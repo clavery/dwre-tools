@@ -8,8 +8,7 @@ Various tools for use with Demandware instances. Written in python
 pip install git+ssh://git@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
 ```
 
-## Usage
-
+## Config Setup
 The tools requires at least one environment setup in your `.dwre.json` file.
 
 - On windows: `C:\Users\[username]\.dwre.json`
@@ -34,4 +33,10 @@ The tools requires at least one environment setup in your `.dwre.json` file.
     }
   }
 }
+```
+
+## Usage
+
+```sh
+$ dwre --help
 ```
