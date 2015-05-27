@@ -24,7 +24,8 @@ def latest_logs(server, username, password, filters):
     latest_files = []
     for f in filters:
         files = sorted([l for l in log_files if l[0].startswith(f)], cmp=compare_file_times)
-        latest_files.append(files.pop())
+        if files:
+            latest_files.append(files.pop())
     return latest_files
 
 
@@ -35,6 +36,7 @@ def format_log_part(logpart):
     lines = [LOGLINE_RE.sub(Fore.BLUE + '\\1' + Fore.RESET, line) for line in lines]
     lines = [ERROR_RE.sub(Fore.RED + '\\1' + Fore.RESET, line) for line in lines]
     return '\n'.join(lines)
+
 
 def tail_logs(server, username, password, filters, interval):
     log_files = latest_logs(server, username, password, filters)
