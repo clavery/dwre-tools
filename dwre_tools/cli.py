@@ -11,7 +11,7 @@ def list_cmd_handler(args):
 
 
 def get_env_password(env):
-    env["password"] = getpass.getpass("{} password: ".format(env["server"]))
+    env["password"] = getpass.getpass("{}@{} password: ".format(env["username"], env["server"]))
 
 
 def tail_cmd_handler(args):
