@@ -19,6 +19,7 @@ def compare_file_times(f1, f2):
 def latest_logs(server, username, password, filters):
     response = requests.request('PROPFIND', 'https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/',
                                 auth=(username, password))
+    response.raise_for_status()
     x = ET.fromstring(response.content)
     log_files = get_files(x)
     latest_files = []
@@ -42,7 +43,10 @@ def tail_logs(server, username, password, filters, interval):
     log_files = latest_logs(server, username, password, filters)
     urls = ['https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/' + log[0] for
             log in log_files]
+
     initial = [requests.head(url, auth=(username, password)) for url in urls]
+    [r.raise_for_status() for r in initial]
+
     lengths = [i.headers.get("Content-Length") for i in initial]
     lengths = [0 if not l else int(l) for l in lengths]
 
@@ -53,12 +57,15 @@ def tail_logs(server, username, password, filters, interval):
             for i, log in enumerate(log_files):
                 url ='https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/' + log[0]
                 check = requests.head(url, auth=(username, password))
+                check.raise_for_status()
+
                 content_length = check.headers.get("Content-Length")
                 newlength = int(content_length) if content_length else 0
                 if newlength > lengths[i]:
                     response = requests.get(url, auth=(username, password), headers={
                         "range" : "bytes=%s-%s" % (lengths[i], newlength-1)
                     })
+                    response.raise_for_status()
                     print
                     print(Fore.GREEN + ("------ %s " % log[0]) + Fore.RESET)
                     print(Fore.GREEN + "------------------------------------------------" + Fore.RESET)

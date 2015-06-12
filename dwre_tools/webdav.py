@@ -21,6 +21,7 @@ def get_files(tree):
 
 def list_dir(location, username, password):
     response = requests.request('PROPFIND', location, auth=(username, password))
+    response.raise_for_status()
     x = ET.fromstring(response.content)
     return ( get_directories(x, ''), get_files(x) )
 
