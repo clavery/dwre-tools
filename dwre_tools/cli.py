@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 
+import getpass
 import zipfile
 from .env import *
 from .tail import tail_logs
@@ -9,9 +10,17 @@ def list_cmd_handler(args):
     print "\t", args.env
 
 
+def get_env_password(env):
+    env["password"] = getpass.getpass("{} password: ".format(env["server"]))
+
+
 def tail_cmd_handler(args):
     project = get_project(args.project)
     env = get_environment(args.env, project)
+
+    if not env["password"]:
+        get_env_password(env)
+
     logfilters = args.filters.split(',')
     tail_logs(env["server"], env["username"], env["password"], logfilters, args.i)
 
