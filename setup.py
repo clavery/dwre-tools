@@ -17,7 +17,7 @@ setup(
     url='https://github.com/clavery/reflectme',
     packages=find_packages(),
     include_package_data=True,
-    install_requires=['requests==2.4.1',
+    install_requires=['requests >= 2.7.0',
                       'colorama==0.3.3'],
     license='MIT License',
     zip_safe=False,
