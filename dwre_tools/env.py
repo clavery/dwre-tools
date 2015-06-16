@@ -1,18 +1,12 @@
 import json
 import os
 
-DWRE_CONFIG = None
 def load_config():
-    global DWRE_CONFIG
-    if not DWRE_CONFIG:
-        home = os.path.expanduser("~")
-        with open(os.path.join(home, ".dwre.json")) as f:
-            dwre = json.load(f)
-        DWRE_CONFIG = dwre
-    return DWRE_CONFIG
+    home = os.path.expanduser("~")
+    with open(os.path.join(home, ".dwre.json")) as f:
+        return json.load(f)
 
-
-def get_default_project_name():
+def get_default_project():
     config = load_config()
     default_project = config.get('defaultProject')
     if not default_project and len(config["projects"].keys()) == 1:
@@ -22,7 +16,7 @@ def get_default_project_name():
     return (None, None)
 
 
-def get_default_environment_name(project):
+def get_default_environment(project):
     if not project:
         raise Exception("No default environment found in ~/.dwre.json")
 

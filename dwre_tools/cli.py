@@ -42,9 +42,9 @@ def main():
     args = parser.parse_args()
     load_config()
     if not args.project:
-        (project_name, project) = get_default_project_name()
+        (project_name, project) = get_default_project()
         args.project = project_name
     if not args.env:
-        (env_name, creds) = get_default_environment_name(project)
+        (env_name, creds) = get_default_environment(project)
         args.env = env_name
     args.func(args)
