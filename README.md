@@ -39,6 +39,85 @@ The tools requires at least one environment setup in your `.dwre.json` file.
 
 ## Usage
 
+Use the command line help to get updated commands/syntax:
+
 ```sh
 $ dwre --help
 ```
+
+### `tail`
+
+The tail command outputs and follows logfiles on your default or specified instance:
+
+```
+usage: dwre tail [-h] [-f FILTERS] [-i I]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FILTERS, --filters FILTERS
+                        logfile prefix filter [default 'warn,error,fatal']
+  -i I                  refresh interval in seconds [default 5]
+```
+
+### `validate`
+
+The validate command will validate an XML file or directory tree against the DWRE schemas included in the module.
+
+```
+usage: dwre validate [-h] target
+
+positional arguments:
+  target      filename or directory to validate
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+### `migrate`
+
+**TODO**: In progress
+
+The migrate command will perform "site imports" against the specified instance in the order specified in the `migrations.xml` file inside the migrations directory (default directory name: `migrations`).
+
+This command requires that the cartridge `bm_dwremigrate` be installed and activated into the business manager site and that the BM user to be used is given the appropriate BM module permissions ("DWREMigrate"). 
+
+This command also requires that metadata be added to the instance however this will be done automatically, if required, at first run time. Metadata will also be automatically added as a migration in future versions.
+
+An example `migrations.xml` follows (the XML will be validated against a schema in the module at run time):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<migrations xmlns="http://www.pixelmedia.com/xml/dwremigrate">
+	<migration id="2015-07-10_initial">
+		<description>Initial Site Migration</description>
+		<location>2015-07-10_initial</location>
+	</migration>
+	<migration id="2015-07-10_m2">
+		<description>m2 description</description>
+		<location>2015-07-10_m2</location>
+		<parent>2015-07-10_initial</parent>
+	</migration>
+	<migration id="2015-07-10_m3">
+		<location>2015-07-10_m3</location>
+		<parent>2015-07-10_m2</parent>
+	</migration>
+</migrations>
+```
+
+The command has a number of subcommands (TODO: finish documenting):
+
+```
+usage: dwre migrate [-h] [-n] [-d DIR]
+
+optional arguments:
+  -h, --help         show this help message and exit
+  -n                 test run; do not execute migrations
+  -d DIR, --dir DIR  migrations directory (default: migrations)
+
+```
+
+## Todo
+
+- Proper logging instead of print statements w/ color disable if not a TTY
+- DWRE migrate CLI integration
+- Client certificates for staging two-factor auth

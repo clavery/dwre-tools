@@ -6,6 +6,9 @@ from .env import *
 from .tail import tail_logs
 from .validations import validate_command
 
+from colorama import init, deinit
+
+
 def list_cmd_handler(args):
     raise NotImplementedError("not implemented yet")
 
@@ -61,6 +64,11 @@ validate_cmd.add_argument('target', help="filename or directory to validate")
 
 
 def main():
+    import os, sys
+    init() # init colors
+    if not os.isatty(sys.stdout.fileno()):
+        deinit()
+
     args = parser.parse_args()
     load_config()
     if not args.project:
@@ -69,4 +77,5 @@ def main():
     if not args.env:
         (env_name, creds) = get_default_environment(project)
         args.env = env_name
+
     args.func(args)
