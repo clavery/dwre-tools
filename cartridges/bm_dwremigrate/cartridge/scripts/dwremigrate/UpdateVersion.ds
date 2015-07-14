@@ -1,0 +1,40 @@
+/**
+* Get DWREMigrate Tool Version
+*
+* @input NewVersion : String
+* @output JSONData : Object
+*
+*/
+importPackage( dw.system );
+importPackage( dw.object );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var preferences : OrganizationPreferences = System.getPreferences();	
+	
+	var dwreMigrateCurrentVersion : String = null;
+	var dwreMigrateToolVersion : String = null;
+	
+	if ("dwreMigrateToolVersion" in preferences.getCustom()) {
+		dwreMigrateToolVersion = preferences.getCustom()["dwreMigrateToolVersion"];
+	}
+	if ("dwreMigrateCurrentVersion" in preferences.getCustom()) {
+		dwreMigrateCurrentVersion = preferences.getCustom()["dwreMigrateCurrentVersion"];
+	}
+	
+	if (dwreMigrateToolVersion === null) {
+		args.JSONData = {
+			"error" : "tools not boostrapped"
+		};
+		return PIPELET_ERROR;
+	}
+	
+	var custom : CustomAttributes = preferences.getCustom();
+	custom.dwreMigrateCurrentVersion = args.NewVersion;
+	
+	args.JSONData = {
+		"message" : "updated"
+	};
+	
+	return PIPELET_NEXT;
+}

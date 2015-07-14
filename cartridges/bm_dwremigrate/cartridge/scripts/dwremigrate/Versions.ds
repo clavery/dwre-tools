@@ -1,0 +1,30 @@
+/**
+* Get DWREMigrate Tool Version
+*
+* @output JSONData : Object
+*
+*/
+importPackage( dw.system );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var preferences : OrganizationPreferences = System.getPreferences();	
+	
+	var dwreMigrateCurrentVersion : String = null;
+	var dwreMigrateToolVersion : String = null;
+	
+	if ("dwreMigrateToolVersion" in preferences.getCustom()) {
+		dwreMigrateToolVersion = preferences.getCustom()["dwreMigrateToolVersion"];
+	}
+	if ("dwreMigrateCurrentVersion" in preferences.getCustom()) {
+		dwreMigrateCurrentVersion = preferences.getCustom()["dwreMigrateCurrentVersion"];
+	}
+	
+	args.JSONData = {
+		"missingToolVersion" : dwreMigrateToolVersion === null,
+		"toolVersion" : dwreMigrateToolVersion,
+		"migrationVersion" : dwreMigrateCurrentVersion 
+	};
+	
+	return PIPELET_NEXT;
+}

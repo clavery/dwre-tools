@@ -1,0 +1,39 @@
+<isdecorate template="application/ExtJSApplicationFrame">
+	<iscontent type="text/html" charset="UTF-8" compact="true">
+	<h1>DWREMigrate</h1>
+	
+	<isscript>
+		importPackage( dw.system );
+		
+		var preferences : OrganizationPreferences = System.getPreferences();
+	
+		var dwreMigrateCurrentVersion : String = null;
+		var dwreMigrateToolVersion : String = null;
+		
+		if ("dwreMigrateToolVersion" in preferences.getCustom()) {
+			dwreMigrateToolVersion = preferences.getCustom()["dwreMigrateToolVersion"];
+		}
+		if ("dwreMigrateCurrentVersion" in preferences.getCustom()) {
+			dwreMigrateCurrentVersion = preferences.getCustom()["dwreMigrateCurrentVersion"];
+		}
+	</isscript>
+	
+	<ul>
+	<li>
+		<strong>Tools Version: </strong> 
+		<isif condition="${dwreMigrateToolVersion === null}">
+			Tool metadata not installed.
+		<iselse>
+			${dwreMigrateToolVersion}
+		</isif>
+	</li>
+	<li>
+		<strong>Current Version: </strong> 
+		<isif condition="${dwreMigrateCurrentVersion === null}">
+			No migrations performed
+		<iselse>
+			${dwreMigrateCurrentVersion}
+		</isif>
+	</li>
+	</ul>
+</isdecorate>

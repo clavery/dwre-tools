@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
+    <menuaction id="dwremigrate_menu" menupath="operations" position="10000" site="false">
+      <name xml:lang="x-default">DWREMigrate</name>
+      <short_description xml:lang="x-default">
+      </short_description>
+      <description xml:lang="x-default">
+      </description>
+      <exec pipeline="DWREMigrate" node="Overview"/>
+      <sub-pipelines>
+         <pipeline name="DWREMigrate-Overview" />
+         <pipeline name="DWREMigrate-Versions" />
+         <pipeline name="DWREMigrate-UpdateVersion" />
+      </sub-pipelines>
+      <parameters>
+        <parameter name="menuname" value="DWRE Migrate"/>
+        <parameter name="mainmenuname" value="dwremigrate_menu"/>
+      </parameters>
+      <permissions />
+    </menuaction>
+</extensions>
