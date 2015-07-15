@@ -10,15 +10,18 @@ except ImportError:
 
 setup(
     name='dwre-tools',
-    version='0.0.1',
-    description='Simple HTTP server for recording requests and returning arbitrary responses.',
+    version='0.0.2',
+    description='Demandware tools',
     author='Charles Lavery',
-    author_email='charles.lavery@gmail.com',
-    url='https://github.com/clavery/reflectme',
+    author_email='clavery@pixelmedia.com',
+    url='https://bitbucket.org/pixelmedia/dwre-dwre-tools',
     packages=find_packages(),
     include_package_data=True,
     install_requires=['requests >= 2.7.0',
-                      'colorama==0.3.3'],
+                      'colorama >= 0.3.3',
+                      'pyquery >= 1.2.9',
+                      'lxml >= 3.4.0',
+                      ],
     license='MIT License',
     zip_safe=False,
     classifiers=(
