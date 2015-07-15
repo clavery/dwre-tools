@@ -36,6 +36,7 @@ SCHEMA_MAP = {
     "schedules" : "schedules.xsd",
     "search" : "search.xsd",
     "search2" : "search2.xsd",
+    "migrations" : "dwre-migrate.xsd",
     "services" : "services.xsd",
     "shipping" : "shipping.xsd",
     "site" : "site.xsd",
@@ -49,8 +50,7 @@ SCHEMA_MAP = {
 }
 
 
-def validate_xml(filename, throw=True):
-    xml = ET.parse(filename)
+def validate_xml(xml, throw=True):
     root_el = xml.getroot()
     root_tag = root_el.tag[root_el.tag.find('}')+1:]
     if root_tag not in SCHEMA_MAP:
@@ -67,7 +67,8 @@ SCHEMALINE_RE = re.compile(r'^(.*?:\d+:\d+:)')
 def validate_file(full_filename):
     print "Validating %s"  % full_filename,
     try:
-        schema = validate_xml(full_filename, throw=False)
+        xml = ET.parse(full_filename)
+        schema = validate_xml(xml, throw=False)
         if schema.error_log:
             print Fore.RED + "[ERROR]" + Fore.RESET
             for e in schema.error_log:

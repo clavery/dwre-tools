@@ -39,7 +39,11 @@ def format_log_part(logpart):
     return '\n'.join(lines)
 
 
-def tail_logs(server, username, password, filters, interval):
+def tail_logs(env, filters, interval):
+    server = env["server"]
+    username = env["username"]
+    password = env["password"]
+
     log_files = latest_logs(server, username, password, filters)
     urls = ['https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/' + log[0] for
             log in log_files]
