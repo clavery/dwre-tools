@@ -5,7 +5,9 @@ Various tools for use with Demandware instances. Written in python
 ## Installation
 
 ```sh
-pip install git+ssh://git@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
+pip install --upgrade git+ssh://git@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
+#or
+pip install --upgrade git+https://username@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
 ```
 
 __Windows Users__: Recommend using the Anaconda distribution of python as it comes pre-installed with many useful packages with native binaries: [http://continuum.io/downloads](http://continuum.io/downloads).
@@ -75,8 +77,6 @@ optional arguments:
 
 ### `migrate`
 
-**TODO**: In progress
-
 The migrate command will perform "site imports" against the specified instance in the order specified in the `migrations.xml` file inside the migrations directory (default directory name: `migrations`).
 
 This command requires that the cartridge `bm_dwremigrate` be installed and activated into the business manager site and that the BM user to be used is given the appropriate BM module permissions ("DWREMigrate"). 
@@ -104,7 +104,7 @@ An example `migrations.xml` follows (the XML will be validated against a schema 
 </migrations>
 ```
 
-The command has a number of subcommands (TODO: finish documenting):
+The command has a number of subcommands
 
 ```
 usage: dwre migrate [-h] [-n] [-d DIR]
@@ -119,5 +119,4 @@ optional arguments:
 ## Todo
 
 - Proper logging instead of print statements w/ color disable if not a TTY
-- DWRE migrate CLI integration
 - Client certificates for staging two-factor auth

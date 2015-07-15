@@ -65,7 +65,7 @@ def validate_xml(xml, throw=True):
 
 SCHEMALINE_RE = re.compile(r'^(.*?:\d+:\d+:)')
 def validate_file(full_filename):
-    print "Validating %s"  % full_filename,
+    print "%s"  % full_filename,
     try:
         xml = ET.parse(full_filename)
         schema = validate_xml(xml, throw=False)

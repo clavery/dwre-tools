@@ -5,7 +5,7 @@ import zipfile
 from .env import *
 from .tail import tail_logs
 from .validations import validate_command
-from .migrate import add_migration, apply_migrations
+from .migrate import add_migration, apply_migrations, validate_migrations
 
 from colorama import init, deinit
 
@@ -25,6 +25,8 @@ def migrate_cmd_handler(args):
         add_migration(args.directory, args.dir, args.id, args.description)
     elif args.subcommand == "apply":
         apply_migrations(env, args.dir, args.test)
+    elif args.subcommand == "validate":
+        validate_migrations(args.dir)
 
 
 def validate_cmd_handler(args):
@@ -76,9 +78,10 @@ migrate_add_cmd.set_defaults(subcommand="add")
 migrate_add_cmd.add_argument('--description', help="description of migration (default: empty)")
 migrate_add_cmd.add_argument('--id', help="id of migration (default: generated)")
 migrate_add_cmd.add_argument('directory', help="migration directory")
-migrate_add_cmd = migrate_parser.add_parser("apply", help="apply migrations to environment")
-migrate_add_cmd.set_defaults(subcommand="apply")
-
+migrate_apply_cmd = migrate_parser.add_parser("apply", help="apply migrations to environment")
+migrate_apply_cmd.set_defaults(subcommand="apply")
+migrate_validate_cmd = migrate_parser.add_parser("validate", help="validate migrations directory")
+migrate_validate_cmd.set_defaults(subcommand="validate")
 
 validate_cmd = cmd_parser.add_parser('validate', help="XMLSchema validations")
 validate_cmd.set_defaults(func=validate_cmd_handler)

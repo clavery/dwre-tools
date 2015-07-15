@@ -242,3 +242,20 @@ def apply_migrations(env, migrations_dir, test=False):
         end_time = time.time()
         print "Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time)
     print Fore.GREEN + "Successfully updated instance with current migrations" + Fore.RESET
+
+
+def validate_migrations(migrations_dir):
+    migrations_file = os.path.join(migrations_dir, "migrations.xml")
+    assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+
+    print Fore.MAGENTA + "Validating migrations.xml" + Fore.RESET,
+    migrations_context = ET.parse(migrations_file)
+    validate_xml(migrations_context)
+    print Fore.GREEN + "[OK]" + Fore.RESET
+
+    (path, migrations) = get_migrations(migrations_context)
+
+    for m in path:
+        print Fore.MAGENTA + "Validating migration: %s" % m + Fore.RESET
+        data = migrations[m]
+        validate_directory(os.path.join(migrations_dir, data["location"]))
