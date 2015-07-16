@@ -131,10 +131,10 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
     E = ElementMaker(namespace="http://www.pixelmedia.com/xml/dwremigrate",
                      nsmap={None : "http://www.pixelmedia.com/xml/dwremigrate"})
 
-    migrations = get_migrations(migrations_context)
+    (path, migrations) = get_migrations(migrations_context)
     parent = None
-    if migrations:
-        parent = migrations[-1]["id"]
+    if path:
+        parent = path[-1]
 
     migration = E.migration(id=id)
 
