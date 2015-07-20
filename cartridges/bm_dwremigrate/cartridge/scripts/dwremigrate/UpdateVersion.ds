@@ -2,6 +2,7 @@
 * Get DWREMigrate Tool Version
 *
 * @input NewVersion : String
+* @input NewVersionPath : String
 * @output JSONData : Object
 *
 */
@@ -31,6 +32,10 @@ function execute( args : PipelineDictionary ) : Number
 	
 	var custom : CustomAttributes = preferences.getCustom();
 	custom.dwreMigrateCurrentVersion = args.NewVersion;
+	
+	if (args.NewVersionPath) {
+		custom.dwreMigrateVersionPath = args.NewVersionPath;
+	}
 	
 	args.JSONData = {
 		"message" : "updated"

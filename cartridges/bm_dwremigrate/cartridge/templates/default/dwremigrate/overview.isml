@@ -9,12 +9,17 @@
 	
 		var dwreMigrateCurrentVersion : String = null;
 		var dwreMigrateToolVersion : String = null;
+		var dwreMigrateVersionPath : Array = [];
+		
 		
 		if ("dwreMigrateToolVersion" in preferences.getCustom()) {
 			dwreMigrateToolVersion = preferences.getCustom()["dwreMigrateToolVersion"];
 		}
 		if ("dwreMigrateCurrentVersion" in preferences.getCustom()) {
 			dwreMigrateCurrentVersion = preferences.getCustom()["dwreMigrateCurrentVersion"];
+		}
+		if ("dwreMigrateVersionPath" in preferences.getCustom()) {
+			dwreMigrateVersionPath = preferences.getCustom()["dwreMigrateVersionPath"].split(',');
 		}
 	</isscript>
 	
@@ -33,6 +38,18 @@
 			No migrations performed
 		<iselse>
 			${dwreMigrateCurrentVersion}
+		</isif>
+	</li>
+	<li>
+		<strong>Migration Path: </strong> 
+		<isif condition="${dwreMigrateVersionPath == null || dwreMigrateVersionPath.length == 0}">
+			Migration Path Not Available
+		<iselse>
+			<ul>
+			<isloop iterator="${dwreMigrateVersionPath}" alias="pathSegment" status="loopstate">
+			<li><b>${loopstate.index}:</b> ${pathSegment}</li>
+			</isloop>
+			</ul>
 		</isif>
 	</li>
 	</ul>

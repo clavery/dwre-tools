@@ -103,8 +103,8 @@
           <config-property key="Transactional" value="false"/>
           <key-binding alias="CurrentHttpParameterMap.NewVersion.stringValue" key="From_0"/>
           <key-binding alias="NewVersion" key="To_0"/>
-          <key-binding alias="null" key="From_1"/>
-          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="CurrentHttpParameterMap.NewVersionPath.stringValue" key="From_1"/>
+          <key-binding alias="NewVersionPath" key="To_1"/>
           <key-binding alias="null" key="From_2"/>
           <key-binding alias="null" key="To_2"/>
           <key-binding alias="null" key="From_3"/>
@@ -133,6 +133,8 @@
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="NewVersion" key="NewVersion"/>
           <key-binding alias="JSONData" key="JSONData"/>
+          <key-binding alias="NewVersionPath" key="NewMigrationPath"/>
+          <key-binding alias="NewVersionPath" key="NewVersionPath"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="error">

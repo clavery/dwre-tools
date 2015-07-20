@@ -12,6 +12,8 @@ function execute( args : PipelineDictionary ) : Number
 	
 	var dwreMigrateCurrentVersion : String = null;
 	var dwreMigrateToolVersion : String = null;
+	var dwreMigrateVersionPath: String = null;
+	
 	
 	if ("dwreMigrateToolVersion" in preferences.getCustom()) {
 		dwreMigrateToolVersion = preferences.getCustom()["dwreMigrateToolVersion"];
@@ -19,11 +21,15 @@ function execute( args : PipelineDictionary ) : Number
 	if ("dwreMigrateCurrentVersion" in preferences.getCustom()) {
 		dwreMigrateCurrentVersion = preferences.getCustom()["dwreMigrateCurrentVersion"];
 	}
+	if ("dwreMigrateVersionPath" in preferences.getCustom()) {
+		dwreMigrateVersionPath = preferences.getCustom()["dwreMigrateVersionPath"];
+	}
 	
 	args.JSONData = {
 		"missingToolVersion" : dwreMigrateToolVersion === null,
 		"toolVersion" : dwreMigrateToolVersion,
-		"migrationVersion" : dwreMigrateCurrentVersion 
+		"migrationVersion" : dwreMigrateCurrentVersion,
+		"migrationPath" : dwreMigrateVersionPath
 	};
 	
 	return PIPELET_NEXT;

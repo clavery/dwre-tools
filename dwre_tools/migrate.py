@@ -164,6 +164,9 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
         f.write(ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True))
 
 
+def upload_and_import_migration(bmsession, webdavsession, zipfile):
+    pass
+
 
 def apply_migrations(env, migrations_dir, test=False):
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
@@ -178,15 +181,32 @@ def apply_migrations(env, migrations_dir, test=False):
 
     login_business_manager(env, bmsession)
 
-    (current_tool_version, current_migration) = get_current_versions(env, bmsession)
+    (current_tool_version, current_migration, current_migration_path) = (
+        get_current_versions(env, bmsession))
 
     (path, migrations) = get_migrations(migrations_context)
 
     if current_migration is not None:
         assert current_migration in path, "Cannot find current migration version (%s) in migrations context; this requires manual intervention" % current_migration
         migration_path = path[path.index(current_migration)+1:]
+        path_to_check = path[:path.index(current_migration)+1]
     else:
         migration_path = path
+        path_to_check = []
+
+    if current_migration_path is not None:
+        if path_to_check != current_migration_path:
+            print Fore.YELLOW + "WARNING migration path does not match expected value" + Fore.RESET
+            print Fore.YELLOW + "Current Path:" + Fore.RESET
+            for p in current_migration_path:
+                print Fore.YELLOW + "\t" + p + Fore.RESET
+            print Fore.YELLOW + "Expected Path:" + Fore.RESET
+            for p in path_to_check:
+                print Fore.YELLOW + "\t" + p + Fore.RESET
+
+            raise RuntimeError("migration path does not match expected value; recommend manual intervention with single migration applications; use force to continue")
+    else:
+        current_migration_path = []
 
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
         migration_path.insert(0, None)
@@ -234,9 +254,11 @@ def apply_migrations(env, migrations_dir, test=False):
         wait_for_import(env, bmsession, zip_filename)
 
         # update migration version
+        current_migration_path.append(migration["id"])
+        new_version_path = ",".join(current_migration_path)
         if m is not None:
             response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
-                                      data={"NewVersion" : migration["id"]})
+                                      data={"NewVersion" : migration["id"], "NewVersionPath" : new_version_path})
 
         # delete file
         dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
@@ -247,6 +269,10 @@ def apply_migrations(env, migrations_dir, test=False):
         end_time = time.time()
         print "Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time)
     print Fore.GREEN + "Successfully updated instance with current migrations" + Fore.RESET
+
+
+def run_migration(env, migrations_dir, migration_name):
+    pass
 
 
 def validate_migrations(migrations_dir):

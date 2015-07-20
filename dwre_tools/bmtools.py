@@ -12,7 +12,10 @@ def get_current_versions(env, session):
         tool_version = response.json()["toolVersion"]
         migration_version = response.json()["migrationVersion"]
         bootstrap_required = response.json()["missingToolVersion"]
-        return (tool_version, migration_version)
+        current_migration_path = None
+        if "migrationPath" in response.json() and response.json()["migrationPath"]:
+            current_migration_path = response.json()["migrationPath"].split(',')
+        return (tool_version, migration_version, current_migration_path)
 
 
 def login_business_manager(env, session):
