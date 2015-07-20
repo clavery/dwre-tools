@@ -22,7 +22,7 @@ def migrate_cmd_handler(args):
         get_env_password(env)
 
     if args.subcommand == "add":
-        add_migration(args.directory, args.dir, args.id, args.description)
+        add_migration(args.directory, args.dir, args.id, args.description, rename=args.rename)
     elif args.subcommand == "apply":
         apply_migrations(env, args.dir, args.test)
     elif args.subcommand == "validate":
@@ -75,7 +75,9 @@ migrate_cmd.set_defaults(test=False)
 migrate_parser = migrate_cmd.add_subparsers(title="Sub Commands")
 migrate_add_cmd = migrate_parser.add_parser("add", help="add a new migration")
 migrate_add_cmd.set_defaults(subcommand="add")
-migrate_add_cmd.add_argument('--description', help="description of migration (default: empty)")
+migrate_add_cmd.add_argument('-d', '--description', help="description of migration (default: empty)")
+migrate_add_cmd.add_argument('-r', '--rename', dest="rename", help="rename folder to generated or specified ID", action="store_true")
+migrate_cmd.set_defaults(rename=False)
 migrate_add_cmd.add_argument('--id', help="id of migration (default: generated)")
 migrate_add_cmd.add_argument('directory', help="migration directory")
 migrate_apply_cmd = migrate_parser.add_parser("apply", help="apply migrations to environment")

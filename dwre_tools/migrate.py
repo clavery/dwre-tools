@@ -109,7 +109,7 @@ def normalize_name(name):
     return name.replace(' ', '_').lower()
 
 
-def add_migration(directory, migrations_dir="migrations", id=None, description=None):
+def add_migration(directory, migrations_dir="migrations", id=None, description=None, rename=False):
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
     parser = ET.XMLParser(remove_blank_text=True)
@@ -121,7 +121,7 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
         raise RuntimeError("Cannot find directory at %s"  % normalized_location)
 
     if id is None:
-        id = datetime.now().strftime("%Y%m%d_")
+        id = datetime.now().strftime("%Y%m%dT%H%M_")
 
         if description:
             id = id + normalize_name(description)
@@ -141,7 +141,12 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
     if description:
         migration.append(E.description(description))
 
-    migration.append(E.location(os.path.basename(directory)))
+    location = os.path.basename(directory)
+    if rename:
+        location = id
+        os.rename(normalized_location, os.path.join(migrations_dir, id))
+
+    migration.append(E.location(location))
 
     if parent:
         migration.append(E.parent(parent))
