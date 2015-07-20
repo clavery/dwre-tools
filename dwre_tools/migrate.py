@@ -206,7 +206,7 @@ def apply_migrations(env, migrations_dir, test=False):
 
             raise RuntimeError("migration path does not match expected value; recommend manual intervention with single migration applications; use force to continue")
     else:
-        current_migration_path = []
+        current_migration_path = path_to_check
 
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
         migration_path.insert(0, None)
