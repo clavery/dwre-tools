@@ -272,7 +272,35 @@ def apply_migrations(env, migrations_dir, test=False):
 
 
 def run_migration(env, migrations_dir, migration_name):
+    # TODO: one off migraiton
     pass
+
+def reset_migrations(env, migrations_dir, test=False):
+    migrations_file = os.path.join(migrations_dir, "migrations.xml")
+    assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+
+    migrations_context = ET.parse(migrations_file)
+    validate_xml(migrations_context)
+
+    webdavsession = requests.session()
+    webdavsession.auth=(env["username"], env["password"],)
+    bmsession = requests.session()
+
+    login_business_manager(env, bmsession)
+
+    (current_tool_version, current_migration, current_migration_path) = (
+        get_current_versions(env, bmsession))
+
+    (path, migrations) = get_migrations(migrations_context)
+
+    print "Will reset migrations to %s" % migrations[path[-1]]["id"]
+    for i, p in enumerate(path):
+        print "\t" + "%s:" % i, p
+
+    if not test:
+        response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
+                                  data={"NewVersion" : migrations[path[-1]]["id"], "NewVersionPath" : path})
+        print "Updated migrations to code version"
 
 
 def validate_migrations(migrations_dir):
@@ -286,7 +314,10 @@ def validate_migrations(migrations_dir):
 
     (path, migrations) = get_migrations(migrations_context)
 
+    results = []
     for m in path:
         print Fore.MAGENTA + "Validating migration: %s" % m + Fore.RESET
         data = migrations[m]
-        validate_directory(os.path.join(migrations_dir, data["location"]))
+        result = validate_directory(os.path.join(migrations_dir, data["location"]))
+        results.append(result)
+    return all(results)

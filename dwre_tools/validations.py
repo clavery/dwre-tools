@@ -73,14 +73,18 @@ def validate_file(full_filename):
             print Fore.RED + "[ERROR]" + Fore.RESET
             for e in schema.error_log:
                 print SCHEMALINE_RE.sub(Fore.BLUE + '\\1' + Fore.RESET, str(e))
+            return False
         else:
             print Fore.GREEN + "[OK]" + Fore.RESET
+            return True
     except ET.XMLSyntaxError as e:
         print Fore.RED + "[ERROR]" + Fore.RESET
         print e
+        return False
 
 
 def validate_directory(directory):
+    results = []
     for (dirpath, dirnames, filenames) in os.walk(directory):
         for fname in filenames:
             (root, ext) = os.path.splitext(fname)
@@ -89,7 +93,10 @@ def validate_directory(directory):
                 continue
 
             full_filename = os.path.join(dirpath, fname)
-            validate_file(full_filename)
+            result = validate_file(full_filename)
+            results.append(result)
+
+    return all(results)
 
 
 

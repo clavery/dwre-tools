@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
 
+import sys
 import getpass
 import zipfile
 from .env import *
 from .tail import tail_logs
 from .validations import validate_command
-from .migrate import add_migration, apply_migrations, validate_migrations
+from .migrate import add_migration, apply_migrations, validate_migrations, reset_migrations
 
 from colorama import init, deinit
 
@@ -21,12 +22,18 @@ def migrate_cmd_handler(args):
     if not env["password"]:
         get_env_password(env)
 
+    result = 0
     if args.subcommand == "add":
-        add_migration(args.directory, args.dir, args.id, args.description, rename=args.rename)
+        result = add_migration(args.directory, args.dir, args.id, args.description, rename=args.rename)
     elif args.subcommand == "apply":
-        apply_migrations(env, args.dir, args.test)
+        result = apply_migrations(env, args.dir, args.test)
     elif args.subcommand == "validate":
-        validate_migrations(args.dir)
+        result = validate_migrations(args.dir)
+    elif args.subcommand == "reset":
+        result = reset_migrations(env, args.dir, args.test)
+
+    if result is False:
+        sys.exit(1)
 
 
 def validate_cmd_handler(args):
@@ -84,6 +91,8 @@ migrate_apply_cmd = migrate_parser.add_parser("apply", help="apply migrations to
 migrate_apply_cmd.set_defaults(subcommand="apply")
 migrate_validate_cmd = migrate_parser.add_parser("validate", help="validate migrations directory")
 migrate_validate_cmd.set_defaults(subcommand="validate")
+migrate_reset_cmd = migrate_parser.add_parser("reset", help="reset migration state to current code version")
+migrate_reset_cmd.set_defaults(subcommand="reset")
 
 validate_cmd = cmd_parser.add_parser('validate', help="XMLSchema validations")
 validate_cmd.set_defaults(func=validate_cmd_handler)
