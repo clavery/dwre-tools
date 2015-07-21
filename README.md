@@ -107,13 +107,20 @@ An example `migrations.xml` follows (the XML will be validated against a schema 
 The command has a number of subcommands
 
 ```
-usage: dwre migrate [-h] [-n] [-d DIR]
+usage: dwre migrate [-h] [-n] [-d DIR] {add,apply,validate,reset,run} ...
 
 optional arguments:
-  -h, --help         show this help message and exit
-  -n                 test run; do not execute migrations
-  -d DIR, --dir DIR  migrations directory (default: migrations)
+  -h, --help            show this help message and exit
+  -n                    test run; do not execute migrations
+  -d DIR, --dir DIR     migrations directory (default: migrations)
 
+Sub Commands:
+  {add,apply,validate,reset,run}
+    add                 add a new migration
+    apply               apply migrations to environment
+    validate            validate migrations directory
+    reset               reset migration state to current code version
+    run                 run a single migration without updating version
 ```
 
 ## Todo
