@@ -23,6 +23,16 @@ def get_env_from_args(args):
             "password" : args.password
         }
 
+    if args.clientcert:
+        assert args.clientkey, "must specify a private key with certificate"
+        env["clientcert"] = args.clientcert
+        env["clientkey"] = args.clientkey
+        env["cert"] = (args.clientcert, args.clientkey,)
+    else:
+        env["cert"] = None
+
+    env["verify"] = not args.noverify
+
     if not env["password"]:
         get_env_password(env)
 
@@ -72,7 +82,10 @@ parser.add_argument('-e', '--env', help="DWRE Environment Name")
 parser.add_argument('--server', help="DWRE server name; overrides env settings")
 parser.add_argument('--username', help="DWRE server username; overrides env settings")
 parser.add_argument('--password', help="DWRE server password; overrides env settings")
-
+parser.add_argument('--clientcert', help="SSL Client certificate")
+parser.add_argument('--clientkey', help="SSL Client private key")
+parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
+parser.set_defaults(noverify=False)
 
 cmd_parser = parser.add_subparsers(title="Commands")
 

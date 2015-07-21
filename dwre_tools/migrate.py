@@ -172,8 +172,12 @@ def apply_migrations(env, migrations_dir, test=False):
     validate_xml(migrations_context)
 
     webdavsession = requests.session()
+    webdavsession.verify = env["verify"]
     webdavsession.auth=(env["username"], env["password"],)
+    webdavsession.cert = env["cert"]
     bmsession = requests.session()
+    bmsession.verify = env["verify"]
+    bmsession.cert = env["cert"]
 
     login_business_manager(env, bmsession)
 
@@ -276,7 +280,11 @@ def run_migration(env, migrations_dir, migration_name):
 
     webdavsession = requests.session()
     webdavsession.auth=(env["username"], env["password"],)
+    webdavsession.verify = env["verify"]
+    webdavsession.cert = env["cert"]
     bmsession = requests.session()
+    bmsession.verify = env["verify"]
+    bmsession.cert = env["cert"]
 
     login_business_manager(env, bmsession)
 
@@ -322,8 +330,12 @@ def reset_migrations(env, migrations_dir, test=False):
     validate_xml(migrations_context)
 
     webdavsession = requests.session()
+    webdavsession.verify = env["verify"]
+    webdavsession.cert = env["cert"]
     webdavsession.auth=(env["username"], env["password"],)
     bmsession = requests.session()
+    bmsession.verify = env["verify"]
+    bmsession.cert = env["cert"]
 
     login_business_manager(env, bmsession)
 
@@ -338,7 +350,7 @@ def reset_migrations(env, migrations_dir, test=False):
 
     if not test:
         response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
-                                  data={"NewVersion" : migrations[path[-1]]["id"], "NewVersionPath" : path})
+                                  data={"NewVersion" : migrations[path[-1]]["id"], "NewVersionPath" : ",".join(path)})
         print "Updated migrations to code version"
 
 

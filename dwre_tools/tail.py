@@ -40,6 +40,7 @@ def format_log_part(logpart):
 
 
 def tail_logs(env, filters, interval):
+    # TODO allow usage with client cert, noverify
     server = env["server"]
     username = env["username"]
     password = env["password"]
