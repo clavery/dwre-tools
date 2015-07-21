@@ -43,6 +43,8 @@ The tools requires at least one environment setup in your `.dwre.json` file.
 
 Use the command line help to get updated commands/syntax:
 
+All subcommands also have a help with `-h` or `--help`
+
 ```sh
 $ dwre --help
 ```
@@ -126,4 +128,15 @@ Sub Commands:
 ## Todo
 
 - Proper logging instead of print statements w/ color disable if not a TTY
-- Client certificates for staging two-factor auth
+
+## Notes
+
+```
+dwre --server cert.staging.web.example.demandware.net\
+    --username clavery\
+    --password testing\
+    --noverify\
+    --clientcert ~/code/swk/pki/client_certs/build.crt\
+    --clientkey ~/code/swk/pki/client_certs/build_private.key\
+    migrate run 20150721T1651_chuck_test2
+```
