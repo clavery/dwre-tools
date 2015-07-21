@@ -6,7 +6,7 @@ import zipfile
 from .env import *
 from .tail import tail_logs
 from .validations import validate_command
-from .migrate import add_migration, apply_migrations, validate_migrations, reset_migrations
+from .migrate import add_migration, apply_migrations, validate_migrations, reset_migrations, run_migration
 
 from colorama import init, deinit
 
@@ -31,6 +31,8 @@ def migrate_cmd_handler(args):
         result = validate_migrations(args.dir)
     elif args.subcommand == "reset":
         result = reset_migrations(env, args.dir, args.test)
+    elif args.subcommand == "run":
+        result = run_migration(env, args.dir, args.name)
 
     if result is False:
         sys.exit(1)
@@ -93,6 +95,9 @@ migrate_validate_cmd = migrate_parser.add_parser("validate", help="validate migr
 migrate_validate_cmd.set_defaults(subcommand="validate")
 migrate_reset_cmd = migrate_parser.add_parser("reset", help="reset migration state to current code version")
 migrate_reset_cmd.set_defaults(subcommand="reset")
+migrate_run_cmd = migrate_parser.add_parser("run", help="run a single migration without updating version")
+migrate_run_cmd.add_argument('name', help="migration name")
+migrate_run_cmd.set_defaults(subcommand="run")
 
 validate_cmd = cmd_parser.add_parser('validate', help="XMLSchema validations")
 validate_cmd.set_defaults(func=validate_cmd_handler)

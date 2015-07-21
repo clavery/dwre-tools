@@ -164,10 +164,6 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
         f.write(ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True))
 
 
-def upload_and_import_migration(bmsession, webdavsession, zipfile):
-    pass
-
-
 def apply_migrations(env, migrations_dir, test=False):
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
@@ -272,8 +268,51 @@ def apply_migrations(env, migrations_dir, test=False):
 
 
 def run_migration(env, migrations_dir, migration_name):
-    # TODO: one off migraiton
-    pass
+    migrations_file = os.path.join(migrations_dir, "migrations.xml")
+    assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+
+    migrations_context = ET.parse(migrations_file)
+    validate_xml(migrations_context)
+
+    webdavsession = requests.session()
+    webdavsession.auth=(env["username"], env["password"],)
+    bmsession = requests.session()
+
+    login_business_manager(env, bmsession)
+
+    (path, migrations) = get_migrations(migrations_context)
+
+    assert migration_name in migrations, "Cannot find migration"
+
+    migration = migrations[migration_name]
+
+    start_time = time.time()
+
+    zip_filename = "dwremigrate_%s" % migration["id"]
+    zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
+
+    # upload
+    dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
+        env["server"], zip_filename)
+    response = webdavsession.put(dest_url, data=zip_file)
+    response.raise_for_status()
+
+    # activate
+    response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
+                                data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
+    response.raise_for_status()
+
+    wait_for_import(env, bmsession, zip_filename)
+
+    # delete file
+    dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
+                env["server"], zip_filename)
+    response = webdavsession.delete(dest_url)
+    response.raise_for_status()
+
+    end_time = time.time()
+    print "Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time)
+
 
 def reset_migrations(env, migrations_dir, test=False):
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
