@@ -11,16 +11,30 @@ from .migrate import add_migration, apply_migrations, validate_migrations, reset
 from colorama import init, deinit
 
 
+def get_env_from_args(args):
+    if not args.server:
+        project = get_project(args.project)
+        env = get_environment(args.env, project)
+    else:
+        assert args.username, "Must specify a username"
+        env = {
+            "server" : args.server,
+            "username" : args.username,
+            "password" : args.password
+        }
+
+    if not env["password"]:
+        get_env_password(env)
+
+    return env
+
+
 def list_cmd_handler(args):
     raise NotImplementedError("not implemented yet")
 
 
 def migrate_cmd_handler(args):
-    project = get_project(args.project)
-    env = get_environment(args.env, project)
-
-    if not env["password"]:
-        get_env_password(env)
+    env = get_env_from_args(args)
 
     result = 0
     if args.subcommand == "add":
@@ -47,12 +61,7 @@ def get_env_password(env):
 
 
 def tail_cmd_handler(args):
-    project = get_project(args.project)
-    env = get_environment(args.env, project)
-
-    if not env["password"]:
-        get_env_password(env)
-
+    env = get_env_from_args(args)
     logfilters = args.filters.split(',')
     tail_logs(env, logfilters, args.i)
 
@@ -60,6 +69,10 @@ def tail_cmd_handler(args):
 parser = ArgumentParser(description="Demandware Tools")
 parser.add_argument('-p', '--project', help="DWRE Project Name")
 parser.add_argument('-e', '--env', help="DWRE Environment Name")
+parser.add_argument('--server', help="DWRE server name; overrides env settings")
+parser.add_argument('--username', help="DWRE server username; overrides env settings")
+parser.add_argument('--password', help="DWRE server password; overrides env settings")
+
 
 cmd_parser = parser.add_subparsers(title="Commands")
 
