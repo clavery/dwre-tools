@@ -127,7 +127,8 @@ Sub Commands:
 
 ## Todo
 
-- Proper logging instead of print statements w/ color disable if not a TTY
+- Refactor migration related tasks
+- Proper logging instead of print statements w/ "disable color if not a TTY"
 
 ## Notes
 
