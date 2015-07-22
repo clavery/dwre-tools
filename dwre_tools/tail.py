@@ -31,12 +31,28 @@ def latest_logs(server, username, password, filters):
 
 
 LOGLINE_RE = re.compile(r'^(\[\d{4}.+?\w{3}\])')
+LOGENTRY_RE = re.compile(r'^(?:\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \w{3}\]).*?(?=(?:\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \w{3}\])|\Z)', re.S|re.M)
 ERROR_RE = re.compile(r'(ERROR)')
 def format_log_part(logpart):
     lines = logpart.splitlines()
     lines = [LOGLINE_RE.sub(Fore.BLUE + '\\1' + Fore.RESET, line) for line in lines]
     lines = [ERROR_RE.sub(Fore.RED + '\\1' + Fore.RESET, line) for line in lines]
     return '\n'.join(lines)
+
+
+def output_log_file(name, content):
+    print
+    print(Fore.GREEN + ("------ %s " % name) + Fore.RESET)
+    print(Fore.GREEN + "------------------------------------------------" + Fore.RESET)
+    print format_log_part(content)
+    print(Fore.GREEN + "------------------------------------------------" + Fore.RESET)
+    print
+
+
+def tail_log_file(name, content):
+    error_lines = LOGENTRY_RE.findall(content)
+    if error_lines:
+        output_log_file(name, error_lines[-1])
 
 
 def tail_logs(env, filters, interval):
@@ -55,6 +71,11 @@ def tail_logs(env, filters, interval):
     lengths = [i.headers.get("Content-Length") for i in initial]
     lengths = [0 if not l else int(l) for l in lengths]
 
+    # get initial for last line purposes (for some reason this returns diff content lengths so we
+    # can't use it for the initial length calc
+    tail_requests = [requests.get(url, auth=(username, password)) for url in urls]
+    [tail_log_file(log[0], r.content) for r, log in zip(tail_requests, log_files)]
+
     try:
         while True:
             time.sleep(interval)
@@ -67,16 +88,12 @@ def tail_logs(env, filters, interval):
                 content_length = check.headers.get("Content-Length")
                 newlength = int(content_length) if content_length else 0
                 if newlength > lengths[i]:
+                    print "getting new", lengths[i], newlength
                     response = requests.get(url, auth=(username, password), headers={
                         "range" : "bytes=%s-%s" % (lengths[i], newlength-1)
                     })
                     response.raise_for_status()
-                    print
-                    print(Fore.GREEN + ("------ %s " % log[0]) + Fore.RESET)
-                    print(Fore.GREEN + "------------------------------------------------" + Fore.RESET)
-                    print format_log_part(response.content)
-                    print(Fore.GREEN + "------------------------------------------------" + Fore.RESET)
-                    print
+                    output_log_file(log[0], response.content)
                 lengths[i] = newlength
     except KeyboardInterrupt, e:
         sys.exit(0)

@@ -127,6 +127,7 @@ Sub Commands:
 
 ## Todo
 
+- reactor tail command to use sessions; correct env
 - Refactor migration related tasks
 - Proper logging instead of print statements w/ "disable color if not a TTY"
 
