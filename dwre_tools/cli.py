@@ -137,7 +137,6 @@ def main():
         deinit()
 
     args = parser.parse_args()
-    load_config()
     if not args.project:
         (project_name, project) = get_default_project()
         args.project = project_name
