@@ -88,7 +88,6 @@ def tail_logs(env, filters, interval):
                 content_length = check.headers.get("Content-Length")
                 newlength = int(content_length) if content_length else 0
                 if newlength > lengths[i]:
-                    print "getting new", lengths[i], newlength
                     response = requests.get(url, auth=(username, password), headers={
                         "range" : "bytes=%s-%s" % (lengths[i], newlength-1)
                     })
