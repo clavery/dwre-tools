@@ -1,5 +1,6 @@
 import requests
 import pyquery
+import time
 
 
 def get_current_versions(env, session):
@@ -31,6 +32,7 @@ def login_business_manager(env, session):
 
 
 def wait_for_import(env, session, filename):
+    time.sleep(0.5)
     response = session.get("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Status".format(env["server"]))
     response_q = pyquery.PyQuery( response.content)
     log_link = response_q.find("a:contains('Site Import'):contains('%s')" % filename).eq(0).attr("href")
@@ -44,5 +46,5 @@ def wait_for_import(env, session, filename):
         elif "aborted" in log_response.content:
             raise RuntimeError("Failure to import %s. Check import log." % filename)
         else:
-            thread.sleep(2)
+            time.sleep(2)
 
