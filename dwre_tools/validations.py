@@ -54,7 +54,7 @@ def validate_xml(xml, throw=True):
     root_el = xml.getroot()
     root_tag = root_el.tag[root_el.tag.find('}')+1:]
     if root_tag not in SCHEMA_MAP:
-        raise RuntimeError("cannot find schema for %s" % root_tag)
+        return
     schema_name = SCHEMA_MAP[root_tag]
     schema = ET.XMLSchema(file=os.path.join(dwre_tools.__path__[0], 'schemas', schema_name))
     schema.validate(xml)
@@ -69,7 +69,10 @@ def validate_file(full_filename):
     try:
         xml = ET.parse(full_filename)
         schema = validate_xml(xml, throw=False)
-        if schema.error_log:
+        if schema is None:
+            print Fore.YELLOW + "no schema [WARNING]" + Fore.RESET
+            return True
+        elif schema.error_log:
             print Fore.RED + "[ERROR]" + Fore.RESET
             for e in schema.error_log:
                 print SCHEMALINE_RE.sub(Fore.BLUE + '\\1' + Fore.RESET, str(e))
