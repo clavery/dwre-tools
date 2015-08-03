@@ -16,11 +16,14 @@ def get_env_from_args(args):
         if not args.project:
             (project_name, project) = get_default_project()
             args.project = project_name
+        else:
+            project = get_project(args.project)
+
         if not args.env:
-            (env_name, creds) = get_default_environment(project)
+            (env_name, env) = get_default_environment(project)
             args.env = env_name
-        project = get_project(args.project)
-        env = get_environment(args.env, project)
+        else:
+            env = get_environment(args.env, project)
     else:
         assert args.username, "Must specify a username"
         env = {
