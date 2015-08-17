@@ -5,6 +5,7 @@ import time
 import re
 import sys
 from xml.etree import ElementTree as ET
+import functools
 
 from colorama import Fore, Back, Style
 
@@ -26,7 +27,11 @@ def latest_logs(server, username, password, filters):
     log_files = get_files(x)
     latest_files = []
     for f in filters:
-        files = sorted([l for l in log_files if l[0].startswith(f)], cmp=compare_file_times)
+        # python3 hacky fix
+        if hasattr(functools, "cmp_to_key"):
+            files = sorted([l for l in log_files if l[0].startswith(f)], key=functools.cmp_to_key(compare_file_times))
+        else:
+            files = sorted([l for l in log_files if l[0].startswith(f)], cmp=compare_file_times)
         if files:
             latest_files.append(files.pop())
     return latest_files
@@ -52,6 +57,7 @@ def output_log_file(name, content):
 
 
 def tail_log_file(name, content):
+    content = content.decode("utf-8")
     error_lines = LOGENTRY_RE.findall(content)
     if error_lines:
         output_log_file(name, error_lines[-1])

@@ -27,7 +27,7 @@ def login_business_manager(env, session):
                                 LocaleID="",
                                 LoginForm_RegistrationDomain="Sites",
                                 login=""))
-    if "Invalid login or password" in response.content:
+    if "Invalid login or password" in response.text:
         raise RuntimeError("Invalid login or password")
 
 
@@ -41,9 +41,9 @@ def wait_for_import(env, session, filename):
     finished = False
     while not finished:
         log_response = session.get(log_link)
-        if "finished successfully" in log_response.content:
+        if "finished successfully" in log_response.text:
             finished = True
-        elif "aborted" in log_response.content:
+        elif "aborted" in log_response.text:
             raise RuntimeError("Failure to import %s. Check import log." % filename)
         else:
             time.sleep(2)
