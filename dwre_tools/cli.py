@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from argparse import ArgumentParser
 
 import sys
@@ -147,4 +149,8 @@ def main():
 
     args = parser.parse_args()
 
-    args.func(args)
+    if hasattr(args, 'func'):
+        args.func(args)
+    else:
+        parser.print_help()
+        sys.exit(2)

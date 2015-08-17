@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import requests
 import time
 import re
@@ -41,12 +43,12 @@ def format_log_part(logpart):
 
 
 def output_log_file(name, content):
-    print
-    print(Fore.GREEN + ("------ %s " % name) + Fore.RESET)
-    print(Fore.GREEN + "------------------------------------------------" + Fore.RESET)
-    print format_log_part(content)
-    print(Fore.GREEN + "------------------------------------------------" + Fore.RESET)
-    print
+    print()
+    print((Fore.GREEN + ("------ %s " % name) + Fore.RESET))
+    print((Fore.GREEN + "------------------------------------------------" + Fore.RESET))
+    print((format_log_part(content)))
+    print((Fore.GREEN + "------------------------------------------------" + Fore.RESET))
+    print()
 
 
 def tail_log_file(name, content):
@@ -94,6 +96,6 @@ def tail_logs(env, filters, interval):
                     response.raise_for_status()
                     output_log_file(log[0], response.content)
                 lengths[i] = newlength
-    except KeyboardInterrupt, e:
+    except KeyboardInterrupt as e:
         sys.exit(0)
 

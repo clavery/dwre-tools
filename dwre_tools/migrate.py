@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import requests
 import zipfile
 import io
@@ -5,7 +7,12 @@ import re
 import time
 from datetime import datetime
 import pyquery
-import thread
+
+try:
+    import _thread as thread
+except ImportError:
+    import thread
+
 import os
 from lxml import etree as ET
 from lxml.builder import ElementMaker
@@ -42,7 +49,7 @@ def find_path(graph, start, path=None):
     else:
         path = path + [start]
 
-    if not graph.has_key(start):
+    if start not in graph:
         return path
 
     for node in graph[start]:
@@ -79,7 +86,7 @@ def get_migrations(migrations_context):
         else:
             migration_nodes[None].append(id)
 
-    if len(migration_data.keys()) == 0:
+    if len(list(migration_data.keys())) == 0:
         return migrations
 
     # validate root exists
@@ -87,7 +94,7 @@ def get_migrations(migrations_context):
 
     errors = []
     # validate graph structure
-    for parent, names in migration_nodes.items():
+    for parent, names in list(migration_nodes.items()):
         if parent and parent not in migration_data:
             errors.append("Cannot find migration: {}".format(parent))
         if len(names) != 1:
@@ -157,7 +164,7 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
     # validate path
     migrations = get_migrations(migrations_context)
 
-    print "Writing new migration (%s) with parent (%s)" % (id, parent)
+    print("Writing new migration (%s) with parent (%s)" % (id, parent))
 
     #print ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True)
     with open(os.path.join(migrations_dir, "migrations.xml"), "w") as f:
@@ -196,13 +203,13 @@ def apply_migrations(env, migrations_dir, test=False):
 
     if current_migration_path is not None:
         if path_to_check != current_migration_path:
-            print Fore.YELLOW + "WARNING migration path does not match expected value" + Fore.RESET
-            print Fore.YELLOW + "Current Path:" + Fore.RESET
+            print(Fore.YELLOW + "WARNING migration path does not match expected value" + Fore.RESET)
+            print(Fore.YELLOW + "Current Path:" + Fore.RESET)
             for p in current_migration_path:
-                print Fore.YELLOW + "\t" + p + Fore.RESET
-            print Fore.YELLOW + "Expected Path:" + Fore.RESET
+                print(Fore.YELLOW + "\t" + p + Fore.RESET)
+            print(Fore.YELLOW + "Expected Path:" + Fore.RESET)
             for p in path_to_check:
-                print Fore.YELLOW + "\t" + p + Fore.RESET
+                print(Fore.YELLOW + "\t" + p + Fore.RESET)
 
             raise RuntimeError("migration path does not match expected value; recommend manual intervention with single migration applications; use force to continue")
     else:
@@ -213,20 +220,20 @@ def apply_migrations(env, migrations_dir, test=False):
         migrations[None] = {"id" : "DWRE_MIGRATE_BOOTSTRAP", "description" : "DWRE Migrate tools bootstrap/upgrade" }
 
     if migration_path:
-        print Fore.YELLOW + "%s migrations required..." % len(migration_path) + Fore.RESET
+        print(Fore.YELLOW + "%s migrations required..." % len(migration_path) + Fore.RESET)
     else:
-        print Fore.GREEN + "No migrations required. Instance is up to date: %s" % current_migration + Fore.RESET
+        print(Fore.GREEN + "No migrations required. Instance is up to date: %s" % current_migration + Fore.RESET)
         return
 
     for migration in migration_path:
         migration_data = migrations[migration]
-        print "[%s] %s" % (migration_data["id"], migration_data["description"])
+        print("[%s] %s" % (migration_data["id"], migration_data["description"]))
 
     if test:
-        print "Will not perform migrations, exiting..."
+        print("Will not perform migrations, exiting...")
         return
 
-    print "\nRunning migrations..."
+    print("\nRunning migrations...")
 
     for m in migration_path:
         migration = migrations[m]
@@ -267,8 +274,8 @@ def apply_migrations(env, migrations_dir, test=False):
         response.raise_for_status()
 
         end_time = time.time()
-        print "Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time)
-    print Fore.GREEN + "Successfully updated instance with current migrations" + Fore.RESET
+        print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time))
+    print(Fore.GREEN + "Successfully updated instance with current migrations" + Fore.RESET)
 
 
 def run_migration(env, migrations_dir, migration_name):
@@ -319,7 +326,7 @@ def run_migration(env, migrations_dir, migration_name):
     response.raise_for_status()
 
     end_time = time.time()
-    print "Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time)
+    print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time))
 
 
 def reset_migrations(env, migrations_dir, test=False):
@@ -344,30 +351,30 @@ def reset_migrations(env, migrations_dir, test=False):
 
     (path, migrations) = get_migrations(migrations_context)
 
-    print "Will reset migrations to %s" % migrations[path[-1]]["id"]
+    print("Will reset migrations to %s" % migrations[path[-1]]["id"])
     for i, p in enumerate(path):
-        print "\t" + "%s:" % i, p
+        print("\t" + "%s:" % i, p)
 
     if not test:
         response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
                                   data={"NewVersion" : migrations[path[-1]]["id"], "NewVersionPath" : ",".join(path)})
-        print "Updated migrations to code version"
+        print("Updated migrations to code version")
 
 
 def validate_migrations(migrations_dir):
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 
-    print Fore.MAGENTA + "Validating migrations.xml" + Fore.RESET,
+    print(Fore.MAGENTA + "Validating migrations.xml" + Fore.RESET, end=' ')
     migrations_context = ET.parse(migrations_file)
     validate_xml(migrations_context)
-    print Fore.GREEN + "[OK]" + Fore.RESET
+    print(Fore.GREEN + "[OK]" + Fore.RESET)
 
     (path, migrations) = get_migrations(migrations_context)
 
     results = []
     for m in path:
-        print Fore.MAGENTA + "Validating migration: %s" % m + Fore.RESET
+        print(Fore.MAGENTA + "Validating migration: %s" % m + Fore.RESET)
         data = migrations[m]
         result = validate_directory(os.path.join(migrations_dir, data["location"]))
         results.append(result)

@@ -1,5 +1,5 @@
 
-TOOL_VERSION = u"6"
+TOOL_VERSION = "6"
 
 BOOTSTRAP_META = """<?xml version="1.0" encoding="UTF-8"?>
 <metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">

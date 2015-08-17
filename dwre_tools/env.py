@@ -9,8 +9,8 @@ def load_config():
 def get_default_project():
     config = load_config()
     default_project = config.get('defaultProject')
-    if not default_project and len(config["projects"].keys()) == 1:
-        default_project = config["projects"].keys()[0]
+    if not default_project and len(list(config["projects"].keys())) == 1:
+        default_project = list(config["projects"].keys())[0]
     if default_project:
         return (default_project, config["projects"][default_project])
     return (None, None)
@@ -21,8 +21,8 @@ def get_default_environment(project):
         raise Exception("No default environment found in ~/.dwre.json")
 
     default_env = project.get('defaultEnvironment')
-    if not default_env and len(project["environments"].keys()) == 1:
-        default_env = project["environments"].keys()[0]
+    if not default_env and len(list(project["environments"].keys())) == 1:
+        default_env = list(project["environments"].keys())[0]
     if default_env:
         return (default_env, project["environments"][default_env])
     return (None, None)

@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from lxml import etree as ET
 import os
 import re
@@ -65,24 +67,24 @@ def validate_xml(xml, throw=True):
 
 SCHEMALINE_RE = re.compile(r'^(.*?:\d+:\d+:)')
 def validate_file(full_filename):
-    print "%s"  % full_filename,
+    print("%s"  % full_filename, end=' ')
     try:
         xml = ET.parse(full_filename)
         schema = validate_xml(xml, throw=False)
         if schema is None:
-            print Fore.YELLOW + "no schema [WARNING]" + Fore.RESET
+            print(Fore.YELLOW + "no schema [WARNING]" + Fore.RESET)
             return True
         elif schema.error_log:
-            print Fore.RED + "[ERROR]" + Fore.RESET
+            print(Fore.RED + "[ERROR]" + Fore.RESET)
             for e in schema.error_log:
-                print SCHEMALINE_RE.sub(Fore.BLUE + '\\1' + Fore.RESET, str(e))
+                print(SCHEMALINE_RE.sub(Fore.BLUE + '\\1' + Fore.RESET, str(e)))
             return False
         else:
-            print Fore.GREEN + "[OK]" + Fore.RESET
+            print(Fore.GREEN + "[OK]" + Fore.RESET)
             return True
     except ET.XMLSyntaxError as e:
-        print Fore.RED + "[ERROR]" + Fore.RESET
-        print e
+        print(Fore.RED + "[ERROR]" + Fore.RESET)
+        print(e)
         return False
 
 
