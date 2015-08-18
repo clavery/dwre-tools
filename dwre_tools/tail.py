@@ -57,7 +57,6 @@ def output_log_file(name, content):
 
 
 def tail_log_file(name, content):
-    content = content.decode("utf-8")
     error_lines = LOGENTRY_RE.findall(content)
     if error_lines:
         output_log_file(name, error_lines[-1])
@@ -82,7 +81,7 @@ def tail_logs(env, filters, interval):
     # get initial for last line purposes (for some reason this returns diff content lengths so we
     # can't use it for the initial length calc
     tail_requests = [requests.get(url, auth=(username, password)) for url in urls]
-    [tail_log_file(log[0], r.content) for r, log in zip(tail_requests, log_files)]
+    [tail_log_file(log[0], r.text) for r, log in zip(tail_requests, log_files)]
 
     try:
         while True:
@@ -100,7 +99,7 @@ def tail_logs(env, filters, interval):
                         "range" : "bytes=%s-%s" % (lengths[i], newlength-1)
                     })
                     response.raise_for_status()
-                    output_log_file(log[0], response.content)
+                    output_log_file(log[0], response.text)
                 lengths[i] = newlength
     except KeyboardInterrupt as e:
         sys.exit(0)
