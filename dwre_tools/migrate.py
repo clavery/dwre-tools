@@ -167,8 +167,9 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
     print("Writing new migration (%s) with parent (%s)" % (id, parent))
 
     #print ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True)
-    with open(os.path.join(migrations_dir, "migrations.xml"), "w") as f:
-        f.write(ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True))
+    xml_file_output = ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True)
+    with open(os.path.join(migrations_dir, "migrations.xml"), "wb") as f:
+        f.write(xml_file_output)
 
 
 def apply_migrations(env, migrations_dir, test=False):
