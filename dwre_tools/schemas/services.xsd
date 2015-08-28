@@ -66,6 +66,14 @@
                         <xsd:extension base="simpleType.Generic.String.4000">
                             <xsd:attribute name="encrypted" type="xsd:boolean" />
                             <xsd:attribute name="masked" type="xsd:boolean" />
+                            <xsd:attribute name="encryption-type" use="optional" >
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:enumeration value="RSA" />
+                                        <xsd:enumeration value="common.export" />
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:attribute>
                         </xsd:extension>
                     </xsd:simpleContent>
                 </xsd:complexType>

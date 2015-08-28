@@ -20,16 +20,27 @@
 
     <xsd:complexType name="complexType.Order">
         <xsd:sequence>
-            <xsd:element name="order-date" type="xsd:dateTime" minOccurs="1" maxOccurs="1">
+            <xsd:element name="order-date" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
-                    <xsd:documentation>The original date and time the order was placed.</xsd:documentation>
+                    <xsd:documentation>Required except in delete mode.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="created-by" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="original-order-no" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
-            <xsd:element name="currency" type="simpleType.Currency" maxOccurs="1" minOccurs="1"></xsd:element>
+            <xsd:element name="currency" type="simpleType.Currency" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Required except in delete mode.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="customer-locale" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
-            <xsd:element name="taxation" minOccurs="0" maxOccurs="1" type="simpleType.Taxation"></xsd:element>
+            <xsd:element name="taxation" minOccurs="0" maxOccurs="1" type="simpleType.Taxation">
+                <xsd:annotation>
+                    <xsd:documentation>
+                    Since version 15.4.
+                    The taxation policy of the site at the time the order was placed.
+                    </xsd:documentation>
+                </xsd:annotation>            
+            </xsd:element>
             <xsd:element name="source-code" type="complexType.SourceCode" maxOccurs="1" minOccurs="0"></xsd:element>
             <xsd:element name="affiliate-partner-name" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="affiliate-partner-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
@@ -84,6 +95,7 @@
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="order-no" type="simpleType.Generic.String.256" use="required" />
+        <xsd:attribute name="mode" type="simpleType.ImportMode" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.SourceCode" mixed="false">
@@ -129,6 +141,13 @@
             <xsd:extension base="xsd:decimal"></xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
+
+    <xsd:simpleType name="simpleType.Percentage">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0" />
+            <xsd:maxInclusive value="100" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:complexType name="complexType.LineItemAmounts">
         <xsd:complexContent>
@@ -190,12 +209,66 @@
                     </xsd:choice>
                     <xsd:element name="coupon-id" type="simpleType.Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1" />
                     <xsd:element name="reason-code" type="simpleType.Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1" />
+                    <xsd:element name="manual" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+                        <xsd:annotation>   
+                            <xsd:documentation>
+                            Since version 15.6.
+                            True if this price adjustment was applied manually to the order via a CSR application (e.g. as an appeasement).
+                            Not exported unless true.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="discount" type="complexType.AppliedDiscount" minOccurs="0" maxOccurs="1" >
+                        <xsd:annotation>   
+                            <xsd:documentation>
+                            Since version 15.6.
+                            Object representing the logical discount that was applied to the order.
+                            This element is only exported for custom PriceAdjustments created using one of the the createPriceAdjustment(String, Discount) API methods.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="created-by" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1">
+                        <xsd:annotation>   
+                            <xsd:documentation>
+                            Since version 15.6.
+                            The ID of the user who manually applied this PriceAdjustment to the order.
+                            This element is only only exported if the PriceAdjustment is manual.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="creation-date" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+                        <xsd:annotation>   
+                            <xsd:documentation>
+                            Since version 15.6.
+                            The date this PriceAdjustment was manually applied to the order.
+                            This element is only only exported if the PriceAdjustment is manual.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
                     <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
                 </xsd:sequence>
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
 
+    <xsd:complexType name="complexType.AppliedDiscount">
+        <xsd:sequence>
+            <xsd:choice minOccurs="1" maxOccurs="1">
+                <xsd:element name="amount" type="xsd:decimal" />
+                <xsd:element name="bonus" type="simpleType.EmptyElement" />
+                <xsd:element name="bonus-choice" type="simpleType.EmptyElement" />
+                <xsd:element name="fixed-price" type="xsd:decimal" />
+                <xsd:element name="fixed-price-shipping" type="xsd:decimal" />
+                <xsd:element name="free" type="simpleType.EmptyElement" />
+                <xsd:element name="free-shipping" type="simpleType.EmptyElement" />
+                <xsd:element name="percentage" type="simpleType.Percentage" />
+                <xsd:element name="percent-off-options" type="simpleType.Percentage" />
+                <xsd:element name="price-book-id" type="simpleType.Generic.NonEmptyString.100" />
+                <xsd:element name="total-fixed-price" type="xsd:decimal" />
+            </xsd:choice>        
+        </xsd:sequence>
+    </xsd:complexType>
+    
     <xsd:complexType name="complexType.ABTestSegment">
         <xsd:sequence>
             <xsd:element name="test-id" type="simpleType.Generic.NonEmptyString.40" minOccurs="1" maxOccurs="1" />
@@ -455,15 +528,22 @@
                     <xsd:documentation>These are the custom attributes of the PaymentTransaction system object.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            
+            <xsd:element name="ek-id" type="xsd:int" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>For internal use. A positive value identifies a known encryption serial number, a value of -1 indicates no encryption</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            
         </xsd:sequence>
     </xsd:complexType>
 
     <xsd:complexType name="complexType.BankTransfer">
         <xsd:sequence>
-            <xsd:element name="account-number" type="simpleType.Generic.String.256" minOccurs="0"></xsd:element>
+            <xsd:element name="account-number" type="simpleType.Generic.String.4000" minOccurs="0"></xsd:element>
             <xsd:element name="account-holder" type="simpleType.Generic.String.256" minOccurs="0"></xsd:element>
             <xsd:element name="routing-number" type="simpleType.Generic.String.256" minOccurs="0"></xsd:element>
-            <xsd:element name="drivers-license" type="simpleType.Generic.String.256" minOccurs="0"></xsd:element>
+            <xsd:element name="drivers-license" type="simpleType.Generic.String.4000" minOccurs="0"></xsd:element>
             <xsd:element name="drivers-license-state-code" type="simpleType.Generic.String.256" minOccurs="0"></xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1">
                  <xsd:annotation>
@@ -633,6 +713,8 @@
         </xsd:restriction>
     </xsd:simpleType>
 
+    <xsd:complexType name="simpleType.EmptyElement" mixed="false" />
+
     <xsd:simpleType name="simpleType.Generic.String.10">
         <xsd:restriction base="simpleType.Generic.String">
             <xsd:minLength value="0" />
@@ -741,6 +823,14 @@
             <xsd:enumeration value="Marketplace" />
             <xsd:enumeration value="DSS" />
             <xsd:enumeration value="Store" />
+            <xsd:enumeration value="Pinterest" />
+            <xsd:enumeration value="Twitter" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.ImportMode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="delete" />
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -764,7 +854,7 @@
             <xsd:pattern value="[A-Z]{3}" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:simpleType name="simpleType.Taxation">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="net" />

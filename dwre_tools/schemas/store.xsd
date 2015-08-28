@@ -33,8 +33,8 @@
             <xsd:element name="store-events" type="sharedType.LocalizedText" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="store-hours" type="sharedType.LocalizedText" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="image" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="latitude" type="xsd:decimal" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="longitude" type="xsd:decimal" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="latitude" type="simpleType.Latitude" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="longitude" type="simpleType.Longitude" minOccurs="0" maxOccurs="1" />
             <xsd:element name="inventory-list-id" type="simpleType.Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
@@ -42,7 +42,7 @@
     </xsd:complexType>
 
     <!-- Shared Complex Types -->
-    
+
     <xsd:complexType name="sharedType.LocalizedText" mixed="false">
         <xsd:simpleContent>
             <xsd:extension base="simpleType.Generic.String">
@@ -50,7 +50,7 @@
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
-    
+
     <xsd:complexType name="sharedType.CustomAttributes" mixed="false">
         <xsd:sequence>
             <xsd:element name="custom-attribute" type="sharedType.CustomAttribute" minOccurs="0" maxOccurs="unbounded" />
@@ -119,6 +119,20 @@
         <xsd:restriction base="simpleType.Generic.String">
             <xsd:minLength value="0" />
             <xsd:maxLength value="256" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.Latitude">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="-90.0"/>
+            <xsd:maxInclusive value="+90.0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.Longitude">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="-180.0"/>
+            <xsd:maxInclusive value="+180.0"/>
         </xsd:restriction>
     </xsd:simpleType>
 

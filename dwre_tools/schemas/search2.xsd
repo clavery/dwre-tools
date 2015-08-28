@@ -23,6 +23,7 @@
                 <xsd:element name="compound-word-list" type="CompoundWordList" minOccurs="0" maxOccurs="unbounded" />
                 <xsd:element name="common-phrase-list" type="CommonPhraseList" minOccurs="0" maxOccurs="unbounded" />
                 <xsd:element name="category-exclusion-list" type="CategoryExclusionList" minOccurs="0" maxOccurs="unbounded" />
+                <xsd:element name="stemming-exception-list" type="StemmingExceptionList" minOccurs="0" maxOccurs="unbounded" />
                 <xsd:element name="index-settings" type="IndexingSettings" minOccurs="0" maxOccurs="1" />
             </xsd:sequence>
     </xsd:complexType>
@@ -138,14 +139,14 @@
         <xsd:attribute ref="xml:lang" use="required" />
         <xsd:attribute name="mode" type="ImportMode" use="optional" />
     </xsd:complexType>
-
+    
     <xsd:complexType name="HypernymRule">
         <xsd:sequence>
             <xsd:element name="hyponyms" type="Hyponyms" minOccurs="1" maxOccurs="1" />
             <xsd:element name="hypernyms" type="Hypernyms" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
-
+    
     <xsd:complexType name="Hyponyms">
         <xsd:simpleContent>
              <xsd:extension base="Generic.String.4000" />
@@ -153,6 +154,33 @@
     </xsd:complexType>
 
     <xsd:complexType name="Hypernyms">
+        <xsd:simpleContent>
+             <xsd:extension base="Generic.String.4000" />
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="StemmingExceptionList">
+        <xsd:sequence>
+            <xsd:element name="stemming-exception-rule" type="StemmingExceptionRule" minOccurs="0" maxOccurs="500" />
+        </xsd:sequence>
+        <xsd:attribute ref="xml:lang" use="required" />
+        <xsd:attribute name="mode" type="ImportMode" use="optional" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="StemmingExceptionRule">
+        <xsd:sequence>
+            <xsd:element name="stemming-exceptions" type="StemmingExceptions" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="stem" type="Stem" minOccurs="1" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>    
+
+    <xsd:complexType name="StemmingExceptions">
+        <xsd:simpleContent>
+             <xsd:extension base="Generic.String.4000" />
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="Stem">
         <xsd:simpleContent>
              <xsd:extension base="Generic.String.4000" />
         </xsd:simpleContent>

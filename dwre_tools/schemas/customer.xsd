@@ -19,14 +19,40 @@
     <!-- Fake some more top level elements to allow for snippet based JAXB parsing -->
     <xsd:element name="customer" type="complexType.Customer" />
 
-    <xsd:element name="group-assignment" type="complexType.CustomerGroupAssignment" />
+    <xsd:element name="group-assignment" type="complexType.CustomerGroupAssignment">
+        <xsd:annotation>
+            <xsd:documentation>
+                Elements of this type are import-only and will never be exported.  
+                Furthermore, elements of this type will be handled only if included in
+                a customer import file (customer.xsd) but are ignored if included in a 
+                customer list import (customerlist2.xsd).
+                <p/>
+                The reason for this discrepancy is that customer groups are site-specific, 
+                and customer import is always done in the context of a site whereas customer 
+                list import is not.
+            </xsd:documentation>
+        </xsd:annotation>       
+    </xsd:element>
 
     <xsd:complexType name="complexType.Customer" mixed="false">
         <xsd:sequence>
             <xsd:element name="credentials" type="complexType.Credentials" minOccurs="0" maxOccurs="1" />
             <xsd:element name="profile" type="complexType.Profile" minOccurs="0" maxOccurs="1" />
             <xsd:element name="addresses" type="complexType.Addresses" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="customer-groups" type="complexType.CustomerGroups" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="customer-groups" type="complexType.CustomerGroups" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        This element will never appear in a customer list export file (customerlist2.xsd)
+                        but may be included in a customer export (customer.xsd).  This element will also 
+                        be ignored if specified in a customer list import but will be processed in
+                        a customer import.
+                        <p/>
+                        The reason for this discrepancy is that customer groups are site-specific, 
+                        and customer export is always done in the context of a 
+                        site where as customer list export is not.
+                    </xsd:documentation>
+                </xsd:annotation>            
+            </xsd:element>
             <xsd:element name="note" type="simpleType.Generic.String.4000" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="customer-no" type="simpleType.Generic.String.100" use="required" />

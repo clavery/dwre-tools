@@ -26,7 +26,7 @@
     <xsd:element name="global-promotion-settings" type="PromotionSettings" />
     <xsd:element name="promotion" type="Promotion" />
     <xsd:element name="promotion-campaign-assignment" type="PromotionCampaignAssignment" />
-    
+
     <!-- campaign -->
 
     <xsd:complexType name="Campaign" mixed="false">
@@ -53,7 +53,7 @@
     <xsd:complexType name="CustomerGroup" mixed="false">
         <xsd:attribute name="group-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
-    
+
     <!-- promotion settings -->
         
     <xsd:complexType name="PromotionSettings" mixed="false">
@@ -68,6 +68,7 @@
     <xsd:complexType name="Promotion" mixed="false">
         <xsd:sequence>
             <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="archived-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="searchable-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="qualifiers" type="PromotionQualifiers" minOccurs="0" maxOccurs="1" >
                 <xsd:annotation>
@@ -81,9 +82,9 @@
                     <xsd:documentation>
                         Deprecated in favor of "rank" element of PromotionCampaignAssignment.
                     </xsd:documentation>
-                </xsd:annotation>           
+                </xsd:annotation>
             </xsd:element>
-            <xsd:element name="exclusivity" type="PromotionExclusivity" minOccurs="0" maxOccurs="1" />           
+            <xsd:element name="exclusivity" type="PromotionExclusivity" minOccurs="0" maxOccurs="1" />
             <xsd:element name="currency" type="simpleType.Currency" minOccurs="0" maxOccurs="1" nillable="true" />
             <xsd:element name="name" type="LocalizedString" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="callout-msg" type="LocalizedString" minOccurs="0" maxOccurs="unbounded" />
@@ -94,7 +95,7 @@
                     <xsd:documentation>
                         Deprecated in favor of "schedule" element of PromotionCampaignAssignment.
                     </xsd:documentation>
-                </xsd:annotation>              
+                </xsd:annotation>
             </xsd:element>
             <xsd:element name="coupons" type="PromotionCoupons" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
@@ -108,8 +109,9 @@
                     <xsd:documentation>
                         Deprecated in favor of "source-codes" element of PromotionCampaignAssignment.
                     </xsd:documentation>
-                </xsd:annotation>  
+                </xsd:annotation>
             </xsd:element>
+            <xsd:element name="tags" type="Tags" minOccurs="0" maxOccurs="1" />
             <xsd:element name="custom-attributes" type="CustomAttributes" minOccurs="0" maxOccurs="1" />
             <xsd:choice minOccurs="0" maxOccurs="1">
                 <xsd:element name="product-promotion-rule" type="ProductPromotionRule" />
@@ -128,21 +130,27 @@
             </xsd:annotation>
         </xsd:attribute>
     </xsd:complexType>
-    
+
+    <xsd:complexType name="Tags" mixed="false">
+        <xsd:sequence>
+            <xsd:element name="tag" type="Generic.String.4000" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
     <!--  promotion-campaign assignment -->
-    
+
     <xsd:complexType name="PromotionCampaignAssignment" mixed="false">
         <xsd:sequence>
             <xsd:element name="qualifiers" type="PromotionQualifiers" minOccurs="0" maxOccurs="1" />
             <xsd:element name="customer-groups" type="CustomerGroups" minOccurs="0" maxOccurs="1" />
             <xsd:element name="coupons" type="PromotionCoupons" minOccurs="0" maxOccurs="1" />
             <xsd:element name="source-codes" type="PromotionSourceCodeGroups" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="rank" type="PromotionRank" minOccurs="0" maxOccurs="1" />          
+            <xsd:element name="rank" type="PromotionRank" minOccurs="0" maxOccurs="1" />
             <xsd:element name="schedule" type="PromotionSchedule" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
         <xsd:attribute name="promotion-id" type="Generic.NonEmptyString.256" use="required" />
-        <xsd:attribute name="campaign-id" type="Generic.NonEmptyString.256" use="required" />    
+        <xsd:attribute name="campaign-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
 
     <!-- promotion schedule -->
@@ -208,27 +216,27 @@
     <xsd:complexType name="SourceCodeGroup" mixed="false">
         <xsd:attribute name="group-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
-    
+
     <!-- product combination -->
-    
+
     <xsd:complexType name="ProductCombination" mixed="false">
         <xsd:sequence>
             <xsd:element name="product-constraints" type="ProductConstraints" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="ProductConstraints" mixed="false">
         <xsd:sequence>
             <xsd:element name="product-constraint" type="ProductConstraint" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="ProductConstraint" mixed="false">
         <xsd:sequence>
             <xsd:element name="quantity" type="Quantity" minOccurs="1" maxOccurs="1" />
             <xsd:element name="product-specification" type="ProductSpecification" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
-    </xsd:complexType>    
+    </xsd:complexType>
 
     <!-- product specification -->
 
@@ -292,7 +300,7 @@
         </xsd:sequence>
         <xsd:attribute name="operator" type="StockComparator" />
     </xsd:complexType>
-    
+
     <xsd:complexType name="ProductSpecification.ProductAttributeFilter" mixed="false">
         <xsd:sequence>
             <xsd:element name="attribute-value" type="Generic.NonEmptyString.256" minOccurs="0" maxOccurs="unbounded" />
@@ -306,7 +314,7 @@
             <xsd:element name="pricebook-id" type="Generic.NonEmptyString.256" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="ProductSpecification.ProductOptionFilter" mixed="false">
         <xsd:sequence>
             <xsd:element name="option-value-id" type="Generic.NonEmptyString.256" minOccurs="0" maxOccurs="unbounded" />
@@ -314,13 +322,13 @@
         <xsd:attribute name="operator" type="OptionComparator" />
         <xsd:attribute name="option-id" type="Generic.NonEmptyString.256" />
     </xsd:complexType>
-    
+
     <xsd:complexType name="ProductOptionSpecification" mixed="false">
         <xsd:sequence>
             <xsd:element name="product-option-id" type="Generic.NonEmptyString.256" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
-        
+
     <!-- product promotion -->
 
     <xsd:complexType name="ProductPromotionRule" mixed="false">
@@ -364,10 +372,10 @@
                 <xsd:element name="bogo" type="BogoProductDiscount" />
                 <xsd:element name="total-discounts" type="TotalPriceDiscounts" />
             </xsd:choice>
-            <xsd:element name="max-applications" type="MaxApplications" minOccurs="0" maxOccurs="1" />             
+            <xsd:element name="max-applications" type="MaxApplications" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="SimpleProductDiscount" mixed="false">
         <xsd:sequence>
             <xsd:choice minOccurs="1" maxOccurs="1">
@@ -384,7 +392,7 @@
             </xsd:choice>
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="TieredProductDiscounts">
         <xsd:sequence>
             <xsd:element name="discount" type="TieredProductDiscount" minOccurs="1" maxOccurs="unbounded" />
@@ -422,22 +430,20 @@
             <xsd:element name="eligible-quantity" type="Quantity" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="TotalPriceDiscounts" mixed="false">
         <xsd:sequence>
             <xsd:element name="discount" type="TotalPriceDiscount" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="TotalPriceDiscount" mixed="false">
         <xsd:sequence>
             <xsd:element name="total-fixed-price" type="Amount" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="eligible-quantity" type="Quantity" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
-    
-   
- 
+
     <!-- order promotions -->
 
     <xsd:complexType name="OrderPromotionRule" mixed="false">
@@ -490,7 +496,7 @@
                     Method-id must be either the ID of a payment method in the system or a credit card type
                     prepended with the prefix "CREDIT_CARD" (e.g. CREDIT_CARD.Visa).
                     </xsd:documentation>
-                </xsd:annotation>            
+                </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
@@ -513,13 +519,13 @@
                     is omitted from the import file.
                     If this flag is false, the promotion allows nonqualifying products in the shipment.
                     </xsd:documentation>
-                </xsd:annotation>            
+                </xsd:annotation>
             </xsd:element> 
             <xsd:element name="disable-global-excluded-products" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="discounts" type="TieredShippingDiscounts" minOccurs="0" maxOccurs="1" />
             <xsd:element name="enable-upsells" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="upsell-threshold" type="Amount" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="max-applications" type="MaxApplications" minOccurs="0" maxOccurs="1" />             
+            <xsd:element name="max-applications" type="MaxApplications" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -528,7 +534,7 @@
             <xsd:element name="method-id" type="Generic.NonEmptyString.256" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="TieredShippingDiscounts">
         <xsd:sequence>
             <xsd:element name="discount" type="TieredShippingDiscount" minOccurs="1" maxOccurs="unbounded" />
@@ -568,7 +574,7 @@
             <xsd:element name="product-id" type="Generic.NonEmptyString.100" minOccurs="0" maxOccurs="50" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="BonusChoiceProductList">
         <xsd:choice minOccurs="0" maxOccurs="50">
             <xsd:element name="product-id" type="Generic.NonEmptyString.100">
@@ -595,22 +601,22 @@
             <xsd:maxInclusive value="10" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <!--  percent off options discount type -->
-   
+
     <xsd:complexType name="PercentOffOptions">
         <xsd:sequence>
             <xsd:element name="percentage" type="Percentage" minOccurs="1" maxOccurs="1" />
             <xsd:element name="product-options" type="ProductOptionList" />
         </xsd:sequence>
     </xsd:complexType>
-   
+
     <xsd:complexType name="ProductOptionList" mixed="false">
         <xsd:sequence>
             <xsd:element name="option-id" type="Generic.NonEmptyString.256" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <!-- Shared Complex Types -->
 
     <xsd:complexType name="LocalizedText" mixed="false">
@@ -687,7 +693,7 @@
             <xsd:maxInclusive value="100" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:complexType name="PriceBookPrice">
         <xsd:choice>
             <xsd:element name="pricebook-id" type="Generic.NonEmptyString.100" minOccurs="0" maxOccurs="1" />
@@ -729,7 +735,7 @@
             </xsd:annotation>
         </xsd:attribute>
     </xsd:complexType>
- 
+
     <!-- new simple type -->
     <xsd:simpleType name="MatchMode">
         <xsd:restriction base="xsd:string">
@@ -737,7 +743,7 @@
             <xsd:enumeration value="any" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <!--  Nonempty string with no leading or trailing whitespace -->
     <xsd:simpleType name="Generic.NonEmptyString.100">
         <xsd:restriction base="Generic.String">
@@ -754,7 +760,7 @@
             <xsd:pattern value="\S|(\S(.*)\S)" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:simpleType name="ProductIDComparator">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="is equal" />
@@ -765,7 +771,7 @@
             <xsd:enumeration value="does not contain" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:simpleType name="BrandComparator">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="exists" />
@@ -797,10 +803,10 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="is equal" />
             <xsd:enumeration value="exists" />
-            <xsd:enumeration value="does not exist" />            
+            <xsd:enumeration value="does not exist" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:simpleType name="AttributeComparator">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="less than" />
@@ -826,7 +832,7 @@
         <xsd:restriction base="xsd:int">
             <xsd:minInclusive value="1" />
         </xsd:restriction>
-    </xsd:simpleType> 
+    </xsd:simpleType>
     
     <xsd:simpleType name="ProductPromotionConditionType">
         <xsd:restriction base="xsd:string">
@@ -850,7 +856,7 @@
             <xsd:enumeration value="product-combination" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:complexType name="EmptyElement" mixed="false" />
 
     <xsd:simpleType name="simpleType.ImportMode">
