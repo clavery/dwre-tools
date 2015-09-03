@@ -10,7 +10,18 @@ pip install --upgrade git+ssh://git@bitbucket.org/pixelmedia/dwre-dwre-tools.git
 pip install --upgrade git+https://username@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
 ```
 
-__Windows Users__: Recommend using the Anaconda distribution of python as it comes pre-installed with many useful packages with native binaries: [http://continuum.io/downloads](http://continuum.io/downloads).
+### Windows Notes
+
+Recommend using the Anaconda distribution of python as it comes pre-installed with many useful packages with native binaries: [http://continuum.io/downloads](http://continuum.io/downloads).
+
+### OS X Notes
+
+Highly recommend using the latest homebrew version of python **and** installing libxml2 from homebrew. Additionally you should run `brew doctor` and ensure any dependencies it complains about are satisfied (like having XCode with Command Line Tools installed)
+
+```sh
+brew install libxml2
+brew install python
+```
 
 ## Config Setup
 The tools requires at least one environment setup in your `.dwre.json` file.
