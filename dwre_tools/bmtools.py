@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import requests
 import pyquery
 import time
@@ -32,10 +34,16 @@ def login_business_manager(env, session):
 
 
 def wait_for_import(env, session, filename):
-    time.sleep(0.5)
-    response = session.get("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Status".format(env["server"]))
-    response_q = pyquery.PyQuery( response.content)
-    log_link = response_q.find("a:contains('Site Import'):contains('%s')" % filename).eq(0).attr("href")
+    log_link = None
+    retries = 0
+
+    # try our best to find the link
+    while not log_link and retries < 4:
+        time.sleep(1)
+        response = session.get("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Status".format(env["server"]))
+        response_q = pyquery.PyQuery(response.content)
+        log_link = response_q.find("a:contains('Site Import'):contains('%s')" % filename).eq(0).attr("href")
+        retries = retries + 1
     if not log_link:
         raise Exception("Failure to find status link for %s. Check import log." % filename)
     finished = False
