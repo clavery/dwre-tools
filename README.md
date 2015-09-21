@@ -144,6 +144,10 @@ Sub Commands:
 
 ## Notes
 
+### Running Against Staging Server (Two Factor Auth)
+
+You'll need a certificate and public key signed by CA key received from DWRE.
+
 ```
 dwre --server cert.staging.web.example.demandware.net\
     --username clavery\
