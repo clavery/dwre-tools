@@ -155,5 +155,5 @@ dwre --server cert.staging.web.example.demandware.net\
     --noverify\
     --clientcert ~/code/swk/pki/client_certs/build.crt\
     --clientkey ~/code/swk/pki/client_certs/build_private.key\
-    migrate run 20150721T1651_chuck_test2
+    migrate -n apply
 ```
