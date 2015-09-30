@@ -2,6 +2,11 @@
 
 Various tools for use with Demandware instances. Written in python
 
+## References
+
+- [Export Cheat Sheet](EXPORT-CHEAT-SHEET.md)
+- [Migrations Cheat Sheet](CHEAT-SHEET.md)
+
 ## Installation
 
 ```sh
