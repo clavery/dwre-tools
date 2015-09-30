@@ -143,9 +143,10 @@ Sub Commands:
 
 ## Todo
 
-- reactor tail command to use sessions; correct env
-- Refactor migration related tasks
+- Abstract sessions for all commands to better support session management (SSL, etc)
 - Proper logging instead of print statements w/ "disable color if not a TTY"
+- NEW COMMAND: `reindex`. Search indexing. Will require new config: siteName
+- NEW COMMAND: `sync`. Sync folders/zips with webdav locations
 
 ## Notes
 
