@@ -204,15 +204,39 @@ def apply_migrations(env, migrations_dir, test=False):
 
     if current_migration_path is not None:
         if path_to_check != current_migration_path:
-            print(Fore.YELLOW + "WARNING migration path does not match expected value" + Fore.RESET)
-            print(Fore.YELLOW + "Current Path:" + Fore.RESET)
-            for p in current_migration_path:
-                print(Fore.YELLOW + "\t" + p + Fore.RESET)
-            print(Fore.YELLOW + "Expected Path:" + Fore.RESET)
-            for p in path_to_check:
-                print(Fore.YELLOW + "\t" + p + Fore.RESET)
+            # TODO refactor this debug output
+            recommended_migration = None
+            for path_pair in zip(path, current_migration_path):
+                if path_pair[0] != path_pair[1]:
+                    break
+                recommended_migration = path_pair[0]
 
-            raise RuntimeError("migration path does not match expected value; recommend manual intervention with single migration applications; use force to continue")
+            print(Fore.YELLOW + "WARNING migration path does not match expected value" + Fore.RESET)
+            print(Fore.BLUE + "Current Path (on sandbox): " + Fore.RESET, end='')
+            current_migration_path_output = []
+            color = Fore.GREEN
+            for p in current_migration_path:
+                if p == recommended_migration:
+                    current_migration_path_output.append(Fore.BLUE + p + Fore.RESET)
+                    color = Fore.YELLOW
+                else:
+                    current_migration_path_output.append(color + p + Fore.RESET)
+            print(",".join(current_migration_path_output))
+            expected_path_output = []
+            color = Fore.GREEN
+            print(Fore.BLUE + "\nExpected Path (from code): " + Fore.RESET, end='')
+            for p in path_to_check:
+                if p == recommended_migration:
+                    expected_path_output.append(Fore.BLUE + p + Fore.RESET)
+                    color = Fore.YELLOW
+                else:
+                    expected_path_output.append(color + p + Fore.RESET)
+            print(",".join(expected_path_output))
+
+            print(Fore.YELLOW + "migration path does not match expected value; See output above and use 'dwre migrate set' command or manually fix" + Fore.RESET)
+            print(Fore.YELLOW + "Recommend reverting to migration:" + Fore.RESET,
+                    Fore.BLUE + ("%s" % recommended_migration) + Fore.RESET)
+            return False
     else:
         current_migration_path = path_to_check
 
@@ -380,3 +404,29 @@ def validate_migrations(migrations_dir):
         result = validate_directory(os.path.join(migrations_dir, data["location"]))
         results.append(result)
     return all(results)
+
+
+def set_migration(env, migrations_dir, migration_name):
+    migrations_file = os.path.join(migrations_dir, "migrations.xml")
+    assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+
+    migrations_context = ET.parse(migrations_file)
+    validate_xml(migrations_context)
+
+    bmsession = requests.session()
+    bmsession.verify = env["verify"]
+    bmsession.cert = env["cert"]
+
+    (path, migrations) = get_migrations(migrations_context)
+
+    login_business_manager(env, bmsession)
+
+    assert migration_name in migrations, "Cannot find migration"
+    
+    # TODO slice path at migrations set on bm
+    new_path = path[:path.index(migration_name)+1]
+
+    response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
+            data={"NewVersion" : migration_name, "NewVersionPath" : ",".join(new_path)})
+    response.raise_for_status()
+    print("Updated migrations to %s" % migration_name)
