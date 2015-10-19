@@ -154,12 +154,12 @@ Sub Commands:
 
 You'll need a certificate and public key signed by CA key received from DWRE.
 
-```
-dwre --server cert.staging.web.example.demandware.net\
-    --username clavery\
-    --password testing\
-    --noverify\
-    --clientcert ~/code/swk/pki/client_certs/build.crt\
-    --clientkey ~/code/swk/pki/client_certs/build_private.key\
-    migrate -n apply
+```sh
+dwre --server cert.staging.web.stonewall.demandware.net \
+--username clavery \
+--password passwordhere \
+--noverify \
+--clientcert ~/code/swk/pki/cert.staging.web.stonewall.demandware.net_01.crt \
+--clientkey ~/code/swk/pki/cert.staging.web.stonewall.demandware.net_01.key \
+migrate -n apply
 ```
