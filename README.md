@@ -146,6 +146,7 @@ Sub Commands:
 - Abstract sessions for all commands to better support session management (SSL, etc)
 - Proper logging instead of print statements w/ "disable color if not a TTY"
 - NEW COMMAND: `reindex`. Search indexing. Will require new config: siteName
+    - Allow Reindex after migration (save till end)
 - NEW COMMAND: `sync`. Sync folders/zips with webdav locations
 
 ## Notes

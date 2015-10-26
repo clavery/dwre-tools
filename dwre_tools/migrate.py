@@ -21,7 +21,7 @@ from collections import defaultdict
 from colorama import Fore, Back, Style
 
 from .validations import validate_xml, validate_file, validate_directory
-from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION
+from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE
 from .bmtools import get_current_versions, login_business_manager, wait_for_import
 from .utils import directory_to_zip
 
@@ -36,7 +36,7 @@ def get_bootstrap_zip():
     bootstrap_package_zip = zipfile.ZipFile(bootstrap_package_file, "w")
 
     bootstrap_package_zip.writestr("{}/version.txt".format(dest_file), VERSION)
-    bootstrap_package_zip.writestr("{}/preferences.xml".format(dest_file), PREFERENCES.encode("utf-8"))
+    bootstrap_package_zip.writestr("{}/preferences.xml".format(dest_file), PREFERENCES)
     bootstrap_package_zip.writestr("{}/meta/system-objecttype-extensions.xml".format(dest_file), BOOTSTRAP_META)
     bootstrap_package_zip.close()
 
@@ -194,55 +194,60 @@ def apply_migrations(env, migrations_dir, test=False):
 
     (path, migrations) = get_migrations(migrations_context)
 
-    if current_migration is not None:
-        assert current_migration in path, "Cannot find current migration version (%s) in migrations context; this requires manual intervention" % current_migration
-        migration_path = path[path.index(current_migration)+1:]
-        path_to_check = path[:path.index(current_migration)+1]
-    else:
-        migration_path = path
-        path_to_check = []
-
-    if current_migration_path is not None:
-        if path_to_check != current_migration_path:
-            # TODO refactor this debug output
-            recommended_migration = None
-            for path_pair in zip(path, current_migration_path):
-                if path_pair[0] != path_pair[1]:
-                    break
-                recommended_migration = path_pair[0]
-
-            print(Fore.YELLOW + "WARNING migration path does not match expected value" + Fore.RESET)
-            print(Fore.BLUE + "Current Path (on sandbox): " + Fore.RESET, end='')
-            current_migration_path_output = []
-            color = Fore.GREEN
-            for p in current_migration_path:
-                if p == recommended_migration:
-                    current_migration_path_output.append(Fore.BLUE + p + Fore.RESET)
-                    color = Fore.YELLOW
-                else:
-                    current_migration_path_output.append(color + p + Fore.RESET)
-            print(",".join(current_migration_path_output))
-            expected_path_output = []
-            color = Fore.GREEN
-            print(Fore.BLUE + "\nExpected Path (from code): " + Fore.RESET, end='')
-            for p in path_to_check:
-                if p == recommended_migration:
-                    expected_path_output.append(Fore.BLUE + p + Fore.RESET)
-                    color = Fore.YELLOW
-                else:
-                    expected_path_output.append(color + p + Fore.RESET)
-            print(",".join(expected_path_output))
-
-            print(Fore.YELLOW + "migration path does not match expected value; See output above and use 'dwre migrate set' command or manually fix" + Fore.RESET)
-            print(Fore.YELLOW + "Recommend reverting to migration:" + Fore.RESET,
-                    Fore.BLUE + ("%s" % recommended_migration) + Fore.RESET)
-            return False
-    else:
-        current_migration_path = path_to_check
-
+    migration_path = []
+    skip_migrations = False
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
         migration_path.insert(0, None)
         migrations[None] = {"id" : "DWRE_MIGRATE_BOOTSTRAP", "description" : "DWRE Migrate tools bootstrap/upgrade" }
+        if SKIP_METADATA_CHECK_ON_UPGRADE:
+            skip_migrations = True
+
+    if not skip_migrations:
+        if current_migration is not None:
+            assert current_migration in path, "Cannot find current migration version (%s) in migrations context; this requires manual intervention" % current_migration
+            migration_path = path[path.index(current_migration)+1:]
+            path_to_check = path[:path.index(current_migration)+1]
+        else:
+            migration_path = path
+            path_to_check = []
+
+        if current_migration_path:
+            if path_to_check != current_migration_path:
+                # TODO refactor this debug output
+                recommended_migration = None
+                for path_pair in zip(path, current_migration_path):
+                    if path_pair[0] != path_pair[1]:
+                        break
+                    recommended_migration = path_pair[0]
+
+                print(Fore.YELLOW + "WARNING migration path does not match expected value" + Fore.RESET)
+                print(Fore.BLUE + "Current Path (on sandbox): " + Fore.RESET, end='')
+                current_migration_path_output = []
+                color = Fore.GREEN
+                for p in current_migration_path:
+                    if p == recommended_migration:
+                        current_migration_path_output.append(Fore.BLUE + p + Fore.RESET)
+                        color = Fore.YELLOW
+                    else:
+                        current_migration_path_output.append(color + p + Fore.RESET)
+                print(",".join(current_migration_path_output))
+                expected_path_output = []
+                color = Fore.GREEN
+                print(Fore.BLUE + "\nExpected Path (from code): " + Fore.RESET, end='')
+                for p in path_to_check:
+                    if p == recommended_migration:
+                        expected_path_output.append(Fore.BLUE + p + Fore.RESET)
+                        color = Fore.YELLOW
+                    else:
+                        expected_path_output.append(color + p + Fore.RESET)
+                print(",".join(expected_path_output))
+
+                print(Fore.YELLOW + "migration path does not match expected value; See output above and use 'dwre migrate set' command or manually fix" + Fore.RESET)
+                print(Fore.YELLOW + "Recommend reverting to migration:" + Fore.RESET,
+                        Fore.BLUE + ("%s" % recommended_migration) + Fore.RESET)
+                return False
+        else:
+            current_migration_path = path_to_check
 
     if migration_path:
         print(Fore.YELLOW + "%s migrations required..." % len(migration_path) + Fore.RESET)
@@ -301,6 +306,8 @@ def apply_migrations(env, migrations_dir, test=False):
         end_time = time.time()
         print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time))
     print(Fore.GREEN + "Successfully updated instance with current migrations" + Fore.RESET)
+    if skip_migrations:
+        print(Fore.YELLOW + "Migrations may have been skipped due to tool upgrade, rerun apply to check." + Fore.RESET)
 
 
 def run_migration(env, migrations_dir, migration_name):
