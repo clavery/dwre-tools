@@ -31,6 +31,11 @@
         </xsd:sequence>
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
         <xsd:attribute name="job-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
+        <xsd:attribute name="priority" type="simpleType.Generic.NonNegativeInt" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>Reserved for Beta users. Priority will not be imported and a warning will be logged if the Schedule Prioritization feature is disabled.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="complexType.Flow">
@@ -77,11 +82,13 @@
             <xsd:element name="stop" type="complexType.EmptyElement" />
             <xsd:element name="continue" type="complexType.StepContinueAction" />
         </xsd:choice>
-        <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString.1000" use="required" />
+        <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString" use="required" />
     </xsd:complexType>
 
-    <xsd:complexType name="complexType.StepContinueAction"></xsd:complexType>
-
+    <xsd:complexType name="complexType.StepContinueAction">
+    	<xsd:attribute name="next-step" type="simpleType.Generic.NonEmptyString.100" use="optional"/>
+    </xsd:complexType>
+    
     <xsd:complexType name="complexType.Split">
         <xsd:sequence>
             <xsd:element name="flow" type="complexType.SplitFlow" minOccurs="1" maxOccurs="unbounded" />
@@ -155,7 +162,7 @@
         <xsd:sequence>
             <xsd:element name="send-mail" type="complexType.SendMailAction" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
-        <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString.1000" use="required" />
+        <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString" use="required" />
         <xsd:attribute name="enabled" type="xsd:boolean" use="required"/>
     </xsd:complexType>
 
@@ -213,7 +220,7 @@
             <xsd:element name="disable-trigger" type="complexType.EmptyElement" minOccurs="1" maxOccurs="1" />
             <xsd:element name="retry" type="complexType.RetryAction" minOccurs="1" maxOccurs="1" />
         </xsd:choice>
-        <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString.1000" use="required" fixed="FAILED" />
+        <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString" use="required" fixed="FAILED" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.RetryAction">
@@ -253,6 +260,13 @@
 
     <xsd:simpleType name="simpleType.Generic.String">
         <xsd:restriction base="xsd:string" />
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.Generic.NonEmptyString">
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:minLength value="1" />
+            <xsd:pattern value="\S|(\S(.*)\S)" />
+        </xsd:restriction>
     </xsd:simpleType>
 
     <xsd:simpleType name="simpleType.Generic.String.10">
@@ -326,6 +340,12 @@
     <xsd:simpleType name="simpleType.JobExitStatus">
         <xsd:restriction base="xsd:string">
             <xsd:pattern value="[a-z]+" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.Generic.NonNegativeInt">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>   
         </xsd:restriction>
     </xsd:simpleType>
 

@@ -36,8 +36,6 @@ SCHEMA_MAP = {
     "promotions" : "promotion.xsd",
     "redirect-urls" : "redirecturl.xsd",
     "schedules" : "schedules.xsd",
-    "search" : "search.xsd",
-    "search2" : "search2.xsd",
     "migrations" : "dwre-migrate.xsd",
     "services" : "services.xsd",
     "shipping" : "shipping.xsd",
@@ -51,13 +49,19 @@ SCHEMA_MAP = {
     "xml" : "xml.xsd"
 }
 
+NSMAP = {
+    "http://www.demandware.com/xml/impex/search/2007-02-28" : "search.xsd",
+    "http://www.demandware.com/xml/impex/search2/2010-02-19" : "search2.xsd",
+}
 
 def validate_xml(xml, throw=True):
     root_el = xml.getroot()
     root_tag = root_el.tag[root_el.tag.find('}')+1:]
-    if root_tag not in SCHEMA_MAP:
+    schema_name = NSMAP.get(root_el.nsmap[None], SCHEMA_MAP.get(root_tag))
+
+    if not schema_name:
         return
-    schema_name = SCHEMA_MAP[root_tag]
+
     schema = ET.XMLSchema(file=os.path.join(dwre_tools.__path__[0], 'schemas', schema_name))
     schema.validate(xml)
     if throw:

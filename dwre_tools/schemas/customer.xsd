@@ -55,7 +55,7 @@
             </xsd:element>
             <xsd:element name="note" type="simpleType.Generic.String.4000" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
-        <xsd:attribute name="customer-no" type="simpleType.Generic.String.100" use="required" />
+        <xsd:attribute name="customer-no" type="simpleType.Generic.String.100" use="optional" />
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
     </xsd:complexType>
 

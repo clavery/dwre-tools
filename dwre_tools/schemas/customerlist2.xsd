@@ -31,6 +31,12 @@
             <xsd:element name="max-failed-logins" type="xsd:integer" minOccurs="0" maxOccurs="1" />
             <xsd:element name="lockout-effective-period" type="xsd:integer" minOccurs="0" maxOccurs="1" />
             <xsd:element name="customer-login-attempt-reset-time" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="min-password-length" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="min-password-special-chars" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="force-password-contains-alpha" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="force-password-contains-numeric" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="force-password-mixed-case" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="max-password-age" type="xsd:integer" minOccurs="0" maxOccurs="1" />
        </xsd:sequence>
     </xsd:complexType>
 

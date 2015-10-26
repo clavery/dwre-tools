@@ -23,6 +23,11 @@
         <xsd:sequence>
             <xsd:element name="description" type="simpleType.Generic.String.4000" minOccurs="0" maxOccurs="1" />
             <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="priority" type="simpleType.Generic.NonNegativeInt" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Reserved for Beta users. Priority will not be imported and a warning will be logged if the Schedule Prioritization feature is disabled.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="execution-scope" type="simpleType.ExecutionScope" minOccurs="1" maxOccurs="1" />
             <xsd:element name="pipeline" type="complexType.Pipeline" minOccurs="1" maxOccurs="1" />
             <xsd:element name="sites" type="complexType.Sites" minOccurs="0" maxOccurs="1" />
@@ -229,6 +234,12 @@
     <xsd:simpleType name="simpleType.ImportMode">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="delete" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.Generic.NonNegativeInt">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>   
         </xsd:restriction>
     </xsd:simpleType>
     
