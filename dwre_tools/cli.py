@@ -41,10 +41,13 @@ def get_env_from_args(args):
         env["clientcert"] = args.clientcert
         env["clientkey"] = args.clientkey
         env["cert"] = (args.clientcert, args.clientkey,)
+    elif "clientcert" in env:
+        env["cert"] = (env["clientcert"], env["clientkey"],)
     else:
         env["cert"] = None
 
-    env["verify"] = not args.noverify
+    if "verify" not in env:
+        env["verify"] = not args.noverify
 
     if not env["password"]:
         get_env_password(env)
