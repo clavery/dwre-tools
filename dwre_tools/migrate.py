@@ -75,6 +75,7 @@ def get_migrations(migrations_context):
         location = migration.find(X + "location").text
         description_el = migration.find(X + "description")
         parent_el = migration.find(X + "parent")
+        reindex = migration.find(X + "reindex")
 
         description = ""
         if description_el is not None:
@@ -82,6 +83,12 @@ def get_migrations(migrations_context):
 
         assert id not in migration_data, "Migration %s already exists" % id
         migration_data[id] = {"id": id, "location" : location, "description": description}
+
+        if reindex is not None and reindex.text.lower() == "true":
+            migration_data[id]["reindex"] = True
+        else:
+            migration_data[id]["reindex"] = False
+
         if parent_el is not None:
             migration_nodes[parent_el.text].append(id)
         else:
@@ -260,14 +267,10 @@ def apply_migrations(env, migrations_dir, test=False):
     for migration in migration_path:
         migration_data = migrations[migration]
 
-        if os.path.exists(os.path.join(migrations_dir, migration_data["location"], "reindex.txt")):
-            reindex_requested = True
-            migration_data["reindex"] = True
-        else:
-            migration_data["reindex"] = False
-
         print("[%s] %s" % (migration_data["id"], migration_data["description"]), end="")
+
         if migration_data["reindex"]:
+            reindex_requested = True
             print(Fore.BLUE + " (Reindex Requested)" + Fore.RESET)
         else:
             print("")
