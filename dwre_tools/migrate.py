@@ -24,6 +24,7 @@ from .validations import validate_xml, validate_file, validate_directory
 from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE
 from .bmtools import get_current_versions, login_business_manager, wait_for_import
 from .utils import directory_to_zip
+from .index import reindex
 
 
 X = "{http://www.pixelmedia.com/xml/dwremigrate}"
@@ -255,15 +256,28 @@ def apply_migrations(env, migrations_dir, test=False):
         print(Fore.GREEN + "No migrations required. Instance is up to date: %s" % current_migration + Fore.RESET)
         return
 
+    reindex_requested = False
     for migration in migration_path:
         migration_data = migrations[migration]
-        print("[%s] %s" % (migration_data["id"], migration_data["description"]))
+
+        if os.path.exists(os.path.join(migrations_dir, migration_data["location"], "reindex.txt")):
+            reindex_requested = True
+            migration_data["reindex"] = True
+        else:
+            migration_data["reindex"] = False
+
+        print("[%s] %s" % (migration_data["id"], migration_data["description"]), end="")
+        if migration_data["reindex"]:
+            print(Fore.BLUE + " (Reindex Requested)" + Fore.RESET)
+        else:
+            print("")
 
     if test:
         print("Will not perform migrations, exiting...")
         return
 
     print("\nRunning migrations...")
+
 
     for m in migration_path:
         migration = migrations[m]
@@ -304,10 +318,24 @@ def apply_migrations(env, migrations_dir, test=False):
         response.raise_for_status()
 
         end_time = time.time()
-        print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time))
+        print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time), end="")
+        if migration["reindex"]:
+            print(Fore.BLUE + " (Reindex Requested)" + Fore.RESET)
+        else:
+            print("")
+
     print(Fore.GREEN + "Successfully updated instance with current migrations" + Fore.RESET)
+
     if skip_migrations:
         print(Fore.YELLOW + "Migrations may have been skipped due to tool upgrade, rerun apply to check." + Fore.RESET)
+
+    if reindex_requested:
+        print(Fore.BLUE + "One or more migrations request a search reindex" + Fore.RESET)
+        try:
+            reindex(env)
+            print(Fore.GREEN + "Initiated reindex on {0}".format(env['server']) + Fore.RESET)
+        except HTTPError as e:
+            print(Fore.RED + "Error reindexing (try updated your bm_dwremigrate cartridge): {}".format(e.message) + Fore.RESET)
 
 
 def run_migration(env, migrations_dir, migration_name):

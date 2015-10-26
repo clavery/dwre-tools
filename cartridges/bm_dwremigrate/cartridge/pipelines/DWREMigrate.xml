@@ -91,6 +91,16 @@
       </node>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_5">
+    <segment>
+      <node>
+        <text-node>
+          <description>Updates All Indexes</description>
+        </text-node>
+        <node-display x="7" y="0"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="UpdateVersion">
     <segment>
       <node>
@@ -153,6 +163,112 @@
             </node>
           </segment>
         </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <interaction-node transaction-required="false">
+          <template buffered="true" dynamic="false" name="dwremigrate/json"/>
+        </interaction-node>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="UpdateIndexes">
+    <segment>
+      <node>
+        <start-node name="UpdateIndexes" secure="true"/>
+        <node-display x="7" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="UpdateSearchIndex" pipelet-set-identifier="bc_api">
+          <config-property key="IndexerType" value="Full"/>
+          <config-property key="IndexerMode" value="Asynchronous"/>
+          <config-property key="Index" value="product"/>
+          <config-property key="IndexScope" value="AllSites"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="UpdateSearchIndex" pipelet-set-identifier="bc_api">
+          <config-property key="IndexerType" value="Full"/>
+          <config-property key="IndexerMode" value="Asynchronous"/>
+          <config-property key="Index" value="content"/>
+          <config-property key="IndexScope" value="AllSites"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="UpdateSearchIndex" pipelet-set-identifier="bc_api">
+          <config-property key="IndexerType" value="Full"/>
+          <config-property key="IndexerMode" value="Asynchronous"/>
+          <config-property key="Index" value="suggest"/>
+          <config-property key="IndexScope" value="AllSites"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="UpdateSearchIndex" pipelet-set-identifier="bc_api">
+          <config-property key="IndexerType" value="Full"/>
+          <config-property key="IndexerMode" value="Asynchronous"/>
+          <config-property key="Index" value="availability"/>
+          <config-property key="IndexScope" value="AllSites"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="{&quot;success&quot; : true}" key="From_0"/>
+          <key-binding alias="JSONData" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition>
         <transition-display>

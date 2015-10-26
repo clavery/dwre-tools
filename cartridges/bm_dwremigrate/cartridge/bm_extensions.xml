@@ -11,6 +11,7 @@
          <pipeline name="DWREMigrate-Overview" />
          <pipeline name="DWREMigrate-Versions" />
          <pipeline name="DWREMigrate-UpdateVersion" />
+         <pipeline name="DWREMigrate-UpdateIndexes" />
       </sub-pipelines>
       <parameters>
         <parameter name="menuname" value="DWRE Migrate"/>

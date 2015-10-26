@@ -10,6 +10,7 @@ from .tail import tail_logs
 from .validations import validate_command
 from .migrate import (add_migration, apply_migrations, validate_migrations, reset_migrations, 
         run_migration, set_migration)
+from .index import reindex_command
 
 from colorama import init, deinit
 
@@ -80,6 +81,13 @@ def validate_cmd_handler(args):
     validate_command(args.target)
 
 
+def reindex_cmd_handler(args):
+    env = get_env_from_args(args)
+    result = reindex_command(env)
+    if result is False:
+        sys.exit(1)
+
+
 def get_env_password(env):
     env["password"] = getpass.getpass("{}@{} password: ".format(env["username"], env["server"]))
 
@@ -107,6 +115,8 @@ cmd_parser = parser.add_subparsers(title="Commands")
 list_cmd = cmd_parser.add_parser('list', help="list DWRE environments")
 list_cmd.set_defaults(func=list_cmd_handler)
 
+reindex_cmd = cmd_parser.add_parser('reindex', help="rebuild search indexes on environment")
+reindex_cmd.set_defaults(func=reindex_cmd_handler)
 
 tail_cmd = cmd_parser.add_parser('tail', help="tail logs")
 tail_cmd.set_defaults(func=tail_cmd_handler)
