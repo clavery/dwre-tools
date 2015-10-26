@@ -93,6 +93,14 @@ optional arguments:
   -h, --help  show this help message and exit
 ```
 
+### `reindex`
+
+The `reindex` subcommand will initiate a rebuild of all search indexes in the environment. This will rebuild across all sites configured.
+
+```sh
+dwre reindex
+```
+
 ### `migrate`
 
 The migrate command will perform "site imports" against the specified instance in the order specified in the `migrations.xml` file inside the migrations directory (default directory name: `migrations`).
@@ -145,8 +153,6 @@ Sub Commands:
 
 - Abstract sessions for all commands to better support session management (SSL, etc)
 - Proper logging instead of print statements w/ "disable color if not a TTY"
-- NEW COMMAND: `reindex`. Search indexing. Will require new config: siteName
-    - Allow Reindex after migration (save till end)
 - NEW COMMAND: `sync`. Sync folders/zips with webdav locations
 
 ## Notes
