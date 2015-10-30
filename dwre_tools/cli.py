@@ -166,6 +166,10 @@ def main():
     if not os.isatty(sys.stdout.fileno()):
         deinit()
 
+    # disbale insecure warnings (we know because we explicitly ask to verify)
+    import requests
+    requests.packages.urllib3.disable_warnings()
+
     args = parser.parse_args()
 
     if hasattr(args, 'func'):
