@@ -209,6 +209,7 @@ def apply_migrations(env, migrations_dir, test=False):
         migrations[None] = {"id" : "DWRE_MIGRATE_BOOTSTRAP", "description" : "DWRE Migrate tools bootstrap/upgrade", "reindex" : False}
         if SKIP_METADATA_CHECK_ON_UPGRADE:
             skip_migrations = True
+            current_migration_path = []
 
     if not skip_migrations:
         if current_migration is not None:
