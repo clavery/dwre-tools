@@ -206,7 +206,7 @@ def apply_migrations(env, migrations_dir, test=False):
     skip_migrations = False
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
         migration_path.insert(0, None)
-        migrations[None] = {"id" : "DWRE_MIGRATE_BOOTSTRAP", "description" : "DWRE Migrate tools bootstrap/upgrade" }
+        migrations[None] = {"id" : "DWRE_MIGRATE_BOOTSTRAP", "description" : "DWRE Migrate tools bootstrap/upgrade", "reindex" : False}
         if SKIP_METADATA_CHECK_ON_UPGRADE:
             skip_migrations = True
 
