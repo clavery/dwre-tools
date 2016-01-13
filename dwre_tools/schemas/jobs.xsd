@@ -55,6 +55,7 @@
         </xsd:sequence>
         <xsd:attribute name="step-id" type="simpleType.Generic.NonEmptyString.100" use="required" />
         <xsd:attribute name="type" type="simpleType.Generic.NonEmptyString.256" use="required" />
+        <xsd:attribute name="enforce-restart" type="xsd:boolean" use="optional" default="false" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.StepParameters">
@@ -65,7 +66,7 @@
 
     <xsd:complexType name="complexType.StepParameter" mixed="true">
         <xsd:simpleContent>
-            <xsd:extension base="simpleType.Generic.NonEmptyString.1000">
+            <xsd:extension base="simpleType.Generic.String.1000">
                 <xsd:attribute name="name" type="simpleType.Generic.NonEmptyString.256" use="required" />
             </xsd:extension>
         </xsd:simpleContent>
@@ -296,6 +297,13 @@
             <xsd:minLength value="1" />
             <xsd:maxLength value="1000" />
             <xsd:pattern value="\S|(\S(.*)\S)" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="simpleType.Generic.String.1000">
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:minLength value="0" />
+            <xsd:maxLength value="1000" />
         </xsd:restriction>
     </xsd:simpleType>
 

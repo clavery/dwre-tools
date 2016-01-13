@@ -24,12 +24,13 @@
  
     <xsd:complexType name="complexType.Locale" mixed="false">
         <xsd:sequence>
+            <xsd:element name="fallback-locale" type="xsd:string" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="regional-settings" type="loc:complexType.RegionalSettingList" minOccurs="0" maxOccurs="1"/>
         </xsd:sequence>
         <xsd:attribute name="locale-id" type="loc:simpleType.Generic.LocaleID" use="optional" />
         <xsd:attribute name="mode" type="loc:simpleType.ImportMode" use="optional" />
     </xsd:complexType>
-     
+    
     <xsd:complexType name="complexType.RegionalSettingList" mixed="false">
         <xsd:sequence>
             <xsd:element name="decimal-negative-pattern" type="loc:simpleType.Generic.RegionalSettingPattern" minOccurs="0" maxOccurs="1" />

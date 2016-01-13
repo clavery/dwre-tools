@@ -564,7 +564,10 @@
 
     <xsd:complexType name="BonusChoice">
         <xsd:sequence>
-            <xsd:element name="bonus-products" type="BonusChoiceProductList" minOccurs="0" maxOccurs="1" />
+            <xsd:choice minOccurs="0" maxOccurs="1">
+                <xsd:element name="bonus-product-rule" type="ProductSpecification" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="bonus-products" type="BonusChoiceProductList" minOccurs="0" maxOccurs="1" />
+            </xsd:choice>
             <xsd:element name="max-bonus-items" type="MaxBonusItems" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>

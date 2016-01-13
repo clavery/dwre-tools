@@ -80,6 +80,10 @@
         <!-- The error message to use for form container. If the container is considered 
         invalid, this is the error message that will be set on the container. -->
         <xsd:attribute name="form-error" type="simpleType.Generic.StringOrKey"/>
+        
+        <!-- Optional attribute -->
+        <!-- Represents a DWscript expression that you use for container validation. -->
+        <xsd:attribute name="validation" type="simpleType.Generic.NonEmptyString"/>
     </xsd:complexType>
 
 

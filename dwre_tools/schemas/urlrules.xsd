@@ -36,6 +36,8 @@
             <xsd:element name="content-page-url-override" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="content-id-separator" type="IDSeparator" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="pipeline-aliases" type="PipelineAliases" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="pipeline-trailing-slash" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="pipeline-perform-redirect" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="character-replacements" type="CharacterReplacements" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="search-refinement-url-settings" type="SearchRefinementURLSettings" minOccurs="0" maxOccurs="1"/>
         </xsd:sequence>
@@ -118,6 +120,7 @@
             <xsd:element name="lower-case-urls" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="blank-substitute" type="BlankSubstitute" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="character-replacements-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="character-replacements-for-page-url-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
 
