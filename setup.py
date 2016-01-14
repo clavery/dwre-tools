@@ -17,7 +17,7 @@ setup(
     url='https://bitbucket.org/pixelmedia/dwre-dwre-tools',
     packages=find_packages(),
     include_package_data=True,
-    install_requires=['requests >= 2.7.0',
+    install_requires=['requests == 2.7.0',
                       'colorama >= 0.3.3',
                       'pyquery >= 1.2.9',
                       'lxml == 3.4.4',
