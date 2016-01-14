@@ -20,7 +20,7 @@ setup(
     install_requires=['requests >= 2.7.0',
                       'colorama >= 0.3.3',
                       'pyquery >= 1.2.9',
-                      'lxml >= 3.4.0',
+                      'lxml == 3.4.4',
                       ],
     license='MIT License',
     zip_safe=False,
