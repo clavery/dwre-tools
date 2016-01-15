@@ -81,7 +81,7 @@ def validate_file(full_filename):
         elif schema.error_log:
             print(Fore.RED + "[ERROR]" + Fore.RESET)
             for e in schema.error_log:
-                print(SCHEMALINE_RE.sub(Fore.BLUE + '\\1' + Fore.RESET, str(e)))
+                print(SCHEMALINE_RE.sub(Fore.CYAN + '\\1' + Fore.RESET, str(e)))
             return False
         else:
             print(Fore.GREEN + "[OK]" + Fore.RESET)

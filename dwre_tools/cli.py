@@ -123,7 +123,7 @@ reindex_cmd.set_defaults(func=reindex_cmd_handler)
 
 tail_cmd = cmd_parser.add_parser('tail', help="tail logs")
 tail_cmd.set_defaults(func=tail_cmd_handler)
-tail_cmd.add_argument('-f', '--filters', help="logfile prefix filter [default 'warn,error,fatal']", default="warn,error,fatal")
+tail_cmd.add_argument('-f', '--filters', help="logfile prefix filter [default 'warn,error,fatal,customerror,customfatal']", default="warn,error,fatal,customerror,customfatal")
 tail_cmd.add_argument('-i', help="refresh interval in seconds [default 5]", default=5, type=int)
 
 

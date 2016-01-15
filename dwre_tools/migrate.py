@@ -230,22 +230,22 @@ def apply_migrations(env, migrations_dir, test=False):
                     recommended_migration = path_pair[0]
 
                 print(Fore.YELLOW + "WARNING migration path does not match expected value" + Fore.RESET)
-                print(Fore.BLUE + "Current Path (on sandbox): " + Fore.RESET, end='')
+                print(Fore.CYAN + "Current Path (on sandbox): " + Fore.RESET, end='')
                 current_migration_path_output = []
                 color = Fore.GREEN
                 for p in current_migration_path:
                     if p == recommended_migration:
-                        current_migration_path_output.append(Fore.BLUE + p + Fore.RESET)
+                        current_migration_path_output.append(Fore.CYAN + p + Fore.RESET)
                         color = Fore.YELLOW
                     else:
                         current_migration_path_output.append(color + p + Fore.RESET)
                 print(",".join(current_migration_path_output))
                 expected_path_output = []
                 color = Fore.GREEN
-                print(Fore.BLUE + "\nExpected Path (from code): " + Fore.RESET, end='')
+                print(Fore.CYAN + "\nExpected Path (from code): " + Fore.RESET, end='')
                 for p in path_to_check:
                     if p == recommended_migration:
-                        expected_path_output.append(Fore.BLUE + p + Fore.RESET)
+                        expected_path_output.append(Fore.CYAN + p + Fore.RESET)
                         color = Fore.YELLOW
                     else:
                         expected_path_output.append(color + p + Fore.RESET)
@@ -253,7 +253,7 @@ def apply_migrations(env, migrations_dir, test=False):
 
                 print(Fore.YELLOW + "migration path does not match expected value; See output above and use 'dwre migrate set' command or manually fix" + Fore.RESET)
                 print(Fore.YELLOW + "Recommend reverting to migration:" + Fore.RESET,
-                        Fore.BLUE + ("%s" % recommended_migration) + Fore.RESET)
+                        Fore.CYAN + ("%s" % recommended_migration) + Fore.RESET)
                 return False
         else:
             current_migration_path = path_to_check
@@ -272,7 +272,7 @@ def apply_migrations(env, migrations_dir, test=False):
 
         if migration_data["reindex"]:
             reindex_requested = True
-            print(Fore.BLUE + " (Reindex Requested)" + Fore.RESET)
+            print(Fore.CYAN + " (Reindex Requested)" + Fore.RESET)
         else:
             print("")
 
@@ -324,7 +324,7 @@ def apply_migrations(env, migrations_dir, test=False):
         end_time = time.time()
         print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time), end="")
         if migration["reindex"]:
-            print(Fore.BLUE + " (Reindex Requested)" + Fore.RESET)
+            print(Fore.CYAN + " (Reindex Requested)" + Fore.RESET)
         else:
             print("")
 
@@ -334,7 +334,7 @@ def apply_migrations(env, migrations_dir, test=False):
         print(Fore.YELLOW + "Migrations may have been skipped due to tool upgrade, rerun apply to check." + Fore.RESET)
 
     if reindex_requested:
-        print(Fore.BLUE + "One or more migrations request a search reindex" + Fore.RESET)
+        print(Fore.CYAN + "One or more migrations request a search reindex" + Fore.RESET)
         try:
             reindex(env)
             print(Fore.GREEN + "Initiated reindex on {0}".format(env['server']) + Fore.RESET)

@@ -42,7 +42,7 @@ LOGENTRY_RE = re.compile(r'^(?:\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \w{3
 ERROR_RE = re.compile(r'(ERROR)')
 def format_log_part(logpart):
     lines = logpart.splitlines()
-    lines = [LOGLINE_RE.sub(Fore.BLUE + '\\1' + Fore.RESET, line) for line in lines]
+    lines = [LOGLINE_RE.sub(Fore.CYAN + '\\1' + Fore.RESET, line) for line in lines]
     lines = [ERROR_RE.sub(Fore.RED + '\\1' + Fore.RESET, line) for line in lines]
     return '\n'.join(lines)
 
