@@ -95,7 +95,7 @@ def get_migrations(migrations_context):
             migration_nodes[None].append(id)
 
     if len(list(migration_data.keys())) == 0:
-        return migrations
+        return ([], {})
 
     # validate root exists
     assert migration_nodes[None], "Cannot find root migration (migration with no parent)"
@@ -261,6 +261,8 @@ def apply_migrations(env, migrations_dir, test=False):
     if migration_path:
         print(Fore.YELLOW + "%s migrations required..." % len(migration_path) + Fore.RESET)
     else:
+        if current_migration is None:
+            current_migration = "No Migrations in Context"
         print(Fore.GREEN + "No migrations required. Instance is up to date: %s" % current_migration + Fore.RESET)
         return
 
