@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name='dwre-tools',
-    version='0.0.3',
+    version='1.0.0',
     description='Demandware tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',
