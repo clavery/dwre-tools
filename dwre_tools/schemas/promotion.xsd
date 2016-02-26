@@ -61,6 +61,7 @@
             <xsd:element name="global-excluded-products" type="ProductSpecification" minOccurs="0" maxOccurs="1" />
             <xsd:element name="global-excluded-product-options" type="ProductOptionSpecification" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
+        <xsd:attribute name="mode" type="simpleType.ImportMode" />
     </xsd:complexType>
 
     <!-- promotion base type -->
@@ -285,6 +286,7 @@
             <xsd:element name="category-id" type="Generic.String.256" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="catalog-id" type="Generic.NonEmptyString.256" use="required"/>
+        <xsd:attribute name="operator" type="CategoryIDComparator" />
     </xsd:complexType>
 
     <xsd:complexType name="ProductSpecification.ProductPriceFilter" mixed="false">
@@ -772,6 +774,17 @@
             <xsd:enumeration value="ends with" />
             <xsd:enumeration value="contains" />
             <xsd:enumeration value="does not contain" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="CategoryIDComparator">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="is equal" />
+            <xsd:enumeration value="is direct child of"/>
+            <xsd:enumeration value="is child of"/>
+            <xsd:enumeration value="is direct parent of"/>
+            <xsd:enumeration value="is parent of"/>
+            <xsd:enumeration value="is sibling of"/>
         </xsd:restriction>
     </xsd:simpleType>
 

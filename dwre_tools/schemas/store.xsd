@@ -39,6 +39,7 @@
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="store-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
+		<xsd:attribute name="mode" type="simpleType.ImportMode" />
     </xsd:complexType>
 
     <!-- Shared Complex Types -->
@@ -133,6 +134,12 @@
         <xsd:restriction base="xsd:decimal">
             <xsd:minInclusive value="-180.0"/>
             <xsd:maxInclusive value="+180.0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.ImportMode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="delete" />
         </xsd:restriction>
     </xsd:simpleType>
 

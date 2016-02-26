@@ -110,6 +110,7 @@
             <xsd:element name="category-id" type="Generic.String.256" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="catalog-id" type="Generic.NonEmptyString.256" use="required"/>
+        <xsd:attribute name="operator" type="CategoryIDComparator" />
     </xsd:complexType>
 
     <xsd:complexType name="ProductSpecification.ProductPriceFilter" mixed="false">
@@ -381,6 +382,18 @@
             <xsd:enumeration value="does not contain" />
         </xsd:restriction>
     </xsd:simpleType>
+
+    <xsd:simpleType name="CategoryIDComparator">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="is equal" />
+            <xsd:enumeration value="is direct child of"/>
+            <xsd:enumeration value="is child of"/>
+            <xsd:enumeration value="is direct parent of"/>
+            <xsd:enumeration value="is parent of"/>
+            <xsd:enumeration value="is sibling of"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
     
     <xsd:simpleType name="BrandComparator">
         <xsd:restriction base="xsd:string">

@@ -119,7 +119,9 @@
     <xsd:simpleType name="simpleType.CouponCodeLength">
         <xsd:restriction base="xsd:int">
             <xsd:enumeration value="12" />
+            <xsd:enumeration value="13" />
             <xsd:enumeration value="16" />
+            <xsd:enumeration value="17" />
         </xsd:restriction>
     </xsd:simpleType>    
 
@@ -141,7 +143,7 @@
     <xsd:restriction base="Generic.String">
           <xsd:minLength value="0" />
           <xsd:maxLength value="256" />
-          <xsd:pattern value="[a-zA-Z0-9$%/()\[\]{}=?!._*|+~#]*" />
+          <xsd:pattern value="[a-zA-Z0-9$%/()\[\]{}=?!._*|+~#&amp;@ ]*" />
     </xsd:restriction>
 </xsd:simpleType>
     

@@ -348,6 +348,7 @@
         <xsd:attribute name="source-id" type="simpleType.Generic.NonEmptyString.256" use="optional" />
         <xsd:attribute name="source-type" type="simpleType.RecommendationSourceType" use="optional" />
         <xsd:attribute name="target-id" type="simpleType.Generic.NonEmptyString.256" use="optional" />
+        <xsd:attribute name="target-type" type="simpleType.RecommendationTargetType" use="optional" />
         <xsd:attribute name="type" type="simpleType.RecommendationType" use="optional" />
         <xsd:attribute name="mode" type="simpleType.ImportMode" use="optional" />
     </xsd:complexType>
@@ -1065,6 +1066,12 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="product" />
             <xsd:enumeration value="category" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.RecommendationTargetType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="product" />
         </xsd:restriction>
     </xsd:simpleType>
 
