@@ -105,7 +105,13 @@ dwre reindex
 
 The migrate command will perform "site imports" against the specified instance in the order specified in the `migrations.xml` file inside the migrations directory (default directory name: `migrations`).
 
+#### Installation
+
 This command requires that the cartridge `bm_dwremigrate` be installed and activated into the business manager site and that the BM user to be used is given the appropriate BM module permissions ("DWREMigrate"). 
+
+- Copy the `bm_dwremigrate` directory into your project's cartridges directory. In Eclipse, import the cartridge into your project and link it to the Demandware server. Perform a full upload.
+- In the Business Manager, go to *Administration -> Manage Sites*. Under the *Business Manager Site* section, click on the *Manage the Business Manager site* link. Add `bm_dwremigrate` to the end of the cartidge path.
+- Go to *Administration -> Roles &amp; Permissions*. Select the user used to manage the site. Select the Business Manager Modules tab. Check the entry for `DWREMigrate` and click *Update*.
 
 This command also requires that metadata be added to the instance however this will be done automatically, if required, at first run time. Metadata will also be automatically added as a migration in future versions.
 
