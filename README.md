@@ -9,6 +9,16 @@ Various tools for use with Demandware instances. Written in python
 
 ## Installation
 
+### Easy Method
+
+Copy this command into your terminal (must have a suitable version of python: see [Windows Notes](#Windows_Notes) blow):
+
+```sh
+pip install https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip
+```
+
+### From Source (HEAD Version)
+
 ```sh
 pip install --upgrade git+ssh://git@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
 #or
