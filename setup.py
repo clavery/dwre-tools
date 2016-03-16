@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name='dwre-tools',
-    version='1.0.2',
+    version='1.1.0',
     description='Demandware tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',
@@ -21,6 +21,8 @@ setup(
                       'colorama >= 0.3.3',
                       'pyquery >= 1.2.9',
                       'lxml == 3.4.4',
+                      'pyyaml >= 3.11',
+                      'flask >= 0.10.1',
                       ],
     license='MIT License',
     zip_safe=False,

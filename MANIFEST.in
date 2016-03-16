@@ -1,1 +1,2 @@
 include dwre_tools/schemas/*.xsd
+include dwre_tools/templates/*.html

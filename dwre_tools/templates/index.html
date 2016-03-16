@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Data Export</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+</head>
+<body>
+
+<div class="container">
+<form action="{{url_for('shutdown')}}" method="post">
+<h1>Data Export</h1>
+
+<p>Select the items to export</p>
+
+<div style="margin-left: 40px; margin-bottom: 20px;">
+<button class="btn btn-danger btn-lg" name="cancel">Cancel</button>
+<button class="btn btn-primary btn-lg" name="export">Export</button>
+</div>
+
+<ul>
+{%- for item in data_units recursive %}
+    <li>
+    <input type="checkbox" name="{{item.id}}" id="{{item.id}}">
+    <label for="{{item.id}}">{{ item.text }}</label>
+    {%- if item.children -%}
+        <ul class="submenu">{{ loop(item.children) }}</ul>
+    {%- endif %}
+    </li>
+{%- endfor %}
+</ul>
+
+<div style="margin-left: 40px; margin-top: 20px;">
+<button class="btn btn-danger btn-lg" name="cancel">Cancel</button>
+<button class="btn btn-primary btn-lg" name="export">Export</button>
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>

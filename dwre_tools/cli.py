@@ -11,6 +11,7 @@ from .validations import validate_command
 from .migrate import (add_migration, apply_migrations, validate_migrations, reset_migrations, 
         run_migration, set_migration)
 from .index import reindex_command
+from .export import export_command
 
 from colorama import init, deinit
 
@@ -84,6 +85,11 @@ def validate_cmd_handler(args):
     validate_command(args.target)
 
 
+def export_cmd_handler(args):
+    env = get_env_from_args(args)
+    export_command(env, args.directory)
+
+
 def reindex_cmd_handler(args):
     env = get_env_from_args(args)
     result = reindex_command(env)
@@ -113,7 +119,6 @@ parser.add_argument('--noverify', help="Don't verify server cert", action="store
 parser.set_defaults(noverify=False)
 
 cmd_parser = parser.add_subparsers(title="Commands")
-
 
 list_cmd = cmd_parser.add_parser('list', help="list DWRE environments")
 list_cmd.set_defaults(func=list_cmd_handler)
@@ -159,6 +164,9 @@ validate_cmd = cmd_parser.add_parser('validate', help="XMLSchema validations")
 validate_cmd.set_defaults(func=validate_cmd_handler)
 validate_cmd.add_argument('target', help="filename or directory to validate")
 
+export_cmd = cmd_parser.add_parser('export', help="Site import/export helper")
+export_cmd.set_defaults(func=export_cmd_handler)
+export_cmd.add_argument('directory', help="destination directory")
 
 def main():
     import os, sys

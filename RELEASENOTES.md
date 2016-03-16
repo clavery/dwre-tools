@@ -1,6 +1,18 @@
 
 # Release Notes
 
+## 1.1.0
+
+- new command: `export`; allows for easy export to quickly make migrations
+
+## 1.0.2
+
+- Increase import time limit
+
+## 1.0.1
+
+- Schema Updates
+
 ## 1.0.0
 
 Initial "public API freeze".

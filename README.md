@@ -157,6 +157,23 @@ Sub Commands:
     run                 run a single migration without updating version
 ```
 
+### `export`
+
+This commands opens a web browser with the ability to create an export file in the same manner
+as business manager. It will then automatically download, extract and cleanup in business manager.
+
+This command is intended to streamline the process of making migrations.
+
+```
+usage: dwre export [-h] directory
+
+positional arguments:
+  directory   destination directory
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
 ## Todo
 
 - Abstract sessions for all commands to better support session management (SSL, etc)
