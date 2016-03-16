@@ -106,6 +106,9 @@ def tail_cmd_handler(args):
     logfilters = args.filters.split(',')
     tail_logs(env, logfilters, args.i)
 
+def update_cmd_handler(args):
+    os.system("pip install https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip")
+
 
 parser = ArgumentParser(description="Demandware Tools")
 parser.add_argument('-p', '--project', help="DWRE Project Name")
@@ -167,6 +170,9 @@ validate_cmd.add_argument('target', help="filename or directory to validate")
 export_cmd = cmd_parser.add_parser('export', help="Site import/export helper")
 export_cmd.set_defaults(func=export_cmd_handler)
 export_cmd.add_argument('directory', help="destination directory")
+
+update_cmd = cmd_parser.add_parser('update', help="Updates tools")
+update_cmd.set_defaults(func=update_cmd_handler)
 
 def main():
     import os, sys

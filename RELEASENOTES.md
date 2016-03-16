@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.1.3
+
+- Adds `update` command and better release process
+
 ## 1.1.0
 
 - new command: `export`; allows for easy export to quickly make migrations
