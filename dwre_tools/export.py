@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from flask import Flask, request, render_template
 import requests
 import webbrowser
