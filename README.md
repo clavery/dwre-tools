@@ -15,6 +15,8 @@ pip install --upgrade git+ssh://git@bitbucket.org/pixelmedia/dwre-dwre-tools.git
 pip install --upgrade git+https://username@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
 ```
 
+**REPLACE `username` in the second command above with your bitbucket username**
+
 ### Windows Notes
 
 Recommend using the Anaconda distribution of python as it comes pre-installed with many useful packages with native binaries: [http://continuum.io/downloads](http://continuum.io/downloads).
