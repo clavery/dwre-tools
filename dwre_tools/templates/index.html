@@ -42,9 +42,9 @@
 <script>
   $('input[type="checkbox"]').click(function() {
     if( $(this).is(':checked') ) {
-      $(this).siblings('.submenu').find('input[type="checkbox"]').prop('disabled', true);
+      $(this).siblings('.submenu').find('input[type="checkbox"]').prop('disabled', true).prop('checked', true);
     } else {
-      $(this).siblings('.submenu').find('input[type="checkbox"]').prop('disabled', false);
+      $(this).siblings('.submenu').find('input[type="checkbox"]').prop('disabled', false).prop('checked', false);
     }
   });
 </script>
