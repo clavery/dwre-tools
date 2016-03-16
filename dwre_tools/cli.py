@@ -15,6 +15,10 @@ from .export import export_command
 
 from colorama import init, deinit
 
+def version():
+    import pkg_resources
+    return pkg_resources.require("dwre-tools")[0].version
+
 
 def get_env_from_args(args):
     if not args.server:
@@ -119,6 +123,9 @@ parser.add_argument('--password', help="DWRE server password; overrides env sett
 parser.add_argument('--clientcert', help="SSL Client certificate")
 parser.add_argument('--clientkey', help="SSL Client private key")
 parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
+
+version_str = version()
+parser.add_argument('--version', action='version', version=version_str)
 parser.set_defaults(noverify=False)
 
 cmd_parser = parser.add_subparsers(title="Commands")
