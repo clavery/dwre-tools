@@ -2,6 +2,7 @@
 <head>
 <title>Data Export</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 </head>
 <body>
@@ -37,6 +38,16 @@
 </form>
 
 </div>
+
+<script>
+  $('input[type="checkbox"]').click(function() {
+    if( $(this).is(':checked') ) {
+      $(this).siblings('.submenu').find('input[type="checkbox"]').prop('disabled', true);
+    } else {
+      $(this).siblings('.submenu').find('input[type="checkbox"]').prop('disabled', false);
+    }
+  });
+</script>
 
 </body>
 </html>
