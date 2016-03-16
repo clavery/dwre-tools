@@ -13,9 +13,6 @@
     <xsd:element name="url-rules" type="URLRules"/>
 
     <xsd:complexType name="URLRules">
-        <xsd:annotation>
-           <xsd:documentation>Search Refinement URL related configuration is reserved for beta users. A warning will be logged for update operations if the Search Refinement URL Beta feature is disabled.</xsd:documentation>
-       </xsd:annotation>
         <xsd:sequence>
             <xsd:element name="general-settings" type="GeneralSettings" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="locale-settings" type="LocaleSettings" minOccurs="0" maxOccurs="1"/>
@@ -23,7 +20,7 @@
             <xsd:element name="category-page-url-override" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="category-trailing-slash" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="category-search-refinement-url-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="category-search-refinements" type="URLSearchRefinements" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="category-search-refinements" type="URLSearchRefinements" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="product-rule" type="ProductRule" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="product-page-url-override" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="product-id-separator" type="IDSeparator" minOccurs="0" maxOccurs="1"/>
@@ -31,7 +28,7 @@
             <xsd:element name="folder-page-url-override" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="folder-trailing-slash" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="folder-search-refinement-url-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="folder-search-refinements" type="URLSearchRefinements" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="folder-search-refinements" type="URLSearchRefinements" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="content-rule" type="ContentRule" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="content-page-url-override" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="content-id-separator" type="IDSeparator" minOccurs="0" maxOccurs="1"/>
@@ -44,9 +41,6 @@
     </xsd:complexType>
     
     <xsd:complexType name="SearchRefinementURLSettings">
-	    <xsd:annotation>
-	       <xsd:documentation>Reserved for Search Refinement URL Beta users. A warning will be logged for update operations if the Search Refinement URL Beta feature is disabled.</xsd:documentation>
-	   </xsd:annotation>
         <xsd:sequence>
             <!-- refinement segment position with respect to category/folder alias-->
             <xsd:element name="position" type="simpleType.SearchRefinementURLPosition" minOccurs="0" maxOccurs="1"/>          
@@ -58,6 +52,8 @@
             <xsd:element name="value-delimiter" type="simpleType.RefinementValueDelimiter" minOccurs="0" maxOccurs="1"/>
             <!-- conflicting refinements value delimiter -->
             <xsd:element name="conflicting-value-delimiter" type="simpleType.ConflictingRefinementValueDelimiter" minOccurs="0" maxOccurs="1"/>
+            <!-- exclude the pipeline alias for a search refinement URL (in case of created without corresponding category or folder ID) -->
+            <xsd:element name="exclude-pipeline-alias-type" type="simpleType.ExcludeSearchPipelineAliasForURLType" minOccurs="0" maxOccurs="1"/>
             <!-- refinement parameter product name identifier ('prefn') -->
             <xsd:element name="product-name-identifier" type="Generic.NonEmptyString.20" minOccurs="0" maxOccurs="1"/>
             <!-- refinement parameter product value identifier ('prefv') -->
@@ -71,16 +67,19 @@
     
     <xsd:complexType name="URLSearchRefinements">
         <xsd:annotation>
-           <xsd:documentation>Reserved for Search Refinement URL Beta users. A warning will be logged for update operations if the Search Refinement URL Beta feature is disabled.</xsd:documentation>
+           <xsd:documentation>URLSearchRefinements support only one URLSearchRefinement with constant 'true'.</xsd:documentation>
        </xsd:annotation>
         <xsd:sequence>
-            <xsd:element name="url-search-refinements" type="URLSearchRefinement" minOccurs="0" maxOccurs="10"/>
+            <xsd:element name="url-search-refinements" type="URLSearchRefinement" minOccurs="0" maxOccurs="30"/>
         </xsd:sequence>
+        <xsd:attribute ref="xml:lang" />
     </xsd:complexType>
     
     <xsd:complexType name="URLSearchRefinement">
         <xsd:sequence>
             <xsd:element name="search-refinement-name" type="Generic.NonEmptyString.256" minOccurs="1" maxOccurs="1"/>
+            <!-- 'true' if this search-refinement-name should be imported as constant, defaults to false -->
+            <xsd:element name="constant" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
     
@@ -96,9 +95,7 @@
             <xsd:element name="character" type="Generic.NonEmptyString.256" minOccurs="1" maxOccurs="1"/>
             <xsd:element name="replacement" type="Generic.String" minOccurs="1" maxOccurs="1"/>
         </xsd:sequence>
-
     </xsd:complexType>
-
 
     <xsd:complexType name="PipelineAliases">
         <xsd:sequence>
@@ -257,6 +254,14 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="before" />
             <xsd:enumeration value="after" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="simpleType.ExcludeSearchPipelineAliasForURLType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="none" />
+            <xsd:enumeration value="catalog" />
+            <xsd:enumeration value="content" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

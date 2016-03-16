@@ -26,7 +26,7 @@
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="created-by" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
-            <xsd:element name="original-order-no" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
+            <xsd:element name="original-order-no" type="simpleType.Generic.NonEmptyString.50" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="currency" type="simpleType.Currency" maxOccurs="1" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation>Required except in delete mode.</xsd:documentation>
@@ -60,9 +60,9 @@
             <xsd:element name="channel-type" type="simpleType.OrderChannelType" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="replace-code" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="replace-description" type="simpleType.Generic.String.4000" minOccurs="0" maxOccurs="1"></xsd:element>
-            <xsd:element name="replacement-order-no" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
-            <xsd:element name="replaced-order-no" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
-            <xsd:element name="current-order-no" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
+            <xsd:element name="replacement-order-no" type="simpleType.Generic.NonEmptyString.50" minOccurs="0" maxOccurs="1"></xsd:element>
+            <xsd:element name="replaced-order-no" type="simpleType.Generic.NonEmptyString.50" minOccurs="0" maxOccurs="1"></xsd:element>
+            <xsd:element name="current-order-no" type="simpleType.Generic.NonEmptyString.50" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="cancel-code" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="cancel-description" type="simpleType.Generic.String.4000" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="product-lineitems" type="complexType.ProductLineItems" maxOccurs="1" minOccurs="0">
@@ -99,7 +99,7 @@
             </xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
-        <xsd:attribute name="order-no" type="simpleType.Generic.String.256" use="required" />
+        <xsd:attribute name="order-no" type="simpleType.Generic.NonEmptyString.50" use="required" />
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
     </xsd:complexType>
 
@@ -770,6 +770,14 @@
         <xsd:restriction base="simpleType.Generic.String">
             <xsd:minLength value="1" />
             <xsd:maxLength value="40" />
+            <xsd:pattern value="\S|(\S(.*)\S)" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.Generic.NonEmptyString.50">
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:minLength value="1" />
+            <xsd:maxLength value="50" />
             <xsd:pattern value="\S|(\S(.*)\S)" />
         </xsd:restriction>
     </xsd:simpleType>

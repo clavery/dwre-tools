@@ -33,16 +33,44 @@
         <xsd:sequence>
             <xsd:element name="description" type="Generic.String.4000" minOccurs="0" maxOccurs="1" />
             <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="campaign-scope" type="CampaignScope" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        campaign-scope is part of "DemandwareStore" beta feature. This element will be ignored on import if the feature is not enabled.  
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="start-date" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
             <xsd:element name="end-date" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
             <xsd:element name="customer-groups" type="CustomerGroups" minOccurs="0" maxOccurs="1" />
             <xsd:element name="coupons" type="PromotionCoupons" minOccurs="0" maxOccurs="1" />
             <xsd:element name="source-codes" type="PromotionSourceCodeGroups" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="store-groups" type="StoreGroups" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        store-groups are part of "DemandwareStore" beta feature. This element will be ignored on import if the feature is not enabled.  
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="stores" type="Stores" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        stores are part of "DemandwareStore" beta feature. This element will be ignored on import if the feature is not enabled.  
+                    </xsd:documentation>
+                </xsd:annotation>
+	            </xsd:element>
             <xsd:element name="custom-attributes" type="CustomAttributes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
         <xsd:attribute name="campaign-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
+
+    <xsd:complexType name="CampaignScope" mixed="false">
+        <xsd:sequence>
+             <xsd:element name="applicable-online" type="EmptyElement" minOccurs="0" maxOccurs="1"/>
+             <xsd:element name="applicable-in-store" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+	</xsd:complexType>
 
     <xsd:complexType name="CustomerGroups" mixed="false">
         <xsd:sequence>
@@ -216,6 +244,30 @@
 
     <xsd:complexType name="SourceCodeGroup" mixed="false">
         <xsd:attribute name="group-id" type="Generic.NonEmptyString.256" use="required" />
+    </xsd:complexType>
+    
+    <!-- stores groups -->
+
+    <xsd:complexType name="StoreGroups" mixed="false">
+        <xsd:sequence>
+            <xsd:element name="store-group" type="StoreGroup" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="StoreGroup" mixed="false">
+        <xsd:attribute name="store-group-id" type="Generic.NonEmptyString.256" use="required" />
+    </xsd:complexType>
+    
+    <!-- stores -->
+
+    <xsd:complexType name="Stores" mixed="false">
+        <xsd:sequence>
+            <xsd:element name="store" type="Store" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Store" mixed="false">
+        <xsd:attribute name="store-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
 
     <!-- product combination -->
@@ -887,6 +939,5 @@
             <xsd:pattern value="[A-Z]{3}" />
         </xsd:restriction>
     </xsd:simpleType>
-
 </xsd:schema>
 
