@@ -40,7 +40,7 @@ def wait_for_import(env, session, filename):
     # TODO detect import in progress
     
     # try our best to find the link
-    while not log_link and retries < 20:
+    while not log_link and retries < 300:
         time.sleep(1)
         response = session.get("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Status".format(env["server"]))
         response_q = pyquery.PyQuery(response.content)
