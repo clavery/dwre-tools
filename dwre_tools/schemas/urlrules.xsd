@@ -152,7 +152,7 @@
         <xsd:restriction base="Generic.String">
             <xsd:minLength value="0"/>
             <xsd:maxLength value="256"/>
-            <xsd:pattern value="\S(.*\S)*|"/>
+            <xsd:pattern value="\S(.*\S)*|()"/>
         </xsd:restriction>
     </xsd:simpleType>
     
@@ -165,7 +165,7 @@
         <xsd:restriction base="Generic.String">
             <xsd:minLength value="0"/>
             <xsd:maxLength value="256"/>
-            <xsd:pattern value="\S(.*\S)*|"/>
+            <xsd:pattern value="\S(.*\S)*|()"/>
         </xsd:restriction>
     </xsd:simpleType>
 
