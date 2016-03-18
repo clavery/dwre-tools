@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.1.4
+
+- Updates urlrules XSD to fix invalid pattern
+
 ## 1.1.3
 
 - Adds `update` command and better release process
