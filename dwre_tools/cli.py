@@ -65,20 +65,23 @@ def list_cmd_handler(args):
 
 
 def migrate_cmd_handler(args):
-    env = get_env_from_args(args)
 
     result = 0
     if args.subcommand == "add":
         result = add_migration(args.directory, args.dir, args.id, args.description, rename=args.rename)
     elif args.subcommand == "apply":
+        env = get_env_from_args(args)
         result = apply_migrations(env, args.dir, args.test)
     elif args.subcommand == "validate":
         result = validate_migrations(args.dir)
     elif args.subcommand == "reset":
+        env = get_env_from_args(args)
         result = reset_migrations(env, args.dir, args.test)
     elif args.subcommand == "run":
+        env = get_env_from_args(args)
         result = run_migration(env, args.dir, args.name)
     elif args.subcommand == "set":
+        env = get_env_from_args(args)
         result = set_migration(env, args.dir, args.name)
 
     if result is False:
