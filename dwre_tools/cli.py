@@ -79,7 +79,7 @@ def migrate_cmd_handler(args):
         result = reset_migrations(env, args.dir, args.test)
     elif args.subcommand == "run":
         env = get_env_from_args(args)
-        result = run_migration(env, args.dir, args.name)
+        result = run_migration(env, args.directory)
     elif args.subcommand == "set":
         env = get_env_from_args(args)
         result = set_migration(env, args.dir, args.name)
@@ -152,7 +152,8 @@ migrate_cmd.set_defaults(test=False)
 migrate_cmd.add_argument('-d', '--dir', help="migrations directory (default: migrations)", default="migrations")
 migrate_cmd.set_defaults(test=False)
 
-migrate_parser = migrate_cmd.add_subparsers(title="Sub Commands")
+migrate_parser = migrate_cmd.add_subparsers(title="Sub Commands", dest='subcommand')
+migrate_parser.required = True
 migrate_add_cmd = migrate_parser.add_parser("add", help="add a new migration")
 migrate_add_cmd.set_defaults(subcommand="add")
 migrate_add_cmd.add_argument('-d', '--description', help="description of migration (default: empty)")
@@ -166,8 +167,8 @@ migrate_validate_cmd = migrate_parser.add_parser("validate", help="validate migr
 migrate_validate_cmd.set_defaults(subcommand="validate")
 migrate_reset_cmd = migrate_parser.add_parser("reset", help="reset migration state to current code version")
 migrate_reset_cmd.set_defaults(subcommand="reset")
-migrate_run_cmd = migrate_parser.add_parser("run", help="run a single migration without updating version")
-migrate_run_cmd.add_argument('name', help="migration name")
+migrate_run_cmd = migrate_parser.add_parser("run", help="run a single site import without validating or updating migrations")
+migrate_run_cmd.add_argument('directory', help="directory containing migration")
 migrate_run_cmd.set_defaults(subcommand="run")
 migrate_set_cmd = migrate_parser.add_parser("set", help="set the current migration version")
 migrate_set_cmd.add_argument('name', help="migration name")

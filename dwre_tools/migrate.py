@@ -7,6 +7,7 @@ import re
 import time
 from datetime import datetime
 import pyquery
+import uuid
 
 try:
     import _thread as thread
@@ -344,13 +345,7 @@ def apply_migrations(env, migrations_dir, test=False):
             print(Fore.RED + "Error reindexing (try updated your bm_dwremigrate cartridge): {}".format(e.message) + Fore.RESET)
 
 
-def run_migration(env, migrations_dir, migration_name):
-    migrations_file = os.path.join(migrations_dir, "migrations.xml")
-    assert os.path.exists(migrations_file), "Cannot find migrations.xml"
-
-    migrations_context = ET.parse(migrations_file)
-    validate_xml(migrations_context)
-
+def run_migration(env, directory):
     webdavsession = requests.session()
     webdavsession.auth=(env["username"], env["password"],)
     webdavsession.verify = env["verify"]
@@ -361,16 +356,14 @@ def run_migration(env, migrations_dir, migration_name):
 
     login_business_manager(env, bmsession)
 
-    (path, migrations) = get_migrations(migrations_context)
-
-    assert migration_name in migrations, "Cannot find migration"
-
-    migration = migrations[migration_name]
-
     start_time = time.time()
 
-    zip_filename = "dwremigrate_%s" % migration["id"]
-    zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
+    if not os.path.exists(directory):
+        print(Fore.RED + "Can't find directory: {}".format(directory) + Fore.RESET)
+        return False
+
+    zip_filename = "dwremigrate_%s" % str(uuid.uuid4())
+    zip_file = directory_to_zip(os.path.join(directory), zip_filename)
 
     # upload
     dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
@@ -392,7 +385,7 @@ def run_migration(env, migrations_dir, migration_name):
     response.raise_for_status()
 
     end_time = time.time()
-    print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time))
+    print("Imported %s in %.3f seconds" % (directory, end_time - start_time))
 
 
 def reset_migrations(env, migrations_dir, test=False):
