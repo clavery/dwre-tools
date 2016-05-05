@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.2.1
+
+- Update Schema to 16.5
+
 ## 1.2.0
 
 - Changes `migrate run` command to not require migrations context

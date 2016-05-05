@@ -199,6 +199,7 @@
             <xsd:element name="display-name" type="sharedType.LocalizedString" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="short-description" type="sharedType.LocalizedText" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="long-description" type="sharedType.LocalizedText" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="store-receipt-name" type="sharedType.LocalizedText" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="online-flag" type="sharedType.SiteSpecificBoolean" minOccurs="0" maxOccurs="unbounded" nillable="true" />
             <xsd:element name="online-from" type="sharedType.SiteSpecificDateTime" minOccurs="0" maxOccurs="unbounded" nillable="true" />
             <xsd:element name="online-to" type="sharedType.SiteSpecificDateTime" minOccurs="0" maxOccurs="unbounded" nillable="true" />

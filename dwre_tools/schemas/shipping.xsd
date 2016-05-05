@@ -28,6 +28,11 @@
             <xsd:element name="description" type="LocalizedString" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="online-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="base-method" type="Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="external-shipping-method" type="Generic.String.28" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>ID of the external shipping method selected.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="tax-class-id" type="Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="price-table" type="PriceTable" minOccurs="0" maxOccurs="1" />
             <xsd:element name="product-cost-groups" type="ProductCostGroups" minOccurs="0" maxOccurs="1" />
@@ -316,6 +321,13 @@
         <xsd:restriction base="Generic.String">
             <xsd:minLength value="0" />
             <xsd:maxLength value="256" />
+        </xsd:restriction>
+    </xsd:simpleType>
+  
+    <xsd:simpleType name="Generic.String.28">
+        <xsd:restriction base="Generic.String">
+            <xsd:minLength value="0" />
+            <xsd:maxLength value="28" />
         </xsd:restriction>
     </xsd:simpleType>
     

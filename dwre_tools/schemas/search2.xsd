@@ -240,6 +240,7 @@
         <xsd:sequence>
             <xsd:element name="keywords" type="LocalizedString" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="online-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="secure-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:choice minOccurs="1" maxOccurs="1">
                 <xsd:element name="category-redirect" type="CategoryRedirect" minOccurs="0" maxOccurs="1" />
                 <xsd:element name="product-redirect" type="ProductRedirect" minOccurs="0" maxOccurs="1" />

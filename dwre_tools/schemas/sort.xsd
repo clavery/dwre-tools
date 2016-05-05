@@ -52,6 +52,7 @@
         - product.activeData.<system-attribute-id>
         - product.activeData.custom.<custom-attribute-id>
         - product.availabilityModel.<system-attribute-id>
+        - sorting.predictive-sort
     -->
     <xsd:simpleType name="AttributePath">
         <xsd:restriction base="Generic.NonEmptyString.256">
@@ -74,6 +75,7 @@
             <xsd:element name="price" type="SortByPrice" />
             <xsd:element name="availability-status" type="SortByAvailabilityStatus" />
             <xsd:element name="explicit-sortings" type="SortByExplicitSortings" />
+            <xsd:element name="predictive-sort" type="SortByPredictiveSort" />
             <xsd:element name="attribute" type="SortByAttribute" />
             <xsd:element name="dynamic-attribute" type="SortByDynamicAttribute" />
         </xsd:choice>
@@ -96,7 +98,13 @@
 
     <xsd:complexType name="SortByExplicitSortings">
     </xsd:complexType>
-
+    
+    <xsd:complexType name="SortByPredictiveSort">
+    	<xsd:sequence>
+    		<xsd:element name="include-text-relevance" type="xsd:boolean" default="false" minOccurs="0" maxOccurs="1" />
+    	</xsd:sequence>
+    </xsd:complexType>
+    
     <xsd:complexType name="SortByAttribute">
         <xsd:sequence>
             <xsd:element name="attribute-path" type="AttributePath" minOccurs="1" maxOccurs="1" />    
