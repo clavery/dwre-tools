@@ -39,7 +39,7 @@ def collect_cartridges(directory, cartridges=None):
     return cartridges
 
 
-def sync_command(env):
+def sync_command(env, delete_code_version):
     cartridges = collect_cartridges(".")
 
     webdavsession = requests.session()
@@ -50,6 +50,10 @@ def sync_command(env):
     code_version = env["codeVersion"]
 
     zip_file = cartridges_to_zip(cartridges, code_version)
+
+    if delete_code_version:
+        print("Deleting code version...")
+        response = webdavsession.delete("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}".format(env["server"], code_version))
 
     print("Syncing code version {0}{1}{2} on {0}{3}{2}".format(Fore.YELLOW, code_version, Fore.RESET, env["server"]))
     dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}.zip"

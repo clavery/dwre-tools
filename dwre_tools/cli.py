@@ -67,7 +67,7 @@ def list_cmd_handler(args):
 
 def sync_cmd_handler(args):
     env = get_env_from_args(args)
-    sync_command(env)
+    sync_command(env, args.delete)
 
 
 def migrate_cmd_handler(args):
@@ -193,6 +193,7 @@ update_cmd.set_defaults(func=update_cmd_handler)
 
 sync_cmd = cmd_parser.add_parser('sync', help="Sync cartridges from current directory")
 sync_cmd.set_defaults(func=sync_cmd_handler)
+sync_cmd.add_argument('-d', '--delete', dest="delete", help="delete code version first", action="store_true")
 
 def main():
     import os, sys
