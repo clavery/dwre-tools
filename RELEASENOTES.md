@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.3.0
+
+- Adds `sync` command
+
 ## 1.2.1
 
 - Update Schema to 16.5

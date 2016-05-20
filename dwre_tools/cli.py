@@ -12,6 +12,7 @@ from .migrate import (add_migration, apply_migrations, validate_migrations, rese
         run_migration, set_migration)
 from .index import reindex_command
 from .export import export_command
+from .sync import sync_command
 
 from colorama import init, deinit
 
@@ -62,6 +63,11 @@ def get_env_from_args(args):
 
 def list_cmd_handler(args):
     raise NotImplementedError("not implemented yet")
+
+
+def sync_cmd_handler(args):
+    env = get_env_from_args(args)
+    sync_command(env)
 
 
 def migrate_cmd_handler(args):
@@ -184,6 +190,9 @@ export_cmd.add_argument('directory', help="destination directory")
 
 update_cmd = cmd_parser.add_parser('update', help="Updates tools")
 update_cmd.set_defaults(func=update_cmd_handler)
+
+sync_cmd = cmd_parser.add_parser('sync', help="Sync cartridges from current directory")
+sync_cmd.set_defaults(func=sync_cmd_handler)
 
 def main():
     import os, sys

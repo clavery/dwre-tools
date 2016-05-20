@@ -184,11 +184,18 @@ optional arguments:
   -h, --help  show this help message and exit
 ```
 
+### `update`
+
+This performs a self-update of the tools
+
+### `sync`
+
+The `sync` command syncs cartridges found in the current directory (and all subdirectories) to the specified server and code version (or default)
+
 ## Todo
 
 - Abstract sessions for all commands to better support session management (SSL, etc)
 - Proper logging instead of print statements w/ "disable color if not a TTY"
-- NEW COMMAND: `sync`. Sync folders/zips with webdav locations
 
 ## Notes
 
