@@ -88,6 +88,8 @@ def validate_file(full_filename):
         else:
             print(Fore.GREEN + "[OK]" + Fore.RESET)
             return True
+    except ET.XMLSchemaParseError as e:
+        print(Fore.YELLOW + "bad schema [WARNING]" + Fore.RESET)
     except ET.XMLSyntaxError as e:
         print(Fore.RED + "[ERROR]" + Fore.RESET)
         print(e)
