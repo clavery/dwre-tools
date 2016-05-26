@@ -15,7 +15,7 @@ from colorama import Fore, Back, Style
 
 def cartridges_to_zip(cartridges, filename):
     zip_file_io = io.BytesIO()
-    zip_file = zipfile.ZipFile(zip_file_io, "w")
+    zip_file = zipfile.ZipFile(zip_file_io, "w", zipfile.ZIP_DEFLATED)
 
     for (cart_location, cart_name) in cartridges:
         fcount = 0
