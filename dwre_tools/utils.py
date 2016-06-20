@@ -8,11 +8,7 @@ def directory_to_zip(directory, filename):
     zip_file = zipfile.ZipFile(zip_file_io, "w")
 
     for (dirpath, dirnames, filenames) in os.walk(directory):
-        if directory[-1] == "/" or directory[-1] == "\\":
-            offset = 0
-        else:
-            offset = 1
-        basepath = dirpath[len(directory)+offset:]
+        basepath = os.path.relpath(dirpath, directory)
         for fname in filenames:
             zip_file.write(os.path.join(dirpath, fname), os.path.join(filename, basepath, fname))
     zip_file.close()
