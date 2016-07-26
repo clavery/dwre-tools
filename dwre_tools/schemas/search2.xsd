@@ -9,7 +9,7 @@
 
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
     
-	<!-- demandware main tag -->
+    <!-- demandware main tag -->
     <xsd:element name="search" type="Search" />
 
     <xsd:complexType name="Search">
@@ -30,7 +30,7 @@
 
     <xsd:complexType name="IndexingSettings">
         <xsd:sequence>
-	        <xsd:element name="full-reindexing-schedule" type="FullReindexingSchedule" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="full-reindexing-schedule" type="FullReindexingSchedule" minOccurs="0" maxOccurs="1" />
             <xsd:element name="full-reindexing-enabled" type="EnabledIndexTypes" minOccurs="0" maxOccurs="1" />
             <xsd:element name="incremental-reindexing-enabled" type="EnabledIndexTypes" minOccurs="0" maxOccurs="1" />
             <xsd:element name="indexed-locales" type="IndexedLocales" minOccurs="0" maxOccurs="1" />
@@ -304,17 +304,17 @@
         <xsd:restriction base="xsd:string" />
     </xsd:simpleType>
 
-	<!--
-		Supported attribute paths: 
-		- product.<system-attribute-id> 
-		- product.custom.<custom-attribute-id>
-		- category.<system-attribute-id> 
-		- category.custom.<custom-attribute-id>
-		- categoryassignment.<system-attribute-id> 
-		- categoryassignment.custom.<custom-attribute-id>
-		- content.<system-attribute-id> 
-		- content.custom.<custom-attribute-id>
-	-->
+    <!--
+        Supported attribute paths: 
+        - product.<system-attribute-id> 
+        - product.custom.<custom-attribute-id>
+        - category.<system-attribute-id> 
+        - category.custom.<custom-attribute-id>
+        - categoryassignment.<system-attribute-id> 
+        - categoryassignment.custom.<custom-attribute-id>
+        - content.<system-attribute-id> 
+        - content.custom.<custom-attribute-id>
+    -->
     <xsd:simpleType name="AttributePath">
         <xsd:restriction base="Generic.NonEmptyString.256">
         </xsd:restriction>

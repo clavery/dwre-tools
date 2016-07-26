@@ -20,7 +20,6 @@
     <!-- Fake some more top level elements to allow for snippet based JAXB parsing -->
     <xsd:element name="customer" type="complexType.Customer" />
 
-
     <xsd:complexType name="complexType.Customer" mixed="false">
         <xsd:sequence>
             <xsd:element name="payment-instruments" type="complexType.PaymentInstruments" minOccurs="0" maxOccurs="1" />
@@ -37,7 +36,7 @@
     <xsd:complexType name="complexType.PaymentInstrument">
         <xsd:sequence maxOccurs="1" minOccurs="0">
         
-        	<!--  payment instrument details -->
+            <!--  payment instrument details -->
             <xsd:choice maxOccurs="1" minOccurs="0">
                 <xsd:element name="credit-card" type="complexType.CreditCard" />
                 <xsd:element name="bank-transfer" type="complexType.BankTransfer" />
@@ -54,7 +53,7 @@
             
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="complexType.BankTransfer">
         <xsd:sequence>
             <xsd:element name="account-number" type="simpleType.Generic.String.256" minOccurs="0"></xsd:element>
@@ -100,13 +99,13 @@
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1">
-            	<xsd:annotation>
+                <xsd:annotation>
                     <xsd:documentation>These are the custom attributes of the CustomerPaymentInstrument system object.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="complexType.CustomPaymentMethod">
         <xsd:sequence>
             <xsd:element name="method-name" type="simpleType.Generic.String.256" minOccurs="1" maxOccurs="1"></xsd:element>

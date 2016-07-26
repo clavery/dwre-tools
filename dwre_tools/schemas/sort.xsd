@@ -39,7 +39,7 @@
 
     <xsd:complexType name="WeightedAttribute">
         <xsd:sequence>
-	    	<xsd:element name="attribute-path" type="AttributePath" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="attribute-path" type="AttributePath" minOccurs="1" maxOccurs="1" />
             <xsd:element name="weight" type="WeightedAttributeWeight" minOccurs="1" maxOccurs="1" />    
             <xsd:element name="default-value" type="WeightedAttributeDefault" minOccurs="1" maxOccurs="1" />    
             <xsd:element name="direction" type="SortingDirection" minOccurs="1" maxOccurs="1" />
@@ -98,13 +98,13 @@
 
     <xsd:complexType name="SortByExplicitSortings">
     </xsd:complexType>
-    
+
     <xsd:complexType name="SortByPredictiveSort">
-    	<xsd:sequence>
-    		<xsd:element name="include-text-relevance" type="xsd:boolean" default="false" minOccurs="0" maxOccurs="1" />
-    	</xsd:sequence>
+        <xsd:sequence>
+            <xsd:element name="include-text-relevance" type="xsd:boolean" default="false" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="SortByAttribute">
         <xsd:sequence>
             <xsd:element name="attribute-path" type="AttributePath" minOccurs="1" maxOccurs="1" />    

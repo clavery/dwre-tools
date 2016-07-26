@@ -53,7 +53,7 @@
             <xsd:element name="preorder-backorder-handling" type="simpleType.InventoryRecord.PreorderBackorderHandling" minOccurs="0" maxOccurs="1" />
             <xsd:element name="preorder-backorder-allocation" type="simpleType.InventoryAmount" minOccurs="0" maxOccurs="1" />
             <xsd:element name="in-stock-date" type="xsd:date" minOccurs="0" maxOccurs="1" >
-            	<xsd:annotation>
+                <xsd:annotation>
                     <xsd:documentation>
                         Deprecated in favor of new "in-stock-datetime" element.
                     </xsd:documentation>

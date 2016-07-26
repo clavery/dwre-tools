@@ -87,7 +87,7 @@
     </xsd:complexType>
 
     <xsd:complexType name="complexType.StepContinueAction">
-    	<xsd:attribute name="next-step" type="simpleType.Generic.NonEmptyString.100" use="optional"/>
+        <xsd:attribute name="next-step" type="simpleType.Generic.NonEmptyString.100" use="optional"/>
     </xsd:complexType>
     
     <xsd:complexType name="complexType.Split">

@@ -72,12 +72,12 @@
         <xsd:attribute name="country-code" type="CountryCode" use="required" />
     </xsd:complexType>
 
-	<!-- currencies -->
-	<xsd:complexType name="Currencies">
-		<xsd:sequence>
-			<xsd:element name="currency" type="simpleType.Currency" minOccurs="0" maxOccurs="unbounded" />
-		</xsd:sequence>
-	</xsd:complexType>
+    <!-- currencies -->
+    <xsd:complexType name="Currencies">
+        <xsd:sequence>
+            <xsd:element name="currency" type="simpleType.Currency" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
 
     <!-- customer groups -->
     <xsd:complexType name="CustomerGroups">
@@ -89,22 +89,22 @@
     <xsd:complexType name="CustomerGroup">
         <xsd:attribute name="group-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
-    
+
     <!-- payment method/card min/max ranges -->
-	<xsd:complexType name="PurchaseAmountRanges">
-		<xsd:sequence>
-			<xsd:element name="range" type="PurchaseAmountRange" minOccurs="0" maxOccurs="unbounded" />
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<!-- payment method/card min/max range -->
-	<xsd:complexType name="PurchaseAmountRange">
-		<xsd:sequence>
-			<xsd:element name="min-purchase-amount" type="Amount" minOccurs="0" maxOccurs="1" />
+    <xsd:complexType name="PurchaseAmountRanges">
+        <xsd:sequence>
+            <xsd:element name="range" type="PurchaseAmountRange" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- payment method/card min/max range -->
+    <xsd:complexType name="PurchaseAmountRange">
+        <xsd:sequence>
+            <xsd:element name="min-purchase-amount" type="Amount" minOccurs="0" maxOccurs="1" />
             <xsd:element name="max-purchase-amount" type="Amount" minOccurs="0" maxOccurs="1" />
-		</xsd:sequence>
+        </xsd:sequence>
         <xsd:attribute name="currency" type="simpleType.Currency" use="required" />
-	</xsd:complexType>
+    </xsd:complexType>
 
     <!-- card number settings -->
     <xsd:complexType name="CardNumberSettings">

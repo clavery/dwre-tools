@@ -67,7 +67,8 @@
             <xsd:element name="code-prefix" type="simpleType.CodePrefix" minOccurs="0" maxOccurs="1" />
             <xsd:element name="code-length" type="simpleType.CouponCodeLength" minOccurs="0" maxOccurs="1" />   
             <xsd:element name="include-vowels" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="include-dashes" type="xsd:boolean" minOccurs="0" maxOccurs="1" />     
+            <xsd:element name="include-dashes" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="algorithm" type="simpleType.CouponCodeAlgorithm" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -118,12 +119,26 @@
     
     <xsd:simpleType name="simpleType.CouponCodeLength">
         <xsd:restriction base="xsd:int">
+            <xsd:enumeration value="10" />
+            <xsd:enumeration value="11" />
             <xsd:enumeration value="12" />
             <xsd:enumeration value="13" />
+            <xsd:enumeration value="14" />
+            <xsd:enumeration value="15" />
             <xsd:enumeration value="16" />
             <xsd:enumeration value="17" />
+            <xsd:enumeration value="18" />
+            <xsd:enumeration value="19" />
+            <xsd:enumeration value="20" />
         </xsd:restriction>
-    </xsd:simpleType>    
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.CouponCodeAlgorithm">
+        <xsd:restriction base="Generic.String">
+            <xsd:pattern value="F1" />
+            <xsd:pattern value="F2" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="simpleType.ImportMode">
         <xsd:restriction base="xsd:string">
@@ -133,10 +148,10 @@
 
 
     <xsd:simpleType name="simpleType.CouponRedemptionTimeFrame">
-    	<xsd:restriction base="xsd:int">
-    		<xsd:minInclusive value="0" />    	
-    		<xsd:maxInclusive value="999" />
-    	</xsd:restriction>
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0" />
+            <xsd:maxInclusive value="999" />
+        </xsd:restriction>
     </xsd:simpleType>
     
     <xsd:simpleType name="simpleType.CodePrefix">

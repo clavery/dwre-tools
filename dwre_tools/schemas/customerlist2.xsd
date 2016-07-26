@@ -37,6 +37,7 @@
             <xsd:element name="force-password-contains-numeric" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="force-password-mixed-case" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="max-password-age" type="xsd:integer" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="max-password-reset-token-age" type="xsd:integer" minOccurs="0" maxOccurs="1" />
        </xsd:sequence>
     </xsd:complexType>
 

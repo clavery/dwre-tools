@@ -108,11 +108,11 @@
     </xsd:complexType>
     
     <xsd:simpleType name="simpleType.EncryptionScheme">
-  		<xsd:restriction base="xsd:string">
-    		<xsd:enumeration value="md5" />
-    		<xsd:enumeration value="scrypt" />
-  		</xsd:restriction>
-	</xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="md5" />
+            <xsd:enumeration value="scrypt" />
+        </xsd:restriction>
+    </xsd:simpleType>
     
     <xsd:complexType name="complexType.Password">
         <xsd:annotation>
@@ -180,25 +180,25 @@
 
     <xsd:complexType name="complexType.CustomerGroupAssignment" mixed="false">
         <xsd:annotation>
-        	<xsd:documentation>
-                    		Represents the assignment of a customer to a customer group.
+            <xsd:documentation>
+                            Represents the assignment of a customer to a customer group.
 
-                    		When a &lt;group-assignment&gt; element is imported, the customer with the specified 
-                    		customer-no is assigned to the customer group with the specified group-id.  If an assignment 
-                    		already exists, no change is made.
-                    		
-                    		When an element is imported with attribute mode="delete", the assignment of the customer
-                    		with the specified customer-no to the customer group with the specified group-id is removed.
-                    		If the customer is not assigned to the group, no change is made.
-                    		
-                    		When mode="delete", either the customer-no or group-id attribute can be omitted to remove
-                    		multiple assignments of customers to customer groups.  If only customer-no is present, any
-                    		existing assignments of the specified customer to groups are removed.  If only group-id is 
-                    		present, any existing assignments of customers to the specified group are removed.
-                    		
-                    		Assignments can only be created or removed for static customer groups.  A warning message
-                    		is logged if a specified customer group is dynamic.
-        	</xsd:documentation>
+                            When a &lt;group-assignment&gt; element is imported, the customer with the specified 
+                            customer-no is assigned to the customer group with the specified group-id.  If an assignment 
+                            already exists, no change is made.
+                            
+                            When an element is imported with attribute mode="delete", the assignment of the customer
+                            with the specified customer-no to the customer group with the specified group-id is removed.
+                            If the customer is not assigned to the group, no change is made.
+                            
+                            When mode="delete", either the customer-no or group-id attribute can be omitted to remove
+                            multiple assignments of customers to customer groups.  If only customer-no is present, any
+                            existing assignments of the specified customer to groups are removed.  If only group-id is 
+                            present, any existing assignments of customers to the specified group are removed.
+                            
+                            Assignments can only be created or removed for static customer groups.  A warning message
+                            is logged if a specified customer group is dynamic.
+            </xsd:documentation>
         </xsd:annotation>
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
         <xsd:attribute name="group-id" type="simpleType.Generic.NonEmptyString.256" />

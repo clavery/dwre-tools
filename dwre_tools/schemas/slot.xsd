@@ -14,7 +14,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="slot-configuration" type="SlotConfiguration" minOccurs="0" maxOccurs="unbounded" />
-            	<xsd:element name="slot-configuration-campaign-assignment" type="SlotConfigurationCampaignAssignment" minOccurs="0" maxOccurs="unbounded" />
+                <xsd:element name="slot-configuration-campaign-assignment" type="SlotConfigurationCampaignAssignment" minOccurs="0" maxOccurs="unbounded" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -24,6 +24,7 @@
     <xsd:element name="slot-configuration-campaign-assignment" type="SlotConfigurationCampaignAssignment" />
 
     <!-- slot configuration -->
+
     <xsd:complexType name="SlotConfiguration" mixed="false">
         <xsd:sequence>
             <xsd:element name="description" type="Generic.String.4000" minOccurs="0" maxOccurs="1" />
@@ -43,21 +44,22 @@
         <xsd:attribute name="configuration-id" type="Generic.NonEmptyString.256" />
         <xsd:attribute name="default" type="xsd:boolean" />
         <xsd:attribute name="assigned-to-site" type="xsd:boolean">
-        	<xsd:annotation>
-            	<xsd:documentation>
-            		Determines if the slot-configuration is implicitly assigned to the site or not.
-            		If not specified, defaults to true.
-            		The elements rank, schedule, and customer-groups can only be set on slot-configurations assigned to the site.
-            	</xsd:documentation>
-        	</xsd:annotation>
+            <xsd:annotation>
+                <xsd:documentation>
+                    Determines if the slot-configuration is implicitly assigned to the site or not.
+                    If not specified, defaults to true.
+                    The elements rank, schedule, and customer-groups can only be set on slot-configurations assigned to the site.
+                </xsd:documentation>
+            </xsd:annotation>
         </xsd:attribute>
     </xsd:complexType>
     
     <!--  slot configuration campaign assignment -->
+
     <xsd:complexType name="SlotConfigurationCampaignAssignment" mixed="false">
         <xsd:sequence>
-        	<xsd:element name="qualifiers" type="SlotConfigurationAssignmentQualifiers" minOccurs="0" maxOccurs="1" />
-        	<xsd:element name="rank" type="Rank" minOccurs="0" maxOccurs="1" />          
+            <xsd:element name="qualifiers" type="SlotConfigurationAssignmentQualifiers" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="rank" type="Rank" minOccurs="0" maxOccurs="1" />          
             <xsd:element name="schedule" type="SlotSchedule" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
@@ -67,7 +69,6 @@
         <xsd:attribute name="configuration-id" type="Generic.NonEmptyString.256" use="required"/>
         <xsd:attribute name="campaign-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
-    
 
     <!-- slot schedule -->
 
@@ -98,7 +99,7 @@
             <xsd:element name="time-to" type="xsd:time" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <!-- content -->
 
     <xsd:complexType name="Content" mixed="false">
@@ -112,15 +113,16 @@
     </xsd:complexType>
     
     <!-- recommendation -->
+
     <xsd:complexType name="RecommendedProducts" mixed="false">
-	    <xsd:annotation>
-			<xsd:documentation>Reserved for Dynamic Recommendations Beta users. Will not be created and a warning will be logged if the Enable Dynamic Recommendations Beta feature is not enabled by Ops.</xsd:documentation>
-		</xsd:annotation>
+        <xsd:annotation>
+            <xsd:documentation>Reserved for Dynamic Recommendations Beta users. Will not be created and a warning will be logged if the Enable Dynamic Recommendations Beta feature is not enabled by Ops.</xsd:documentation>
+        </xsd:annotation>
         <xsd:attribute name="recommendation-rule-id" type="Generic.NonEmptyString.100" use="required" />
     </xsd:complexType>
     
     <!-- products -->
-    
+
     <xsd:complexType name="Products" mixed="false">
         <xsd:sequence>
             <xsd:element name="product" type="Product" minOccurs="0" maxOccurs="unbounded" />
@@ -132,7 +134,7 @@
     </xsd:complexType>
 
     <!-- categories -->
-    
+
     <xsd:complexType name="Categories" mixed="false">
         <xsd:sequence>
             <xsd:element name="category" type="Category" minOccurs="0" maxOccurs="unbounded" />
@@ -143,8 +145,8 @@
         <xsd:attribute name="category-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
 
-    <!-- products -->
-    
+    <!-- content assets -->
+
     <xsd:complexType name="ContentAssets" mixed="false">
         <xsd:sequence>
             <xsd:element name="content-asset" type="ContentAsset" minOccurs="0" maxOccurs="unbounded" />
@@ -156,27 +158,27 @@
     </xsd:complexType>
 
     <!-- static html -->
-    
+
     <xsd:complexType name="HTML" mixed="false">
-		<xsd:annotation>
+        <xsd:annotation>
             <xsd:documentation>
-				Slot configuration import in MERGE mode only updates content for locales 
-				specified in the import file instead of replacing all previous ones.
+                Slot configuration import in MERGE mode only updates content for locales 
+                specified in the import file instead of replacing all previous ones.
             </xsd:documentation>
         </xsd:annotation>
-        <xsd:sequence>        	
+        <xsd:sequence>
             <xsd:element name="body" type="LocalizedText" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <!--  qualifiers -->
-    
+
     <xsd:complexType name="SlotConfigurationAssignmentQualifiers" mixed="false">
         <xsd:sequence>
             <xsd:element name="customer-groups" type="CustomerGroups" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
-    
+
     <xsd:complexType name="CustomerGroups" mixed="false">
         <xsd:sequence>
             <xsd:element name="customer-group" type="CustomerGroup" minOccurs="0" maxOccurs="unbounded" />
@@ -186,7 +188,7 @@
     <xsd:complexType name="CustomerGroup" mixed="false">
         <xsd:attribute name="group-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>   
-    
+
     <!-- Shared Complex Types -->
 
     <xsd:complexType name="LocalizedText" mixed="false">
@@ -258,7 +260,7 @@
     </xsd:simpleType>
 
     <!--  Nonempty strings with no leading or trailing whitespace -->
-    
+
     <xsd:simpleType name="Generic.NonEmptyString">
         <xsd:restriction base="Generic.String">
             <xsd:minLength value="1" />
@@ -281,7 +283,7 @@
             <xsd:pattern value="\S|(\S(.*)\S)" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:simpleType name="simpleType.ImportMode">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="delete" />
