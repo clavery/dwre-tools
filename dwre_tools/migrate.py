@@ -437,7 +437,6 @@ def validate_migrations(migrations_dir):
         data = migrations[m]
         result = validate_directory(os.path.join(migrations_dir, data["location"]))
         results.append(result)
-    print(results)
     return all(results)
 
 
