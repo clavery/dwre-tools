@@ -424,6 +424,7 @@
                 <xsd:element name="simple-discount" type="SimpleProductDiscount" />
                 <xsd:element name="discounts" type="TieredProductDiscounts" />
                 <xsd:element name="bogo" type="BogoProductDiscount" />
+                <xsd:element name="bogo-discounts" type="TieredBogoProductDiscounts" />
                 <xsd:element name="total-discounts" type="TotalPriceDiscounts" />
             </xsd:choice>
             <xsd:element name="max-applications" type="MaxApplications" minOccurs="0" maxOccurs="1" />
@@ -452,6 +453,13 @@
             <xsd:element name="discount" type="TieredProductDiscount" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="condition-type" type="ProductPromotionConditionType" use="required" />
+    </xsd:complexType>
+
+    <xsd:complexType name="TieredBogoProductDiscounts">
+        <xsd:sequence>
+            <xsd:element name="bogo" type="BogoProductDiscount" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="require-exact-eligible-quantity" type="xsd:boolean" use="optional" />
     </xsd:complexType>
 
     <xsd:complexType name="TieredProductDiscount" mixed="false">

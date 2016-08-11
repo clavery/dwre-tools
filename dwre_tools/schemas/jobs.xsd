@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema 
+<xsd:schema
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
     targetNamespace="http://www.demandware.com/xml/impex/jobs/2015-07-01"
@@ -22,9 +22,9 @@
     <xsd:complexType name="complexType.Job">
         <xsd:sequence>
             <xsd:element name="description" type="simpleType.Generic.String.4000" minOccurs="0" maxOccurs="1" />
-            <xsd:choice>
-                <xsd:element name="flow" type="complexType.Flow" minOccurs="1" maxOccurs="1" />
-                <xsd:element name="split" type="complexType.Split" minOccurs="1" maxOccurs="1" />
+            <xsd:choice minOccurs="1" maxOccurs="unbounded">
+                <xsd:element name="flow" type="complexType.StepFlow" />
+                <xsd:element name="split" type="complexType.SplitFlow" />
             </xsd:choice>
             <xsd:element name="rules" type="complexType.JobRules" minOccurs="0" maxOccurs="1" />
             <xsd:element name="triggers" type="complexType.Triggers" minOccurs="1" maxOccurs="1" />
@@ -38,12 +38,10 @@
         </xsd:attribute>
     </xsd:complexType>
 
-    <xsd:complexType name="complexType.Flow">
+    <xsd:complexType name="complexType.StepFlow">
         <xsd:sequence>
             <xsd:element name="context" type="complexType.SiteContext" minOccurs="0" maxOccurs="1" />
-            <xsd:choice>
-                <xsd:element name="step" type="complexType.Step" minOccurs="1" maxOccurs="unbounded" />
-            </xsd:choice>
+            <xsd:element name="step" type="complexType.Step" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -81,6 +79,8 @@
     <xsd:complexType name="complexType.StepOnExitRule">
         <xsd:choice>
             <xsd:element name="stop" type="complexType.EmptyElement" />
+            <xsd:element name="stop-job" type="complexType.EmptyElement" />
+            <xsd:element name="stop-flow" type="complexType.EmptyElement" />
             <xsd:element name="continue" type="complexType.StepContinueAction" />
         </xsd:choice>
         <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString" use="required" />
@@ -90,17 +90,24 @@
         <xsd:attribute name="next-step" type="simpleType.Generic.NonEmptyString.100" use="optional"/>
     </xsd:complexType>
     
-    <xsd:complexType name="complexType.Split">
+    <xsd:complexType name="complexType.SplitFlow">
         <xsd:sequence>
-            <xsd:element name="flow" type="complexType.SplitFlow" minOccurs="1" maxOccurs="unbounded" />
-            <xsd:element name="flow-template" type="complexType.FlowTemplate" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="flow" type="complexType.SplitStepFlow" minOccurs="1" maxOccurs="unbounded" />
+            <xsd:element name="flow-template" type="complexType.FlowTemplate" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="complexType.SplitFlow">
+    <xsd:complexType name="complexType.SplitStepFlow">
         <xsd:sequence>
-            <xsd:element name="context" type="complexType.SiteContext" minOccurs="1" maxOccurs="1" />
-            <xsd:element name="template-ref" type="complexType.FlowTemplateRef" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="context" type="complexType.SiteContext" minOccurs="0" maxOccurs="1" />
+            <xsd:choice>
+                <xsd:sequence>
+                    <xsd:element name="step" type="complexType.Step" minOccurs="1" maxOccurs="unbounded" />
+                </xsd:sequence>
+                <xsd:sequence>
+                    <xsd:element name="template-ref" type="complexType.FlowTemplateRef" minOccurs="1" maxOccurs="1" />
+                </xsd:sequence>
+            </xsd:choice>
         </xsd:sequence>
     </xsd:complexType>
 
@@ -121,11 +128,15 @@
 
     <xsd:complexType name="complexType.JobOnRunningRule">
         <xsd:sequence>
-            <xsd:element name="mark-job-as-hanging" type="complexType.EmptyElement" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="mark-job-as-hanging" type="complexType.MarkJobAsHangingAction" minOccurs="0" maxOccurs="1" />
             <xsd:element name="send-mail" type="complexType.SendMailAction" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="runtime-threshold" type="simpleType.MinutesInterval" use="required" />
         <xsd:attribute name="enabled" type="xsd:boolean" use="required" />
+    </xsd:complexType>
+
+	<xsd:complexType name="complexType.MarkJobAsHangingAction">
+        <xsd:attribute name="enabled" type="xsd:boolean" use="optional" default="true" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.SendMailAction">
@@ -135,6 +146,7 @@
             <xsd:element name="cc" type="simpleType.Email" minOccurs="0" maxOccurs="1" />
             <xsd:element name="bcc" type="simpleType.Email" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
+        <xsd:attribute name="enabled" type="xsd:boolean" use="optional" default="true" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.SiteContext">
@@ -221,7 +233,7 @@
             <xsd:element name="disable-trigger" type="complexType.EmptyElement" minOccurs="1" maxOccurs="1" />
             <xsd:element name="retry" type="complexType.RetryAction" minOccurs="1" maxOccurs="1" />
         </xsd:choice>
-        <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString" use="required" fixed="FAILED" />
+        <xsd:attribute name="status" type="simpleType.Generic.NonEmptyString" use="required" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.RetryAction">
@@ -299,7 +311,7 @@
             <xsd:pattern value="\S|(\S(.*)\S)" />
         </xsd:restriction>
     </xsd:simpleType>
-    
+
     <xsd:simpleType name="simpleType.Generic.String.1000">
         <xsd:restriction base="simpleType.Generic.String">
             <xsd:minLength value="0" />
