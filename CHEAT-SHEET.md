@@ -15,7 +15,7 @@ The `-n` switch means "dry-run". It will only print what needs to be applied.
 
 ### Apply Migrations To Your Sandbox
 
-This will ensure your sandbox is up to date with the current migrations in the repository
+This will ensure your sandbox is up to date with the current migrations in the repository. This should probably only be run on the develop branch. 
 
 1. `git pull` to update your working copy
 
