@@ -15,7 +15,7 @@ The `-n` switch means "dry-run". It will only print what needs to be applied.
 
 ### Apply Migrations To Your Sandbox
 
-This will ensure your sandbox is up to date with the current migrations in the repository
+This will ensure your sandbox is up to date with the current migrations in the repository. This should probably only be run on the develop branch. 
 
 1. `git pull` to update your working copy
 
@@ -37,16 +37,26 @@ dwre migrate validate
 
 Note: All commands should be run from the root project directory.
 
-1. `git pull` to update your working copy
-2. Create a `Site Import & Export` export in Business Manager exporting the type of Data or Metadata you wish to migrate
-3. Download the zip file of your export
-4. Move the extracted zip file into the `migrations/` folder
-5. Edit the extracted files; paring down the migration to exactly the items you want
-6. Validate the directory: `dwre validate migrations/mymigration`
-7. If valid add the migration: `dwre migrate add -r -d "short description" mymigration`
-8. `git pull` again to ensure no new migrations have been added in the meantime.
-9. `dwre migrate apply` to apply your migration to your own sandbox
-10. If everything is ok `git push` to push the migration upstream
+1. Make sure your working copy is up to date
+1. `dwre export migrations/mymigrations`
+    * This will open a web page to allow you to choose the content you need to migrate.
+    * You can choose any name here after `migrations/` -- it will be renamed later
+    * The old school way to do this was in Business Manger
+        * Create a `Site Import & Export` export in Business Manager exporting the type of Data or Metadata you wish to migrate
+1. Edit the saved files; paring down the migration to exactly the items you want
+1. `dwre validate migrations/mymigration`
+    * The DWRE tools will validate that your migration looks ok
+1. `dwre migrate add -r -d "short description" mymigration`
+    * This creates the real Demandware migration in migrations.xml
+    * `-r` for rename
+    * `-d` for description (used in the xml and the rename)
+1. `dwre migrate validate`
+    * Validates the migrations.xml file to ensure no issues
+1. `dwre migrate run migrations\YYYYMMDDTXXXX_short_description`
+    * This will run the migration on your sandbox. Verify by loading the site that things still look as expected.
+1. `git pull` again to ensure no new migrations have been added in the meantime. If they have, merge and conflicts.
+1. `dwre migrate apply` to apply your migration to your own sandbox
+
 
 ## Logging
 
