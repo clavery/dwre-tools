@@ -124,9 +124,12 @@
             <xsd:element name="psp-api-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="psp-api-version" type="simpleType.PspApiVersion" minOccurs="0" maxOccurs="1" />
             <xsd:element name="psp-url" type="simpleType.Generic.String.2000" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-basic-auth-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="psp-username" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="psp-password" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="psp-merchant-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-jws-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-jws-key-alias" type="simpleType.Generic.String.250" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -169,6 +172,12 @@
     <!-- Simple Types -->
     <xsd:simpleType name="simpleType.Generic.String">
         <xsd:restriction base="xsd:string" />
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.Generic.String.250">
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:maxLength value="250" />
+        </xsd:restriction>
     </xsd:simpleType>
 
     <xsd:simpleType name="simpleType.Generic.String.256">

@@ -37,6 +37,7 @@
                 <xsd:element name="name" type="complexType.LocalizedString" maxOccurs="unbounded"/>
                 <xsd:element name="short_description" type="complexType.LocalizedString" minOccurs="0" maxOccurs="unbounded"/>
                 <xsd:element name="description" type="complexType.LocalizedString" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="extended_description" type="complexType.LocalizedString" minOccurs="0" maxOccurs="unbounded"/>
                 <xsd:element ref="exec" minOccurs="0"/>
                 <xsd:element ref="sub-pipelines" minOccurs="0"/>
                 <xsd:element ref="parameters" minOccurs="0"/>

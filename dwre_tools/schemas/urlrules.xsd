@@ -173,7 +173,8 @@
         <xsd:restriction base="Generic.String">
             <xsd:minLength value="1"/>
             <xsd:maxLength value="20"/>
-            <xsd:pattern value="[a-z]*"/>
+            <xsd:p
+              ttern value="[a-z]*"/>
         </xsd:restriction>
     </xsd:simpleType>
 
