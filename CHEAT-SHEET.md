@@ -39,7 +39,7 @@ dwre migrate validate
 
 Note: All commands should be run from the root project directory.
 
-1. Make sure your working copy is up to date
+1. Make sure your working copy is up to date with all the latest changes from `develop`
 1. `dwre export migrations/mymigrations`
     * This will open a web page to allow you to choose the content you need to migrate.
     * You can choose any name here after `migrations/` -- it will be renamed later
