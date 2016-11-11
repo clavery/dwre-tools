@@ -57,10 +57,11 @@ Note: All commands should be run from the root project directory.
 1. `dwre migrate run migrations\YYYYMMDDTXXXX_short_description`
     * This will run the migration on your sandbox. Verify by loading the site that things still look as expected.
 1. Commit this migration to your branch
-1. Switch back to `develop` and pull the latest code to ensure no new migrations have been added in the meantime. If they have, merge `develop` into your branch and fix any conflicts.
+1. Switch back to `develop` and pull the latest code to ensure no new migrations have been added in the meantime. If there are new migrations, `apply` them in your integration branch. 
+    * Once they have been applied, merge `develop` into your branch and fix any conflicts.
     * You WILL have conflicts in `migrations.xml` if other migrations have been added to `develop` 
 1. Once `develop` has been merged into your branch and conflicts have been fixed, open a PR to merge your branch back into `develop`
-1. Migration will eventually need to be applied to your sandbox. This should happen next time you pull your main branch and run `dwre migrate apply` from `develop`.
+
 
 
 ## Logging
