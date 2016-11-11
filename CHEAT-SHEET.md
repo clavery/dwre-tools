@@ -2,9 +2,11 @@
 
 ## Migrations
 
+This cheat sheet assumes you are working in your own feature branch, and that your repository has a main integration branch called `develop`. 
+
 ### Test What Migrations Will Be Applied
 
-1. `git pull` to update your working copy
+1. Pull the latest code from the `develop` branch
 
 ```sh
 dwre migrate -n apply
@@ -15,9 +17,9 @@ The `-n` switch means "dry-run". It will only print what needs to be applied.
 
 ### Apply Migrations To Your Sandbox
 
-This will ensure your sandbox is up to date with the current migrations in the repository. This should probably only be run on the develop branch. 
+This will ensure your sandbox is up to date with the current migrations in the repository. This should only be run on the `develop` branch. 
 
-1. `git pull` to update your working copy
+1. Pull the latest code from the `develop` branch
 
 ```sh
 dwre migrate apply
@@ -37,7 +39,7 @@ dwre migrate validate
 
 Note: All commands should be run from the root project directory.
 
-1. Make sure your working copy is up to date
+1. Make sure your working copy is up to date with all the latest changes from `develop` (merge develop branch into your working branch)
 1. `dwre export migrations/mymigrations`
     * This will open a web page to allow you to choose the content you need to migrate.
     * You can choose any name here after `migrations/` -- it will be renamed later
@@ -54,8 +56,12 @@ Note: All commands should be run from the root project directory.
     * Validates the migrations.xml file to ensure no issues
 1. `dwre migrate run migrations\YYYYMMDDTXXXX_short_description`
     * This will run the migration on your sandbox. Verify by loading the site that things still look as expected.
-1. `git pull` again to ensure no new migrations have been added in the meantime. If they have, merge and conflicts.
-1. `dwre migrate apply` to apply your migration to your own sandbox
+1. Commit this migration to your branch
+1. Switch back to `develop` and pull the latest code to ensure no new migrations have been added in the meantime. If there are new migrations, `apply` them in your integration branch. 
+    * Once they have been applied, merge `develop` into your branch and fix any conflicts.
+    * You WILL have conflicts in `migrations.xml` if other migrations have been added to `develop` 
+1. Once `develop` has been merged into your branch and conflicts have been fixed, open a PR to merge your branch back into `develop`
+
 
 
 ## Logging
