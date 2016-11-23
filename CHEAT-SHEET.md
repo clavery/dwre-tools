@@ -25,6 +25,15 @@ This will ensure your sandbox is up to date with the current migrations in the r
 dwre migrate apply
 ```
 
+
+### Run a migration without actually applying it
+
+This is to test a migration. This doesn't advance your sandbox version. 
+
+```sh
+dwre migrate run migrations\YYYYMMDDTXXXX_short_description
+```
+
 If any exceptions are output see the Errors section below
 
 ### Validate Migration Context
