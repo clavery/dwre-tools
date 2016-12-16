@@ -11,50 +11,46 @@ import json
 import os
 
 
-# In[59]:
+# In[119]:
 
 with open(os.path.expanduser("~/.dwre.json")) as f:
     SERVERS = json.load(f)
-DEV01 = SERVERS["projects"]["ktp"]["environments"]["dev01"]
-PASSWORD = DEV01["password"]
-CLIENT_ID = DEV01["apiClientId"]
-API_CLIENT_PASSWORD = DEV01["apiClientPassword"]
-
-
-# In[56]:
-
-PASSWORD
+SERVER = SERVERS["projects"]["jss"]["environments"]["dev01"]
+HOST = SERVER["server"]
+PASSWORD = SERVER["password"]
+CLIENT_ID = SERVER["apiClientId"]
+API_CLIENT_PASSWORD = SERVER["apiClientPassword"]
 
 
 # ## OAUTH Business Manager Grant
 
 # Uses default `aaa..` client id used for sandboxes
 
-# In[2]:
+# In[112]:
 
 
 headers = {
-    "authorization" : "Basic " + base64.b64encode("clavery:%s:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" % PASSWORD)
+    "authorization" : "Basic " + base64.b64encode("clavery:%s:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" % PASSWORD)
 }
 
-resp = requests.post('https://dev01-web-ktp.demandware.net/dw/oauth2/access_token?client_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', headers=headers, data={"grant_type" : "urn:demandware:params:oauth:grant-type:client-id:dwsid:dwsecuretoken"})
+resp = requests.post('https://%s/dw/oauth2/access_token?client_id=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb' % HOST, headers=headers, data={"grant_type" : "urn:demandware:params:oauth:grant-type:client-id:dwsid:dwsecuretoken"})
 ACCESS_TOKEN = resp.json()["access_token"]
 
 
-# In[3]:
+# In[113]:
 
 get_ipython().magic(u'resp resp')
 
 
-# In[6]:
+# In[110]:
 
 headers = {
     "authorization" : "Bearer " + ACCESS_TOKEN
 }
-resp = requests.get("https://dev01-web-ktp.demandware.net/s/-/dw/data/v17_1/system_object_definitions?client_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&count=100", headers=headers)
+resp = requests.get("https://%s/s/-/dw/data/v17_1/catalogs?client_id=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&count=100" % (HOST), headers=headers)
 
 
-# In[8]:
+# In[111]:
 
 get_ipython().magic(u'resp resp')
 
@@ -71,26 +67,51 @@ get_ipython().magic(u'resp resp')
 # grant_type=client_credentials
 # ```
 
-# In[60]:
+# In[120]:
 
-AUTH = (CLIENT_ID, API_CLIENT_PASSWORD)
-
+#AUTH = (CLIENT_ID, API_CLIENT_PASSWORD)
+AUTH = ("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 
 resp = requests.post('https://account.demandware.com/dw/oauth2/access_token', auth=AUTH, data={"grant_type" : "client_credentials"})
 ACCESS_TOKEN = resp.json()["access_token"]
 
 
-# In[61]:
+# In[121]:
 
 get_ipython().magic(u'resp resp')
 
 
-# In[62]:
+# In[122]:
 
 headers = {
     "authorization" : "Bearer " + ACCESS_TOKEN
 }
-resp = requests.get("https://dev01-web-ktp.demandware.net/s/-/dw/data/v17_1/system_object_definitions?count=100", headers=headers)
+
+data = { 
+  "query" : 
+  {
+"match_all_query": {}
+    },
+  "sorts":[{"field":"start_time", "sort_order":"asc"}]
+}
+resp = requests.post("https://%s/s/-/dw/data/v17_1/job_execution_search" % HOST, json=data, headers=headers)
+get_ipython().magic(u'resp resp')
+
+
+# In[86]:
+
+headers = {
+    "authorization" : "Bearer " + ACCESS_TOKEN
+}
+
+data = { 
+  "query" : 
+  {
+"match_all_query": {}
+    },
+  "sorts":[{"field":"start_time", "sort_order":"asc"}]
+}
+resp = requests.get("https://%s/s/-/dw/data/v17_1/jobs/ExportOrders/executions/160002" % HOST, headers=headers)
 get_ipython().magic(u'resp resp')
 
 

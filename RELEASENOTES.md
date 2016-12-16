@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.3.7
+
+- updates to 17.1; adds new schemas for jobs, etc
+
 ## 1.3.0
 
 - Adds `sync` command

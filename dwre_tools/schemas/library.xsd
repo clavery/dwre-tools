@@ -31,7 +31,8 @@
         <xsd:sequence>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
-    </xsd:complexType>    
+    </xsd:complexType>
+
 
     <!-- Library Folder -->
     <xsd:complexType name="complexType.Folder" mixed="false">
@@ -46,6 +47,8 @@
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
             <xsd:element name="attribute-groups" type="complexType.AttributeGroups" minOccurs="0" maxOccurs="1" />
             <xsd:element name="refinement-definitions" type="complexType.RefinementDefinitions" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="content-detail-page-meta-tag-rules" type="complexType.PageMetaTagRules" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="content-listing-page-meta-tag-rules" type="complexType.PageMetaTagRules" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="mode" type="simpleType.ImportMode" use="optional" />
         <xsd:attribute name="folder-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
@@ -86,7 +89,7 @@
             <xsd:element name="sitemap-included-flag" type="sharedType.SiteSpecificBoolean" minOccurs="0" maxOccurs="unbounded" nillable="true" />
             <xsd:element name="sitemap-changefrequency" type="sharedType.SiteSpecificSiteMapChangeFrequency" minOccurs="0" maxOccurs="unbounded" nillable="true" />
             <xsd:element name="sitemap-priority" type="sharedType.SiteSpecificSiteMapPriority" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-
+            <xsd:element name="content-detail-page-meta-tag-rules" type="complexType.PageMetaTagRules" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
         <xsd:attribute name="content-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
@@ -244,6 +247,30 @@
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
+    
+    <!-- page meta tag rules -->
+    <xsd:complexType name="complexType.PageMetaTagRules" mixed="false">
+        <xsd:sequence>
+             <xsd:element name="page-meta-tag-rule" type="complexType.PageMetaTagRule" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="complexType.PageMetaTagRule" mixed="false">
+        <xsd:simpleContent>
+            <xsd:extension base="simpleType.Generic.NonEmptyString.4000">
+                <xsd:attribute name="meta-tag-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
+                <xsd:attribute ref="xml:lang" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="simpleType.Generic.NonEmptyString.4000">
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:minLength value="1" />
+            <xsd:maxLength value="4000" />
+            <xsd:pattern value="\S|(\S(.*)\S)" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="simpleType.ImportMode">
         <xsd:restriction base="xsd:string">

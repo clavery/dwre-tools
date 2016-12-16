@@ -95,6 +95,7 @@
             <xsd:element name="flow" type="complexType.SplitStepFlow" minOccurs="1" maxOccurs="unbounded" />
             <xsd:element name="flow-template" type="complexType.FlowTemplate" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
+        <xsd:attribute name="sequential" type="xsd:boolean" use="optional" default="false" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.SplitStepFlow">

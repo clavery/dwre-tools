@@ -101,6 +101,7 @@
         <xsd:sequence>
             <xsd:element name="attribute-path" type="AttributePath" minOccurs="1" maxOccurs="1" />
             <xsd:element name="boost" type="BoostFactor" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="auto-correction" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
     

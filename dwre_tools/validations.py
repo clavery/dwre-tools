@@ -46,7 +46,9 @@ SCHEMA_MAP = {
     "stores" : "store.xsd",
     "tax" : "tax.xsd",
     "url-rules" : "urlrules.xsd",
-    "xml" : "xml.xsd"
+    "xml" : "xml.xsd",
+    "jobs" : "jobs.xsd",
+    "page-meta-tags" : "pagemetatag.xsd",
 }
 
 NSMAP = {
