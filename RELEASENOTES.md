@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.3.8
+
+- make sync with delete reactivate code version
+
 ## 1.3.7
 
 - updates to 17.1; adds new schemas for jobs, etc

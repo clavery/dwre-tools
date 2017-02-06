@@ -12,6 +12,7 @@ import zipfile
 import os
 
 from colorama import Fore, Back, Style
+from .bmtools import login_business_manager, activate_code_version
 
 def cartridges_to_zip(cartridges, filename):
     zip_file_io = io.BytesIO()
@@ -70,3 +71,13 @@ def sync_command(env, delete_code_version):
     response.raise_for_status()
 
     print("{0}Successfully synced cartridges with {1}{2}".format(Fore.GREEN, env["server"], Fore.RESET))
+
+    if delete_code_version:
+        print("Reactivating code version...")
+        bmsession = requests.session()
+        bmsession.verify = env["verify"]
+        bmsession.cert = env["cert"]
+
+        login_business_manager(env, bmsession)
+        activate_code_version(env, bmsession, code_version)
+        print("Done")

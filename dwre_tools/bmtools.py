@@ -34,6 +34,12 @@ def login_business_manager(env, session):
         raise RuntimeError("Invalid login or password")
 
 
+def activate_code_version(env, session, code_version):
+    response = session.post("https://{}/on/demandware.store/Sites-Site/default/ViewCodeDeployment-Activate".format(env["server"]),
+                            data=dict(
+                                CodeVersionID=code_version))
+
+
 def wait_for_import(env, session, filename):
     log_link = None
     retries = 0
