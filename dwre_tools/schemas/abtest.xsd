@@ -238,7 +238,7 @@
         <xsd:restriction base="Generic.String">
             <xsd:minLength value="1" />
             <xsd:maxLength value="40" />
-            <xsd:pattern value="\w+" />
+            <xsd:pattern value="[_\w]+" />
         </xsd:restriction>
     </xsd:simpleType>
 

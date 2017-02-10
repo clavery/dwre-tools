@@ -40,6 +40,7 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="category"/>
             <xsd:enumeration value="product"/>
+            <xsd:enumeration value="folder"/>
             <xsd:enumeration value="content"/>
         </xsd:restriction>
     </xsd:simpleType>
@@ -48,6 +49,7 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="category"/>
             <xsd:enumeration value="product"/>
+            <xsd:enumeration value="folder"/>
             <xsd:enumeration value="content"/>
         </xsd:restriction>
     </xsd:simpleType>

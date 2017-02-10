@@ -849,6 +849,8 @@
             <xsd:enumeration value="Store" />
             <xsd:enumeration value="Pinterest" />
             <xsd:enumeration value="Twitter" />
+            <xsd:enumeration value="FacebookAds" />
+            <xsd:enumeration value="Subscriptions" />
         </xsd:restriction>
     </xsd:simpleType>
 

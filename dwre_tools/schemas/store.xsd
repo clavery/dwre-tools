@@ -45,7 +45,15 @@
             <xsd:element name="longitude" type="simpleType.Longitude" minOccurs="0" maxOccurs="1" />
             <xsd:element name="inventory-list-id" type="simpleType.Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="store-locator-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="demandware-pos-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="demandware-pos-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" >
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Deprecated and will be removed in a future release.
+                        Please use pos-enabled-flag instead.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pos-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="store-id" type="simpleType.Generic.NonEmptyString.256" use="required" />

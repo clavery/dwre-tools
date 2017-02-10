@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.3.9
+
+- 17.2 schemas
+
 ## 1.3.8
 
 - make sync with delete reactivate code version

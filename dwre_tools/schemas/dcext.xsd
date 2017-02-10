@@ -13,7 +13,7 @@
         <xsd:sequence>
             <xsd:element name="pinterest" type="complexType.Pinterest" minOccurs="0" maxOccurs="1" />
             <xsd:element name="facebook" type="complexType.Facebook" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="apple-pay" type="complexType.ApplePay" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="apple-pay" type="complexType.ApplePay" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="site-id" type="simpleType.Generic.NonEmptyString.32" />
     </xsd:complexType>
@@ -74,6 +74,7 @@
     <xsd:complexType name="complexType.Facebook" mixed="false">
         <xsd:sequence>
             <xsd:element name="environment-configuration" type="complexType.FacebookEnvironmentConfiguration" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="notification-email" type="simpleType.Email" minOccurs="0" maxOccurs="1" />
             <xsd:element name="catalog-feed" type="complexType.FacebookCatalogFeed" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
@@ -131,6 +132,7 @@
             <xsd:element name="psp-jws-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="psp-jws-key-alias" type="simpleType.Generic.String.250" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
+        <xsd:attribute name="instance-type" type="simpleType.InstanceType" default="all-instances" use="optional" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.ApplePayMerchantCapabilities">
@@ -254,6 +256,15 @@
     <xsd:simpleType name="simpleType.PspApiVersion">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="v1" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.InstanceType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="all-instances" />
+            <xsd:enumeration value="production" />
+            <xsd:enumeration value="staging" />
+            <xsd:enumeration value="development" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

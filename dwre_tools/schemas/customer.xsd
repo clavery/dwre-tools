@@ -38,6 +38,7 @@
         <xsd:sequence>
             <xsd:element name="credentials" type="complexType.Credentials" minOccurs="0" maxOccurs="1" />
             <xsd:element name="profile" type="complexType.Profile" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="external-profiles" type="complexType.ExternalProfiles" minOccurs="0" maxOccurs="1" />
             <xsd:element name="addresses" type="complexType.Addresses" minOccurs="0" maxOccurs="1" />
             <xsd:element name="customer-groups" type="complexType.CustomerGroups" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
@@ -102,8 +103,31 @@
             <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="password-question" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="password-answer" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="provider-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" >
+               <xsd:annotation> 
+                   <xsd:documentation>The element 'provider-id' has been deprecated. Use external-profiles to manage provider-id/external-id pairs.</xsd:documentation> 
+               </xsd:annotation> 
+			</xsd:element>            
+            <xsd:element name="external-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" >
+               <xsd:annotation> 
+                   <xsd:documentation>The element 'external-id' has been deprecated. Use external-profiles to manage provider-id/external-id pairs.</xsd:documentation> 
+               </xsd:annotation> 
+			</xsd:element>            
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="complexType.ExternalProfiles" mixed="false">
+        <xsd:sequence>
+            <xsd:element name="external-profile" type="complexType.ExternalProfile" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="complexType.ExternalProfile" mixed="false">
+        <xsd:sequence>
             <xsd:element name="provider-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="external-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="email" type="simpleType.Email" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="last-login-time" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
     
