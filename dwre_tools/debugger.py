@@ -101,6 +101,11 @@ def print_thread(session):
             print "\t", "%s @ %s:%s" % (loc['function_name'], loc['script_path'], loc['line_number'])
 
 
+def clean_value(val):
+    if len(val) > 60:
+        return val[0:60] + "..."
+    return val
+
 def print_members(session, base_url, member, refine=None):
     if not CURRENT_THREAD:
         return
@@ -115,7 +120,7 @@ def print_members(session, base_url, member, refine=None):
     members = resp.json().get('object_members')
 
     if members:
-        table_data = [(m['name'], m['value'], m['type']) for m in members 
+        table_data = [(m['name'], clean_value(m['value']), m['type']) for m in members 
                       if not m['name'] == 'arguments' and 
                       (not refine or (refine and re.search(refine, m['name'], re.IGNORECASE)))]
         table_data.insert(0, ['Name', 'Value', 'Type'])
