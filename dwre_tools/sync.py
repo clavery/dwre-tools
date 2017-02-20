@@ -30,11 +30,13 @@ def cartridges_to_zip(cartridges, filename):
     zip_file.close()
     return zip_file_io
 
+BAD_DIRS = ["node_modules", "tools"]
 def collect_cartridges(directory, cartridges=None):
     if cartridges is None:
         cartridges = []
 
     for root, dirs, files in os.walk(directory):
+        dirs[:] = [d for d in dirs if d not in BAD_DIRS]
         if ".project" in files:
             cartridges.append( (root, os.path.basename(root)) )
     return cartridges

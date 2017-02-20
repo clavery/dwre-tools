@@ -38,6 +38,8 @@ def get_bottom_toolbar_tokens(cli):
     if CURRENT_THREAD:
         thread_id = CURRENT_THREAD
         thread = [t for t in THREADS if t.get('id') == CURRENT_THREAD].pop()
+        if thread['status'] != 'halted':
+            return [(Token.Toolbar, '[RUNNING]')]
         frame = thread['call_stack'][0]
         loc = frame['location']
         filename = os.path.basename(loc['script_path'])
@@ -166,8 +168,7 @@ def debug_command(env, breakpoint_locations=None):
     resp.raise_for_status()
 
     manager = KeyBindingManager(enable_abort_and_exit_bindings=True)
-    app = create_prompt_application(message="> ", completer=WordCompleter(['exit', 'print']), reserve_space_for_menu=0,
-                                    get_bottom_toolbar_tokens=get_bottom_toolbar_tokens, style=STYLE)
+    app = create_prompt_application(message="> ", get_bottom_toolbar_tokens=get_bottom_toolbar_tokens, style=STYLE)
     cli = CommandLineInterface(application=app, eventloop=create_eventloop())
 
     t = None
@@ -212,6 +213,8 @@ def debug_command(env, breakpoint_locations=None):
             cmd = result.text.split(' ')[0]
             rest = result.text.split(' ')[1:]
             if cmd in ['exit']:
+                resp = session.delete(base_url + "/client")
+                resp.raise_for_status()
                 return
             elif cmd in ['print', 'p']:
                 var = None
