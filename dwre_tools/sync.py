@@ -40,8 +40,8 @@ def collect_cartridges(directory, cartridges=None):
     return cartridges
 
 
-def sync_command(env, delete_code_version):
-    cartridges = collect_cartridges(".")
+def sync_command(env, delete_code_version, cartridge_location="."):
+    cartridges = collect_cartridges(cartridge_location)
 
     webdavsession = requests.session()
     webdavsession.verify = env["verify"]

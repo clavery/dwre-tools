@@ -23,6 +23,8 @@ setup(
                       'lxml == 3.4.4',
                       'pyyaml >= 3.11',
                       'flask >= 0.10.1',
+                      'prompt_toolkit == 1.0.13',
+                      'terminaltables == 3.1.0',
                       ],
     license='MIT License',
     zip_safe=False,

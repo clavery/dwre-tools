@@ -13,6 +13,7 @@ from .migrate import (add_migration, apply_migrations, validate_migrations, rese
 from .index import reindex_command
 from .export import export_command
 from .sync import sync_command
+from .debugger import debug_command
 
 from colorama import init, deinit
 
@@ -122,8 +123,12 @@ def tail_cmd_handler(args):
 def update_cmd_handler(args):
     os.system("pip install https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip")
 
+def debug_cmd_handler(args):
+    env = get_env_from_args(args)
+    debug_command(env, args.breakpoints)
 
-parser = ArgumentParser(description="Demandware Tools")
+
+parser = ArgumentParser(description="Demandware/SFCC Tools")
 parser.add_argument('-p', '--project', help="DWRE Project Name")
 parser.add_argument('-e', '--env', help="DWRE Environment Name")
 parser.add_argument('--server', help="DWRE server name; overrides env settings")
@@ -194,6 +199,11 @@ update_cmd.set_defaults(func=update_cmd_handler)
 sync_cmd = cmd_parser.add_parser('sync', help="Sync cartridges from current directory")
 sync_cmd.set_defaults(func=sync_cmd_handler)
 sync_cmd.add_argument('-d', '--delete', dest="delete", help="delete code version first", action="store_true")
+
+debug_cmd = cmd_parser.add_parser('debug', help="Begin an interactive debugging session")
+debug_cmd.set_defaults(func=debug_cmd_handler)
+debug_cmd.add_argument('breakpoints', metavar='breakpoint_locations', nargs='*',
+                    help='path:line_num breakpoints')
 
 def main():
     import os, sys
