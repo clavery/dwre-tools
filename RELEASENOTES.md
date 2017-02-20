@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.4.0
+
+- ignore common large directories in sync
+- beta `debug` command
+
 ## 1.3.9
 
 - 17.2 schemas

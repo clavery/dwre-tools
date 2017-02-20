@@ -192,6 +192,23 @@ This performs a self-update of the tools
 
 The `sync` command syncs cartridges found in the current directory (and all subdirectories) to the specified server and code version (or default)
 
+### `debug`
+
+The `debug` command launches an interactive Script Debugging session with the specified instance and breakpoints given on the command line (filename:line_num). At least one breakpoint is required.
+
+Some commands once launched (most are only relevant on a HALTED thread; i.e. a breakpoint has been hit)
+
+- `continue,c` - continue execution to next breakpoint or running
+- `next,n` - continue to next line, over any functions
+- `into,i` - continue into function on current line
+- `out,o` - jump out of function
+- `print,p [objectpath] [re]` - prints the current stack frame members or a specific member/member path; if `re` is specified will further filter down the list to those matching (case insensitively) the regex pattern specified. (i.e. `p order total` to see members with names containing "total" in the order object)
+- `stack,s` - print stack frame
+- `list,l` - print current code surrounding breakpoint
+- `eval,e` - eval an expression in the context of the HALTED thread.
+
+Additionally any commands not defined will instead be "evaled" as if they were passed to the `eval` command (i.e. "1+2" will echo 3)
+
 ## Todo
 
 - Abstract sessions for all commands to better support session management (SSL, etc)

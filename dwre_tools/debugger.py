@@ -192,7 +192,7 @@ def debug_command(env, breakpoint_locations=None):
                 THREADS = []
             cli.request_redraw()
             time.sleep(1)
-    
+
     thread_check_thread = Thread(target=check_for_threads)
     thread_check_thread.daemon = True
     thread_check_thread.start()
