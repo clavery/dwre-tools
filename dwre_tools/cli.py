@@ -202,7 +202,7 @@ sync_cmd.add_argument('-d', '--delete', dest="delete", help="delete code version
 
 debug_cmd = cmd_parser.add_parser('debug', help="Begin an interactive debugging session")
 debug_cmd.set_defaults(func=debug_cmd_handler)
-debug_cmd.add_argument('breakpoints', metavar='breakpoint_locations', nargs='*',
+debug_cmd.add_argument('breakpoints', metavar='breakpoint_locations', nargs='+',
                     help='path:line_num breakpoints')
 
 def main():
