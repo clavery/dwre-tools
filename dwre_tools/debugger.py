@@ -6,6 +6,9 @@ from threading import Timer, Thread
 import os.path
 
 from terminaltables import AsciiTable
+from pygments import highlight
+from pygments.lexers import JavascriptLexer
+from pygments.formatters import TerminalFormatter
 from prompt_toolkit import prompt
 from prompt_toolkit.history import InMemoryHistory
 from prompt_toolkit.contrib.completers import WordCompleter
@@ -53,6 +56,8 @@ def list_current_code():
         return
     thread_id = CURRENT_THREAD
     thread = [t for t in THREADS if t.get('id') == CURRENT_THREAD].pop()
+    if thread['status'] != 'halted':
+        return
     frame = thread['call_stack'][0]
     loc = frame['location']
     filename = loc['script_path']
@@ -71,11 +76,19 @@ def list_current_code():
 
     with open(real_path, 'r') as f:
         lines = f.readlines()
-    for line in lines[line_num-5:line_num-1]:
-        print "     ", line.rstrip()
-    print "---> ", lines[line_num-1].rstrip()
-    for line in lines[line_num:line_num+5]:
-        print "     ", line.rstrip()
+
+    # TODO: this is ugly
+    starting_offset = 6 if line_num > 5 else line_num
+
+    code = ''.join(lines[line_num-starting_offset:line_num+5])
+    result = highlight(code, JavascriptLexer(), TerminalFormatter(bg="dark"))
+    output = result.encode()
+
+    for num, line in enumerate(output.split('\n')):
+        if num+1 == starting_offset:
+            print "---> %s:" % str(num + 1 + line_num - starting_offset).zfill(3), line
+        else:
+            print "     %s:" % str(num + 1 + line_num - starting_offset).zfill(3), line
 
 
 def print_thread(session):
