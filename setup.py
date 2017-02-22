@@ -25,6 +25,7 @@ setup(
                       'flask >= 0.10.1',
                       'prompt_toolkit == 1.0.13',
                       'terminaltables == 3.1.0',
+                      'Pygments == 2.1.3',
                       ],
     license='MIT License',
     zip_safe=False,
