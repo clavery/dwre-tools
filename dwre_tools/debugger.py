@@ -30,13 +30,17 @@ CLIENT_ID = "dwre-tools"
 
 CURRENT_THREAD = None
 THREADS = []
+WATCH_VAR = None
+WATCH_VAL = None
 
 STYLE = style_from_dict({
     Token.Toolbar: '#ffffff bg:#666666',
+    Token.Watch: '#ff0000 bg:#666666',
 })
 
 
 def get_bottom_toolbar_tokens(cli):
+    tokens = []
     thread = "Running"
     if CURRENT_THREAD:
         thread_id = CURRENT_THREAD
@@ -47,7 +51,13 @@ def get_bottom_toolbar_tokens(cli):
         loc = frame['location']
         filename = os.path.basename(loc['script_path'])
         location = "%s @ %s:%s" % (loc['function_name'], filename, loc['line_number'])
-        return [(Token.Toolbar, '[HALTED] Current Thread: %s   %s' % (thread_id, location))]
+        tokens.append((Token.Toolbar, '[HALTED] Current Thread: %s   %s' % (thread_id, location)))
+
+        if WATCH_VAR:
+            value = WATCH_VAL if WATCH_VAL else ""
+            tokens.append((Token.Watch, '   %s: %s' % (WATCH_VAR, value)))
+        return tokens
+    
     return [(Token.Toolbar, '[RUNNING]')]
 
 
@@ -80,15 +90,19 @@ def list_current_code():
     # TODO: this is ugly
     starting_offset = 6 if line_num > 5 else line_num
 
-    code = ''.join(lines[line_num-starting_offset:line_num+5])
+    code = ''.join(lines)
     result = highlight(code, JavascriptLexer(), TerminalFormatter(bg="dark"))
     output = result.encode()
 
-    for num, line in enumerate(output.split('\n')):
-        if num+1 == starting_offset:
-            print "---> %s:" % str(num + 1 + line_num - starting_offset).zfill(3), line
+    code_lines = output.split('\n')
+
+    for num, line in enumerate(code_lines):
+        if num+1 < (line_num - 5) or num > (line_num + 5):
+            continue
+        if num+1 == line_num:
+            print "---> %s:" % str(num + 1).zfill(3), line
         else:
-            print "     %s:" % str(num + 1 + line_num - starting_offset).zfill(3), line
+            print "     %s:" % str(num + 1).zfill(3), line
 
 
 def print_thread(session):
@@ -138,7 +152,7 @@ def thread_eval(session, base_url, expr):
 
 
 def debug_command(env, breakpoint_locations=None):
-    global CARTRIDGES
+    global CARTRIDGES, WATCH_VAR, WATCH_VAL
     cartridges = collect_cartridges(".")
     CARTRIDGES = {name:path for path, name in cartridges}
     cartridge_paths = {path:name for path, name in cartridges}
@@ -180,10 +194,11 @@ def debug_command(env, breakpoint_locations=None):
     resp.raise_for_status()
 
     resp = session.delete(base_url + "/breakpoints")
-    resp = session.post(base_url + "/breakpoints", json={
-        "breakpoints" : breakpoints
-    })
-    resp.raise_for_status()
+    if breakpoints:
+        resp = session.post(base_url + "/breakpoints", json={
+            "breakpoints" : breakpoints
+        })
+        resp.raise_for_status()
 
     manager = KeyBindingManager(enable_abort_and_exit_bindings=True)
     app = create_prompt_application(message="> ", get_bottom_toolbar_tokens=get_bottom_toolbar_tokens, style=STYLE)
@@ -198,15 +213,20 @@ def debug_command(env, breakpoint_locations=None):
     keepalive()
 
     def check_for_threads():
-        global CURRENT_THREAD, THREADS
+        global CURRENT_THREAD, THREADS, WATCH_VAR, WATCH_VAL
         while True:
             resp = session.get(base_url + "/threads")
             threads = resp.json().get("script_threads")
             if threads:
                 CURRENT_THREAD = threads[0].get("id")
                 THREADS = threads
+                resp = session.get(base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD, params={"object_path" : WATCH_VAR})
+                members = resp.json().get('object_members') 
+                if members:
+                    WATCH_VAL = members[0]["value"]
             else:
                 CURRENT_THREAD = None
+                WATCH_VAL = None
                 THREADS = []
             cli.request_redraw()
             time.sleep(1)
@@ -244,6 +264,10 @@ def debug_command(env, breakpoint_locations=None):
                 print_members(session, base_url, var, refine)
             elif cmd in ['stack', 's']:
                 print_thread(session)
+            elif cmd in ['watch']:
+                if rest:
+                    WATCH_VAR = rest[0]
+                    WATCH_VAL = None
             elif cmd in ['continue', 'c']:
                 if CURRENT_THREAD:
                     resp = session.post(base_url + "/threads/%s/resume" % CURRENT_THREAD)
