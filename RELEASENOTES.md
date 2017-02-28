@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.4.1
+
+- use file history for dwre debug
+
 ## 1.4.0
 
 - ignore common large directories in sync

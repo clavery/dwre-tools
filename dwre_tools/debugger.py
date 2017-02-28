@@ -10,7 +10,7 @@ from pygments import highlight
 from pygments.lexers import JavascriptLexer
 from pygments.formatters import TerminalFormatter
 from prompt_toolkit import prompt
-from prompt_toolkit.history import InMemoryHistory
+from prompt_toolkit.history import InMemoryHistory, FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
 from prompt_toolkit.application import Application
 from prompt_toolkit.buffer import Buffer
@@ -201,7 +201,9 @@ def debug_command(env, breakpoint_locations=None):
         resp.raise_for_status()
 
     manager = KeyBindingManager(enable_abort_and_exit_bindings=True)
-    app = create_prompt_application(message="> ", get_bottom_toolbar_tokens=get_bottom_toolbar_tokens, style=STYLE)
+    history = FileHistory(os.path.expanduser("~/.dwredebughist"))
+    app = create_prompt_application(message="> ", get_bottom_toolbar_tokens=get_bottom_toolbar_tokens,
+                                    style=STYLE, history=history)
     cli = CommandLineInterface(application=app, eventloop=create_eventloop())
 
     t = None
