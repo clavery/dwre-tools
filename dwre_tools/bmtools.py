@@ -6,6 +6,8 @@ import time
 import yaml
 import re
 
+CSRF_FINDER = re.compile(r"'csrf_token'\s*,(?:\s|\n)*'(.*?)'", re.MULTILINE)
+
 def get_current_versions(env, session):
     versions_url = "https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-Versions".format(env["server"])
     response = session.get(versions_url)
@@ -30,6 +32,10 @@ def login_business_manager(env, session):
                                 LocaleID="",
                                 LoginForm_RegistrationDomain="Sites",
                                 login=""))
+    csrf_match = CSRF_FINDER.search(response.text)
+    if csrf_match:
+        csrf_token = csrf_match.group(1)
+        session.params['csrf_token'] = csrf_token
     if "Invalid login or password" in response.text:
         raise RuntimeError("Invalid login or password")
 
