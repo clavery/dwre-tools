@@ -1,0 +1,80 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Pipelet UpdateStockLevel</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+						Overview
+					</a>
+</div>
+<div class="bannerItem">
+<a href="pipeletVersioning.html">
+						API Versioning
+					</a>
+</div>
+<div class="bannerItem">
+<a href="pipeletDeprecated.html">
+						Deprecated
+					</a>
+</div>
+<div class="clear"></div>
+</div>
+<div>
+<div class="className 
+				 dep">
+			Pipelet UpdateStockLevel</div>
+<div class="pipeletDesc">Deprecated. Do not use this pipelet.<br/>
+The pipelet increments or decrements the current stock level of the specified product by the specified quantity.<p/>
+
+The pipelet ends on the ERROR exit if any of the following conditions are encountered:<br/>
+- no inventory list is assigned to the current site<br/>
+- no inventory record exists for the specified product in the site inventory list<br/>
+- product inventory record has no allocation<br/><p/>
+
+Product bundles are handled specially:  When the stock level for a product bundle is updated, the stock levels for the bundled products are updated accordingly.  If a product bundle has its own inventory record, then the stock level for this record is also updated.</div>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">Deprecated. Do not use this pipelet.</div>
+<span class="parameterTitle">Group:</span>
+<div class="parameterDetail">Order (deprecated)</div>
+<span class="parameterTitle">Flags:</span>
+<div class="parameterDetail">Error Connector</div>
+<div class="parameterDetail">Transaction Required</div>
+</div>
+<div class="section">
+<div class="header">
+			Input Parameters
+		</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">Product</span>
+					&nbsp;:&nbsp;
+					Product
+							(Required)
+						</span>
+<div class="description">
+The product to update the stock-level of.
+</div>
+</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">Quantity</span>
+					&nbsp;:&nbsp;
+					Number
+							(Required)
+						</span>
+<div class="description">
+The amount of the stock-level to decrease or increase. NOTE: If a positive number is provided the stock-level of the product is decreased. If a negative number is provided the stock-level of the product is increased.
+</div>
+</div>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+</div>
+</body>
+</html>

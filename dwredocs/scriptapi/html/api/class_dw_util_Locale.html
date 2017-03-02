@@ -1,0 +1,473 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class Locale</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_dw.util.Locale">
+<a name="dw.util.Locale"></a>
+<div class="packageName">dw.util</div>
+<div class="className
+					">	
+        	
+				Class Locale</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%;">
+<img src="images/inherit.gif">dw.util.Locale</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">Represents a <code>Locale</code> supported by the system.</div>
+<div class="subclasses"></div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">Properties</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>country
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The country/region code for this <code>Locale</code>, which will
+ either be the empty string or an upercase ISO 3166 2-letter code.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>displayCountry
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">A name for the <code>Locale's</code> country that is appropriate for
+ display to the user, or an empty string if no country has been specified
+ for the <code>Locale</code>.
+ The display country is returned in the language defined for this locale,
+ and not in the language of the session locale.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>displayLanguage
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">A name for the <code>Locale's</code> language that is appropriate for
+ display to the user, or an empty string if no language has been specified
+ for the <code>Locale</code>.
+ The display language is returned in the language defined for this locale,
+ and not in the language of the session locale.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>displayName
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">A name for the <code>Locale</code> that is appropriate for
+ display to the user, or an empty string if no display name has been
+ specified for the <code>Locale</code>.
+ The display name is returned in the language defined for this locale,
+ and not in the language of the session locale.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>ID
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The String representation of the 'localeID'.
+ <p/>
+
+ The identifier of the <code>Locale</code>. Contains a combination of the
+ language and the country key, concatenated by "_", e.g. "en_US". This
+ attribute is the primary key of the class.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>ISO3Country
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">A three-letter abbreviation for this <code>Locale's</code> country, or an
+ empty string if no country has been specified for the <code>Locale</code>
+ .</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>ISO3Language
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">A three-letter abbreviation for this <code>Locale's</code> language, or an
+ empty string if no language has been specified for the
+ <code>Locale</code>.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>language
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The language code for this <code>Locale</code>, which will either
+ be the empty string or a lowercase ISO 639 code.</div>
+</span>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem"> 
+			This class does not have a constructor, so you cannot create it directly.  
+		    </div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_getCountry_DetailAnchor"><span class="">getCountry</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the country/region code for this <code>Locale</code>, which will either be the empty string or an upercase ISO 3166 2-letter code.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_getDisplayCountry_DetailAnchor"><span class="">getDisplayCountry</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns a name for the <code>Locale's</code> country that is appropriate for display to the user, or an empty string if no country has been specified for the <code>Locale</code>.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_getDisplayLanguage_DetailAnchor"><span class="">getDisplayLanguage</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns a name for the <code>Locale's</code> language that is appropriate for display to the user, or an empty string if no language has been specified for the <code>Locale</code>.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_getDisplayName_DetailAnchor"><span class="">getDisplayName</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns a name for the <code>Locale</code> that is appropriate for display to the user, or an empty string if no display name has been specified for the <code>Locale</code>.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_getID_DetailAnchor"><span class="">getID</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the String representation of the 'localeID'.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_getISO3Country_DetailAnchor"><span class="">getISO3Country</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns a three-letter abbreviation for this <code>Locale's</code> country, or an empty string if no country has been specified for the <code>Locale</code> .</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_getISO3Language_DetailAnchor"><span class="">getISO3Language</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns a three-letter abbreviation for this <code>Locale's</code> language, or an empty string if no language has been specified for the <code>Locale</code>.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_getLanguage_DetailAnchor"><span class="">getLanguage</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the language code for this <code>Locale</code>, which will either be the empty string or a lowercase ISO 639 code.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_util_Locale_getLocale_String_DetailAnchor"><span class="">getLocale</span></a></span>(localeId
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_util_Locale.html"><span class="">Locale</span></a></span>
+<div class="description">Returns a <code>Locale</code> instance for the given localeId, or <code>null</code> if no such<code>Locale</code> could be found.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Locale_toString_DetailAnchor"><span class="">toString</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the String representation of the 'localeID'.</div>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Detail
+		</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getCountry_DetailAnchor"></a>
+<div class="detailName 
+						">getCountry</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getCountry</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the country/region code for this <code>Locale</code>, which will
+ either be the empty string or an upercase ISO 3166 2-letter code.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the country/region code for this <code>Locale</code>, which will either be the empty string or an upercase ISO 3166 2-letter code.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getDisplayCountry_DetailAnchor"></a>
+<div class="detailName 
+						">getDisplayCountry</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getDisplayCountry</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns a name for the <code>Locale's</code> country that is appropriate for
+ display to the user, or an empty string if no country has been specified
+ for the <code>Locale</code>.
+ The display country is returned in the language defined for this locale,
+ and not in the language of the session locale.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a name for the <code>Locale's</code> country that is appropriate for display to the user, or an empty string if no country has been specified for the <code>Locale</code>.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getDisplayLanguage_DetailAnchor"></a>
+<div class="detailName 
+						">getDisplayLanguage</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getDisplayLanguage</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns a name for the <code>Locale's</code> language that is appropriate for
+ display to the user, or an empty string if no language has been specified
+ for the <code>Locale</code>.
+ The display language is returned in the language defined for this locale,
+ and not in the language of the session locale.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a name for the <code>Locale's</code> language that is appropriate for display to the user, or an empty string if no language has been specified for the <code>Locale</code>.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getDisplayName_DetailAnchor"></a>
+<div class="detailName 
+						">getDisplayName</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getDisplayName</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns a name for the <code>Locale</code> that is appropriate for
+ display to the user, or an empty string if no display name has been
+ specified for the <code>Locale</code>.
+ The display name is returned in the language defined for this locale,
+ and not in the language of the session locale.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a name for the <code>Locale</code>that is appropriate for display to the user, or an empty string if no display name has been specified for the <code>Locale</code>.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getID_DetailAnchor"></a>
+<div class="detailName 
+						">getID</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getID</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the String representation of the 'localeID'.
+ <p/>
+
+ The identifier of the <code>Locale</code>. Contains a combination of the
+ language and the country key, concatenated by "_", e.g. "en_US". This
+ attribute is the primary key of the class.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the String representation of the 'localeID'.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getISO3Country_DetailAnchor"></a>
+<div class="detailName 
+						">getISO3Country</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getISO3Country</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns a three-letter abbreviation for this <code>Locale's</code> country, or an
+ empty string if no country has been specified for the <code>Locale</code>
+ .</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a three-letter abbreviation for this l<code>Locale's</code> country, or an empty string if no country has been specified for the <code>Locale</code>.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getISO3Language_DetailAnchor"></a>
+<div class="detailName 
+						">getISO3Language</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getISO3Language</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns a three-letter abbreviation for this <code>Locale's</code> language, or an
+ empty string if no language has been specified for the
+ <code>Locale</code>.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a three-letter abbreviation for this <code>Locale's</code> language, or an empty string if no language has been specified for the <code>Locale</code>.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getLanguage_DetailAnchor"></a>
+<div class="detailName 
+						">getLanguage</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getLanguage</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the language code for this <code>Locale</code>, which will either
+ be the empty string or a lowercase ISO 639 code.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the language code for this <code>Locale</code>, which will either be the empty string or a lowercase ISO 639 code.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_getLocale_String_DetailAnchor"></a>
+<div class="detailName 
+						">getLocale</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getLocale</span>(localeId
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_util_Locale.html"><span class="">Locale</span></a>
+</div>
+<div class="description">Returns a <code>Locale</code> instance for the given localeId, or
+ <code>null</code> if no such<code>Locale</code> could be found.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">localeId</span>
+						 - 
+						<span class="parameterDesc">the localeID of the desired <code>Locale</code></span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the <code>Locale</code> instance for the given localeId, or <code>null</code> if no such<code>Locale</code> could be found.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Locale_toString_DetailAnchor"></a>
+<div class="detailName 
+						">toString</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">toString</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the String representation of the 'localeID'.
+
+ The identifier of the <code>Locale</code>. Contains a combination of the
+ language and the country key, concatenated by "_", e.g. "en_US". This
+ attribute is the primary key of the class.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the String representation of the 'localeID'.</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>

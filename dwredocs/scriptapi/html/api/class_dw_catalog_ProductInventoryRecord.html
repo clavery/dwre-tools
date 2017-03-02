@@ -1,0 +1,797 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class ProductInventoryRecord</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_dw.catalog.ProductInventoryRecord">
+<a name="dw.catalog.ProductInventoryRecord"></a>
+<div class="packageName">dw.catalog</div>
+<div class="className
+					">	
+        	
+				Class ProductInventoryRecord</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%">
+<img src="images/inherit.gif"><a href="class_dw_object_PersistentObject.html">dw.object.PersistentObject</a>
+</div>
+<div style="position:relative;left:5%">
+<img src="images/inherit.gif"><a href="class_dw_object_ExtensibleObject.html">dw.object.ExtensibleObject</a>
+</div>
+<div style="position:relative;left:7%;">
+<img src="images/inherit.gif">dw.catalog.ProductInventoryRecord</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">The ProductInventoryRecord holds information about a Product's inventory, and
+ availability.</div>
+<div class="subclasses"></div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">Properties</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>allocation
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+<div class="description">The allocation quantity that is currently set. The quantity unit
+ is the same unit as the product itself.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>allocationResetDate
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_Date.html"><span class="">Date</span></a>
+							&nbsp;(Read Only)<div class="description">The date the allocation quantity was initialized or reset.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>ATS
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+							&nbsp;(Read Only)<div class="description">The quantity of items available to sell (ATS). This is calculated as the allocation (
+ <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getAllocation_DetailAnchor">getAllocation()</a>) plus the preorderBackorderAllocation (<a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getPreorderBackorderAllocation_DetailAnchor">getPreorderBackorderAllocation()</a>) minus
+ the turnover (<a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getTurnover_DetailAnchor">getTurnover()</a>) minus on order (<a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getOnOrder_DetailAnchor">getOnOrder()</a>).</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>backorderable
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean<div class="description">Determines if the product is backorderable.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>inStockDate
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_Date.html"><span class="">Date</span></a>
+<div class="description">The date that the item is expected to be in stock.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span class="dep"><a name="_DetailAnchor"></a>onHand
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+							&nbsp;(Read Only)<div class="description">The on-hand quantity, the actual quantity of available (on-hand)
+ items.</div>
+</span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getStockLevel_DetailAnchor">getStockLevel()</a> instead.</span>
+</div>
+</div>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>onOrder
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+							&nbsp;(Read Only)<div class="description">The quantity that is currently on order.
+ <p>
+ This is only relevant when On Order Inventory is turned on for the related inventory list. On Order is a bucket
+ of inventory used for the time between order creation and order export to external (warehouse) systems. On Order
+ value is increased when an order is created. It will be decreased and with that turnover will be increased when
+ the order is exported, see <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getTurnover_DetailAnchor">getTurnover()</a>. Notice that <a href="class_dw_order_Order.html#dw_order_Order_setExportStatus_Number_DetailAnchor">Order.setExportStatus(Number)</a> and
+ <a href="class_dw_order_OrderItem.html#dw_order_OrderItem_allocateInventory_Boolean_DetailAnchor">OrderItem.allocateInventory(Boolean)</a> will decrease the On Order value. On order will be included
+ in the ATS calculation, see <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getATS_DetailAnchor">getATS()</a>.
+ </p></div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>perpetual
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean<div class="description">Determines if the product is perpetually in stock.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>preorderable
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean<div class="description">Determines if the product is preorderable.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>preorderBackorderAllocation
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+<div class="description">The quantity of items that are allocated for sale, beyond
+ the initial stock allocation.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>reserved
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+							&nbsp;(Read Only)<div class="description">The quantity of items that are reserved.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>stockLevel
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+							&nbsp;(Read Only)<div class="description">The current stock level.  This is calculated as the allocation
+ minus the turnover.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>turnover
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+							&nbsp;(Read Only)<div class="description">The sum of all inventory transactions (decrements and increments)
+ that have been recorded subsequent to the allocation was reset date.
+ The quantity value can be negative due to higher quantity of
+ inventory decrements than increments.</div>
+</span>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem"> 
+			This class does not have a constructor, so you cannot create it directly.  
+		    </div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getAllocation_DetailAnchor"><span class="">getAllocation</span></a></span>()
+						: 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
+<div class="description">Returns the allocation quantity that is currently set.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getAllocationResetDate_DetailAnchor"><span class="">getAllocationResetDate</span></a></span>()
+						: 
+					<a href="class_TopLevel_Date.html"><span class="">Date</span></a></span>
+<div class="description">Returns the date the allocation quantity was initialized or reset.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getATS_DetailAnchor"><span class="">getATS</span></a></span>()
+						: 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
+<div class="description">Returns the quantity of items available to sell (ATS).</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getInStockDate_DetailAnchor"><span class="">getInStockDate</span></a></span>()
+						: 
+					<a href="class_TopLevel_Date.html"><span class="">Date</span></a></span>
+<div class="description">Returns the date that the item is expected to be in stock.</div>
+</div>
+<div class="summaryItem">
+<span class="dep"><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getOnHand_DetailAnchor"><span class="">getOnHand</span></a></span>()
+						: 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
+<div class="description">Returns the on-hand quantity, the actual quantity of available (on-hand) items.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getOnOrder_DetailAnchor"><span class="">getOnOrder</span></a></span>()
+						: 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
+<div class="description">Returns the quantity that is currently on order.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getPreorderBackorderAllocation_DetailAnchor"><span class="">getPreorderBackorderAllocation</span></a></span>()
+						: 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
+<div class="description">Returns the quantity of items that are allocated for sale, beyond the initial stock allocation.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getReserved_DetailAnchor"><span class="">getReserved</span></a></span>()
+						: 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
+<div class="description">Returns the quantity of items that are reserved.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getStockLevel_DetailAnchor"><span class="">getStockLevel</span></a></span>()
+						: 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
+<div class="description">Returns the current stock level.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getTurnover_DetailAnchor"><span class="">getTurnover</span></a></span>()
+						: 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
+<div class="description">Returns the sum of all inventory transactions (decrements and increments) that have been recorded subsequent to the allocation was reset date.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_isBackorderable_DetailAnchor"><span class="">isBackorderable</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Determines if the product is backorderable.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_isPerpetual_DetailAnchor"><span class="">isPerpetual</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Determines if the product is perpetually in stock.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_isPreorderable_DetailAnchor"><span class="">isPreorderable</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Determines if the product is preorderable.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_setAllocation_Number_DetailAnchor"><span class="">setAllocation</span></a></span>(quantity
+								 : 	
+								 
+								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the allocation quantity.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_setBackorderable_Boolean_DetailAnchor"><span class="">setBackorderable</span></a></span>(backorderableFlag
+								 : 	
+								 
+								boolean)
+						: 
+					void</span>
+<div class="description">The method is used to set whether the product is backorderable.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_setInStockDate_Date_DetailAnchor"><span class="">setInStockDate</span></a></span>(inStockDate
+								 : 	
+								 
+								<a href="class_TopLevel_Date.html"><span class="">Date</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the date that the item is expected to be in stock.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_setPerpetual_Boolean_DetailAnchor"><span class="">setPerpetual</span></a></span>(perpetualFlag
+								 : 	
+								 
+								boolean)
+						: 
+					void</span>
+<div class="description">Sets if the product is perpetually in stock.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_setPreorderable_Boolean_DetailAnchor"><span class="">setPreorderable</span></a></span>(preorderableFlag
+								 : 	
+								 
+								boolean)
+						: 
+					void</span>
+<div class="description">The method is used to set whether the product is preorderable.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_setPreorderBackorderAllocation_Number_DetailAnchor"><span class="">setPreorderBackorderAllocation</span></a></span>(quantity
+								 : 	
+								 
+								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the quantity of items that are allocated for sale, beyond the initial stock allocation.</div>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_dw_object_ExtensibleObject.html"><span class="">ExtensibleObject</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_dw_object_ExtensibleObject.html#dw_object_ExtensibleObject_describe_DetailAnchor"><span class="">describe</span></a>, <a href="class_dw_object_ExtensibleObject.html#dw_object_ExtensibleObject_getCustom_DetailAnchor"><span class="">getCustom</span></a>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_dw_object_PersistentObject.html"><span class="">PersistentObject</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_dw_object_PersistentObject.html#dw_object_PersistentObject_getCreationDate_DetailAnchor"><span class="">getCreationDate</span></a>, <a href="class_dw_object_PersistentObject.html#dw_object_PersistentObject_getLastModified_DetailAnchor"><span class="">getLastModified</span></a>, <a href="class_dw_object_PersistentObject.html#dw_object_PersistentObject_getUUID_DetailAnchor"><span class="">getUUID</span></a>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Detail
+		</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getAllocation_DetailAnchor"></a>
+<div class="detailName 
+						">getAllocation</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getAllocation</span>()
+					 : 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+</div>
+<div class="description">Returns the allocation quantity that is currently set. The quantity unit
+ is the same unit as the product itself.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the allocation quantity or quantity N/A if not available.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getAllocationResetDate_DetailAnchor"></a>
+<div class="detailName 
+						">getAllocationResetDate</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getAllocationResetDate</span>()
+					 : 
+					<a href="class_TopLevel_Date.html"><span class="">Date</span></a>
+</div>
+<div class="description">Returns the date the allocation quantity was initialized or reset.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the allocation reset date.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getATS_DetailAnchor"></a>
+<div class="detailName 
+						">getATS</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getATS</span>()
+					 : 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+</div>
+<div class="description">Returns the quantity of items available to sell (ATS). This is calculated as the allocation (
+ <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getAllocation_DetailAnchor">getAllocation()</a>) plus the preorderBackorderAllocation (<a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getPreorderBackorderAllocation_DetailAnchor">getPreorderBackorderAllocation()</a>) minus
+ the turnover (<a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getTurnover_DetailAnchor">getTurnover()</a>) minus on order (<a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getOnOrder_DetailAnchor">getOnOrder()</a>).</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the quantity or quantity N/A if not available.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getInStockDate_DetailAnchor"></a>
+<div class="detailName 
+						">getInStockDate</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getInStockDate</span>()
+					 : 
+					<a href="class_TopLevel_Date.html"><span class="">Date</span></a>
+</div>
+<div class="description">Returns the date that the item is expected to be in stock.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the date that the item is expected to be in stock.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getOnHand_DetailAnchor"></a>
+<div class="detailName 
+						dep">getOnHand</div>
+<div class="detailSignature
+	    				dep">
+<span class="emphasis">getOnHand</span>()
+					 : 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+</div>
+<div class="description">Returns the on-hand quantity, the actual quantity of available (on-hand)
+ items.</div>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getStockLevel_DetailAnchor">getStockLevel()</a> instead.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the on-hand quantity or quantity N/A if not available.</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getOnOrder_DetailAnchor"></a>
+<div class="detailName 
+						">getOnOrder</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getOnOrder</span>()
+					 : 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+</div>
+<div class="description">Returns the quantity that is currently on order.
+ <p>
+ This is only relevant when On Order Inventory is turned on for the related inventory list. On Order is a bucket
+ of inventory used for the time between order creation and order export to external (warehouse) systems. On Order
+ value is increased when an order is created. It will be decreased and with that turnover will be increased when
+ the order is exported, see <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getTurnover_DetailAnchor">getTurnover()</a>. Notice that <a href="class_dw_order_Order.html#dw_order_Order_setExportStatus_Number_DetailAnchor">Order.setExportStatus(Number)</a> and
+ <a href="class_dw_order_OrderItem.html#dw_order_OrderItem_allocateInventory_Boolean_DetailAnchor">OrderItem.allocateInventory(Boolean)</a> will decrease the On Order value. On order will be included
+ in the ATS calculation, see <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getATS_DetailAnchor">getATS()</a>.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the quantity or quantity N/A if not available.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getPreorderBackorderAllocation_DetailAnchor"></a>
+<div class="detailName 
+						">getPreorderBackorderAllocation</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPreorderBackorderAllocation</span>()
+					 : 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+</div>
+<div class="description">Returns the quantity of items that are allocated for sale, beyond
+ the initial stock allocation.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the quantity or quantity N/A if not available.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getReserved_DetailAnchor"></a>
+<div class="detailName 
+						">getReserved</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getReserved</span>()
+					 : 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+</div>
+<div class="description">Returns the quantity of items that are reserved.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the quantity of items reserved for this product.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getStockLevel_DetailAnchor"></a>
+<div class="detailName 
+						">getStockLevel</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getStockLevel</span>()
+					 : 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+</div>
+<div class="description">Returns the current stock level.  This is calculated as the allocation
+ minus the turnover.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the stock level or quantity N/A if not available.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getTurnover_DetailAnchor"></a>
+<div class="detailName 
+						">getTurnover</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getTurnover</span>()
+					 : 
+					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>
+</div>
+<div class="description">Returns the sum of all inventory transactions (decrements and increments)
+ that have been recorded subsequent to the allocation was reset date.
+ The quantity value can be negative due to higher quantity of
+ inventory decrements than increments.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the turnover or quantity N/A if not available.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_isBackorderable_DetailAnchor"></a>
+<div class="detailName 
+						">isBackorderable</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isBackorderable</span>()
+					 : 
+					boolean</div>
+<div class="description">Determines if the product is backorderable.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">true if the product is backorderable.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_isPerpetual_DetailAnchor"></a>
+<div class="detailName 
+						">isPerpetual</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isPerpetual</span>()
+					 : 
+					boolean</div>
+<div class="description">Determines if the product is perpetually in stock.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">true if the product is perpetually in stock.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_isPreorderable_DetailAnchor"></a>
+<div class="detailName 
+						">isPreorderable</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isPreorderable</span>()
+					 : 
+					boolean</div>
+<div class="description">Determines if the product is preorderable.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">true if the product is preorderable.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_setAllocation_Number_DetailAnchor"></a>
+<div class="detailName 
+						">setAllocation</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setAllocation</span>(quantity
+								 : 
+								 
+								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the allocation quantity. This also updates the allocation reset date.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">quantity</span>
+						 - 
+						<span class="parameterDesc">the allocation quantity to set.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_setBackorderable_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setBackorderable</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setBackorderable</span>(backorderableFlag
+								 : 
+								 
+								boolean)
+					 : 
+					void</div>
+<div class="description">The method is used to set whether the product is backorderable.
+ Setting the backorderable flag to true will clear the preorderable flag.
+ If the record's preorderable flag is set to true, calling this method
+ with backorderableFlag==false will have no effect.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">backorderableFlag</span>
+						 - 
+						<span class="parameterDesc">the flag to set backorderable status.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_setInStockDate_Date_DetailAnchor"></a>
+<div class="detailName 
+						">setInStockDate</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setInStockDate</span>(inStockDate
+								 : 
+								 
+								<a href="class_TopLevel_Date.html"><span class="">Date</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the date that the item is expected to be in stock.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">inStockDate</span>
+						 - 
+						<span class="parameterDesc">the date that the item is expected to be in stock.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_setPerpetual_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setPerpetual</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setPerpetual</span>(perpetualFlag
+								 : 
+								 
+								boolean)
+					 : 
+					void</div>
+<div class="description">Sets if the product is perpetually in stock.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">perpetualFlag</span>
+						 - 
+						<span class="parameterDesc">true to set the product perpetually in stock.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_setPreorderable_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setPreorderable</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setPreorderable</span>(preorderableFlag
+								 : 
+								 
+								boolean)
+					 : 
+					void</div>
+<div class="description">The method is used to set whether the product is preorderable.
+ Setting the preorderable flag to true will clear the backorderable flag.
+ If the record's backorderable flag is set to true, calling this method
+ with preorderableFlag==false will have no effect.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">preorderableFlag</span>
+						 - 
+						<span class="parameterDesc">the flag to set preorderable status.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_setPreorderBackorderAllocation_Number_DetailAnchor"></a>
+<div class="detailName 
+						">setPreorderBackorderAllocation</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setPreorderBackorderAllocation</span>(quantity
+								 : 
+								 
+								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the quantity of items that are allocated for sale, beyond
+ the initial stock allocation.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">quantity</span>
+						 - 
+						<span class="parameterDesc">the quantity to set.</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>

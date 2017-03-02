@@ -1,0 +1,614 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class ServiceCallback</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_dw.svc.ServiceCallback">
+<a name="dw.svc.ServiceCallback"></a>
+<div class="packageName">dw.svc</div>
+<div class="className
+					">	
+        	
+				Class ServiceCallback</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%;">
+<img src="images/inherit.gif">dw.svc.ServiceCallback</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">Defines callbacks for use with the <a href="class_dw_svc_ServiceRegistry.html">ServiceRegistry</a>.
+ <p>
+ Note this class itself is not used directly, and is present only for documentation
+ of the available callback methods.</div>
+<div class="subclasses"></div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">Properties</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>URL
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">Allows overriding the URL provided by the service configuration.</div>
+</span>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem"> 
+			This class does not have a constructor, so you cannot create it directly.  
+		    </div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor"><span class="">createRequest</span></a></span>(service
+								 : 	
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, params
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>...)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Creates a request object to be used when calling the service.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_execute_Service_Object_DetailAnchor"><span class="">execute</span></a></span>(service
+								 : 	
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, request
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Provides service-specific execution logic.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_filterLogMessage_String_DetailAnchor"><span class="">filterLogMessage</span></a></span>(msg
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Allows filtering communication URL, request, and response log messages.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_getRequestLogMessage_Object_DetailAnchor"><span class="">getRequestLogMessage</span></a></span>(request
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Creates a communication log message for the given request.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_getResponseLogMessage_Object_DetailAnchor"><span class="">getResponseLogMessage</span></a></span>(response
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Creates a response log message for the given request.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_getURL_DetailAnchor"><span class="">getURL</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Allows overriding the URL provided by the service configuration.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_initServiceClient_Service_DetailAnchor"><span class="">initServiceClient</span></a></span>(service
+								 : 	
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Creates a protocol-specific client object.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_mockCall_Service_Object_DetailAnchor"><span class="">mockCall</span></a></span>(service
+								 : 	
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, requestObj
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Override this method to mock the remote portion of the service call.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_mockFull_Service_Object_DetailAnchor"><span class="">mockFull</span></a></span>(service
+								 : 	
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, args
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>...)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Override this method to mock the entire service call, including the createRequest, execute, and parseResponse phases.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_ServiceCallback_parseResponse_Service_Object_DetailAnchor"><span class="">parseResponse</span></a></span>(service
+								 : 	
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, response
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Creates a response object from a successful service call.</div>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Detail
+		</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor"></a>
+<div class="detailName 
+						">createRequest</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">createRequest</span>(service
+								 : 
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, params
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>...)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Creates a request object to be used when calling the service.
+ <p>
+ The type of the object expected is dependent on the service. For example, the <a href="class_dw_svc_HTTPServiceDefinition.html">HTTPServiceDefinition</a> expects the
+ HTTP request body to be returned.
+ <p>
+ This is required unless the execute method is implemented.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">service</span>
+						 - 
+						<span class="parameterDesc">Service being executed.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">params</span>
+						 - 
+						<span class="parameterDesc">Parameters given to the call method.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Request object to give to the execute method.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_execute_Service_Object_DetailAnchor"></a>
+<div class="detailName 
+						">execute</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">execute</span>(service
+								 : 
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, request
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Provides service-specific execution logic.
+ <p>
+ This can be overridden to execute a chain of FTP commands in the <a href="class_dw_svc_FTPServiceDefinition.html">FTPServiceDefinition</a>, or perform the actual remote
+ call on a webservice stub in the <a href="class_dw_svc_SOAPServiceDefinition.html">SOAPServiceDefinition</a>.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">service</span>
+						 - 
+						<span class="parameterDesc">Service being executed.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">request</span>
+						 - 
+						<span class="parameterDesc">Request object returned by <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor">createRequest(Service, Object...)</a>.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Response from the underlying call, to be sent to <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_parseResponse_Service_Object_DetailAnchor">parseResponse(Service, Object)</a>.</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">						
+						 - 
+						 <span class="parameterDesc">Exception</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_filterLogMessage_String_DetailAnchor"></a>
+<div class="detailName 
+						">filterLogMessage</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">filterLogMessage</span>(msg
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Allows filtering communication URL, request, and response log messages.
+ <p>
+ If not implemented, then no filtering will be performed and the message will be logged as-is.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">msg</span>
+						 - 
+						<span class="parameterDesc">Original log message.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Message to be logged.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_getRequestLogMessage_Object_DetailAnchor"></a>
+<div class="detailName 
+						">getRequestLogMessage</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getRequestLogMessage</span>(request
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Creates a communication log message for the given request.
+ <p>
+ If not implemented then the default logic will be used to convert the request into a log message.
+ <p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">request</span>
+						 - 
+						<span class="parameterDesc">Request object.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Log message, or null to create and use the default message.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_getResponseLogMessage_Object_DetailAnchor"></a>
+<div class="detailName 
+						">getResponseLogMessage</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getResponseLogMessage</span>(response
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Creates a response log message for the given request.
+ <p>
+ If not implemented then the default logic will be used to convert the response into a log message.
+ <p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">response</span>
+						 - 
+						<span class="parameterDesc">Response object.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Log message, or null to create and use the default message.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_getURL_DetailAnchor"></a>
+<div class="detailName 
+						">getURL</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getURL</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Allows overriding the URL provided by the service configuration.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">URL to use. The default behavior is to use the URL from the service configuration.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_initServiceClient_Service_DetailAnchor"></a>
+<div class="detailName 
+						">initServiceClient</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">initServiceClient</span>(service
+								 : 
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Creates a protocol-specific client object.
+ <p>
+ This does not normally need to be implemented, except in the case of SOAP services.
+ <p>
+ Example declaration:
+ <pre>
+ initServiceClient: function( svc:SOAPService ) {
+ }
+ </pre></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">service</span>
+						 - 
+						<span class="parameterDesc">the Service object.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Client object</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">						
+						 - 
+						 <span class="parameterDesc">Exception</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_mockCall_Service_Object_DetailAnchor"></a>
+<div class="detailName 
+						">mockCall</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">mockCall</span>(service
+								 : 
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, requestObj
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Override this method to mock the remote portion of the service call.
+ <p>
+ Other callbacks like createRequest and parseResponse are still called.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">service</span>
+						 - 
+						<span class="parameterDesc">Service being executed.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">requestObj</span>
+						 - 
+						<span class="parameterDesc">Request object returned by <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor">createRequest(Service, Object...)</a>.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Mock response, to be sent to <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_parseResponse_Service_Object_DetailAnchor">parseResponse(Service, Object)</a>.</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">						
+						 - 
+						 <span class="parameterDesc">Exception</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_mockFull_Service_Object_DetailAnchor"></a>
+<div class="detailName 
+						">mockFull</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">mockFull</span>(service
+								 : 
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, args
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>...)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Override this method to mock the entire service call, including the createRequest, execute, and parseResponse phases.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">service</span>
+						 - 
+						<span class="parameterDesc">Service being executed.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">args</span>
+						 - 
+						<span class="parameterDesc">Arguments from the Service call method.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Object to return in the service call's <a href="class_dw_svc_Result.html">Result</a>.</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">						
+						 - 
+						 <span class="parameterDesc">Exception</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_ServiceCallback_parseResponse_Service_Object_DetailAnchor"></a>
+<div class="detailName 
+						">parseResponse</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">parseResponse</span>(service
+								 : 
+								 
+								<a href="class_dw_svc_Service.html"><span class="">Service</span></a>, response
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Creates a response object from a successful service call.
+ <p>
+ This response object will be the output object of the call method's Result.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">service</span>
+						 - 
+						<span class="parameterDesc">Service being executed.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">response</span>
+						 - 
+						<span class="parameterDesc">Service-specific response object. For example, the <a href="class_dw_svc_HTTPServiceDefinition.html">HTTPServiceDefinition</a> service provides the underlying <a href="class_dw_net_HTTPClient.html">HTTPClient</a> object that made the HTTP call.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Object to return in the service call's <a href="class_dw_svc_Result.html">Result</a>.</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>

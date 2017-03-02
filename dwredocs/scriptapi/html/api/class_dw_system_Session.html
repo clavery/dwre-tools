@@ -1,0 +1,705 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class Session</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_dw.system.Session">
+<a name="dw.system.Session"></a>
+<div class="packageName">dw.system</div>
+<div class="className
+					">	
+        	
+				Class Session</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%;">
+<img src="images/inherit.gif">dw.system.Session</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">Represents a session in Commerce Cloud Digital. The session has some well defined
+ attributes like the current authenticated customer or the click stream, but also
+ supports storing custom values in the session.
+
+ The Digital session handling works in the following way:
+ <ul>
+ <li>
+ A session is created in Digital on the first user click. This is guaranteed even if
+ Commerce Cloud Digital caches the HTML pages. It is not guaranteed when the pages are cached by a CDN.
+ </li>
+ <li>
+ A session is identified with a unique ID, called the session ID.
+ </li>
+ <li>
+ When a session is created the application server calls the pipeline OnSession-Start. It can
+ be used to pre-initialize the session, before the actual request hits the server.
+ </li>
+ <li>
+ Digital uses session stickiness and routes request within on session always to the same
+ application server.
+ </li>
+ <li>
+ Session data is also stored in a persistent location.
+ </li>
+ <li>
+ In case of a fail-over situation requests are re-routed to another application server, which than
+ loads the session data from the persistent storage.
+ </li>
+ <li>
+ There are two timeouts, a soft one when the session is not used anymore and a
+ hard one, which renders a session id invalid if it is too old, independent whether
+ it is still used or not. The soft timeout takes care of automatic logout, and clearing
+ all privacy data. But it is still possible to use the session id and re-open
+ the session. The hard timeout makes it basically impossible to re-open a session
+ after a certain time. This hard timeout basically prevents that a session id, which
+ for example is accidentally copied into a URL, can be actually used to start a session.
+ </li>
+ </ul>
+
+ Certain rules apply for what and how much data can be stored in a session:
+ <ul>
+ <li>
+ All primitive types (boolean, number, string, Number, String, Boolean, Date) are supported.
+ </li>
+ <li>
+ All Commerce Cloud Digital value types (Money, Quantity, Decimal, Calendar) are supported.
+ </li>
+ <li>
+ String are limited to 2000 characters.
+ </li>
+ <li>
+ All other types must not be stored in a session. In particular persistent object,
+ collections and scripted objects can not be stored in a session. Commerce Cloud Digital
+ will report values, which are not supported, with a deprecation message in the log
+ files. The value will be stored in the session, but the results are undefined.
+ In a future version of Digital, other types then the listed will be not allowed anymore
+ and an exception will be thrown.
+ </li>
+ <li>
+ There is a 4k size limit for the overall serialized session.
+ </li>
+ </ul></div>
+<div class="subclasses"></div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">Properties</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>clickStream
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_web_ClickStream.html"><span class="">ClickStream</span></a>
+							&nbsp;(Read Only)<div class="description">The current click stream if this is an HTTP session, null otherwise.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>currency
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_Currency.html"><span class="">Currency</span></a>
+<div class="description">Get the currency associated with the current session. The session
+ currency is established at session construction time and is typically
+ equal to the site default currency. In the case of a multi-currency site,
+ the session currency may be different than the site default currency.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>custom
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
+							&nbsp;(Read Only)<div class="description">The session's custom attributes. The
+ attributes are stored for the life time of the session and are not
+ cleared when the customer logs out.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>customer
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_customer_Customer.html"><span class="">Customer</span></a>
+							&nbsp;(Read Only)<div class="description">The customer associated with this storefront session. The method
+ always returns <code>null</code> if called for a non-storefront session
+ (e.g. within a job or within the business manager). For a storefront
+ session, the method always returns a customer. The returned customer
+ may be anonymous if the customer could not be identified via the
+ customer cookie.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>customerAuthenticated
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean
+							&nbsp;(Read Only)<div class="description">Identifies if the customer associated with this session
+ is authenticated or not. This call is equivalent to customer.isAuthenticated().</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>customerExternallyAuthenticated
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean
+							&nbsp;(Read Only)<div class="description">Identifies if the customer associated with this session
+ is externally authenticated or not.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>forms
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_web_Forms.html"><span class="">Forms</span></a>
+							&nbsp;(Read Only)<div class="description">The forms object that provides access to all current forms of a customer in the session.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>lastReceivedSourceCodeInfo
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a>
+							&nbsp;(Read Only)<div class="description">Returns information on the last source-code handled by the session.
+ This may or may not be the session's active source-code, e.g. the
+ last received source-code was inactive and therefore was not
+ set as the session's active source-code.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>privacy
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
+							&nbsp;(Read Only)<div class="description">The session's custom privacy attributes.
+ The attributes are stored for the live time of the session and are
+ automatically cleared when the customer logs out.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>sessionID
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The unique session id. This can safely be used as identifier
+ against external systems.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>sourceCodeInfo
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a>
+							&nbsp;(Read Only)<div class="description">Returns information on the session's active source-code.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>userAuthenticated
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean
+							&nbsp;(Read Only)<div class="description">Identifies if the agent user associated with this session
+ is authenticated or not.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>userName
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The current agent user name associated with this session.
+ <p/>
+ <b>Note:</b> this class allows access to sensitive security-related data.
+ Pay special attention to PCI DSS v3. requirements 2, 4, and 12.</div>
+</span>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem"> 
+			This class does not have a constructor, so you cannot create it directly.  
+		    </div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getClickStream_DetailAnchor"><span class="">getClickStream</span></a></span>()
+						: 
+					<a href="class_dw_web_ClickStream.html"><span class="">ClickStream</span></a></span>
+<div class="description">Returns the current click stream if this is an HTTP session, null otherwise.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getCurrency_DetailAnchor"><span class="">getCurrency</span></a></span>()
+						: 
+					<a href="class_dw_util_Currency.html"><span class="">Currency</span></a></span>
+<div class="description">Get the currency associated with the current session.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getCustom_DetailAnchor"><span class="">getCustom</span></a></span>()
+						: 
+					<a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a></span>
+<div class="description">Returns the session's custom attributes.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getCustomer_DetailAnchor"><span class="">getCustomer</span></a></span>()
+						: 
+					<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a></span>
+<div class="description">Returns the customer associated with this storefront session.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getForms_DetailAnchor"><span class="">getForms</span></a></span>()
+						: 
+					<a href="class_dw_web_Forms.html"><span class="">Forms</span></a></span>
+<div class="description">Returns the forms object that provides access to all current forms of a customer in the session.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getLastReceivedSourceCodeInfo_DetailAnchor"><span class="">getLastReceivedSourceCodeInfo</span></a></span>()
+						: 
+					<a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a></span>
+<div class="description">Returns information on the last source-code handled by the session.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getPrivacy_DetailAnchor"><span class="">getPrivacy</span></a></span>()
+						: 
+					<a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a></span>
+<div class="description">Returns the session's custom privacy attributes.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getSessionID_DetailAnchor"><span class="">getSessionID</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the unique session id.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getSourceCodeInfo_DetailAnchor"><span class="">getSourceCodeInfo</span></a></span>()
+						: 
+					<a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a></span>
+<div class="description">Returns information on the session's active source-code.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_getUserName_DetailAnchor"><span class="">getUserName</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the current agent user name associated with this session.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_isCustomerAuthenticated_DetailAnchor"><span class="">isCustomerAuthenticated</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Identifies if the customer associated with this session is authenticated or not.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_isCustomerExternallyAuthenticated_DetailAnchor"><span class="">isCustomerExternallyAuthenticated</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Identifies if the customer associated with this session is externally authenticated or not.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_isUserAuthenticated_DetailAnchor"><span class="">isUserAuthenticated</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Identifies if the agent user associated with this session is authenticated or not.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_setCurrency_Currency_DetailAnchor"><span class="">setCurrency</span></a></span>(newCurrency
+								 : 	
+								 
+								<a href="class_dw_util_Currency.html"><span class="">Currency</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the session currency.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_setSourceCode_String_DetailAnchor"><span class="">setSourceCode</span></a></span>(sourceCode
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
+<div class="description">Applies the specified source-code to the current session and basket.</div>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Detail
+		</div>
+<div class="detailItem">
+<a name="dw_system_Session_getClickStream_DetailAnchor"></a>
+<div class="detailName 
+						">getClickStream</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getClickStream</span>()
+					 : 
+					<a href="class_dw_web_ClickStream.html"><span class="">ClickStream</span></a>
+</div>
+<div class="description">Returns the current click stream if this is an HTTP session, null otherwise.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the current click stream if this is an HTTP session, null otherwise.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getCurrency_DetailAnchor"></a>
+<div class="detailName 
+						">getCurrency</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getCurrency</span>()
+					 : 
+					<a href="class_dw_util_Currency.html"><span class="">Currency</span></a>
+</div>
+<div class="description">Get the currency associated with the current session. The session
+ currency is established at session construction time and is typically
+ equal to the site default currency. In the case of a multi-currency site,
+ the session currency may be different than the site default currency.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the currency associated with this storefront session, never null.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getCustom_DetailAnchor"></a>
+<div class="detailName 
+						">getCustom</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getCustom</span>()
+					 : 
+					<a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
+</div>
+<div class="description">Returns the session's custom attributes. The
+ attributes are stored for the life time of the session and are not
+ cleared when the customer logs out.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the session's custom attributes.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getCustomer_DetailAnchor"></a>
+<div class="detailName 
+						">getCustomer</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getCustomer</span>()
+					 : 
+					<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a>
+</div>
+<div class="description">Returns the customer associated with this storefront session. The method
+ always returns <code>null</code> if called for a non-storefront session
+ (e.g. within a job or within the business manager). For a storefront
+ session, the method always returns a customer. The returned customer
+ may be anonymous if the customer could not be identified via the
+ customer cookie.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the customer associated with this storefront session.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getForms_DetailAnchor"></a>
+<div class="detailName 
+						">getForms</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getForms</span>()
+					 : 
+					<a href="class_dw_web_Forms.html"><span class="">Forms</span></a>
+</div>
+<div class="description">Returns the forms object that provides access to all current forms of a customer in the session.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the forms</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getLastReceivedSourceCodeInfo_DetailAnchor"></a>
+<div class="detailName 
+						">getLastReceivedSourceCodeInfo</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getLastReceivedSourceCodeInfo</span>()
+					 : 
+					<a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a>
+</div>
+<div class="description">Returns information on the last source-code handled by the session.
+ This may or may not be the session's active source-code, e.g. the
+ last received source-code was inactive and therefore was not
+ set as the session's active source-code.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">source-code information for the last received source-code.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getPrivacy_DetailAnchor"></a>
+<div class="detailName 
+						">getPrivacy</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPrivacy</span>()
+					 : 
+					<a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
+</div>
+<div class="description">Returns the session's custom privacy attributes.
+ The attributes are stored for the live time of the session and are
+ automatically cleared when the customer logs out.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the session's custom privacy attributes.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getSessionID_DetailAnchor"></a>
+<div class="detailName 
+						">getSessionID</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getSessionID</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the unique session id. This can safely be used as identifier
+ against external systems.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the unique identifier for the session.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getSourceCodeInfo_DetailAnchor"></a>
+<div class="detailName 
+						">getSourceCodeInfo</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getSourceCodeInfo</span>()
+					 : 
+					<a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a>
+</div>
+<div class="description">Returns information on the session's active source-code.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the session's source-code information.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_getUserName_DetailAnchor"></a>
+<div class="detailName 
+						">getUserName</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getUserName</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the current agent user name associated with this session.
+ <p/>
+ <b>Note:</b> this class allows access to sensitive security-related data.
+ Pay special attention to PCI DSS v3. requirements 2, 4, and 12.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the current agent user name associated with this session.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_isCustomerAuthenticated_DetailAnchor"></a>
+<div class="detailName 
+						">isCustomerAuthenticated</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isCustomerAuthenticated</span>()
+					 : 
+					boolean</div>
+<div class="description">Identifies if the customer associated with this session
+ is authenticated or not. This call is equivalent to customer.isAuthenticated().</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">true if the customer is authenticated, false otherwise.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_isCustomerExternallyAuthenticated_DetailAnchor"></a>
+<div class="detailName 
+						">isCustomerExternallyAuthenticated</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isCustomerExternallyAuthenticated</span>()
+					 : 
+					boolean</div>
+<div class="description">Identifies if the customer associated with this session
+ is externally authenticated or not.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">true if the customer is authenticated, false otherwise.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_isUserAuthenticated_DetailAnchor"></a>
+<div class="detailName 
+						">isUserAuthenticated</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isUserAuthenticated</span>()
+					 : 
+					boolean</div>
+<div class="description">Identifies if the agent user associated with this session
+ is authenticated or not.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">true if the agent user is authenticated, false otherwise.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_setCurrency_Currency_DetailAnchor"></a>
+<div class="detailName 
+						">setCurrency</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setCurrency</span>(newCurrency
+								 : 
+								 
+								<a href="class_dw_util_Currency.html"><span class="">Currency</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the session currency.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">newCurrency</span>
+						 - 
+						<span class="parameterDesc">the new currency to change to, must not be null. Method will throw an exception if currency not allowed by current site is passed.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_system_Session_setSourceCode_String_DetailAnchor"></a>
+<div class="detailName 
+						">setSourceCode</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setSourceCode</span>(sourceCode
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
+</div>
+<div class="description">Applies the specified source-code to the current session and basket. This API processes the source-code exactly as if it
+ were supplied on the URL query string, with the additional benefit of returning error information. If no input
+ parameter is passed, then the active source code in the session and basket is removed. If a basket exists, and the modification fails,
+ then the session is not written to either. This method may open and commit a transaction, if none is currently active.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">sourceCode</span>
+						 - 
+						<span class="parameterDesc">the SourceCode to set as active in the session and basket. If null parameter is passed, then the active source code in the session is removed.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">an OK status if the source code was applied, otherwise an ERROR status. In the latter case, the possible error codes are: CODE_INVALID and CODE_INACTIVE. See documentation for <a href="class_dw_campaign_SourceCodeStatusCodes.html">SourceCodeStatusCodes</a> for further descriptions.</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class Generator</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_TopLevel.Generator">
+<a name="TopLevel.Generator"></a>
+<div class="packageName">TopLevel</div>
+<div class="className
+					">	
+        	
+				Class Generator</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%;">
+<img src="images/inherit.gif">Generator</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">A generator is a special type of function that works as a factory for
+ iterators and it allows you to define an iterative algorithm by writing a
+ single function which can maintain its own state. A function becomes a
+ generator if it contains one or more <b>yield</b> statements.
+
+ When a generator function is called, the body of the function does not
+ execute straight away; instead, it returns a generator-iterator object.
+ Each call to the generator-iterator's next() method will execute the
+ body of the function up to the next <b>yield</b> statement and return its result.
+ When either the end of the function or a return statement is reached,
+ a StopIteration exception is thrown.
+
+ For example, the following fib() function is a Fibonacci number generator,
+ that returns the generator when it encounters the <b>yield</b> statement:
+ <pre>
+ <code>
+ function fib() {
+    var fibNum = 0, j = 1;
+    while (true) {
+       <b><i>yield</i></b> fibNum;
+       var t = fibNum;
+       fibNum = j;
+       j += t;
+    }
+ }
+ </code>
+ </pre>
+
+ To use the generator, simply call the next() method to access the values
+ returned by the function:
+ <pre>
+ <code>
+  var gen = fib();
+  for (var i = 0; i &lt; 10; i++) {
+    document.write(<b><i>gen.next()</i></b> " ");
+  }
+ </code>
+ </pre></div>
+<div class="subclasses"></div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_TopLevel_Iterator.html">Iterator</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_TopLevel_StopIteration.html">StopIteration</a></span>
+</div>
+</div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#TopLevel_Generator_Generator_DetailAnchor"><span class="">Generator</span></a></span>()</span>
+<div class="description"></div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#TopLevel_Generator_close_DetailAnchor"><span class="">close</span></a></span>()
+						: 
+					void</span>
+<div class="description">Closes the iteration of the generator.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#TopLevel_Generator_next_DetailAnchor"><span class="">next</span></a></span>()
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Resumes the iteration of the generator by continuing the function at the statement after the <b>yield</b> statement.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#TopLevel_Generator_send_Object_DetailAnchor"><span class="">send</span></a></span>(value
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Allows you to control the resumption of the iterative algorithm.</div>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Constructor Detail
+		</div>
+<div class="detailItem">
+<a name="TopLevel_Generator_Generator_DetailAnchor"></a>
+<div class="detailName 
+						">Generator</div>
+<div class="detailSignature
+	    				">public&nbsp;<span class="emphasis">Generator</span>()</div>
+<div class="description"></div>
+<hr>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Detail
+		</div>
+<div class="detailItem">
+<a name="TopLevel_Generator_close_DetailAnchor"></a>
+<div class="detailName 
+						">close</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">close</span>()
+					 : 
+					void</div>
+<div class="description">Closes the iteration of the generator. Any finally clauses active in
+ the generator function are run. If a finally clause throws any
+ exception other than StopIteration, the exception is propagated to
+ the caller of the close() method.</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="TopLevel_Generator_next_DetailAnchor"></a>
+<div class="detailName 
+						">next</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">next</span>()
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Resumes the iteration of the generator by continuing the function
+ at the statement after the <b>yield</b> statement. This function throws a
+ StopIterator exception when there are no additional iterative steps.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the result of resuming the iterative algorithm or a StopIterator exception if the sequence is exhausted.</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_TopLevel_StopIteration.html">StopIteration</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="TopLevel_Generator_send_Object_DetailAnchor"></a>
+<div class="detailName 
+						">send</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">send</span>(value
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Allows you to control the resumption of the iterative algorithm. Once a
+ generator has been started by calling its next() method, you can use
+ send() and pass a specific value that will be treated as the result
+ of the last <b>yield</b>. The generator will then return the operand of the
+ subsequent <b>yield</b>.
+
+ You can't start a generator at an arbitrary point; you must start
+ it with next() before you can send() it a specific value. Note that
+ calling send(undefined) is equivalent to calling next(). However,
+ starting a newborn generator with any value other than 'undefined' when
+ calling send() will result in a TypeError exception.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">value</span>
+						 - 
+						<span class="parameterDesc">the value to use.</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>

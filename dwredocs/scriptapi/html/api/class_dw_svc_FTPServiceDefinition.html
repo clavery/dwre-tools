@@ -1,0 +1,185 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class FTPServiceDefinition</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_dw.svc.FTPServiceDefinition">
+<a name="dw.svc.FTPServiceDefinition"></a>
+<div class="packageName">dw.svc</div>
+<div class="className
+					">	
+        	
+				Class FTPServiceDefinition</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%">
+<img src="images/inherit.gif"><a href="class_dw_svc_ServiceDefinition.html">dw.svc.ServiceDefinition</a>
+</div>
+<div style="position:relative;left:5%;">
+<img src="images/inherit.gif">dw.svc.FTPServiceDefinition</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">Represents an FTP or SFTP Service Definition.
+ <p>
+ There are two basic styles of configuration for this service.
+ <p>
+ In the first style, <code>createRequest</code> is implemented to call the setOperation method on the Service. This
+ will cause the single operation to be performed and returned as the data object in the <code>parseResponse</code>
+ method. Any error status is set automatically based on the returned value of the operation.
+ <p>
+ In the second style, <code>execute</code> is implemented to perform one or more operations using the serviceClient
+ available on the Service object. This serviceClient will be either an <a href="class_dw_net_FTPClient.html">FTPClient</a> or an
+ <a href="class_dw_net_SFTPClient.html">SFTPClient</a>. The return value of execute will be passed as the data object in the
+ <code>parseResponse</code> method.</div>
+<div class="subclasses"></div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">Properties</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>autoDisconnect
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean<div class="description">The status of whether the underlying FTP connection will be disconnected after the service call.</div>
+</span>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem"> 
+			This class does not have a constructor, so you cannot create it directly.  
+		    </div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_FTPServiceDefinition_isAutoDisconnect_DetailAnchor"><span class="">isAutoDisconnect</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Returns the status of whether the underlying FTP connection will be disconnected after the service call.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_FTPServiceDefinition_setAutoDisconnect_Boolean_DetailAnchor"><span class="">setAutoDisconnect</span></a></span>(b
+								 : 	
+								 
+								boolean)
+						: 
+					<a href="class_dw_svc_FTPServiceDefinition.html"><span class="">FTPServiceDefinition</span></a></span>
+<div class="description">Sets the auto-disconnect flag.</div>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_dw_svc_ServiceDefinition.html"><span class="">ServiceDefinition</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_dw_svc_ServiceDefinition.html#dw_svc_ServiceDefinition_configure_Object_DetailAnchor"><span class="">configure</span></a>, <a href="class_dw_svc_ServiceDefinition.html#dw_svc_ServiceDefinition_getConfiguration_DetailAnchor"><span class="">getConfiguration</span></a>, <a href="class_dw_svc_ServiceDefinition.html#dw_svc_ServiceDefinition_getServiceName_DetailAnchor"><span class="">getServiceName</span></a>, <a href="class_dw_svc_ServiceDefinition.html#dw_svc_ServiceDefinition_isMock_DetailAnchor"><span class="">isMock</span></a>, <a href="class_dw_svc_ServiceDefinition.html#dw_svc_ServiceDefinition_isThrowOnError_DetailAnchor"><span class="">isThrowOnError</span></a>, <a href="class_dw_svc_ServiceDefinition.html#dw_svc_ServiceDefinition_setMock_DetailAnchor"><span class="">setMock</span></a>, <a href="class_dw_svc_ServiceDefinition.html#dw_svc_ServiceDefinition_setThrowOnError_DetailAnchor"><span class="">setThrowOnError</span></a>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Detail
+		</div>
+<div class="detailItem">
+<a name="dw_svc_FTPServiceDefinition_isAutoDisconnect_DetailAnchor"></a>
+<div class="detailName 
+						">isAutoDisconnect</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isAutoDisconnect</span>()
+					 : 
+					boolean</div>
+<div class="description">Returns the status of whether the underlying FTP connection will be disconnected after the service call.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">The auto-disconnect flag.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_FTPServiceDefinition_setAutoDisconnect_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setAutoDisconnect</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setAutoDisconnect</span>(b
+								 : 
+								 
+								boolean)
+					 : 
+					<a href="class_dw_svc_FTPServiceDefinition.html"><span class="">FTPServiceDefinition</span></a>
+</div>
+<div class="description">Sets the auto-disconnect flag.
+ <p>
+ If true, the underlying FTP connection will be disconnected after the service call. If false then it will remain
+ open. The default value is true.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">b</span>
+						 - 
+						<span class="parameterDesc">true to enable auto-disconnect, false otherwise.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">this FTP or SFTP Service Definition.</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>

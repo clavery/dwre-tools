@@ -1,0 +1,125 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class OrganizationPreferences</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_dw.system.OrganizationPreferences">
+<a name="dw.system.OrganizationPreferences"></a>
+<div class="packageName">dw.system</div>
+<div class="className
+					">	
+        	
+				Class OrganizationPreferences</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%">
+<img src="images/inherit.gif"><a href="class_dw_object_PersistentObject.html">dw.object.PersistentObject</a>
+</div>
+<div style="position:relative;left:5%">
+<img src="images/inherit.gif"><a href="class_dw_object_ExtensibleObject.html">dw.object.ExtensibleObject</a>
+</div>
+<div style="position:relative;left:7%;">
+<img src="images/inherit.gif">dw.system.OrganizationPreferences</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">OrganizationPreferences is a container for custom global (i.e.
+ organization-level) attributes. The object corresponds with system object
+ definition "OrganizationPreferences". It has no system attributes and exists
+ only as a place for merchants to define custom attributes which need to be
+ available to all of their sites.
+ <p/>
+ An instance is obtained by calling <a href="class_dw_system_System.html#dw_system_System_getPreferences_DetailAnchor">System.getPreferences()</a>.
+ Once an instance of the container is obtained, it is possible to read/write
+ organization preference values by using the usual syntax for
+ <a href="class_dw_object_ExtensibleObject.html">ExtensibleObject</a> instances. For example:
+ <pre>
+ var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
+ var myOrgPrefValue : String = orgPrefs.getCustom()["myOrgPref"];
+ </pre>
+ <p/>
+ <b>Note:</b> this class allows access to sensitive security-related data.
+ Pay special attention to PCI DSS v3. requirements 2, 4, and 12.
+ <p/>
+ Commerce Cloud Digital defines many organization-level preferences, relating to
+ locale, timezone, geolocations, etc, which can be managed within the
+ "Global Preferences" module of the Business Manager, but these preferences
+ are not accessible through this object.</div>
+<div class="subclasses"></div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem"> 
+			This class does not have a constructor, so you cannot create it directly.  
+		    </div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_dw_object_ExtensibleObject.html"><span class="">ExtensibleObject</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_dw_object_ExtensibleObject.html#dw_object_ExtensibleObject_describe_DetailAnchor"><span class="">describe</span></a>, <a href="class_dw_object_ExtensibleObject.html#dw_object_ExtensibleObject_getCustom_DetailAnchor"><span class="">getCustom</span></a>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_dw_object_PersistentObject.html"><span class="">PersistentObject</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_dw_object_PersistentObject.html#dw_object_PersistentObject_getCreationDate_DetailAnchor"><span class="">getCreationDate</span></a>, <a href="class_dw_object_PersistentObject.html#dw_object_PersistentObject_getLastModified_DetailAnchor"><span class="">getLastModified</span></a>, <a href="class_dw_object_PersistentObject.html#dw_object_PersistentObject_getUUID_DetailAnchor"><span class="">getUUID</span></a>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>
