@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.4.3
+
+- debugger supports unicode code files
+
 ## 1.4.2
 
 - updates business manager sessions to use CSRF Token as per https://xchange.demandware.com/message/70079#70079

@@ -86,13 +86,14 @@ def list_current_code():
 
     with open(real_path, 'r') as f:
         lines = f.readlines()
+    lines = [l.decode('utf-8') for l in lines]
 
     # TODO: this is ugly
     starting_offset = 6 if line_num > 5 else line_num
 
     code = ''.join(lines)
     result = highlight(code, JavascriptLexer(), TerminalFormatter(bg="dark"))
-    output = result.encode()
+    output = result
 
     code_lines = output.split('\n')
 
