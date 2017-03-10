@@ -163,6 +163,18 @@
 <div class="description"><p> Reserves inventory for all items in this basket for a specified amount of minutes.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_order_Basket_reserveInventory_Number_Boolean_DetailAnchor"><span class="">reserveInventory</span></a></span>(reservationDurationInMinutes
+								 : 	
+								 
+								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>, removeIfNotAvailable
+								 : 	
+								 
+								boolean)
+						: 
+					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
+<div class="description"><p> Reserves inventory for all items in this basket for a specified amount of minutes.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Basket_setBusinessType_Number_DetailAnchor"><span class="">setBusinessType</span></a></span>(aType
 								 : 	
 								 
@@ -381,6 +393,9 @@
  <p>
  If the reservation fails with an ERROR status, existing valid reservations for the basket will remain unchanged
  but no new reservations will be made. This might lead to a partially reserved basket.
+ </p>
+ <p>
+ Behaves same as <code>reserveInventory( null, false );</code>.
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -447,6 +462,9 @@
  <p>
  If the reservation fails with an ERROR status, existing valid reservations for the basket will remain unchanged but
  no new reservations will be made. This might lead to a partially reserved basket.
+ </p>
+ <p>
+ Behaves same as <code>reserveInventory( reservationDurationInMinutes, false );</code>.
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -461,6 +479,104 @@
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
 <span class="parameterDesc">a Status instance with - Status.OK if all items could be reserved, otherwise Status.ERROR meaning no items were reserved.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_order_Basket_reserveInventory_Number_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">reserveInventory</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">reserveInventory</span>(reservationDurationInMinutes
+								 : 
+								 
+								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>, removeIfNotAvailable
+								 : 
+								 
+								boolean)
+					 : 
+					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
+</div>
+<div class="description"><p>
+ Reserves inventory for all items in this basket for a specified amount of minutes. Any reservations created by
+ previous calls of this method will be reset to that amount of minutes.
+ </p>
+ <p>
+ The method can be used to reserve basket items before checkout to ensure that inventory is still available at the
+ time an order is created from the basket using <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a>. If all or some
+ basket items are not reserved before creating an order, <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a> will
+ validate item availability and will fail if any item is unavailable. Calling this method in the same request as
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a> is unnecessary and discouraged for performance reasons.
+ </p>
+ <p>
+ Note that the <i>maximum total quantity</i> of reservations which can be made at any time is ATS (Available To
+ Sell, see <a href="class_dw_catalog_ProductInventoryRecord.html#dw_catalog_ProductInventoryRecord_getATS_DetailAnchor">ProductInventoryRecord.getATS()</a> ), but the ATS itself is not reduced by making a
+ reservation. An example product has an ATS of 5 with 0 reservations. Now one basket reserves inventory for
+ quantity 3, at which point any other basket still sees an ATS of 5 but can reserve a maximum of 2 items. The ATS
+ is reduced when an order is created.
+ </p>
+ <p>
+ Reservations can only be made for products with an inventory record. The reservation of product bundles is
+ controlled by the <i>Use Bundle Inventory Only</i> setting on the inventory list. The setting allows inventory to
+ be reserved for just the bundle or for the bundle and its bundled products.
+ </p>
+ <p>
+ The following conditions must be met for the method to succeed:
+ <ul>
+ <li>an inventory list must be assigned to the current site</li>
+ <li>all products in the basket must exist, and must not be of type Master or ProductSet</li>
+ <li>each product line item must have a valid quantity</li>
+ <li>each product must have an inventory record, or the inventory list must define that products without inventory
+ record are available by default</li>
+ <li>the reservation must succeed for each item as described above or <code>removeIfNotAvailable</code> is set to
+ <code>true</code></li>
+ </ul>
+ </p>
+ <p>
+ The method implements its own transaction handling. Calling the method from inside a transaction is disallowed
+ and results in an exception being thrown.
+ </p>
+ <p>
+ <a href="class_dw_order_Basket.html#dw_order_Basket_getInventoryReservationExpiry_DetailAnchor">getInventoryReservationExpiry()</a> can be used to determine when the expiration will expire.
+ </p>
+ <p>
+ If the reservation fails with an ERROR status, existing valid reservations for the basket will remain unchanged
+ but no new reservations will be made. This might lead to a partially reserved basket.
+ </p>
+ <p>
+ If the reservation succeeds with an OK status and <code>removeIfNotAvailable</code> is <code>true</code>, basket
+ line items quantities might have been changed or line items might have been removed. The returned
+ <a href="class_dw_system_Status.html">Status</a> object will contain information about the changes. Possible values for
+ <a href="class_dw_system_StatusItem.html#dw_system_StatusItem_getCode_DetailAnchor">StatusItem.getCode()</a> are:
+ <ul>
+ <li>BUNDLE_REMOVED - a bundle item was removed completely</li>
+ <li>ITEM_REMOVED - a product line item was removed completely</li>
+ <li>ITEM_QUANTITY_REDUCED - the quantity of a line item was reduced</li>
+ </ul>
+ <a href="class_dw_system_StatusItem.html#dw_system_StatusItem_getDetails_DetailAnchor">StatusItem.getDetails()</a> will contain for each item the <b>sku</b> and <b>uuid</b> of the item
+ which was changed/removed.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">reservationDurationInMinutes</span>
+						 - 
+						<span class="parameterDesc">reservation duration in minutes, specifying how long the reservation will last. The maximum value for the reservation duration is 240 minutes.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">removeIfNotAvailable</span>
+						 - 
+						<span class="parameterDesc">if <code>true</code> is specified it will not fail if not the full quantity of the items can be reserved. Item quantity will be reduced to the quantity that could be reserved. Item will be removed if not at least quantity 1 for the item could be reserved. Different to that if a bundle line item cannot be reserved completely it will be removed including dependent line item (bundled items).</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">a Status instance with - Status.OK meaning reservation process was successful. In case of <code>removeIfNotAvailable</code> is true, status might contain status items (<a href="class_dw_system_Status.html#dw_system_Status_getItems_DetailAnchor">Status.getItems()</a>) for each item that needed to be changed or removed. In the worst case this could result in an empty basket and no items reserved. A Status instance with - Status.ERROR will be returned if <code>removeIfNotAvailable</code> is false and not all items could be reserved fully or any unexpected error occurred.</span>
 </div>
 </div>
 <hr>
@@ -502,12 +618,14 @@
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
 					 : 
 					void</div>
-<div class="description">Set the channel type in which sales channel this order has been created.
- This can be used to distinguish order placed through e.g. Storefront, Call Center or Marketplace.<br/>
- Possible values are <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_STOREFRONT_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_STOREFRONT</a>, <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_CALLCENTER_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_CALLCENTER</a>,
- <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_MARKETPLACE_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_MARKETPLACE</a>, <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_DSS_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_DSS</a>, <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_STORE_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_STORE</a>,
+<div class="description">Set the channel type in which sales channel this order has been created. This can be used to distinguish order
+ placed through e.g. Storefront, Call Center or Marketplace.<br/>
+ Possible values are <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_STOREFRONT_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_STOREFRONT</a>,
+ <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_CALLCENTER_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_CALLCENTER</a>, <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_MARKETPLACE_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_MARKETPLACE</a>,
+ <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_DSS_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_DSS</a>, <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_STORE_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_STORE</a>,
  <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_PINTEREST_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_PINTEREST</a>, <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_TWITTER_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_TWITTER</a>,
- <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_FACEBOOKADS_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_FACEBOOKADS</a>, or <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_SUBSCRIPTIONS_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_SUBSCRIPTIONS</a>.
+ <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_FACEBOOKADS_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_FACEBOOKADS</a>, <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_SUBSCRIPTIONS_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_SUBSCRIPTIONS</a>,
+ or <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_CHANNEL_TYPE_ONLINERESERVATION_DetailAnchor">LineItemCtnr.CHANNEL_TYPE_ONLINERESERVATION</a>.
  <p/></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -563,7 +681,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

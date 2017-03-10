@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.4.4
+
+- update schemas and docs to 17.3
+
 ## 1.4.3
 
 - debugger supports unicode code files

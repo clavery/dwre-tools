@@ -665,7 +665,7 @@
     <xsd:complexType name="complexType.BundledProductLineItem">
         <xsd:sequence>
             <xsd:element name="product-id" type="simpleType.Generic.NonEmptyString.100"></xsd:element>
-            <xsd:element name="product-name" type="simpleType.Generic.String.256"></xsd:element>
+            <xsd:element name="product-name" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="quantity" type="complexType.Quantity"></xsd:element>
             <xsd:element name="bundled-product-lineitems" type="complexType.BundledProductLineItems" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1"></xsd:element>
@@ -851,11 +851,18 @@
             <xsd:enumeration value="Twitter" />
             <xsd:enumeration value="FacebookAds" />
             <xsd:enumeration value="Subscriptions" />
+            <xsd:enumeration value="OnlineReservation" />
         </xsd:restriction>
     </xsd:simpleType>
 
     <xsd:simpleType name="simpleType.ImportMode">
-        <xsd:restriction base="xsd:string">
+		        <xsd:restriction base="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>Import mode delete can only be used on
+					non-production systems. One possible use case is to enable automated
+					testing by deleting the orders before or after each test run.
+				</xsd:documentation>
+			</xsd:annotation>
             <xsd:enumeration value="delete" />
         </xsd:restriction>
     </xsd:simpleType>

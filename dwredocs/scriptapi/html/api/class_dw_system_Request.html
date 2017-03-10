@@ -76,7 +76,7 @@
 						
 					    
 					    <a href="class_dw_util_Geolocation.html"><span class="">Geolocation</span></a>
-							&nbsp;(Read Only)<div class="description">The physical location for the current request, if available. The
+<div class="description">The physical location for the current request, if available. The
  location is calculated based on the IP address of the request. Note, if
  the geolocation tracking feature is not enabled, this method always
  returns null.</div>
@@ -490,6 +490,15 @@
 						: 
 					boolean</span>
 <div class="description">Returns true if the request represents a request for a remote include, false if it is a top-level request.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Request_setGeolocation_Geolocation_DetailAnchor"><span class="">setGeolocation</span></a></span>(geoLocation
+								 : 	
+								 
+								<a href="class_dw_util_Geolocation.html"><span class="">Geolocation</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the physical location for the current request and remembers the new value for the duration of the user session.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_system_Request_setLocale_String_DetailAnchor"><span class="">setLocale</span></a></span>(localeID
@@ -1071,6 +1080,31 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_system_Request_setGeolocation_Geolocation_DetailAnchor"></a>
+<div class="detailName 
+						">setGeolocation</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setGeolocation</span>(geoLocation
+								 : 
+								 
+								<a href="class_dw_util_Geolocation.html"><span class="">Geolocation</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the physical location for the current request and remembers the new
+ value for the duration of the user session. So any subsequent calls to
+ <a href="class_dw_system_Request.html#dw_system_Request_getGeolocation_DetailAnchor">getGeolocation()</a> will return this value</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">geoLocation</span>
+						 - 
+						<span class="parameterDesc">the geolocation object to use</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_system_Request_setLocale_String_DetailAnchor"></a>
 <div class="detailName 
 						">setLocale</div>
@@ -1104,7 +1138,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.2<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>
