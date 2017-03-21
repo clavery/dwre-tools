@@ -119,7 +119,7 @@ The migrate command will perform "site imports" against the specified instance i
 
 #### Installation
 
-This command requires that the cartridge `bm_dwremigrate` be installed and activated into the business manager site and that the BM user to be used is given the appropriate BM module permissions ("DWREMigrate"). 
+This command requires that the cartridge `bm_dwremigrate` be installed and activated into the business manager site and that the BM user to be used is given the appropriate BM module permissions ("DWREMigrate"). **NOTE: As of version 1.5.0 the DWRE tools can perform this activation and access role step for you. The cartridge must simply be uploaded to the current code version (i.e. through eclipse or `dwre sync`**
 
 - Copy the `bm_dwremigrate` directory into your project's cartridges directory. In Eclipse, import the cartridge into your project and link it to the Demandware server. Perform a full upload.
 - In the Business Manager, go to *Administration -> Manage Sites*. Under the *Business Manager Site* section, click on the *Manage the Business Manager site* link. Add `bm_dwremigrate` to the end of the cartidge path.
