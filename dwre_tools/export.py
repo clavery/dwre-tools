@@ -11,8 +11,11 @@ import zipfile, io
 import os
 import shutil
 
-from .bmtools import login_business_manager, get_list_data_units, export_data_units, wait_for_export
+from .bmtools import login_business_manager, get_list_data_units, get_export_zip
 
+
+def export_units(env):
+    pass
 
 def export_command(env, directory):
     bmsession = requests.session()
@@ -62,27 +65,17 @@ def export_command(env, directory):
         [print("\t", u) for u in export_units]
 
         filename = "ToolsExport_" + str(uuid.uuid4()).replace("-", "")[:10]
-        export_data_units(env, bmsession, export_units, filename)
-        wait_for_export(env, bmsession, filename)
 
         webdavsession = requests.session()
         webdavsession.verify = env["verify"]
         webdavsession.auth=(env["username"], env["password"],)
         webdavsession.cert = env["cert"]
 
-        dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip"
-                    .format(env["server"], filename))
-        resp = webdavsession.get(dest_url, stream=True)
-        resp.raise_for_status()
+        export_zip = get_export_zip(env, bmsession, webdavsession, export_units, filename)
 
         tempdir = tempfile.mkdtemp()
-
-        export_zip = zipfile.ZipFile(io.BytesIO(resp.content))
         export_zip.extractall(tempdir)
 
         shutil.move(os.path.join(tempdir, filename), directory)
-
-        resp = webdavsession.delete(dest_url)
-        resp.raise_for_status()
 
         print("Saved export to", directory)

@@ -5,6 +5,10 @@ import pyquery
 import time
 import yaml
 import re
+import zipfile, io
+import uuid
+
+from .exc import NotInstalledException
 
 CSRF_FINDER = re.compile(r"'csrf_token'\s*,(?:\s|\n)*'(.*?)'", re.MULTILINE)
 
@@ -13,7 +17,7 @@ def get_current_versions(env, session):
     response = session.get(versions_url)
 
     if "application/json" not in response.headers['content-type']:
-        raise RuntimeError("Server response is not json; this requires manual intervention")
+        raise NotInstalledException("Server response is not json; DWRE Tools is likely not installed")
     else:
         tool_version = response.json()["toolVersion"]
         migration_version = response.json()["migrationVersion"]
@@ -115,3 +119,16 @@ def wait_for_export(env, session, filename):
         else:
             time.sleep(2)
 
+def get_export_zip(env, bmsession, webdavsession, export_units, filename):
+    export_data_units(env, bmsession, export_units, filename)
+    wait_for_export(env, bmsession, filename)
+
+    dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip"
+                .format(env["server"], filename))
+    resp = webdavsession.get(dest_url, stream=True)
+    resp.raise_for_status()
+
+    zip_file = zipfile.ZipFile(io.BytesIO(resp.content))
+    resp = webdavsession.delete(dest_url)
+    resp.raise_for_status()
+    return zip_file

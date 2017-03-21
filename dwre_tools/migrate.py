@@ -26,9 +26,71 @@ from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKI
 from .bmtools import get_current_versions, login_business_manager, wait_for_import
 from .utils import directory_to_zip
 from .index import reindex
+from .exc import NotInstalledException
+from .export import get_export_zip
 
 
 X = "{http://www.pixelmedia.com/xml/dwremigrate}"
+
+NSMAP_PREFS = {"P" : 'http://www.demandware.com/xml/impex/preferences/2007-03-31'}
+NSMAP_ACCESS_ROLE = {"A" : 'http://www.demandware.com/xml/impex/accessrole/2007-09-05'}
+
+def get_install_zip(env, bmsession, webdavsession):
+    """Attempts to add the BM extension and access roles to prep for boostrap"""
+    filename = "ToolsExport_" + str(uuid.uuid4()).replace("-", "")[:10]
+    zip_file = get_export_zip(env, bmsession, webdavsession, 
+                              export_units=["AccessRoleExport", "GlobalPreferencesExport"],
+                              filename=filename)
+
+    dest_file = "DWREMigrateInstall_" + str(uuid.uuid4()).replace("-", "")[:10]
+
+    install_package_file = io.BytesIO()
+    install_package_zip = zipfile.ZipFile(install_package_file, "w")
+
+    preferences = ET.fromstring(zip_file.read("%s/preferences.xml" % filename))
+    bm_cartridge_path = preferences.xpath(".//P:standard-preferences/P:all-instances/P:preference[@preference-id='CustomCartridges']", namespaces=NSMAP_PREFS)
+    if not bm_cartridge_path:
+        raise Exception("Cannot automatically install DWRE tools; must be done manually")
+    
+    if not bm_cartridge_path[0].text or "bm_dwremigrate" not in bm_cartridge_path[0].text:
+        print("Updating BM cartridge path preferences...")
+        # create preferences.xml with updated cartridge path
+        EP = ElementMaker(namespace="http://www.demandware.com/xml/impex/preferences/2007-03-31",
+                          nsmap={None : "http://www.demandware.com/xml/impex/preferences/2007-03-31"})
+        old_bm_path = bm_cartridge_path[0].text if bm_cartridge_path[0].text else ""
+        new_bm_path = 'bm_dwremigrate:' + old_bm_path
+        new_preferences = EP('preferences',
+                             EP('standard-preferences',
+                                EP('all-instances',
+                                   EP('preference', new_bm_path, **{"preference-id" : "CustomCartridges"})
+                                )))
+        new_prefs_xml = ET.tostring(new_preferences, pretty_print=True, encoding="utf-8", xml_declaration=True)
+        install_package_zip.writestr("{}/preferences.xml".format(dest_file), new_prefs_xml)
+
+    access_roles = ET.fromstring(zip_file.read("%s/access-roles.xml" % filename))
+    admin_access_role = access_roles.xpath(".//A:access-role[@role-id='Administrator']", namespaces=NSMAP_ACCESS_ROLE)
+
+    if not admin_access_role:
+        raise Exception("Cannot find 'Administrator' access role; DWRE tools must be installed manually")
+    admin_access_role = admin_access_role[0]
+    migration_access = admin_access_role.xpath(".//A:access-controls/A:access-control[@resource-path='BUSINESSMGR/CustomMenu/Sites/-/dwremigrate_menu']", namespaces=NSMAP_ACCESS_ROLE)
+    
+    if not migration_access or migration_access[0].attrib['permission'] != 'ACCESS':
+        print("Adding bm_dwremigrate access role...")
+        # need to add access to BM cart
+        if migration_access:
+            migration_access[0].attrib['permission'] = 'ACCESS'
+        else:
+            EA = ElementMaker(namespace="http://www.demandware.com/xml/impex/accessrole/2007-09-05",
+                              nsmap={None : "http://www.demandware.com/xml/impex/accessrole/2007-09-05"})
+
+            access_controls = admin_access_role.xpath(".//A:access-controls", namespaces=NSMAP_ACCESS_ROLE)[0]
+            access_controls.insert(0, EA('access-control', **{"resource-path" : "BUSINESSMGR/CustomMenu/Sites/-/dwremigrate_menu", "permission" : "ACCESS"}))
+        new_access_xml = ET.tostring(access_roles, pretty_print=True, encoding="utf-8", xml_declaration=True)
+        install_package_zip.writestr("{}/access-roles.xml".format(dest_file), new_access_xml)
+
+    install_package_zip.close()
+    return (install_package_file, dest_file)
 
 
 def get_bootstrap_zip():
@@ -198,16 +260,27 @@ def apply_migrations(env, migrations_dir, test=False):
 
     login_business_manager(env, bmsession)
 
-    (current_tool_version, current_migration, current_migration_path) = (
-        get_current_versions(env, bmsession))
+    not_installed = False
+    try:
+        (current_tool_version, current_migration, current_migration_path) = (
+            get_current_versions(env, bmsession))
+    except NotInstalledException, e:
+        current_tool_version = None
+        not_installed = True
 
     (path, migrations) = get_migrations(migrations_context)
 
     migration_path = []
     skip_migrations = False
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
-        migration_path.insert(0, None)
-        migrations[None] = {"id" : "DWRE_MIGRATE_BOOTSTRAP", "description" : "DWRE Migrate tools bootstrap/upgrade", "reindex" : False}
+        if not_installed:
+            migration_path.append("INSTALL")
+            migrations["INSTALL"] = {"id" : "DWRE_MIGRATE_INSTALL", "description" : "Install DWRE Migrate BM Extension (requires cartridge to exist; 'dwre sync' first)", "reindex" : False}
+            skip_migrations = True
+            current_migration_path = []
+
+        migration_path.append("BOOTSTRAP")
+        migrations["BOOTSTRAP"] = {"id" : "DWRE_MIGRATE_BOOTSTRAP", "description" : "DWRE Migrate tools bootstrap/upgrade", "reindex" : False}
         if SKIP_METADATA_CHECK_ON_UPGRADE:
             skip_migrations = True
             current_migration_path = []
@@ -292,9 +365,11 @@ def apply_migrations(env, migrations_dir, test=False):
         start_time = time.time()
 
         zip_filename = "dwremigrate_%s" % migration["id"]
-        if m is None:
+        if m is "BOOTSTRAP":
             zip_file = get_bootstrap_zip()
             zip_filename = "DWREMigrateBootstrap_v{}".format(TOOL_VERSION)
+        elif m is "INSTALL":
+            (zip_file, zip_filename) = get_install_zip(env, bmsession, webdavsession)
         else:
             zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
 
@@ -314,7 +389,7 @@ def apply_migrations(env, migrations_dir, test=False):
         # update migration version
         current_migration_path.append(migration["id"])
         new_version_path = ",".join(current_migration_path)
-        if m is not None:
+        if m not in ['INSTALL', 'BOOTSTRAP']:
             response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
                                       data={"NewVersion" : migration["id"], "NewVersionPath" : new_version_path})
 
