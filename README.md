@@ -27,6 +27,12 @@ pip install --upgrade git+https://username@bitbucket.org/pixelmedia/dwre-dwre-to
 
 **REPLACE `username` in the second command above with your bitbucket username**
 
+### Development
+
+```sh
+python setup.py develop
+```
+
 ### Windows Notes
 
 Recommend using the Anaconda distribution of python as it comes pre-installed with many useful packages with native binaries: [http://continuum.io/downloads](http://continuum.io/downloads).
@@ -232,6 +238,6 @@ migrate -n apply
 
 # License
 
-This software is Copyright 2015-2016 PixelMEDIA, Inc. All Rights Reserved.
+This software is Copyright 2015-2017 PixelMEDIA, Inc. All Rights Reserved.
 
 Use of this software is only allowed under the expressed written permission of PixelMEDIA, Inc. Any other use is strictly prohibited.
