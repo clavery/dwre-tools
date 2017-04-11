@@ -22,7 +22,7 @@ from collections import defaultdict
 from colorama import Fore, Back, Style
 
 from .validations import validate_xml, validate_file, validate_directory
-from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE
+from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST
 from .bmtools import get_current_versions, login_business_manager, wait_for_import
 from .utils import directory_to_zip
 from .index import reindex
@@ -101,6 +101,7 @@ def get_bootstrap_zip():
 
     bootstrap_package_zip.writestr("{}/version.txt".format(dest_file), VERSION)
     bootstrap_package_zip.writestr("{}/preferences.xml".format(dest_file), PREFERENCES)
+    bootstrap_package_zip.writestr("{}/csrf-whitelists.xml".format(dest_file), WHITELIST)
     bootstrap_package_zip.writestr("{}/meta/system-objecttype-extensions.xml".format(dest_file), BOOTSTRAP_META)
     bootstrap_package_zip.close()
 

@@ -40,6 +40,9 @@ def login_business_manager(env, session):
     if csrf_match:
         csrf_token = csrf_match.group(1)
         session.params['csrf_token'] = csrf_token
+        session.headers['origin'] = "https://%s" % env["server"]
+    else:
+        raise RuntimeError("Can't find CSRF")
     if "Invalid login or password" in response.text:
         raise RuntimeError("Invalid login or password")
 

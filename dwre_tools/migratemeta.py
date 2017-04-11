@@ -1,5 +1,5 @@
 
-TOOL_VERSION = "7"
+TOOL_VERSION = "8"
 SKIP_METADATA_CHECK_ON_UPGRADE = True
 
 BOOTSTRAP_META = """<?xml version="1.0" encoding="UTF-8"?>
@@ -61,6 +61,22 @@ PREFERENCES = """<?xml version="1.0" encoding="UTF-8"?>
     </custom-preferences>
 </preferences>
 """.format(TOOL_VERSION)
+
+WHITELIST = """<?xml version="1.0" encoding="UTF-8"?>
+<csrf-whitelists xmlns="http://www.demandware.com/xml/impex/csrfwhitelists/2017-02-09">
+    <pipelines>
+        <pipeline name="ViewSiteImpex" start-node="Dispatch"/>
+        <pipeline name="DWREMigrate" start-node="Versions"/>
+        <pipeline name="DWREMigrate" start-node="UpdateIndexes"/>
+        <pipeline name="DWREMigrate" start-node="UpdateVersion"/>
+        <pipeline name="ViewCodeDeployment" start-node="Activate"/>
+        <pipeline name="ViewSiteImpex" start-node="Status"/>
+    </pipelines>
+
+    <user-agents/>
+
+</csrf-whitelists>
+"""
 
 VERSION = """###########################################
 # Generated file, do not edit.

@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.5.1
+
+- Potential fix for 17.4 breaking changes to CSRF BM protection
+
 ## 1.5.0
 
 - DWRE migrate can now add the BM configuration for the BM extension cartridge itself; dwre migrate apply will run an "install" migration prior to bootstrap if the BM cartridge path is missing the extension or the access roles for administrator are not complete. This eliminates a major install step that usually trips up developers. The cartridge must still exist in the current code version (i.e. `dwre sync` first). A future version will also install the latest version of the cartridge if missing.
