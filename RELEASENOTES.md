@@ -1,6 +1,13 @@
 
 # Release Notes
 
+## 1.5.2
+
+- more fixes for 17.4 regressions
+    - export command
+- locking down dependencies for windows users due to jinja2 issue on latest flask
+- other fixes
+
 ## 1.5.1
 
 - Potential fix for 17.4 breaking changes to CSRF BM protection

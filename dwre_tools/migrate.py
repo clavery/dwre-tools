@@ -101,7 +101,7 @@ def get_bootstrap_zip():
 
     bootstrap_package_zip.writestr("{}/version.txt".format(dest_file), VERSION)
     bootstrap_package_zip.writestr("{}/preferences.xml".format(dest_file), PREFERENCES)
-    bootstrap_package_zip.writestr("{}/csrf-whitelists.xml".format(dest_file), WHITELIST)
+    #bootstrap_package_zip.writestr("{}/csrf-whitelists.xml".format(dest_file), WHITELIST)
     bootstrap_package_zip.writestr("{}/meta/system-objecttype-extensions.xml".format(dest_file), BOOTSTRAP_META)
     bootstrap_package_zip.close()
 

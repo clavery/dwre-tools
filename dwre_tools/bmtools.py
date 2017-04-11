@@ -78,14 +78,21 @@ def wait_for_import(env, session, filename):
         else:
             time.sleep(2)
 
-EXPORT_UNIT_JSON = re.compile(r"var exportUnitJSON = (.*?)/\*\*", re.MULTILINE|re.DOTALL)
+EXPORT_UNIT_JSON_OLD = re.compile(r"var exportUnitJSON = (.*?)/\*\*", re.MULTILINE|re.DOTALL)
+EXPORT_UNIT_JSON = re.compile(r"var exportUnitJSON1 = (?=\[)(?P<json>.*?)// too big", re.MULTILINE|re.DOTALL)
+EXPORT_UNIT_BREAK = re.compile(r"\][\w\n]*?var exportUnitJSON2 = \[", re.MULTILINE|re.DOTALL)
 def get_list_data_units(env, session):
     response = session.get("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Status".format(env["server"]))
     response.raise_for_status()
     match = EXPORT_UNIT_JSON.search(response.text)
     if not match:
-        raise Exception("Cannot load site impex page")
-    data_units = yaml.safe_load(match.group(1))
+        match = EXPORT_UNIT_JSON_OLD.search(response.text)
+        if not match:
+            raise Exception("Cannot load site impex page")
+        group = match.group(1)
+    else:
+        group = EXPORT_UNIT_BREAK.sub(",", match.group("json"))
+    data_units = yaml.safe_load(group)
     return data_units
 
 
