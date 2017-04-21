@@ -27,7 +27,12 @@
             <xsd:element name="folder" type="complexType.Folder" minOccurs="0" maxOccurs="1" />
             <xsd:element name="pipeline" type="complexType.Pipeline" minOccurs="0" maxOccurs="1" />
             <xsd:element name="product-image" type="complexType.ProductImage" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="video" type="complexType.Video" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="video" type="complexType.Video" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Deprecated. Please use element custom-sitemap (complexType.CustomSitemap).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="custom-sitemap" type="complexType.CustomSitemap" minOccurs="0" maxOccurs="1" />
  
             <xsd:element name="alternate-urls-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="default-locale-mapping" type="simpleType.Generic.LocaleID" minOccurs="0" maxOccurs="1" />
@@ -93,6 +98,16 @@
     </xsd:complexType>
 
     <xsd:complexType name="complexType.Video">
+        <xsd:sequence>
+            <xsd:element name="sitemap-included" type="xsd:boolean" default="false" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Deprecated. Please use complex type complexType.CustomSitemap.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="complexType.CustomSitemap">
         <xsd:sequence>
             <xsd:element name="sitemap-included" type="xsd:boolean" default="false" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>

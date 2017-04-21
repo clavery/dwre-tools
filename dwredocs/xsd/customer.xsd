@@ -135,6 +135,7 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="md5" />
             <xsd:enumeration value="scrypt" />
+            <xsd:enumeration value="s0001" />
         </xsd:restriction>
     </xsd:simpleType>
     
@@ -146,11 +147,12 @@
             Import: If the attribute 'encrypted' is set to false, the content of this tag will be encrypted  
             using the new scrypt algorithm. 'encryptionScheme' should be 'null' in this case.
             If the attribute 'encrypted' is set to true, it is assumed that the given password was encrypted
-            with the algorithm in 'encryptionScheme' (md5 or scrypt). The password will be imported 'as is'.
+            with the algorithm in 'encryptionScheme' (md5, scrypt, or the internal implementation s0001). 
+            The password will be imported 'as is'.
             
             Export: The attribute 'encrypted' will always be set to true. The attribute 'encryptionScheme'
-            will reflect the encryption scheme of the password in the database (md5 or scrypt). The encrypted
-            password will not be transformed during export.
+            will reflect the encryption scheme of the password in the database (md5, scrypt, or the internal implementation s0001). 
+            The encrypted password will not be transformed during export.
             </xsd:documentation>
         </xsd:annotation>    
         <xsd:simpleContent>

@@ -207,8 +207,8 @@
         <xsd:restriction base="xsd:string">
             <!-- Business Manager module -->
             <xsd:enumeration value="BM" />
-            <!-- Commerce Center module -->
-            <xsd:enumeration value="CC" />
+            <!-- Customer Service Center -->
+            <xsd:enumeration value="CSC" />
         </xsd:restriction>
     </xsd:simpleType>
     
@@ -216,8 +216,8 @@
         <xsd:restriction base="xsd:string">
             <!-- Business Manager module -->
             <xsd:enumeration value="BM" />
-            <!-- Commerce Center module -->
-            <xsd:enumeration value="CC" />
+            <!-- Customer Service Center -->
+            <xsd:enumeration value="CSC" />           
         </xsd:restriction>
     </xsd:simpleType>
     

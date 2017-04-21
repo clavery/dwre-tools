@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.5.3
+
+- updates schemas and docs to 17.4
+
 ## 1.5.2
 
 - more fixes for 17.4 regressions

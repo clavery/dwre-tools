@@ -327,15 +327,6 @@
 					boolean</span>
 <div class="description">Convenience method for <a href="class_dw_catalog_ProductAvailabilityModel.html#dw_catalog_ProductAvailabilityModel_isOrderable_Number_DetailAnchor">isOrderable(Number)</a>.</div>
 </div>
-<div class="summaryItem">
-<span class="dep"><span class="emphasis"><a href="#dw_catalog_ProductAvailabilityModel_updateStockLevel_Number_DetailAnchor"><span class="">updateStockLevel</span></a></span>(amount
-								 : 	
-								 
-								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
-						: 
-					boolean</span>
-<div class="description">Reduces the stock-level by the amount specified.</div>
-</div>
 </div>
 <div class="section">
 <div class="subHeader">
@@ -760,60 +751,10 @@
 </div>
 <hr>
 </div>
-<div class="detailItem">
-<a name="dw_catalog_ProductAvailabilityModel_updateStockLevel_Number_DetailAnchor"></a>
-<div class="detailName 
-						dep">updateStockLevel</div>
-<div class="detailSignature
-	    				dep">
-<span class="emphasis">updateStockLevel</span>(amount
-								 : 
-								 
-								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
-					 : 
-					boolean</div>
-<div class="description">Reduces the stock-level by the amount specified.
- The following conditions must be met for the update to succeed:
- <ul>
- <li>There must be an inventory list for the current site.</li>
- <li>There must be an inventory record for the product.</li>
- <li>There must be an allocation amount on the inventory record.</li>
- </ul>
-
- Product bundles are handled specially:  When the stock level for
- a product bundle is updated, the stock levels for the bundled products
- are updated accordingly.  If a product bundle has its own inventory
- record, then the stock level for this record is also updated.</div>
-<div class="parameters">
-<span class="parameterTitle">Deprecated:</span>
-<div class="parameterDetail"></div>
-<div class="parameterDetail"></div>
-<div class="parameterDetail">
-<span class="parameterDesc">Please update stock level via import.</span>
-</div>
-</div>
-<div class="parameters">
-<span class="parameterTitle">Parameters:</span>
-<div class="parameterDetail">
-<span class="parameterName">amount</span>
-						 - 
-						<span class="parameterDesc">the to use to update the stock level.</span>
-</div>
-</div>
-<div class="parameters">
-<span class="parameterTitle">Returns:</span>
-<div class="parameterDetail"></div>
-<div class="parameterDetail">
-<span class="parameterDesc">true if successful</span>
-</div>
-<div class="parameterDetail"></div>
-</div>
-<hr>
-</div>
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.3<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.4<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

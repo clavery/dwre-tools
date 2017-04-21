@@ -14,6 +14,7 @@
             <xsd:element name="pinterest" type="complexType.Pinterest" minOccurs="0" maxOccurs="1" />
             <xsd:element name="facebook" type="complexType.Facebook" minOccurs="0" maxOccurs="1" />
             <xsd:element name="apple-pay" type="complexType.ApplePay" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="android-pay" type="complexType.AndroidPay" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="site-id" type="simpleType.Generic.NonEmptyString.32" />
     </xsd:complexType>
@@ -96,6 +97,7 @@
             <xsd:element name="product-feed-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="country-code" type="simpleType.CountryCode" minOccurs="0" maxOccurs="1" />
             <xsd:element name="access-token" type="simpleType.Generic.String" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="pixel-code-injected-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="default-product-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="product-image-view-type" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="color-variation-attribute" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
@@ -146,30 +148,68 @@
 
     <xsd:complexType name="complexType.ApplePaySupportedNetworks">
         <xsd:sequence>
-            <xsd:element name="amex" type="complexType.ApplePaySupportedNetwork" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="china-union-pay" type="complexType.ApplePaySupportedNetwork" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="discover" type="complexType.ApplePaySupportedNetwork" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="interac" type="complexType.ApplePaySupportedNetwork" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="master-card" type="complexType.ApplePaySupportedNetwork" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="private-label" type="complexType.ApplePaySupportedNetwork" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="visa" type="complexType.ApplePaySupportedNetwork" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="amex" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="china-union-pay" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="discover" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="interac" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="master-card" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="private-label" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="visa" type="EmptyElement" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
 
     <xsd:complexType name="complexType.ApplePayRequiredAddressFields">
         <xsd:sequence>
-            <xsd:element name="email" type="complexType.ApplePayAddressField" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="name" type="complexType.ApplePayAddressField" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="phone" type="complexType.ApplePayAddressField" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="postal-address" type="complexType.ApplePayAddressField" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="email" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="name" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="phone" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="postal-address" type="EmptyElement" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
 
     <xsd:complexType name="complexType.ApplePayMerchantCapability" mixed="false"></xsd:complexType>
 
-    <xsd:complexType name="complexType.ApplePaySupportedNetwork" mixed="false"></xsd:complexType>
+    <xsd:complexType name="complexType.AndroidPay">
+        <xsd:sequence>
+            <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="merchant-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="public-key" type="simpleType.Generic.NonEmptyString" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="environment" type="simpleType.AndroidPayEnvironment" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="allowed-networks" type="complexType.AndroidPayAllowedNetworks" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="request-fields" type="complexType.AndroidPayRequestFields" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="https-redirect" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-api-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-api-version" type="simpleType.PspApiVersion" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-url" type="simpleType.Generic.String.2000" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-basic-auth-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-username" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-password" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-merchant-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-jws-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="psp-jws-key-alias" type="simpleType.Generic.String.250" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+        <xsd:attribute name="instance-type" type="simpleType.InstanceType" default="all-instances" use="optional" />
+    </xsd:complexType>
 
-    <xsd:complexType name="complexType.ApplePayAddressField" mixed="false"></xsd:complexType>
+    <xsd:complexType name="complexType.AndroidPayAllowedNetworks">
+        <xsd:sequence>
+            <xsd:element name="amex" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="discover" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="master-card" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="visa" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="complexType.AndroidPayRequestFields">
+        <xsd:sequence>
+            <xsd:element name="payer-email" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="payer-name" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="payer-phone" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="shipping" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="EmptyElement" mixed="false" />
 
     <!-- Simple Types -->
     <xsd:simpleType name="simpleType.Generic.String">
@@ -265,6 +305,12 @@
             <xsd:enumeration value="production" />
             <xsd:enumeration value="staging" />
             <xsd:enumeration value="development" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.AndroidPayEnvironment">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="test" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

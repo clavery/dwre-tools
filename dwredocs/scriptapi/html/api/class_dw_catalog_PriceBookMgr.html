@@ -57,6 +57,15 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>applicablePriceBooks
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
+<div class="description">A collection of price books that are set in the user session.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>sitePriceBooks
 						&nbsp;:&nbsp;
 						
@@ -88,6 +97,12 @@
 <div class="description">Returns all price books defined for the organization.</div>
 </div>
 <div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_catalog_PriceBookMgr_getApplicablePriceBooks_DetailAnchor"><span class="">getApplicablePriceBooks</span></a></span>()
+						: 
+					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a></span>
+<div class="description">Returns a collection of price books that are set in the user session.</div>
+</div>
+<div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_catalog_PriceBookMgr_getPriceBook_String_DetailAnchor"><span class="">getPriceBook</span></a></span>(priceBookID
 								 : 	
 								 
@@ -101,6 +116,15 @@
 						: 
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a></span>
 <div class="description">Returns all price books assigned to the current site.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_catalog_PriceBookMgr_setApplicablePriceBooks_PriceBook_DetailAnchor"><span class="">setApplicablePriceBooks</span></a></span>(priceBooks
+								 : 	
+								 
+								<a href="class_dw_catalog_PriceBook.html"><span class="">PriceBook</span></a>...)
+						: 
+					void</span>
+<div class="description">Sets one or more price books to be considered by the product price lookup.</div>
 </div>
 </div>
 <div class="section">
@@ -131,6 +155,24 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">All price books of the organization.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_PriceBookMgr_getApplicablePriceBooks_DetailAnchor"></a>
+<div class="detailName 
+						">getApplicablePriceBooks</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getApplicablePriceBooks</span>()
+					 : 
+					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
+</div>
+<div class="description">Returns a collection of price books that are set in the user session.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Collection of applicable price books set in the session.</span>
 </div>
 </div>
 <hr>
@@ -187,10 +229,36 @@
 </div>
 <hr>
 </div>
+<div class="detailItem">
+<a name="dw_catalog_PriceBookMgr_setApplicablePriceBooks_PriceBook_DetailAnchor"></a>
+<div class="detailName 
+						">setApplicablePriceBooks</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">setApplicablePriceBooks</span>(priceBooks
+								 : 
+								 
+								<a href="class_dw_catalog_PriceBook.html"><span class="">PriceBook</span></a>...)
+					 : 
+					void</div>
+<div class="description">Sets one or more price books to be considered by the product price lookup. The information is
+ stored in the user session. If no price book is set in the user session, all active and valid price books assigned to
+ the site are used for the price lookup. If price books are set, only those price books are considered by the price
+ lookup. Note that the system does not assure that a price book set by this API is assigned to the current
+ site.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">priceBooks</span>
+						 - 
+						<span class="parameterDesc">The price books that are set in the session as applicable price books.</span>
+</div>
+</div>
+<hr>
+</div>
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.3<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.4<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

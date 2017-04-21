@@ -370,7 +370,7 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_TopLevel_Module.html"><span class="">Module</span></a></span>
-<div class="description">The require() supports loading modules in JavaScript.</div>
+<div class="description">The require() function supports loading of modules in JavaScript.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#TopLevel_global_trace_String_Object_DetailAnchor"><span class="">trace</span></a></span>(msg
@@ -921,16 +921,17 @@
 					 : 
 					<a href="class_TopLevel_Module.html"><span class="">Module</span></a>
 </div>
-<div class="description">The require() supports loading modules in JavaScript. The function works similar to the require() function
- in commonjs. The general module loading works the same way, but the exact path lookup is slightly different
- and better fits into Demandware concepts. Here the details for the lookup:
+<div class="description">The require() function supports loading of modules in JavaScript. The function works similar to the require() function
+ in CommonJS. The general module loading works the same way, but the exact path lookup is slightly different
+ and better fits into Demandware concepts. Here are the details for the lookup:
  <ul>
  <li>If the module name starts with "./" or "../" then load it relative to the current module. The module can be a file or a directory. A file
  extension is acknowledged, but not required. If it's a directory a 'package.json' or a 'main' file is expected.
- If the 'package.json' does not contains a main entry, then default to main file in the directory.
+ If the 'package.json' does not contain a main entry, then default to main file in the directory.
  Access to parent files can't go beyond the cartridges directory. Access to other cartridges is explicitly allowed.</li>
  <li>If the module name starts with "~/" it's a path relative to the current cartridge.</li>
- <li>A module with the name "dw" or which starts with "dw/" references Demandware builtin functions and classes.
+ <li>If the module name starts with "&#42;/" try to find the module in all cartridges that are assigned to the current site.</li>
+ <li>A module with the name "dw" or which starts with "dw/" references Demandware built-in functions and classes.
  For example <code>var u = require( 'dw/util' );</code> loads the classes in the util package, which can be then used like
  <code>var h = new u.HashMap();</code></li>
  <li>A module, which doesn't start with "./" or "../" is resolved as top level module.
@@ -1029,7 +1030,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.3<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.4<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

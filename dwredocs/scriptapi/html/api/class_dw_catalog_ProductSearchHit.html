@@ -60,6 +60,48 @@
 <div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>allPromotionIDs
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_List.html"><span class="">List</span></a>
+							&nbsp;(Read Only)<div class="description">Return the IDs of all searchable promotions for which at least one of the represented products of this search hit
+ relates to the promotion, either as qualifying, discount, or bonus product. This may be used as a better
+ performing alternative to <a href="class_dw_campaign_PromotionPlan.html#dw_campaign_PromotionPlan_getProductPromotions_Product_DetailAnchor">PromotionPlan.getProductPromotions(Product)</a> in some special cases.
+ However be warned: this method has no additional checks and returns currently all id's which are known at
+ indexing time. Custom code should generally filter and sort the promotions returned by this method according to
+ <a href="class_dw_campaign_PromotionMgr.html#dw_campaign_PromotionMgr_getActiveCustomerPromotions_DetailAnchor">PromotionMgr.getActiveCustomerPromotions()</a> before messaging the promotions on a product tile.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>bonusPromotionIDs
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_List.html"><span class="">List</span></a>
+							&nbsp;(Read Only)<div class="description">Return the IDs of all searchable promotions for which at least one of the represented products of this search hit
+ is a bonus product. This may be used as a better performing alternative to
+ <a href="class_dw_campaign_PromotionPlan.html#dw_campaign_PromotionPlan_getProductPromotions_Product_DetailAnchor">PromotionPlan.getProductPromotions(Product)</a> in some special cases. However be warned: this
+ method has no additional checks and returns currently all id's which are known at indexing time. Custom code
+ should generally filter and sort the promotions returned by this method according to
+ <a href="class_dw_campaign_PromotionMgr.html#dw_campaign_PromotionMgr_getActiveCustomerPromotions_DetailAnchor">PromotionMgr.getActiveCustomerPromotions()</a> before messaging the promotions on a product tile.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>discountedPromotionIDs
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_List.html"><span class="">List</span></a>
+							&nbsp;(Read Only)<div class="description">Return the IDs of all searchable promotions for which at least one of the represented products of this search hit
+ satisfy the discounted product rule. This may be used as a better performing alternative to
+ <a href="class_dw_campaign_PromotionPlan.html#dw_campaign_PromotionPlan_getProductPromotionsForDiscountedProduct_Product_DetailAnchor">PromotionPlan.getProductPromotionsForDiscountedProduct(Product)</a> in some special cases.
+ However be warned: this method has no additional checks and returns currently all id's which are known at
+ indexing time. Custom code should generally filter and sort the promotions returned by this method according to
+ <a href="class_dw_campaign_PromotionMgr.html#dw_campaign_PromotionMgr_getActiveCustomerPromotions_DetailAnchor">PromotionMgr.getActiveCustomerPromotions()</a> before messaging the promotions on a product tile.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>firstRepresentedProduct
 						&nbsp;:&nbsp;
 						
@@ -170,6 +212,20 @@
  by the search represents a collection of hit bundled-products. In this
  case call <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProductIDs_DetailAnchor">getRepresentedProductIDs()</a> to get a list of the
  represented product IDs.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>qualifyingPromotionIDs
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_List.html"><span class="">List</span></a>
+							&nbsp;(Read Only)<div class="description">Return the IDs of all searchable promotions for which at least one of the represented products of this search hit
+ satisfies the qualifying product rule. This may be used as a better performing alternative to
+ <a href="class_dw_campaign_PromotionPlan.html#dw_campaign_PromotionPlan_getProductPromotionsForQualifyingProduct_Product_DetailAnchor">PromotionPlan.getProductPromotionsForQualifyingProduct(Product)</a> in some special cases.
+ However be warned: this method has no additional checks and returns currently all id's which are known at
+ indexing time. Custom code should generally filter and sort the promotions returned by this method according to
+ <a href="class_dw_campaign_PromotionMgr.html#dw_campaign_PromotionMgr_getActiveCustomerPromotions_DetailAnchor">PromotionMgr.getActiveCustomerPromotions()</a> before messaging the promotions on a product tile.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -766,7 +822,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.3<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.4<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

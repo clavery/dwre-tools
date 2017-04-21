@@ -521,6 +521,7 @@
                 <xsd:element name="bml" type="complexType.BillMeLater" />
                 <xsd:element name="gift-certificate" type="complexType.GiftCertificate" />
                 <xsd:element name="dw-apple-pay" type="complexType.DWApplePay" />
+                <xsd:element name="dw-android-pay" type="complexType.DWAndroidPay" />
                 <xsd:element name="custom-method" type="complexType.CustomPaymentMethod" />
             </xsd:choice>
 
@@ -628,6 +629,16 @@
     </xsd:complexType>
 
     <xsd:complexType name="complexType.DWApplePay">
+        <xsd:sequence>
+            <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>These are the custom attributes of the OrderPaymentInstrument system object.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="complexType.DWAndroidPay">
         <xsd:sequence>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
@@ -852,6 +863,7 @@
             <xsd:enumeration value="FacebookAds" />
             <xsd:enumeration value="Subscriptions" />
             <xsd:enumeration value="OnlineReservation" />
+            <xsd:enumeration value="CustomerServiceCenter" />
         </xsd:restriction>
     </xsd:simpleType>
 
