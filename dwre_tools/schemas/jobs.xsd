@@ -23,7 +23,7 @@
         <xsd:sequence>
             <xsd:element name="description" type="simpleType.Generic.String.4000" minOccurs="0" maxOccurs="1" />
             <xsd:element name="parameters" type="complexType.JobParameters" minOccurs="0" maxOccurs="1" />
-            <xsd:choice minOccurs="1" maxOccurs="unbounded">
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
                 <xsd:element name="flow" type="complexType.StepFlow" />
                 <xsd:element name="split" type="complexType.SplitFlow" />
             </xsd:choice>
@@ -56,7 +56,7 @@
     <xsd:complexType name="complexType.StepFlow">
         <xsd:sequence>
             <xsd:element name="context" type="complexType.SiteContext" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="step" type="complexType.Step" minOccurs="1" maxOccurs="unbounded" />
+            <xsd:element name="step" type="complexType.Step" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
 
@@ -108,7 +108,7 @@
     
     <xsd:complexType name="complexType.SplitFlow">
         <xsd:sequence>
-            <xsd:element name="flow" type="complexType.SplitStepFlow" minOccurs="1" maxOccurs="unbounded" />
+            <xsd:element name="flow" type="complexType.SplitStepFlow" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="flow-template" type="complexType.FlowTemplate" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="sequential" type="xsd:boolean" use="optional" default="false" />
@@ -119,7 +119,7 @@
             <xsd:element name="context" type="complexType.SiteContext" minOccurs="0" maxOccurs="1" />
             <xsd:choice>
                 <xsd:sequence>
-                    <xsd:element name="step" type="complexType.Step" minOccurs="1" maxOccurs="unbounded" />
+                    <xsd:element name="step" type="complexType.Step" minOccurs="0" maxOccurs="unbounded" />
                 </xsd:sequence>
                 <xsd:sequence>
                     <xsd:element name="template-ref" type="complexType.FlowTemplateRef" minOccurs="1" maxOccurs="1" />
@@ -130,7 +130,7 @@
 
     <xsd:complexType name="complexType.FlowTemplate">
         <xsd:sequence>
-            <xsd:element name="step" type="complexType.Step" minOccurs="1" maxOccurs="unbounded" />
+            <xsd:element name="step" type="complexType.Step" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="template-id" type="simpleType.Generic.NonEmptyString.100" use="required" />
     </xsd:complexType>

@@ -75,11 +75,11 @@
 			Constants
 		</div>
 <div class="summaryItem">
-<span><a name="dw_extensions_paymentrequest_PaymentRequestHooks_extensionPointCancel_DetailAnchor"></a>extensionPointCancel
+<span><a name="dw_extensions_paymentrequest_PaymentRequestHooks_extensionPointAbort_DetailAnchor"></a>extensionPointAbort
 						&nbsp;:&nbsp;
 						
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-<div class="description">The extension point name dw.extensions.paymentrequest.cancel.</div>
+<div class="description">The extension point name dw.extensions.paymentrequest.abort.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -136,6 +136,15 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_extensions_paymentrequest_PaymentRequestHooks_abort_Basket_DetailAnchor"><span class="">abort</span></a></span>(basket
+								 : 	
+								 
+								<a href="class_dw_order_Basket.html"><span class="">Basket</span></a>)
+						: 
+					<a href="class_dw_extensions_paymentrequest_PaymentRequestHookResult.html"><span class="">PaymentRequestHookResult</span></a></span>
+<div class="description"><p> Called after the Payment Request user interface was canceled.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_extensions_paymentrequest_PaymentRequestHooks_authorizeOrderPayment_Order_Object_DetailAnchor"><span class="">authorizeOrderPayment</span></a></span>(order
 								 : 	
 								 
@@ -146,15 +155,6 @@
 						: 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
 <div class="description"><p> Called after the shopper accepts the Payment Request payment for the given order.</div>
-</div>
-<div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_extensions_paymentrequest_PaymentRequestHooks_cancel_Basket_DetailAnchor"><span class="">cancel</span></a></span>(basket
-								 : 	
-								 
-								<a href="class_dw_order_Basket.html"><span class="">Basket</span></a>)
-						: 
-					<a href="class_dw_extensions_paymentrequest_PaymentRequestHookResult.html"><span class="">PaymentRequestHookResult</span></a></span>
-<div class="description"><p> Called after the Payment Request user interface was canceled.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_extensions_paymentrequest_PaymentRequestHooks_getPaymentRequest_Basket_Object_DetailAnchor"><span class="">getPaymentRequest</span></a></span>(basket
@@ -210,6 +210,48 @@
 			Method Detail
 		</div>
 <div class="detailItem">
+<a name="dw_extensions_paymentrequest_PaymentRequestHooks_abort_Basket_DetailAnchor"></a>
+<div class="detailName 
+						">abort</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">abort</span>(basket
+								 : 
+								 
+								<a href="class_dw_order_Basket.html"><span class="">Basket</span></a>)
+					 : 
+					<a href="class_dw_extensions_paymentrequest_PaymentRequestHookResult.html"><span class="">PaymentRequestHookResult</span></a>
+</div>
+<div class="description"><p>
+ Called after the Payment Request user interface was canceled. The given basket is the one that was passed to other
+ hooks earlier in the Payment Request checkout process.
+ </p>
+ <p>
+ It is not guaranteed that this hook will be executed for all Payment Request user interfaces canceled by shoppers or
+ otherwise ended without a successful order. Calls to this hook are provided on a best-effort basis.
+ </p>
+ <p>
+ If the returned result includes a redirect URL, the shopper browser will be navigated to that URL if possible. It
+ is not guaranteed that the response with the hook result will be handled in the shopper browser in all cases.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">basket</span>
+						 - 
+						<span class="parameterDesc">the basket that was being checked out using Payment Request</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">a non-null result ends the hook execution</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_extensions_paymentrequest_PaymentRequestHooks_authorizeOrderPayment_Order_Object_DetailAnchor"></a>
 <div class="detailName 
 						">authorizeOrderPayment</div>
@@ -263,48 +305,6 @@
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
 <span class="parameterDesc">a non-null status ends the hook execution</span>
-</div>
-</div>
-<hr>
-</div>
-<div class="detailItem">
-<a name="dw_extensions_paymentrequest_PaymentRequestHooks_cancel_Basket_DetailAnchor"></a>
-<div class="detailName 
-						">cancel</div>
-<div class="detailSignature
-	    				">
-<span class="emphasis">cancel</span>(basket
-								 : 
-								 
-								<a href="class_dw_order_Basket.html"><span class="">Basket</span></a>)
-					 : 
-					<a href="class_dw_extensions_paymentrequest_PaymentRequestHookResult.html"><span class="">PaymentRequestHookResult</span></a>
-</div>
-<div class="description"><p>
- Called after the Payment Request user interface was canceled. The given basket is the one that was passed to other
- hooks earlier in the Payment Request checkout process.
- </p>
- <p>
- It is not guaranteed that this hook will be executed for all Payment Request user interfaces canceled by shoppers or
- otherwise ended without a successful order. Calls to this hook are provided on a best-effort basis.
- </p>
- <p>
- If the returned result includes a redirect URL, the shopper browser will be navigated to that URL if possible. It
- is not guaranteed that the response with the hook result will be handled in the shopper browser in all cases.
- </p></div>
-<div class="parameters">
-<span class="parameterTitle">Parameters:</span>
-<div class="parameterDetail">
-<span class="parameterName">basket</span>
-						 - 
-						<span class="parameterDesc">the basket that was being checked out using Payment Request</span>
-</div>
-</div>
-<div class="parameters">
-<span class="parameterTitle">Returns:</span>
-<div class="parameterDetail"></div>
-<div class="parameterDetail">
-<span class="parameterDesc">a non-null result ends the hook execution</span>
 </div>
 </div>
 <hr>
@@ -543,7 +543,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.4<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.5<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

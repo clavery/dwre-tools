@@ -122,7 +122,10 @@
     <xsd:complexType name="ProductSpecification.ProductPriceFilter" mixed="false">
         <xsd:choice minOccurs="1" maxOccurs="1">
             <xsd:element name="price" type="xsd:decimal" minOccurs="1" maxOccurs="1" />
-            <xsd:element name="price-ending" type="PriceEnding.String.3" minOccurs="1" maxOccurs="1" />
+            <xsd:sequence>
+                <xsd:element name="price-ending" type="PriceEnding.String.3"
+                    minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
         </xsd:choice>
         <xsd:attribute name="operator" type="PriceComparator" />
     </xsd:complexType>

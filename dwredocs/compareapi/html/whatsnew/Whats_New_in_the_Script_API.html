@@ -9,7 +9,7 @@
 <span class="newTitle">
 					What's New in the Script API
 				</span>
-<p>The following classes are either new or have been changed in version 17.4.</p>
+<p>The following classes are either new or have been changed in version 17.5.</p>
 </div>
 <div class="section">
 <div class="header">
@@ -17,7 +17,7 @@
 <p>The following classes changed in the <code>dw.catalog</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">PriceBookMgr</span>
+<span class="className">Product</span>
 <div class="section">
 <table>
 <thead>
@@ -28,16 +28,7 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_PriceBookMgr.html#class_dw_catalog_PriceBookMgr/dw_catalog_PriceBookMgr_getApplicablePriceBooks_DetailAnchor">getApplicablePriceBooks()</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_PriceBookMgr.html#class_dw_catalog_PriceBookMgr/dw_catalog_PriceBookMgr_setApplicablePriceBooks_PriceBook_DetailAnchor">setApplicablePriceBooks(PriceBook...)</xref>
+<xref href="../ScriptAPI/class_dw_catalog_Product.html#class_dw_catalog_Product/dw_catalog_Product_getSearchableIfUnavailableFlag_DetailAnchor">getSearchableIfUnavailableFlag()</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -50,29 +41,7 @@
 </div>
 <div class="section">
 <hr>
-<span class="className">ProductAvailabilityModel</span>
-</div>
-</div>
-<div class="section">
-<div class="header">
-							Package dw.extensions.paymentrequest</div>
-<p>The <code>dw.extensions.paymentrequest</code> Package was added containing following classes.</p>
-<ul>
-<li>
-<code>PaymentRequestHookResult</code>
-</li>
-<li>
-<code>PaymentRequestHooks</code>
-</li>
-</ul>
-</div>
-<div class="section">
-<div class="header">
-							Package dw.order</div>
-<p>The following classes changed in the <code>dw.order</code> Package. </p>
-<div class="section">
-<hr>
-<span class="className">Basket</span>
+<span class="className">ProductSearchModel</span>
 <div class="section">
 <table>
 <thead>
@@ -83,144 +52,10 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_Basket.html#class_dw_order_Basket/dw_order_Basket_setChannelType_Number_DetailAnchor">setChannelType(Number)</xref>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_isPersonalizedSort_DetailAnchor">isPersonalizedSort()</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">LineItemCtnr</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Field</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_LineItemCtnr.html#class_dw_order_LineItemCtnr/dw_order_LineItemCtnr_CHANNEL_TYPE_CUSTOMERSERVICECENTER_DetailAnchor">CHANNEL_TYPE_CUSTOMERSERVICECENTER</xref>
-</code></td><td class="summary">
-<p>
-			Field is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_LineItemCtnr.html#class_dw_order_LineItemCtnr/dw_order_LineItemCtnr_getChannelType_DetailAnchor">getChannelType()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">Order</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_getStatus_DetailAnchor">getStatus()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_setOrderStatus_Number_DetailAnchor">setOrderStatus(Number)</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_setStatus_Number_DetailAnchor">setStatus(Number)</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">OrderItem</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_OrderItem.html#class_dw_order_OrderItem/dw_order_OrderItem_getStatus_DetailAnchor">getStatus()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">PaymentInstrument</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Field</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_METHOD_DW_ANDROID_PAY_DetailAnchor">METHOD_DW_ANDROID_PAY</xref>
-</code></td><td class="summary">
-<p>
-			Field is New
+			Method is New
 		</p>
 </td>
 </tr>
@@ -231,22 +66,23 @@
 </div>
 <div class="section">
 <div class="header">
-							Package dw.system</div>
-<p>The following classes changed in the <code>dw.system</code> Package. </p>
+							Package dw.crypto</div>
+<p>The following classes changed in the <code>dw.crypto</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Site</span>
+<span class="className">KeyRef</span>
 <div class="section">
 <table>
 <thead>
 <tr>
-<td>Method</td><td>Summary</td>
+<td>Constructor</td><td>Summary</td>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_system_Site.html#class_dw_system_Site/dw_system_Site_isOMSEnabled_DetailAnchor">isOMSEnabled()</xref>
+<xref href="../ScriptAPI/class_dw_crypto_KeyRef.html#class_dw_crypto_KeyRef/dw_crypto_KeyRef_KeyRef_String_String_DetailAnchor">KeyRef(String,
+                String)</xref>
 </code></td><td class="summary">
 <p>
 <b>Deprecated</b>
@@ -260,11 +96,40 @@
 </div>
 <div class="section">
 <div class="header">
-							Package TopLevel</div>
-<p>The following classes changed in the <code>TopLevel</code> Package. </p>
+							Package dw.extensions.paymentrequest</div>
+<p>The following classes changed in the <code>dw.extensions.paymentrequest</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">global</span>
+<span class="className">PaymentRequestHooks</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Field</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_extensions_paymentrequest_PaymentRequestHooks.html#class_dw_extensions_paymentrequest_PaymentRequestHooks/dw_extensions_paymentrequest_PaymentRequestHooks_extensionPointAbort_DetailAnchor">extensionPointAbort</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_extensions_paymentrequest_PaymentRequestHooks.html#class_dw_extensions_paymentrequest_PaymentRequestHooks/dw_extensions_paymentrequest_PaymentRequestHooks_extensionPointCancel_DetailAnchor">extensionPointCancel</xref>
+</code></td><td class="summary">
+<p>
+			Field has been Removed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section">
 <table>
 <thead>
@@ -275,10 +140,77 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_TopLevel_global.html#class_TopLevel_global/TopLevel_global_require_String_DetailAnchor">require(String)</xref>
+<xref href="../ScriptAPI/class_dw_extensions_paymentrequest_PaymentRequestHooks.html#class_dw_extensions_paymentrequest_PaymentRequestHooks/dw_extensions_paymentrequest_PaymentRequestHooks_abort_Basket_DetailAnchor">abort(Basket)</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_extensions_paymentrequest_PaymentRequestHooks.html#class_dw_extensions_paymentrequest_PaymentRequestHooks/dw_extensions_paymentrequest_PaymentRequestHooks_cancel_Basket_DetailAnchor">cancel(Basket)</xref>
+</code></td><td class="summary">
+<p>
+			Method has been Removed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.web</div>
+<p>The following classes changed in the <code>dw.web</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">URL</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_web_URL.html#class_dw_web_URL/dw_web_URL_appendCSRFTokenBM_DetailAnchor">appendCSRFTokenBM()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package TopLevel</div>
+<p>The following classes changed in the <code>TopLevel</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">Module</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Field</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_TopLevel_Module.html#class_TopLevel_Module/TopLevel_Module_superModule_DetailAnchor">superModule</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
 		</p>
 </td>
 </tr>
@@ -289,7 +221,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.4<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.5<div class="clear"></div>
 </div>
 </body>
 </html>

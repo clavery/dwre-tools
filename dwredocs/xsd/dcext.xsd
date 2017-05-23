@@ -174,7 +174,12 @@
             <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="merchant-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="public-key" type="simpleType.Generic.NonEmptyString" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="environment" type="simpleType.AndroidPayEnvironment" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="environment" type="simpleType.AndroidPayEnvironment" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The element 'environment' is deprecated and will be removed in a future release. Use test-environment-flag to enable/disable Android Pay test environment.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="test-environment-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="allowed-networks" type="complexType.AndroidPayAllowedNetworks" minOccurs="0" maxOccurs="1" />
             <xsd:element name="request-fields" type="complexType.AndroidPayRequestFields" minOccurs="0" maxOccurs="1" />
             <xsd:element name="https-redirect" type="xsd:boolean" minOccurs="0" maxOccurs="1" />

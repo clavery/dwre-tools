@@ -76,6 +76,12 @@
 <div class="description">Append a request parameter to this URL.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_web_URL_appendCSRFTokenBM_DetailAnchor"><span class="">appendCSRFTokenBM</span></a></span>()
+						: 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a></span>
+<div class="description"><p>Appends, if applicable, a CSRF protection token to this URL.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_web_URL_host_String_DetailAnchor"><span class="">host</span></a></span>(host
 								 : 	
 								 
@@ -196,6 +202,32 @@
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
 <span class="parameterDesc">A reference to this URL.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_web_URL_appendCSRFTokenBM_DetailAnchor"></a>
+<div class="detailName 
+						">appendCSRFTokenBM</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">appendCSRFTokenBM</span>()
+					 : 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a>
+</div>
+<div class="description"><p>Appends, if applicable, a CSRF protection token to this URL. The CSRF token will only be appended under the following conditions:</p>
+ <ul>
+ <li>the URL is a pipeline URL</li>
+ <li>the URL is for Business Manager</li>
+ <li>CSRF validation is not disabled</li>
+ </ul>
+ <p>
+ If a CSRF token already exists in the URL, it will be replaced with a newly generated one.</p></div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a reference to this URL, with a CSRF token appended if applicable.</span>
 </div>
 </div>
 <hr>
@@ -371,7 +403,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.4<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.5<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

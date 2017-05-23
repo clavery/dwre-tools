@@ -41,8 +41,8 @@
 <div class="classSummary">
 <div class="classSummaryDetail">
 <div class="description">CommonJS modules are JavaScript files that are loaded using the <a href="class_TopLevel_global.html#TopLevel_global_require_String_DetailAnchor"> require(String)</a>
- function. This function returns a module object, which wraps the script code from the file.
- Within a module implementation, the module object can be accessed via the <a href="class_TopLevel_global.html#TopLevel_global_module_DetailAnchor"> module</a> variable.
+ function. This function returns a module object, which wraps the script code from the file. Within a module
+ implementation, the module object can be accessed via the <a href="class_TopLevel_global.html#TopLevel_global_module_DetailAnchor"> module</a> variable.
  <p>
  A module has a unique absolute id. The same module may be resolved by <a href="class_TopLevel_global.html#TopLevel_global_require_String_DetailAnchor"> require(String)</a>
  for different path arguments, like relative paths (starting with "./" or "../"), or absolute paths. See the
@@ -72,7 +72,8 @@
  };
  </pre>
 
- With the above implementation, a caller (for example another module in the same directory) could call the module function like this:
+ With the above implementation, a caller (for example another module in the same directory) could call the module
+ function like this:
 
  <pre>
  var message = require('./Greeting').sayHello();
@@ -150,6 +151,17 @@
  <a href="class_TopLevel_global.html#TopLevel_global_require_String_DetailAnchor">global.require(String)</a> function with this id would resolve this module.</div>
 </span>
 </div>
+<div class="summaryItem">
+<span><a name="TopLevel_Module_superModule_DetailAnchor"></a>superModule
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_Module.html"><span class="">Module</span></a>
+<div class="description">The module (if exists) that is overridden by this module. The super module would have the same path as the
+ current module but its code location would be checked later in the lookup sequence. This property is useful to
+ reuse functionality implemented in overridden modules.</div>
+</span>
+</div>
 </div>
 <div class="section">
 <div class="header">
@@ -176,7 +188,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.4<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.5<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

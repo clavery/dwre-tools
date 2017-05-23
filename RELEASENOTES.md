@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.5.4
+
+- updates schemas and docs to 17.5
+
 ## 1.5.3
 
 - updates schemas and docs to 17.4

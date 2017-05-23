@@ -105,11 +105,17 @@
     </xsd:simpleType>
 
     <!--  customer groups -->
-
     <xsd:complexType name="CustomerGroups" mixed="false">
         <xsd:sequence>
             <xsd:element name="customer-group" type="CustomerGroup" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
+        <xsd:attribute name="match-mode" type="MatchMode" use="optional" default="any" >
+        	<xsd:annotation>
+                <xsd:documentation>
+                    Lack of 'MatchMode' attribute defaults to legacy 'any' behavior.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="CustomerGroup" mixed="false">
@@ -307,5 +313,12 @@
             <xsd:enumeration value="units-added-to-baskets" />
         </xsd:restriction>
      </xsd:simpleType>
+     
+     <xsd:simpleType name="MatchMode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="any" />
+            <xsd:enumeration value="all" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
 </xsd:schema>

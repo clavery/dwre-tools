@@ -53,6 +53,7 @@
         - product.activeData.custom.<custom-attribute-id>
         - product.availabilityModel.<system-attribute-id>
         - sorting.predictive-sort
+        - sorting.text-relevance
     -->
     <xsd:simpleType name="AttributePath">
         <xsd:restriction base="Generic.NonEmptyString.256">
