@@ -157,7 +157,8 @@ An example `migrations.xml` follows (the XML will be validated against a schema 
 The command has a number of subcommands
 
 ```
-usage: dwre migrate [-h] [-n] [-d DIR] {add,apply,validate,reset,run} ...
+usage: dwre migrate [-h] [-n] [-d DIR]
+                    {add,apply,validate,reset,run,set,runall} ...
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -165,12 +166,16 @@ optional arguments:
   -d DIR, --dir DIR     migrations directory (default: migrations)
 
 Sub Commands:
-  {add,apply,validate,reset,run}
+  {add,apply,validate,reset,run,set,runall}
     add                 add a new migration
     apply               apply migrations to environment
     validate            validate migrations directory
     reset               reset migration state to current code version
-    run                 run a single migration without updating version
+    run                 run a single site import without validating or
+                        updating migrations
+    set                 set the current migration version
+    runall              run all migrations not currently applied without
+                        validating or updating/applying migrations
 ```
 
 ### `export`

@@ -421,7 +421,52 @@ def apply_migrations(env, migrations_dir, test=False):
             print(Fore.RED + "Error reindexing (try updated your bm_dwremigrate cartridge): {}".format(e.message) + Fore.RESET)
 
 
-def run_migration(env, directory):
+def run_all(env, migrations_dir, test=False):
+    migrations_file = os.path.join(migrations_dir, "migrations.xml")
+    assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+    parser = ET.XMLParser(remove_blank_text=True)
+    migrations_context = ET.parse(migrations_file, parser)
+    validate_xml(migrations_context)
+    migrations = get_migrations(migrations_context)
+
+    webdavsession = requests.session()
+    webdavsession.auth=(env["username"], env["password"],)
+    webdavsession.verify = env["verify"]
+    webdavsession.cert = env["cert"]
+    bmsession = requests.session()
+    bmsession.verify = env["verify"]
+    bmsession.cert = env["cert"]
+
+    login_business_manager(env, bmsession)
+
+    not_installed = False
+    try:
+        (current_tool_version, current_migration, current_migration_path) = (
+            get_current_versions(env, bmsession))
+    except NotInstalledException, e:
+        raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
+
+    required_migrations = list(set(migrations[0]).difference(set(current_migration_path)))
+    required_migrations = sorted(required_migrations, cmp=lambda x, y: migrations[0].index(x) - migrations[0].index(y))
+
+    if required_migrations:
+        print(Fore.YELLOW + "%s migrations to run..." % len(required_migrations) + Fore.RESET)
+
+    for migration in required_migrations:
+        migration_data = migrations[1][migration]
+
+        print("[%s] %s" % (migration_data["id"], migration_data["description"]))
+
+    if test:
+        print("Will not perform migrations, exiting...")
+        return
+
+    for migration in required_migrations:
+        migration_data = migrations[1][migration]
+        run_migration(env, os.path.join(migrations_dir, migration_data["location"]), migration)
+
+
+def run_migration(env, directory, name=None):
     webdavsession = requests.session()
     webdavsession.auth=(env["username"], env["password"],)
     webdavsession.verify = env["verify"]
@@ -438,7 +483,10 @@ def run_migration(env, directory):
         print(Fore.RED + "Can't find directory: {}".format(directory) + Fore.RESET)
         return False
 
-    zip_filename = "dwremigrate_%s" % str(uuid.uuid4())
+    if name is not None:
+        zip_filename = name
+    else:
+        zip_filename = "dwremigrate_%s" % str(uuid.uuid4())
     zip_file = directory_to_zip(os.path.join(directory), zip_filename)
 
     # upload

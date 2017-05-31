@@ -9,7 +9,7 @@ from .env import *
 from .tail import tail_logs
 from .validations import validate_command
 from .migrate import (add_migration, apply_migrations, validate_migrations, reset_migrations, 
-        run_migration, set_migration)
+        run_migration, set_migration, run_all)
 from .index import reindex_command
 from .export import export_command
 from .sync import sync_command
@@ -87,6 +87,9 @@ def migrate_cmd_handler(args):
     elif args.subcommand == "run":
         env = get_env_from_args(args)
         result = run_migration(env, args.directory)
+    elif args.subcommand == "runall":
+        env = get_env_from_args(args)
+        result = run_all(env, args.dir, args.test)
     elif args.subcommand == "set":
         env = get_env_from_args(args)
         result = set_migration(env, args.dir, args.name)
@@ -184,6 +187,8 @@ migrate_run_cmd.set_defaults(subcommand="run")
 migrate_set_cmd = migrate_parser.add_parser("set", help="set the current migration version")
 migrate_set_cmd.add_argument('name', help="migration name")
 migrate_set_cmd.set_defaults(subcommand="set")
+migrate_runall_cmd = migrate_parser.add_parser("runall", help="run all migrations not currently applied without validating or updating/applying migrations")
+migrate_runall_cmd.set_defaults(subcommand="runall")
 
 validate_cmd = cmd_parser.add_parser('validate', help="XMLSchema validations")
 validate_cmd.set_defaults(func=validate_cmd_handler)

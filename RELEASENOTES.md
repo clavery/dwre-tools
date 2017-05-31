@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.6.0
+
+- adds `migrate runall` subcommand. This command `run`'s all migrations you do not currently have on your sandbox. It does not check for migration path conflicts nor does it update the sandbox migration path after running (i.e. just like `run` repeated `runall`'s are NOT idempotent). This command is intended for power user and other development/QA scenarios where all missing migrations should be applied but no consistency checking is performed. `apply` should still be used when getting up to date with integration branches.
+
 ## 1.5.4
 
 - updates schemas and docs to 17.5
