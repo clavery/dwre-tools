@@ -79,9 +79,17 @@ Use the command line help to get updated commands/syntax:
 
 All subcommands also have a help with `-h` or `--help`
 
+
 ```sh
 $ dwre --help
 ```
+
+Be default, all commands will execute against the default project specified in your .dwre.json file. If you'd like to use one of the alternative projects, you can use the `--project` flag.
+
+```sh
+$ dwre --project XXX
+```
+
 
 ### `tail`
 
