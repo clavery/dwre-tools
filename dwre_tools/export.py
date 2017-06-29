@@ -58,6 +58,7 @@ def export_command(env, directory):
             return 'Saving migration'
 
     webbrowser.open("http://localhost:5698")
+    print("Launching web browser to http://localhost:5698")
     app.run(port=5698)
 
     if not cancelled:
