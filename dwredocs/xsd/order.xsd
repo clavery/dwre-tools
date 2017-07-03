@@ -630,6 +630,16 @@
 
     <xsd:complexType name="complexType.DWApplePay">
         <xsd:sequence>
+            <xsd:element name="card-type" type="simpleType.Generic.String.256" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The type of the card. Some recognized card types are exported in different formats than they are stored internally: Visa, Master, Amex, Discover are exported in all capital letters: VISA, MASTER, AMEX, DISCOVER. All other card types are exported precisely as they are stored.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="card-number" type="simpleType.Generic.String.4000" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The actual PAN of the card used for the Apple Pay transaction. The value will be in a format like XXXX-XXXX-XXXX-1234 with no more than 4 of the last digits unmasked.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
                     <xsd:documentation>These are the custom attributes of the OrderPaymentInstrument system object.</xsd:documentation>
@@ -640,6 +650,16 @@
 
     <xsd:complexType name="complexType.DWAndroidPay">
         <xsd:sequence>
+            <xsd:element name="card-type" type="simpleType.Generic.String.256" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The type of the card. Some recognized card types are exported in different formats than they are stored internally: Visa, Master, Amex, Discover are exported in all capital letters: VISA, MASTER, AMEX, DISCOVER. All other card types are exported precisely as they are stored.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="card-number" type="simpleType.Generic.String.4000" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>The actual PAN of the card used for the Android Pay transaction. The value will be in a format like XXXX-XXXX-XXXX-1234 with no more than 4 of the last digits unmasked.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
                     <xsd:documentation>These are the custom attributes of the OrderPaymentInstrument system object.</xsd:documentation>

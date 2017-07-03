@@ -28,6 +28,7 @@
         <xsd:sequence>
             <xsd:element name="description" type="Generic.String.4000" minOccurs="0" maxOccurs="1" />
             <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="case-insensitive" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="redemption-limits" type="RedemptionLimits" minOccurs="0" maxOccurs="1" />
             <xsd:choice minOccurs="0" maxOccurs="1">
                 <xsd:element name="single-code" type="Generic.NonEmptyString.256" />

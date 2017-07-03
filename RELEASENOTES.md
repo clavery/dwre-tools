@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.6.3
+
+- update schemas and docs to 17.6
+- make more code visible in debugger code output
+
 ## 1.6.2
 
 - basic stack/object member completion in `debug` command (press <TAB> to complete)
