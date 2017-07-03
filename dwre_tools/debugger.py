@@ -91,7 +91,7 @@ def list_current_code():
     lines = [l.decode('utf-8') for l in lines]
 
     # TODO: this is ugly
-    starting_offset = 6 if line_num > 5 else line_num
+    starting_offset = 11 if line_num > 10 else line_num
 
     code = ''.join(lines)
     result = highlight(code, JavascriptLexer(), TerminalFormatter(bg="dark"))
@@ -100,7 +100,7 @@ def list_current_code():
     code_lines = output.split('\n')
 
     for num, line in enumerate(code_lines):
-        if num+1 < (line_num - 5) or num > (line_num + 5):
+        if num+1 < (line_num - 10) or num > (line_num + 10):
             continue
         if num+1 == line_num:
             print "---> %s:" % str(num + 1).zfill(3), line
