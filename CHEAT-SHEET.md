@@ -49,21 +49,22 @@ dwre migrate validate
 Note: All commands should be run from the root project directory.
 
 1. Make sure your working copy is up to date with all the latest changes from `develop` (merge develop branch into your working branch)
-1. `dwre export migrations/mymigration`
+1. Run `dwre export migrations/mymigration`
     * This will open a web page to allow you to choose the content you need to migrate.
     * You can choose any name here after `migrations/` -- it will be renamed later
     * The old school way to do this was in Business Manger
         * Create a `Site Import & Export` export in Business Manager exporting the type of Data or Metadata you wish to migrate
 1. Edit the saved files; paring down the migration to exactly the items you want
-1. `dwre validate migrations/mymigration`
+1. Run `dwre validate migrations/mymigration`
     * The DWRE tools will validate that your migration looks ok
-1. `dwre migrate add -r -d "short description" mymigration`
+1. Run `dwre migrate add -r -d "short description" mymigration`
     * This creates the real Demandware migration in migrations.xml
     * `-r` for rename
     * `-d` for description (used in the xml and the rename)
-1. `dwre migrate validate`
+    * If the migration requires a reindex, add `<reindex>true</reindex>` to the migration XML
+1. Run `dwre migrate validate`
     * Validates the migrations.xml file to ensure no issues
-1. `dwre migrate run migrations\YYYYMMDDTXXXX_short_description`
+1. Run `dwre migrate run migrations\YYYYMMDDTXXXX_short_description`
     * This will run the migration on your sandbox. Verify by loading the site that things still look as expected.
 1. Commit this migration to your branch
 1. Switch back to `develop` and pull the latest code to ensure no new migrations have been added in the meantime. If there are new migrations, `apply` them in your integration branch. 
