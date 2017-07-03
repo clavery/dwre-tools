@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.6.2
+
+- basic stack/object member completion in `debug` command (press <TAB> to complete)
+
 ## 1.6.1
 
 - indicate to user we are launching a browser to localhost:5698

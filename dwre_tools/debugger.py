@@ -12,6 +12,7 @@ from pygments.formatters import TerminalFormatter
 from prompt_toolkit import prompt
 from prompt_toolkit.history import InMemoryHistory, FileHistory
 from prompt_toolkit.contrib.completers import WordCompleter
+from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.application import Application
 from prompt_toolkit.buffer import Buffer
 from prompt_toolkit.interface import CommandLineInterface
@@ -32,6 +33,7 @@ CURRENT_THREAD = None
 THREADS = []
 WATCH_VAR = None
 WATCH_VAL = None
+COMPLETE_CACHE = {}
 
 STYLE = style_from_dict({
     Token.Toolbar: '#ffffff bg:#666666',
@@ -124,7 +126,7 @@ def clean_value(val):
 def print_members(session, base_url, member, refine=None):
     if not CURRENT_THREAD:
         return
-    
+   
     if member:
         resp = session.get(base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD, params={"object_path" : member})
         resp.raise_for_status()
@@ -152,8 +154,40 @@ def thread_eval(session, base_url, expr):
     print resp.json().get('result')
 
 
+class MemberCompleter(Completer):
+    def __init__(self, session, base_url):
+        self.session = session
+        self.base_url = base_url
+
+    def get_completions(self, document, complete_event):
+        global COMPLETE_CACHE
+        if not CURRENT_THREAD:
+            return
+
+        doc = document.text.replace("p ", "").replace("print ", "")
+
+        member = ".".join(doc.split('.')[0:-1])
+        if member in COMPLETE_CACHE:
+            members = COMPLETE_CACHE.get(member)
+        else:
+            if member:
+                resp = self.session.get(self.base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD, params={"object_path" : member})
+            else:
+                resp = self.session.get(self.base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD)
+
+            if resp.status_code >= 300:
+                return
+            members = resp.json().get('object_members')
+            COMPLETE_CACHE[member] = members
+
+        tomatch = doc.split('.')[-1]
+        matched_members = [m for m in members if m["name"].startswith(tomatch)]
+        for m in matched_members:
+            yield Completion(m["name"], start_position=-len(tomatch))
+
+
 def debug_command(env, breakpoint_locations=None):
-    global CARTRIDGES, WATCH_VAR, WATCH_VAL
+    global CARTRIDGES, WATCH_VAR, WATCH_VAL, COMPLETE_CACHE
     cartridges = collect_cartridges(".")
     CARTRIDGES = {name:path for path, name in cartridges}
     cartridge_paths = {path:name for path, name in cartridges}
@@ -203,8 +237,11 @@ def debug_command(env, breakpoint_locations=None):
 
     manager = KeyBindingManager(enable_abort_and_exit_bindings=True)
     history = FileHistory(os.path.expanduser("~/.dwredebughist"))
+
+    
+    completer = MemberCompleter(session, base_url)
     app = create_prompt_application(message="> ", get_bottom_toolbar_tokens=get_bottom_toolbar_tokens,
-                                    style=STYLE, history=history)
+                                    style=STYLE, history=history, completer=completer, complete_while_typing=False)
     cli = CommandLineInterface(application=app, eventloop=create_eventloop())
 
     t = None
@@ -216,18 +253,20 @@ def debug_command(env, breakpoint_locations=None):
     keepalive()
 
     def check_for_threads():
-        global CURRENT_THREAD, THREADS, WATCH_VAR, WATCH_VAL
+        global CURRENT_THREAD, THREADS, WATCH_VAR, WATCH_VAL, COMPLETE_CACHE
         while True:
             resp = session.get(base_url + "/threads")
             threads = resp.json().get("script_threads")
             if threads:
                 CURRENT_THREAD = threads[0].get("id")
                 THREADS = threads
-                resp = session.get(base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD, params={"object_path" : WATCH_VAR})
-                members = resp.json().get('object_members') 
-                if members:
-                    WATCH_VAL = members[0]["value"]
+                if WATCH_VAR:
+                    resp = session.get(base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD, params={"object_path" : WATCH_VAR})
+                    members = resp.json().get('object_members') 
+                    if members:
+                        WATCH_VAL = members[0]["value"]
             else:
+                COMPLETE_CACHE = {}
                 CURRENT_THREAD = None
                 WATCH_VAL = None
                 THREADS = []
@@ -272,15 +311,19 @@ def debug_command(env, breakpoint_locations=None):
                     WATCH_VAR = rest[0]
                     WATCH_VAL = None
             elif cmd in ['continue', 'c']:
+                COMPLETE_CACHE = {}
                 if CURRENT_THREAD:
                     resp = session.post(base_url + "/threads/%s/resume" % CURRENT_THREAD)
             elif cmd in ['into', 'i']:
+                COMPLETE_CACHE = {}
                 if CURRENT_THREAD:
                     resp = session.post(base_url + "/threads/%s/into" % CURRENT_THREAD)
             elif cmd in ['out', 'o']:
+                COMPLETE_CACHE = {}
                 if CURRENT_THREAD:
                     resp = session.post(base_url + "/threads/%s/out" % CURRENT_THREAD)
             elif cmd in ['next', 'n']:
+                COMPLETE_CACHE = {}
                 if CURRENT_THREAD:
                     resp = session.post(base_url + "/threads/%s/over" % CURRENT_THREAD)
             elif cmd in ['list', 'l']:
