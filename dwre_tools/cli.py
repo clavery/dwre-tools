@@ -13,6 +13,7 @@ from .migrate import (add_migration, apply_migrations, validate_migrations, rese
 from .index import reindex_command
 from .export import export_command
 from .sync import sync_command
+from .webdav import copy_command
 from .debugger import debug_command
 
 from colorama import init, deinit
@@ -123,12 +124,21 @@ def tail_cmd_handler(args):
     logfilters = args.filters.split(',')
     tail_logs(env, logfilters, args.i)
 
+
 def update_cmd_handler(args):
     os.system("pip install https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip")
+
 
 def debug_cmd_handler(args):
     env = get_env_from_args(args)
     debug_command(env, args.breakpoints)
+
+
+def webdav_cmd_handler(args):
+
+    if args.subcommand == "cp":
+        env = get_env_from_args(args)
+        copy_command(env, args.src, args.dest)
 
 
 parser = ArgumentParser(description="Demandware/SFCC Tools")
@@ -209,6 +219,14 @@ debug_cmd = cmd_parser.add_parser('debug', help="Begin an interactive debugging 
 debug_cmd.set_defaults(func=debug_cmd_handler)
 debug_cmd.add_argument('breakpoints', metavar='breakpoint_locations', nargs='+',
                     help='path:line_num breakpoints')
+
+webdav_cmd = cmd_parser.add_parser('webdav', help="webdav operations")
+webdav_cmd.set_defaults(func=webdav_cmd_handler)
+webdav_parser = webdav_cmd.add_subparsers(title="Sub Commands", dest='subcommand')
+webdav_parser.required = True
+webdav_cp_cmd = webdav_parser.add_parser("cp", help="Copy a file to/from the webdav location")
+webdav_cp_cmd.add_argument('src', help="src file name")
+webdav_cp_cmd.add_argument('dest', help="destination on webdav (relative to /on/demandware.servlet/webdav/Sites)")
 
 def main():
     import os, sys
