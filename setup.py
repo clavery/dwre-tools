@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name='dwre-tools',
-    version='1.6.3',
+    version='1.6.4',
     description='Demandware tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',
@@ -20,7 +20,7 @@ setup(
     install_requires=['requests == 2.7.0',
                       'colorama >= 0.3.3',
                       'pyquery >= 1.2.9',
-                      'lxml == 3.4.4',
+                      'lxml >= 3.4.4',
                       'pyyaml >= 3.11',
                       'flask == 0.10.1',
                       'prompt_toolkit == 1.0.13',

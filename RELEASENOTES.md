@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.6.4
+
+- relaxed the version requirements on lxml
+
 ## 1.6.3
 
 - update schemas and docs to 17.6
