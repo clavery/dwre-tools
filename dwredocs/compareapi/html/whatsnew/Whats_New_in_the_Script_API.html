@@ -9,15 +9,29 @@
 <span class="newTitle">
 					What's New in the Script API
 				</span>
-<p>The following classes are either new or have been changed in version 17.6.</p>
+<p>The following classes are either new or have been changed in version 17.7.</p>
 </div>
 <div class="section">
 <div class="header">
-							Package dw.catalog</div>
-<p>The following classes changed in the <code>dw.catalog</code> Package. </p>
+							Package dw.content</div>
+<p>The following classes changed in the <code>dw.content</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Category</span>
+<span class="className">MediaFile</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.io</div>
+<p>The following classes changed in the <code>dw.io</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">File</span>
 <div class="section">
 <table>
 <thead>
@@ -28,97 +42,49 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getOnlineProducts_DetailAnchor">getOnlineProducts()</xref>
+<xref href="../ScriptAPI/class_dw_io_File.html#class_dw_io_File/dw_io_File_copyTo_File_DetailAnchor">copyTo(File)</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
+			Method is New
 		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">Reader</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_io_Reader.html#class_dw_io_Reader/dw_io_Reader_getLines_DetailAnchor">getLines()</xref>
+</code></td><td class="summary">
+<p>
+<b>Deprecated</b>
+</p>
 </td>
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getOnlineSubCategories_DetailAnchor">getOnlineSubCategories()</xref>
+<xref href="../ScriptAPI/class_dw_io_Reader.html#class_dw_io_Reader/dw_io_Reader_getString_DetailAnchor">getString()</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
-		</p>
+<b>Deprecated</b>
+</p>
 </td>
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getPageDescription_DetailAnchor">getPageDescription()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getPageKeywords_DetailAnchor">getPageKeywords()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getPageTitle_DetailAnchor">getPageTitle()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getPageURL_DetailAnchor">getPageURL()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getProducts_DetailAnchor">getProducts()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getSiteMapChangeFrequency_DetailAnchor">getSiteMapChangeFrequency()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getSiteMapPriority_DetailAnchor">getSiteMapPriority()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getSubCategories_DetailAnchor">getSubCategories()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_hasOnlineProducts_DetailAnchor">hasOnlineProducts()</xref>
+<xref href="../ScriptAPI/class_dw_io_Reader.html#class_dw_io_Reader/dw_io_Reader_readLines_DetailAnchor">readLines()</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -127,7 +93,61 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_hasOnlineSubCategories_DetailAnchor">hasOnlineSubCategories()</xref>
+<xref href="../ScriptAPI/class_dw_io_Reader.html#class_dw_io_Reader/dw_io_Reader_readString_DetailAnchor">readString()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">XMLStreamReader</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_io_XMLStreamReader.html#class_dw_io_XMLStreamReader/dw_io_XMLStreamReader_getElementText_DetailAnchor">getElementText()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+<p>
+<b>Deprecated</b>
+</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_io_XMLStreamReader.html#class_dw_io_XMLStreamReader/dw_io_XMLStreamReader_getXMLObject_DetailAnchor">getXMLObject()</xref>
+</code></td><td class="summary">
+<p>
+<b>Deprecated</b>
+</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_io_XMLStreamReader.html#class_dw_io_XMLStreamReader/dw_io_XMLStreamReader_nextTag_DetailAnchor">nextTag()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_io_XMLStreamReader.html#class_dw_io_XMLStreamReader/dw_io_XMLStreamReader_readElementText_DetailAnchor">readElementText()</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -136,7 +156,396 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_setSearchRank_Number_DetailAnchor">setSearchRank(Number)</xref>
+<xref href="../ScriptAPI/class_dw_io_XMLStreamReader.html#class_dw_io_XMLStreamReader/dw_io_XMLStreamReader_readXMLObject_DetailAnchor">readXMLObject()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.order</div>
+<p>The following classes changed in the <code>dw.order</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">Order</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor">getOrderExportXML(String,
+                String,
+                Boolean)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+<p>
+<b>Deprecated</b>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.order.hooks</div>
+<p>The following classes were added to the <code>dw.order.hooks</code> Package.</p>
+<ul>
+<li>
+<code>CalculateHooks</code>
+</li>
+</ul>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.suggest</div>
+<p>The following classes changed in the <code>dw.suggest</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">SuggestModel</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_suggest_SuggestModel.html#class_dw_suggest_SuggestModel/dw_suggest_SuggestModel_addRefinementValues_String_String_DetailAnchor">addRefinementValues(String,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_suggest_SuggestModel.html#class_dw_suggest_SuggestModel/dw_suggest_SuggestModel_removeRefinementValues_String_String_DetailAnchor">removeRefinementValues(String,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_suggest_SuggestModel.html#class_dw_suggest_SuggestModel/dw_suggest_SuggestModel_setRefinementValues_String_String_DetailAnchor">setRefinementValues(String,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.svc</div>
+<p>The following classes were added to the <code>dw.svc</code> Package.</p>
+<ul>
+<li>
+<code>LocalServiceRegistry</code>
+</li>
+</ul>
+<p>The following classes changed in the <code>dw.svc</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">Result</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Field</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_Result.html#class_dw_svc_Result/dw_svc_Result_UNAVAILABLE_CIRCUIT_BROKEN_DetailAnchor">UNAVAILABLE_CIRCUIT_BROKEN</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_Result.html#class_dw_svc_Result/dw_svc_Result_UNAVAILABLE_CONFIG_PROBLEM_DetailAnchor">UNAVAILABLE_CONFIG_PROBLEM</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_Result.html#class_dw_svc_Result/dw_svc_Result_UNAVAILABLE_DISABLED_DetailAnchor">UNAVAILABLE_DISABLED</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_Result.html#class_dw_svc_Result/dw_svc_Result_UNAVAILABLE_RATE_LIMITED_DetailAnchor">UNAVAILABLE_RATE_LIMITED</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_Result.html#class_dw_svc_Result/dw_svc_Result_UNAVAILABLE_TIMEOUT_DetailAnchor">UNAVAILABLE_TIMEOUT</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_Result.html#class_dw_svc_Result/dw_svc_Result_getStatus_DetailAnchor">getStatus()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_Result.html#class_dw_svc_Result/dw_svc_Result_getUnavailableReason_DetailAnchor">getUnavailableReason()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">ServiceRegistry</span>
+<div class="section">
+<ul>
+<li>Deprecated</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.system</div>
+<p>The following classes changed in the <code>dw.system</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">HookMgr</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_system_HookMgr.html#class_dw_system_HookMgr/dw_system_HookMgr_callHook_String_String_Object_DetailAnchor">callHook(String,
+                String,
+                Object...)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_system_HookMgr.html#class_dw_system_HookMgr/dw_system_HookMgr_hasHook_String_DetailAnchor">hasHook(String)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">Response</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Field</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_system_Response.html#class_dw_system_Response/dw_system_Response_X_CONTENT_TYPE_OPTIONS_DetailAnchor">X_CONTENT_TYPE_OPTIONS</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_system_Response.html#class_dw_system_Response/dw_system_Response_X_XSS_PROTECTION_DetailAnchor">X_XSS_PROTECTION</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.template</div>
+<p>The following classes changed in the <code>dw.template</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">ISML</span>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.util</div>
+<p>The following classes changed in the <code>dw.util</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">Calendar</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Constructor</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Calendar.html#class_dw_util_Calendar/dw_util_Calendar_Calendar_DetailAnchor">Calendar()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Calendar.html#class_dw_util_Calendar/dw_util_Calendar_Calendar_Date_DetailAnchor">Calendar(Date)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Calendar.html#class_dw_util_Calendar/dw_util_Calendar_getTime_DetailAnchor">getTime()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Calendar.html#class_dw_util_Calendar/dw_util_Calendar_isSameDay_Calendar_DetailAnchor">isSameDay(Calendar)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Calendar.html#class_dw_util_Calendar/dw_util_Calendar_isSameDayByTimestamp_Calendar_DetailAnchor">isSameDayByTimestamp(Calendar)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Calendar.html#class_dw_util_Calendar/dw_util_Calendar_setTime_Date_DetailAnchor">setTime(Date)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Calendar.html#class_dw_util_Calendar/dw_util_Calendar_setTimeZone_String_DetailAnchor">setTimeZone(String)</xref>
 </code></td><td class="summary">
 <p>
 			Documentation Changed.
@@ -148,9 +557,23 @@
 </div>
 </div>
 </div>
+<div class="section">
+<div class="header">
+							Package dw.web</div>
+<p>The following classes changed in the <code>dw.web</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">URLUtils</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 </body>
 </html>

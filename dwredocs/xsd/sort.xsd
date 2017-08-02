@@ -18,6 +18,8 @@
                 <xsd:element name="sorting-rule-assignment" type="SortingRuleAssignment" minOccurs="0" maxOccurs="unbounded" />
                 <xsd:element name="sorting-rule-campaign-assignment" type="SortingRuleCampaignAssignment" minOccurs="0" maxOccurs="unbounded" />
                 <xsd:element name="sorting-options" type="SortingOptions" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="keyword-search-sorting-rule-assignment" type="KeywordSearchSortingRuleAssignment" minOccurs="0" maxOccurs="unbounded" />
+                <xsd:element name="keyword-search-sorting-rule-campaign-assignment" type="KeywordSearchSortingRuleCampaignAssignment" minOccurs="0" maxOccurs="unbounded" />
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -28,6 +30,8 @@
     <xsd:element name="sorting-rule-assignment" type="SortingRuleAssignment" />
     <xsd:element name="sorting-rule-campaign-assignment" type="SortingRuleCampaignAssignment" />
     <xsd:element name="sorting-options" type="SortingOptions" />
+    <xsd:element name="keyword-search-sorting-rule-assignment" type="KeywordSearchSortingRuleAssignment" />
+    <xsd:element name="keyword-search-sorting-rule-campaign-assignment" type="KeywordSearchSortingRuleCampaignAssignment" />
 
     <xsd:complexType name="DynamicAttribute">
         <xsd:sequence>
@@ -126,12 +130,25 @@
         <xsd:attribute name="rule-id" type="Generic.NonEmptyString.256" use="required" />
         <xsd:attribute name="mode" type="ImportMode" />
     </xsd:complexType>
-    
+
+    <xsd:complexType name="KeywordSearchSortingRuleAssignment">
+        <xsd:attribute name="keywords" type="Generic.String.4000" use="optional" />
+        <xsd:attribute name="rule-id" type="Generic.NonEmptyString.256" use="required" />
+        <xsd:attribute name="mode" type="ImportMode" />
+    </xsd:complexType>
+
     <xsd:complexType name="SortingRuleCampaignAssignment">
         <xsd:attribute name="category-id" type="Generic.NonEmptyString.256" use="required" />
         <xsd:attribute name="rule-id" type="Generic.NonEmptyString.256" use="required" />
         <xsd:attribute name="campaign-id" type="Generic.NonEmptyString.256" use="required" />
         <xsd:attribute name="mode" type="ImportMode" />    
+    </xsd:complexType>
+
+    <xsd:complexType name="KeywordSearchSortingRuleCampaignAssignment">
+        <xsd:attribute name="keywords" type="Generic.String.4000" use="optional" />
+        <xsd:attribute name="rule-id" type="Generic.NonEmptyString.256" use="required" />
+        <xsd:attribute name="campaign-id" type="Generic.NonEmptyString.256" use="required" />
+        <xsd:attribute name="mode" type="ImportMode" />
     </xsd:complexType>
     
     <xsd:complexType name="SortingOptions">

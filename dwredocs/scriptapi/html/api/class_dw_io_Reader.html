@@ -55,7 +55,7 @@
 <div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
-<span><a name="_DetailAnchor"></a>lines
+<span class="dep"><a name="_DetailAnchor"></a>lines
 						&nbsp;:&nbsp;
 						
 					    
@@ -65,9 +65,16 @@
  Using this method on large feeds is inherently unsafe and may lead to an out-of-memory condition. Instead use
  method <a href="class_dw_io_Reader.html#dw_io_Reader_readLine_DetailAnchor">readLine()</a> and process one line at a time.</div>
 </span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_io_Reader.html#dw_io_Reader_readLines_DetailAnchor">readLines()</a></span>
+</div>
+</div>
 </div>
 <div class="summaryItem">
-<span><a name="_DetailAnchor"></a>string
+<span class="dep"><a name="_DetailAnchor"></a>string
 						&nbsp;:&nbsp;
 						
 					    
@@ -77,6 +84,14 @@
  Using this method is unsafe if the length of the input stream is not known and may lead to an out-of-memory
  condition. Instead use method <a href="class_dw_io_Reader.html#dw_io_Reader_readN_Number_DetailAnchor">readN(Number)</a>.</div>
 </span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_io_Reader.html#dw_io_Reader_readString_DetailAnchor">readString()</a></span>
+</div>
+</div>
 </div>
 </div>
 <div class="section">
@@ -119,13 +134,13 @@
 <div class="description">Closes the reader.</div>
 </div>
 <div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_io_Reader_getLines_DetailAnchor"><span class="">getLines</span></a></span>()
+<span class="dep"><span class="emphasis"><a href="#dw_io_Reader_getLines_DetailAnchor"><span class="">getLines</span></a></span>()
 						: 
 					<a href="class_dw_util_List.html"><span class="">List</span></a></span>
 <div class="description">The method reads the whole input stream, parses it and returns a list of strings.</div>
 </div>
 <div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_io_Reader_getString_DetailAnchor"><span class="">getString</span></a></span>()
+<span class="dep"><span class="emphasis"><a href="#dw_io_Reader_getString_DetailAnchor"><span class="">getString</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
 <div class="description">The method reads the whole input stream as one string and returns it.</div>
@@ -152,6 +167,12 @@
 <div class="description">Reads the next line.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_io_Reader_readLines_DetailAnchor"><span class="">readLines</span></a></span>()
+						: 
+					<a href="class_dw_util_List.html"><span class="">List</span></a></span>
+<div class="description">The method reads the whole input stream, parses it and returns a list of strings.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_io_Reader_readN_Number_DetailAnchor"><span class="">readN</span></a></span>(n
 								 : 	
 								 
@@ -159,6 +180,12 @@
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
 <div class="description">Reads n characters from the stream as string.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_io_Reader_readString_DetailAnchor"><span class="">readString</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">The method reads the whole input stream as one string and returns it.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_io_Reader_ready_DetailAnchor"><span class="">ready</span></a></span>()
@@ -278,9 +305,9 @@
 <div class="detailItem">
 <a name="dw_io_Reader_getLines_DetailAnchor"></a>
 <div class="detailName 
-						">getLines</div>
+						dep">getLines</div>
 <div class="detailSignature
-	    				">
+	    				dep">
 <span class="emphasis">getLines</span>()
 					 : 
 					<a href="class_dw_util_List.html"><span class="">List</span></a>
@@ -290,19 +317,27 @@
  Using this method on large feeds is inherently unsafe and may lead to an out-of-memory condition. Instead use
  method <a href="class_dw_io_Reader.html#dw_io_Reader_readLine_DetailAnchor">readLine()</a> and process one line at a time.</div>
 <div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_io_Reader.html#dw_io_Reader_readLines_DetailAnchor">readLines()</a></span>
+</div>
+</div>
+<div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">a list of strings</span>
 </div>
+<div class="parameterDetail"></div>
 </div>
 <hr>
 </div>
 <div class="detailItem">
 <a name="dw_io_Reader_getString_DetailAnchor"></a>
 <div class="detailName 
-						">getString</div>
+						dep">getString</div>
 <div class="detailSignature
-	    				">
+	    				dep">
 <span class="emphasis">getString</span>()
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
@@ -312,10 +347,19 @@
  Using this method is unsafe if the length of the input stream is not known and may lead to an out-of-memory
  condition. Instead use method <a href="class_dw_io_Reader.html#dw_io_Reader_readN_Number_DetailAnchor">readN(Number)</a>.</div>
 <div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_io_Reader.html#dw_io_Reader_readString_DetailAnchor">readString()</a></span>
+</div>
+</div>
+<div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">a string, which represents the whole content of the InputStream</span>
 </div>
+<div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 </div>
 <div class="parameters">
@@ -325,6 +369,7 @@
 						 - 
 						 <span class="parameterDesc">if something went wrong while reading from the underlying stream</span>
 </div>
+<div class="parameterDetail"></div>
 </div>
 <hr>
 </div>
@@ -421,6 +466,28 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_io_Reader_readLines_DetailAnchor"></a>
+<div class="detailName 
+						">readLines</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">readLines</span>()
+					 : 
+					<a href="class_dw_util_List.html"><span class="">List</span></a>
+</div>
+<div class="description">The method reads the whole input stream, parses it and returns a list of strings.
+ <p/>
+ Using this method on large feeds is inherently unsafe and may lead to an out-of-memory condition. Instead use
+ method <a href="class_dw_io_Reader.html#dw_io_Reader_readLine_DetailAnchor">readLine()</a> and process one line at a time.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a list of strings</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_io_Reader_readN_Number_DetailAnchor"></a>
 <div class="detailName 
 						">readN</div>
@@ -449,6 +516,37 @@
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
 <span class="parameterDesc">a string whose maximum length is controlled by the n parameter, or null if the end of the stream is reached and no more characters can be read</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_io_Reader_readString_DetailAnchor"></a>
+<div class="detailName 
+						">readString</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">readString</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">The method reads the whole input stream as one string and returns it.
+ <p/>
+ Using this method is unsafe if the length of the input stream is not known and may lead to an out-of-memory
+ condition. Instead use method <a href="class_dw_io_Reader.html#dw_io_Reader_readN_Number_DetailAnchor">readN(Number)</a>.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a string, which represents the whole content of the InputStream</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">IOException						
+						 - 
+						 <span class="parameterDesc">if something went wrong while reading from the underlying stream</span>
 </div>
 </div>
 <hr>
@@ -497,7 +595,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

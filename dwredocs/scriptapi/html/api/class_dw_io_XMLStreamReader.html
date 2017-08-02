@@ -223,50 +223,58 @@
 </span>
 </div>
 <div class="summaryItem">
-<span><a name="_DetailAnchor"></a>elementText
+<span class="dep"><a name="_DetailAnchor"></a>elementText
 						&nbsp;:&nbsp;
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">Reads the content of a text-only element, an exception is thrown if this is
- not a text-only element.
- Regardless of value of javax.xml.stream.isCoalescing this method always returns coalesced content.
- <br /> Precondition: the current event is START_ELEMENT.
- <br /> Postcondition: the current event is the corresponding END_ELEMENT.
+							&nbsp;(Read Only)<div class="description">Reads the content of a text-only element, an exception is thrown if this is not a text-only element. This method
+ always returns coalesced content. <br />
+ Precondition: the current event is START_ELEMENT. <br />
+ Postcondition: the current event is the corresponding END_ELEMENT. <br />
+ The method does the following (implementations are free to be optimized but must do equivalent processing):
 
- <br />The method does the following (implementations are free to optimized
- but must do equivalent processing):
  <pre>
- if(getEventType() != XMLStreamConstants.START_ELEMENT) {
- throw new XMLStreamException(
- "parser must be on START_ELEMENT to read next text", getLocation());
+ if ( getEventType() != XMLStreamConstants.START_ELEMENT )
+ {
+     throw new XMLStreamException( "parser must be on START_ELEMENT to read next text", getLocation() );
  }
  int eventType = next();
  StringBuffer content = new StringBuffer();
- while(eventType != XMLStreamConstants.END_ELEMENT ) {
- if(eventType == XMLStreamConstants.CHARACTERS
- || eventType == XMLStreamConstants.CDATA
- || eventType == XMLStreamConstants.SPACE
- || eventType == XMLStreamConstants.ENTITY_REFERENCE) {
- buf.append(getText());
- } else if(eventType == XMLStreamConstants.PROCESSING_INSTRUCTION
- || eventType == XMLStreamConstants.COMMENT) {
- // skipping
- } else if(eventType == XMLStreamConstants.END_DOCUMENT) {
- throw new XMLStreamException(
- "unexpected end of document when reading element text content", this);
- } else if(eventType == XMLStreamConstants.START_ELEMENT) {
- throw new XMLStreamException(
- "element text content may not contain START_ELEMENT", getLocation());
- } else {
- throw new XMLStreamException(
- "Unexpected event type "+eventType, getLocation());
- }
- eventType = next();
+ while ( eventType != XMLStreamConstants.END_ELEMENT )
+ {
+     if ( eventType == XMLStreamConstants.CHARACTERS || eventType == XMLStreamConstants.CDATA
+         || eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.ENTITY_REFERENCE )
+     {
+         buf.append( getText() );
+     }
+     else if ( eventType == XMLStreamConstants.PROCESSING_INSTRUCTION || eventType == XMLStreamConstants.COMMENT )
+     {
+         // skipping
+     }
+     else if ( eventType == XMLStreamConstants.END_DOCUMENT )
+     {
+         throw new XMLStreamException( "unexpected end of document when reading element text content", this );
+     }
+     else if ( eventType == XMLStreamConstants.START_ELEMENT )
+     {
+         throw new XMLStreamException( "element text content may not contain START_ELEMENT", getLocation() );
+     }
+     else
+     {
+         throw new XMLStreamException( "Unexpected event type " + eventType, getLocation() );
+     }
+     eventType = next();
  }
  return buf.toString();
  </pre></div>
 </span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_io_XMLStreamReader.html#dw_io_XMLStreamReader_readElementText_DetailAnchor">readElementText()</a></span>
+</div>
+</div>
 </div>
 <div class="summaryItem">
 <span><a name="_DetailAnchor"></a>encoding
@@ -445,7 +453,7 @@
 </span>
 </div>
 <div class="summaryItem">
-<span><a name="_DetailAnchor"></a>XMLObject
+<span class="dep"><a name="_DetailAnchor"></a>XMLObject
 						&nbsp;:&nbsp;
 						
 					    
@@ -461,6 +469,12 @@
  method reads the stream up to the matching END_ELEMENT. When the method
  returns the current event is the END_ELEMENT event.</div>
 </span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_io_XMLStreamReader.html#dw_io_XMLStreamReader_readXMLObject_DetailAnchor">readXMLObject()</a></span>
+</div>
+</div>
 </div>
 </div>
 <div class="section">
@@ -561,7 +575,7 @@
 <div class="description">Returns the column number where the current event ends or -1 if none is available.</div>
 </div>
 <div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_io_XMLStreamReader_getElementText_DetailAnchor"><span class="">getElementText</span></a></span>()
+<span class="dep"><span class="emphasis"><a href="#dw_io_XMLStreamReader_getElementText_DetailAnchor"><span class="">getElementText</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
 <div class="description">Reads the content of a text-only element, an exception is thrown if this is not a text-only element.</div>
@@ -672,7 +686,7 @@
 <div class="description">Get the xml version declared on the xml declaration.</div>
 </div>
 <div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_io_XMLStreamReader_getXMLObject_DetailAnchor"><span class="">getXMLObject</span></a></span>()
+<span class="dep"><span class="emphasis"><a href="#dw_io_XMLStreamReader_getXMLObject_DetailAnchor"><span class="">getXMLObject</span></a></span>()
 						: 
 					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
 <div class="description">Reads a sub-tree of the XML document and parses it as XML object.</div>
@@ -745,6 +759,18 @@
 						: 
 					<a href="class_TopLevel_Number.html"><span class="">Number</span></a></span>
 <div class="description">Skips any white space (isWhiteSpace() returns true), COMMENT, or PROCESSING_INSTRUCTION, until a START_ELEMENT or END_ELEMENT is reached.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_io_XMLStreamReader_readElementText_DetailAnchor"><span class="">readElementText</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Reads the content of a text-only element, an exception is thrown if this is not a text-only element.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_io_XMLStreamReader_readXMLObject_DetailAnchor"><span class="">readXMLObject</span></a></span>()
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Reads a sub-tree of the XML document and parses it as XML object.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_io_XMLStreamReader_require_Number_String_String_DetailAnchor"><span class="">require</span></a></span>(type
@@ -1088,51 +1114,59 @@
 <div class="detailItem">
 <a name="dw_io_XMLStreamReader_getElementText_DetailAnchor"></a>
 <div class="detailName 
-						">getElementText</div>
+						dep">getElementText</div>
 <div class="detailSignature
-	    				">
+	    				dep">
 <span class="emphasis">getElementText</span>()
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Reads the content of a text-only element, an exception is thrown if this is
- not a text-only element.
- Regardless of value of javax.xml.stream.isCoalescing this method always returns coalesced content.
- <br /> Precondition: the current event is START_ELEMENT.
- <br /> Postcondition: the current event is the corresponding END_ELEMENT.
+<div class="description">Reads the content of a text-only element, an exception is thrown if this is not a text-only element. This method
+ always returns coalesced content. <br />
+ Precondition: the current event is START_ELEMENT. <br />
+ Postcondition: the current event is the corresponding END_ELEMENT. <br />
+ The method does the following (implementations are free to be optimized but must do equivalent processing):
 
- <br />The method does the following (implementations are free to optimized
- but must do equivalent processing):
  <pre>
- if(getEventType() != XMLStreamConstants.START_ELEMENT) {
- throw new XMLStreamException(
- "parser must be on START_ELEMENT to read next text", getLocation());
+ if ( getEventType() != XMLStreamConstants.START_ELEMENT )
+ {
+     throw new XMLStreamException( "parser must be on START_ELEMENT to read next text", getLocation() );
  }
  int eventType = next();
  StringBuffer content = new StringBuffer();
- while(eventType != XMLStreamConstants.END_ELEMENT ) {
- if(eventType == XMLStreamConstants.CHARACTERS
- || eventType == XMLStreamConstants.CDATA
- || eventType == XMLStreamConstants.SPACE
- || eventType == XMLStreamConstants.ENTITY_REFERENCE) {
- buf.append(getText());
- } else if(eventType == XMLStreamConstants.PROCESSING_INSTRUCTION
- || eventType == XMLStreamConstants.COMMENT) {
- // skipping
- } else if(eventType == XMLStreamConstants.END_DOCUMENT) {
- throw new XMLStreamException(
- "unexpected end of document when reading element text content", this);
- } else if(eventType == XMLStreamConstants.START_ELEMENT) {
- throw new XMLStreamException(
- "element text content may not contain START_ELEMENT", getLocation());
- } else {
- throw new XMLStreamException(
- "Unexpected event type "+eventType, getLocation());
- }
- eventType = next();
+ while ( eventType != XMLStreamConstants.END_ELEMENT )
+ {
+     if ( eventType == XMLStreamConstants.CHARACTERS || eventType == XMLStreamConstants.CDATA
+         || eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.ENTITY_REFERENCE )
+     {
+         buf.append( getText() );
+     }
+     else if ( eventType == XMLStreamConstants.PROCESSING_INSTRUCTION || eventType == XMLStreamConstants.COMMENT )
+     {
+         // skipping
+     }
+     else if ( eventType == XMLStreamConstants.END_DOCUMENT )
+     {
+         throw new XMLStreamException( "unexpected end of document when reading element text content", this );
+     }
+     else if ( eventType == XMLStreamConstants.START_ELEMENT )
+     {
+         throw new XMLStreamException( "element text content may not contain START_ELEMENT", getLocation() );
+     }
+     else
+     {
+         throw new XMLStreamException( "Unexpected event type " + eventType, getLocation() );
+     }
+     eventType = next();
  }
  return buf.toString();
  </pre></div>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_io_XMLStreamReader.html#dw_io_XMLStreamReader_readElementText_DetailAnchor">readElementText()</a></span>
+</div>
+</div>
 <hr>
 </div>
 <div class="detailItem">
@@ -1511,9 +1545,9 @@
 <div class="detailItem">
 <a name="dw_io_XMLStreamReader_getXMLObject_DetailAnchor"></a>
 <div class="detailName 
-						">getXMLObject</div>
+						dep">getXMLObject</div>
 <div class="detailSignature
-	    				">
+	    				dep">
 <span class="emphasis">getXMLObject</span>()
 					 : 
 					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
@@ -1528,6 +1562,12 @@
  more than the currently processed XML to keep memory consumption low. The
  method reads the stream up to the matching END_ELEMENT. When the method
  returns the current event is the END_ELEMENT event.</div>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Use <a href="class_dw_io_XMLStreamReader.html#dw_io_XMLStreamReader_readXMLObject_DetailAnchor">readXMLObject()</a></span>
+</div>
+</div>
 <hr>
 </div>
 <div class="detailItem">
@@ -1770,7 +1810,7 @@
  until a START_ELEMENT or END_ELEMENT is reached.
  If other than white space characters, COMMENT, PROCESSING_INSTRUCTION, START_ELEMENT, END_ELEMENT
  are encountered, an exception is thrown. This method should
- be used when processing element-only content seperated by white space.
+ be used when processing element-only content separated by white space.
 
  <br /> Precondition: none
  <br /> Postcondition: the current event is START_ELEMENT or END_ELEMENT
@@ -1778,19 +1818,20 @@
 
  <br />Essentially it does the following (implementations are free to optimized
  but must do equivalent processing):
+
  <pre>
  int eventType = next();
- while((eventType == XMLStreamConstants.CHARACTERS &amp;&amp; isWhiteSpace()) // skip whitespace
- || (eventType == XMLStreamConstants.CDATA &amp;&amp; isWhiteSpace())
- // skip whitespace
- || eventType == XMLStreamConstants.SPACE
- || eventType == XMLStreamConstants.PROCESSING_INSTRUCTION
- || eventType == XMLStreamConstants.COMMENT
- ) {
- eventType = next();
+ while ( (eventType == XMLStreamConstants.CHARACTERS &amp;&amp; isWhiteSpace() )
+       || (eventType == XMLStreamConstants.CDATA &amp;&amp; isWhiteSpace())
+       || eventType == XMLStreamConstants.SPACE
+       || eventType == XMLStreamConstants.PROCESSING_INSTRUCTION
+       || eventType == XMLStreamConstants.COMMENT )
+ {
+     eventType = next();
  }
- if (eventType != XMLStreamConstants.START_ELEMENT &amp;&amp; eventType != XMLStreamConstants.END_ELEMENT) {
- throw new String XMLStreamException("expected start or end tag", getLocation());
+ if ( eventType != XMLStreamConstants.START_ELEMENT &amp;&amp; eventType != XMLStreamConstants.END_ELEMENT )
+ {
+     throw new String XMLStreamException( "expected start or end tag", getLocation() );
  }
  return eventType;
  </pre></div>
@@ -1800,6 +1841,80 @@
 <span class="parameterDesc">the event type of the element read (START_ELEMENT or END_ELEMENT)</span>
 </div>
 </div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_io_XMLStreamReader_readElementText_DetailAnchor"></a>
+<div class="detailName 
+						">readElementText</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">readElementText</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Reads the content of a text-only element, an exception is thrown if this is not a text-only element. This method
+ always returns coalesced content. <br />
+ Precondition: the current event is START_ELEMENT. <br />
+ Postcondition: the current event is the corresponding END_ELEMENT. <br />
+ The method does the following (implementations are free to be optimized but must do equivalent processing):
+
+ <pre>
+ if ( getEventType() != XMLStreamConstants.START_ELEMENT )
+ {
+     throw new XMLStreamException( "parser must be on START_ELEMENT to read next text", getLocation() );
+ }
+ int eventType = next();
+ StringBuffer content = new StringBuffer();
+ while ( eventType != XMLStreamConstants.END_ELEMENT )
+ {
+     if ( eventType == XMLStreamConstants.CHARACTERS || eventType == XMLStreamConstants.CDATA
+         || eventType == XMLStreamConstants.SPACE || eventType == XMLStreamConstants.ENTITY_REFERENCE )
+     {
+         buf.append( getText() );
+     }
+     else if ( eventType == XMLStreamConstants.PROCESSING_INSTRUCTION || eventType == XMLStreamConstants.COMMENT )
+     {
+         // skipping
+     }
+     else if ( eventType == XMLStreamConstants.END_DOCUMENT )
+     {
+         throw new XMLStreamException( "unexpected end of document when reading element text content", this );
+     }
+     else if ( eventType == XMLStreamConstants.START_ELEMENT )
+     {
+         throw new XMLStreamException( "element text content may not contain START_ELEMENT", getLocation() );
+     }
+     else
+     {
+         throw new XMLStreamException( "Unexpected event type " + eventType, getLocation() );
+     }
+     eventType = next();
+ }
+ return buf.toString();
+ </pre></div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_io_XMLStreamReader_readXMLObject_DetailAnchor"></a>
+<div class="detailName 
+						">readXMLObject</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">readXMLObject</span>()
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Reads a sub-tree of the XML document and parses it as XML object.
+ <p/>
+ The stream must be positioned on a START_ELEMENT. Do not call the method
+ when the stream is positioned at document's root element. This would
+ cause the whole document to be parsed into a single XML what may lead to
+ an out-of-memory condition. Instead use #next() to navigate to
+ sub-elements and invoke getXMLObject() there. Do not keep references to
+ more than the currently processed XML to keep memory consumption low. The
+ method reads the stream up to the matching END_ELEMENT. When the method
+ returns the current event is the END_ELEMENT event.</div>
 <hr>
 </div>
 <div class="detailItem">
@@ -1864,7 +1979,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

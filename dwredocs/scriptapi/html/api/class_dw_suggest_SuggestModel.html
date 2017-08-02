@@ -156,6 +156,18 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_suggest_SuggestModel_addRefinementValues_String_String_DetailAnchor"><span class="">addRefinementValues</span></a></span>(attributeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, values
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					void</span>
+<div class="description">Adds a refinement for product suggestions.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_suggest_SuggestModel_getBrandSuggestions_DetailAnchor"><span class="">getBrandSuggestions</span></a></span>()
 						: 
 					<a href="class_dw_suggest_BrandSuggestions.html"><span class="">BrandSuggestions</span></a></span>
@@ -186,6 +198,18 @@
 <div class="description">Returns a <a href="class_dw_suggest_ProductSuggestions.html">ProductSuggestions</a> container for the current search phrase.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_suggest_SuggestModel_removeRefinementValues_String_String_DetailAnchor"><span class="">removeRefinementValues</span></a></span>(attributeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, values
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					void</span>
+<div class="description">Removes a refinement.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_suggest_SuggestModel_setCategoryID_String_DetailAnchor"><span class="">setCategoryID</span></a></span>(categoryID
 								 : 	
 								 
@@ -202,6 +226,18 @@
 						: 
 					void</span>
 <div class="description">Use this method to setup the maximum number of returned suggested items.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_suggest_SuggestModel_setRefinementValues_String_String_DetailAnchor"><span class="">setRefinementValues</span></a></span>(attributeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, values
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					void</span>
+<div class="description">Sets product suggestion refinement values for an attribute.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_suggest_SuggestModel_setSearchPhrase_String_DetailAnchor"><span class="">setSearchPhrase</span></a></span>(searchPhrase
@@ -241,6 +277,40 @@
 <div class="header">
 			Method Detail
 		</div>
+<div class="detailItem">
+<a name="dw_suggest_SuggestModel_addRefinementValues_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">addRefinementValues</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">addRefinementValues</span>(attributeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, values
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					void</div>
+<div class="description">Adds a refinement for product suggestions.
+ The method can be called to add an additional query
+ parameter specified as name-value pair. The values string may encode
+ multiple values delimited by the pipe symbol ('|').</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">attributeID</span>
+						 - 
+						<span class="parameterDesc">The ID of the refinement attribute.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">values</span>
+						 - 
+						<span class="parameterDesc">the refinement value to set</span>
+</div>
+</div>
+<hr>
+</div>
 <div class="detailItem">
 <a name="dw_suggest_SuggestModel_getBrandSuggestions_DetailAnchor"></a>
 <div class="detailName 
@@ -408,6 +478,39 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_suggest_SuggestModel_removeRefinementValues_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">removeRefinementValues</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">removeRefinementValues</span>(attributeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, values
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					void</div>
+<div class="description">Removes a refinement. The method can be called to remove previously added
+ refinement values. The values string may encode multiple values delimited
+ by the pipe symbol ('|').</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">attributeID</span>
+						 - 
+						<span class="parameterDesc">The ID of the refinement attribute.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">values</span>
+						 - 
+						<span class="parameterDesc">the refinement value to remove or null to remove all values</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_suggest_SuggestModel_setCategoryID_String_DetailAnchor"></a>
 <div class="detailName 
 						">setCategoryID</div>
@@ -465,6 +568,41 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_suggest_SuggestModel_setRefinementValues_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">setRefinementValues</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setRefinementValues</span>(attributeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, values
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets product suggestion refinement values for an attribute.
+ The method can be called to set
+ an additional query parameter specified as name-value pair. The value
+ string may encode multiple values delimited by the pipe symbol ('|').
+ Existing refinement values for the attribute will be removed.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">attributeID</span>
+						 - 
+						<span class="parameterDesc">The ID of the refinement attribute.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">values</span>
+						 - 
+						<span class="parameterDesc">the refinement values to set (delimited by '|') or null to remove all values</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_suggest_SuggestModel_setSearchPhrase_String_DetailAnchor"></a>
 <div class="detailName 
 						">setSearchPhrase</div>
@@ -506,7 +644,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

@@ -165,7 +165,7 @@
      <td>Format an image</td>
      <td><code>format</code></td>
      <td>
-         The <code>format</code> parameter specifies the target format of
+         The <code>format</code> parameter specifies the target format of the
          image. Supported formats are <code>png</code>, <code>jpg</code>, and
          <code>gif</code>. If no target format is specified, no format
          conversion is performed.<p/>
@@ -182,6 +182,29 @@
          URL parameter.
      </td>
  </tr>
+ <tr>
+     <td>Adjust image compression quality</td>
+     <td><code>quality</code></td>
+     <td>
+         The <code>quality</code> parameter specifies the compression quality of
+         the image. Depending on the target image format, this might result in changes
+         to the visual quality of the image as well.
+
+         Valid values for the <code>quality</code> parameter are between 1 and 100. The default is 80.
+     </td>
+ </tr>
+ <tr>
+     <td>Adjust Metadata stripping</td>
+     <td><code>strip</code></td>
+     <td>
+         The <code>strip</code> parameter specifies if metadata like EXIF and color profiles is
+         stripped from the image during transformation.
+
+         Valid values for the <code>strip</code> parameter are between <code>true</code> and <code>false</code>.
+         The default is <code>true</code>
+     </td>
+ </tr>
+
  </table>
 
  Example:<p/>
@@ -3408,7 +3431,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

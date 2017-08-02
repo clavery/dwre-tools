@@ -967,7 +967,7 @@
 <div class="description">Returns the collection of <a href="class_dw_order_Invoice.html">Invoice</a>s associated with this order.</div>
 </div>
 <div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor"><span class="">getOrderExportXML</span></a></span>(encryptionMethod
+<span class="dep"><span class="emphasis"><a href="#dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor"><span class="">getOrderExportXML</span></a></span>(encryptionMethod
 								 : 	
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
@@ -977,6 +977,18 @@
 								 : 	
 								 
 								boolean)
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the order export XML as String object.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_order_Order_getOrderExportXML_String_String_DetailAnchor"><span class="">getOrderExportXML</span></a></span>(encryptionMethod
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
 <div class="description">Returns the order export XML as String object.</div>
@@ -2319,9 +2331,9 @@
 <div class="detailItem">
 <a name="dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor"></a>
 <div class="detailName 
-						">getOrderExportXML</div>
+						dep">getOrderExportXML</div>
 <div class="detailSignature
-	    				">
+	    				dep">
 <span class="emphasis">getOrderExportXML</span>(encryptionMethod
 								 : 
 								 
@@ -2337,16 +2349,26 @@
 </div>
 <div class="description">Returns the order export XML as String object.
  <p/>
- Example:
+ NOTE: This method is deprecated and will be removed soon. Use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a> instead.
  <p/>
+ Example:
  <pre>
      var orderXmlAsString : String = order.getOrderExportXML(null, null, false);
      var orderXml : XML = new XML(orderXmlAsString);
  </pre>
- <p/>
  This method can be called for placed orders only, otherwise an exception will be thrown.
  <br/>
  Also, an exception will be thrown if the method is called in a transaction with changes.</div>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a></span>
+</div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2362,12 +2384,62 @@
 <div class="parameterDetail">
 <span class="parameterName">encryptUsingEKID</span>
 						 - 
-						<span class="parameterDesc">the flag whether the initial encryption key ID to be used for the the payment instruments; when it is <code>true</code>, <code>encryptionMethod</code> and <code>encryptionKey</code> parameters are ignored</span>
+						<span class="parameterDesc">ignored</span>
 </div>
 </div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the order export XML</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_order_Order_getOrderExportXML_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">getOrderExportXML</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getOrderExportXML</span>(encryptionMethod
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the order export XML as String object.
+ <p/>
+ Example:
+ <pre>
+     var orderXmlAsString : String = order.getOrderExportXML(null, null);
+     var orderXml : XML = new XML(orderXmlAsString);
+ </pre>
+ This method can be called for placed orders only, otherwise an exception will be thrown.
+ <br/>
+ Also, an exception will be thrown if the method is called in a transaction with changes.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">encryptionMethod</span>
+						 - 
+						<span class="parameterDesc">the algorithm to be used for the encryption of the payment instruments if order payments re-encryption is needed</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">encryptionKey</span>
+						 - 
+						<span class="parameterDesc">the base64 encoded form of the public key to be used to encrypt the payment instruments if order payments re-encryption is needed</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
@@ -3949,7 +4021,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

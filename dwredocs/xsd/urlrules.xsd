@@ -19,6 +19,7 @@
             <xsd:element name="category-rule" type="CategoryRule" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="category-page-url-override" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="category-trailing-slash" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="category-offline-url-generation" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="category-search-refinement-url-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="category-search-refinements" type="URLSearchRefinements" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="product-rule" type="ProductRule" minOccurs="0" maxOccurs="1"/>
@@ -27,6 +28,7 @@
             <xsd:element name="folder-rule" type="FolderRule" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="folder-page-url-override" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="folder-trailing-slash" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="folder-offline-url-generation" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="folder-search-refinement-url-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
             <xsd:element name="folder-search-refinements" type="URLSearchRefinements" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="content-rule" type="ContentRule" minOccurs="0" maxOccurs="1"/>

@@ -76,6 +76,7 @@
         <xsd:sequence>
             <xsd:element name="environment-configuration" type="complexType.FacebookEnvironmentConfiguration" minOccurs="1" maxOccurs="1" />
             <xsd:element name="notification-email" type="simpleType.Email" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="notification-status" type="complexType.FacebookNotificationStatus" minOccurs="0" maxOccurs="1" />
             <xsd:element name="catalog-feed" type="complexType.FacebookCatalogFeed" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
@@ -99,6 +100,7 @@
             <xsd:element name="access-token" type="simpleType.Generic.String" minOccurs="0" maxOccurs="1" />
             <xsd:element name="pixel-code-injected-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="default-product-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="redirect-action" type="simpleType.FacebookRedirectAction" minOccurs="0" maxOccurs="1" />
             <xsd:element name="product-image-view-type" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="color-variation-attribute" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="size-variation-attribute" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
@@ -168,6 +170,14 @@
     </xsd:complexType>
 
     <xsd:complexType name="complexType.ApplePayMerchantCapability" mixed="false"></xsd:complexType>
+
+    <xsd:complexType name="complexType.FacebookNotificationStatus">
+        <xsd:sequence>
+            <xsd:element name="error" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="exception" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="success" type="EmptyElement" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
 
     <xsd:complexType name="complexType.AndroidPay">
         <xsd:sequence>
@@ -316,6 +326,13 @@
     <xsd:simpleType name="simpleType.AndroidPayEnvironment">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="test" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.FacebookRedirectAction">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="add-to-cart" />
+            <xsd:enumeration value="view-product" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

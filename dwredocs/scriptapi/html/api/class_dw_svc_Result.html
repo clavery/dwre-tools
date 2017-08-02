@@ -73,6 +73,46 @@
 <div class="description">Status indicating the service is unavailable. This includes timeouts, rate limits, and remote server issues.</div>
 </span>
 </div>
+<div class="summaryItem">
+<span><a name="dw_svc_Result_UNAVAILABLE_CIRCUIT_BROKEN_DetailAnchor"></a>UNAVAILABLE_CIRCUIT_BROKEN
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Unavailable reason: No call was made because the circuit breaker prevented it.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_svc_Result_UNAVAILABLE_CONFIG_PROBLEM_DetailAnchor"></a>UNAVAILABLE_CONFIG_PROBLEM
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Unavailable reason: No call was made because the service was not configured correctly.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_svc_Result_UNAVAILABLE_DISABLED_DetailAnchor"></a>UNAVAILABLE_DISABLED
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Unavailable reason: No call was made because the service is disabled.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_svc_Result_UNAVAILABLE_RATE_LIMITED_DetailAnchor"></a>UNAVAILABLE_RATE_LIMITED
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Unavailable reason: No call was made because the rate limit was hit.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_svc_Result_UNAVAILABLE_TIMEOUT_DetailAnchor"></a>UNAVAILABLE_TIMEOUT
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Unavailable reason: A real call was made but a timeout occurred.</div>
+</span>
+</div>
 </div>
 <div class="section">
 <div class="header">Properties</div>
@@ -137,7 +177,18 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The status. This is "OK" on success. Failure codes include "ERROR" and "SERVICE_UNAVAILABLE".</div>
+							&nbsp;(Read Only)<div class="description">The status. This is "OK" on success. Failure codes include "ERROR" and "SERVICE_UNAVAILABLE".
+ <p>
+ If the status is "SERVICE_UNAVAILABLE", then the unavailableReason is guaranteed to be non-null.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>unavailableReason
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The reason the status is SERVICE_UNAVAILABLE.</div>
 </span>
 </div>
 </div>
@@ -183,6 +234,12 @@
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
 <div class="description">Returns the status.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_Result_getUnavailableReason_DetailAnchor"><span class="">getUnavailableReason</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the reason the status is SERVICE_UNAVAILABLE.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_svc_Result_isMockResult_DetailAnchor"><span class="">isMockResult</span></a></span>()
@@ -318,7 +375,9 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the status. This is "OK" on success. Failure codes include "ERROR" and "SERVICE_UNAVAILABLE".</div>
+<div class="description">Returns the status. This is "OK" on success. Failure codes include "ERROR" and "SERVICE_UNAVAILABLE".
+ <p>
+ If the status is "SERVICE_UNAVAILABLE", then the unavailableReason is guaranteed to be non-null.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
@@ -338,6 +397,49 @@
 </div>
 <div class="parameterDetail">
 <span class="parameterDesc"><a href="class_dw_svc_Result.html#dw_svc_Result_SERVICE_UNAVAILABLE_DetailAnchor">SERVICE_UNAVAILABLE</a></span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_Result_getUnavailableReason_DetailAnchor"></a>
+<div class="detailName 
+						">getUnavailableReason</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getUnavailableReason</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the reason the status is SERVICE_UNAVAILABLE.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Unavailable reason code, or null if the status is not SERVICE_UNAVAILABLE.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_svc_Result.html#dw_svc_Result_UNAVAILABLE_TIMEOUT_DetailAnchor">UNAVAILABLE_TIMEOUT</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_svc_Result.html#dw_svc_Result_UNAVAILABLE_CIRCUIT_BROKEN_DetailAnchor">UNAVAILABLE_CIRCUIT_BROKEN</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_svc_Result.html#dw_svc_Result_UNAVAILABLE_RATE_LIMITED_DetailAnchor">UNAVAILABLE_RATE_LIMITED</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_svc_Result.html#dw_svc_Result_UNAVAILABLE_DISABLED_DetailAnchor">UNAVAILABLE_DISABLED</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_svc_Result.html#dw_svc_Result_UNAVAILABLE_CONFIG_PROBLEM_DetailAnchor">UNAVAILABLE_CONFIG_PROBLEM</a></span>
 </div>
 <div class="parameterDetail"></div>
 </div>
@@ -401,7 +503,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

@@ -41,10 +41,10 @@
 <div class="classSummary">
 <div class="classSummaryDetail">
 <div class="description">This class provides support for rendering ISML templates. For more details about the ISML syntax, refer to the
- Commerce Cloud Digital developer documentation. Templates are stored as *.isml files. They are located in a locale-specific
- folder under the '/cartridge/templates' folder, with '/cartridge/template/default' being the default locale. The
- template name arguments of the various render methods represent the template path (without file ending) within this
- folder structure.
+ Commerce Cloud Digital developer documentation. Templates are stored as *.isml files. They are located in a
+ locale-specific folder under the '/cartridge/templates' folder, with '/cartridge/template/default' being the default
+ locale. The template name arguments of the various render methods represent the template path (without file ending)
+ within this folder structure.
  <p/>
  Example for rendering a template with arguments from JavaScript code:
 
@@ -77,7 +77,7 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
-<span>static&nbsp;<span class="emphasis"><a href="#dw_template_ISML_renderTemplate_String_DetailAnchor"><span class="">renderTemplate</span></a></span>(template
+<span>static&nbsp;<span class="emphasis"><a href="#dw_template_ISML_renderTemplate_2_String_DetailAnchor"><span class="">renderTemplate</span></a></span>(template
 								 : 	
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
@@ -86,7 +86,7 @@
 <div class="description">Renders an ISML template and writes the output to the current response.</div>
 </div>
 <div class="summaryItem">
-<span>static&nbsp;<span class="emphasis"><a href="#dw_template_ISML_renderTemplate_String_Object_DetailAnchor"><span class="">renderTemplate</span></a></span>(template
+<span>static&nbsp;<span class="emphasis"><a href="#dw_template_ISML_renderTemplate_2_String_Object_DetailAnchor"><span class="">renderTemplate</span></a></span>(template
 								 : 	
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>, templateArgs
@@ -113,7 +113,7 @@
 			Method Detail
 		</div>
 <div class="detailItem">
-<a name="dw_template_ISML_renderTemplate_String_DetailAnchor"></a>
+<a name="dw_template_ISML_renderTemplate_2_String_DetailAnchor"></a>
 <div class="detailName 
 						">renderTemplate</div>
 <div class="detailSignature
@@ -127,6 +127,12 @@
  control the character encoding, content type, caching behavior and so on of the response (see ISML
  documentation).</div>
 <div class="parameters">
+<span class="parameterTitle">API Versioned:</span>
+<div class="parameterDetail">
+				From version 17.7. 
+				Keeps template arguments in a local pipeline dictionary scope. This avoids side-effects on other templates.</div>
+</div>
+<div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
 <span class="parameterName">template</span>
@@ -137,7 +143,7 @@
 <hr>
 </div>
 <div class="detailItem">
-<a name="dw_template_ISML_renderTemplate_String_Object_DetailAnchor"></a>
+<a name="dw_template_ISML_renderTemplate_2_String_Object_DetailAnchor"></a>
 <div class="detailName 
 						">renderTemplate</div>
 <div class="detailSignature
@@ -154,6 +160,12 @@
  control the character encoding, content type, caching behavior and so on of the response (see ISML
  documentation). This method takes an additional JavaScript object as argument. Its properties are accessible for
  script expressions in the template under the "pdict.*" variable.</div>
+<div class="parameters">
+<span class="parameterTitle">API Versioned:</span>
+<div class="parameterDetail">
+				From version 17.7. 
+				Keeps template arguments in a local pipeline dictionary scope. This avoids side-effects on other templates.</div>
+</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -172,7 +184,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

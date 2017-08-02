@@ -245,6 +245,15 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_io_File_copyTo_File_DetailAnchor"><span class="">copyTo</span></a></span>(file
+								 : 	
+								 
+								<a href="class_dw_io_File.html"><span class="">File</span></a>)
+						: 
+					<a href="class_dw_io_File.html"><span class="">File</span></a></span>
+<div class="description">Copy a file.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_io_File_createNewFile_DetailAnchor"><span class="">createNewFile</span></a></span>()
 						: 
 					boolean</span>
@@ -482,6 +491,57 @@
 <div class="header">
 			Method Detail
 		</div>
+<div class="detailItem">
+<a name="dw_io_File_copyTo_File_DetailAnchor"></a>
+<div class="detailName 
+						">copyTo</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">copyTo</span>(file
+								 : 
+								 
+								<a href="class_dw_io_File.html"><span class="">File</span></a>)
+					 : 
+					<a href="class_dw_io_File.html"><span class="">File</span></a>
+</div>
+<div class="description">Copy a file. Directories cannot be copied. This method cannot be used from storefront requests.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">file</span>
+						 - 
+						<span class="parameterDesc">the File object to copy to</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">a reference to the copied file.</span>
+</div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">IOException						
+						 - 
+						 <span class="parameterDesc">if there is an interruption during file copy.</span>
+</div>
+<div class="parameterDetail">FileAlreadyExistsException						
+						 - 
+						 <span class="parameterDesc">if the file to copy to already exists</span>
+</div>
+<div class="parameterDetail">UnsupportedOperationException						
+						 - 
+						 <span class="parameterDesc">if invoked from a storefront request</span>
+</div>
+</div>
+<hr>
+</div>
 <div class="detailItem">
 <a name="dw_io_File_createNewFile_DetailAnchor"></a>
 <div class="detailName 
@@ -1125,7 +1185,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

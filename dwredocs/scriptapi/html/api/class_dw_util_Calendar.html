@@ -420,8 +420,8 @@
 <div class="description">The current time stamp of this calendar. This method
  is also used to convert a Calendar into a Date.<br/>
  <br/>
- <b>WARNING:</b> Keep in mind that the returned Date object is always
-          in the time zone GMT. That means that time zone information
+ <b>WARNING:</b> Keep in mind that the returned Date object's time is always
+          interpreted in the time zone GMT. This means time zone information
           set at the calendar object will not be honored and gets lost.</div>
 </span>
 </div>
@@ -606,6 +606,15 @@
 <div class="description">Checks, whether two calendar dates fall on the same day.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_util_Calendar_isSameDayByTimestamp_Calendar_DetailAnchor"><span class="">isSameDayByTimestamp</span></a></span>(other
+								 : 	
+								 
+								<a href="class_dw_util_Calendar.html"><span class="">Calendar</span></a>)
+						: 
+					boolean</span>
+<div class="description">Checks, whether two calendar dates fall on the same day.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_util_Calendar_isSet_Number_DetailAnchor"><span class="">isSet</span></a></span>(field
 								 : 	
 								 
@@ -753,7 +762,7 @@
 								<a href="class_TopLevel_Date.html"><span class="">Date</span></a>)
 						: 
 					void</span>
-<div class="description">Sets the current time stamp of this calendar.<br/> <br/> <b>WARNING:</b> Keep in mind that the set Date object is always interpreted in the time zone GMT.</div>
+<div class="description">Sets the current time stamp of this calendar.<br/> <br/> <b>WARNING:</b> Keep in mind that the set Date object's time is always interpreted in the time zone GMT.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_util_Calendar_setTimeZone_String_DetailAnchor"><span class="">setTimeZone</span></a></span>(timeZone
@@ -762,7 +771,7 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					void</span>
-<div class="description">Sets the current time zone of this calendar.</div>
+<div class="description">Sets the current time zone of this calendar.<br/> <br/> <b>WARNING:</b> Keep in mind that the time stamp represented by the calendar is always interpreted in the time zone GMT.</div>
 </div>
 </div>
 <div class="section">
@@ -786,7 +795,12 @@
 <div class="detailSignature
 	    				">public&nbsp;<span class="emphasis">Calendar</span>()</div>
 <div class="description">Creates a new Calendar object that is set to the current
- time. The default time zone of the Calendar object is GMT.</div>
+ time. The default time zone of the Calendar object is GMT.<br/>
+ <br/>
+ <b>WARNING:</b> Keep in mind that the time stamp represented by the new calendar
+          is always interpreted in the time zone GMT. This means time zone
+          information at the calendar object needs to be set separately by
+          using the <a href="class_dw_util_Calendar.html#dw_util_Calendar_setTimeZone_String_DetailAnchor">setTimeZone(String)</a> method.</div>
 <hr>
 </div>
 <div class="detailItem">
@@ -798,8 +812,13 @@
 								 : 
 								 					
 								<a href="class_TopLevel_Date.html"><span class="">Date</span></a>)</div>
-<div class="description">Creates a new Calendar object for the given Date object.
- The default time zone of the Calendar object is GMT.</div>
+<div class="description">Creates a new Calendar object for the given Date object. The time is set to
+ the given Date object's time. The default time zone of the Calendar object is GMT.<br/>
+ <br/>
+ <b>WARNING:</b> Keep in mind that the given Date object is always
+          interpreted in the time zone GMT. This means time zone
+          information at the calendar object needs to be set separately by
+          using the <a href="class_dw_util_Calendar.html#dw_util_Calendar_setTimeZone_String_DetailAnchor">setTimeZone(String)</a> method.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1194,8 +1213,8 @@
 <div class="description">Returns the current time stamp of this calendar. This method
  is also used to convert a Calendar into a Date.<br/>
  <br/>
- <b>WARNING:</b> Keep in mind that the returned Date object is always
-          in the time zone GMT. That means that time zone information
+ <b>WARNING:</b> Keep in mind that the returned Date object's time is always
+          interpreted in the time zone GMT. This means time zone information
           set at the calendar object will not be honored and gets lost.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -1280,13 +1299,73 @@
 					 : 
 					boolean</div>
 <div class="description">Checks, whether two calendar dates fall on the same day.
-
- The method does not consider differences between timezones.
-
- Some examples:
-  28 Mar 2002 13:45 and 28 Mar 2002 06:01 would return true.
-  28 Mar 2002 13:45 and 12 Mar 2002 13:45 would return false.
-  28 Mar 2002 13:45 and 28 Mar 1970 13:45 would return false.</div>
+ <p>
+ The method performs comparison based on both calendar's
+ field values by honoring the defined time zones.
+ </p>
+ <p>
+ Examples:
+ <br/>
+ <pre>new Calendar( new Date( "2002/02/28 13:45" ).isSameDay( new Calendar( new Date( "2002/02/28 06:01" ) ) );</pre>
+ would return true.
+ <pre>new Calendar( new Date( "2002/02/28 13:45" ).isSameDay( new Calendar( new Date( "2002/02/12 13:45" ) ) );</pre>
+ would return false.
+ <pre>new Calendar( new Date( "2002/02/28 13:45" ).isSameDay( new Calendar( new Date( "1970/02/28 13:45" ) ) );</pre>
+ would return false.
+ <pre>
+ var cal1 = new Calendar( new Date( "2002/02/28 02:00" );
+ cal1.setTimeZone( "Etc/GMT+1" );
+ var cal2 = new Calendar( new Date( "2002/02/28 00:00" );
+ cal2.setTimeZone( "Etc/GMT+1" );
+ cal1.isSameDay( cal2 );</pre>
+ would return false since the time zone is applied first which results in comparing <code>2002/02/28 01:00</code> for <code>cal1</code>
+ with <code>2002/02/27 23:00</code> for <code>cal2</code>.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">other</span>
+						 - 
+						<span class="parameterDesc">the calendar to compare against this calendar.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_util_Calendar_isSameDayByTimestamp_Calendar_DetailAnchor"></a>
+<div class="detailName 
+						">isSameDayByTimestamp</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isSameDayByTimestamp</span>(other
+								 : 
+								 
+								<a href="class_dw_util_Calendar.html"><span class="">Calendar</span></a>)
+					 : 
+					boolean</div>
+<div class="description">Checks, whether two calendar dates fall on the same day.
+ <p>
+ The method performs comparison based on both calendar's
+ time stamps by ignoring any defined time zones.
+ </p>
+ <p>
+ Examples:
+ <br/>
+ <pre>new Calendar( new Date( "2002/02/28 13:45" ).isSameDayByTimestamp( new Calendar( new Date( "2002/02/28 06:01" ) ) );</pre>
+ would return true.
+ <pre>new Calendar( new Date( "2002/02/28 13:45" ).isSameDayByTimestamp( new Calendar( new Date( "2002/02/12 13:45" ) ) );</pre>
+ would return false.
+ <pre>new Calendar( new Date( "2002/02/28 13:45" ).isSameDayByTimestamp( new Calendar( new Date( "1970/02/28 13:45" ) ) );</pre>
+ would return false.
+ <pre>
+ var cal1 = new Calendar( new Date( "2002/02/28 02:00" );
+ cal1.setTimeZone( "Etc/GMT+1" );
+ var cal2 = new Calendar( new Date( "2002/02/28 00:00" );
+ cal2.setTimeZone( "Etc/GMT+1" );
+ cal1.isSameDayByTimestamp( cal2 );</pre>
+ would return true since the time zone is not applied first which results in comparing <code>2002/02/28 02:00</code> for <code>cal1</code>
+ with <code>2002/02/28 00:00</code> for <code>cal2</code>.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1693,8 +1772,8 @@
 					void</div>
 <div class="description">Sets the current time stamp of this calendar.<br/>
  <br/>
- <b>WARNING:</b> Keep in mind that the set Date object is always
-          interpreted in the time zone GMT. That means that time zone
+ <b>WARNING:</b> Keep in mind that the set Date object's time is always
+          interpreted in the time zone GMT. This means that time zone
           information at the calendar object needs to be set separately by
           using the <a href="class_dw_util_Calendar.html#dw_util_Calendar_setTimeZone_String_DetailAnchor">setTimeZone(String)</a> method.</div>
 <div class="parameters">
@@ -1719,7 +1798,11 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets the current time zone of this calendar.</div>
+<div class="description">Sets the current time zone of this calendar.<br/>
+ <br/>
+ <b>WARNING:</b> Keep in mind that the time stamp represented by the calendar is
+          always interpreted in the time zone GMT. Changing the time zone will not
+          change the calendar's time stamp.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1733,7 +1816,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.6<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>
