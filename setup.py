@@ -10,8 +10,8 @@ except ImportError:
 
 setup(
     name='dwre-tools',
-    version='1.6.5',
-    description='Demandware tools',
+    version='1.6.6',
+    description='SFCC (Demandware) tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',
     url='https://bitbucket.org/pixelmedia/dwre-dwre-tools',
@@ -20,6 +20,7 @@ setup(
     install_requires=['requests == 2.7.0',
                       'colorama >= 0.3.3',
                       'pyquery >= 1.2.9',
+                      'pytz==2016.10',
                       'lxml >= 3.4.4',
                       'pyyaml >= 3.11',
                       'flask == 0.10.1',

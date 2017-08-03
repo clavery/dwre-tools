@@ -2,8 +2,13 @@ from __future__ import print_function
 
 from xml.etree import ElementTree as ET
 from datetime import datetime
+import pytz
 
 import requests
+
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+}
 
 # File node reference
 # <ns0:response xmlns:ns0="DAV:"><ns0:href>/on/demandware.servlet/webdav/Sites/Logs/warn-blade1-4.mon.demandware.net-appserver-20170723.log</ns0:href>
@@ -23,9 +28,10 @@ def get_directories(tree, root):
     return sorted([n.text for n in names if root != n.text])
 
 
-# Fri, 15 May 2015 15:37:14 GMT
 def file_convert_date(filetup):
-    return (filetup[0], datetime.strptime(filetup[1], "%a, %d %b %Y %H:%M:%S GMT"))
+    tup = (filetup[0], datetime.strptime(filetup[1], "%a, %d %b %Y %H:%M:%S GMT"))
+    tup = (tup[0], tup[1].replace(tzinfo=pytz.utc))
+    return tup
 
 def get_files(tree):
     filenodes = [n for n in tree.iterfind("./") if not n.findall(".//{DAV:}collection")]
@@ -35,7 +41,7 @@ def get_files(tree):
 
 
 def list_dir(location, username, password):
-    response = requests.request('PROPFIND', location, auth=(username, password))
+    response = requests.request('PROPFIND', location, auth=(username, password), headers=HEADERS)
     response.raise_for_status()
     x = ET.fromstring(response.content)
     return ( get_directories(x, ''), get_files(x) )

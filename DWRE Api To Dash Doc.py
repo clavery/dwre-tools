@@ -7,7 +7,7 @@
 # - copy scriptapi/api to Documents/api and pipeletapi/api to Documents/pipelet (i.e. rename folder to pipelet)
 # - Run this script
 
-# In[1]:
+
 
 from pyquery import PyQuery as pq
 import sqlite3
@@ -20,7 +20,7 @@ from markdown.extensions.codehilite import CodeHiliteExtension
 from jinja2 import Template
 
 
-# In[2]:
+
 
 PLIST = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -40,7 +40,7 @@ PLIST = """<?xml version="1.0" encoding="UTF-8"?>
 
 # # Init
 
-# In[3]:
+
 
 shutil.rmtree("./DWREApiDoc.docset/Contents/")
 
@@ -61,14 +61,14 @@ conn.commit()
 
 # # Script API
 
-# In[4]:
+
 
 if os.path.exists("./DWREApiDoc.docset/Contents/Resources/Documents/api"):
     shutil.rmtree("./DWREApiDoc.docset/Contents/Resources/Documents/api")
 shutil.copytree("./dwredocs/scriptapi/html/api", "./DWREApiDoc.docset/Contents/Resources/Documents/api")
 
 
-# In[5]:
+
 
 with open("./DWREApiDoc.docset/Contents/Resources/Documents/api/classList.html", "r") as f:
     d = pq(f.read())
@@ -92,14 +92,14 @@ def test():
 
 # # Pipelet API
 
-# In[6]:
+
 
 if os.path.exists("./DWREApiDoc.docset/Contents/Resources/Documents/pipelet/"):
     shutil.rmtree("./DWREApiDoc.docset/Contents/Resources/Documents/pipelet/")
 shutil.copytree("./dwredocs/pipeletapi/html/api/", "./DWREApiDoc.docset/Contents/Resources/Documents/pipelet")
 
 
-# In[7]:
+
 
 with open("./DWREApiDoc.docset/Contents/Resources/Documents/pipelet/pipeletList.html", "r") as f:
     d = pq(f.read())
@@ -120,7 +120,7 @@ conn.commit()
 
 # # Sample/Guides
 
-# In[8]:
+
 
 with open('./dwredocs/guidetemplate.html', 'r') as f:
     template_src = f.read()
@@ -147,7 +147,7 @@ conn.commit()
 
 # # ISML Tags
 
-# In[9]:
+
 
 if not os.path.exists('./DWREApiDoc.docset/Contents/Resources/Documents/isml/'):
     os.makedirs('./DWREApiDoc.docset/Contents/Resources/Documents/isml/')
@@ -165,7 +165,7 @@ conn.commit()
 
 # # Schemas
 
-# In[10]:
+
 
 with open('./dwredocs/schematemplate.html', 'r') as f:
     template_src = f.read()
@@ -196,12 +196,12 @@ for f in os.listdir('./dwredocs/xsd/'):
 conn.commit()
 
 
-# In[78]:
+
 
 conn.close()
 
 
-# In[ ]:
+
 
 
 

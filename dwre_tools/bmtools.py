@@ -47,6 +47,14 @@ def login_business_manager(env, session):
         raise RuntimeError("Invalid login or password")
 
 
+def select_site(env, session, site_uuid):
+    data = {
+        "SelectedSiteID" : site_uuid
+    }
+    resp = session.post("https://{}/on/demandware.store/Sites-Site/default/ViewApplication-SelectSite?MenuGroupID=ChannelMenu&ChannelID=".format(env["server"]), data=data)
+    resp.raise_for_status()
+
+
 def activate_code_version(env, session, code_version):
     response = session.post("https://{}/on/demandware.store/Sites-Site/default/ViewCodeDeployment-Activate".format(env["server"]),
                             data=dict(
@@ -128,6 +136,7 @@ def wait_for_export(env, session, filename):
             raise RuntimeError("Failure to import %s. Check import log." % filename)
         else:
             time.sleep(2)
+
 
 def get_export_zip(env, bmsession, webdavsession, export_units, filename):
     export_data_units(env, bmsession, export_units, filename)

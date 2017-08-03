@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.6.6
+
+- consolidating code from magnet tools to use DWRE tools as source library
+
 ## 1.6.5
 
 - update to 17.7 docs and schemas
