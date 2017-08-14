@@ -67,6 +67,8 @@ def validate_xml(xml, throw=True):
     schema_name = None
     if None in root_el.nsmap:
         schema_name = NSMAP.get(root_el.nsmap[None], SCHEMA_MAP.get(root_tag))
+    elif root_tag in SCHEMA_MAP:
+        schema_name = SCHEMA_MAP.get(root_tag)
 
     if not schema_name:
         return

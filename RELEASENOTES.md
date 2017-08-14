@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.6.7
+
+- better schema map search
+
 ## 1.6.6
 
 - consolidating code from magnet tools to use DWRE tools as source library
