@@ -7,7 +7,8 @@ import pytz
 import requests
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+    'User-Agent':
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
 }
 
 # File node reference
@@ -23,6 +24,7 @@ HEADERS = {
 # </ns0:propstat>
 # </ns0:response>
 
+
 def get_directories(tree, root):
     names = tree.findall(".//{DAV:}collection/../../{DAV:}displayname")
     return sorted([n.text for n in names if root != n.text])
@@ -32,6 +34,7 @@ def file_convert_date(filetup):
     tup = (filetup[0], datetime.strptime(filetup[1], "%a, %d %b %Y %H:%M:%S GMT"))
     tup = (tup[0], tup[1].replace(tzinfo=pytz.utc))
     return tup
+
 
 def get_files(tree):
     filenodes = [n for n in tree.iterfind("./") if not n.findall(".//{DAV:}collection")]
@@ -44,20 +47,19 @@ def list_dir(location, username, password):
     response = requests.request('PROPFIND', location, auth=(username, password), headers=HEADERS)
     response.raise_for_status()
     x = ET.fromstring(response.content)
-    return ( get_directories(x, ''), get_files(x) )
+    return (get_directories(x, ''), get_files(x))
 
 
 def copy_command(env, src, dest):
     webdavsession = requests.session()
     webdavsession.verify = env["verify"]
-    webdavsession.auth=(env["username"], env["password"],)
+    webdavsession.auth = (env["username"], env["password"], )
     webdavsession.cert = env["cert"]
 
     if dest[0] == '/':
         dest = dest[1:]
 
-    dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/{1}"
-                .format(env["server"], dest))
+    dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/{1}".format(env["server"], dest))
 
     with open(src, "rb") as f:
         response = webdavsession.put(dest_url, data=f)
