@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name='dwre-tools',
-    version='1.6.7',
+    version='1.6.8',
     description='SFCC (Demandware) tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',

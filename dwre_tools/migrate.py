@@ -265,7 +265,7 @@ def apply_migrations(env, migrations_dir, test=False):
     try:
         (current_tool_version, current_migration, current_migration_path) = (
             get_current_versions(env, bmsession))
-    except NotInstalledException, e:
+    except NotInstalledException as e:
         current_tool_version = None
         not_installed = True
 
@@ -443,7 +443,7 @@ def run_all(env, migrations_dir, test=False):
     try:
         (current_tool_version, current_migration, current_migration_path) = (
             get_current_versions(env, bmsession))
-    except NotInstalledException, e:
+    except NotInstalledException as e:
         raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
 
     required_migrations = list(set(migrations[0]).difference(set(current_migration_path)))

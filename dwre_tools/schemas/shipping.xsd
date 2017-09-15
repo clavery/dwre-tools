@@ -149,11 +149,12 @@
         <xsd:sequence>
             <xsd:element name="pricebook-id" type="Generic.NonEmptyString.256" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
-     	<xsd:attribute name="operator" type="PriceBookComparator" use="optional" default="storefront price in" />
+     	<xsd:attribute name="operator" type="PriceBookComparator" use="optional" default="storefront price in (recursive)" />
 	 </xsd:complexType>
 	 
 	 <xsd:simpleType name="PriceBookComparator">
 	     <xsd:restriction base="xsd:string">
+	         <xsd:enumeration value="storefront price in (recursive)" />
 	         <xsd:enumeration value="storefront price in" />
 	         <xsd:enumeration value="price in" />
 	     </xsd:restriction>

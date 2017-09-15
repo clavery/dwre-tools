@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.6.8
+
+- changes necessary for python 3 compatibility
+- update to 17.8 schema and docs
+
 ## 1.6.7
 
 - better schema map search

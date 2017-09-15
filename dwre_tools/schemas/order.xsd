@@ -884,6 +884,7 @@
             <xsd:enumeration value="Subscriptions" />
             <xsd:enumeration value="OnlineReservation" />
             <xsd:enumeration value="CustomerServiceCenter" />
+            <xsd:enumeration value="InstagramCommerce" />
         </xsd:restriction>
     </xsd:simpleType>
 

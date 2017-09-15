@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from __future__ import print_function
 
 import re
 import time
@@ -81,7 +82,7 @@ def list_current_code():
     cartridge_path = CARTRIDGES.get(cartridge)
     
     if not cartridge_path:
-        print "Cannot find file: " % filename
+        print("Cannot find file: " % filename)
         return
 
     real_path = os.path.join(cartridge_path, rest)
@@ -103,19 +104,19 @@ def list_current_code():
         if num+1 < (line_num - 10) or num > (line_num + 10):
             continue
         if num+1 == line_num:
-            print "---> %s:" % str(num + 1).zfill(3), line
+            print("---> %s:" % str(num + 1).zfill(3), line)
         else:
-            print "     %s:" % str(num + 1).zfill(3), line
+            print("     %s:" % str(num + 1).zfill(3), line)
 
 
 def print_thread(session):
     if not CURRENT_THREAD:
         return
     for thread in THREADS:
-        print "THREAD %s [%s]" % (thread['id'], thread['status'])
+        print("THREAD %s [%s]" % (thread['id'], thread['status']))
         for frame in thread['call_stack']:
             loc = frame['location']
-            print "\t", "%s @ %s:%s" % (loc['function_name'], loc['script_path'], loc['line_number'])
+            print("\t", "%s @ %s:%s" % (loc['function_name'], loc['script_path'], loc['line_number']))
 
 
 def clean_value(val):
@@ -143,7 +144,7 @@ def print_members(session, base_url, member, refine=None):
         table_data.insert(0, ['Name', 'Value', 'Type'])
         table = AsciiTable(table_data)
 
-        print table.table
+        print(table.table)
 
 
 def thread_eval(session, base_url, expr):
@@ -151,7 +152,7 @@ def thread_eval(session, base_url, expr):
         return
     resp = session.get(base_url + "/threads/%s/frames/0/eval" % CURRENT_THREAD, params={"expr" : expr})
     resp.raise_for_status()
-    print resp.json().get('result')
+    print(resp.json().get('result'))
 
 
 class MemberCompleter(Completer):
@@ -210,7 +211,7 @@ def debug_command(env, breakpoint_locations=None):
                         "script_path" : script_path
                     })
             if script_path is None:
-                print "Cannot find cartridge code for " + location
+                print("Cannot find cartridge code for " + location)
 
     base_url = "https://{0}/s/-/dw/debugger/v1_0".format(env['server'])
 
@@ -277,13 +278,13 @@ def debug_command(env, breakpoint_locations=None):
     thread_check_thread.daemon = True
     thread_check_thread.start()
 
-    print "Connected to {} [version: {}], starting interactive session...".format(env["server"], env["codeVersion"])
+    print("Connected to {} [version: {}], starting interactive session...".format(env["server"], env["codeVersion"]))
     
     resp = session.get(base_url + "/breakpoints")
     server_bp = resp.json().get('breakpoints')
     if server_bp:
         for bp in server_bp:
-            print "BREAKPOINT %s:%s" % (bp['script_path'], bp['line_number'])
+            print("BREAKPOINT %s:%s" % (bp['script_path'], bp['line_number']))
 
     while True:
         try:

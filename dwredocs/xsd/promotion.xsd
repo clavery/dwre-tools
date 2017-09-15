@@ -378,11 +378,12 @@
         <xsd:sequence>
             <xsd:element name="pricebook-id" type="Generic.NonEmptyString.256" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
-     	<xsd:attribute name="operator" type="PriceBookComparator" use="optional" default="storefront price in" />
+     	<xsd:attribute name="operator" type="PriceBookComparator" use="optional" default="storefront price in (recursive)" />
 	 </xsd:complexType>
 	 
 	 <xsd:simpleType name="PriceBookComparator">
 	     <xsd:restriction base="xsd:string">
+	         <xsd:enumeration value="storefront price in (recursive)" />
 	         <xsd:enumeration value="storefront price in" />
 	         <xsd:enumeration value="price in" />
 	     </xsd:restriction>
@@ -547,6 +548,7 @@
             <xsd:element name="discounts" type="TieredOrderDiscounts" minOccurs="0" maxOccurs="1" />
             <xsd:element name="enable-upsells" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="upsell-threshold" type="Amount" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="exclude-discounted-products" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
 

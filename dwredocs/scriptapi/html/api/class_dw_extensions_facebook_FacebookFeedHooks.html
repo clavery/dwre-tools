@@ -95,16 +95,19 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_extensions_facebook_FacebookFeedHooks_transformProduct_Product_FacebookProduct_DetailAnchor"><span class="">transformProduct</span></a></span>(product
+<span><span class="emphasis"><a href="#dw_extensions_facebook_FacebookFeedHooks_transformProduct_Product_FacebookProduct_String_DetailAnchor"><span class="">transformProduct</span></a></span>(product
 								 : 	
 								 
 								<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>, facebookProduct
 								 : 	
 								 
-								<a href="class_dw_extensions_facebook_FacebookProduct.html"><span class="">FacebookProduct</span></a>)
+								<a href="class_dw_extensions_facebook_FacebookProduct.html"><span class="">FacebookProduct</span></a>, feedId
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
-<div class="description">Called after default transformation of given Demandware product to Facebook product as part of the catalog feed export.</div>
+<div class="description"><p> Called after default transformation of given Demandware product to Facebook product as part of the catalog feed export.</div>
 </div>
 </div>
 <div class="section">
@@ -112,7 +115,7 @@
 			Method Detail
 		</div>
 <div class="detailItem">
-<a name="dw_extensions_facebook_FacebookFeedHooks_transformProduct_Product_FacebookProduct_DetailAnchor"></a>
+<a name="dw_extensions_facebook_FacebookFeedHooks_transformProduct_Product_FacebookProduct_String_DetailAnchor"></a>
 <div class="detailName 
 						">transformProduct</div>
 <div class="detailSignature
@@ -123,12 +126,22 @@
 								<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>, facebookProduct
 								 : 
 								 
-								<a href="class_dw_extensions_facebook_FacebookProduct.html"><span class="">FacebookProduct</span></a>)
+								<a href="class_dw_extensions_facebook_FacebookProduct.html"><span class="">FacebookProduct</span></a>, feedId
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 					 : 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
 </div>
-<div class="description">Called after default transformation of given Demandware product to Facebook product as part of the catalog feed
- export.</div>
+<div class="description"><p>
+ Called after default transformation of given Demandware product to Facebook product as part of the catalog feed
+ export.
+ </p>
+ <p>
+ To customize multiple feeds differently, for example if one is for Facebook Dynamic Ads and the other is for
+ Instagram Commerce, use the <code>feedId</code> parameter to determine which feed is being exported. If the same
+ customization should apply to all feeds, ignore the parameter.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -141,9 +154,15 @@
 						 - 
 						<span class="parameterDesc">the Facebook representation of the product</span>
 </div>
+<div class="parameterDetail">
+<span class="parameterName">feedId</span>
+						 - 
+						<span class="parameterDesc">the merchant-selected ID for the feed being exported</span>
+</div>
 </div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
@@ -155,7 +174,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

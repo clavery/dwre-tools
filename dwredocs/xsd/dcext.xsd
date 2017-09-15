@@ -84,7 +84,19 @@
     <xsd:complexType name="complexType.FacebookCatalogFeed" mixed="false">
         <xsd:sequence>
             <xsd:element name="time-from" type="xsd:time" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="catalog-configuration" type="complexType.FacebookCatalogConfiguration" minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="complexType.FacebookCatalogConfiguration" mixed="false">
+        <xsd:sequence>
+            <xsd:element name="country-code" type="simpleType.CountryCode" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="channel-type" type="simpleType.FacebookChannelType" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="redirect-action" type="simpleType.FacebookRedirectAction" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+        <xsd:attribute name="feed-id" type="simpleType.Generic.String.256" use="required" />
+        <xsd:attribute name="product-feed-id" type="simpleType.Generic.String.256" use="required" />
+        <xsd:attribute name="catalog-id" type="simpleType.Generic.String.256" use="required" />
     </xsd:complexType>
 
     <xsd:complexType name="complexType.FacebookEnvironmentConfiguration" mixed="false">
@@ -93,14 +105,30 @@
             <xsd:element name="app-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="app-secret" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="page-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="catalog-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="catalog-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The element 'catalog-id' is deprecated and will be removed in a future release. Use catalog-id in catalog-configuration to set the Facebook identifier of a product feed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="pixel-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="product-feed-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="country-code" type="simpleType.CountryCode" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="product-feed-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The element 'product-feed-id' is deprecated and will be removed in a future release. Use product-feed-id in catalog-configuration to set the Facebook identifier of a product feed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="country-code" type="simpleType.CountryCode" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The element 'country-code' is deprecated and will be removed in a future release. Use country-code in catalog-configuration to set the Facebook identifier of a product feed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="access-token" type="simpleType.Generic.String" minOccurs="0" maxOccurs="1" />
             <xsd:element name="pixel-code-injected-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="default-product-enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="redirect-action" type="simpleType.FacebookRedirectAction" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="redirect-action" type="simpleType.FacebookRedirectAction" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>The element 'redirect-action' is deprecated and will be removed in a future release. Use redirect-action in catalog-configuration to set the default redirect action for products in a Facebook product feed.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="product-image-view-type" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="color-variation-attribute" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="size-variation-attribute" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
@@ -333,6 +361,13 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="add-to-cart" />
             <xsd:enumeration value="view-product" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="simpleType.FacebookChannelType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FacebookAds" />
+            <xsd:enumeration value="InstagramCommerce" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

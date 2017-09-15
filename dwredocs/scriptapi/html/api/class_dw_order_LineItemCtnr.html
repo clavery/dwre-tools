@@ -150,6 +150,14 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="dw_order_LineItemCtnr_CHANNEL_TYPE_INSTAGRAMCOMMERCE_DetailAnchor"></a>CHANNEL_TYPE_INSTAGRAMCOMMERCE
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_Number.html"><span class="">Number</span></a>
+<div class="description">constant for Channel Type Instagram Commerce</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="dw_order_LineItemCtnr_CHANNEL_TYPE_MARKETPLACE_DetailAnchor"></a>CHANNEL_TYPE_MARKETPLACE
 						&nbsp;:&nbsp;
 						
@@ -907,6 +915,18 @@
 						: 
 					<a href="class_dw_order_OrderPaymentInstrument.html"><span class="">OrderPaymentInstrument</span></a></span>
 <div class="description">Creates a payment instrument using the specified payment method id and amount.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_order_LineItemCtnr_createPaymentInstrumentFromWallet_CustomerPaymentInstrument_Money_DetailAnchor"><span class="">createPaymentInstrumentFromWallet</span></a></span>(walletPaymentInstrument
+								 : 	
+								 
+								<a href="class_dw_customer_CustomerPaymentInstrument.html"><span class="">CustomerPaymentInstrument</span></a>, amount
+								 : 	
+								 
+								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
+						: 
+					<a href="class_dw_order_OrderPaymentInstrument.html"><span class="">OrderPaymentInstrument</span></a></span>
+<div class="description">Creates a payment instrument using the specified wallet payment instrument and amount.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_LineItemCtnr_createPriceAdjustment_String_DetailAnchor"><span class="">createPriceAdjustment</span></a></span>(promotionID
@@ -1917,6 +1937,48 @@
 <span class="parameterName">paymentMethodId</span>
 						 - 
 						<span class="parameterDesc">The payment method id. See the <a href="class_dw_order_PaymentInstrument.html">PaymentInstrument</a> class for payment method types</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">amount</span>
+						 - 
+						<span class="parameterDesc">The payment amount or null</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">The new payment instrument</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_order_LineItemCtnr_createPaymentInstrumentFromWallet_CustomerPaymentInstrument_Money_DetailAnchor"></a>
+<div class="detailName 
+						">createPaymentInstrumentFromWallet</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">createPaymentInstrumentFromWallet</span>(walletPaymentInstrument
+								 : 
+								 
+								<a href="class_dw_customer_CustomerPaymentInstrument.html"><span class="">CustomerPaymentInstrument</span></a>, amount
+								 : 
+								 
+								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
+					 : 
+					<a href="class_dw_order_OrderPaymentInstrument.html"><span class="">OrderPaymentInstrument</span></a>
+</div>
+<div class="description">Creates a payment instrument using the specified wallet payment instrument and amount. The amount is set on the
+ <a href="class_dw_order_PaymentTransaction.html">PaymentTransaction</a> that is attached to the payment instrument. All data from the wallet payment
+ instrument will be copied over to the created payment instrument.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">walletPaymentInstrument</span>
+						 - 
+						<span class="parameterDesc">The payment instrument from the customer's walled.</span>
 </div>
 <div class="parameterDetail">
 <span class="parameterName">amount</span>
@@ -4200,7 +4262,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.7<div class="clear"></div>
+			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>
