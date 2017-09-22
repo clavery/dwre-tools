@@ -87,7 +87,7 @@ def list_current_code():
 
     real_path = os.path.join(cartridge_path, rest)
 
-    with open(real_path, 'r') as f:
+    with open(real_path, 'rb') as f:
         lines = f.readlines()
     lines = [l.decode('utf-8') for l in lines]
 
@@ -200,7 +200,7 @@ def debug_command(env, breakpoint_locations=None):
             abs_location = os.path.abspath(path)
             script_path = None
 
-            for name, path in CARTRIDGES.iteritems():
+            for name, path in CARTRIDGES.items():
                 abs_cart_path = os.path.abspath(path)
                 common_prefix = os.path.commonprefix([abs_cart_path, abs_location])
                 if os.path.basename(common_prefix) == name:
