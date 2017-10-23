@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import functools
 import requests
 import zipfile
 import io
@@ -447,7 +448,7 @@ def run_all(env, migrations_dir, test=False):
         raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
 
     required_migrations = list(set(migrations[0]).difference(set(current_migration_path)))
-    required_migrations = sorted(required_migrations, cmp=lambda x, y: migrations[0].index(x) - migrations[0].index(y))
+    required_migrations = sorted(required_migrations, key=functools.cmp_to_key(lambda x, y: migrations[0].index(x) - migrations[0].index(y)))
 
     if required_migrations:
         print(Fore.YELLOW + "%s migrations to run..." % len(required_migrations) + Fore.RESET)

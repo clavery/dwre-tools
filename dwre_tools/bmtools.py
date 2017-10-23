@@ -36,6 +36,7 @@ def login_business_manager(env, session):
                                 LocaleID="",
                                 LoginForm_RegistrationDomain="Sites",
                                 login=""))
+    response.raise_for_status()
     csrf_match = CSRF_FINDER.search(response.text)
     if csrf_match:
         csrf_token = csrf_match.group(1)
