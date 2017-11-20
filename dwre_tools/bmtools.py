@@ -20,15 +20,17 @@ def get_current_versions(env, session):
     if "application/json" not in response.headers['content-type']:
         raise NotInstalledException("Server response is not json; DWRE Tools is likely not installed")
     else:
-        print(response.json())
         tool_version = response.json()["toolVersion"]
         migration_version = response.json()["migrationVersion"]
         bootstrap_required = response.json()["missingToolVersion"]
         cartridge_version = response.json().get('cartridgeVersion')
         current_migration_path = None
+        hotfixes = []
         if "migrationPath" in response.json() and response.json()["migrationPath"]:
             current_migration_path = response.json()["migrationPath"].split(',')
-        return (tool_version, migration_version, current_migration_path, cartridge_version)
+        if "dwreMigrateHotfixes" in response.json() and response.json()["dwreMigrateHotfixes"]:
+            hotfixes = response.json()["dwreMigrateHotfixes"].split(',')
+        return (tool_version, migration_version, current_migration_path, cartridge_version, hotfixes)
 
 
 def login_business_manager(env, session):

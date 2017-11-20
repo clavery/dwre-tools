@@ -120,7 +120,9 @@ function updateVersion() {
     }
 
     Transaction.wrap(function() {
-        preferences.custom.dwreMigrateCurrentVersion = params.NewVersion.stringValue;
+        if (params.NewVersion.submitted) {
+          preferences.custom.dwreMigrateCurrentVersion = params.NewVersion.stringValue;
+        }
 
         if (params.NewVersionPath.submitted) {
             preferences.custom.dwreMigrateVersionPath = params.NewVersionPath.stringValue;

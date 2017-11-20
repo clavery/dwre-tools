@@ -133,10 +133,11 @@ def get_path(current_migration, migrations):
     return []
 
 
-def get_migrations(migrations_context):
+def get_migrations(migrations_context, hotfix=False):
     migrations = []
     migration_nodes = defaultdict(list)
     migration_data = {}
+    path = []
     for migration in migrations_context.getroot():
         id = migration.attrib["id"]
         location = migration.find(X + "location").text
@@ -160,6 +161,7 @@ def get_migrations(migrations_context):
             migration_nodes[parent_el.text].append(id)
         else:
             migration_nodes[None].append(id)
+        path.append(id)
 
     if len(list(migration_data.keys())) == 0:
         return ([], {})
@@ -169,17 +171,19 @@ def get_migrations(migrations_context):
 
     errors = []
     # validate graph structure
-    for parent, names in list(migration_nodes.items()):
-        if parent and parent not in migration_data:
-            errors.append("Cannot find migration: {}".format(parent))
-        if len(names) != 1:
-            errors.append("Migration ({}) has multiple ({}) children".format(
-                        parent if parent else "ROOT", [m for m in names]))
+    if not hotfix:
+        for parent, names in list(migration_nodes.items()):
+            if parent and parent not in migration_data:
+                errors.append("Cannot find migration: {}".format(parent))
+            if len(names) != 1:
+                errors.append("Migration ({}) has multiple ({}) children".format(
+                            parent if parent else "ROOT", [m for m in names]))
 
     if errors:
         raise RuntimeError("Errors in migration context: %s" % (', '.join(errors)))
     else:
-        path = find_path(migration_nodes, None)
+        if not hotfix:
+            path = find_path(migration_nodes, None)
         migrations.extend([migration_data[m] for m in path])
 
     return (path, migration_data)
@@ -252,9 +256,11 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 
     hotfixes_file = os.path.join(migrations_dir, "hotfixes.xml")
+    hotfix_path = []
     if os.path.exists(hotfixes_file):
         hotfixes_context = ET.parse(hotfixes_file)
-        validate_xml(hotfixes_file)
+        validate_xml(hotfixes_context)
+        (hotfix_path, hotfixes) = get_migrations(hotfixes_context, hotfix=True)
 
     migrations_context = ET.parse(migrations_file)
     validate_xml(migrations_context)
@@ -271,7 +277,8 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
 
     not_installed = False
     try:
-        (current_tool_version, current_migration, current_migration_path, current_cartridge_version) = (
+        (current_tool_version, current_migration, current_migration_path,
+         current_cartridge_version, current_hotfixes) = (
             get_current_versions(env, bmsession))
     except NotInstalledException as e:
         current_tool_version = None
@@ -289,6 +296,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         skip_migrations = True
         current_migration_path = []
         upgrade_required = True
+        hotfix_path = []
 
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
         upgrade_required = True
@@ -304,6 +312,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         if SKIP_METADATA_CHECK_ON_UPGRADE:
             skip_migrations = True
             current_migration_path = []
+            hotfix_path = []
 
     if not skip_migrations:
         if current_migration is not None:
@@ -352,8 +361,13 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         else:
             current_migration_path = path_to_check
 
-    if migration_path:
+        if current_hotfixes:
+            hotfix_path = [h for h in hotfixes if h not in current_hotfixes]
+
+    if migration_path or hotfix_path:
         print(Fore.YELLOW + "%s migrations required..." % len(migration_path) + Fore.RESET)
+        if hotfix_path:
+            print(Fore.YELLOW + "%s hotfixes required..." % len(hotfix_path) + Fore.RESET)
     else:
         if current_migration is None:
             current_migration = "No Migrations in Context"
@@ -371,6 +385,17 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             print(Fore.CYAN + " (Reindex Requested)" + Fore.RESET)
         else:
             print("")
+
+    for migration in hotfix_path:
+        migration_data = hotfixes[migration]
+
+        print("[%s] %s " % (migration_data["id"], migration_data["description"]), end="")
+        print(Fore.CYAN + "(hotfix", end="")
+        if migration_data["reindex"]:
+            reindex_requested = True
+            print(",Reindex Requested)")
+        else:
+            print(")", Fore.RESET)
 
     if test:
         print("Will not perform migrations, exiting...")
@@ -436,6 +461,47 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         else:
             print("")
 
+    for m in hotfix_path:
+        migration = hotfixes[m]
+
+        start_time = time.time()
+
+        zip_filename = "dwremigrate_%s" % migration["id"]
+        zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
+
+        # upload
+        dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
+            env["server"], zip_filename)
+        response = webdavsession.put(dest_url, data=zip_file)
+        response.raise_for_status()
+
+        # activate
+        response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
+                                  data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
+        response.raise_for_status()
+
+        wait_for_import(env, bmsession, zip_filename)
+
+        # update migration version
+        current_hotfixes.append(migration["id"])
+        new_version_path = ",".join(current_hotfixes)
+        response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
+                                  data={"dwreMigrateHotfixes" : new_version_path})
+
+        # delete file
+        dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
+                    env["server"], zip_filename)
+        response = webdavsession.delete(dest_url)
+        response.raise_for_status()
+
+        end_time = time.time()
+        print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time), end="")
+        if migration["reindex"]:
+            print(Fore.CYAN + " (Reindex Requested)" + Fore.RESET)
+        else:
+            print("")
+
+
     if skip_migrations and not RERUN_MIGRATIONS_ON_UPGRADE:
         print(Fore.YELLOW + "Migrations may have been skipped due to tool upgrade, rerun apply to check." + Fore.RESET)
     elif upgrade_required and RERUN_MIGRATIONS_ON_UPGRADE:
@@ -473,7 +539,8 @@ def run_all(env, migrations_dir, test=False):
 
     not_installed = False
     try:
-        (current_tool_version, current_migration, current_migration_path, current_cartridge_version) = (
+        (current_tool_version, current_migration, current_migration_path,
+         current_cartridge_version, hotfixes) = (
             get_current_versions(env, bmsession))
     except NotInstalledException as e:
         raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
@@ -558,7 +625,8 @@ def reset_migrations(env, migrations_dir, test=False):
 
     login_business_manager(env, bmsession)
 
-    (current_tool_version, current_migration, current_migration_path, current_cartridge_version) = (
+    (current_tool_version, current_migration, current_migration_path,
+     current_cartridge_version, hotfixes) = (
         get_current_versions(env, bmsession))
 
     (path, migrations) = get_migrations(migrations_context)
