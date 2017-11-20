@@ -12,6 +12,7 @@ from .exc import NotInstalledException
 
 CSRF_FINDER = re.compile(r"'csrf_token'\s*,(?:\s|\n)*'(.*?)'", re.MULTILINE)
 
+
 def get_current_versions(env, session):
     versions_url = "https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-Versions".format(env["server"])
     response = session.get(versions_url)
@@ -22,10 +23,11 @@ def get_current_versions(env, session):
         tool_version = response.json()["toolVersion"]
         migration_version = response.json()["migrationVersion"]
         bootstrap_required = response.json()["missingToolVersion"]
+        cartridge_version = response.json().get('cartridgeVersion')
         current_migration_path = None
         if "migrationPath" in response.json() and response.json()["migrationPath"]:
             current_migration_path = response.json()["migrationPath"].split(',')
-        return (tool_version, migration_version, current_migration_path)
+        return (tool_version, migration_version, current_migration_path, cartridge_version)
 
 
 def login_business_manager(env, session):

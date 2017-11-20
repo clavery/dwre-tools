@@ -1,0 +1,55 @@
+<isdecorate template="application/ExtJSApplicationFrame">
+	<iscontent type="text/html" charset="UTF-8" compact="true">
+	<h1>DWREMigrate</h1>
+	
+	<ul>
+	<li>
+		<strong>Tools Version: </strong> 
+		<isif condition="${pdict.dwreMigrateToolVersion === null}">
+			Tool metadata not installed.
+		<iselse>
+			${pdict.dwreMigrateToolVersion}
+		</isif>
+	</li>
+	<li>
+		<strong>Cartridge Version: </strong> 
+		<isif condition="${pdict.cartridgeVersion === null}">
+		Unknown
+		<iselse>
+			${pdict.cartridgeVersion}
+		</isif>
+	</li>
+	<li>
+		<strong>Current Version: </strong> 
+		<isif condition="${pdict.dwreMigrateCurrentVersion === null}">
+			No migrations performed
+		<iselse>
+			${pdict.dwreMigrateCurrentVersion}
+		</isif>
+	</li>
+	<li>
+		<strong>Migration Path: </strong> 
+		<isif condition="${pdict.dwreMigrateVersionPath == null || pdict.dwreMigrateVersionPath.length == 0}">
+			Migration Path Not Available
+		<iselse>
+			<ul>
+			<isloop iterator="${pdict.dwreMigrateVersionPath}" alias="pathSegment" status="loopstate">
+			<li><b>${loopstate.index}:</b> ${pathSegment}</li>
+			</isloop>
+			</ul>
+		</isif>
+	</li>
+	<li>
+		<strong>Hotfixes:</strong> 
+		<isif condition="${pdict.dwreMigrateHotfixes == null || pdict.dwreMigrateHotfixes.length == 0}">
+			Hotfixes Not Available
+		<iselse>
+			<ul>
+			<isloop iterator="${pdict.dwreMigrateHotfixes}" alias="pathSegment" status="loopstate">
+			<li><b>${loopstate.index}:</b> ${pathSegment}</li>
+			</isloop>
+			</ul>
+		</isif>
+	</li>
+	</ul>
+</isdecorate>

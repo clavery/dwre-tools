@@ -1,6 +1,9 @@
 
-TOOL_VERSION = "9"
+TOOL_VERSION = "10"
+# used to pair included cartridge and determine slipstream requirements
+CARTRIDGE_VERSION = "2"
 SKIP_METADATA_CHECK_ON_UPGRADE = True
+RERUN_MIGRATIONS_ON_UPGRADE = True
 
 BOOTSTRAP_META = """<?xml version="1.0" encoding="UTF-8"?>
 <metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
@@ -30,6 +33,13 @@ BOOTSTRAP_META = """<?xml version="1.0" encoding="UTF-8"?>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>true</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="dwreMigrateHotfixes">
+                <display-name xml:lang="x-default">DWRE Migrate Hotfixes Applied</display-name>
+                <description xml:lang="x-default">DO NOT MODIFY THIS VALUE UNLESS YOU UNDERSTAND THE CONSEQUENCES. PERFORM A SITE BACKUP BEFORE MANUAL MODIFICATION</description>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>true</externally-managed-flag>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="dwreMigrate">
@@ -37,6 +47,7 @@ BOOTSTRAP_META = """<?xml version="1.0" encoding="UTF-8"?>
                 <attribute attribute-id="dwreMigrateCurrentVersion"/>
                 <attribute attribute-id="dwreMigrateToolVersion"/>
                 <attribute attribute-id="dwreMigrateVersionPath"/>
+                <attribute attribute-id="dwreMigrateHotfixes"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

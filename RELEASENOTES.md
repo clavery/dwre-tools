@@ -1,6 +1,15 @@
 
 # Release Notes
 
+## 1.7.0
+
+- adds hotfix migrations capability (`add --hotfix`)
+    - hotfixes are stored separately from primary migration and the context is controlled in a `hotfixes.xml` file
+    - hotfixes are not required to match version "path" on server
+- slipstream `bm_dwremigrate` cartridge into metadata update if required; tool will recommend running `upgrade-bm-cartridge` if this occurs
+- adds `upgrade-bm-cartridge` command to update cartridge in filesystem w/ bundled version
+- the tool can now bootstrap the installation of the cartridge, metadata, etc if used by an administrator (i.e. on fresh sandboxes). The correct code version must still be created.
+
 ## 1.6.8
 
 - changes necessary for python 3 compatibility

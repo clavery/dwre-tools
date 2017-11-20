@@ -1,13 +1,13 @@
 from __future__ import print_function
 
 import functools
-import requests
+import time
 import zipfile
+import os
 import io
 import re
 import time
 from datetime import datetime
-import pyquery
 import uuid
 
 try:
@@ -15,7 +15,8 @@ try:
 except ImportError:
     import thread
 
-import os
+import pyquery
+import requests
 from lxml import etree as ET
 from lxml.builder import ElementMaker
 from collections import defaultdict
@@ -23,12 +24,13 @@ from collections import defaultdict
 from colorama import Fore, Back, Style
 
 from .validations import validate_xml, validate_file, validate_directory
-from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST
+from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST, RERUN_MIGRATIONS_ON_UPGRADE, CARTRIDGE_VERSION
 from .bmtools import get_current_versions, login_business_manager, wait_for_import
 from .utils import directory_to_zip
 from .index import reindex
 from .exc import NotInstalledException
 from .export import get_export_zip
+from .cartridge import update_bm_cartridge_server
 
 
 X = "{http://www.pixelmedia.com/xml/dwremigrate}"
@@ -245,7 +247,7 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
         f.write(xml_file_output)
 
 
-def apply_migrations(env, migrations_dir, test=False):
+def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 
@@ -264,7 +266,7 @@ def apply_migrations(env, migrations_dir, test=False):
 
     not_installed = False
     try:
-        (current_tool_version, current_migration, current_migration_path) = (
+        (current_tool_version, current_migration, current_migration_path, current_cartridge_version) = (
             get_current_versions(env, bmsession))
     except NotInstalledException as e:
         current_tool_version = None
@@ -274,12 +276,23 @@ def apply_migrations(env, migrations_dir, test=False):
 
     migration_path = []
     skip_migrations = False
+    upgrade_required = False
+    if (not_installed or current_cartridge_version is None 
+            or int(current_cartridge_version) < int(CARTRIDGE_VERSION)):
+        migration_path.append("CARTRIDGE")
+        migrations["CARTRIDGE"] = {"id" : "DWRE_MIGRATE_CARTRIDGE", "description" : "Install/upgrade cartridge bm_dwremigrate", "reindex" : False}
+        skip_migrations = True
+        current_migration_path = []
+        upgrade_required = True
+
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
+        upgrade_required = True
         if not_installed:
             migration_path.append("INSTALL")
-            migrations["INSTALL"] = {"id" : "DWRE_MIGRATE_INSTALL", "description" : "Install DWRE Migrate BM Extension (requires cartridge to exist; 'dwre sync' first)", "reindex" : False}
+            migrations["INSTALL"] = {"id" : "DWRE_MIGRATE_INSTALL", "description" : "Install DWRE Migrate BM Extension", "reindex" : False}
             skip_migrations = True
             current_migration_path = []
+            upgrade_required = True
 
         migration_path.append("BOOTSTRAP")
         migrations["BOOTSTRAP"] = {"id" : "DWRE_MIGRATE_BOOTSTRAP", "description" : "DWRE Migrate tools bootstrap/upgrade", "reindex" : False}
@@ -367,7 +380,17 @@ def apply_migrations(env, migrations_dir, test=False):
         start_time = time.time()
 
         zip_filename = "dwremigrate_%s" % migration["id"]
-        if m is "BOOTSTRAP":
+        if m is "CARTRIDGE":
+            if code_deployed:
+                print(Fore.RED + "Error: cartridge does not appear to have upgraded; check code version", Fore.RESET)
+                sys.exit(2)
+            print("[DWRE_MIGRATE_CARTRIDGE] Install/upgrade cartridge bm_dwremigrate ")
+            update_bm_cartridge_server(env, webdavsession)
+            print("Waiting for code deployment...")
+            time.sleep(8)
+            code_deployed = True
+            continue
+        elif m is "BOOTSTRAP":
             zip_file = get_bootstrap_zip()
             zip_filename = "DWREMigrateBootstrap_v{}".format(TOOL_VERSION)
         elif m is "INSTALL":
@@ -391,7 +414,7 @@ def apply_migrations(env, migrations_dir, test=False):
         # update migration version
         current_migration_path.append(migration["id"])
         new_version_path = ",".join(current_migration_path)
-        if m not in ['INSTALL', 'BOOTSTRAP']:
+        if m not in ['CARTRIDGE', 'INSTALL', 'BOOTSTRAP']:
             response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
                                       data={"NewVersion" : migration["id"], "NewVersionPath" : new_version_path})
 
@@ -408,10 +431,14 @@ def apply_migrations(env, migrations_dir, test=False):
         else:
             print("")
 
-    print(Fore.GREEN + "Successfully updated instance with current migrations" + Fore.RESET)
 
-    if skip_migrations:
+    if skip_migrations and not RERUN_MIGRATIONS_ON_UPGRADE:
         print(Fore.YELLOW + "Migrations may have been skipped due to tool upgrade, rerun apply to check." + Fore.RESET)
+    elif upgrade_required and RERUN_MIGRATIONS_ON_UPGRADE:
+        print(Fore.YELLOW + "Upgrade complete...rerunning migrations" + Fore.RESET)
+        return apply_migrations(env, migrations_dir, test, code_deployed)
+    else:
+        print(Fore.GREEN + "Successfully updated instance with current migrations" + Fore.RESET)
 
     if reindex_requested:
         print(Fore.CYAN + "One or more migrations request a search reindex" + Fore.RESET)
@@ -503,9 +530,6 @@ def run_migration(env, directory, name=None):
 
     wait_for_import(env, bmsession, zip_filename)
 
-    # delete file
-    dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
-                env["server"], zip_filename)
     response = webdavsession.delete(dest_url)
     response.raise_for_status()
 

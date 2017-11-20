@@ -15,6 +15,7 @@ from .export import export_command
 from .sync import sync_command
 from .webdav import copy_command
 from .debugger import debug_command
+from .cartridge import upgrade_bm_cartridge
 
 from colorama import init, deinit
 
@@ -135,10 +136,12 @@ def debug_cmd_handler(args):
 
 
 def webdav_cmd_handler(args):
-
     if args.subcommand == "cp":
         env = get_env_from_args(args)
         copy_command(env, args.src, args.dest)
+
+def upgrade_bm_cartridge_handler(args):
+    upgrade_bm_cartridge()
 
 
 parser = ArgumentParser(description="Demandware/SFCC Tools")
@@ -227,6 +230,9 @@ webdav_parser.required = True
 webdav_cp_cmd = webdav_parser.add_parser("cp", help="Copy a file to/from the webdav location")
 webdav_cp_cmd.add_argument('src', help="src file name")
 webdav_cp_cmd.add_argument('dest', help="destination on webdav (relative to /on/demandware.servlet/webdav/Sites)")
+
+upgrade_bm_cartridge_cmd = cmd_parser.add_parser('upgrade-bm-cartridge', help="upgrades the bm_dwremigrate cartridge to the latest version")
+upgrade_bm_cartridge_cmd.set_defaults(func=upgrade_bm_cartridge_handler)
 
 def main():
     import os, sys
