@@ -77,7 +77,7 @@ def migrate_cmd_handler(args):
 
     result = 0
     if args.subcommand == "add":
-        result = add_migration(args.directory, args.dir, args.id, args.description, rename=args.rename)
+        result = add_migration(args.directory, args.dir, args.id, args.description, rename=args.rename, hotfix=args.hotfix)
     elif args.subcommand == "apply":
         env = get_env_from_args(args)
         result = apply_migrations(env, args.dir, args.test)
@@ -186,6 +186,8 @@ migrate_add_cmd.set_defaults(subcommand="add")
 migrate_add_cmd.add_argument('-d', '--description', help="description of migration (default: empty)")
 migrate_add_cmd.add_argument('-r', '--rename', dest="rename", help="rename folder to generated or specified ID", action="store_true")
 migrate_cmd.set_defaults(rename=False)
+migrate_add_cmd.add_argument('--hotfix', dest="hotfix", help="create migration as a hotfix", action="store_true")
+migrate_cmd.set_defaults(hotfix=False)
 migrate_add_cmd.add_argument('--id', help="id of migration (default: generated)")
 migrate_add_cmd.add_argument('directory', help="migration directory")
 migrate_apply_cmd = migrate_parser.add_parser("apply", help="apply migrations to environment")

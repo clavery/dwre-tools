@@ -195,9 +195,13 @@ def normalize_name(name):
     return name.replace(' ', '_').lower()
 
 
-def add_migration(directory, migrations_dir="migrations", id=None, description=None, rename=False):
-    migrations_file = os.path.join(migrations_dir, "migrations.xml")
-    assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+def add_migration(directory, migrations_dir="migrations", id=None, description=None, rename=False, hotfix=False):
+    if hotfix:
+        migrations_file = os.path.join(migrations_dir, "hotfixes.xml")
+        assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+    else:
+        migrations_file = os.path.join(migrations_dir, "migrations.xml")
+        assert os.path.exists(migrations_file), "Cannot find migrations.xml"
     parser = ET.XMLParser(remove_blank_text=True)
     migrations_context = ET.parse(migrations_file, parser)
     validate_xml(migrations_context)
@@ -217,9 +221,9 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
     E = ElementMaker(namespace="http://www.pixelmedia.com/xml/dwremigrate",
                      nsmap={None : "http://www.pixelmedia.com/xml/dwremigrate"})
 
-    (path, migrations) = get_migrations(migrations_context)
+    (path, migrations) = get_migrations(migrations_context, hotfix=hotfix)
     parent = None
-    if path:
+    if path and not hotfix:
         parent = path[-1]
 
     migration = E.migration(id=id)
@@ -241,13 +245,13 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
 
     validate_xml(migrations_context)
     # validate path
-    migrations = get_migrations(migrations_context)
+    migrations = get_migrations(migrations_context, hotfix=hotfix)
 
     print("Writing new migration (%s) with parent (%s)" % (id, parent))
 
     #print ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True)
     xml_file_output = ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True)
-    with open(os.path.join(migrations_dir, "migrations.xml"), "wb") as f:
+    with open(migrations_file, "wb") as f:
         f.write(xml_file_output)
 
 
@@ -525,7 +529,14 @@ def run_all(env, migrations_dir, test=False):
     parser = ET.XMLParser(remove_blank_text=True)
     migrations_context = ET.parse(migrations_file, parser)
     validate_xml(migrations_context)
-    migrations = get_migrations(migrations_context)
+    (path, migrations) = get_migrations(migrations_context)
+
+    hotfixes_file = os.path.join(migrations_dir, "hotfixes.xml")
+    hotfix_path = []
+    if os.path.exists(hotfixes_file):
+        hotfixes_context = ET.parse(hotfixes_file)
+        validate_xml(hotfixes_context)
+        (hotfix_path, hotfixes) = get_migrations(hotfixes_context, hotfix=True)
 
     webdavsession = requests.session()
     webdavsession.auth=(env["username"], env["password"],)
@@ -540,19 +551,28 @@ def run_all(env, migrations_dir, test=False):
     not_installed = False
     try:
         (current_tool_version, current_migration, current_migration_path,
-         current_cartridge_version, hotfixes) = (
+         current_cartridge_version, current_hotfixes) = (
             get_current_versions(env, bmsession))
     except NotInstalledException as e:
         raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
 
-    required_migrations = list(set(migrations[0]).difference(set(current_migration_path)))
-    required_migrations = sorted(required_migrations, key=functools.cmp_to_key(lambda x, y: migrations[0].index(x) - migrations[0].index(y)))
+    required_migrations = list(set(path).difference(set(current_migration_path)))
+    required_migrations = sorted(required_migrations, key=functools.cmp_to_key(lambda x, y: path.index(x) - path.index(y)))
+
+    required_hotfixes = [h for h in hotfix_path if h not in current_hotfixes]
 
     if required_migrations:
         print(Fore.YELLOW + "%s migrations to run..." % len(required_migrations) + Fore.RESET)
+    if required_hotfixes:
+        print(Fore.YELLOW + "%s hotfixes required..." % len(required_hotfixes) + Fore.RESET)
 
     for migration in required_migrations:
-        migration_data = migrations[1][migration]
+        migration_data = migrations[migration]
+
+        print("[%s] %s" % (migration_data["id"], migration_data["description"]))
+
+    for migration in required_hotfixes:
+        migration_data = hotfixes[migration]
 
         print("[%s] %s" % (migration_data["id"], migration_data["description"]))
 
@@ -561,7 +581,10 @@ def run_all(env, migrations_dir, test=False):
         return
 
     for migration in required_migrations:
-        migration_data = migrations[1][migration]
+        migration_data = migrations[migration]
+        run_migration(env, os.path.join(migrations_dir, migration_data["location"]), migration)
+    for migration in required_hotfixes:
+        migration_data = hotfixes[migration]
         run_migration(env, os.path.join(migrations_dir, migration_data["location"]), migration)
 
 
@@ -645,17 +668,30 @@ def validate_migrations(migrations_dir):
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 
+    hotfixes_file = os.path.join(migrations_dir, "hotfixes.xml")
+
     print(Fore.MAGENTA + "Validating migrations.xml" + Fore.RESET, end=' ')
     migrations_context = ET.parse(migrations_file)
     validate_xml(migrations_context)
     print(Fore.GREEN + "[OK]" + Fore.RESET)
+    if os.path.exists(hotfixes_file):
+        print(Fore.MAGENTA + "Validating hotfixes.xml" + Fore.RESET, end=' ')
+        hotfixes_context = ET.parse(hotfixes_file)
+        validate_xml(hotfixes_context)
+        print(Fore.GREEN + "[OK]" + Fore.RESET)
 
     (path, migrations) = get_migrations(migrations_context)
+    (hotfix_path, hotfixes) = get_migrations(hotfixes_context, hotfix=True)
 
     results = []
     for m in path:
         print(Fore.MAGENTA + "Validating migration: %s" % m + Fore.RESET)
         data = migrations[m]
+        result = validate_directory(os.path.join(migrations_dir, data["location"]))
+        results.append(result)
+    for m in hotfix_path:
+        print(Fore.MAGENTA + "Validating hotfix: %s" % m + Fore.RESET)
+        data = hotfixes[m]
         result = validate_directory(os.path.join(migrations_dir, data["location"]))
         results.append(result)
     return all(results)
