@@ -251,6 +251,11 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 
+    hotfixes_file = os.path.join(migrations_dir, "hotfixes.xml")
+    if os.path.exists(hotfixes_file):
+        hotfixes_context = ET.parse(hotfixes_file)
+        validate_xml(hotfixes_file)
+
     migrations_context = ET.parse(migrations_file)
     validate_xml(migrations_context)
 
@@ -431,7 +436,6 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         else:
             print("")
 
-
     if skip_migrations and not RERUN_MIGRATIONS_ON_UPGRADE:
         print(Fore.YELLOW + "Migrations may have been skipped due to tool upgrade, rerun apply to check." + Fore.RESET)
     elif upgrade_required and RERUN_MIGRATIONS_ON_UPGRADE:
@@ -469,7 +473,7 @@ def run_all(env, migrations_dir, test=False):
 
     not_installed = False
     try:
-        (current_tool_version, current_migration, current_migration_path) = (
+        (current_tool_version, current_migration, current_migration_path, current_cartridge_version) = (
             get_current_versions(env, bmsession))
     except NotInstalledException as e:
         raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
@@ -554,7 +558,7 @@ def reset_migrations(env, migrations_dir, test=False):
 
     login_business_manager(env, bmsession)
 
-    (current_tool_version, current_migration, current_migration_path) = (
+    (current_tool_version, current_migration, current_migration_path, current_cartridge_version) = (
         get_current_versions(env, bmsession))
 
     (path, migrations) = get_migrations(migrations_context)

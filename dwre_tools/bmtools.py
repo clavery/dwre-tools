@@ -20,6 +20,7 @@ def get_current_versions(env, session):
     if "application/json" not in response.headers['content-type']:
         raise NotInstalledException("Server response is not json; DWRE Tools is likely not installed")
     else:
+        print(response.json())
         tool_version = response.json()["toolVersion"]
         migration_version = response.json()["migrationVersion"]
         bootstrap_required = response.json()["missingToolVersion"]
