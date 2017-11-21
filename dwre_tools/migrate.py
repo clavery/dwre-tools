@@ -674,14 +674,15 @@ def validate_migrations(migrations_dir):
     migrations_context = ET.parse(migrations_file)
     validate_xml(migrations_context)
     print(Fore.GREEN + "[OK]" + Fore.RESET)
+    hotfix_path = []
     if os.path.exists(hotfixes_file):
         print(Fore.MAGENTA + "Validating hotfixes.xml" + Fore.RESET, end=' ')
         hotfixes_context = ET.parse(hotfixes_file)
         validate_xml(hotfixes_context)
         print(Fore.GREEN + "[OK]" + Fore.RESET)
+        (hotfix_path, hotfixes) = get_migrations(hotfixes_context, hotfix=True)
 
     (path, migrations) = get_migrations(migrations_context)
-    (hotfix_path, hotfixes) = get_migrations(hotfixes_context, hotfix=True)
 
     results = []
     for m in path:

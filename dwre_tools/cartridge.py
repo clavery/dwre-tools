@@ -1,3 +1,4 @@
+import re
 import os
 import zipfile, io
 import shutil
@@ -14,10 +15,17 @@ def make_cartridge_package():
     return directory_to_zip(bm_dwremigrate_path, 'bm_dwremigrate')
 
 
+CODE_VERSION_RE = re.compile(r"(.*?)/\d+/\d+", re.MULTILINE)
 def update_bm_cartridge_server(env, webdavsession):
     zip_file = make_cartridge_package()
 
-    code_version = env['codeVersion']
+    code_version_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/.version"
+                        .format(env["server"]))
+    response = webdavsession.get(code_version_url)
+    response.raise_for_status()
+
+    match = CODE_VERSION_RE.search(response.text)
+    code_version = match.group(1)
 
     print("Syncing cartridge to code version {0}{1}{2} on {0}{3}{2}".format(Fore.YELLOW, code_version, Fore.RESET, env["server"]))
     dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}/bm_dwremigrate.zip"
