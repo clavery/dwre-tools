@@ -6,6 +6,7 @@ import zipfile
 import os
 import io
 import re
+import sys
 import time
 from datetime import datetime
 import uuid
@@ -421,7 +422,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             print("[DWRE_MIGRATE_CARTRIDGE] Install/upgrade cartridge bm_dwremigrate ")
             update_bm_cartridge_server(env, webdavsession)
             print("Waiting for code deployment...")
-            time.sleep(8)
+            time.sleep(15)
             code_deployed = True
             continue
         elif m is "BOOTSTRAP":

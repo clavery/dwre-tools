@@ -85,7 +85,8 @@ class TestBMTools(TestCase):
         assert 'hotfix1' in hotfixes
 
     @responses.activate
-    def test_wait_for_import(self):
+    @patch('time.sleep')
+    def test_wait_for_import(self, new_time_sleep):
         def request_callback(request):
             request_callback.num_requests += 1
             if request_callback.num_requests == 3:
@@ -102,7 +103,12 @@ class TestBMTools(TestCase):
         session = requests.session()
         wait_for_import(self.env, session, 'dwremigrate_20171120T1319_foo.zip')
 
+        # 3 calls for waiting and 1 final to get the result of the import
+        # = 4 total remote calls
         assert len(responses.calls) == 4
+        # assert sleep was called with 1 second interval
+        # use mock to speed test up
+        new_time_sleep.assert_called_with(1)
 
 
 IMPORT_BODY = """
