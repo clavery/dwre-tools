@@ -85,3 +85,6 @@ VERSION = """###########################################
 15.5.2
 """
 
+MIGRATION_FILE = """<?xml version='1.0' encoding='utf-8'?>
+<migrations xmlns="http://www.pixelmedia.com/xml/dwremigrate"></migrations>
+"""

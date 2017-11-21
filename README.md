@@ -186,6 +186,26 @@ Sub Commands:
                         validating or updating/applying migrations
 ```
 
+#### Adding a Migration
+
+```sh
+usage: dwre migrate add [-h] [-d DESCRIPTION] [-r] [--hotfix] [--id ID]
+                        directory
+
+positional arguments:
+  directory             migration directory (within migrations/)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DESCRIPTION, --description DESCRIPTION
+                        description of migration (default: empty)
+  -r, --rename          rename folder to generated or specified ID
+  --hotfix              create migration as a hotfix
+  --id ID               id of migration (default: generated)
+```
+
+Use the `--hotfix` switch when adding a migration to add it as a hotfix. i.e. `dwre migrate add --hotfix -r -d 'some hotfix' hotfixdir`
+
 ### `export`
 
 This commands opens a web browser with the ability to create an export file in the same manner

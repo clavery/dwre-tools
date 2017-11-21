@@ -25,7 +25,7 @@ from collections import defaultdict
 from colorama import Fore, Back, Style
 
 from .validations import validate_xml, validate_file, validate_directory
-from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST, RERUN_MIGRATIONS_ON_UPGRADE, CARTRIDGE_VERSION
+from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST, RERUN_MIGRATIONS_ON_UPGRADE, CARTRIDGE_VERSION, MIGRATION_FILE
 from .bmtools import get_current_versions, login_business_manager, wait_for_import
 from .utils import directory_to_zip
 from .index import reindex
@@ -199,10 +199,14 @@ def normalize_name(name):
 def add_migration(directory, migrations_dir="migrations", id=None, description=None, rename=False, hotfix=False):
     if hotfix:
         migrations_file = os.path.join(migrations_dir, "hotfixes.xml")
-        assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+        if not os.path.exists(migrations_file):
+            with open(migrations_file, 'w') as f:
+                f.write(MIGRATION_FILE)
     else:
         migrations_file = os.path.join(migrations_dir, "migrations.xml")
-        assert os.path.exists(migrations_file), "Cannot find migrations.xml"
+        if not os.path.exists(migrations_file):
+            with open(migrations_file, 'w') as f:
+                f.write(MIGRATION_FILE)
     parser = ET.XMLParser(remove_blank_text=True)
     migrations_context = ET.parse(migrations_file, parser)
     validate_xml(migrations_context)
@@ -420,6 +424,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
                 print(Fore.RED + "Error: cartridge does not appear to have upgraded; check code version", Fore.RESET)
                 sys.exit(2)
             print("[DWRE_MIGRATE_CARTRIDGE] Install/upgrade cartridge bm_dwremigrate ")
+            print(Fore.YELLOW + "Recommend running upgrade-bm-cartridge to avoid this in the future" + Fore.RESET)
             update_bm_cartridge_server(env, webdavsession)
             print("Waiting for code deployment...")
             time.sleep(15)
