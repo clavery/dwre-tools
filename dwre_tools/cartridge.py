@@ -53,7 +53,7 @@ def upgrade_bm_cartridge():
         fresh_install = True
         print(",".join(bm_cartridges) + Fore.RESET)
 
-    result = input("\nThis command will install the upgraded versions to the locations above. Are you sure (y/n)")
+    result = raw_input("\nThis command will install the upgraded versions to the locations above. Are you sure (y/n)")
     if result not in ['Y', 'y']:
         print("Exiting.")
         return
