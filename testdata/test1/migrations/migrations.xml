@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<migrations xmlns="http://www.pixelmedia.com/xml/dwremigrate">
+  <migration id="20171024T2217_initial">
+    <description>initial</description>
+    <location>20171024T2217_initial</location>
+  </migration>
+  <migration id="20171115T1210_jira_collector_meta">
+    <description>jira collector meta</description>
+    <location>20171115T1210_jira_collector_meta</location>
+    <parent>20171102T1453_lbh_test_service</parent>
+  </migration>
+</migrations>

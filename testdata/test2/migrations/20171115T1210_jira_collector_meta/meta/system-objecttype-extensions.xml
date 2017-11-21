@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="jiraCollectorEnabled">
+                <display-name xml:lang="x-default">Jira Collector Enabled</display-name>
+                <description xml:lang="x-default">Enable the collection of site issues into a JIRA system (not applicable on production)</description>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="magnet">
+                <display-name xml:lang="x-default">PXL Magnet</display-name>
+                <attribute attribute-id="jiraCollectorEnabled"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

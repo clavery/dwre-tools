@@ -62,6 +62,8 @@ NSMAP = {
 }
 
 def validate_xml(xml, throw=True):
+    """Validates XML against DWRE schemas"""
+
     root_el = xml.getroot()
     root_tag = root_el.tag[root_el.tag.find('}')+1:]
     schema_name = None
@@ -120,7 +122,6 @@ def validate_directory(directory):
             results.append(result)
 
     return all(results)
-
 
 
 def validate_command(target):

@@ -1,12 +1,11 @@
 from __future__ import print_function
 
-import requests
 import pyquery
 import time
 import yaml
 import re
-import zipfile, io
-import uuid
+import zipfile
+import io
 
 from .exc import NotInstalledException
 
@@ -14,15 +13,16 @@ CSRF_FINDER = re.compile(r"'csrf_token'\s*,(?:\s|\n)*'(.*?)'", re.MULTILINE)
 
 
 def get_current_versions(env, session):
-    versions_url = "https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-Versions".format(env["server"])
+    versions_url = ("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-Versions"
+                    .format(env["server"]))
     response = session.get(versions_url)
 
     if "application/json" not in response.headers['content-type']:
-        raise NotInstalledException("Server response is not json; DWRE Tools is likely not installed")
+        raise NotInstalledException("Server response is not json;" +
+                                    "DWRE Tools is likely not installed")
     else:
         tool_version = response.json()["toolVersion"]
         migration_version = response.json()["migrationVersion"]
-        bootstrap_required = response.json()["missingToolVersion"]
         cartridge_version = response.json().get('cartridgeVersion')
         current_migration_path = None
         hotfixes = []
@@ -30,7 +30,8 @@ def get_current_versions(env, session):
             current_migration_path = response.json()["migrationPath"].split(',')
         if "dwreMigrateHotfixes" in response.json() and response.json()["dwreMigrateHotfixes"]:
             hotfixes = response.json()["dwreMigrateHotfixes"].split(',')
-        return (tool_version, migration_version, current_migration_path, cartridge_version, hotfixes)
+        return (tool_version, migration_version, current_migration_path,
+                cartridge_version, hotfixes)
 
 
 def login_business_manager(env, session):
@@ -55,16 +56,17 @@ def login_business_manager(env, session):
 
 def select_site(env, session, site_uuid):
     data = {
-        "SelectedSiteID" : site_uuid
+        "SelectedSiteID": site_uuid
     }
-    resp = session.post("https://{}/on/demandware.store/Sites-Site/default/ViewApplication-SelectSite?MenuGroupID=ChannelMenu&ChannelID=".format(env["server"]), data=data)
+    resp = session.post("https://{}/on/demandware.store/Sites-Site/default/ViewApplication-SelectSite?MenuGroupID=ChannelMenu&ChannelID="
+                        .format(env["server"]), data=data)
     resp.raise_for_status()
 
 
 def activate_code_version(env, session, code_version):
-    response = session.post("https://{}/on/demandware.store/Sites-Site/default/ViewCodeDeployment-Activate".format(env["server"]),
-                            data=dict(
-                                CodeVersionID=code_version))
+    session.post("https://{}/on/demandware.store/Sites-Site/default/ViewCodeDeployment-Activate"
+                 .format(env["server"]), data=dict(
+                     CodeVersionID=code_version))
 
 
 def wait_for_import(env, session, filename):
@@ -72,7 +74,7 @@ def wait_for_import(env, session, filename):
     retries = 0
 
     # TODO detect import in progress
-    
+
     # try our best to find the link
     while not log_link and retries < 300:
         time.sleep(1)
@@ -92,9 +94,13 @@ def wait_for_import(env, session, filename):
         else:
             time.sleep(2)
 
-EXPORT_UNIT_JSON_OLD = re.compile(r"var exportUnitJSON = (.*?)/\*\*", re.MULTILINE|re.DOTALL)
-EXPORT_UNIT_JSON = re.compile(r"var exportUnitJSON1 = (?=\[)(?P<json>.*?)// too big", re.MULTILINE|re.DOTALL)
-EXPORT_UNIT_BREAK = re.compile(r"\][\w\n]*?var exportUnitJSON2 = \[", re.MULTILINE|re.DOTALL)
+
+EXPORT_UNIT_JSON_OLD = re.compile(r"var exportUnitJSON = (.*?)/\*\*", re.MULTILINE | re.DOTALL)
+EXPORT_UNIT_JSON = re.compile(r"var exportUnitJSON1 = (?=\[)(?P<json>.*?)// too big",
+                              re.MULTILINE | re.DOTALL)
+EXPORT_UNIT_BREAK = re.compile(r"\][\w\n]*?var exportUnitJSON2 = \[", re.MULTILINE | re.DOTALL)
+
+
 def get_list_data_units(env, session):
     response = session.get("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Status".format(env["server"]))
     response.raise_for_status()

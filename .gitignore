@@ -1,3 +1,6 @@
 DWREApiDoc.docset
 dist/
 build/
+env/
+.eggs/
+.cache/
