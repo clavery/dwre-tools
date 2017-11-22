@@ -43,7 +43,7 @@ Highly recommend using the latest homebrew version of python **and** installing 
 
 ```sh
 brew install libxml2
-brew install python
+brew install python3
 ```
 
 ## Config Setup
