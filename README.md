@@ -273,6 +273,7 @@ The simplest way to run the tests is to run `python setup.py test` which will en
 - Use the `responses` library and decorator to mock responses to the `requests` library (which is used for all http requests)
 - Use the `unittest.mock` (or just `mock` in py2) to mock uncontrolled libraries like some filesystem and other standard library functions.
 - Use the data in the `testdata` directory to simulate existing projects (i.e. migration directories and XML files). Use the `setUp` and `tearDown` methods to copy to a temporary directory for testing live filesystem affecting code.
+- The quickest way to run tests is to use `pytest` directly and use verbose mode: `pytest --pyargs dwre_tools -v`. You'll need to ensure the test dependencies are installed: `pip install pytest responses mock`
 
 ## Todo
 
