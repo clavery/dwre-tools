@@ -268,6 +268,12 @@ The simplest way to run the tests is to run `python setup.py test` which will en
 
 **Note: it is a good idea to run the full test suite with `tox` before publishing code or new versions to ensure some manner of test coverage over both python2 and py3**
 
+### Testing Tips
+
+- Use the `responses` library and decorator to mock responses to the `requests` library (which is used for all http requests)
+- Use the `unittest.mock` (or just `mock` in py2) to mock uncontrolled libraries like some filesystem and other standard library functions.
+- Use the data in the `testdata` directory to simulate existing projects (i.e. migration directories and XML files). Use the `setUp` and `tearDown` methods to copy to a temporary directory for testing live filesystem affecting code.
+
 ## Todo
 
 - Abstract sessions for all commands to better support session management (SSL, etc)
