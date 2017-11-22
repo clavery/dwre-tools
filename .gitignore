@@ -4,3 +4,4 @@ build/
 env/
 .eggs/
 .cache/
+.tox/

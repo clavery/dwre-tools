@@ -18,7 +18,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     test_suite='pytest-runner',
-    tests_require=['pytest', 'responses'],
+    tests_require=['pytest', 'responses', 'mock'],
     setup_requires=['pytest-runner'],
     install_requires=['requests == 2.7.0',
                       'colorama >= 0.3.3',

@@ -248,6 +248,26 @@ Some commands once launched (most are only relevant on a HALTED thread; i.e. a b
 
 Additionally any commands not defined will instead be "evaled" as if they were passed to the `eval` command (i.e. "1+2" will echo 3)
 
+## Development / Contributing
+
+To install in development mode first ensure the package is uninstalled
+
+```sh
+pip uninstall dwre_tools
+```
+
+Then run `python setup.py develop` or `pip install -e .` in the root directory to install the package in development mode. You can use a virtual environment to further contain the dependencies.
+
+### Testing
+
+Tests are created via docstrings and the unittest modules in `dwre_tools/tests/`. We use the `pytest` library to simplify test discovery and flexibility.
+
+The simplest way to run the tests is to run `python setup.py test` which will ensure the correct test libraries are installed. This will use `pytest` under the hood (as configured in `setup.py`)
+
+`tox` is used to test multiple python versions at once. In particular we test against python 2.7 and python 3.6. See the `tox.ini` file for the setup. To run tox first install it: `pip install tox` and run it in the root directory: `tox`. This will read the `tox.ini` and execute the test suite(s) in each environment.
+
+**Note: it is a good idea to run the full test suite with `tox` before publishing code or new versions to ensure some manner of test coverage over both python2 and py3**
+
 ## Todo
 
 - Abstract sessions for all commands to better support session management (SSL, etc)
