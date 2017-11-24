@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 
-import os
-import sys
+from setuptools import setup, find_packages
 
-try:
-    from setuptools import setup, find_packages
-except ImportError:
-    from distutils.core import setup, find_packages
 
+def get_requirements(env):
+    with open('requirements-{}.txt'.format(env)) as fp:
+        return [x.strip() for x in fp.read().split('\n') if not x.startswith('#')]
+
+
+install_requires = get_requirements('base')
+test_requires = get_requirements('test')
+dev_requires = get_requirements('dev')
 setup(
     name='dwre-tools',
     version='1.7.0',
@@ -18,33 +21,16 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     test_suite='pytest-runner',
-    tests_require=['pytest', 'responses', 'mock'],
+    tests_require=test_requires,
     setup_requires=['pytest-runner'],
-    install_requires=['requests == 2.7.0',
-                      'colorama >= 0.3.3',
-                      'pyquery >= 1.2.9',
-                      'pytz==2016.10',
-                      'lxml >= 3.4.4',
-                      'pyyaml >= 3.11',
-                      'flask == 0.10.1',
-                      'prompt_toolkit == 1.0.13',
-                      'terminaltables == 3.1.0',
-                      'Pygments == 2.1.3',
-                      'wcwidth == 0.1.7',
-                      'six >= 1.10.0',
-                      ],
-    license='MIT License',
+    install_requires=install_requires,
+    extras_require={
+        'test': test_requires,
+        'dev': test_requires + dev_requires
+    },
+    license='Private',
     zip_safe=False,
-    classifiers=(
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'Natural Language :: English',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7'
-    ),
-    entry_points = {
+    entry_points={
         'console_scripts': ['dwre = dwre_tools.cli:main'],
     },
 )

@@ -256,15 +256,17 @@ To install in development mode first ensure the package is uninstalled
 pip uninstall dwre_tools
 ```
 
-Then run `python setup.py develop` or `pip install -e .` in the root directory to install the package in development mode. You can use a virtual environment to further contain the dependencies.
+Then run `pip install -e .[dev]` in the root directory to install the package in development mode. You can use a virtual environment to further contain the dependencies. (Note: the `[dev]` specification means install the extras used for development, like testing tools.
 
 ### Testing
+
+Install testing requirements (already done if you installed in `[dev]` mode above) with: `pip install -e .[test]`
 
 Tests are created via docstrings and the unittest modules in `dwre_tools/tests/`. We use the `pytest` library to simplify test discovery and flexibility.
 
 The simplest way to run the tests is to run `python setup.py test` which will ensure the correct test libraries are installed. This will use `pytest` under the hood (as configured in `setup.py`)
 
-`tox` is used to test multiple python versions at once. In particular we test against python 2.7 and python 3.6. See the `tox.ini` file for the setup. To run tox first install it: `pip install tox` and run it in the root directory: `tox`. This will read the `tox.ini` and execute the test suite(s) in each environment.
+`tox` is used to test multiple python versions at once. In particular we test against python 2.7 and python 3.6. See the `tox.ini` file for the setup. Run it with: `tox`. This will read the `tox.ini` and execute the test suite(s) in each environment.
 
 **Note: it is a good idea to run the full test suite with `tox` before publishing code or new versions to ensure some manner of test coverage over both python2 and py3**
 
@@ -273,7 +275,7 @@ The simplest way to run the tests is to run `python setup.py test` which will en
 - Use the `responses` library and decorator to mock responses to the `requests` library (which is used for all http requests)
 - Use the `unittest.mock` (or just `mock` in py2) to mock uncontrolled libraries like some filesystem and other standard library functions.
 - Use the data in the `testdata` directory to simulate existing projects (i.e. migration directories and XML files). Use the `setUp` and `tearDown` methods to copy to a temporary directory for testing live filesystem affecting code.
-- The quickest way to run tests is to use `pytest` directly and use verbose mode: `pytest --pyargs dwre_tools -v`. You'll need to ensure the test dependencies are installed: `pip install pytest responses mock`
+- The quickest and most informative way to run tests is to use `pytest` directly and use verbose mode: `pytest --pyargs dwre_tools -v`.
 
 ## Todo
 
