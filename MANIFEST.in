@@ -1,3 +1,6 @@
 include dwre_tools/schemas/*.xsd
+include requirements-base.txt
+include requirements-test.txt
+include requirements-dev.txt
 include dwre_tools/templates/*.html
 recursive-include dwre_tools/cartridges *
