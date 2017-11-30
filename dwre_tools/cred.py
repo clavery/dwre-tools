@@ -71,3 +71,22 @@ def put_credential(name, value, description=''):
             err("Unknown error: %s".format(e.response['Error']['Code']))
         sys.exit(1)
     print("OK. Wrote version %s of %s" % (resp['Version'], name))
+
+
+def list_credentials():
+    client = boto3.client('ssm')
+    try:
+        # TODO: paginate
+        resp = client.describe_parameters(MaxResults=50)
+    except botocore.exceptions.NoCredentialsError as e:
+        print(Fore.RED + "Unable to connect to AWS; do you have IAM credentials?" + Fore.RESET)
+        sys.exit(1)
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == 'ParameterNotFound':
+            err("Credential not found")
+        elif e.response['Error']['Code'] == 'AccessDeniedException':
+            err("Access denied writing parameter")
+        else:
+            err("Unknown error: %s".format(e.response['Error']['Code']))
+        sys.exit(1)
+    [print(p.get('Name')) for p in resp.get('Parameters')]

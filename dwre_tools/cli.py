@@ -16,7 +16,7 @@ from .sync import sync_command
 from .webdav import copy_command
 from .debugger import debug_command
 from .cartridge import upgrade_bm_cartridge
-from .cred import get_credential, get_credential_info, put_credential
+from .cred import get_credential, get_credential_info, put_credential, list_credentials
 
 from colorama import init, deinit
 
@@ -153,6 +153,9 @@ def cred_cmd_handler(args):
         get_credential_info(args.name)
     elif args.subcommand == "put":
         put_credential(args.name, args.value, description=args.description)
+    elif args.subcommand == "list":
+        list_credentials()
+
 
 
 parser = ArgumentParser(description="Demandware/SFCC Tools")
@@ -253,6 +256,7 @@ cred_parser = cred_cmd.add_subparsers(title="Sub Commands", dest='subcommand')
 cred_parser.required = True
 cred_get_cmd = cred_parser.add_parser("get", help="get a credential")
 cred_get_cmd.add_argument('name', help="credential name")
+cred_get_cmd = cred_parser.add_parser("list", help="list available keys")
 cred_info_cmd = cred_parser.add_parser("info", help="credential information")
 cred_info_cmd.add_argument('name', help="credential name")
 cred_put_cmd = cred_parser.add_parser("put", help="create or update credential")
