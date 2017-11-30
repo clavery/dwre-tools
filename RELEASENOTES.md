@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.8.0
+
+- adds `cred` command for retrieving shared credentials from AWS (requires an IAM user set up)
+
 ## 1.7.0
 
 - adds hotfix migrations capability (`add --hotfix`)

@@ -16,6 +16,7 @@ from .sync import sync_command
 from .webdav import copy_command
 from .debugger import debug_command
 from .cartridge import upgrade_bm_cartridge
+from .cred import get_credential, get_credential_info, put_credential
 
 from colorama import init, deinit
 
@@ -140,8 +141,18 @@ def webdav_cmd_handler(args):
         env = get_env_from_args(args)
         copy_command(env, args.src, args.dest)
 
+
 def upgrade_bm_cartridge_handler(args):
     upgrade_bm_cartridge()
+
+
+def cred_cmd_handler(args):
+    if args.subcommand == "get":
+        get_credential(args.name)
+    elif args.subcommand == "info":
+        get_credential_info(args.name)
+    elif args.subcommand == "put":
+        put_credential(args.name, args.value, description=args.description)
 
 
 parser = ArgumentParser(description="Demandware/SFCC Tools")
@@ -235,6 +246,20 @@ webdav_cp_cmd.add_argument('dest', help="destination on webdav (relative to /on/
 
 upgrade_bm_cartridge_cmd = cmd_parser.add_parser('upgrade-bm-cartridge', help="upgrades the bm_dwremigrate cartridge to the latest version")
 upgrade_bm_cartridge_cmd.set_defaults(func=upgrade_bm_cartridge_handler)
+
+cred_cmd = cmd_parser.add_parser('cred', help="credential management")
+cred_cmd.set_defaults(func=cred_cmd_handler)
+cred_parser = cred_cmd.add_subparsers(title="Sub Commands", dest='subcommand')
+cred_parser.required = True
+cred_get_cmd = cred_parser.add_parser("get", help="get a credential")
+cred_get_cmd.add_argument('name', help="credential name")
+cred_info_cmd = cred_parser.add_parser("info", help="credential information")
+cred_info_cmd.add_argument('name', help="credential name")
+cred_put_cmd = cred_parser.add_parser("put", help="create or update credential")
+cred_put_cmd.add_argument('-d', '--description', dest="description", help="credential description")
+cred_put_cmd.add_argument('name', help="credential name")
+cred_put_cmd.add_argument('value', help="new value")
+
 
 def main():
     import os, sys
