@@ -151,7 +151,7 @@ def update_cmd_handler(args):
     if pip is None:
         pip = which("pip")
     if pip is not None:
-        print("Using pip installed at: %s" % pip
+        print("Using pip installed at: %s" % pip)
         os.system("%s install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip" % pip)
     else:
         raise RuntimeError("Unable to determine correct pip install; upgrade manually")
