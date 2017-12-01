@@ -1,4 +1,6 @@
 """SSM Credentials Retrieval and Storage"""
+from __future__ import print_function
+
 import sys
 import re
 import pprint

@@ -4,6 +4,7 @@
 ## 1.8.1
 
 - `update` command will try to better search for installed pip executable
+- python compatibility fixes and CLI smoke test UnitTest
 
 ## 1.8.0
 
