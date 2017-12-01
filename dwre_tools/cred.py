@@ -1,6 +1,6 @@
 """SSM Credentials Retrieval and Storage"""
 import sys
-import json
+import re
 import pprint
 
 import botocore
@@ -73,11 +73,18 @@ def put_credential(name, value, description=''):
     print("OK. Wrote version %s of %s" % (resp['Version'], name))
 
 
-def list_credentials():
+def list_credentials(param_filter=None):
     client = boto3.client('ssm')
     try:
         # TODO: paginate
         resp = client.describe_parameters(MaxResults=50)
+        if param_filter is not None:
+            regex = re.compile(param_filter)
+        else:
+            regex = re.compile('')
+
+        parameters = [p for p in resp.get('Parameters')
+                      if regex.search(p.get('Name'))]
     except botocore.exceptions.NoCredentialsError as e:
         print(Fore.RED + "Unable to connect to AWS; do you have IAM credentials?" + Fore.RESET)
         sys.exit(1)
@@ -89,4 +96,4 @@ def list_credentials():
         else:
             err("Unknown error: %s".format(e.response['Error']['Code']))
         sys.exit(1)
-    [print(p.get('Name')) for p in resp.get('Parameters')]
+    [print(p.get('Name')) for p in parameters]

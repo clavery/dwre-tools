@@ -4,12 +4,12 @@ from argparse import ArgumentParser
 
 import sys
 import getpass
-import zipfile
-from .env import *
+import os
+from .env import get_project, get_environment, get_default_environment, get_default_project
 from .tail import tail_logs
 from .validations import validate_command
-from .migrate import (add_migration, apply_migrations, validate_migrations, reset_migrations, 
-        run_migration, set_migration, run_all)
+from .migrate import (add_migration, apply_migrations, validate_migrations, reset_migrations,
+                      run_migration, set_migration, run_all)
 from .index import reindex_command
 from .export import export_command
 from .sync import sync_command
@@ -19,6 +19,7 @@ from .cartridge import upgrade_bm_cartridge
 from .cred import get_credential, get_credential_info, put_credential, list_credentials
 
 from colorama import init, deinit
+
 
 def version():
     import pkg_resources
@@ -41,9 +42,9 @@ def get_env_from_args(args):
     else:
         assert args.username, "Must specify a username"
         env = {
-            "server" : args.server,
-            "username" : args.username,
-            "password" : args.password
+            "server": args.server,
+            "username": args.username,
+            "password": args.password
         }
 
     if args.clientcert:
@@ -75,10 +76,10 @@ def sync_cmd_handler(args):
 
 
 def migrate_cmd_handler(args):
-
     result = 0
     if args.subcommand == "add":
-        result = add_migration(args.directory, args.dir, args.id, args.description, rename=args.rename, hotfix=args.hotfix)
+        result = add_migration(args.directory, args.dir, args.id, args.description,
+                               rename=args.rename, hotfix=args.hotfix)
     elif args.subcommand == "apply":
         env = get_env_from_args(args)
         result = apply_migrations(env, args.dir, args.test)
@@ -154,8 +155,7 @@ def cred_cmd_handler(args):
     elif args.subcommand == "put":
         put_credential(args.name, args.value, description=args.description)
     elif args.subcommand == "list":
-        list_credentials()
-
+        list_credentials(args.filter)
 
 
 parser = ArgumentParser(description="Demandware/SFCC Tools")
@@ -256,7 +256,8 @@ cred_parser = cred_cmd.add_subparsers(title="Sub Commands", dest='subcommand')
 cred_parser.required = True
 cred_get_cmd = cred_parser.add_parser("get", help="get a credential")
 cred_get_cmd.add_argument('name', help="credential name")
-cred_get_cmd = cred_parser.add_parser("list", help="list available keys")
+cred_list_cmd = cred_parser.add_parser("list", help="list available keys")
+cred_list_cmd.add_argument('filter', help="credential filter (Regexp)", nargs='?')
 cred_info_cmd = cred_parser.add_parser("info", help="credential information")
 cred_info_cmd.add_argument('name', help="credential name")
 cred_put_cmd = cred_parser.add_parser("put", help="create or update credential")
@@ -266,8 +267,9 @@ cred_put_cmd.add_argument('value', help="new value")
 
 
 def main():
-    import os, sys
-    init() # init colors
+    import os
+    import sys
+    init()  # init colors
     if not os.isatty(sys.stdout.fileno()):
         deinit()
 
