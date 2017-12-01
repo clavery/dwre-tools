@@ -15,17 +15,9 @@ Copy this command into your terminal (must have a suitable version of python: se
 
 ```sh
 pip install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip
+# or if using python3 
+pip install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip
 ```
-
-### From Source (HEAD Version)
-
-```sh
-pip install --upgrade git+ssh://git@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
-#or
-pip install --upgrade git+https://username@bitbucket.org/pixelmedia/dwre-dwre-tools.git#egg=DwreTools
-```
-
-**REPLACE `username` in the second command above with your bitbucket username**
 
 ### Development
 

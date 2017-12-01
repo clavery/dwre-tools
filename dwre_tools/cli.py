@@ -128,8 +128,34 @@ def tail_cmd_handler(args):
     tail_logs(env, logfilters, args.i)
 
 
+def which(program):
+    import os
+    def is_exe(fpath):
+        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program):
+            return program
+    else:
+        for path in os.environ["PATH"].split(os.pathsep):
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file):
+                return exe_file
+
+    return None
+
+
 def update_cmd_handler(args):
-    os.system("pip install https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip")
+    pip = which("pip3")
+    if pip is None:
+        pip = which("pip")
+    if pip is not None:
+        print("Using pip installed at: %s" % pip
+        os.system("%s install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip" % pip)
+    else:
+        raise RuntimeError("Unable to determine correct pip install; upgrade manually")
+
 
 
 def debug_cmd_handler(args):

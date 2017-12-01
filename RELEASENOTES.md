@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.8.1
+
+- `update` command will try to better search for installed pip executable
+
 ## 1.8.0
 
 - adds `cred` command for retrieving shared credentials from AWS (requires an IAM user set up)
