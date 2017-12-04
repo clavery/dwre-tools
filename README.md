@@ -240,6 +240,26 @@ Some commands once launched (most are only relevant on a HALTED thread; i.e. a b
 
 Additionally any commands not defined will instead be "evaled" as if they were passed to the `eval` command (i.e. "1+2" will echo 3)
 
+### `cred`
+
+Get stored credentials from AWS (required IAM access)
+
+Use `--help` on an individual command
+
+```
+usage: dwre cred [-h] {get,list,info,put} ...
+
+optional arguments:
+  -h, --help           show this help message and exit
+
+Sub Commands:
+  {get,list,info,put}
+    get                get a credential
+    list               list available keys
+    info               credential information
+    put                create or update credential
+```
+
 ## Development / Contributing
 
 To install in development mode first ensure the package is uninstalled

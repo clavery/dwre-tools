@@ -78,14 +78,19 @@ def put_credential(name, value, description=''):
 def list_credentials(param_filter=None):
     client = boto3.client('ssm')
     try:
-        # TODO: paginate
+        parameters = []
         resp = client.describe_parameters(MaxResults=50)
+        parameters = parameters + resp.get('Parameters')
+        while resp.get('NextToken'):
+            resp = client.describe_parameters(MaxResults=50, NextToken=resp.get('NextToken'))
+            parameters = parameters + resp.get('Parameters')
+
         if param_filter is not None:
             regex = re.compile(param_filter)
         else:
             regex = re.compile('')
 
-        parameters = [p for p in resp.get('Parameters')
+        parameters = [p for p in parameters
                       if regex.search(p.get('Name'))]
     except botocore.exceptions.NoCredentialsError as e:
         print(Fore.RED + "Unable to connect to AWS; do you have IAM credentials?" + Fore.RESET)

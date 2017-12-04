@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.8.2
+
+- pagination credentials
+
 ## 1.8.1
 
 - `update` command will try to better search for installed pip executable
