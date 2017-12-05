@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.8.3
+
+- potential fix for edge case migration install
+
 ## 1.8.2
 
 - pagination credentials

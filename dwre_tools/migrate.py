@@ -93,6 +93,11 @@ def get_install_zip(env, bmsession, webdavsession):
         new_access_xml = ET.tostring(access_roles, pretty_print=True, encoding="utf-8", xml_declaration=True)
         install_package_zip.writestr("{}/access-roles.xml".format(dest_file), new_access_xml)
 
+    install_package_zip.writestr("version.txt", """###########################################
+# Generated file, do not edit.
+# Copyright (c) 2017 by Demandware, Inc.
+###########################################
+17.8.3""")
     install_package_zip.close()
     return (install_package_file, dest_file)
 
@@ -290,6 +295,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
          current_cartridge_version, current_hotfixes) = (
             get_current_versions(env, bmsession))
     except NotInstalledException as e:
+        current_cartridge_version = None
         current_tool_version = None
         not_installed = True
 
@@ -427,7 +433,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             print(Fore.YELLOW + "Recommend running upgrade-bm-cartridge to avoid this in the future" + Fore.RESET)
             update_bm_cartridge_server(env, webdavsession)
             print("Waiting for code deployment...")
-            time.sleep(15)
+            time.sleep(10)
             code_deployed = True
             continue
         elif m is "BOOTSTRAP":

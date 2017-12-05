@@ -78,11 +78,13 @@ function versions() {
     };
 
     var migrateAttributeGroup = prefTypeDef.getAttributeGroup('dwreMigrate');
-    for (var i=0; i < migrateAttributeGroup.attributeDefinitions.length; i++) {
-        var def = migrateAttributeGroup.attributeDefinitions[i];
-        if (def.ID in preferences.custom && !(def.ID in resp)) {
-            resp[def.ID] = preferences.custom[def.ID];
-        }
+    if (!empty(migrateAttributeGroup)) {
+      for (var i=0; i < migrateAttributeGroup.attributeDefinitions.length; i++) {
+          var def = migrateAttributeGroup.attributeDefinitions[i];
+          if (def.ID in preferences.custom && !(def.ID in resp)) {
+              resp[def.ID] = preferences.custom[def.ID];
+          }
+      }
     }
 
     response.setContentType('application/json');
