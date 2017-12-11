@@ -3,7 +3,7 @@
 
 # # OCAPI Authentication
 
-# In[1]:
+
 
 import requests
 import base64
@@ -11,11 +11,11 @@ import json
 import os
 
 
-# In[119]:
+
 
 with open(os.path.expanduser("~/.dwre.json")) as f:
     SERVERS = json.load(f)
-SERVER = SERVERS["projects"]["jss"]["environments"]["dev01"]
+SERVER = SERVERS["projects"]["lbh"]["environments"]["dev01"]
 HOST = SERVER["server"]
 PASSWORD = SERVER["password"]
 CLIENT_ID = SERVER["apiClientId"]
@@ -26,33 +26,37 @@ API_CLIENT_PASSWORD = SERVER["apiClientPassword"]
 
 # Uses default `aaa..` client id used for sandboxes
 
-# In[112]:
+
 
 
 headers = {
-    "authorization" : "Basic " + base64.b64encode("clavery:%s:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" % PASSWORD)
+    "authorization" : "Basic " + base64.b64encode(("clavery:%s:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" % PASSWORD).encode("utf-8")).decode("utf-8")
 }
 
-resp = requests.post('https://%s/dw/oauth2/access_token?client_id=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb' % HOST, headers=headers, data={"grant_type" : "urn:demandware:params:oauth:grant-type:client-id:dwsid:dwsecuretoken"})
+resp = requests.post('https://%s/dw/oauth2/access_token?client_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' % HOST, headers=headers, data={"grant_type" : "urn:demandware:params:oauth:grant-type:client-id:dwsid:dwsecuretoken"})
 ACCESS_TOKEN = resp.json()["access_token"]
 
 
-# In[113]:
-
-get_ipython().magic(u'resp resp')
 
 
-# In[110]:
+get_ipython().run_line_magic('resp', 'resp')
+
+
+
 
 headers = {
     "authorization" : "Bearer " + ACCESS_TOKEN
 }
-resp = requests.get("https://%s/s/-/dw/data/v17_1/catalogs?client_id=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&count=100" % (HOST), headers=headers)
+j = {
+    "file_name" : "test.zip"
+}
+resp = requests.post("https://%s/s/-/dw/data/v17_1/jobs/sfcc-save-instance-state/executions?client_id=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&count=100" % (HOST), 
+                     headers=headers, json=j)
 
 
-# In[111]:
 
-get_ipython().magic(u'resp resp')
+
+get_ipython().run_line_magic('resp', 'resp')
 
 
 # ## Client Credentials Grant
@@ -67,7 +71,7 @@ get_ipython().magic(u'resp resp')
 # grant_type=client_credentials
 # ```
 
-# In[120]:
+
 
 #AUTH = (CLIENT_ID, API_CLIENT_PASSWORD)
 AUTH = ("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -76,12 +80,12 @@ resp = requests.post('https://account.demandware.com/dw/oauth2/access_token', au
 ACCESS_TOKEN = resp.json()["access_token"]
 
 
-# In[121]:
-
-get_ipython().magic(u'resp resp')
 
 
-# In[122]:
+get_ipython().run_line_magic('resp', 'resp')
+
+
+
 
 headers = {
     "authorization" : "Bearer " + ACCESS_TOKEN
@@ -95,10 +99,10 @@ data = {
   "sorts":[{"field":"start_time", "sort_order":"asc"}]
 }
 resp = requests.post("https://%s/s/-/dw/data/v17_1/job_execution_search" % HOST, json=data, headers=headers)
-get_ipython().magic(u'resp resp')
+get_ipython().run_line_magic('resp', 'resp')
 
 
-# In[86]:
+
 
 headers = {
     "authorization" : "Bearer " + ACCESS_TOKEN
@@ -112,10 +116,5 @@ data = {
   "sorts":[{"field":"start_time", "sort_order":"asc"}]
 }
 resp = requests.get("https://%s/s/-/dw/data/v17_1/jobs/ExportOrders/executions/160002" % HOST, headers=headers)
-get_ipython().magic(u'resp resp')
-
-
-# In[ ]:
-
-
+get_ipython().run_line_magic('resp', 'resp')
 

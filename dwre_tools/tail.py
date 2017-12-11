@@ -12,9 +12,9 @@ from colorama import Fore, Back, Style
 from .webdav import get_directories, get_files
 
 def compare_file_times(f1, f2):
-    if f1 > f2:
+    if f1[1] > f2[1]:
         return 1
-    elif f2 > f1:
+    elif f2[1] > f1[1]:
         return -1
     return 0
 
