@@ -93,7 +93,7 @@ def get_install_zip(env, bmsession, webdavsession):
         new_access_xml = ET.tostring(access_roles, pretty_print=True, encoding="utf-8", xml_declaration=True)
         install_package_zip.writestr("{}/access-roles.xml".format(dest_file), new_access_xml)
 
-    install_package_zip.writestr("version.txt", """###########################################
+    install_package_zip.writestr("{}/version.txt".format(dest_file), """###########################################
 # Generated file, do not edit.
 # Copyright (c) 2017 by Demandware, Inc.
 ###########################################
@@ -271,6 +271,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
 
     hotfixes_file = os.path.join(migrations_dir, "hotfixes.xml")
     hotfix_path = []
+    hotfixes = []
     if os.path.exists(hotfixes_file):
         hotfixes_context = ET.parse(hotfixes_file)
         validate_xml(hotfixes_context)
@@ -376,7 +377,8 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         else:
             current_migration_path = path_to_check
 
-        if current_hotfixes:
+        if current_hotfixes and hotfixes:
+            print(hotfixes)
             hotfix_path = [h for h in hotfixes if h not in current_hotfixes]
 
     if migration_path or hotfix_path:

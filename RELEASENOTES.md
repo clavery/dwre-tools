@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.8.5
+
+- issues with bootstrap zip file
+
 ## 1.8.4
 
 - bugfix `tail` command to actually compare file dates and not just tuples
