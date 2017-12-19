@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.8.6
+
+- input fix for both py2 and py3
+
 ## 1.8.5
 
 - issues with bootstrap zip file

@@ -3,6 +3,9 @@ import os
 import zipfile, io
 import shutil
 
+try: input = raw_input
+except NameError: pass
+
 from colorama import Fore, Back, Style
 
 import dwre_tools
@@ -53,7 +56,7 @@ def upgrade_bm_cartridge():
         fresh_install = True
         print(",".join(bm_cartridges) + Fore.RESET)
 
-    result = raw_input("\nThis command will install the upgraded versions to the locations above. Are you sure (y/n)")
+    result = input("\nThis command will install the upgraded versions to the locations above. Are you sure (y/n)")
     if result not in ['Y', 'y']:
         print("Exiting.")
         return

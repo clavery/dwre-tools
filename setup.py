@@ -13,7 +13,7 @@ test_requires = get_requirements('test')
 dev_requires = get_requirements('dev')
 setup(
     name='dwre-tools',
-    version='1.8.5',
+    version='1.8.6',
     description='SFCC (Demandware) tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',
