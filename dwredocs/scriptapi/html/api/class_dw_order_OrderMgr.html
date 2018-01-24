@@ -166,7 +166,7 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>...)
 						: 
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a></span>
-<div class="description"><p/>Searches for a single order instance.</div>
+<div class="description"><p/> Searches for a single order instance.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_queryOrders_String_String_Object_DetailAnchor"><span class="">queryOrders</span></a></span>(queryString
@@ -205,7 +205,7 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>...)
 						: 
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a></span>
-<div class="description"><p/>Searches for a single order instance.</div>
+<div class="description"><p/> Searches for a single order instance.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor"><span class="">searchOrders</span></a></span>(queryString
@@ -232,7 +232,7 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a></span>
-<div class="description"><p/>Searches for order instances.</div>
+<div class="description"><p/> Searches for order instances.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_undoCancelOrder_Order_DetailAnchor"><span class="">undoCancelOrder</span></a></span>(order
@@ -322,13 +322,14 @@
 <div class="description">This method creates an order based on a basket. If successful, the new order will be in status
  <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_CREATED_DetailAnchor">Order.ORDER_STATUS_CREATED</a>. The basket will be removed from the session and marked for removal.
  <p/>
- This method throws an APIException with type 'CreateOrderException' if any of the following conditions
- are encountered:
+ This method throws an APIException with type 'CreateOrderException' if any of the following conditions are
+ encountered:
  <ul>
  <li>any of the totals (net, gross, tax) of the basket is N/A</li>
  <li>any of the product items is not available (this takes previously reserved items into account)</li>
  <li>any campaign-based coupon in the basket is invalid (see <a href="class_dw_order_CouponLineItem.html#dw_order_CouponLineItem_isValid_DetailAnchor">CouponLineItem.isValid()</a></li>
- <li>the basket represents an order being edited, but the order has been already been replaced by another order</li>
+ <li>the basket represents an order being edited, but the order has been already been replaced by another
+ order</li>
  <li>the basket represents an order being edited, but the customer associated with the original order is not the
  same as the current customer</li>
  </ul>
@@ -340,13 +341,15 @@
  </ul>
  The method decrements inventory for all products contained in the order. A previous call to
  <a href="class_dw_order_Basket.html#dw_order_Basket_reserveInventory_DetailAnchor">Basket.reserveInventory()</a> is unnecessary and discouraged within the same request. The method
- takes any items with reserved inventory into account, allowing an early reservation of items e.g. at the beginning
- of the checkout process. As described above an APIException is thrown if any item is not available.
+ takes any items with reserved inventory into account, allowing an early reservation of items e.g. at the
+ beginning of the checkout process. As described above an APIException is thrown if any item is not available.
  <p/>
  If the basket contains product or gift certificate line items associated with product list items, the method
- updates the purchased quantity of the product list items, see <a href="class_dw_customer_ProductListItem.html#dw_customer_ProductListItem_getPurchasedQuantity_DetailAnchor">ProductListItem.getPurchasedQuantity()</a>.
+ updates the purchased quantity of the product list items, see
+ <a href="class_dw_customer_ProductListItem.html#dw_customer_ProductListItem_getPurchasedQuantity_DetailAnchor">ProductListItem.getPurchasedQuantity()</a>.
  <p/>
  Usage:
+
  <pre>
  var basket : Basket; // known
  try
@@ -401,10 +404,11 @@
 					 : 
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a>
 </div>
-<div class="description">This method is identical to <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">createOrder(Basket)</a> but allows the optional specification
- of an <code>orderNo</code>. The <code>orderNo</code> must be unique within the context of a site.
+<div class="description">This method is identical to <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">createOrder(Basket)</a> but allows the optional specification of an
+ <code>orderNo</code>. The <code>orderNo</code> must be unique within the context of a site.
+ <p/>
+ Usage:
 
- <p/>Usage:
  <pre>
  var basket : Basket; // known
  var orderNo : String; // known
@@ -491,8 +495,7 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Creates an order number which is either taken from the organization or
- the site order series.</div>
+<div class="description">Creates an order number which is either taken from the organization or the site order series.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -524,13 +527,12 @@
 </div>
 <div class="description">Triggers the shipping order creation for an order.
  <P>
- Must be run outside of an transaction. Will call hooks of the shipping
- order creation process which are:
+ Must be run outside of an transaction. Will call hooks of the shipping order creation process which are:
  <ul>
- <li> <a href="class_dw_order_hooks_ShippingOrderHooks.html#dw_order_hooks_ShippingOrderHooks_extensionPointPrepareCreateShippingOrders_DetailAnchor">ShippingOrderHooks.extensionPointPrepareCreateShippingOrders</a></li>
- <li> <a href="class_dw_order_hooks_ShippingOrderHooks.html#dw_order_hooks_ShippingOrderHooks_extensionPointCreateShippingOrders_DetailAnchor">ShippingOrderHooks.extensionPointCreateShippingOrders</a></li>
- <li> <a href="class_dw_order_hooks_ShippingOrderHooks.html#dw_order_hooks_ShippingOrderHooks_extensionPointAfterStatusChange_DetailAnchor">ShippingOrderHooks.extensionPointAfterStatusChange</a></li>
- <li> <a href="class_dw_order_hooks_ShippingOrderHooks.html#dw_order_hooks_ShippingOrderHooks_extensionPointNotifyStatusChange_DetailAnchor">ShippingOrderHooks.extensionPointNotifyStatusChange</a></li>
+ <li><a href="class_dw_order_hooks_ShippingOrderHooks.html#dw_order_hooks_ShippingOrderHooks_extensionPointPrepareCreateShippingOrders_DetailAnchor">ShippingOrderHooks.extensionPointPrepareCreateShippingOrders</a></li>
+ <li><a href="class_dw_order_hooks_ShippingOrderHooks.html#dw_order_hooks_ShippingOrderHooks_extensionPointCreateShippingOrders_DetailAnchor">ShippingOrderHooks.extensionPointCreateShippingOrders</a></li>
+ <li><a href="class_dw_order_hooks_ShippingOrderHooks.html#dw_order_hooks_ShippingOrderHooks_extensionPointAfterStatusChange_DetailAnchor">ShippingOrderHooks.extensionPointAfterStatusChange</a></li>
+ <li><a href="class_dw_order_hooks_ShippingOrderHooks.html#dw_order_hooks_ShippingOrderHooks_extensionPointNotifyStatusChange_DetailAnchor">ShippingOrderHooks.extensionPointNotifyStatusChange</a></li>
  </ul>
  As a result none, one or multiple <a href="class_dw_order_ShippingOrder.html">ShippingOrder</a>s are created.</div>
 <div class="parameters">
@@ -581,17 +583,15 @@
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
 </div>
 <div class="description"><p>
- This method fails an unplaced order and is usually called if payment could
- not be authorized. The specified Order must be in status CREATED, and will
- be set to status FAILED.
+ This method fails an unplaced order and is usually called if payment could not be authorized. The specified Order
+ must be in status CREATED, and will be set to status FAILED.
  </p>
  <p>
- Inventory transactions and coupon redemptions associated with the Order will
- be rolled back.
+ Inventory transactions and coupon redemptions associated with the Order will be rolled back.
  </p>
  <p>
- If the order is failed in the same session in which it was created, the
- basket will be reopened such that it can be used for a subsequent order.
+ If the order is failed in the same session in which it was created, the basket will be reopened such that it can
+ be used for a subsequent order.
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -698,23 +698,17 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>...)
 					 : 
 					void</div>
-<div class="description">Executes a user-definable function on a set of orders. This method is intended top be used in batch processes and jobs,
- since it allows efficient processing of large result sets (which might take a while to process).
-
- First, a search with the given parameters is executed. Then the given function is executed once for each order of the search result.
- The order is handed over as the only parameter to this function.
-
- <p/>The search can be configured using a simple query language, which
- provides most common filter and operator functionality.
-
- The callback function will be supplied with a single argument of type 'Order'. When the function defines
- additional arguments, they will be undefined when called. When the method doesn't define any argument, it will
- be called anyway.
-
- Error during execution of the callback will be logged, and execution will continue with the next element from the
- result set.
-
- This method can be used as in this example (which counts the number of orders):
+<div class="description">Executes a user-definable function on a set of orders. This method is intended top be used in batch processes and
+ jobs, since it allows efficient processing of large result sets (which might take a while to process). First, a
+ search with the given parameters is executed. Then the given function is executed once for each order of the
+ search result. The order is handed over as the only parameter to this function.
+ <p/>
+ The search can be configured using a simple query language, which provides most common filter and operator
+ functionality. The callback function will be supplied with a single argument of type 'Order'. When the function
+ defines additional arguments, they will be undefined when called. When the method doesn't define any argument, it
+ will be called anyway. Error during execution of the callback will be logged, and execution will continue with
+ the next element from the result set. This method can be used as in this example (which counts the number of
+ orders):
 
  <pre>
          var count=0;
@@ -725,7 +719,7 @@
          }
         OrderMgr.processOrders(callback, "buyerno=1");
         dw.system.Logger.debug("found "+count+" orders for buyerno 1");
-     </pre></div>
+ </pre></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -761,75 +755,74 @@
 					 : 
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a>
 </div>
-<div class="description"><p/>Searches for a single order instance.
-
- <p/>The search can be configured using a simple query language, which
- provides most common filter and operator functionality.
-
- <p/>The identifier for an <b>attribute</b>  to use in a query condition is always the
- ID of the  attribute as defined in the type definition. For custom defined attributes
- the prefix custom is required in the search term (e.g. <code>custom.color = {1}</code>),
- while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
-
- <p/>Supported attribute value <b>types</b> with sample expression values:<ul>
+<div class="description"><p/>
+ Searches for a single order instance.
+ <p/>
+ The search can be configured using a simple query language, which provides most common filter and operator
+ functionality.
+ <p/>
+ The identifier for an <b>attribute</b> to use in a query condition is always the ID of the attribute as defined
+ in the type definition. For custom defined attributes the prefix custom is required in the search term (e.g.
+ <code>custom.color = {1}</code>), while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
+ <p/>
+ Supported attribute value <b>types</b> with sample expression values:
+ <ul>
  <li><i>String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Integer</i> <code>1, 3E4</code></li>
  <li><i>Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Date</i> <code>yyyy-MM-dd e.g. 2007-05-31 (Default TimeZone = UTC)</code></li>
- <li><i>DateTime</i> <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
+ <li><i>DateTime</i>
+ <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
  <li><i>Boolean</i> <code>true, false</code></li>
  <li><i>Email</i> <code>'search@demandware.com', '*@demandware.com'</code></li>
  <li><i>Set of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Set of Integer</i> <code>1, 3E4</code></li>
  <li><i>Set of Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Enum of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
- <li><i>Enum of Integer</i> <code>1, 3E4</code></li></ul><br/>
- The following types of attributes are not queryable:<ul><br/>
+ <li><i>Enum of Integer</i> <code>1, 3E4</code></li>
+ </ul>
+ <br/>
+ The following types of attributes are not queryable:
+ <ul>
+ <br/>
  <li><i>Image</i></li>
  <li><i>HTML</i></li>
  <li><i>Text</i></li>
  <li><i>Quantity</i></li>
- <li><i>Password</i></li></ul><br/>
- Note, that some system attributes are not queryable by default regardless of the
- actual value type code.
-
-
- <p/>The following <b>operators</b> are supported in a condition:<br/><ul>
+ <li><i>Password</i></li>
+ </ul>
+ <br/>
+ Note, that some system attributes are not queryable by default regardless of the actual value type code.
+ <p/>
+ The following <b>operators</b> are supported in a condition:<br/>
+ <ul>
  <li><code>=</code> Equals - All types; supports NULL value (<code>thumbnail = NULL</code>)</li>
  <li><code>!=</code> Not equals - All types; supports NULL value (<code>thumbnail != NULL</code>)</li>
- <li><code>&lt;</code> Less than  - Integer, Number and Date types only</li>
+ <li><code>&lt;</code> Less than - Integer, Number and Date types only</li>
  <li><code>&gt;</code> Greater than - Integer, Number and Date types only</li>
  <li><code>&lt;=</code> Less or equals than - Integer, Number and Date types only</li>
- <li><code>&gt;=</code> Greater or equals than  - Integer, Number and Date types only</li>
- <li><code>LIKE</code> Like - String types and Email only; use if leading or trailing
- wildcards will be used to support substring search(<code>custom.country LIKE 'US*'</code>)</li>
- <li><code>ILIKE</code> Caseindependent Like - String types and Email only, use to support
- case insensitive query (<code>custom.country ILIKE 'usa'</code>), does also support wildcards for
- substring matching</li></ul>
-
- <p/>Conditions can be combined using logical expressions 'AND', 'OR' and 'NOT'
- and nested using parenthesis e.g.
+ <li><code>&gt;=</code> Greater or equals than - Integer, Number and Date types only</li>
+ <li><code>LIKE</code> Like - String types and Email only; use if leading or trailing wildcards will be used to
+ support substring search(<code>custom.country LIKE 'US*'</code>)</li>
+ <li><code>ILIKE</code> Caseindependent Like - String types and Email only, use to support case insensitive query
+ (<code>custom.country ILIKE 'usa'</code>), does also support wildcards for substring matching</li>
+ </ul>
+ <p/>
+ Conditions can be combined using logical expressions 'AND', 'OR' and 'NOT' and nested using parenthesis e.g.
  <code>gender = {1} AND (age >= {2} OR (NOT profession LIKE {3}))</code>.
-
-
- <p/>The query language provides a placeholder syntax to pass objects as
- additional search parameters. Each passed object is related to a
- placeholder in the query string. The placeholder must be an Integer that
- is surrounded by braces. The first Integer value must be '0', the second
- '1' and so on, e.g.
+ <p/>
+ The query language provides a placeholder syntax to pass objects as additional search parameters. Each passed
+ object is related to a placeholder in the query string. The placeholder must be an Integer that is surrounded by
+ braces. The first Integer value must be '0', the second '1' and so on, e.g.
  <code>querySystemObjects("sample", "age = {0} or creationDate >= {1}", 18, date)</code>
-
-
- <p/>If there is more than one object matching the specified query criteria, the
- result is not deterministic. In order to retrieve a single object from a sorted result
- set it is recommended to use the following code:
- <code>queryOrders("", "custom.myAttr asc", null).first()</code>.
- The method <code>first()</code> returns only the next element and closes the
- iterator.
-
- <b>This method will be deprecated in a future release. We recommend to use methods <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrder_String_Object_DetailAnchor">searchOrder(String, Object...)</a>,
- <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_Map_String_DetailAnchor">searchOrders(Map, String)</a> and <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor">searchOrders(String, String, Object...)</a>
- to search for orders, and to use method <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_processOrders_Function_String_Object_DetailAnchor">processOrders(Function, String, Object...)</a> to search and process orders in jobs.</b></div>
+ <p/>
+ If there is more than one object matching the specified query criteria, the result is not deterministic. In order
+ to retrieve a single object from a sorted result set it is recommended to use the following code:
+ <code>queryOrders("", "custom.myAttr asc", null).first()</code>. The method <code>first()</code> returns only the
+ next element and closes the iterator. <b>This method will be deprecated in a future release. We recommend to use
+ methods <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrder_String_Object_DetailAnchor">searchOrder(String, Object...)</a>, <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_Map_String_DetailAnchor">searchOrders(Map, String)</a> and
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor">searchOrders(String, String, Object...)</a> to search for orders, and to use method
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_processOrders_Function_String_Object_DetailAnchor">processOrders(Function, String, Object...)</a> to search and process orders in jobs.</b></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -872,82 +865,83 @@
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a>
 </div>
 <div class="description">Searches for order instances.
-
- <p/>The search can be configured using a simple query language, which
- provides most common filter and operator functionality.
-
- <p/>The identifier for an <b>attribute</b>  to use in a query condition is always the
- ID of the  attribute as defined in the type definition. For custom defined attributes
- the prefix custom is required in the search term (e.g. <code>custom.color = {1}</code>),
- while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
-
- <p/>Supported attribute value <b>types</b> with sample expression values:<ul>
+ <p/>
+ The search can be configured using a simple query language, which provides most common filter and operator
+ functionality.
+ <p/>
+ The identifier for an <b>attribute</b> to use in a query condition is always the ID of the attribute as defined
+ in the type definition. For custom defined attributes the prefix custom is required in the search term (e.g.
+ <code>custom.color = {1}</code>), while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
+ <p/>
+ Supported attribute value <b>types</b> with sample expression values:
+ <ul>
  <li><i>String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Integer</i> <code>1, 3E4</code></li>
  <li><i>Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Date</i> <code>yyyy-MM-dd e.g. 2007-05-31 (Default TimeZone = UTC)</code></li>
- <li><i>DateTime</i> <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
+ <li><i>DateTime</i>
+ <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
  <li><i>Boolean</i> <code>true, false</code></li>
  <li><i>Email</i> <code>'search@demandware.com', '*@demandware.com'</code></li>
  <li><i>Set of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Set of Integer</i> <code>1, 3E4</code></li>
  <li><i>Set of Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Enum of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
- <li><i>Enum of Integer</i> <code>1, 3E4</code></li></ul><br/>
- The following types of attributes are not queryable:<ul><br/>
+ <li><i>Enum of Integer</i> <code>1, 3E4</code></li>
+ </ul>
+ <br/>
+ The following types of attributes are not queryable:
+ <ul>
+ <br/>
  <li><i>Image</i></li>
  <li><i>HTML</i></li>
  <li><i>Text</i></li>
  <li><i>Quantity</i></li>
- <li><i>Password</i></li></ul><br/>
- Note, that some system attributes are not queryable by default regardless of the
- actual value type code.
-
-
- <p/>The following <b>operators</b> are supported in a condition:<br/><ul>
+ <li><i>Password</i></li>
+ </ul>
+ <br/>
+ Note, that some system attributes are not queryable by default regardless of the actual value type code.
+ <p/>
+ The following <b>operators</b> are supported in a condition:<br/>
+ <ul>
  <li><code>=</code> Equals - All types; supports NULL value (<code>thumbnail = NULL</code>)</li>
  <li><code>!=</code> Not equals - All types; supports NULL value (<code>thumbnail != NULL</code>)</li>
- <li><code>&lt;</code> Less than  - Integer, Number and Date types only</li>
+ <li><code>&lt;</code> Less than - Integer, Number and Date types only</li>
  <li><code>&gt;</code> Greater than - Integer, Number and Date types only</li>
  <li><code>&lt;=</code> Less or equals than - Integer, Number and Date types only</li>
- <li><code>&gt;=</code> Greater or equals than  - Integer, Number and Date types only</li>
- <li><code>LIKE</code> Like - String types and Email only; use if leading or trailing
- wildcards will be used to support substring search(<code>custom.country LIKE 'US*'</code>)</li>
- <li><code>ILIKE</code> Caseindependent Like - String types and Email only, use to support
- case insensitive query (<code>custom.country ILIKE 'usa'</code>), does also support wildcards for
- substring matching</li></ul>
-
- <p/>Conditions can be combined using logical expressions 'AND', 'OR' and 'NOT'
- and nested using parenthesis e.g.
+ <li><code>&gt;=</code> Greater or equals than - Integer, Number and Date types only</li>
+ <li><code>LIKE</code> Like - String types and Email only; use if leading or trailing wildcards will be used to
+ support substring search(<code>custom.country LIKE 'US*'</code>)</li>
+ <li><code>ILIKE</code> Caseindependent Like - String types and Email only, use to support case insensitive query
+ (<code>custom.country ILIKE 'usa'</code>), does also support wildcards for substring matching</li>
+ </ul>
+ <p/>
+ Conditions can be combined using logical expressions 'AND', 'OR' and 'NOT' and nested using parenthesis e.g.
  <code>gender = {1} AND (age >= {2} OR (NOT profession LIKE {3}))</code>.
-
-
- <p/>The query language provides a placeholder syntax to pass objects as
- additional search parameters. Each passed object is related to a
- placeholder in the query string. The placeholder must be an Integer that
- is surrounded by braces. The first Integer value must be '0', the second
- '1' and so on, e.g.
+ <p/>
+ The query language provides a placeholder syntax to pass objects as additional search parameters. Each passed
+ object is related to a placeholder in the query string. The placeholder must be an Integer that is surrounded by
+ braces. The first Integer value must be '0', the second '1' and so on, e.g.
  <code>querySystemObjects("sample", "age = {0} or creationDate >= {1}", 18, date)</code>
-
-
- <p/>The <b>sorting</b> parameter is optional and may contain a comma separated list of
- attribute names to sort by. Each sort attribute name may be followed by an
- optional sort direction specifier ('asc' | 'desc'). Default sorting directions is
- ascending, if no direction was specified.<br/>
+ <p/>
+ The <b>sorting</b> parameter is optional and may contain a comma separated list of attribute names to sort by.
+ Each sort attribute name may be followed by an optional sort direction specifier ('asc' | 'desc'). Default
+ sorting directions is ascending, if no direction was specified.<br/>
  Example: <code>age desc, name</code><br/>
- Please note that specifying a localized custom attribute as the sorting attribute is
- currently not supported.
-
- <p/>Sometimes it is desired to get all instances of specified type with a special sorting condition.
- This can be easily done by providing the 'type' of the custom object and the 'sortString' in combination with
- an empty 'queryString', e.g. <code>queryOrders("sample", "", "custom.myAttr asc")</code>
-
- <p>It is strongly recommended to call <code><a href="class_dw_util_SeekableIterator.html#dw_util_SeekableIterator_close_DetailAnchor">SeekableIterator.close()</a></code> on the returned SeekableIterator
- if not all of its elements are being retrieved. This will ensure the proper cleanup of system resources.</p>
-
- <b>This method will be deprecated in a future release. We recommend to use methods <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrder_String_Object_DetailAnchor">searchOrder(String, Object...)</a>,
- <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_Map_String_DetailAnchor">searchOrders(Map, String)</a> and <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor">searchOrders(String, String, Object...)</a>
- to search for orders, and to use method <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_processOrders_Function_String_Object_DetailAnchor">processOrders(Function, String, Object...)</a> to search and process orders in jobs.</b></div>
+ Please note that specifying a localized custom attribute as the sorting attribute is currently not supported.
+ <p/>
+ Sometimes it is desired to get all instances of specified type with a special sorting condition. This can be
+ easily done by providing the 'type' of the custom object and the 'sortString' in combination with an empty
+ 'queryString', e.g. <code>queryOrders("sample", "", "custom.myAttr asc")</code>
+ <p>
+ It is strongly recommended to call <code><a href="class_dw_util_SeekableIterator.html#dw_util_SeekableIterator_close_DetailAnchor">SeekableIterator.close()</a></code> on the returned
+ SeekableIterator if not all of its elements are being retrieved. This will ensure the proper cleanup of system
+ resources.
+ </p>
+ <b>This method will be deprecated in a future release. We recommend to use methods
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrder_String_Object_DetailAnchor">searchOrder(String, Object...)</a>, <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_Map_String_DetailAnchor">searchOrders(Map, String)</a> and
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor">searchOrders(String, String, Object...)</a> to search for orders, and to use method
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_processOrders_Function_String_Object_DetailAnchor">processOrders(Function, String, Object...)</a> to search and process orders in jobs.</b></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1108,79 +1102,81 @@
 					 : 
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a>
 </div>
-<div class="description"><p/>Searches for a single order instance.
-
- <p/>The search can be configured using a simple query language, which
- provides most common filter and operator functionality.
-
- <p/>The identifier for an <b>attribute</b> to use in a query condition is always the
- ID of the attribute as defined in the type definition. For custom defined attributes
- the prefix custom is required in the search term (e.g. <code>custom.color = {1}</code>),
- while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
-
- <p/>Supported attribute value <b>types</b> with sample expression values:<ul>
+<div class="description"><p/>
+ Searches for a single order instance.
+ <p/>
+ The search can be configured using a simple query language, which provides most common filter and operator
+ functionality.
+ <p/>
+ The identifier for an <b>attribute</b> to use in a query condition is always the ID of the attribute as defined
+ in the type definition. For custom defined attributes the prefix custom is required in the search term (e.g.
+ <code>custom.color = {1}</code>), while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
+ <p/>
+ Supported attribute value <b>types</b> with sample expression values:
+ <ul>
  <li><i>String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Integer</i> <code>1, 3E4</code></li>
  <li><i>Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Date</i> <code>yyyy-MM-dd e.g. 2007-05-31 (Default TimeZone = UTC)</code></li>
- <li><i>DateTime</i> <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
+ <li><i>DateTime</i>
+ <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
  <li><i>Boolean</i> <code>true, false</code></li>
  <li><i>Email</i> <code>'search@demandware.com', '*@demandware.com'</code></li>
  <li><i>Set of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Set of Integer</i> <code>1, 3E4</code></li>
  <li><i>Set of Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Enum of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
- <li><i>Enum of Integer</i> <code>1, 3E4</code></li></ul><br/>
- The following types of attributes are not queryable:<ul><br/>
+ <li><i>Enum of Integer</i> <code>1, 3E4</code></li>
+ </ul>
+ <br/>
+ The following types of attributes are not queryable:
+ <ul>
+ <br/>
  <li><i>Image</i></li>
  <li><i>HTML</i></li>
  <li><i>Text</i></li>
  <li><i>Quantity</i></li>
- <li><i>Password</i></li></ul><br/>
- Note, that some system attributes are not queryable by default regardless of the
- actual value type code.
-
-
- <p/>The following <b>operators</b> are supported in a condition:<br/><ul>
+ <li><i>Password</i></li>
+ </ul>
+ <br/>
+ Note, that some system attributes are not queryable by default regardless of the actual value type code.
+ <p/>
+ The following <b>operators</b> are supported in a condition:<br/>
+ <ul>
  <li><code>=</code> Equals - All types; supports NULL value (<code>thumbnail = NULL</code>)</li>
  <li><code>!=</code> Not equals - All types; supports NULL value (<code>thumbnail != NULL</code>)</li>
- <li><code>&lt;</code> Less than  - Integer, Number and Date types only</li>
+ <li><code>&lt;</code> Less than - Integer, Number and Date types only</li>
  <li><code>&gt;</code> Greater than - Integer, Number and Date types only</li>
  <li><code>&lt;=</code> Less or equals than - Integer, Number and Date types only</li>
- <li><code>&gt;=</code> Greater or equals than  - Integer, Number and Date types only</li>
- <li><code>LIKE</code> Like - String types and Email only; use if leading or trailing
- wildcards will be used to support substring search(<code>custom.country LIKE 'US*'</code>)</li>
- <li><code>ILIKE</code> Caseindependent Like - String types and Email only, use to support
- case insensitive query (<code>custom.country ILIKE 'usa'</code>), does also support wildcards for
- substring matching</li></ul>
-
- <p/>Conditions can be combined using logical expressions 'AND', 'OR' and 'NOT'
- and nested using parenthesis e.g.
+ <li><code>&gt;=</code> Greater or equals than - Integer, Number and Date types only</li>
+ <li><code>LIKE</code> Like - String types and Email only; use if leading or trailing wildcards will be used to
+ support substring search(<code>custom.country LIKE 'US*'</code>)</li>
+ <li><code>ILIKE</code> Caseindependent Like - String types and Email only, use to support case insensitive query
+ (<code>custom.country ILIKE 'usa'</code>), does also support wildcards for substring matching</li>
+ </ul>
+ <p/>
+ Conditions can be combined using logical expressions 'AND', 'OR' and 'NOT' and nested using parenthesis e.g.
  <code>gender = {1} AND (age >= {2} OR (NOT profession LIKE {3}))</code>.
-
-
- <p/>The query language provides a placeholder syntax to pass objects as
- additional search parameters. Each passed object is related to a
- placeholder in the query string. The placeholder must be an Integer that
- is surrounded by braces. The first Integer value must be '0', the second
- '1' and so on, e.g.
+ <p/>
+ The query language provides a placeholder syntax to pass objects as additional search parameters. Each passed
+ object is related to a placeholder in the query string. The placeholder must be an Integer that is surrounded by
+ braces. The first Integer value must be '0', the second '1' and so on, e.g.
  <code>querySystemObjects("sample", "age = {0} or creationDate >= {1}", 18, date)</code>
-
-
- <p/>If there is more than one object matching the specified query criteria, the
- result is not deterministic. In order to retrieve a single object from a sorted result
- set it is recommended to use the following code:
- <code>queryOrders("", "custom.myAttr asc", null).first()</code>.
- The method <code>first()</code> returns only the next element and closes the
- iterator.
-
- <p/>If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
+ <p/>
+ If there is more than one object matching the specified query criteria, the result is not deterministic. In order
+ to retrieve a single object from a sorted result set it is recommended to use the following code:
+ <code>queryOrders("", "custom.myAttr asc", null).first()</code>. The method <code>first()</code> returns only the
+ next element and closes the iterator.
+ <p/>
+ If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
  <ul>
-     <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
-     <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring searches</li>
-     <li>LIKE queries will always be case insensitive</li>
-     <li>using logical operators may change the execution of LIKE/ILIKE clauses to exact string comparison, depending on how they are combined</li>
-     <li>using logical operators may result in degraded performance, depending on how they are combined</li>
+ <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
+ <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring
+ searches</li>
+ <li>LIKE queries will always be case insensitive</li>
+ <li>using logical operators may change the execution of LIKE/ILIKE clauses to exact string comparison, depending
+ on how they are combined</li>
+ <li>using logical operators may result in degraded performance, depending on how they are combined</li>
  </ul></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -1224,87 +1220,90 @@
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a>
 </div>
 <div class="description">Searches for order instances.
-
- <p/>The search can be configured using a simple query language, which
- provides most common filter and operator functionality.
-
- <p/>The identifier for an <b>attribute</b> to use in a query condition is always the
- ID of the attribute as defined in the type definition. For custom defined attributes
- the prefix custom is required in the search term (e.g. <code>custom.color = {1}</code>),
- while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
-
- <p/>Supported attribute value <b>types</b> with sample expression values:<ul>
+ <p/>
+ The search can be configured using a simple query language, which provides most common filter and operator
+ functionality.
+ <p/>
+ The identifier for an <b>attribute</b> to use in a query condition is always the ID of the attribute as defined
+ in the type definition. For custom defined attributes the prefix custom is required in the search term (e.g.
+ <code>custom.color = {1}</code>), while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
+ <p/>
+ Supported attribute value <b>types</b> with sample expression values:
+ <ul>
  <li><i>String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Integer</i> <code>1, 3E4</code></li>
  <li><i>Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Date</i> <code>yyyy-MM-dd e.g. 2007-05-31 (Default TimeZone = UTC)</code></li>
- <li><i>DateTime</i> <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
+ <li><i>DateTime</i>
+ <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
  <li><i>Boolean</i> <code>true, false</code></li>
  <li><i>Email</i> <code>'search@demandware.com', '*@demandware.com'</code></li>
  <li><i>Set of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Set of Integer</i> <code>1, 3E4</code></li>
  <li><i>Set of Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Enum of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
- <li><i>Enum of Integer</i> <code>1, 3E4</code></li></ul><br/>
- The following types of attributes are not queryable:<ul><br/>
+ <li><i>Enum of Integer</i> <code>1, 3E4</code></li>
+ </ul>
+ <br/>
+ The following types of attributes are not queryable:
+ <ul>
+ <br/>
  <li><i>Image</i></li>
  <li><i>HTML</i></li>
  <li><i>Text</i></li>
  <li><i>Quantity</i></li>
- <li><i>Password</i></li></ul><br/>
- Note, that some system attributes are not queryable by default regardless of the
- actual value type code.
-
-
- <p/>The following <b>operators</b> are supported in a condition:<br/><ul>
+ <li><i>Password</i></li>
+ </ul>
+ <br/>
+ Note, that some system attributes are not queryable by default regardless of the actual value type code.
+ <p/>
+ The following <b>operators</b> are supported in a condition:<br/>
+ <ul>
  <li><code>=</code> Equals - All types; supports NULL value (<code>thumbnail = NULL</code>)</li>
  <li><code>!=</code> Not equals - All types; supports NULL value (<code>thumbnail != NULL</code>)</li>
- <li><code>&lt;</code> Less than  - Integer, Number and Date types only</li>
+ <li><code>&lt;</code> Less than - Integer, Number and Date types only</li>
  <li><code>&gt;</code> Greater than - Integer, Number and Date types only</li>
  <li><code>&lt;=</code> Less or equals than - Integer, Number and Date types only</li>
- <li><code>&gt;=</code> Greater or equals than  - Integer, Number and Date types only</li>
- <li><code>LIKE</code> Like - String types and Email only; use if leading or trailing
- wildcards will be used to support substring search(<code>custom.country LIKE 'US*'</code>)</li>
- <li><code>ILIKE</code> Caseindependent Like - String types and Email only, use to support
- case insensitive query (<code>custom.country ILIKE 'usa'</code>), does also support wildcards for
- substring matching</li></ul>
+ <li><code>&gt;=</code> Greater or equals than - Integer, Number and Date types only</li>
+ <li><code>LIKE</code> Like - String types and Email only; use if leading or trailing wildcards will be used to
+ support substring search(<code>custom.country LIKE 'US*'</code>)</li>
+ <li><code>ILIKE</code> Caseindependent Like - String types and Email only, use to support case insensitive query
+ (<code>custom.country ILIKE 'usa'</code>), does also support wildcards for substring matching</li>
+ </ul>
  Note that wildcards are not supported by Search Service.
-
- <p/>Conditions can be combined using logical expressions 'AND', 'OR' and 'NOT'
- and nested using parenthesis e.g.
+ <p/>
+ Conditions can be combined using logical expressions 'AND', 'OR' and 'NOT' and nested using parenthesis e.g.
  <code>gender = {1} AND (age >= {2} OR (NOT profession LIKE {3}))</code>.
-
-
- <p/>The query language provides a placeholder syntax to pass objects as
- additional search parameters. Each passed object is related to a
- placeholder in the query string. The placeholder must be an Integer that
- is surrounded by braces. The first Integer value must be '0', the second
- '1' and so on, e.g.
+ <p/>
+ The query language provides a placeholder syntax to pass objects as additional search parameters. Each passed
+ object is related to a placeholder in the query string. The placeholder must be an Integer that is surrounded by
+ braces. The first Integer value must be '0', the second '1' and so on, e.g.
  <code>querySystemObjects("sample", "age = {0} or creationDate >= {1}", 18, date)</code>
-
-
- <p/>The <b>sorting</b> parameter is optional and may contain a comma separated list of
- attribute names to sort by. Each sort attribute name may be followed by an
- optional sort direction specifier ('asc' | 'desc'). Default sorting directions is
- ascending, if no direction was specified.<br/>
+ <p/>
+ The <b>sorting</b> parameter is optional and may contain a comma separated list of attribute names to sort by.
+ Each sort attribute name may be followed by an optional sort direction specifier ('asc' | 'desc'). Default
+ sorting directions is ascending, if no direction was specified.<br/>
  Example: <code>age desc, name</code><br/>
- Please note that specifying a localized custom attribute as the sorting attribute is
- currently not supported.
-
- <p/>Sometimes it is desired to get all instances of specified type with a special sorting condition.
- This can be easily done by providing the 'type' of the custom object and the 'sortString' in combination with
- an empty 'queryString', e.g. <code>queryOrders("sample", "", "custom.myAttr asc")</code>
-
- <p>It is strongly recommended to call <code><a href="class_dw_util_SeekableIterator.html#dw_util_SeekableIterator_close_DetailAnchor">SeekableIterator.close()</a></code> on the returned SeekableIterator
- if not all of its elements are being retrieved. This will ensure the proper cleanup of system resources.</p>
-
- <p/>If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
+ Please note that specifying a localized custom attribute as the sorting attribute is currently not supported.
+ <p/>
+ Sometimes it is desired to get all instances of specified type with a special sorting condition. This can be
+ easily done by providing the 'type' of the custom object and the 'sortString' in combination with an empty
+ 'queryString', e.g. <code>queryOrders("sample", "", "custom.myAttr asc")</code>
+ <p>
+ It is strongly recommended to call <code><a href="class_dw_util_SeekableIterator.html#dw_util_SeekableIterator_close_DetailAnchor">SeekableIterator.close()</a></code> on the returned
+ SeekableIterator if not all of its elements are being retrieved. This will ensure the proper cleanup of system
+ resources.
+ </p>
+ <p/>
+ If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
  <ul>
-     <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
-     <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring searches</li>
-     <li>LIKE queries will always be case insensitive</li>
-     <li>using logical operators may change the execution of LIKE/ILIKE clauses to exact string comparison, depending on how they are combined</li>
-     <li>using logical operators may result in degraded performance, depending on how they are combined</li>
+ <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
+ <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring
+ searches</li>
+ <li>LIKE queries will always be case insensitive</li>
+ <li>using logical operators may change the execution of LIKE/ILIKE clauses to exact string comparison, depending
+ on how they are combined</li>
+ <li>using logical operators may result in degraded performance, depending on how they are combined</li>
  </ul></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -1361,64 +1360,69 @@
 					 : 
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a>
 </div>
-<div class="description"><p/>Searches for order instances.
-
- <p/>The search can be configured with a map, which key-value pairs are
- converted into a query expression. The key-value pairs are turned into a
- sequence of '=' or 'like' conditions, which are combined with AND
- statements.
-
- <p/>Example:<br/>
- A map with the key/value pairs: <i>'name'/'tom*', 'age'/66</i>
- will be converted as follows: <code>"name like 'tom*' and age = 66"</code>
- Note that wildcards are not supported by Search Service.
-
- <p/>The identifier for an <b>attribute</b> to use in a query condition is always the
- ID of the attribute as defined in the type definition. For custom defined attributes
- the prefix custom is required in the search term (e.g. <code>custom.color = {1}</code>),
- while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
-
- <p/>Supported attribute value <b>types</b> with sample expression values:<ul>
+<div class="description"><p/>
+ Searches for order instances.
+ <p/>
+ The search can be configured with a map, which key-value pairs are converted into a query expression. The
+ key-value pairs are turned into a sequence of '=' or 'like' conditions, which are combined with AND statements.
+ <p/>
+ Example:<br/>
+ A map with the key/value pairs: <i>'name'/'tom*', 'age'/66</i> will be converted as follows:
+ <code>"name like 'tom*' and age = 66"</code> Note that wildcards are not supported by Search Service.
+ <p/>
+ The identifier for an <b>attribute</b> to use in a query condition is always the ID of the attribute as defined
+ in the type definition. For custom defined attributes the prefix custom is required in the search term (e.g.
+ <code>custom.color = {1}</code>), while for system attributes no prefix is used (e.g. <code>name = {4}</code>).
+ <p/>
+ Supported attribute value <b>types</b> with sample expression values:
+ <ul>
  <li><i>String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Integer</i> <code>1, 3E4</code></li>
  <li><i>Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Date</i> <code>yyyy-MM-dd e.g. 2007-05-31 (Default TimeZone = UTC)</code></li>
- <li><i>DateTime</i> <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
+ <li><i>DateTime</i>
+ <code>yyyy-MM-dd'T'hh:mm:ss+Z e.g. 2007-05-31T00:00+Z (Z TimeZone = UTC) or 2007-05-31T00:00:00</code></li>
  <li><i>Boolean</i> <code>true, false</code></li>
  <li><i>Email</i> <code>'search@demandware.com', '*@demandware.com'</code></li>
  <li><i>Set of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
  <li><i>Set of Integer</i> <code>1, 3E4</code></li>
  <li><i>Set of Number</i> <code>1.0, 3.99E5</code></li>
  <li><i>Enum of String</i> <code>'String', 'Str*', 'Strin?'</code></li>
- <li><i>Enum of Integer</i> <code>1, 3E4</code></li></ul><br/>
- The following types of attributes are not queryable:<ul><br/>
+ <li><i>Enum of Integer</i> <code>1, 3E4</code></li>
+ </ul>
+ <br/>
+ The following types of attributes are not queryable:
+ <ul>
+ <br/>
  <li><i>Image</i></li>
  <li><i>HTML</i></li>
  <li><i>Text</i></li>
  <li><i>Quantity</i></li>
- <li><i>Password</i></li></ul><br/>
- Note, that some system attributes are not queryable by default regardless of the
- actual value type code.
-
-
- <p/>The <b>sorting</b> parameter is optional and may contain a comma separated list of
- attribute names to sort by. Each sort attribute name may be followed by an
- optional sort direction specifier ('asc' | 'desc'). Default sorting directions is
- ascending, if no direction was specified.<br/>
+ <li><i>Password</i></li>
+ </ul>
+ <br/>
+ Note, that some system attributes are not queryable by default regardless of the actual value type code.
+ <p/>
+ The <b>sorting</b> parameter is optional and may contain a comma separated list of attribute names to sort by.
+ Each sort attribute name may be followed by an optional sort direction specifier ('asc' | 'desc'). Default
+ sorting directions is ascending, if no direction was specified.<br/>
  Example: <code>age desc, name</code><br/>
- Please note that specifying a localized custom attribute as the sorting attribute is
- currently not supported.
-
- <p>It is strongly recommended to call <code><a href="class_dw_util_SeekableIterator.html#dw_util_SeekableIterator_close_DetailAnchor">SeekableIterator.close()</a></code> on the returned SeekableIterator
- if not all of its elements are being retrieved. This will ensure the proper cleanup of system resources.</p>
-
- <p/>If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
+ Please note that specifying a localized custom attribute as the sorting attribute is currently not supported.
+ <p>
+ It is strongly recommended to call <code><a href="class_dw_util_SeekableIterator.html#dw_util_SeekableIterator_close_DetailAnchor">SeekableIterator.close()</a></code> on the returned
+ SeekableIterator if not all of its elements are being retrieved. This will ensure the proper cleanup of system
+ resources.
+ </p>
+ <p/>
+ If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
  <ul>
-     <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
-     <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring searches</li>
-     <li>LIKE queries will always be case insensitive</li>
-     <li>using logical operators may change the execution of LIKE/ILIKE clauses to exact string comparison, depending on how they are combined</li>
-     <li>using logical operators may result in degraded performance, depending on how they are combined</li>
+ <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
+ <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring
+ searches</li>
+ <li>LIKE queries will always be case insensitive</li>
+ <li>using logical operators may change the execution of LIKE/ILIKE clauses to exact string comparison, depending
+ on how they are combined</li>
+ <li>using logical operators may result in degraded performance, depending on how they are combined</li>
  </ul></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -1512,14 +1516,16 @@
 </div>
 <div class="description">This method is used to turn a FAILED order into a CREATED order.
  <p>
- The specified order must be a failed order (<a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_FAILED_DetailAnchor">Order.ORDER_STATUS_FAILED</a>).
- The method will reserve inventory for all product line items, and create redemptions for all coupons.
- If successful, the status of the order will be changed to <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_CREATED_DetailAnchor">Order.ORDER_STATUS_CREATED</a>.
+ The specified order must be a failed order (<a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_FAILED_DetailAnchor">Order.ORDER_STATUS_FAILED</a>). The method will reserve
+ inventory for all product line items, and create redemptions for all coupons. If successful, the status of the
+ order will be changed to <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_CREATED_DetailAnchor">Order.ORDER_STATUS_CREATED</a>.
  <p>
  Possible error status codes are:
  <ul>
- <li><a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_COUPON_INVALID_DetailAnchor">OrderProcessStatusCodes.COUPON_INVALID</a> - coupon is not active anymore or maximum amount of redemptions is reached</li>
- <li><a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_ORDER_NOT_FAILED_DetailAnchor">OrderProcessStatusCodes.ORDER_NOT_FAILED</a> - order is not in status <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_FAILED_DetailAnchor">Order.ORDER_STATUS_FAILED</a></li>
+ <li><a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_COUPON_INVALID_DetailAnchor">OrderProcessStatusCodes.COUPON_INVALID</a> - coupon is not active anymore or maximum amount of
+ redemptions is reached</li>
+ <li><a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_ORDER_NOT_FAILED_DetailAnchor">OrderProcessStatusCodes.ORDER_NOT_FAILED</a> - order is not in status
+ <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_FAILED_DetailAnchor">Order.ORDER_STATUS_FAILED</a></li>
  <li><a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_INVENTORY_RESERVATION_FAILED_DetailAnchor">OrderProcessStatusCodes.INVENTORY_RESERVATION_FAILED</a> - inventory reservation failed</li>
  </ul></div>
 <div class="parameters">
@@ -1542,7 +1548,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

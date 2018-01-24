@@ -49,6 +49,9 @@
             <xsd:element name="refinement-definitions" type="complexType.RefinementDefinitions" minOccurs="0" maxOccurs="1" />
             <xsd:element name="content-detail-page-meta-tag-rules" type="complexType.PageMetaTagRules" minOccurs="0" maxOccurs="1" />
             <xsd:element name="content-listing-page-meta-tag-rules" type="complexType.PageMetaTagRules" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="sitemap-included-flag" type="xsd:boolean" minOccurs="0"/>
+            <xsd:element name="sitemap-changefrequency" type="simpleType.SiteMapChangeFrequency" minOccurs="0"/>
+            <xsd:element name="sitemap-priority" type="simpleType.SiteMapPriority" minOccurs="0"/>
         </xsd:sequence>
         <xsd:attribute name="mode" type="simpleType.ImportMode" use="optional" />
         <xsd:attribute name="folder-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
@@ -80,15 +83,78 @@
         <xsd:sequence>
             <xsd:element name="display-name" type="sharedType.LocalizedString" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="description" type="sharedType.LocalizedString" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="type" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The type must either be a page ("page.*") or a component ("component.*") and can only be set
+                        if the experience editor feature is turned on. Those types are defined as part of the storefront
+                        cartridges, that should be assigned to the same sites to which the given library is assigned to
+                        such that definition and data match.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="config" type="sharedType.Text" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The config can only be set for pages (see contentassetpageconfig.json) and
+                        components (contentassetcomponentconfig.json).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="data" type="sharedType.LocalizedString" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The data only be set for components (see contentassetcomponentdata.json).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="online-flag" type="sharedType.SiteSpecificBoolean" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-            <xsd:element name="searchable-flag" type="sharedType.SiteSpecificBoolean" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+            <xsd:element name="searchable-flag" type="sharedType.SiteSpecificBoolean" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The searchable-flag cannot be set for components.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="template" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="page-attributes" type="complexType.PageAttributes" minOccurs="0" maxOccurs="1" />
             <xsd:element name="custom-attributes" type="sharedType.SiteSpecificCustomAttributes" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="folder-links" type="complexType.Content.FolderLinks" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="sitemap-included-flag" type="sharedType.SiteSpecificBoolean" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-            <xsd:element name="sitemap-changefrequency" type="sharedType.SiteSpecificSiteMapChangeFrequency" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-            <xsd:element name="sitemap-priority" type="sharedType.SiteSpecificSiteMapPriority" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+            <xsd:element name="folder-links" type="complexType.Content.FolderLinks" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Pages and components cannot be assigned to folders.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="content-links" type="complexType.Content.ContentLinks" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The content-links can only be set for pages and components. Each can have multiple outgoing
+                        links. Incoming links are only allowed for components (at most one per component).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sitemap-included-flag" type="sharedType.SiteSpecificBoolean" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The sitemap-included-flag cannot be set for components.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sitemap-changefrequency" type="sharedType.SiteSpecificSiteMapChangeFrequency" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The sitemap-changefrequency cannot be set for components.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="sitemap-priority" type="sharedType.SiteSpecificSiteMapPriority" minOccurs="0" maxOccurs="unbounded" nillable="true">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The sitemap-priority cannot be set for components.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="content-detail-page-meta-tag-rules" type="complexType.PageMetaTagRules" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="mode" type="simpleType.ImportMode" />
@@ -108,6 +174,31 @@
             <xsd:element name="position" type="xsd:double" minOccurs="0" maxOccurs="1" />
         </xsd:all>
         <xsd:attribute name="folder-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
+    </xsd:complexType>
+
+    <!-- ContentLink -->
+    <xsd:complexType name="complexType.Content.ContentLinks" mixed="false">
+        <xsd:annotation>
+            <xsd:documentation>
+                These links are only allowed between content elements of type page or component.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="content-link" type="complexType.Content.ContentLink" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="complexType.Content.ContentLink" mixed="false">
+        <xsd:annotation>
+            <xsd:documentation>
+                Each component can only have a single incoming content link (and pages cannot have incoming links).
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:all>
+            <xsd:element name="position" type="xsd:double" minOccurs="0" maxOccurs="1" />
+        </xsd:all>
+        <xsd:attribute name="content-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
+        <xsd:attribute name="type" type="simpleType.Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
 
     <!-- Search Engine Support -->
@@ -191,6 +282,12 @@
             <xsd:extension base="simpleType.Generic.String">
                 <xsd:attribute ref="xml:lang" />
             </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="sharedType.Text" mixed="false">
+        <xsd:simpleContent>
+            <xsd:extension base="simpleType.Generic.String"/>
         </xsd:simpleContent>
     </xsd:complexType>
     

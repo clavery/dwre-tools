@@ -200,8 +200,11 @@
    // arg is the output of createRequest.
    execute: function(svc:Service, arg:Object) {
         // Execute the service call and return a result
-        // This method is not required for HTTP-related services.
+        // This method is not used by default for HTTP-related services unless executeOverride is set.
    },
+
+   // Use the execute function if it is present. This is only required to use the functionality with HTTP services.
+   executeOverride: true,
 
    // svc is the call-specific Service instance.
    // response is the output of execute.
@@ -358,7 +361,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

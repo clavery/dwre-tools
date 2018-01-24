@@ -47,6 +47,19 @@
 </div>
 <!--End of class div-->
 <div class="section">
+<div class="header">
+			Constants
+		</div>
+<div class="summaryItem">
+<span><a name="dw_content_ContentMgr_PRIVATE_LIBRARY_DetailAnchor"></a>PRIVATE_LIBRARY
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">The input string to identify that the library is a private site library when invoking <a href="class_dw_content_ContentMgr.html#dw_content_ContentMgr_getLibrary_String_DetailAnchor">getLibrary(String)</a>.</div>
+</span>
+</div>
+</div>
+<div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
 <span><a name="_DetailAnchor"></a>siteLibrary
@@ -80,6 +93,18 @@
 <div class="description">Returns the content with the corresponding identifier within the current site's site library.</div>
 </div>
 <div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_content_ContentMgr_getContent_Library_String_DetailAnchor"><span class="">getContent</span></a></span>(library
+								 : 	
+								 
+								<a href="class_dw_content_Library.html"><span class="">Library</span></a>, id
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_content_Content.html"><span class="">Content</span></a></span>
+<div class="description">Returns the content with the corresponding identifier within the specified library.</div>
+</div>
+<div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_content_ContentMgr_getFolder_String_DetailAnchor"><span class="">getFolder</span></a></span>(id
 								 : 	
 								 
@@ -87,6 +112,27 @@
 						: 
 					<a href="class_dw_content_Folder.html"><span class="">Folder</span></a></span>
 <div class="description">Returns the folder identified by the specified id within the current site's site library.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_content_ContentMgr_getFolder_Library_String_DetailAnchor"><span class="">getFolder</span></a></span>(library
+								 : 	
+								 
+								<a href="class_dw_content_Library.html"><span class="">Library</span></a>, id
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_content_Folder.html"><span class="">Folder</span></a></span>
+<div class="description">Returns the folder identified by the specified id within the specified library.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_content_ContentMgr_getLibrary_String_DetailAnchor"><span class="">getLibrary</span></a></span>(libraryId
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_content_Library.html"><span class="">Library</span></a></span>
+<div class="description">Returns the content library specified by the given id.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_content_ContentMgr_getSiteLibrary_DetailAnchor"><span class="">getSiteLibrary</span></a></span>()
@@ -141,6 +187,45 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_content_ContentMgr_getContent_Library_String_DetailAnchor"></a>
+<div class="detailName 
+						">getContent</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getContent</span>(library
+								 : 
+								 
+								<a href="class_dw_content_Library.html"><span class="">Library</span></a>, id
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_content_Content.html"><span class="">Content</span></a>
+</div>
+<div class="description">Returns the content with the corresponding identifier within the specified library.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">library</span>
+						 - 
+						<span class="parameterDesc">the content library to look for the content in</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">id</span>
+						 - 
+						<span class="parameterDesc">the ID of the content asset to find.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the content if found, or null if not found.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_content_ContentMgr_getFolder_String_DetailAnchor"></a>
 <div class="detailName 
 						">getFolder</div>
@@ -172,6 +257,76 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_content_ContentMgr_getFolder_Library_String_DetailAnchor"></a>
+<div class="detailName 
+						">getFolder</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getFolder</span>(library
+								 : 
+								 
+								<a href="class_dw_content_Library.html"><span class="">Library</span></a>, id
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_content_Folder.html"><span class="">Folder</span></a>
+</div>
+<div class="description">Returns the folder identified by the specified id within the specified library.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">library</span>
+						 - 
+						<span class="parameterDesc">the content library to look for the folder in</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">id</span>
+						 - 
+						<span class="parameterDesc">the ID of the folder to find.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the folder, or null if not found.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_content_ContentMgr_getLibrary_String_DetailAnchor"></a>
+<div class="detailName 
+						">getLibrary</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getLibrary</span>(libraryId
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_content_Library.html"><span class="">Library</span></a>
+</div>
+<div class="description">Returns the content library specified by the given id. If <a href="class_dw_content_ContentMgr.html#dw_content_ContentMgr_PRIVATE_LIBRARY_DetailAnchor">PRIVATE_LIBRARY</a> is used, then the current
+ site's private library will be returned.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">libraryId</span>
+						 - 
+						<span class="parameterDesc">the id of the library to return.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the library for the passed id. Returns null if there is no content library with that id.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_content_ContentMgr_getSiteLibrary_DetailAnchor"></a>
 <div class="detailName 
 						">getSiteLibrary</div>
@@ -192,7 +347,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

@@ -1,0 +1,328 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class PageMgr</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_dw.experience.PageMgr">
+<a name="dw.experience.PageMgr"></a>
+<div class="packageName">dw.experience</div>
+<div class="className
+					">	
+        	
+				Class PageMgr</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%;">
+<img src="images/inherit.gif">dw.experience.PageMgr</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">==========================
+ EXPERIENCE EDITOR BETA API
+ ==========================
+
+ <p>Provides functionality for getting and rendering experience editor managed pages. The basic flow is
+ to fetch a page by ID first via <code>PageMgr.getPage(pageID)</code> and then subsequently call to
+ <code>PageMgr.renderPage(page)</code> with the recently retrieved page. This will trigger page rendering from a
+ top level perspective, i.e. the page serves as entry point and root container of components.
+ As a related page or component template will likely want to trigger rendering of nested components
+ within its regions it can do this by first fetching the desired region by ID via
+ <code>Component/Page.getRegion(regionID)</code> and then call to <code>PageMgr.renderRegion(region)</code>
+ with the recently retrieved region (and optionally provide <a href="class_dw_experience_RegionRenderSettings.html">RegionRenderSettings</a> for customized
+ rendering of region and component wrapper elements).</p>
+
+ <p>Various attributes required for rendering in the corresponding template can be accessed with the
+ accordant methods of Page and Component.</p>
+
+ <p><b>Any retrieval of pages, components and regions will return null in case the experience editor feature is
+ turned off. Calling to the render methods would also yield no rendering result in case this feature is
+ turned off. The experience editor feature is a beta feature only and must not be used if not explicitly taking
+ part in the corresponding beta program.</b></p></div>
+<div class="subclasses"></div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_Page.html">Page</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_Region.html">Region</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_Component.html">Component</a></span>
+</div>
+</div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem"> 
+			This class does not have a constructor, so you cannot create it directly.  
+		    </div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_getPage_String_DetailAnchor"><span class="">getPage</span></a></span>(pageID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_experience_Page.html"><span class="">Page</span></a></span>
+<div class="description">Returns the page identified by the specified id.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_renderPage_Page_DetailAnchor"><span class="">renderPage</span></a></span>(page
+								 : 	
+								 
+								<a href="class_dw_experience_Page.html"><span class="">Page</span></a>)
+						: 
+					void</span>
+<div class="description">Render a page by invoking its process function first, followed by invoking its view function for the purpose of writing the render result to the current response.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_renderRegion_Region_RegionRenderSettings_DetailAnchor"><span class="">renderRegion</span></a></span>(region
+								 : 	
+								 
+								<a href="class_dw_experience_Region.html"><span class="">Region</span></a>, regionRenderSettings
+								 : 	
+								 
+								<a href="class_dw_experience_RegionRenderSettings.html"><span class="">RegionRenderSettings</span></a>)
+						: 
+					void</span>
+<div class="description"><p>Renders a region by triggering rendering of all visible components within this region.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_renderRegion_Region_DetailAnchor"><span class="">renderRegion</span></a></span>(region
+								 : 	
+								 
+								<a href="class_dw_experience_Region.html"><span class="">Region</span></a>)
+						: 
+					void</span>
+<div class="description"><p>Renders a region by triggering rendering of all visible components within this region.</div>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Detail
+		</div>
+<div class="detailItem">
+<a name="dw_experience_PageMgr_getPage_String_DetailAnchor"></a>
+<div class="detailName 
+						">getPage</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getPage</span>(pageID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_experience_Page.html"><span class="">Page</span></a>
+</div>
+<div class="description">Returns the page identified by the specified id.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">pageID</span>
+						 - 
+						<span class="parameterDesc">the id of the page</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the page, or null if not found.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_PageMgr_renderPage_Page_DetailAnchor"></a>
+<div class="detailName 
+						">renderPage</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">renderPage</span>(page
+								 : 
+								 
+								<a href="class_dw_experience_Page.html"><span class="">Page</span></a>)
+					 : 
+					void</div>
+<div class="description">Render a page by invoking its process function first, followed by
+ invoking its view function for the purpose of writing the render result
+ to the current response.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">page</span>
+						 - 
+						<span class="parameterDesc">the page that will be rendered</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_PageMgr_renderRegion_Region_RegionRenderSettings_DetailAnchor"></a>
+<div class="detailName 
+						">renderRegion</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">renderRegion</span>(region
+								 : 
+								 
+								<a href="class_dw_experience_Region.html"><span class="">Region</span></a>, regionRenderSettings
+								 : 
+								 
+								<a href="class_dw_experience_RegionRenderSettings.html"><span class="">RegionRenderSettings</span></a>)
+					 : 
+					void</div>
+<div class="description"><p>Renders a region by triggering rendering of all visible components within
+ this region. For each of these components first the process function is
+ invoked, followed by invoking the view function for the purpose of
+ writing the render result to the current response. The combined render
+ output will be wrapped by an HMTL element. <br />
+ In order to provide styling for these wrapper
+ elements of the components and the region some render settings can optionally be provided,
+ which basically allows to configure which kind of tag is used for the wrapper element and
+ which attributes the wrapper element contains. A sample output could look like this if
+ <a href="class_dw_experience_RegionRenderSettings.html">RegionRenderSettings</a> are applied with customized tag names and attribtues
+ for the region and component wrapper elements.</p>
+ <pre>
+ {@code 
+ <p class="myRegionCssClass">
+     <span class="myComponentCssClass myComponentCssClass1" data-foo="bar">
+         ...
+     </span>
+     <span class="myComponentCssClass myComponentCssClass2">
+         ...
+     </span>
+ </p>
+ }
+ </pre>
+
+ <p>In order to go with the default settings for the wrapper elements see
+ <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderRegion_Region_DetailAnchor">renderRegion(Region)</a>.</p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">region</span>
+						 - 
+						<span class="parameterDesc">the region that will be rendered</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">regionRenderSettings</span>
+						 - 
+						<span class="parameterDesc">the render settings that drive how the region and its components is rendered</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_RegionRenderSettings.html">RegionRenderSettings</a></span>
+</div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_PageMgr_renderRegion_Region_DetailAnchor"></a>
+<div class="detailName 
+						">renderRegion</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">renderRegion</span>(region
+								 : 
+								 
+								<a href="class_dw_experience_Region.html"><span class="">Region</span></a>)
+					 : 
+					void</div>
+<div class="description"><p>Renders a region by triggering rendering of all visible components within
+ this region. For each of these components first the process function is
+ invoked, followed by invoking the view function for the purpose of
+ writing the render result to the current response. The combined render
+ output will be wrapped by an HMTL element with system default settings applied.
+ The following sample shows how this would look like for a 'pictures' region
+ that contains two components of type 'image'. </p>
+ <pre>
+ {@code 
+ <div class="experience-region experience-pictures">
+     <div class="experience-component experience-image">
+         ...
+     </div>
+     <div class="experience-component experience-image">
+         ..
+     </div>
+ </div>
+ }
+ </pre>
+
+ <p>The system default for region render settings are:
+ <ul>
+  <li>tag_name : div</li>
+  <li>attributes : {"class":"experience-region experience-[REGION_ID]"}</li>
+ </ul>
+ </p>
+
+ <p>The system default for component render settings are:
+ <ul>
+  <li>tag name : div</li>
+  <li>attributes : {"class":"experience-component experience-[COMPONENT_TYPE_ID]"}</li>
+ </ul>
+ </p>
+
+ <p>In order to provide your own settings for the wrapper elements see
+ <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderRegion_Region_RegionRenderSettings_DetailAnchor">renderRegion(Region, RegionRenderSettings)</a>.</p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">region</span>
+						 - 
+						<span class="parameterDesc">the region that will be rendered</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>

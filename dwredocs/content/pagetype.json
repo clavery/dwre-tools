@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+   
+  "type":"object",
+  
+  "properties": {
+    "id": {"$ref":"common.json#/definitions/id"},
+    "name": {"$ref":"common.json#/definitions/name"},
+    "description": {"$ref":"common.json#/definitions/description"},
+    "region_definitions": {
+      "type": "array",
+      "items": {"$ref": "regiondefinition.json"}
+    }
+  },
+  "required": ["id","region_definitions"],
+  "additionalProperties": false
+}

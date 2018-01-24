@@ -153,8 +153,13 @@
 						
 					    
 					    boolean
-							&nbsp;(Read Only)<div class="description">Returns 'true' if the product is assigned to the current site (via the
- site catalog), otherwise 'false' is returned.</div>
+							&nbsp;(Read Only)<div class="description">Returns <code>true</code> if the product is assigned to the current site (via the site catalog), otherwise
+ <code>false</code> is returned.
+ <P>
+ In case of the product being a variant, the variant will be considered as assigned if its master, one of the
+ variation groups it is in or itself is assigned to the site catalog. In case this is triggered for a variation
+ group the variation group is considered as assigned if its master or itself is assigned.
+ </P></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -1466,7 +1471,7 @@
 <span><span class="emphasis"><a href="#dw_catalog_Product_isAssignedToSiteCatalog_DetailAnchor"><span class="">isAssignedToSiteCatalog</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Returns 'true' if the product is assigned to the current site (via the site catalog), otherwise 'false' is returned.</div>
+<div class="description">Returns <code>true</code> if the product is assigned to the current site (via the site catalog), otherwise <code>false</code> is returned.</div>
 </div>
 <div class="summaryItem">
 <span class="dep"><span class="emphasis"><a href="#dw_catalog_Product_isAvailable_DetailAnchor"><span class="">isAvailable</span></a></span>()
@@ -3580,12 +3585,17 @@
 <span class="emphasis">isAssignedToSiteCatalog</span>()
 					 : 
 					boolean</div>
-<div class="description">Returns 'true' if the product is assigned to the current site (via the
- site catalog), otherwise 'false' is returned.</div>
+<div class="description">Returns <code>true</code> if the product is assigned to the current site (via the site catalog), otherwise
+ <code>false</code> is returned.
+ <P>
+ In case of the product being a variant, the variant will be considered as assigned if its master, one of the
+ variation groups it is in or itself is assigned to the site catalog. In case this is triggered for a variation
+ group the variation group is considered as assigned if its master or itself is assigned.
+ </P></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">'true' if product assigned to site.</span>
+<span class="parameterDesc">'true' if product assigned to the site catalog</span>
 </div>
 </div>
 <hr>
@@ -4102,7 +4112,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

@@ -442,6 +442,15 @@
 </div>
 </div>
 </div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>trackingEmptySearchesEnabled
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean
+							&nbsp;(Read Only)<div class="description">The method indicates if no-hits search should be tracked for predictive intelligence use.</p></div>
+</span>
+</div>
 </div>
 <div class="section">
 <div class="header">
@@ -456,6 +465,24 @@
 <div class="header">
 			Method Summary
 		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_addHitTypeRefinement_String_DetailAnchor"><span class="">addHitTypeRefinement</span></a></span>(types
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>...)
+						: 
+					void</span>
+<div class="description">Set the only search hit types to be included from the search.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_excludeHitType_String_DetailAnchor"><span class="">excludeHitType</span></a></span>(types
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>...)
+						: 
+					void</span>
+<div class="description">Set the search hit types to be excluded from the search.</div>
+</div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_getCategory_DetailAnchor"><span class="">getCategory</span></a></span>()
 						: 
@@ -631,6 +658,12 @@
 <div class="description">Identifies if this is a category search and is refined with further criteria, like a brand refinement or an attribute refinement.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_isTrackingEmptySearchesEnabled_DetailAnchor"><span class="">isTrackingEmptySearchesEnabled</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">The method indicates if no-hits search should be tracked for predictive intelligence use.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_search_DetailAnchor"><span class="">search</span></a></span>()
 						: 
 					void</span>
@@ -644,6 +677,15 @@
 						: 
 					void</span>
 <div class="description">Specifies the category id used for the search query.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_setEnableTrackingEmptySearches_Boolean_DetailAnchor"><span class="">setEnableTrackingEmptySearches</span></a></span>(trackingEmptySearches
+								 : 	
+								 
+								boolean)
+						: 
+					void</span>
+<div class="description">Set a flag indicating whether no-hits search should be tracked for predictive intelligence use.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_setOrderableProductsOnly_Boolean_DetailAnchor"><span class="">setOrderableProductsOnly</span></a></span>(orderableOnly
@@ -975,6 +1017,56 @@
 <div class="header">
 			Method Detail
 		</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_addHitTypeRefinement_String_DetailAnchor"></a>
+<div class="detailName 
+						">addHitTypeRefinement</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">addHitTypeRefinement</span>(types
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>...)
+					 : 
+					void</div>
+<div class="description">Set the only search hit types to be included from the search. Values accepted are the 'hit type' constants
+ exposed in the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> class. Overwrites any hit type refinements set from prior calls to
+ addHitTypeRefinement(String...) or excludeHitType(String...).</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">types</span>
+						 - 
+						<span class="parameterDesc">to be included.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_excludeHitType_String_DetailAnchor"></a>
+<div class="detailName 
+						">excludeHitType</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">excludeHitType</span>(types
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>...)
+					 : 
+					void</div>
+<div class="description">Set the search hit types to be excluded from the search. Values accepted are the 'hit type' constants exposed in
+ the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> class. Overwrites any hit type refinements set from prior calls to
+ addHitTypeRefinement(String...) or excludeHitType(String...).</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">types</span>
+						 - 
+						<span class="parameterDesc">to be excluded.</span>
+</div>
+</div>
+<hr>
+</div>
 <div class="detailItem">
 <a name="dw_catalog_ProductSearchModel_getCategory_DetailAnchor"></a>
 <div class="detailName 
@@ -1604,6 +1696,24 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_isTrackingEmptySearchesEnabled_DetailAnchor"></a>
+<div class="detailName 
+						">isTrackingEmptySearchesEnabled</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isTrackingEmptySearchesEnabled</span>()
+					 : 
+					boolean</div>
+<div class="description">The method indicates if no-hits search should be tracked for predictive intelligence use.</p></div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">true, if no-hits search should be tracked, otherwise false.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductSearchModel_search_DetailAnchor"></a>
 <div class="detailName 
 						">search</div>
@@ -1634,6 +1744,29 @@
 <span class="parameterName">categoryID</span>
 						 - 
 						<span class="parameterDesc">the category id for the search query.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_setEnableTrackingEmptySearches_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setEnableTrackingEmptySearches</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setEnableTrackingEmptySearches</span>(trackingEmptySearches
+								 : 
+								 
+								boolean)
+					 : 
+					void</div>
+<div class="description">Set a flag indicating whether no-hits search should be tracked for predictive intelligence use.</p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">trackingEmptySearches</span>
+						 - 
+						<span class="parameterDesc">true, no-hits search should be tracked, false, otherwise.</span>
 </div>
 </div>
 <hr>
@@ -2611,7 +2744,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

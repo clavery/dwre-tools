@@ -101,6 +101,15 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>filteredByFolder
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean<div class="description">The method returns true, if the content search result is filtered by the folder and it is not subsequently
+ possible to search for content assets that belong to no folder (e.g. those for Experience Editor).</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>folder
 						&nbsp;:&nbsp;
 						
@@ -248,6 +257,12 @@
 <div class="description">Returns the set of search refinements used in this search.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_content_ContentSearchModel_isFilteredByFolder_DetailAnchor"><span class="">isFilteredByFolder</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">The method returns true, if the content search result is filtered by the folder and it is not subsequently possible to search for content assets that belong to no folder (e.g.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_content_ContentSearchModel_isFolderSearch_DetailAnchor"><span class="">isFolderSearch</span></a></span>()
 						: 
 					boolean</span>
@@ -285,6 +300,15 @@
 						: 
 					void</span>
 <div class="description">Sets the contentID used in this search.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_content_ContentSearchModel_setFilteredByFolder_Boolean_DetailAnchor"><span class="">setFilteredByFolder</span></a></span>(filteredByFolder
+								 : 	
+								 
+								boolean)
+						: 
+					void</span>
+<div class="description">Set a flag to indicate if the search is filtered by the folder.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_content_ContentSearchModel_setFolderID_String_DetailAnchor"><span class="">setFolderID</span></a></span>(folderID
@@ -644,6 +668,25 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_content_ContentSearchModel_isFilteredByFolder_DetailAnchor"></a>
+<div class="detailName 
+						">isFilteredByFolder</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isFilteredByFolder</span>()
+					 : 
+					boolean</div>
+<div class="description">The method returns true, if the content search result is filtered by the folder and it is not subsequently
+ possible to search for content assets that belong to no folder (e.g. those for Experience Editor).</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">True if this is filtered by the folder of the content asset.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_content_ContentSearchModel_isFolderSearch_DetailAnchor"></a>
 <div class="detailName 
 						">isFolderSearch</div>
@@ -751,6 +794,30 @@
 <span class="parameterName">contentID</span>
 						 - 
 						<span class="parameterDesc">the contentID used in this search.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_content_ContentSearchModel_setFilteredByFolder_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setFilteredByFolder</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setFilteredByFolder</span>(filteredByFolder
+								 : 
+								 
+								boolean)
+					 : 
+					void</div>
+<div class="description">Set a flag to indicate if the search is filtered by the folder. Must be set to false to return content assets that
+ do not belong to any folder.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">filteredByFolder</span>
+						 - 
+						<span class="parameterDesc">filter the search result by folder</span>
 </div>
 </div>
 <hr>
@@ -1210,7 +1277,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

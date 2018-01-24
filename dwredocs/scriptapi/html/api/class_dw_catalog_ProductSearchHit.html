@@ -41,22 +41,80 @@
 <div class="classSummary">
 <div class="classSummaryDetail">
 <div class="description">Represents a product search result item returned by the Search pipelet. <br/>
- An instance of ProductSearchHit is a wrapper around the actual product
- returned by the search. The wrapped product can be accessed by method
- <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>.
+ An instance of ProductSearchHit is a wrapper around the actual product returned by the search. The wrapped product
+ can be accessed by method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>. An instance of ProductSearchHit contains a hit type that can be
+ accessed by method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getHitType_DetailAnchor">getHitType()</a>. A hit type can be refined against and encapsulates the wrapped product type
+ of the hit.
  <p/>
- For special product types, the wrapped product can be the representative of
- other related products actually hit by the search. A variation master or
- variation group returned by the search represents a collection of hit
- variants. A product set returned by the search represents a collection of hit
- set-products. A bundle returned by the search represents a collection of hit
- bundled-products. If the product wrapped by this ProductSearchHit is the
- representative of other products, method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a>
- can be used to access all these products.</div>
+ For special product types, the wrapped product can be the representative of other related products actually hit by
+ the search. A variation master or variation group returned by the search represents a collection of hit variants. A
+ product set returned by the search represents a collection of hit set-products. A bundle returned by the search
+ represents a collection of hit bundled-products. If the product wrapped by this ProductSearchHit is the
+ representative of other products, method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> can be used to access all these products.</div>
 <div class="subclasses"></div>
 </div>
 </div>
 <!--End of class div-->
+<div class="section">
+<div class="header">
+			Constants
+		</div>
+<div class="summaryItem">
+<span><a name="dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor"></a>HIT_TYPE_PRODUCT_BUNDLE
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Constant representing a product search hit type based on the presentation product of a hit. This hit type is used with product bundles.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor"></a>HIT_TYPE_PRODUCT_MASTER
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Constant representing a product search hit type based on the presentation product of a hit. This hit type is used with master products.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor"></a>HIT_TYPE_PRODUCT_SET
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Constant representing a product search hit type based on the presentation product of a hit. This hit type is used with product sets.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor"></a>HIT_TYPE_SIMPLE
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Constant representing a product search hit type based on the presentation product of a hit. This hit type is used with single, non-complex products, including product variants that
+ are assigned to a category and are returned as the presentation product.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span class="dep"><a name="dw_catalog_ProductSearchHit_HIT_TYPE_SLICING_GROUP_DetailAnchor"></a>HIT_TYPE_SLICING_GROUP
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Constant representing a product search hit type based on the presentation product of a hit. This hit type is used with slicing groups.</div>
+</span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Please use <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> instead.</span>
+</div>
+</div>
+</div>
+<div class="summaryItem">
+<span><a name="dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor"></a>HIT_TYPE_VARIATION_GROUP
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+<div class="description">Constant representing a product search hit type based on the presentation product of a hit. This hit type is used with variation groups.</div>
+</span>
+</div>
+</div>
 <div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
@@ -119,6 +177,23 @@
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
 							&nbsp;(Read Only)<div class="description">The first product ID represented by the product wrapped by the search
  hit.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>hitType
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The type of the product wrapped by this search hit. The product type returned will be one of the hit types: <br/>
+ <ul>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SLICING_GROUP_DetailAnchor">HIT_TYPE_SLICING_GROUP</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a>
+ <ul></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -320,6 +395,12 @@
 <div class="description">Returns the first product ID represented by the product wrapped by the search hit.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getHitType_DetailAnchor"><span class="">getHitType</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the type of the product wrapped by this search hit.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getLastRepresentedProduct_DetailAnchor"><span class="">getLastRepresentedProduct</span></a></span>()
 						: 
 					<a href="class_dw_catalog_Product.html"><span class="">Product</span></a></span>
@@ -457,6 +538,33 @@
 </div>
 <div class="parameterDetail">
 <span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProductID_DetailAnchor">getLastRepresentedProductID()</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchHit_getHitType_DetailAnchor"></a>
+<div class="detailName 
+						">getHitType</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getHitType</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the type of the product wrapped by this search hit. The product type returned will be one of the hit types: <br/>
+ <ul>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SLICING_GROUP_DetailAnchor">HIT_TYPE_SLICING_GROUP</a>
+ <li> <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a>
+ <ul></div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">search hit type</span>
 </div>
 </div>
 <hr>
@@ -822,7 +930,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

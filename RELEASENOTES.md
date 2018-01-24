@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.8.7
+
+- updated to 18.2
+
 ## 1.8.6
 
 - input fix for both py2 and py3

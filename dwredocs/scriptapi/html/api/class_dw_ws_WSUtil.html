@@ -512,6 +512,18 @@
 <div class="description">Returns the connection timeout value for the port.</div>
 </div>
 <div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_ws_WSUtil_getHTTPRequestHeader_Object_String_DetailAnchor"><span class="">getHTTPRequestHeader</span></a></span>(svc
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>, key
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns an HTTP request header property value using the specified key.</div>
+</div>
+<div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_ws_WSUtil_getProperty_String_Object_DetailAnchor"><span class="">getProperty</span></a></span>(key
 								 : 	
 								 
@@ -555,6 +567,21 @@
 						: 
 					void</span>
 <div class="description">Sets the connection timeout for the port.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_ws_WSUtil_setHTTPRequestHeader_Object_String_String_DetailAnchor"><span class="">setHTTPRequestHeader</span></a></span>(svc
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>, key
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, value
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					void</span>
+<div class="description">Sets an HTTP request header property using the specified key and value.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_ws_WSUtil_setProperty_String_Object_Object_DetailAnchor"><span class="">setProperty</span></a></span>(key
@@ -844,6 +871,46 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_ws_WSUtil_getHTTPRequestHeader_Object_String_DetailAnchor"></a>
+<div class="detailName 
+						">getHTTPRequestHeader</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getHTTPRequestHeader</span>(svc
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>, key
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns an HTTP request header property value using the specified key. Null is returned
+ if the key does not represent an HTTP header property.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">svc</span>
+						 - 
+						<span class="parameterDesc">a service stub returned from getService().</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">key</span>
+						 - 
+						<span class="parameterDesc">the header property key.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">an HTTP request header property value using the specified key or null.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_ws_WSUtil_getProperty_String_Object_DetailAnchor"></a>
 <div class="detailName 
 						">getProperty</div>
@@ -1033,6 +1100,44 @@
 </div>
 <div class="parameterDetail">
 <span class="parameterDesc"><a href="class_dw_ws_Port.html">Port</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_ws_WSUtil_setHTTPRequestHeader_Object_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">setHTTPRequestHeader</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">setHTTPRequestHeader</span>(svc
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>, key
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, value
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets an HTTP request header property using the specified key and value.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">svc</span>
+						 - 
+						<span class="parameterDesc">a service stub returned from getService().</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">key</span>
+						 - 
+						<span class="parameterDesc">the header property key.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">value</span>
+						 - 
+						<span class="parameterDesc">the header property value. If the value is null, the property identified by the key is removed from the HTTP request header.</span>
 </div>
 </div>
 <hr>
@@ -1239,7 +1344,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

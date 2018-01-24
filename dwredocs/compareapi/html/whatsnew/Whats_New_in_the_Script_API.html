@@ -9,15 +9,15 @@
 <span class="newTitle">
 					What's New in the Script API
 				</span>
-<p>The following classes are either new or have been changed in version 17.8.</p>
+<p>The following classes are either new or have been changed in version 18.2.</p>
 </div>
 <div class="section">
 <div class="header">
-							Package dw.extensions.facebook</div>
-<p>The following classes changed in the <code>dw.extensions.facebook</code> Package. </p>
+							Package dw.content</div>
+<p>The following classes changed in the <code>dw.content</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">FacebookFeedHooks</span>
+<span class="className">ContentSearchModel</span>
 <div class="section">
 <table>
 <thead>
@@ -28,19 +28,20 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_extensions_facebook_FacebookFeedHooks.html#class_dw_extensions_facebook_FacebookFeedHooks/dw_extensions_facebook_FacebookFeedHooks_transformProduct_Product_FacebookProduct_String_DetailAnchor">transformProduct(Product,
-                FacebookProduct,
-                String)</xref>
+<xref href="../ScriptAPI/class_dw_content_ContentSearchModel.html#class_dw_content_ContentSearchModel/dw_content_ContentSearchModel_isFilteredByFolder_DetailAnchor">isFilteredByFolder()</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
+			Method is New
 		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_content_ContentSearchModel.html#class_dw_content_ContentSearchModel/dw_content_ContentSearchModel_setFilteredByFolder_Boolean_DetailAnchor">setFilteredByFolder(Boolean)</xref>
+</code></td><td class="summary">
 <p>
-			Parameters Changed from <code>Product,
-                FacebookProduct</code> to <code>Product,
-                FacebookProduct,
-                String</code>
-</p>
+			Method is New
+		</p>
 </td>
 </tr>
 </tbody>
@@ -49,7 +50,7 @@
 </div>
 <div class="section">
 <hr>
-<span class="className">FacebookProduct</span>
+<span class="className">Folder</span>
 <div class="section">
 <table>
 <thead>
@@ -60,7 +61,7 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_extensions_facebook_FacebookProduct.html#class_dw_extensions_facebook_FacebookProduct/dw_extensions_facebook_FacebookProduct_getSize_DetailAnchor">getSize()</xref>
+<xref href="../ScriptAPI/class_dw_content_Folder.html#class_dw_content_Folder/dw_content_Folder_getSiteMapChangeFrequency_DetailAnchor">getSiteMapChangeFrequency()</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -69,7 +70,7 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_extensions_facebook_FacebookProduct.html#class_dw_extensions_facebook_FacebookProduct/dw_extensions_facebook_FacebookProduct_setSize_String_DetailAnchor">setSize(String)</xref>
+<xref href="../ScriptAPI/class_dw_content_Folder.html#class_dw_content_Folder/dw_content_Folder_getSiteMapPriority_DetailAnchor">getSiteMapPriority()</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -80,6 +81,31 @@
 </table>
 </div>
 </div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.experience</div>
+<p>The <code>dw.experience</code> Package was added containing following classes.</p>
+<ul>
+<li>
+<code>Component</code>
+</li>
+<li>
+<code>ComponentRenderSettings</code>
+</li>
+<li>
+<code>Page</code>
+</li>
+<li>
+<code>PageMgr</code>
+</li>
+<li>
+<code>Region</code>
+</li>
+<li>
+<code>RegionRenderSettings</code>
+</li>
+</ul>
 </div>
 <div class="section">
 <div class="header">
@@ -87,7 +113,7 @@
 <p>The following classes changed in the <code>dw.order</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Basket</span>
+<span class="className">OrderMgr</span>
 <div class="section">
 <table>
 <thead>
@@ -98,7 +124,80 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_Basket.html#class_dw_order_Basket/dw_order_Basket_setChannelType_Number_DetailAnchor">setChannelType(Number)</xref>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_createOrder_Basket_String_DetailAnchor">createOrder(Basket,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_createShippingOrders_Order_DetailAnchor">createShippingOrders(Order)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_processOrders_Function_String_Object_DetailAnchor">processOrders(Function,
+                String,
+                Object...)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_queryOrder_String_Object_DetailAnchor">queryOrder(String,
+                Object...)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_queryOrders_String_String_Object_DetailAnchor">queryOrders(String,
+                String,
+                Object...)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_searchOrder_String_Object_DetailAnchor">searchOrder(String,
+                Object...)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor">searchOrders(String,
+                String,
+                Object...)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_searchOrders_Map_String_DetailAnchor">searchOrders(Map,
+                String)</xref>
 </code></td><td class="summary">
 <p>
 			Documentation Changed.
@@ -109,29 +208,14 @@
 </table>
 </div>
 </div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.svc</div>
+<p>The following classes changed in the <code>dw.svc</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">LineItemCtnr</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Field</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_LineItemCtnr.html#class_dw_order_LineItemCtnr/dw_order_LineItemCtnr_CHANNEL_TYPE_INSTAGRAMCOMMERCE_DetailAnchor">CHANNEL_TYPE_INSTAGRAMCOMMERCE</xref>
-</code></td><td class="summary">
-<p>
-			Field is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
+<span class="className">FTPService</span>
 <div class="section">
 <table>
 <thead>
@@ -142,8 +226,16 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_LineItemCtnr.html#class_dw_order_LineItemCtnr/dw_order_LineItemCtnr_createPaymentInstrumentFromWallet_CustomerPaymentInstrument_Money_DetailAnchor">createPaymentInstrumentFromWallet(CustomerPaymentInstrument,
-                Money)</xref>
+<xref href="../ScriptAPI/class_dw_svc_FTPService.html#class_dw_svc_FTPService/dw_svc_FTPService_isAutoDisconnect_DetailAnchor">isAutoDisconnect()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_FTPService.html#class_dw_svc_FTPService/dw_svc_FTPService_setAutoDisconnect_Boolean_DetailAnchor">setAutoDisconnect(Boolean)</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -154,41 +246,23 @@
 </table>
 </div>
 </div>
-</div>
-<div class="section">
-<div class="header">
-							Package dw.sitemap</div>
-<p>The <code>dw.sitemap</code> Package was added containing following classes.</p>
-<ul>
-<li>
-<code>SitemapFile</code>
-</li>
-<li>
-<code>SitemapMgr</code>
-</li>
-</ul>
-</div>
-<div class="section">
-<div class="header">
-							Package dw.system</div>
-<p>The following classes changed in the <code>dw.system</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Response</span>
+<span class="className">ServiceDefinition</span>
 <div class="section">
 <table>
 <thead>
 <tr>
-<td>Field</td><td>Summary</td>
+<td>Method</td><td>Summary</td>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_system_Response.html#class_dw_system_Response/dw_system_Response_REFERRER_POLICY_DetailAnchor">REFERRER_POLICY</xref>
+<xref href="../ScriptAPI/class_dw_svc_ServiceDefinition.html#class_dw_svc_ServiceDefinition/dw_svc_ServiceDefinition_configure_Object_DetailAnchor">configure(Object)</xref>
 </code></td><td class="summary">
 <p>
-			Field is New
+			Documentation Changed.
 		</p>
 </td>
 </tr>
@@ -199,7 +273,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 </body>
 </html>

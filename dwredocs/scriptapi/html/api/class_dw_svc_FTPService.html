@@ -51,6 +51,14 @@
 <div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>autoDisconnect
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean<div class="description">The status of whether the underlying FTP connection will be disconnected after the service call.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>client
 						&nbsp;:&nbsp;
 						
@@ -79,6 +87,21 @@
 						: 
 					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
 <div class="description">Returns the underlying client object.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_FTPService_isAutoDisconnect_DetailAnchor"><span class="">isAutoDisconnect</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Returns the status of whether the underlying FTP connection will be disconnected after the service call.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_svc_FTPService_setAutoDisconnect_Boolean_DetailAnchor"><span class="">setAutoDisconnect</span></a></span>(b
+								 : 	
+								 
+								boolean)
+						: 
+					<a href="class_dw_svc_FTPService.html"><span class="">FTPService</span></a></span>
+<div class="description">Sets the auto-disconnect flag.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_svc_FTPService_setOperation_String_Object_DetailAnchor"><span class="">setOperation</span></a></span>(name
@@ -139,6 +162,58 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_svc_FTPService_isAutoDisconnect_DetailAnchor"></a>
+<div class="detailName 
+						">isAutoDisconnect</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isAutoDisconnect</span>()
+					 : 
+					boolean</div>
+<div class="description">Returns the status of whether the underlying FTP connection will be disconnected after the service call.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">The auto-disconnect flag.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_svc_FTPService_setAutoDisconnect_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setAutoDisconnect</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setAutoDisconnect</span>(b
+								 : 
+								 
+								boolean)
+					 : 
+					<a href="class_dw_svc_FTPService.html"><span class="">FTPService</span></a>
+</div>
+<div class="description">Sets the auto-disconnect flag.
+ <p>
+ If true, the underlying FTP connection will be disconnected after the service call. If false then it will remain
+ open. The default value is true.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">b</span>
+						 - 
+						<span class="parameterDesc">true to enable auto-disconnect, false otherwise.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">this FTP or SFTP Service.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_svc_FTPService_setOperation_String_Object_DetailAnchor"></a>
 <div class="detailName 
 						">setOperation</div>
@@ -186,7 +261,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2017 salesforce.com, inc. All rights reserved. 17.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

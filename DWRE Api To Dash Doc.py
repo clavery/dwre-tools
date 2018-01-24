@@ -131,7 +131,7 @@ if not os.path.exists('./DWREApiDoc.docset/Contents/Resources/Documents/guides/'
     
 for f in os.listdir('./dwredocs/guides/'):
     name, ext = os.path.splitext(f)
-    print name
+    print(name)
     c.execute("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES ('%s', 'Guide', '%s');" % 
               (name, "guides/%s" % (name+".html")))
     
@@ -154,7 +154,7 @@ if not os.path.exists('./DWREApiDoc.docset/Contents/Resources/Documents/isml/'):
     
 for f in os.listdir('./dwredocs/isml/'):
     name, ext = os.path.splitext(f)
-    print name
+    print(name)
     c.execute("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES ('%s', 'Tag', '%s');" % 
               (name, "isml/%s" % (name+".html")))
     
@@ -177,7 +177,7 @@ for f in os.listdir('./dwredocs/xsd/'):
     name, ext = os.path.splitext(f)
     if ext != ".xsd":
         continue
-    print name
+    print(name)
     c.execute("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES ('%s', 'Protocol', '%s');" % 
               (f, "schemas/%s" % (name+".html")))
     
@@ -199,14 +199,4 @@ conn.commit()
 
 
 conn.close()
-
-
-
-
-
-
-
-
-
-
 

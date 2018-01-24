@@ -1,0 +1,306 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Class Component</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+	      			Overview
+	      		</a>
+</div>
+<div class="bannerItem">
+<a href="apiVersioning.html">
+      					API Versioning
+      				</a>
+</div>
+<div class="bannerItem">
+<a href="apiDeprecated.html">
+	      			Deprecated
+	      		</a>
+</div>
+<div class="clear"></div>
+</div>
+<div id="class_dw.experience.Component">
+<a name="dw.experience.Component"></a>
+<div class="packageName">dw.experience</div>
+<div class="className
+					">	
+        	
+				Class Component</div>
+<div class="hierarchy">
+<div>
+<a href="class_TopLevel_Object.html">Object</a>
+</div>
+<div style="position:relative;left:3%;">
+<img src="images/inherit.gif">dw.experience.Component</div>
+</div>
+<div class="classSummary">
+<div class="classSummaryDetail">
+<div class="description">==========================
+ EXPERIENCE EDITOR BETA API
+ ==========================
+
+ This class represents an experience editor managed component as part of a
+ page. A component comprises of multiple regions that again hold components,
+ thus spanning a hierarchical tree of components. Using the <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderRegion_Region_DetailAnchor">PageMgr.renderRegion(Region)</a> or
+ <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderRegion_Region_RegionRenderSettings_DetailAnchor">PageMgr.renderRegion(Region, RegionRenderSettings)</a> a region can be rendered which
+ implicitly includes rendering of all contained visible components. All
+ content attributes (defined by the corresponding component type) can be
+ accessed, reading the accordant values as provided by the content editor
+ that created this component.</div>
+<div class="subclasses"></div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_Page.html">Page</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_Region.html">Region</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_PageMgr.html">PageMgr</a></span>
+</div>
+</div>
+</div>
+</div>
+<!--End of class div-->
+<div class="section">
+<div class="header">Properties</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>ID
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The id of this component.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>name
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The name of this component</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>typeID
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The type id of this component.</div>
+</span>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Constructor Summary
+		</div>
+<div class="summaryItem"> 
+			This class does not have a constructor, so you cannot create it directly.  
+		    </div>
+</div>
+<div class="section">
+<div class="header">
+			Method Summary
+		</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Component_getAttribute_String_DetailAnchor"><span class="">getAttribute</span></a></span>(attributeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Returns the raw attribute value identified by the specified attribute id.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Component_getID_DetailAnchor"><span class="">getID</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the id of this component.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Component_getName_DetailAnchor"><span class="">getName</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the name of this component</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Component_getRegion_String_DetailAnchor"><span class="">getRegion</span></a></span>(id
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_experience_Region.html"><span class="">Region</span></a></span>
+<div class="description">Returns the component region that matches the given id.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Component_getTypeID_DetailAnchor"><span class="">getTypeID</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the type id of this component.</div>
+</div>
+</div>
+<div class="section">
+<div class="subHeader">
+						Methods inherited from class 
+						
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="summaryItem">
+<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+</div>
+</div>
+<div class="section">
+<div class="header">
+			Method Detail
+		</div>
+<div class="detailItem">
+<a name="dw_experience_Component_getAttribute_String_DetailAnchor"></a>
+<div class="detailName 
+						">getAttribute</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getAttribute</span>(attributeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Returns the raw attribute value identified by the specified attribute id.
+ By raw attribute value we denote the value as provided by the content
+ editor when setting up this component. This value might be fundamentally
+ different from the value as provided through the content dictionary when
+ the process or view function of the component is invoked. This is due to
+ the fact that during rendering the raw value is processed before being
+ stored in the content dictionary - for example link placeholders in
+ markup text are resolved to real URLs as part of such processing.
+ Accessing the raw value can be helpful if process or view logic of the
+ component needs to operate on these unprocessed values. Furthermore
+ especially the component process function might inject values into the
+ content dictionary as part of it business logic, e.g. by implementing
+ procedural fallbacks for optional attributes that have not been provided
+ by the content editor directly - so in order to distinguish these
+ scenarios in the subsequent handling of the component view function the
+ access to the raw values again is helpful.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">attributeID</span>
+						 - 
+						<span class="parameterDesc">the id of the desired attribute</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the value of the desired attribute, or null if not found</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_Component_getID_DetailAnchor"></a>
+<div class="detailName 
+						">getID</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getID</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the id of this component.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the component id</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_Component_getName_DetailAnchor"></a>
+<div class="detailName 
+						">getName</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getName</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the name of this component</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the component name</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_Component_getRegion_String_DetailAnchor"></a>
+<div class="detailName 
+						">getRegion</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getRegion</span>(id
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_experience_Region.html"><span class="">Region</span></a>
+</div>
+<div class="description">Returns the component region that matches the given id.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">id</span>
+						 - 
+						<span class="parameterDesc">the id of the desired component region</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the region, or null if not found.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_Component_getTypeID_DetailAnchor"></a>
+<div class="detailName 
+						">getTypeID</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getTypeID</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the type id of this component.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the component type id</span>
+</div>
+</div>
+<hr>
+</div>
+</div>
+<div class="copyright">
+      		
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+</div>
+<!--End of formatClass-->
+</div>
+</body>
+</html>

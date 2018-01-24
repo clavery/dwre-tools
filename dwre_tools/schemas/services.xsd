@@ -27,6 +27,7 @@
             <xsd:element name="enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="log-prefix" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="comm-log-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="force-prd-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="mock-mode-enabled" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="profile-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="credential-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />

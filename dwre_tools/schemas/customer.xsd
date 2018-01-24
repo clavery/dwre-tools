@@ -133,8 +133,12 @@
     
     <xsd:simpleType name="simpleType.EncryptionScheme">
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="md5" />
-            <xsd:enumeration value="scrypt" />
+        	<xsd:enumeration value="md5" >
+        		<xsd:annotation> 
+                   <xsd:documentation>Support for the md5 encryption algorithm has changed. Passwords imported in md5 will be stored as an scrypt'd value.</xsd:documentation> 
+               </xsd:annotation> 
+        	</xsd:enumeration>
+        	<xsd:enumeration value="scrypt" />
             <xsd:enumeration value="s0001" />
         </xsd:restriction>
     </xsd:simpleType>
@@ -151,7 +155,7 @@
             The password will be imported 'as is'.
             
             Export: The attribute 'encrypted' will always be set to true. The attribute 'encryptionScheme'
-            will reflect the encryption scheme of the password in the database (md5, scrypt, or the internal implementation s0001). 
+            will reflect the encryption scheme of the password in the database (md5 (deprecated), scrypt, or the internal implementation s0001). 
             The encrypted password will not be transformed during export.
             </xsd:documentation>
         </xsd:annotation>    
