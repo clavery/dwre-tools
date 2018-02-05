@@ -1,10 +1,30 @@
+from __future__ import print_function
+
 import json
 import os
+import sys
+
 
 def load_config():
     home = os.path.expanduser("~")
-    with open(os.path.join(home, ".dwre.json")) as f:
-        return json.load(f)
+    if os.path.exists(os.path.join(home, ".dwre.json.gpg")):
+        try:
+            import gnupg
+            gpg = gnupg.GPG(use_agent=True)
+        except ImportError as e:
+            print("You must have gnupg installed: pip install python-gnupg", file=sys.stderr)
+            print("You must have GNUpg installed and the following python module: pip install python-gnupg", file=sys.stderr)
+            sys.exit(1)
+        with open(os.path.join(home, ".dwre.json.gpg"), 'rb') as f:
+            decrypted = gpg.decrypt_file(f)
+            if decrypted.ok:
+                return json.loads(str(decrypted))
+            else:
+                raise RuntimeError(decrypted.status)
+    else:
+        with open(os.path.join(home, ".dwre.json")) as f:
+            return json.load(f)
+
 
 def get_default_project():
     config = load_config()
@@ -27,9 +47,11 @@ def get_default_environment(project):
         return (default_env, project["environments"][default_env])
     return (None, None)
 
+
 def get_project(name):
     config = load_config()
     return config["projects"][name]
+
 
 def get_environment(name, project):
     return project["environments"][name]

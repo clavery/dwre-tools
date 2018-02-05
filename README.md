@@ -260,6 +260,35 @@ Sub Commands:
     put                create or update credential
 ```
 
+### `pw`
+
+The `pw` command interfaces with the users `.dwre.json` file. 
+
+```
+usage: dwre pw [-h] {list,get} ...
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+Sub Commands:
+  {list,get}
+    list      list available accounts
+    get       get account (project-env)
+```
+
+#### Shell Function
+
+The following shell function requires OSX and the program `fzf` (`brew install fzf`). It uses the `dwre pw` commands to quickly list and find passwords, and copies the selected credential to the clipboard.
+
+```
+function dpw {
+  dwre pw list |
+    fzf |
+    xargs dwre pw get |
+    pbcopy
+}
+```
+
 ## Development / Contributing
 
 To install in development mode first ensure the package is uninstalled

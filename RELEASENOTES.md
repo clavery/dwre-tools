@@ -1,6 +1,12 @@
 
 # Release Notes
 
+## 1.9.0
+
+- adds `pw` subcommand to list and retrieve passwords from `.dwre.json`
+- adds support for encrypting `.dwre.json` with GnuPG; If a file `.dwre.json.gpg` is found it will be decrypted using the GPG agent of the user; See `README.md` for shell scripts that use this
+
+
 ## 1.8.7
 
 - updated to 18.2

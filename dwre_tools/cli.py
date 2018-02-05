@@ -17,6 +17,7 @@ from .webdav import copy_command
 from .debugger import debug_command
 from .cartridge import upgrade_bm_cartridge
 from .cred import get_credential, get_credential_info, put_credential, list_credentials
+from .pw import pw_list, pw_get
 
 from colorama import init, deinit
 
@@ -184,6 +185,13 @@ def cred_cmd_handler(args):
         list_credentials(args.filter)
 
 
+def pw_cmd_handler(args):
+    if args.subcommand == "list":
+        pw_list()
+    elif args.subcommand == "get":
+        pw_get(args.account)
+
+
 parser = ArgumentParser(description="Demandware/SFCC Tools")
 parser.add_argument('-p', '--project', help="DWRE Project Name")
 parser.add_argument('-e', '--env', help="DWRE Environment Name")
@@ -276,7 +284,7 @@ webdav_cp_cmd.add_argument('dest', help="destination on webdav (relative to /on/
 upgrade_bm_cartridge_cmd = cmd_parser.add_parser('upgrade-bm-cartridge', help="upgrades the bm_dwremigrate cartridge to the latest version")
 upgrade_bm_cartridge_cmd.set_defaults(func=upgrade_bm_cartridge_handler)
 
-cred_cmd = cmd_parser.add_parser('cred', help="credential management")
+cred_cmd = cmd_parser.add_parser('cred', help="credential management using AWS SSM")
 cred_cmd.set_defaults(func=cred_cmd_handler)
 cred_parser = cred_cmd.add_subparsers(title="Sub Commands", dest='subcommand')
 cred_parser.required = True
@@ -291,6 +299,14 @@ cred_put_cmd.add_argument('-d', '--description', dest="description", help="crede
 cred_put_cmd.add_argument('name', help="credential name")
 cred_put_cmd.add_argument('value', help="new value")
 
+pw_cmd = cmd_parser.add_parser('pw', help="password/account reading / writing from DWRE.json")
+pw_cmd.set_defaults(func=pw_cmd_handler)
+pw_parser = pw_cmd.add_subparsers(title="Sub Commands", dest='subcommand')
+pw_parser.required = True
+pw_list_cmd = pw_parser.add_parser("list", help="list available accounts")
+pw_get_cmd = pw_parser.add_parser("get", help="get account (project-env)")
+pw_get_cmd.add_argument('account', help="[project]-[env]")
+
 
 def main():
     import os
@@ -298,6 +314,10 @@ def main():
     init()  # init colors
     if not os.isatty(sys.stdout.fileno()):
         deinit()
+
+    # disbale insecure warnings (we know because we explicitly ask to verify)
+    import requests
+    requests.packages.urllib3.disable_warnings()
 
     args = parser.parse_args()
 

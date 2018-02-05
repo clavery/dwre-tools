@@ -2,3 +2,4 @@ flake8
 ipdb
 jupyter
 awscli
+python-gnupg
