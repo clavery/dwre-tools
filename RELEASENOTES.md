@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.9.1
+
+- adds workaround for `tail` when SFCC webdav does not report content length headers
+
 ## 1.9.0
 
 - adds `pw` subcommand to list and retrieve passwords from `.dwre.json`

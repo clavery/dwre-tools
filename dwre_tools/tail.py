@@ -88,19 +88,15 @@ def tail_logs(env, filters, interval):
             time.sleep(interval)
 
             for i, log in enumerate(log_files):
-                url ='https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/' + log[0]
-                check = requests.head(url, auth=(username, password))
-                check.raise_for_status()
-
-                content_length = check.headers.get("Content-Length")
-                newlength = int(content_length) if content_length else 0
-                if newlength > lengths[i]:
-                    response = requests.get(url, auth=(username, password), headers={
-                        "range" : "bytes=%s-%s" % (lengths[i], newlength-1)
-                    })
-                    response.raise_for_status()
-                    output_log_file(log[0], response.text)
-                lengths[i] = newlength
+                url = 'https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/' + log[0]
+                response = requests.get(url, auth=(username, password), headers={
+                    "range": "bytes=%s-" % (lengths[i])
+                })
+                if response.status_code == 416:
+                    continue
+                response.raise_for_status()
+                output_log_file(log[0], response.text)
+                lengths[i] = lengths[i] + len(response.text)
     except KeyboardInterrupt as e:
         sys.exit(0)
 
