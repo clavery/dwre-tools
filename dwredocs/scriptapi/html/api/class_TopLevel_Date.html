@@ -926,20 +926,25 @@
 					 : 
 					<a href="class_TopLevel_Number.html"><span class="">Number</span></a>
 </div>
-<div class="description">Takes a date string and returns the number of milliseconds since midnight of January 1, 1970.</div>
+<div class="description">Takes a date string and returns the number of milliseconds since midnight of January 1, 1970.
+ <p>Supports:
+ <ul>
+      <li>RFC2822 date strings</li>
+      <li>strings matching the exact ISO 8601 format 'YYYY-MM-DDTHH:mm:ss.sssZ'</li>
+ </ul></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
 <span class="parameterName">dateString</span>
 						 - 
-						<span class="parameterDesc">represents a Date in a valid date format according to RFC2822 or ISO 8601.</span>
+						<span class="parameterDesc">represents a Date in a valid date format.</span>
 </div>
 </div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">the number of milliseconds since midnight of January 1, 1970.</span>
+<span class="parameterDesc">the number of milliseconds since midnight of January 1, 1970 or NaN if no date could be recognized.</span>
 </div>
 </div>
 <hr>
@@ -1756,7 +1761,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

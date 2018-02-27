@@ -46,9 +46,11 @@
         </xsd:restriction>
     </xsd:simpleType>
     
-    <xsd:simpleType name="simpleType.StorefrontPassword">
-        <xsd:restriction base="xsd:string">
-            <xsd:pattern value="[a-zA-Z\-_0-9]+" />
+    <xsd:simpleType name="simpleType.StorefrontPassword" >
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:minLength value="0" />
+            <xsd:maxLength value="256" />
+            <xsd:pattern value="\S|(\S(.*)\S)" />
         </xsd:restriction>
     </xsd:simpleType>    
 

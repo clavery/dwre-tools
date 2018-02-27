@@ -331,13 +331,11 @@
 </div>
 <div class="description">This method can be called to process a form submission for an HTML form
  with encoding type "multipart/form-data". Such a form can have a mixture
- of "regular" HTML form fields and also file uploads. When such a form is
- submitted, the request handler framework does not automatically populate
- CurrentHttpParameterMap with field values and so it necessary to call
- this method first to access these values. When called, the system parses
- the request body. For each form field the HttpParameterMap is immediately
- updated. For each file upload the provided callback function is called.
-
+ of "regular" HTML form fields and also file uploads.
+ <p/>
+ Form fields are available via <a href="class_dw_web_HttpParameterMap.html#dw_web_HttpParameterMap_get_Object_DetailAnchor">get(Object)</a> without calling this method.
+ Uploaded files still need to be processed via the passed callback function.
+ <p/>
  This callback function is called for each file upload part in the request.
  The parameters are the field name, the content type and the original file
  name. The function can return either a null, which means that the upload
@@ -345,22 +343,14 @@
  file is an existing directory the system will automatically generate a
  unique file name. If the file is not an existing directory the uploaded
  content will be directly stored into that file. An existing file with the
- same name will be deleted. An automatically generated file name consists
- of the the prefix "upload", a time stamp, a unique id and the extension
- tmp. Here an example:
+ same name will be deleted. If the file can't be deleted for whatever reason,
+ the upload is stored with a generated unique file name in the indicated directory.
+ <p/>
+ An automatically generated file name consists of the the prefix "upload",
+ a time stamp, a unique id and the extension tmp. For example:
  "upload_20070114221535_bc7H1aOadI9qYaaacovPd3lqna.tmp".
 
- The return value of the processMultipart() function is a LinkedHashMap
- with all upload files. The entries are order in the sequence of the
- upload. The keys are the field names and the values are references to the
- file (instances of dw.io.File).
-
- During the multipart processing the HttpParameterMap is updated with
- every parsed form field. This allows the callback function to read the
- HttpParameter for example to construct the file name for storage based on
- a previous form field. Here an example:
-
- <pre>
+ <pre><code>
  var params : HttpParameterMap = pdict.CurrentHttpParameterMap;
 
  // Get the file name from the first field. This is works because the
@@ -368,7 +358,7 @@
  var files : LinkedHashMap = params.processMultipart( (function( field, ct, oname ){
      return new File( File.IMPEX + &quot;/&quot; + params.firstField );
  }) );
- </pre></div>
+ </code></pre></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -381,7 +371,7 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">a list with all uploaded files or null if this is not a multipart request</span>
+<span class="parameterDesc">a LinkedHashMap where the keys are the actual file names and the values are references to the <a href="class_dw_io_File.html">File</a>, <i>or</i> <code>null</code> if this is not a multipart request</span>
 </div>
 </div>
 <hr>
@@ -389,7 +379,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

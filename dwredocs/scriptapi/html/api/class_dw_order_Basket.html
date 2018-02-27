@@ -388,7 +388,10 @@
  </p>
  <p>
  The method implements its own transaction handling. Calling the method from inside a transaction is disallowed
- and results in an exception being thrown.
+ and results in an exception being thrown. This behavior differs when calling the method from an <b>OCAPI
+ hook</b>. OCAPI hooks handle transactions themselves, so in this case there is also no need to do any transaction
+ handling, but to ensure the shortest possible locking of the inventory you should only call this method <i>as the
+ last step</i> in the OCAPI hook.
  </p>
  <p>
  If the reservation fails with an ERROR status, existing valid reservations for the basket will remain unchanged
@@ -454,7 +457,10 @@
  </p>
  <p>
  The method implements its own transaction handling. Calling the method from inside a transaction is disallowed
- and results in an exception being thrown.
+ and results in an exception being thrown. This behavior differs when calling the method from an <b>OCAPI
+ hook</b>. OCAPI hooks handle transactions themselves, so in this case there is also no need to do any transaction
+ handling, but to ensure the shortest possible locking of the inventory you should only call this method <i>as the
+ last step</i> in the OCAPI hook.
  </p>
  <p>
  <a href="class_dw_order_Basket.html#dw_order_Basket_getInventoryReservationExpiry_DetailAnchor">getInventoryReservationExpiry()</a> can be used to determine when the expiration will expire.
@@ -536,7 +542,10 @@
  </p>
  <p>
  The method implements its own transaction handling. Calling the method from inside a transaction is disallowed
- and results in an exception being thrown.
+ and results in an exception being thrown. This behavior differs when calling the method from an <b>OCAPI
+ hook</b>. OCAPI hooks handle transactions themselves, so in this case there is also no need to do any transaction
+ handling, but to ensure the shortest possible locking of the inventory you should only call this method <i>as the
+ last step</i> in the OCAPI hook.
  </p>
  <p>
  <a href="class_dw_order_Basket.html#dw_order_Basket_getInventoryReservationExpiry_DetailAnchor">getInventoryReservationExpiry()</a> can be used to determine when the expiration will expire.
@@ -683,7 +692,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

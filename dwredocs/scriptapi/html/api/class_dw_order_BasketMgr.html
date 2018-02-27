@@ -336,7 +336,11 @@
 								<a href="class_dw_order_Basket.html"><span class="">Basket</span></a>)
 					 : 
 					void</div>
-<div class="description">Remove a customer basket.</div>
+<div class="description">Remove a customer basket.
+ <p>
+ This method will result in an exception if called by a user without permission Create_Order_On_Behalf_Of or if no
+ customer is logged in the session.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -344,6 +348,16 @@
 						 - 
 						<span class="parameterDesc">the basket to be removed</span>
 </div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_customer_AgentUserMgr.html#dw_customer_AgentUserMgr_loginAgentUser_String_String_DetailAnchor">AgentUserMgr.loginAgentUser(String, String)</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_customer_AgentUserMgr.html#dw_customer_AgentUserMgr_loginOnBehalfOfCustomer_Customer_DetailAnchor">AgentUserMgr.loginOnBehalfOfCustomer(Customer)</a></span>
+</div>
+<div class="parameterDetail"></div>
 </div>
 <hr>
 </div>
@@ -526,7 +540,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

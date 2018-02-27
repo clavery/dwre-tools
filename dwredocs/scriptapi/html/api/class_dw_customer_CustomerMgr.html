@@ -103,6 +103,18 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_authenticateCustomer_String_String_DetailAnchor"><span class="">authenticateCustomer</span></a></span>(login
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, password
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_customer_AuthenticationStatus.html"><span class="">AuthenticationStatus</span></a></span>
+<div class="description">This method authenticates a customer using the supplied login and password.</div>
+</div>
+<div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_createCustomer_String_String_DetailAnchor"><span class="">createCustomer</span></a></span>(login
 								 : 	
 								 
@@ -247,7 +259,16 @@
 <div class="description">Checks if the given password matches the password constraints (for example password length) of the current site's assigned customerlist.</div>
 </div>
 <div class="summaryItem">
-<span>static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_loginCustomer_String_String_Boolean_DetailAnchor"><span class="">loginCustomer</span></a></span>(login
+<span>static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_isPasswordExpired_String_DetailAnchor"><span class="">isPasswordExpired</span></a></span>(login
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					boolean</span>
+<div class="description">Checks if the password for the given customer is expired</div>
+</div>
+<div class="summaryItem">
+<span class="dep">static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_loginCustomer_String_String_Boolean_DetailAnchor"><span class="">loginCustomer</span></a></span>(login
 								 : 	
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>, password
@@ -260,6 +281,18 @@
 						: 
 					<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a></span>
 <div class="description">This method authenticates the current session using the supplied login and password.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_loginCustomer_AuthenticationStatus_Boolean_DetailAnchor"><span class="">loginCustomer</span></a></span>(authStatus
+								 : 	
+								 
+								<a href="class_dw_customer_AuthenticationStatus.html"><span class="">AuthenticationStatus</span></a>, rememberMe
+								 : 	
+								 
+								boolean)
+						: 
+					<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a></span>
+<div class="description">This method logs in the authenticated customer (from a previous authenticateCustomer() call).</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_loginExternallyAuthenticatedCustomer_String_String_Boolean_DetailAnchor"><span class="">loginExternallyAuthenticatedCustomer</span></a></span>(authenticationProviderId
@@ -349,6 +382,15 @@
 <div class="description">Logs out the supplied customer and deletes the customer record.</div>
 </div>
 <div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_removeCustomerTrackingData_Customer_DetailAnchor"><span class="">removeCustomerTrackingData</span></a></span>(customer
+								 : 	
+								 
+								<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a>)
+						: 
+					void</span>
+<div class="description">Removes (asynchronously) tracking data for this customer (from external systems or data stores).</div>
+</div>
+<div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_customer_CustomerMgr_searchProfile_String_Object_DetailAnchor"><span class="">searchProfile</span></a></span>(queryString
 								 : 	
 								 
@@ -402,6 +444,51 @@
 <div class="header">
 			Method Detail
 		</div>
+<div class="detailItem">
+<a name="dw_customer_CustomerMgr_authenticateCustomer_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">authenticateCustomer</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">authenticateCustomer</span>(login
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, password
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_customer_AuthenticationStatus.html"><span class="">AuthenticationStatus</span></a>
+</div>
+<div class="description">This method authenticates a customer using the supplied login and password. It will not log in the customer into
+ the current session, but returns only a status indicating success or failure (with different error codes for the failure cases).
+ Upon successful authentication (status code 'AUTH_OK') the status object also holds the authenticated customer.
+ To continue the login process, call the loginCustomer(AuthenticationStatus, boolean) method.
+
+ This method verifies that the password for the customer is not expired. If it is expired the authentication will fail, with a status code of
+ ERROR_PASSWORD_EXPIRED. This allows the storefront to require the customer to change the password, and then the login can proceed.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">login</span>
+						 - 
+						<span class="parameterDesc">Login name, must not be null.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">password</span>
+						 - 
+						<span class="parameterDesc">Password, must not be null.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the status of the authentication process</span>
+</div>
+</div>
+<hr>
+</div>
 <div class="detailItem">
 <a name="dw_customer_CustomerMgr_createCustomer_String_String_DetailAnchor"></a>
 <div class="detailName 
@@ -928,11 +1015,40 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_customer_CustomerMgr_isPasswordExpired_String_DetailAnchor"></a>
+<div class="detailName 
+						">isPasswordExpired</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">isPasswordExpired</span>(login
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					boolean</div>
+<div class="description">Checks if the password for the given customer is expired</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">login</span>
+						 - 
+						<span class="parameterDesc">the login for the customer to be checked</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">true if the password is expired</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_customer_CustomerMgr_loginCustomer_String_String_Boolean_DetailAnchor"></a>
 <div class="detailName 
-						">loginCustomer</div>
+						dep">loginCustomer</div>
 <div class="detailSignature
-	    				">static&nbsp;<span class="emphasis">loginCustomer</span>(login
+	    				dep">static&nbsp;<span class="emphasis">loginCustomer</span>(login
 								 : 
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>, password
@@ -947,11 +1063,21 @@
 </div>
 <div class="description">This method authenticates the current session using the supplied login and password. If a different customer is currently authenticated in the session, then this
  customer is "logged out" and her/his privacy and form data are deleted. If the authentication with the given credentials fails, then null is returned and no changes
- to the session are made.
+ to the session are made. The authentication will be sucessful even when the password of the customer is already expired (according to the customer list settings).
 
- </p> If the input value "RememberMe" is set to True, this method stores a cookie on the customer's machine which will be used to identify the customer when the next
+ </p> If the input value "RememberMe" is set to true, this method stores a cookie on the customer's machine which will be used to identify the customer when the next
  session is initiated.  The cookie is set to expire in 180 days (i.e. 6 months). Note that a customer who is remembered is not automatically authenticated and will
  have to explicitly log in to access any personal information.</div>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">use authenticateCustomer(login, password) and loginCustomer(authStatus, rememberMe) instead since they correctly check for expired passwords</span>
+</div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -967,7 +1093,7 @@
 <div class="parameterDetail">
 <span class="parameterName">rememberMe</span>
 						 - 
-						<span class="parameterDesc">Boolean value indicating if the customer wants to be remembered on the current computer. If a value of True is supplied a cookie identifying the customer is stored upon successful login. If a value of False, or a null value, is supplied, then no cookie is stored and any existing cookie is removed.</span>
+						<span class="parameterDesc">Boolean value indicating if the customer wants to be remembered on the current computer. If a value of true is supplied a cookie identifying the customer is stored upon successful login. If a value of false, or a null value, is supplied, then no cookie is stored and any existing cookie is removed.</span>
 </div>
 </div>
 <div class="parameters">
@@ -975,8 +1101,54 @@
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">Customer authenticated for successfully authenticated customer. Null if the authentication with the given credentials fails.</span>
+<span class="parameterDesc">Customer successfully authenticated customer. Null if the authentication with the given credentials fails.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_customer_CustomerMgr_loginCustomer_AuthenticationStatus_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">loginCustomer</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">loginCustomer</span>(authStatus
+								 : 
+								 
+								<a href="class_dw_customer_AuthenticationStatus.html"><span class="">AuthenticationStatus</span></a>, rememberMe
+								 : 
+								 
+								boolean)
+					 : 
+					<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a>
+</div>
+<div class="description">This method logs in the authenticated customer (from a previous authenticateCustomer() call). If a different customer is currently authenticated in the session, then this
+ customer is "logged out" and all privacy-relevant data and all form data are deleted. If the previous authentication was not successful, then null is returned and no changes
+ to the session are made.
+
+ </p> If the input value "RememberMe" is set to true, this method stores a cookie on the customer's machine which will be used to identify the customer when the next
+ session is initiated.  The cookie is set to expire in 180 days (i.e. 6 months). Note that a customer who is remembered is not automatically authenticated and will
+ have to explicitly log in to access any personal information.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">authStatus</span>
+						 - 
+						<span class="parameterDesc">the authentication status from the previous authenticateCustomer call</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">rememberMe</span>
+						 - 
+						<span class="parameterDesc">Boolean value indicating if the customer wants to be remembered on the current computer. If a value of true is supplied a cookie identifying the customer is stored upon successful login. If a value of false, or a null value, is supplied, then no cookie is stored and any existing cookie is removed.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Customer successfully authenticated customer. Null if the authentication status was not indicating success of the authentication.</span>
 </div>
 </div>
 <hr>
@@ -1411,6 +1583,32 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_customer_CustomerMgr_removeCustomerTrackingData_Customer_DetailAnchor"></a>
+<div class="detailName 
+						">removeCustomerTrackingData</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">removeCustomerTrackingData</span>(customer
+								 : 
+								 
+								<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a>)
+					 : 
+					void</div>
+<div class="description">Removes (asynchronously) tracking data for this customer (from external systems or data stores). This will not remove the
+ customer from the database, nor will it prevent tracking to start again in the future for this customer.
+
+ The customer is identified by login / email /customerNo / cookie when its a registered customer, and by cookie
+ when its an anonymous customer.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">customer</span>
+						 - 
+						<span class="parameterDesc">the customer</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_customer_CustomerMgr_searchProfile_String_Object_DetailAnchor"></a>
 <div class="detailName 
 						">searchProfile</div>
@@ -1687,7 +1885,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

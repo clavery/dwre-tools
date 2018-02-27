@@ -30,9 +30,16 @@
             <xsd:element name="customer-email" type="Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="coupon-id" type="Generic.NonEmptyString.256" use="required" />
+        <xsd:attribute name="mode" type="SimpleType.ImportMode" />
     </xsd:complexType>
 
     <!-- simple generic types -->
+
+    <xsd:simpleType name="SimpleType.ImportMode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="delete" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="Generic.String">
         <xsd:restriction base="xsd:string" />

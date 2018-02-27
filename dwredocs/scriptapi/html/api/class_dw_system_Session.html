@@ -226,6 +226,16 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>trackingAllowed
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean<div class="description">Returns whether the tracking allowed flag is set in the session.
+ The value for newly created sessions defaults to the Site Preference "TrackingAllowed" unless
+ a cookie named "dw_dnt" is found in which case the cookie value takes precedence.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>userAuthenticated
 						&nbsp;:&nbsp;
 						
@@ -333,6 +343,12 @@
 <div class="description">Identifies if the customer associated with this session is externally authenticated or not.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_isTrackingAllowed_DetailAnchor"><span class="">isTrackingAllowed</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Returns whether the tracking allowed flag is set in the session.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_system_Session_isUserAuthenticated_DetailAnchor"><span class="">isUserAuthenticated</span></a></span>()
 						: 
 					boolean</span>
@@ -355,6 +371,15 @@
 						: 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
 <div class="description">Applies the specified source-code to the current session and basket.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_system_Session_setTrackingAllowed_Boolean_DetailAnchor"><span class="">setTrackingAllowed</span></a></span>(trackingAllowed
+								 : 	
+								 
+								boolean)
+						: 
+					void</span>
+<div class="description">Sets the tracking allowed flag for the session.</div>
 </div>
 </div>
 <div class="section">
@@ -619,6 +644,26 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_system_Session_isTrackingAllowed_DetailAnchor"></a>
+<div class="detailName 
+						">isTrackingAllowed</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isTrackingAllowed</span>()
+					 : 
+					boolean</div>
+<div class="description">Returns whether the tracking allowed flag is set in the session.
+ The value for newly created sessions defaults to the Site Preference "TrackingAllowed" unless
+ a cookie named "dw_dnt" is found in which case the cookie value takes precedence.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">true if the tracking allowed flag is set in the session, false otherwise</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_system_Session_isUserAuthenticated_DetailAnchor"></a>
 <div class="detailName 
 						">isUserAuthenticated</div>
@@ -694,10 +739,38 @@
 </div>
 <hr>
 </div>
+<div class="detailItem">
+<a name="dw_system_Session_setTrackingAllowed_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setTrackingAllowed</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setTrackingAllowed</span>(trackingAllowed
+								 : 
+								 
+								boolean)
+					 : 
+					void</div>
+<div class="description">Sets the tracking allowed flag for the session. If tracking is not allowed, multiple services
+ depending on tracking will be restricted or disabled: Predictive Intelligence recommendations,
+ Active Data, Analytics of the customer behavior in the storefront.
+ Additionally, collected clicks in the session click stream will be cleared.
+ Setting this property to either value also results in setting a session-scoped cookie named "dw_dnt"
+ (1=DoNotTrack; 0=Track)</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">trackingAllowed</span>
+						 - 
+						<span class="parameterDesc">true if tracking is allowed, false otherwise</span>
+</div>
+</div>
+<hr>
+</div>
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

@@ -374,12 +374,26 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>refinementCategory
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_catalog_Category.html"><span class="">Category</span></a>
+<div class="description">The category used to determine possible refinements for the search.
+ If an explicit category was set for this purpose using <a href="class_dw_catalog_ProductSearchModel.html#dw_catalog_ProductSearchModel_setRefinementCategory_Category_DetailAnchor">setRefinementCategory(Category)</a>, it is returned.
+ Otherwise, the deepest common category of all search results will be returned.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>refinements
 						&nbsp;:&nbsp;
 						
 					    
 					    <a href="class_dw_catalog_ProductSearchRefinements.html"><span class="">ProductSearchRefinements</span></a>
-							&nbsp;(Read Only)<div class="description">The ProductSearchRefinements associated with this search and filtered by session currency.</div>
+							&nbsp;(Read Only)<div class="description">The ProductSearchRefinements associated with this search and filtered by session currency.
+ If an explicit category was set for this purpose using <a href="class_dw_catalog_ProductSearchModel.html#dw_catalog_ProductSearchModel_setRefinementCategory_Category_DetailAnchor">setRefinementCategory(Category)</a>, it will be used to determine the refinements.
+ Otherwise, the refinements are determined based on the deepest common category of all products in the search result.
+ Hint: If you want to use the same refinements for all searches, consider defining them in one category (usually root) and using <a href="class_dw_catalog_ProductSearchModel.html#dw_catalog_ProductSearchModel_setRefinementCategory_Category_DetailAnchor">setRefinementCategory(Category)</a> to avoid unnecessary calculation of the deepest common category.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -580,6 +594,12 @@
 <div class="description">Returns the promotion product type specified in the search query.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_getRefinementCategory_DetailAnchor"><span class="">getRefinementCategory</span></a></span>()
+						: 
+					<a href="class_dw_catalog_Category.html"><span class="">Category</span></a></span>
+<div class="description">Returns the category used to determine possible refinements for the search.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_getRefinements_DetailAnchor"><span class="">getRefinements</span></a></span>()
 						: 
 					<a href="class_dw_catalog_ProductSearchRefinements.html"><span class="">ProductSearchRefinements</span></a></span>
@@ -758,6 +778,15 @@
 						: 
 					void</span>
 <div class="description">Set a flag to indicate if the search in category should be recursive.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_setRefinementCategory_Category_DetailAnchor"><span class="">setRefinementCategory</span></a></span>(refinementCategory
+								 : 	
+								 
+								<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>)
+						: 
+					void</span>
+<div class="description">Sets an explicit category to be used when determining refinements.</div>
 </div>
 <div class="summaryItem">
 <span class="dep"><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_setSortingCondition_String_Number_DetailAnchor"><span class="">setSortingCondition</span></a></span>(attributeID
@@ -1422,6 +1451,27 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_getRefinementCategory_DetailAnchor"></a>
+<div class="detailName 
+						">getRefinementCategory</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getRefinementCategory</span>()
+					 : 
+					<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>
+</div>
+<div class="description">Returns the category used to determine possible refinements for the search.
+ If an explicit category was set for this purpose using <a href="class_dw_catalog_ProductSearchModel.html#dw_catalog_ProductSearchModel_setRefinementCategory_Category_DetailAnchor">setRefinementCategory(Category)</a>, it is returned.
+ Otherwise, the deepest common category of all search results will be returned.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the category used to determine refinements.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductSearchModel_getRefinements_DetailAnchor"></a>
 <div class="detailName 
 						">getRefinements</div>
@@ -1431,7 +1481,10 @@
 					 : 
 					<a href="class_dw_catalog_ProductSearchRefinements.html"><span class="">ProductSearchRefinements</span></a>
 </div>
-<div class="description">Returns the ProductSearchRefinements associated with this search and filtered by session currency.</div>
+<div class="description">Returns the ProductSearchRefinements associated with this search and filtered by session currency.
+ If an explicit category was set for this purpose using <a href="class_dw_catalog_ProductSearchModel.html#dw_catalog_ProductSearchModel_setRefinementCategory_Category_DetailAnchor">setRefinementCategory(Category)</a>, it will be used to determine the refinements.
+ Otherwise, the refinements are determined based on the deepest common category of all products in the search result.
+ Hint: If you want to use the same refinements for all searches, consider defining them in one category (usually root) and using <a href="class_dw_catalog_ProductSearchModel.html#dw_catalog_ProductSearchModel_setRefinementCategory_Category_DetailAnchor">setRefinementCategory(Category)</a> to avoid unnecessary calculation of the deepest common category.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1963,6 +2016,38 @@
 <span class="parameterName">recurse</span>
 						 - 
 						<span class="parameterDesc">recurse the category in the search</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_setRefinementCategory_Category_DetailAnchor"></a>
+<div class="detailName 
+						">setRefinementCategory</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setRefinementCategory</span>(refinementCategory
+								 : 
+								 
+								<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets an explicit category to be used when determining refinements. If this is not done, they will be determined based on the deepest common category of all search results.
+ The explicit category must be in the site's storefront catalog, otherwise the method fails with an IllegalArgumentException.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">refinementCategory</span>
+						 - 
+						<span class="parameterDesc">the category used to determine the applicable refinements.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">IllegalArgumentException						
+						 - 
+						 <span class="parameterDesc">if the refinement category does not reside in the storefront catalog</span>
 </div>
 </div>
 <hr>
@@ -2744,7 +2829,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.2<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

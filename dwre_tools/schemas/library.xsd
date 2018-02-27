@@ -87,7 +87,7 @@
                 <xsd:annotation>
                     <xsd:documentation>
                         The type must either be a page ("page.*") or a component ("component.*") and can only be set
-                        if the experience editor feature is turned on. Those types are defined as part of the storefront
+                        if the experience builder feature is turned on. Those types are defined as part of the storefront
                         cartridges, that should be assigned to the same sites to which the given library is assigned to
                         such that definition and data match.
                     </xsd:documentation>

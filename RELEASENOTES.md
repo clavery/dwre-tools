@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.9.2
+
+- updated to 18.3
+
 ## 1.9.1
 
 - adds workaround for `tail` when SFCC webdav does not report content length headers
