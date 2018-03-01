@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-from .env import load_config
+from .env import load_config, save_config
 import sys
 
 
@@ -16,6 +16,23 @@ def pw_get(account_name):
 
     print(host.get('password'), end='')
     print(host.get('extra'), file=sys.stderr)
+
+
+def pw_put(account_name, password):
+    j = load_config()
+    env = None
+
+    for project_name, p in j.get('projects').items():
+        for env_name, e in p.get('environments').items():
+            name = "%s-%s" % (project_name, env_name)
+            if account_name == name:
+                env = e
+                break
+
+    if env:
+        env['password'] = password
+        save_config(j)
+        print("Updated %s" % account_name)
 
 
 def get_dwre_hosts():

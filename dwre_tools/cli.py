@@ -17,7 +17,7 @@ from .webdav import copy_command
 from .debugger import debug_command
 from .cartridge import upgrade_bm_cartridge
 from .cred import get_credential, get_credential_info, put_credential, list_credentials
-from .pw import pw_list, pw_get
+from .pw import pw_list, pw_get, pw_put
 
 from colorama import init, deinit
 
@@ -190,6 +190,11 @@ def pw_cmd_handler(args):
         pw_list()
     elif args.subcommand == "get":
         pw_get(args.account)
+    elif args.subcommand == "put":
+        password = args.password
+        if not password:
+            password = getpass.getpass("password: ")
+        pw_put(args.account, password)
 
 
 parser = ArgumentParser(description="Demandware/SFCC Tools")
@@ -306,7 +311,9 @@ pw_parser.required = True
 pw_list_cmd = pw_parser.add_parser("list", help="list available accounts")
 pw_get_cmd = pw_parser.add_parser("get", help="get account (project-env)")
 pw_get_cmd.add_argument('account', help="[project]-[env]")
-
+pw_put_cmd = pw_parser.add_parser("put", help="put account (project-env)")
+pw_put_cmd.add_argument('account', help="[project]-[env]")
+pw_put_cmd.add_argument('password', help="new password", nargs='?')
 
 def main():
     import os

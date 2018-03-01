@@ -26,6 +26,29 @@ def load_config():
             return json.load(f)
 
 
+def save_config(config):
+    config_data = json.dumps(config, indent=2)
+    home = os.path.expanduser("~")
+    if os.path.exists(os.path.join(home, ".dwre.json.gpg")):
+        try:
+            import gnupg
+            gpg = gnupg.GPG(use_agent=True)
+        except ImportError as e:
+            print("You must have gnupg installed: pip install python-gnupg", file=sys.stderr)
+            print("You must have GNUpg installed and the following python module: pip install python-gnupg", file=sys.stderr)
+            sys.exit(1)
+        with open(os.path.join(home, ".dwre.json.gpg"), 'wb') as f:
+            encrypted = gpg.encrypt(config_data, ['B050C1999B5B4181'])
+            if encrypted.ok:
+                f.write(encrypted.data)
+            else:
+                raise RuntimeError(encrypted.status)
+    else:
+        with open(os.path.join(home, ".dwre.json"), 'wb') as f:
+            f.write(config_data.encode('utf-8'))
+    pass
+
+
 def get_default_project():
     config = load_config()
     default_project = config.get('defaultProject')

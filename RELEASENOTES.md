@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.9.3
+
+- added a `put` subcommand to `pw` management (BETA: not responsible if this blows us your dwre.json file)
+
 ## 1.9.2
 
 - updated to 18.3
