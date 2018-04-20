@@ -55,9 +55,10 @@
 					    <a href="class_dw_util_List.html"><span class="">List</span></a>
 							&nbsp;(Read Only)<div class="description">Retrieve all open baskets for the logged in customer.
  <p>
- The returned list contains all agent baskets created with <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_createAgentBasket_DetailAnchor">createAgentBasket()</a> and the current storefront
- basket which can also be retrieved with <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a>. This method will result in an exception if
- called by a user without permission Create_Order_On_Behalf_Of or if no customer is logged in the session.
+ Restricted to agent scenario use cases: The returned list contains all agent baskets created with
+ <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_createAgentBasket_DetailAnchor">createAgentBasket()</a> and the current storefront basket which can also be retrieved with
+ <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a>. This method will result in an exception if called by a user without permission
+ Create_Order_On_Behalf_Of or if no customer is logged in the session.
  </p>
  <p>
  Please notice that baskets are invalidated after a certain amount of time and may not be returned anymore.
@@ -267,11 +268,30 @@
 					<a href="class_dw_order_Basket.html"><span class="">Basket</span></a>
 </div>
 <div class="description">Creates a Basket from an existing Order for the purposes of changing an Order. When an Order is later created
- from the Basket, the original Order is changed to status <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_REPLACED_DetailAnchor">Order.ORDER_STATUS_REPLACED</a>.
+ from the Basket, the original Order is changed to status <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_REPLACED_DetailAnchor">Order.ORDER_STATUS_REPLACED</a>. Restricted
+ to agent scenario use cases: In case a storefront customer is using it the created storefront basket cannot be
+ retrieved via
+ <ul>
+ <li><a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a> (ScriptAPI),</li>
+ <li>GET /baskets/<basketid> (OCAPI) or</li>
+ <li>GetBasket (Pipelet).</li>
+ </ul>
+ Baskets containing an "orderNumberBeingEdited" are explicitely excluded from the list of baskets that can be
+ retrieved. Responsible for this behaviour (this kind of basket cannot be used as general purpose shopping
+ baskets) - see <a href="class_dw_order_Basket.html#dw_order_Basket_getOrderNoBeingEdited_DetailAnchor">Basket.getOrderNoBeingEdited()</a> / <a href="class_dw_order_Basket.html#dw_order_Basket_getOrderBeingEdited_DetailAnchor">Basket.getOrderBeingEdited()</a>.
  <p/>
- The method only succeeds for an Order with no gift certificates, where the Order is not cancelled, was not
- previously replaced, and was not previously exported or has passed its export-after date. Failures are indicated
- by throwing an APIException of type CreateBasketFromOrderException which provides one of these errorCodes:
+ In case a Business Manager user is logged in into the session the basket will be marked as an agent basket. See
+ <a href="class_dw_order_Basket.html#dw_order_Basket_isAgentBasket_DetailAnchor">Basket.isAgentBasket()</a></>.
+ <p/>
+ The method only succeeds for an Order
+ <ul>
+ <li>without gift certificates,</li>
+ <li>status is not cancelled,</li>
+ <li>was not previously replaced and</li>
+ <li>was not previously exported or has passed its export-after date.</li>
+ </ul>
+ Failures are indicated by throwing an APIException of type CreateBasketFromOrderException which provides one of
+ these errorCodes:
  <ul>
  <li>Code <a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_ORDER_CONTAINS_GC_DetailAnchor">OrderProcessStatusCodes.ORDER_CONTAINS_GC</a> - the Order contains a gift certificate and
  cannot be replaced.</li>
@@ -380,8 +400,8 @@
  If the registered customer is not logged in, the method returns <code>null</code>.
  <p/>
  <p>
- This method will result in an exception if called by a user without permission Create_Order_On_Behalf_Of or if no
- customer is logged in the session.
+ Restricted to agent scenario use cases: This method will result in an exception if called by a user without
+ permission Create_Order_On_Behalf_Of or if no customer is logged in the session.
  </p>
  The basket, if accessible, is usually updated in the same way as <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a>.
  <p/>
@@ -415,9 +435,10 @@
 </div>
 <div class="description">Retrieve all open baskets for the logged in customer.
  <p>
- The returned list contains all agent baskets created with <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_createAgentBasket_DetailAnchor">createAgentBasket()</a> and the current storefront
- basket which can also be retrieved with <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a>. This method will result in an exception if
- called by a user without permission Create_Order_On_Behalf_Of or if no customer is logged in the session.
+ Restricted to agent scenario use cases: The returned list contains all agent baskets created with
+ <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_createAgentBasket_DetailAnchor">createAgentBasket()</a> and the current storefront basket which can also be retrieved with
+ <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a>. This method will result in an exception if called by a user without permission
+ Create_Order_On_Behalf_Of or if no customer is logged in the session.
  </p>
  <p>
  Please notice that baskets are invalidated after a certain amount of time and may not be returned anymore.
@@ -540,7 +561,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.4<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

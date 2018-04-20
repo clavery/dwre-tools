@@ -15,6 +15,7 @@
         <xsd:sequence>
             <xsd:element name="settings" type="complexType.Settings" minOccurs="0" maxOccurs="1" />
             <xsd:element name="hostnames" type="complexType.Hostnames" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="pipelines" type="complexType.Pipelines" minOccurs="0" maxOccurs="1" />
             <xsd:element name="schedule" type="complexType.Schedule" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
@@ -153,8 +154,14 @@
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
-     
-   <xsd:complexType name="complexType.Schedule">
+
+	<xsd:complexType name="complexType.Pipelines">
+		<xsd:sequence>
+			<xsd:element name="pipeline" type="simpleType.Generic.Pipeline" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+    <xsd:complexType name="complexType.Schedule">
         <xsd:sequence>
             <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:choice>
@@ -209,6 +216,14 @@
      
     <xsd:simpleType name="simpleType.Generic.String">
         <xsd:restriction base="xsd:string" />
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="simpleType.Generic.Pipeline">
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:minLength value="1" />
+            <xsd:maxLength value="256" />
+            <xsd:pattern value="\S|(\S(.*)\S)-\S|(\S(.*)\S)" />
+        </xsd:restriction>
     </xsd:simpleType>
  
 </xsd:schema>

@@ -231,8 +231,7 @@
 						
 					    
 					    boolean<div class="description">Returns whether the tracking allowed flag is set in the session.
- The value for newly created sessions defaults to the Site Preference "TrackingAllowed" unless
- a cookie named "dw_dnt" is found in which case the cookie value takes precedence.</div>
+ The value for newly created sessions defaults to the Site Preference "TrackingAllowed".</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -653,8 +652,7 @@
 					 : 
 					boolean</div>
 <div class="description">Returns whether the tracking allowed flag is set in the session.
- The value for newly created sessions defaults to the Site Preference "TrackingAllowed" unless
- a cookie named "dw_dnt" is found in which case the cookie value takes precedence.</div>
+ The value for newly created sessions defaults to the Site Preference "TrackingAllowed".</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -753,10 +751,7 @@
 					void</div>
 <div class="description">Sets the tracking allowed flag for the session. If tracking is not allowed, multiple services
  depending on tracking will be restricted or disabled: Predictive Intelligence recommendations,
- Active Data, Analytics of the customer behavior in the storefront.
- Additionally, collected clicks in the session click stream will be cleared.
- Setting this property to either value also results in setting a session-scoped cookie named "dw_dnt"
- (1=DoNotTrack; 0=Track)</div>
+ Active Data, Analytics of the customer behavior in the storefront.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -770,7 +765,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.3<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.4<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

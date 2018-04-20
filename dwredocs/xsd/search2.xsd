@@ -25,6 +25,7 @@
                 <xsd:element name="category-exclusion-list" type="CategoryExclusionList" minOccurs="0" maxOccurs="unbounded" />
                 <xsd:element name="stemming-exception-list" type="StemmingExceptionList" minOccurs="0" maxOccurs="unbounded" />
                 <xsd:element name="index-settings" type="IndexingSettings" minOccurs="0" maxOccurs="1" />
+                <xsd:element name="keyword-group-list" type="KeywordGroupList" minOccurs="0" maxOccurs="1" />
             </xsd:sequence>
     </xsd:complexType>
 
@@ -174,6 +175,24 @@
             <xsd:element name="stem" type="Stem" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>    
+
+    <xsd:complexType name="KeywordGroupList">
+        <xsd:sequence>
+            <xsd:element name="keyword-group" type="KeywordGroup" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="mode" type="ImportMode" use="optional" />
+    </xsd:complexType>
+
+    <xsd:complexType name="KeywordGroup">
+        <xsd:simpleContent>
+            <xsd:extension base="Generic.String.4000">
+                <xsd:attribute name="id" type="Generic.String.40" use="required" />
+                <xsd:attribute ref="xml:lang" use="required" />
+                <xsd:attribute name="merge-mode" type="MergeMode" use="optional" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
 
     <xsd:complexType name="StemmingExceptions">
         <xsd:simpleContent>
@@ -343,6 +362,13 @@
         </xsd:restriction>
     </xsd:simpleType>
 
+    <xsd:simpleType name="Generic.String.40">
+        <xsd:restriction base="Generic.String">
+            <xsd:minLength value="0" />
+            <xsd:maxLength value="40" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
     <!--  Nonempty string with no leading or trailing whitespace -->
     <xsd:simpleType name="Generic.NonEmptyString.100">
         <xsd:restriction base="Generic.String">
@@ -368,9 +394,18 @@
         </xsd:simpleContent>
     </xsd:complexType>
     
-        <xsd:simpleType name="ImportMode">
+    <xsd:simpleType name="ImportMode">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="delete" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="MergeMode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="remove" />
+            <xsd:enumeration value="add" />
+            <xsd:enumeration value="merge" />
+            <xsd:enumeration value="replace" />
         </xsd:restriction>
     </xsd:simpleType>
 

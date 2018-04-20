@@ -12,7 +12,6 @@ def load_config():
             import gnupg
             gpg = gnupg.GPG(use_agent=True)
         except ImportError as e:
-            print("You must have gnupg installed: pip install python-gnupg", file=sys.stderr)
             print("You must have GNUpg installed and the following python module: pip install python-gnupg", file=sys.stderr)
             sys.exit(1)
         with open(os.path.join(home, ".dwre.json.gpg"), 'rb') as f:
@@ -34,7 +33,6 @@ def save_config(config):
             import gnupg
             gpg = gnupg.GPG(use_agent=True)
         except ImportError as e:
-            print("You must have gnupg installed: pip install python-gnupg", file=sys.stderr)
             print("You must have GNUpg installed and the following python module: pip install python-gnupg", file=sys.stderr)
             sys.exit(1)
         with open(os.path.join(home, ".dwre.json.gpg"), 'wb') as f:

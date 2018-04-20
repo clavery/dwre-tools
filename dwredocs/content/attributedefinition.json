@@ -6,7 +6,7 @@
   "definitions": {
     "basic_attribute_type": {
       "type": "string",
-      "enum":["string","text","markup","integer","boolean","product","category","file"]
+      "enum":["string","text","markup","integer","boolean","product","category","file","page","image"]
     },
     "enumerated_attribute_type": {
       "type": "string",
