@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.9.5
+
+- `tail` will now show deprecation logs by default
+
 ## 1.9.4
 
 - updated to 18.4
