@@ -19,9 +19,9 @@ def compare_file_times(f1, f2):
     return 0
 
 
-def latest_logs(server, username, password, filters):
+def latest_logs(server, username, password, filters, verify, cert):
     response = requests.request('PROPFIND', 'https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/',
-                                auth=(username, password))
+                                auth=(username, password), verify=verify, cert=cert)
     response.raise_for_status()
     x = ET.fromstring(response.content)
     log_files = get_files(x)
@@ -67,12 +67,14 @@ def tail_logs(env, filters, interval):
     server = env["server"]
     username = env["username"]
     password = env["password"]
+    verify = env["verify"]
+    cert = env["cert"]
 
-    log_files = latest_logs(server, username, password, filters)
+    log_files = latest_logs(server, username, password, filters, verify, cert)
     urls = ['https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/' + log[0] for
             log in log_files]
 
-    initial = [requests.head(url, auth=(username, password)) for url in urls]
+    initial = [requests.head(url, auth=(username, password), verify=verify, cert=cert) for url in urls]
     [r.raise_for_status() for r in initial]
 
     lengths = [i.headers.get("Content-Length") for i in initial]
@@ -80,7 +82,7 @@ def tail_logs(env, filters, interval):
 
     # get initial for last line purposes (for some reason this returns diff content lengths so we
     # can't use it for the initial length calc
-    tail_requests = [requests.get(url, auth=(username, password)) for url in urls]
+    tail_requests = [requests.get(url, auth=(username, password), verify=verify, cert=cert) for url in urls]
     [tail_log_file(log[0], r.text) for r, log in zip(tail_requests, log_files)]
 
     try:
@@ -91,7 +93,7 @@ def tail_logs(env, filters, interval):
                 url = 'https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/' + log[0]
                 response = requests.get(url, auth=(username, password), headers={
                     "range": "bytes=%s-" % (lengths[i])
-                })
+                }, verify=verify, cert=cert)
                 if response.status_code == 416:
                     continue
                 response.raise_for_status()

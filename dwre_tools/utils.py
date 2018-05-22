@@ -5,7 +5,10 @@ import os
 
 def directory_to_zip(directory, filename):
     zip_file_io = io.BytesIO()
-    zip_file = zipfile.ZipFile(zip_file_io, "w")
+    try:
+        zip_file = zipfile.ZipFile(zip_file_io, "w", compression=zipfile.ZIP_DEFLATED)
+    except NotImplementedError:
+        zip_file = zipfile.ZipFile(zip_file_io, "w")
 
     for (dirpath, dirnames, filenames) in os.walk(directory):
         basepath = os.path.relpath(dirpath, directory)
