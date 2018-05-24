@@ -533,7 +533,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         try:
             reindex(env)
             print(Fore.GREEN + "Initiated reindex on {0}".format(env['server']) + Fore.RESET)
-        except HTTPError as e:
+        except requests.exceptions.HTTPError as e:
             print(Fore.RED + "Error reindexing (try updated your bm_dwremigrate cartridge): {}".format(e.message) + Fore.RESET)
 
 

@@ -41,17 +41,25 @@ def login_business_manager(env, session):
                                 LoginForm_Password=env["password"],
                                 LocaleID="",
                                 LoginForm_RegistrationDomain="Sites",
-                                login=""))
+                                login=""), timeout=10)
     response.raise_for_status()
     csrf_match = CSRF_FINDER.search(response.text)
+    if "Please create a new password." in response.text:
+        raise RuntimeError("Password Expired; New password required")
+
+    if "Invalid login or password" in response.text:
+        raise RuntimeError("Invalid login or password")
+
+    if "This user is currently inactive.<br />Please contact the administrator." in response.text:
+        raise RuntimeError("Inactive account")
+
     if csrf_match:
         csrf_token = csrf_match.group(1)
         session.params['csrf_token'] = csrf_token
         session.headers['origin'] = "https://%s" % env["server"]
     else:
+        print(response.text)
         raise RuntimeError("Can't find CSRF")
-    if "Invalid login or password" in response.text:
-        raise RuntimeError("Invalid login or password")
 
 
 def select_site(env, session, site_uuid):

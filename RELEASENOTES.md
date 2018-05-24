@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.10.0
+
+- adds `pw refresh` command to refresh all credentials or report login errors
+
 ## 1.9.5
 
 - `tail` will now show deprecation logs by default

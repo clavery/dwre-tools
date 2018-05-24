@@ -17,7 +17,7 @@ from .webdav import copy_command
 from .debugger import debug_command
 from .cartridge import upgrade_bm_cartridge
 from .cred import get_credential, get_credential_info, put_credential, list_credentials
-from .pw import pw_list, pw_get, pw_put
+from .pw import pw_list, pw_get, pw_put, pw_refresh
 
 from colorama import init, deinit
 
@@ -190,6 +190,8 @@ def pw_cmd_handler(args):
         pw_list()
     elif args.subcommand == "get":
         pw_get(args.account)
+    elif args.subcommand == "refresh":
+        pw_refresh()
     elif args.subcommand == "put":
         password = args.password
         if not password:
@@ -314,6 +316,7 @@ pw_get_cmd.add_argument('account', help="[project]-[env]")
 pw_put_cmd = pw_parser.add_parser("put", help="put account (project-env)")
 pw_put_cmd.add_argument('account', help="[project]-[env]")
 pw_put_cmd.add_argument('password', help="new password", nargs='?')
+pw_refresh_cmd = pw_parser.add_parser("refresh", help="login to all accounts in dwre.json")
 
 def main():
     import os
