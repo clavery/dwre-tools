@@ -1,4 +1,4 @@
 pytest
 responses
-mock;python_version<"3.4"
+mock
 tox
