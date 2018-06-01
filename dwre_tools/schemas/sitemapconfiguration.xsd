@@ -137,6 +137,7 @@
     <xsd:complexType name="complexType.IncludedProductStatus">
         <xsd:sequence>
             <xsd:element name="unavailable" type="xsd:boolean" default="false" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="orderable" type="xsd:boolean" default="false" minOccurs="0" maxOccurs="1" />
             <xsd:element name="non-searchable" type="xsd:boolean" default="false" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>

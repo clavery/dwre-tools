@@ -176,18 +176,19 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)</div>
 <div class="description">Constructor to create a new SortedSet.
 
- The constructor takes a compare function as additional parameter. The
- order of the elements is determined with a comparator (see PropertyComparator)
+ The constructor takes a compare function as additional parameter. This comparator
+ determines identity and the order of the elements for this set.
+ The order of the elements is determined with a comparator (see <a href="class_dw_util_PropertyComparator.html">PropertyComparator</a>)
  or with the help of the given function. The function must take two parameters
- and return a value &lt;0 if the first parameter is smaller than the second,
- a value of 0 if both are equal and a value if &gt;0 if the first one is greater
- than the second parameter.</div>
+ and return a value &lt;=-1 if the first parameter is smaller than the second,
+ a value if &gt;=1 if the first one is greater than the second parameter
+ and a value in between like 0 if both are equal.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
 <span class="parameterName">comparator</span>
 						 - 
-						<span class="parameterDesc">an instance of a PropertyComparator or a comparision function</span>
+						<span class="parameterDesc">an instance of a PropertyComparator or a comparison function</span>
 </div>
 </div>
 <hr>
@@ -395,7 +396,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.4<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.6<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

@@ -40,7 +40,7 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description">Represents a session in Commerce Cloud Digital. The session has some well defined
+<div class="description">Represents a session in Commerce Cloud Digital. The session has some well-defined
  attributes like the current authenticated customer or the click stream, but also
  supports storing custom values in the session.
 
@@ -54,28 +54,28 @@
  A session is identified with a unique ID, called the session ID.
  </li>
  <li>
- When a session is created the application server calls the pipeline OnSession-Start. It can
+ When a session is created, the application server calls the pipeline OnSession-Start. It can
  be used to pre-initialize the session, before the actual request hits the server.
  </li>
  <li>
- Digital uses session stickiness and routes request within on session always to the same
+ Digital uses session stickiness and always routes requests within a single session to the same
  application server.
  </li>
  <li>
  Session data is also stored in a persistent location.
  </li>
  <li>
- In case of a fail-over situation requests are re-routed to another application server, which than
+ In case of a fail-over situation, requests are re-routed to another application server, which then
  loads the session data from the persistent storage.
  </li>
  <li>
- There are two timeouts, a soft one when the session is not used anymore and a
- hard one, which renders a session id invalid if it is too old, independent whether
- it is still used or not. The soft timeout takes care of automatic logout, and clearing
- all privacy data. But it is still possible to use the session id and re-open
- the session. The hard timeout makes it basically impossible to re-open a session
- after a certain time. This hard timeout basically prevents that a session id, which
- for example is accidentally copied into a URL, can be actually used to start a session.
+ There are two timeouts: a soft one when the session is not used anymore, and a
+ hard one, which renders a session ID invalid if it is too old, regardless of whether
+ it is still used. The soft timeout takes care of automatic logout and clearing
+ all privacy data, but it is still possible to use the session ID to re-open
+ the session. The hard timeout prevents a session from being reopened
+ after a certain time. For example, if the session ID is accidentally pasted into a URL after
+ the hard timeout, it will not reopen the session.
  </li>
  </ul>
 
@@ -88,14 +88,14 @@
  All Commerce Cloud Digital value types (Money, Quantity, Decimal, Calendar) are supported.
  </li>
  <li>
- String are limited to 2000 characters.
+ Strings are limited to 2000 characters.
  </li>
  <li>
- All other types must not be stored in a session. In particular persistent object,
- collections and scripted objects can not be stored in a session. Commerce Cloud Digital
- will report values, which are not supported, with a deprecation message in the log
- files. The value will be stored in the session, but the results are undefined.
- In a future version of Digital, other types then the listed will be not allowed anymore
+ No other types can be stored in a session. In particular, persistent objects,
+ collections, and scripted objects cannot be stored in a session. Commerce Cloud Digital
+ will report unsupported values with a deprecation message in the log files.
+ An unsupported value will be stored in the session, but the results are undefined.
+ In a future version of Digital, unsupported types will no longer be accepted,
  and an exception will be thrown.
  </li>
  <li>
@@ -136,7 +136,7 @@
 					    
 					    <a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
 							&nbsp;(Read Only)<div class="description">The session's custom attributes. The
- attributes are stored for the life time of the session and are not
+ attributes are stored for the lifetime of the session and are not
  cleared when the customer logs out.</div>
 </span>
 </div>
@@ -148,7 +148,7 @@
 					    <a href="class_dw_customer_Customer.html"><span class="">Customer</span></a>
 							&nbsp;(Read Only)<div class="description">The customer associated with this storefront session. The method
  always returns <code>null</code> if called for a non-storefront session
- (e.g. within a job or within the business manager). For a storefront
+ (e.g., within a job or within Business Manager). For a storefront
  session, the method always returns a customer. The returned customer
  may be anonymous if the customer could not be identified via the
  customer cookie.</div>
@@ -160,8 +160,8 @@
 						
 					    
 					    boolean
-							&nbsp;(Read Only)<div class="description">Identifies if the customer associated with this session
- is authenticated or not. This call is equivalent to customer.isAuthenticated().</div>
+							&nbsp;(Read Only)<div class="description">Identifies whether the customer associated with this session
+ is authenticated. This call is equivalent to customer.isAuthenticated().</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -170,8 +170,8 @@
 						
 					    
 					    boolean
-							&nbsp;(Read Only)<div class="description">Identifies if the customer associated with this session
- is externally authenticated or not.</div>
+							&nbsp;(Read Only)<div class="description">Identifies whether the customer associated with this session
+ is externally authenticated.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -189,10 +189,10 @@
 						
 					    
 					    <a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a>
-							&nbsp;(Read Only)<div class="description">Returns information on the last source-code handled by the session.
- This may or may not be the session's active source-code, e.g. the
- last received source-code was inactive and therefore was not
- set as the session's active source-code.</div>
+							&nbsp;(Read Only)<div class="description">Returns information on the last source code handled by the session.
+ This may or may not be the session's active source code, e.g., the
+ last received source code was inactive and therefore was not
+ set as the session's active source code.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -202,7 +202,7 @@
 					    
 					    <a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
 							&nbsp;(Read Only)<div class="description">The session's custom privacy attributes.
- The attributes are stored for the live time of the session and are
+ The attributes are stored for the lifetime of the session and are
  automatically cleared when the customer logs out.</div>
 </span>
 </div>
@@ -212,7 +212,7 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The unique session id. This can safely be used as identifier
+							&nbsp;(Read Only)<div class="description">The unique session id. This can safely be used as an identifier
  against external systems.</div>
 </span>
 </div>
@@ -231,7 +231,8 @@
 						
 					    
 					    boolean<div class="description">Returns whether the tracking allowed flag is set in the session.
- The value for newly created sessions defaults to the Site Preference "TrackingAllowed".</div>
+ The value for newly created sessions defaults to the Site Preference "TrackingAllowed" unless
+ a cookie named "dw_dnt" is found in which case the cookie value takes precedence.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -240,8 +241,8 @@
 						
 					    
 					    boolean
-							&nbsp;(Read Only)<div class="description">Identifies if the agent user associated with this session
- is authenticated or not.</div>
+							&nbsp;(Read Only)<div class="description">Identifies whether the agent user associated with this session
+ is authenticated.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -253,7 +254,7 @@
 							&nbsp;(Read Only)<div class="description">The current agent user name associated with this session.
  <p/>
  <b>Note:</b> this class allows access to sensitive security-related data.
- Pay special attention to PCI DSS v3. requirements 2, 4, and 12.</div>
+ Pay special attention to PCI DSS v3 requirements 2, 4, and 12.</div>
 </span>
 </div>
 </div>
@@ -303,7 +304,7 @@
 <span><span class="emphasis"><a href="#dw_system_Session_getLastReceivedSourceCodeInfo_DetailAnchor"><span class="">getLastReceivedSourceCodeInfo</span></a></span>()
 						: 
 					<a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a></span>
-<div class="description">Returns information on the last source-code handled by the session.</div>
+<div class="description">Returns information on the last source code handled by the session.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_system_Session_getPrivacy_DetailAnchor"><span class="">getPrivacy</span></a></span>()
@@ -333,13 +334,13 @@
 <span><span class="emphasis"><a href="#dw_system_Session_isCustomerAuthenticated_DetailAnchor"><span class="">isCustomerAuthenticated</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Identifies if the customer associated with this session is authenticated or not.</div>
+<div class="description">Identifies whether the customer associated with this session is authenticated.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_system_Session_isCustomerExternallyAuthenticated_DetailAnchor"><span class="">isCustomerExternallyAuthenticated</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Identifies if the customer associated with this session is externally authenticated or not.</div>
+<div class="description">Identifies whether the customer associated with this session is externally authenticated.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_system_Session_isTrackingAllowed_DetailAnchor"><span class="">isTrackingAllowed</span></a></span>()
@@ -351,7 +352,7 @@
 <span><span class="emphasis"><a href="#dw_system_Session_isUserAuthenticated_DetailAnchor"><span class="">isUserAuthenticated</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Identifies if the agent user associated with this session is authenticated or not.</div>
+<div class="description">Identifies whether the agent user associated with this session is authenticated.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_system_Session_setCurrency_Currency_DetailAnchor"><span class="">setCurrency</span></a></span>(newCurrency
@@ -369,7 +370,7 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
-<div class="description">Applies the specified source-code to the current session and basket.</div>
+<div class="description">Applies the specified source code to the current session and basket.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_system_Session_setTrackingAllowed_Boolean_DetailAnchor"><span class="">setTrackingAllowed</span></a></span>(trackingAllowed
@@ -447,7 +448,7 @@
 					<a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
 </div>
 <div class="description">Returns the session's custom attributes. The
- attributes are stored for the life time of the session and are not
+ attributes are stored for the lifetime of the session and are not
  cleared when the customer logs out.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -469,7 +470,7 @@
 </div>
 <div class="description">Returns the customer associated with this storefront session. The method
  always returns <code>null</code> if called for a non-storefront session
- (e.g. within a job or within the business manager). For a storefront
+ (e.g., within a job or within Business Manager). For a storefront
  session, the method always returns a customer. The returned customer
  may be anonymous if the customer could not be identified via the
  customer cookie.</div>
@@ -495,7 +496,7 @@
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the forms</span>
+<span class="parameterDesc">the forms.</span>
 </div>
 </div>
 <hr>
@@ -510,14 +511,14 @@
 					 : 
 					<a href="class_dw_campaign_SourceCodeInfo.html"><span class="">SourceCodeInfo</span></a>
 </div>
-<div class="description">Returns information on the last source-code handled by the session.
- This may or may not be the session's active source-code, e.g. the
- last received source-code was inactive and therefore was not
- set as the session's active source-code.</div>
+<div class="description">Returns information on the last source code handled by the session.
+ This may or may not be the session's active source code, e.g., the
+ last received source code was inactive and therefore was not
+ set as the session's active source code.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">source-code information for the last received source-code.</span>
+<span class="parameterDesc">source code information for the last received source code.</span>
 </div>
 </div>
 <hr>
@@ -533,7 +534,7 @@
 					<a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
 </div>
 <div class="description">Returns the session's custom privacy attributes.
- The attributes are stored for the live time of the session and are
+ The attributes are stored for the lifetime of the session and are
  automatically cleared when the customer logs out.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -553,7 +554,7 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the unique session id. This can safely be used as identifier
+<div class="description">Returns the unique session id. This can safely be used as an identifier
  against external systems.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -595,7 +596,7 @@
 <div class="description">Returns the current agent user name associated with this session.
  <p/>
  <b>Note:</b> this class allows access to sensitive security-related data.
- Pay special attention to PCI DSS v3. requirements 2, 4, and 12.</div>
+ Pay special attention to PCI DSS v3 requirements 2, 4, and 12.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -613,8 +614,8 @@
 <span class="emphasis">isCustomerAuthenticated</span>()
 					 : 
 					boolean</div>
-<div class="description">Identifies if the customer associated with this session
- is authenticated or not. This call is equivalent to customer.isAuthenticated().</div>
+<div class="description">Identifies whether the customer associated with this session
+ is authenticated. This call is equivalent to customer.isAuthenticated().</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -632,8 +633,8 @@
 <span class="emphasis">isCustomerExternallyAuthenticated</span>()
 					 : 
 					boolean</div>
-<div class="description">Identifies if the customer associated with this session
- is externally authenticated or not.</div>
+<div class="description">Identifies whether the customer associated with this session
+ is externally authenticated.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -652,11 +653,12 @@
 					 : 
 					boolean</div>
 <div class="description">Returns whether the tracking allowed flag is set in the session.
- The value for newly created sessions defaults to the Site Preference "TrackingAllowed".</div>
+ The value for newly created sessions defaults to the Site Preference "TrackingAllowed" unless
+ a cookie named "dw_dnt" is found in which case the cookie value takes precedence.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">true if the tracking allowed flag is set in the session, false otherwise</span>
+<span class="parameterDesc">true if the tracking allowed flag is set in the session, false otherwise.</span>
 </div>
 </div>
 <hr>
@@ -670,8 +672,8 @@
 <span class="emphasis">isUserAuthenticated</span>()
 					 : 
 					boolean</div>
-<div class="description">Identifies if the agent user associated with this session
- is authenticated or not.</div>
+<div class="description">Identifies whether the agent user associated with this session
+ is authenticated.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -698,7 +700,7 @@
 <div class="parameterDetail">
 <span class="parameterName">newCurrency</span>
 						 - 
-						<span class="parameterDesc">the new currency to change to, must not be null. Method will throw an exception if currency not allowed by current site is passed.</span>
+						<span class="parameterDesc">the new currency to use. Must not be null. Method will throw an exception if a currency not allowed by the current site is passed.</span>
 </div>
 </div>
 <hr>
@@ -716,7 +718,7 @@
 					 : 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
 </div>
-<div class="description">Applies the specified source-code to the current session and basket. This API processes the source-code exactly as if it
+<div class="description">Applies the specified source code to the current session and basket. This API processes the source code exactly as if it
  were supplied on the URL query string, with the additional benefit of returning error information. If no input
  parameter is passed, then the active source code in the session and basket is removed. If a basket exists, and the modification fails,
  then the session is not written to either. This method may open and commit a transaction, if none is currently active.</div>
@@ -725,7 +727,7 @@
 <div class="parameterDetail">
 <span class="parameterName">sourceCode</span>
 						 - 
-						<span class="parameterDesc">the SourceCode to set as active in the session and basket. If null parameter is passed, then the active source code in the session is removed.</span>
+						<span class="parameterDesc">the source code to set as active in the session and basket. If a null parameter is passed, then the active source code in the session is removed.</span>
 </div>
 </div>
 <div class="parameters">
@@ -751,13 +753,16 @@
 					void</div>
 <div class="description">Sets the tracking allowed flag for the session. If tracking is not allowed, multiple services
  depending on tracking will be restricted or disabled: Predictive Intelligence recommendations,
- Active Data, Analytics of the customer behavior in the storefront.</div>
+ Active Data, Analytics of the customer behavior in the storefront.
+ Additionally, collected clicks in the session click stream will be cleared.
+ Setting this property to either value also results in setting a session-scoped cookie named "dw_dnt"
+ (1=DoNotTrack; 0=Track)</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
 <span class="parameterName">trackingAllowed</span>
 						 - 
-						<span class="parameterDesc">true if tracking is allowed, false otherwise</span>
+						<span class="parameterDesc">true if tracking is allowed, false otherwise.</span>
 </div>
 </div>
 <hr>
@@ -765,7 +770,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.4<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.6<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

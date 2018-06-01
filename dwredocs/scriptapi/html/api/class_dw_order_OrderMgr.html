@@ -40,7 +40,24 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description">Provides static helper methods for managing orders.</div>
+<div class="description">Provides static helper methods for managing orders.
+ <p>
+ Pipelet GetOrder and methods provided to access orders such as <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_getOrder_String_DetailAnchor">getOrder(String)</a> and
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor">searchOrders(String, String, Object...)</a> can be limited by the site preference 'Limit Storefront Order
+ Access'. An insecure order access occurs in a storefront session when
+ <ul>
+ <li>The current storefront session is not the session in which the order was created</li>
+ <li>AND the session customer does not match the order customer</li>
+ <li>AND the order status is not CREATED.</li>
+ </ul>
+ When an order is accessed in an insecure manner:
+ <ul>
+ <li>If the preference is ACTIVE: the action is disallowed and a SecurityException with a message beginning
+ 'Unauthorized access to order' is thrown.</li>
+ <li>If the preference is NOT ACTIVE, a SecurityException with a message beginning 'Unauthorized access to order' will
+ be logged as an error.</li>
+ </ul>
+ </p></div>
 <div class="subclasses"></div>
 </div>
 </div>
@@ -193,7 +210,7 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a></span>
-<div class="description"><p/> Searches for order instances.</div>
+<div class="description">Searches for order instances.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_searchOrder_String_Object_DetailAnchor"><span class="">searchOrder</span></a></span>(queryString
@@ -205,7 +222,7 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>...)
 						: 
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a></span>
-<div class="description"><p/> Searches for a single order instance.</div>
+<div class="description">Searches for a single order instance.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor"><span class="">searchOrders</span></a></span>(queryString
@@ -232,7 +249,7 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a></span>
-<div class="description"><p/> Searches for order instances.</div>
+<div class="description">Searches for order instances.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_undoCancelOrder_Order_DetailAnchor"><span class="">undoCancelOrder</span></a></span>(order
@@ -622,7 +639,8 @@
 					 : 
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a>
 </div>
-<div class="description">Returns the order with the specified order number.</div>
+<div class="description">Returns the order with the specified order number. Order access in the storefront can be limited, please see
+ class description.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -663,6 +681,11 @@
  </p>
  <p>
  The order will count towards product and customer active data.
+ </p>
+ <p>
+ Placing an order leads to the generation of shipment numbers for all shipments and the invoice number of the
+ order. See <a href="class_dw_order_Shipment.html#dw_order_Shipment_getShipmentNo_DetailAnchor">Shipment.getShipmentNo()</a> and <a href="class_dw_order_Order.html#dw_order_Order_getInvoiceNo_DetailAnchor">Order.getInvoiceNo()</a>. This is done
+ utilizing sequences.
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -756,7 +779,7 @@
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a>
 </div>
 <div class="description"><p/>
- Searches for a single order instance.
+ Searches for a single order instance. Order access in the storefront can be limited, please see class description.
  <p/>
  The search can be configured using a simple query language, which provides most common filter and operator
  functionality.
@@ -864,7 +887,7 @@
 					 : 
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a>
 </div>
-<div class="description">Searches for order instances.
+<div class="description">Searches for order instances. Order access in the storefront can be limited, please see class description.
  <p/>
  The search can be configured using a simple query language, which provides most common filter and operator
  functionality.
@@ -997,8 +1020,7 @@
 					 : 
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a>
 </div>
-<div class="description"><p/>
- Searches for order instances.
+<div class="description">Searches for order instances. Order access in the storefront can be limited, please see class description.
  <p/>
  The search can be configured with a map, which key-value pairs are converted into a query expression. The
  key-value pairs are turned into a sequence of '=' or 'like' conditions, which are combined with AND statements.
@@ -1102,8 +1124,7 @@
 					 : 
 					<a href="class_dw_order_Order.html"><span class="">Order</span></a>
 </div>
-<div class="description"><p/>
- Searches for a single order instance.
+<div class="description">Searches for a single order instance. Order access in the storefront can be limited, please see class description.
  <p/>
  The search can be configured using a simple query language, which provides most common filter and operator
  functionality.
@@ -1219,7 +1240,7 @@
 					 : 
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a>
 </div>
-<div class="description">Searches for order instances.
+<div class="description">Searches for order instances. Order access in the storefront can be limited, please see class description.
  <p/>
  The search can be configured using a simple query language, which provides most common filter and operator
  functionality.
@@ -1360,8 +1381,7 @@
 					 : 
 					<a href="class_dw_util_SeekableIterator.html"><span class="">SeekableIterator</span></a>
 </div>
-<div class="description"><p/>
- Searches for order instances.
+<div class="description">Searches for order instances. Order access in the storefront can be limited, please see class description.
  <p/>
  The search can be configured with a map, which key-value pairs are converted into a query expression. The
  key-value pairs are turned into a sequence of '=' or 'like' conditions, which are combined with AND statements.
@@ -1548,7 +1568,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.4<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.6<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

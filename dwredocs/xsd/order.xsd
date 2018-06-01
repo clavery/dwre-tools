@@ -15,8 +15,18 @@
             <xsd:sequence>
                 <xsd:element name="order" type="complexType.Order" minOccurs="0" maxOccurs="unbounded"></xsd:element>
             </xsd:sequence>
+            <xsd:attribute name="version" use="optional" type="simpleType.Version"/>
         </xsd:complexType>
     </xsd:element>
+
+    <xsd:simpleType name="simpleType.Version">
+        <xsd:restriction base="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>The export version which was used for the export. Since 18.5 </xsd:documentation>
+            </xsd:annotation>
+            <xsd:enumeration value="18.5" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:complexType name="complexType.Order">
         <xsd:sequence>
@@ -297,6 +307,11 @@
 
     <xsd:complexType name="complexType.Customer">
         <xsd:sequence>
+            <xsd:element name="guest" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>Was the order placed by a guest.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="customer-no" type="simpleType.Generic.String.100" minOccurs="0" maxOccurs="1"></xsd:element>
             <xsd:element name="customer-name" type="simpleType.Generic.String.256" maxOccurs="1" minOccurs="0"></xsd:element>
             <xsd:element name="customer-email" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1">
@@ -889,13 +904,13 @@
     </xsd:simpleType>
 
     <xsd:simpleType name="simpleType.ImportMode">
-		        <xsd:restriction base="xsd:string">
-			<xsd:annotation>
-				<xsd:documentation>Import mode delete can only be used on
-					non-production systems. One possible use case is to enable automated
-					testing by deleting the orders before or after each test run.
-				</xsd:documentation>
-			</xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>Import mode delete can only be used on
+                    non-production systems. One possible use case is to enable automated
+                    testing by deleting the orders before or after each test run.
+                </xsd:documentation>
+            </xsd:annotation>
             <xsd:enumeration value="delete" />
         </xsd:restriction>
     </xsd:simpleType>

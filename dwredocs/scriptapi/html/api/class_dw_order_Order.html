@@ -410,7 +410,12 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-<div class="description">The invoice number for this Order.</div>
+<div class="description">The invoice number for this Order.
+ <p>
+ When an order is placed (e.g. with <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_placeOrder_Order_DetailAnchor">OrderMgr.placeOrder(Order)</a>) invoice number will be filled
+ using a sequence. Before order was placed <code>null</code> will be returned unless it was set with
+ <a href="class_dw_order_Order.html#dw_order_Order_setInvoiceNo_String_DetailAnchor">setInvoiceNo(String)</a>.
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -666,8 +671,7 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The source code stored with the order or
- null if no source code is attached to the order.</div>
+							&nbsp;(Read Only)<div class="description">The source code stored with the order or <code>null</code> if no source code is attached to the order.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -676,8 +680,8 @@
 						
 					    
 					    <a href="class_dw_campaign_SourceCodeGroup.html"><span class="">SourceCodeGroup</span></a>
-							&nbsp;(Read Only)<div class="description">The source code group attached to the order or
- null if no source code group is attached to the order.</div>
+							&nbsp;(Read Only)<div class="description">The source code group attached to the order or <code>null</code> if no source code group is attached to
+ the order.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -686,8 +690,8 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The source code group id stored with the order or
- null if no source code group is attached to the order.</div>
+							&nbsp;(Read Only)<div class="description">The source code group id stored with the order or <code>null</code> if no source code group is attached
+ to the order.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -706,7 +710,30 @@
  <li><a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_CANCELLED_DetailAnchor">ORDER_STATUS_CANCELLED</a></li>
  <li><a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_FAILED_DetailAnchor">ORDER_STATUS_FAILED</a></li>
  <li><a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_REPLACED_DetailAnchor">ORDER_STATUS_REPLACED</a></li>
- </ul></div>
+ </ul>
+ <p>
+ The order status usually changes when a process action is initiated. Most status changes have an action which
+ needs to executed in order to end having the order in a specific order status. When an order is created with e.g.
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a> the order status will be <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_CREATED_DetailAnchor">ORDER_STATUS_CREATED</a>. The usual
+ flow is that payment authorization will be added to the order. Once the order is considered as valid (payed,
+ fraud checked, ...) the order gets placed. This can be done by calling
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_placeOrder_Order_DetailAnchor">OrderMgr.placeOrder(Order)</a>. The result of placing an order will be status
+ <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_OPEN_DetailAnchor">ORDER_STATUS_OPEN</a> (from a process standpoint <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_NEW_DetailAnchor">ORDER_STATUS_NEW</a> which has the same meaning).
+ Status <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_REPLACED_DetailAnchor">ORDER_STATUS_REPLACED</a> is related to functionality
+ <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_createBasketFromOrder_Order_DetailAnchor">BasketMgr.createBasketFromOrder(Order)</a>. <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_COMPLETED_DetailAnchor">ORDER_STATUS_COMPLETED</a> has no meaning by
+ default but can be used by custom implementations but is a synonym for NEW/OPEN. Below you will find the most important status changes:
+ </p>
+
+ <table>
+ <tr><th>Status before</th><th>Action</th><th>Status after</th><th>Business meaning</th></tr>
+ <tr><td>-</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a></td><td>CREATED</td><td>Order was created from a basket.</td></tr>
+ <tr><td>CREATED</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_placeOrder_Order_DetailAnchor">OrderMgr.placeOrder(Order)</a></td><td>OPEN/NEW</td><td>Order was considered as valid. Order can now be exported to 3rd party systems.</td></tr>
+ <tr><td>CREATED</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_failOrder_Order_DetailAnchor">OrderMgr.failOrder(Order)</a></td><td>FAILED</td><td>Order was considered not valid. E.g. payment authorization was wrong or fraud check was not successful.</td></tr>
+ <tr><td>OPEN/NEW</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_cancelOrder_Order_DetailAnchor">OrderMgr.cancelOrder(Order)</a></td><td>CANCELLED</td><td>Order was cancelled.</td></tr>
+ <tr><td>CANCELLED</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_undoCancelOrder_Order_DetailAnchor">OrderMgr.undoCancelOrder(Order)</a></td><td>OPEN/NEW</td><td>Order was cancelled by mistake and this needs to be undone.</td></tr>
+ <tr><td>FAILED</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_undoFailOrder_Order_DetailAnchor">OrderMgr.undoFailOrder(Order)</a></td><td>CREATED</td><td>Order was failed by mistake and this needs to be undone.</td></tr>
+ </table>
+ <p>Every status change will trigger a change in the order journal which is the base for GMV calculations.</p></div>
 </span>
 </div>
 </div>
@@ -1167,19 +1194,19 @@
 <span><span class="emphasis"><a href="#dw_order_Order_getSourceCode_DetailAnchor"><span class="">getSourceCode</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the source code stored with the order or null if no source code is attached to the order.</div>
+<div class="description">Returns the source code stored with the order or <code>null</code> if no source code is attached to the order.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Order_getSourceCodeGroup_DetailAnchor"><span class="">getSourceCodeGroup</span></a></span>()
 						: 
 					<a href="class_dw_campaign_SourceCodeGroup.html"><span class="">SourceCodeGroup</span></a></span>
-<div class="description">Returns the source code group attached to the order or null if no source code group is attached to the order.</div>
+<div class="description">Returns the source code group attached to the order or <code>null</code> if no source code group is attached to the order.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Order_getSourceCodeGroupID_DetailAnchor"><span class="">getSourceCodeGroupID</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the source code group id stored with the order or null if no source code group is attached to the order.</div>
+<div class="description">Returns the source code group id stored with the order or <code>null</code> if no source code group is attached to the order.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Order_getStatus_DetailAnchor"><span class="">getStatus</span></a></span>()
@@ -1308,7 +1335,7 @@
 <div class="description">Sets the text describing the external order.</div>
 </div>
 <div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_order_Order_setInvoiceNo_String_DetailAnchor"><span class="">setInvoiceNo</span></a></span>(aValue
+<span><span class="emphasis"><a href="#dw_order_Order_setInvoiceNo_String_DetailAnchor"><span class="">setInvoiceNo</span></a></span>(invoiceNumber
 								 : 	
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
@@ -2281,7 +2308,12 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the invoice number for this Order.</div>
+<div class="description">Returns the invoice number for this Order.
+ <p>
+ When an order is placed (e.g. with <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_placeOrder_Order_DetailAnchor">OrderMgr.placeOrder(Order)</a>) invoice number will be filled
+ using a sequence. Before order was placed <code>null</code> will be returned unless it was set with
+ <a href="class_dw_order_Order.html#dw_order_Order_setInvoiceNo_String_DetailAnchor">setInvoiceNo(String)</a>.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -3308,12 +3340,11 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the source code stored with the order or
- null if no source code is attached to the order.</div>
+<div class="description">Returns the source code stored with the order or <code>null</code> if no source code is attached to the order.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the source code stored with the order or null if no source code is attached to the order.</span>
+<span class="parameterDesc">the source code stored with the order or <code>null</code> if no source code is attached to the order.</span>
 </div>
 </div>
 <hr>
@@ -3328,12 +3359,12 @@
 					 : 
 					<a href="class_dw_campaign_SourceCodeGroup.html"><span class="">SourceCodeGroup</span></a>
 </div>
-<div class="description">Returns the source code group attached to the order or
- null if no source code group is attached to the order.</div>
+<div class="description">Returns the source code group attached to the order or <code>null</code> if no source code group is attached to
+ the order.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the source code group attached to the order or null if no source code group is attached to the order.</span>
+<span class="parameterDesc">the source code group attached to the order or <code>null</code> if no source code group is attached to the order.</span>
 </div>
 </div>
 <hr>
@@ -3348,12 +3379,12 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the source code group id stored with the order or
- null if no source code group is attached to the order.</div>
+<div class="description">Returns the source code group id stored with the order or <code>null</code> if no source code group is attached
+ to the order.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the source code group id stored with the order or null if no source code group is attached to the order.</span>
+<span class="parameterDesc">the source code group id stored with the order or <code>null</code> if no source code group is attached to the order.</span>
 </div>
 </div>
 <hr>
@@ -3378,7 +3409,30 @@
  <li><a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_CANCELLED_DetailAnchor">ORDER_STATUS_CANCELLED</a></li>
  <li><a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_FAILED_DetailAnchor">ORDER_STATUS_FAILED</a></li>
  <li><a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_REPLACED_DetailAnchor">ORDER_STATUS_REPLACED</a></li>
- </ul></div>
+ </ul>
+ <p>
+ The order status usually changes when a process action is initiated. Most status changes have an action which
+ needs to executed in order to end having the order in a specific order status. When an order is created with e.g.
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a> the order status will be <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_CREATED_DetailAnchor">ORDER_STATUS_CREATED</a>. The usual
+ flow is that payment authorization will be added to the order. Once the order is considered as valid (payed,
+ fraud checked, ...) the order gets placed. This can be done by calling
+ <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_placeOrder_Order_DetailAnchor">OrderMgr.placeOrder(Order)</a>. The result of placing an order will be status
+ <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_OPEN_DetailAnchor">ORDER_STATUS_OPEN</a> (from a process standpoint <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_NEW_DetailAnchor">ORDER_STATUS_NEW</a> which has the same meaning).
+ Status <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_REPLACED_DetailAnchor">ORDER_STATUS_REPLACED</a> is related to functionality
+ <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_createBasketFromOrder_Order_DetailAnchor">BasketMgr.createBasketFromOrder(Order)</a>. <a href="class_dw_order_Order.html#dw_order_Order_ORDER_STATUS_COMPLETED_DetailAnchor">ORDER_STATUS_COMPLETED</a> has no meaning by
+ default but can be used by custom implementations but is a synonym for NEW/OPEN. Below you will find the most important status changes:
+ </p>
+
+ <table>
+ <tr><th>Status before</th><th>Action</th><th>Status after</th><th>Business meaning</th></tr>
+ <tr><td>-</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a></td><td>CREATED</td><td>Order was created from a basket.</td></tr>
+ <tr><td>CREATED</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_placeOrder_Order_DetailAnchor">OrderMgr.placeOrder(Order)</a></td><td>OPEN/NEW</td><td>Order was considered as valid. Order can now be exported to 3rd party systems.</td></tr>
+ <tr><td>CREATED</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_failOrder_Order_DetailAnchor">OrderMgr.failOrder(Order)</a></td><td>FAILED</td><td>Order was considered not valid. E.g. payment authorization was wrong or fraud check was not successful.</td></tr>
+ <tr><td>OPEN/NEW</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_cancelOrder_Order_DetailAnchor">OrderMgr.cancelOrder(Order)</a></td><td>CANCELLED</td><td>Order was cancelled.</td></tr>
+ <tr><td>CANCELLED</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_undoCancelOrder_Order_DetailAnchor">OrderMgr.undoCancelOrder(Order)</a></td><td>OPEN/NEW</td><td>Order was cancelled by mistake and this needs to be undone.</td></tr>
+ <tr><td>FAILED</td><td><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_undoFailOrder_Order_DetailAnchor">OrderMgr.undoFailOrder(Order)</a></td><td>CREATED</td><td>Order was failed by mistake and this needs to be undone.</td></tr>
+ </table>
+ <p>Every status change will trigger a change in the order journal which is the base for GMV calculations.</p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -3751,20 +3805,30 @@
 						">setInvoiceNo</div>
 <div class="detailSignature
 	    				">
-<span class="emphasis">setInvoiceNo</span>(aValue
+<span class="emphasis">setInvoiceNo</span>(invoiceNumber
 								 : 
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets the invoice number for this Order.</div>
+<div class="description">Sets the invoice number for this Order.
+ <p>
+ Notice that this value might be overwritten during order placement (e.g. with <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_placeOrder_Order_DetailAnchor">OrderMgr.placeOrder(Order)</a>).
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
-<span class="parameterName">aValue</span>
+<span class="parameterName">invoiceNumber</span>
 						 - 
 						<span class="parameterDesc">the invoice number for this Order.</span>
 </div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_order_Order.html#dw_order_Order_getInvoiceNo_DetailAnchor">getInvoiceNo()</a></span>
+</div>
+<div class="parameterDetail"></div>
 </div>
 <hr>
 </div>
@@ -4005,7 +4069,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.4<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.6<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

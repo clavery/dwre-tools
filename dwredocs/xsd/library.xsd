@@ -101,7 +101,7 @@
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="data" type="sharedType.LocalizedString" minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="data" type="sharedType.LocalizedText" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation>
                         The data only be set for components (see contentassetcomponentdata.json).

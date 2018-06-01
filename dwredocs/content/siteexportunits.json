@@ -1,0 +1,227 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "boolSelection": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "\\*"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/onlyTrue"
+          }
+        }
+      ]
+    },
+    "onlyTrue": {
+      "type": "boolean",
+      "enum": [
+        true
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "Sites": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "\\*"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "\\*"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "AB Tests": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Active Data Feeds": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Cache Settings": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Campaigns and Promotions": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Content": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Coupons": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Customer CDN Settings": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Customer Groups": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Custom Objects": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Dynamic File Resources": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Distributed Commerce Extensions": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "OCAPI Settings": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Payment Methods": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Payment Processors": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Redirect URLs": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Search Settings": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Shipping": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Site Descriptor": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Site Preferences": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Site URLs": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Sitemap Settings": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Slots": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Sorting Rules": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Source Codes": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Stores": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "Tax": {
+                    "$ref": "#/definitions/onlyTrue"
+                  },
+                  "URL Rules": {
+                    "$ref": "#/definitions/onlyTrue"
+                  }
+                },
+                "additionalProperties": false
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "Libraries": {
+      "$ref": "#/definitions/boolSelection"
+    },
+    "Library Static Resources": {
+      "$ref": "#/definitions/boolSelection"
+    },
+    "Catalogs": {
+      "$ref": "#/definitions/boolSelection"
+    },
+    "Catalog Static Resources": {
+      "$ref": "#/definitions/boolSelection"
+    },
+    "Price Books": {
+      "$ref": "#/definitions/boolSelection"
+    },
+    "Inventory Lists": {
+      "$ref": "#/definitions/boolSelection"
+    },
+    "Customer Lists": {
+      "$ref": "#/definitions/boolSelection"
+    },
+    "Global Data": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "\\*"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Locales": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Preferences": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Global Custom Objects": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Job Schedules": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Job Schedules (deprecated)": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Meta Data": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Static Resources": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Users": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Access Roles": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Geolocations": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Custom Quota Settings": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "OAuth Providers": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "OCAPI Settings": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "WebDAV Client Permissions": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Services": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "CSC Settings": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Page Meta Tags": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "Price Adjustment Limits": {
+              "$ref": "#/definitions/onlyTrue"
+            },
+            "CSRF Whitelists": {
+              "$ref": "#/definitions/onlyTrue"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

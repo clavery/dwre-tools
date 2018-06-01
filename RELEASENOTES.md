@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.10.1
+
+- 18.6 schema updates; docset update
+
 ## 1.10.0
 
 - adds `pw refresh` command to refresh all credentials or report login errors
