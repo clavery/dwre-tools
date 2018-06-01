@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.10.2
+
+- support `dw.json` files if present; falling back to `~/.dwre.json`
+
 ## 1.10.1
 
 - 18.6 schema updates; docset update

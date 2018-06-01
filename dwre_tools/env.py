@@ -5,6 +5,20 @@ import os
 import sys
 
 
+def get_env_from_dw_json():
+    dw_json_file = os.path.join(os.curdir, 'dw.json')
+    if os.path.exists(dw_json_file):
+        with open(dw_json_file) as f:
+            j = json.load(f)
+            return {
+                "server": j.get("hostname"),
+                "username": j.get("username"),
+                "password": j.get("password"),
+                "codeVersion": j.get("code-version"),
+            }
+    return None
+
+
 def load_config():
     home = os.path.expanduser("~")
     if os.path.exists(os.path.join(home, ".dwre.json.gpg")):

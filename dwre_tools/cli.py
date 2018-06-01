@@ -5,7 +5,8 @@ from argparse import ArgumentParser
 import sys
 import getpass
 import os
-from .env import get_project, get_environment, get_default_environment, get_default_project
+from .env import (get_project, get_environment, get_default_environment,
+                  get_default_project, get_env_from_dw_json)
 from .tail import tail_logs
 from .validations import validate_command
 from .migrate import (add_migration, apply_migrations, validate_migrations, reset_migrations,
@@ -28,25 +29,30 @@ def version():
 
 
 def get_env_from_args(args):
-    if not args.server:
-        if not args.project:
-            (project_name, project) = get_default_project()
-            args.project = project_name
-        else:
-            project = get_project(args.project)
+    if not args.server and not args.project and not args.env:
+        # check for dw.json
+        env = get_env_from_dw_json()
 
-        if not args.env:
-            (env_name, env) = get_default_environment(project)
-            args.env = env_name
+    if env is None:
+        if not args.server:
+            if not args.project:
+                (project_name, project) = get_default_project()
+                args.project = project_name
+            else:
+                project = get_project(args.project)
+
+            if not args.env:
+                (env_name, env) = get_default_environment(project)
+                args.env = env_name
+            else:
+                env = get_environment(args.env, project)
         else:
-            env = get_environment(args.env, project)
-    else:
-        assert args.username, "Must specify a username"
-        env = {
-            "server": args.server,
-            "username": args.username,
-            "password": args.password
-        }
+            assert args.username, "Must specify a username"
+            env = {
+                "server": args.server,
+                "username": args.username,
+                "password": args.password
+            }
 
     if args.clientcert:
         assert args.clientkey, "must specify a private key with certificate"
