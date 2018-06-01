@@ -1,6 +1,14 @@
 
 # Release Notes
 
+## 1.11.0
+
+- deprecating python3
+
+## 1.10.3
+
+- fixes issue with python2
+
 ## 1.10.2
 
 - support `dw.json` files if present; falling back to `~/.dwre.json`

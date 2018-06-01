@@ -13,7 +13,7 @@ test_requires = get_requirements('test')
 dev_requires = get_requirements('dev')
 setup(
     name='dwre-tools',
-    version='1.10.3',
+    version='1.11.0',
     description='SFCC (Demandware) tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',
@@ -24,6 +24,7 @@ setup(
     tests_require=test_requires,
     setup_requires=['pytest-runner'],
     install_requires=install_requires,
+    python_requires='>=3.6',
     extras_require={
         'test': test_requires,
         'dev': test_requires + dev_requires
