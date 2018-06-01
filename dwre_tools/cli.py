@@ -29,6 +29,7 @@ def version():
 
 
 def get_env_from_args(args):
+    env = None
     if not args.server and not args.project and not args.env:
         # check for dw.json
         env = get_env_from_dw_json()
