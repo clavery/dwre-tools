@@ -3,7 +3,7 @@
 
 ## 1.11.0
 
-- deprecating python3
+- deprecating python2
 
 ## 1.10.3
 
