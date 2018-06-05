@@ -16,7 +16,7 @@ Install the PixelMEDIA Homebrew Tap if not already installed
 ```
 $ brew tap pixelmedia/pxl-homebrew git@bitbucket.org:pixelmedia/pxl-homebrew.git
 # or for https:
-$ brew tap pixelmedia/pxl-homebrew git@bitbucket.org:pixelmedia/pxl-homebrew.git
+$ brew tap pixelmedia/pxl-homebrew https://bitbucket.org/pixelmedia/pxl-homebrew.git
 ```
 
 Install dwre-tools:
