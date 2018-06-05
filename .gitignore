@@ -6,3 +6,4 @@ env/
 .cache/
 .tox/
 .test-results/
+*.pyc
