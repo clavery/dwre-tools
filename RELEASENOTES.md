@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.11.1
+
+- deprecating `update` command; Use Pixel Homebrew tap or manually install using python dependency management of choice
+
 ## 1.11.0
 
 - deprecating python2

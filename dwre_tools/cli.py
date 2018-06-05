@@ -155,15 +155,7 @@ def which(program):
 
 
 def update_cmd_handler(args):
-    pip = which("pip3")
-    if pip is None:
-        pip = which("pip")
-    if pip is not None:
-        print("Using pip installed at: %s" % pip)
-        os.system("%s install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip" % pip)
-    else:
-        raise RuntimeError("Unable to determine correct pip install; upgrade manually")
-
+    print("Error: No longer supporting self update; Use Homebrew or manually update")
 
 
 def debug_cmd_handler(args):
