@@ -9,7 +9,25 @@ Various tools for use with Demandware instances. Written in python
 
 ## Installation
 
-### Easy Method
+### Homebrew (Easy Method)
+
+Install the PixelMEDIA Homebrew Tap if not already installed
+
+```
+$ brew tap pixelmedia/pxl-homebrew git@bitbucket.org:pixelmedia/pxl-homebrew.git
+# or for https:
+$ brew tap pixelmedia/pxl-homebrew git@bitbucket.org:pixelmedia/pxl-homebrew.git
+```
+
+Install dwre-tools:
+
+```
+brew install dwre-tools
+```
+
+Later you can `brew update` and `brew upgrade dwre-tools` to get newer versions
+
+### Manual Method
 
 Copy this command into your terminal (must have a suitable version of python: see [Windows Notes](#Windows_Notes) blow):
 
