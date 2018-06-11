@@ -19,6 +19,8 @@ from .debugger import debug_command
 from .cartridge import upgrade_bm_cartridge
 from .cred import get_credential, get_credential_info, put_credential, list_credentials
 from .pw import pw_list, pw_get, pw_put, pw_refresh
+from .zip import zip_command
+from .watch import watch_command
 
 from colorama import init, deinit
 
@@ -65,6 +67,9 @@ def get_env_from_args(args):
     else:
         env["cert"] = None
 
+    if args.codeversion:
+        env['codeVersion'] = args.codeversion
+
     if "verify" not in env:
         env["verify"] = not args.noverify
 
@@ -80,7 +85,7 @@ def list_cmd_handler(args):
 
 def sync_cmd_handler(args):
     env = get_env_from_args(args)
-    sync_command(env, args.delete)
+    sync_command(env, args.delete, args.location)
 
 
 def migrate_cmd_handler(args):
@@ -136,24 +141,6 @@ def tail_cmd_handler(args):
     tail_logs(env, logfilters, args.i)
 
 
-def which(program):
-    import os
-    def is_exe(fpath):
-        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
-
-    fpath, fname = os.path.split(program)
-    if fpath:
-        if is_exe(program):
-            return program
-    else:
-        for path in os.environ["PATH"].split(os.pathsep):
-            exe_file = os.path.join(path, program)
-            if is_exe(exe_file):
-                return exe_file
-
-    return None
-
-
 def update_cmd_handler(args):
     print("Error: No longer supporting self update; Use Homebrew or manually update")
 
@@ -198,6 +185,15 @@ def pw_cmd_handler(args):
         pw_put(args.account, password)
 
 
+def zip_cmd_handler(args):
+    zip_command(args.filename, args.directory)
+
+
+def watch_cmd_handler(args):
+    env = get_env_from_args(args)
+    watch_command(env, args.directory)
+
+
 parser = ArgumentParser(description="Demandware/SFCC Tools")
 parser.add_argument('-p', '--project', help="DWRE Project Name")
 parser.add_argument('-e', '--env', help="DWRE Environment Name")
@@ -207,6 +203,7 @@ parser.add_argument('--password', help="DWRE server password; overrides env sett
 parser.add_argument('--clientcert', help="SSL Client certificate")
 parser.add_argument('--clientkey', help="SSL Client private key")
 parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
+parser.add_argument('--codeversion', help="Code version override")
 
 version_str = version()
 parser.add_argument('--version', action='version', version=version_str)
@@ -273,6 +270,7 @@ update_cmd.set_defaults(func=update_cmd_handler)
 sync_cmd = cmd_parser.add_parser('sync', help="Sync cartridges from current directory")
 sync_cmd.set_defaults(func=sync_cmd_handler)
 sync_cmd.add_argument('-d', '--delete', dest="delete", help="delete code version first", action="store_true")
+sync_cmd.add_argument('location', metavar='directory or zip file with cartridges', nargs='?')
 
 debug_cmd = cmd_parser.add_parser('debug', help="Begin an interactive debugging session")
 debug_cmd.set_defaults(func=debug_cmd_handler)
@@ -316,6 +314,17 @@ pw_put_cmd = pw_parser.add_parser("put", help="put account (project-env)")
 pw_put_cmd.add_argument('account', help="[project]-[env]")
 pw_put_cmd.add_argument('password', help="new password", nargs='?')
 pw_refresh_cmd = pw_parser.add_parser("refresh", help="login to all accounts in dwre.json")
+
+zip_cmd = cmd_parser.add_parser('zip', help="zip cartridges from directory")
+zip_cmd.set_defaults(func=zip_cmd_handler)
+zip_cmd.add_argument('filename', help="destination filename")
+zip_cmd.add_argument('directory', help="cartridges dir (default current)", nargs='?')
+
+
+watch_cmd = cmd_parser.add_parser('watch', help="watch cartridges from directory and upload to env")
+watch_cmd.set_defaults(func=watch_cmd_handler)
+watch_cmd.add_argument('directory', help="cartridges dir (default current)", nargs='?')
+
 
 def main():
     import os

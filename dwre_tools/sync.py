@@ -42,17 +42,26 @@ def collect_cartridges(directory, cartridges=None):
     return cartridges
 
 
-def sync_command(env, delete_code_version, cartridge_location="."):
-    cartridges = collect_cartridges(cartridge_location)
+def sync_command(env, delete_code_version, cartridge_location):
+    if cartridge_location is None:
+        cartridge_location = '.'
 
     webdavsession = requests.session()
     webdavsession.verify = env["verify"]
     webdavsession.auth=(env["username"], env["password"],)
     webdavsession.cert = env["cert"]
-
     code_version = env["codeVersion"]
 
-    zip_file = cartridges_to_zip(cartridges, code_version)
+    if os.path.isfile(cartridge_location):
+        # zip file instead of dir
+        with tempfile.TemporaryDirectory() as tempdir:
+            with zipfile.ZipFile(cartridge_location, 'r') as stored_zip:
+                stored_zip.extractall(path=tempdir)
+            cartridges = collect_cartridges(tempdir)
+            zip_file = cartridges_to_zip(cartridges, code_version)
+    else:
+        cartridges = collect_cartridges(cartridge_location)
+        zip_file = cartridges_to_zip(cartridges, code_version)
 
     if delete_code_version:
         print("Deleting code version...")
@@ -65,14 +74,14 @@ def sync_command(env, delete_code_version, cartridge_location="."):
     response.raise_for_status()
 
     print("Extracting...")
-    data = {"method" : "UNZIP"}
+    data = {"method": "UNZIP"}
     response = webdavsession.post(dest_url, data=data)
     response.raise_for_status()
 
     response = webdavsession.delete(dest_url)
     response.raise_for_status()
 
-    print("{0}Successfully synced cartridges with {1}{2}".format(Fore.GREEN, env["server"], Fore.RESET))
+    print(f"{Fore.GREEN}Successfully synced cartridges with {env['server']}{Fore.RESET}")
 
     if delete_code_version:
         print("Reactivating code version...")

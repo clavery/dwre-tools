@@ -1,6 +1,14 @@
 
 # Release Notes
 
+## 1.12.0
+
+- adds global `--codeversion` argument to support specification of code version on cli
+- adds `zip` command for collecting and zipping cartridges in given path
+- sync now supports zip files in addition to directories (still defaults to current dir)
+- cleans up some code and further removes deprecated update functionality
+- adds `watch` subcommend to replicate watch and upload functionality usually done by nodejs based scripts
+
 ## 1.11.1
 
 - deprecating `update` command; Use Pixel Homebrew tap or manually install using python dependency management of choice

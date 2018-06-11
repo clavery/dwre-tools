@@ -12,3 +12,4 @@ wcwidth == 0.1.7
 six >= 1.10.0
 boto3 >= 1.4.7
 python-gnupg
+watchdog==0.8.3
