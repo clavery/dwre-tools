@@ -37,7 +37,6 @@ class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
         if not queue:
             return
 
-        # TODO: zip instead of upload for performance and dirs
         zip_file_io = io.BytesIO()
         zip_file = zipfile.ZipFile(zip_file_io, "w", zipfile.ZIP_DEFLATED)
         for file in queue:
