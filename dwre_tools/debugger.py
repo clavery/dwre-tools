@@ -1,98 +1,232 @@
-from __future__ import unicode_literals
-from __future__ import print_function
-
+import os.path
 import re
 import time
-from threading import Timer, Thread
-import os.path
-
-from terminaltables import AsciiTable
-from pygments import highlight
-from pygments.lexers import JavascriptLexer
-from pygments.formatters import TerminalFormatter
-from prompt_toolkit import prompt
-from prompt_toolkit.history import InMemoryHistory, FileHistory
-from prompt_toolkit.contrib.completers import WordCompleter
-from prompt_toolkit.completion import Completer, Completion
-from prompt_toolkit.application import Application
-from prompt_toolkit.buffer import Buffer
-from prompt_toolkit.interface import CommandLineInterface
-from prompt_toolkit.key_binding.manager import KeyBindingManager
-from prompt_toolkit.shortcuts import create_prompt_application, create_eventloop, create_prompt_layout
-from prompt_toolkit.styles import style_from_dict
-from prompt_toolkit.token import Token
+import json
+from threading import Thread, Timer
+from typing import Dict, List, Optional
 
 import requests
-from dwre_tools.env import get_default_environment, get_default_project
-from dwre_tools.sync import collect_cartridges, sync_command
+from prompt_toolkit.completion import Completer, Completion
+from prompt_toolkit.formatted_text import HTML, to_formatted_text
+from prompt_toolkit.history import FileHistory
+from prompt_toolkit.shortcuts import PromptSession
+from pygments import highlight
+from pygments.formatters import TerminalFormatter
+from pygments.lexers import JavascriptLexer
+from terminaltables import AsciiTable
 
+from dwre_tools.sync import collect_cartridges
 
-CARTRIDGES = {}
+from .vim import vim_call
+
 CLIENT_ID = "dwre-tools"
 
-CURRENT_THREAD = None
-THREADS = []
-WATCH_VAR = None
-WATCH_VAL = None
+
+class DebugContext():
+    def __init__(self,
+                 server: str,
+                 username: str,
+                 password: str,
+                 breakpoints: List[Dict]):
+        """Initialize a DWRE debugging session
+
+        @param breakpoints: dictionary of breakpoints {line_number:.., script_path:...}
+        """
+        self._current_thread = None
+        self._threads_state = None
+        self._threads = []
+        self.state_change_listeners = []
+        # future
+        self._watches = []
+        self.base_url = f"https://{server}/s/-/dw/debugger/v2_0"
+
+        auth = username, password
+        headers = {
+            "x-dw-client-id": CLIENT_ID
+        }
+
+        self.session = requests.session()
+        self.session.auth = auth
+        self.session.headers.update(headers)
+        resp = self.session.delete(f"{self.base_url}/client")
+        resp.raise_for_status()
+        resp = self.session.post(f"{self.base_url}/client")
+        resp.raise_for_status()
+
+        resp = self.session.delete(f"{self.base_url}/breakpoints")
+        if breakpoints:
+            resp = self.session.post(f"{self.base_url}/breakpoints", json={
+                "breakpoints": breakpoints
+            })
+            resp.raise_for_status()
+
+        self.t = None
+        def keepalive():
+            self.session.post(f"{self.base_url}/threads/reset")
+            self.t = Timer(15, keepalive)
+            self.t.daemon = True
+            self.t.start()
+        keepalive()
+
+        def check_for_threads():
+            while True:
+                resp = self.session.get(f"{self.base_url}/threads")
+                threads = resp.json().get("script_threads")
+                if threads and any([t.get('status') != 'running' for t in threads]):
+                    self._threads = threads
+                    threads_json = json.dumps(threads)
+                    if threads_json != self._threads_state:
+                        for l in self.state_change_listeners:
+                            l(self)
+                    self._threads_state = threads_json
+                else:
+                    if self._threads:
+                        for l in self.state_change_listeners:
+                            l(self)
+                    self._threads = []
+                    self._threads_state = None
+                time.sleep(0.250)
+
+        self.thread_check_thread = Thread(target=check_for_threads)
+        self.thread_check_thread.daemon = True
+        self.thread_check_thread.start()
+
+    @property
+    def current_thread(self):
+        if self._threads:
+            thread = [t for t in self._threads if t.get('status') == 'halted'].pop()
+        return thread
+
+    @property
+    def current_thread_id(self):
+        if self.is_halted():
+            return self.current_thread.get('id')
+
+    @property
+    def breakpoints(self):
+        resp = self.session.get(f"{self.base_url}/breakpoints")
+        resp.raise_for_status()
+        server_bp = resp.json().get('breakpoints')
+        return server_bp
+
+    def add_state_change_listener(self, l):
+        self.state_change_listeners.append(l)
+
+    @property
+    def threads(self):
+        return self._threads
+
+    def is_running(self):
+        return (not self._threads or
+                not any([t.get('status') != 'running' for t in self._threads]))
+
+    def is_halted(self):
+        return not self.is_running()
+
+    def get_current_location(self, frame=0):
+        """Returns tuple of script, line_number, function_name or None"""
+        if self.is_halted():
+            thread = self.current_thread
+            frame = thread['call_stack'][frame]
+            loc = frame['location']
+            script = loc['script_path']
+            return (script, loc['line_number'], loc['function_name'])
+
+    def disconnect(self):
+        resp = self.session.delete(f"{self.base_url}/client")
+        resp.raise_for_status()
+
+    def eval(self, expr, frame=0):
+        if self.is_halted():
+            resp = self.session.get(f"{self.base_url}/threads/{self.current_thread_id}/" +
+                                    f"frames/{frame}/eval",
+                                    params={"expr": expr})
+            resp.raise_for_status()
+            return resp.json().get('result')
+
+    def continue_(self):
+        if self.is_halted():
+            resp = self.session.post(f"{self.base_url}/threads/{self.current_thread_id}/resume")
+            resp.raise_for_status()
+
+    def next(self):
+        if self.is_halted():
+            resp = self.session.post(f"{self.base_url}/threads/{self.current_thread_id}/over")
+            resp.raise_for_status()
+
+    def into(self):
+        if self.is_halted():
+            resp = self.session.post(f"{self.base_url}/threads/{self.current_thread_id}/into")
+            resp.raise_for_status()
+
+    def out(self):
+        if self.is_halted():
+            resp = self.session.post(f"{self.base_url}/threads/{self.current_thread_id}/out")
+            resp.raise_for_status()
+
+    def get_object_members(self, frame=0, object_path=None):
+        if self.is_halted():
+            if object_path:
+                resp = self.session.get(f"{self.base_url}/threads/{self.current_thread_id}/" +
+                                        f"frames/{frame}/members",
+                                        params={"object_path": object_path})
+            else:
+                resp = self.session.get(f"{self.base_url}/threads/{self.current_thread_id}/" +
+                                        f"frames/{frame}/members")
+
+            resp.raise_for_status()
+
+            members = resp.json().get('object_members')
+            return members
+
+    def get_variables(self, frame=0):
+        if self.is_halted():
+            resp = self.session.get(f"{self.base_url}/threads/{self.current_thread_id}/" +
+                                    f"frames/{frame}/variables")
+            resp.raise_for_status()
+            members = resp.json().get('object_members')
+            return members
+
+
 COMPLETE_CACHE = {}
+CURRENT_FRAME = 0
 
-STYLE = style_from_dict({
-    Token.Toolbar: '#ffffff bg:#666666',
-    Token.Watch: '#ff0000 bg:#666666',
-})
+def get_bottom_toolbar(context):
+    global CURRENT_FRAME
+    if context.is_halted():
+        (script, line, function) = context.get_current_location(CURRENT_FRAME)
+        thread_id = context.current_thread.get('id')
+        filename = os.path.basename(script)
+        location = "[%s] %s @ %s:%s" % (CURRENT_FRAME, function, filename, line)
+        return to_formatted_text(HTML('[HALTED] Current Thread: %s   %s' % (thread_id, location)))
 
-
-def get_bottom_toolbar_tokens(cli):
-    tokens = []
-    thread = "Running"
-    if CURRENT_THREAD:
-        thread_id = CURRENT_THREAD
-        thread = [t for t in THREADS if t.get('id') == CURRENT_THREAD].pop()
-        if thread['status'] != 'halted':
-            return [(Token.Toolbar, '[RUNNING]')]
-        frame = thread['call_stack'][0]
-        loc = frame['location']
-        filename = os.path.basename(loc['script_path'])
-        location = "%s @ %s:%s" % (loc['function_name'], filename, loc['line_number'])
-        tokens.append((Token.Toolbar, '[HALTED] Current Thread: %s   %s' % (thread_id, location)))
-
-        if WATCH_VAR:
-            value = WATCH_VAL if WATCH_VAL else ""
-            tokens.append((Token.Watch, '   %s: %s' % (WATCH_VAR, value)))
-        return tokens
-    
-    return [(Token.Toolbar, '[RUNNING]')]
+    return to_formatted_text(HTML('[RUNNING]'))
 
 
-def list_current_code():
-    if not CURRENT_THREAD:
-        return
-    thread_id = CURRENT_THREAD
-    thread = [t for t in THREADS if t.get('id') == CURRENT_THREAD].pop()
-    if thread['status'] != 'halted':
-        return
-    frame = thread['call_stack'][0]
-    loc = frame['location']
-    filename = loc['script_path']
-    line_num = loc['line_number']
-    
-    parts = filename[1:].split('/')
+def script_path_to_real(script, cartridges):
+    parts = script[1:].split('/')
     (cartridge, rest) = parts[0], '/'.join(parts[1:])
 
-    cartridge_path = CARTRIDGES.get(cartridge)
-    
+    cartridge_path = cartridges.get(cartridge)
     if not cartridge_path:
-        print("Cannot find file: " % filename)
         return
+    return os.path.join(cartridge_path, rest)
 
-    real_path = os.path.join(cartridge_path, rest)
+
+def list_current_code(context, cartridges):
+    global CURRENT_FRAME
+    if not context.is_halted():
+        return
+    (filename, line_num, _) = context.get_current_location(CURRENT_FRAME)
+
+    real_path = script_path_to_real(filename, cartridges)
+    if not real_path or not os.path.exists(real_path):
+        print(f"Cannot find file for current frame")
+        return
 
     with open(real_path, 'rb') as f:
         lines = f.readlines()
     lines = [l.decode('utf-8') for l in lines]
-
-    # TODO: this is ugly
-    starting_offset = 11 if line_num > 10 else line_num
 
     code = ''.join(lines)
     result = highlight(code, JavascriptLexer(), TerminalFormatter(bg="dark"))
@@ -109,14 +243,19 @@ def list_current_code():
             print("     %s:" % str(num + 1).zfill(3), line)
 
 
-def print_thread(session):
-    if not CURRENT_THREAD:
+def print_thread(context):
+    global CURRENT_FRAME
+    if not context.is_halted():
         return
-    for thread in THREADS:
+    threads = context.threads
+    for thread in threads:
         print("THREAD %s [%s]" % (thread['id'], thread['status']))
-        for frame in thread['call_stack']:
+        for i, frame in enumerate(thread['call_stack']):
             loc = frame['location']
-            print("\t", "%s @ %s:%s" % (loc['function_name'], loc['script_path'], loc['line_number']))
+            if i == CURRENT_FRAME:
+                print("-->", end='')
+            print("\t", "[%s] %s @ %s:%s" %
+                  (i, loc['function_name'], loc['script_path'], loc['line_number']))
 
 
 def clean_value(val):
@@ -124,45 +263,44 @@ def clean_value(val):
         return val[0:60] + "..."
     return val
 
-def print_members(session, base_url, member, refine=None):
-    if not CURRENT_THREAD:
+
+def print_members(context, member, refine=None):
+    global CURRENT_FRAME
+    if not context.is_halted():
         return
-   
-    if member:
-        resp = session.get(base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD, params={"object_path" : member})
-        resp.raise_for_status()
-    else:
-        resp = session.get(base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD)
-        resp.raise_for_status()
 
-    members = resp.json().get('object_members')
-
+    members = context.get_object_members(frame=CURRENT_FRAME, object_path=member)
     if members:
         table_data = [(m['name'], clean_value(m['value']), m['type']) for m in members 
                       if not m['name'] == 'arguments' and 
                       (not refine or (refine and re.search(refine, m['name'], re.IGNORECASE)))]
         table_data.insert(0, ['Name', 'Value', 'Type'])
         table = AsciiTable(table_data)
-
         print(table.table)
 
 
-def thread_eval(session, base_url, expr):
-    if not CURRENT_THREAD:
+def print_variables(context, refine=None):
+    global CURRENT_FRAME
+    if not context.is_halted():
         return
-    resp = session.get(base_url + "/threads/%s/frames/0/eval" % CURRENT_THREAD, params={"expr" : expr})
-    resp.raise_for_status()
-    print(resp.json().get('result'))
+
+    members = context.get_variables(frame=CURRENT_FRAME)
+    if members:
+        table_data = [(m['name'], clean_value(m['value']), m['type']) for m in members 
+                      if not m['name'] == 'arguments' and 
+                      (not refine or (refine and re.search(refine, m['name'], re.IGNORECASE)))]
+        table_data.insert(0, ['Name', 'Value', 'Type'])
+        table = AsciiTable(table_data)
+        print(table.table)
 
 
 class MemberCompleter(Completer):
-    def __init__(self, session, base_url):
-        self.session = session
-        self.base_url = base_url
+    def __init__(self, context):
+        self.context = context
 
     def get_completions(self, document, complete_event):
-        global COMPLETE_CACHE
-        if not CURRENT_THREAD:
+        global COMPLETE_CACHE, CURRENT_FRAME
+        if not self.context.is_halted():
             return
 
         doc = document.text.replace("p ", "").replace("print ", "")
@@ -171,27 +309,23 @@ class MemberCompleter(Completer):
         if member in COMPLETE_CACHE:
             members = COMPLETE_CACHE.get(member)
         else:
-            if member:
-                resp = self.session.get(self.base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD, params={"object_path" : member})
-            else:
-                resp = self.session.get(self.base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD)
-
-            if resp.status_code >= 300:
-                return
-            members = resp.json().get('object_members')
+            members = self.context.get_object_members(frame=CURRENT_FRAME, object_path=member)
             COMPLETE_CACHE[member] = members
 
         tomatch = doc.split('.')[-1]
-        matched_members = [m for m in members if m["name"].startswith(tomatch)]
-        for m in matched_members:
-            yield Completion(m["name"], start_position=-len(tomatch))
+        if members:
+            matched_members = [m for m in members if m["name"].startswith(tomatch)]
+            for m in matched_members:
+                yield Completion(m["name"], start_position=-len(tomatch))
 
 
-def debug_command(env, breakpoint_locations=None):
-    global CARTRIDGES, WATCH_VAR, WATCH_VAL, COMPLETE_CACHE
+def debug_command(env,
+                  breakpoint_locations: Optional[Dict[str, str]] = None,
+                  vim: bool = False,
+                  verbose: bool = False):
+    global CURRENT_FRAME
     cartridges = collect_cartridges(".")
-    CARTRIDGES = {name:path for path, name in cartridges}
-    cartridge_paths = {path:name for path, name in cartridges}
+    cartridges = {name: path for path, name in cartridges}
 
     breakpoints = []
     if breakpoint_locations:
@@ -200,103 +334,69 @@ def debug_command(env, breakpoint_locations=None):
             abs_location = os.path.abspath(path)
             script_path = None
 
-            for name, path in CARTRIDGES.items():
+            for name, path in cartridges.items():
                 abs_cart_path = os.path.abspath(path)
                 common_prefix = os.path.commonprefix([abs_cart_path, abs_location])
                 if os.path.basename(common_prefix) == name:
                     # cartridge match
                     script_path = "/%s%s" % (name, abs_location[len(common_prefix):])
                     breakpoints.append({
-                        "line_number" : int(line),
-                        "script_path" : script_path
+                        "line_number": int(line),
+                        "script_path": script_path
                     })
             if script_path is None:
                 print("Cannot find cartridge code for " + location)
 
-    base_url = "https://{0}/s/-/dw/debugger/v1_0".format(env['server'])
+    debug_context = DebugContext(env['server'], env['username'], env['password'], breakpoints)
 
-    auth = env['username'], env['password']
-    headers = {
-        "x-dw-client-id" : CLIENT_ID
-    }
-
-    session = requests.session()
-    session.auth = auth
-    session.headers.update(headers)
-
-    resp = session.delete(base_url + "/client")
-    resp.raise_for_status()
-    resp = session.post(base_url + "/client")
-    resp.raise_for_status()
-
-    resp = session.delete(base_url + "/breakpoints")
-    if breakpoints:
-        resp = session.post(base_url + "/breakpoints", json={
-            "breakpoints" : breakpoints
-        })
-        resp.raise_for_status()
-
-    manager = KeyBindingManager(enable_abort_and_exit_bindings=True)
     history = FileHistory(os.path.expanduser("~/.dwredebughist"))
+    completer = MemberCompleter(debug_context)
+    cli = PromptSession(message="> ", bottom_toolbar=lambda: get_bottom_toolbar(debug_context),
+                        history=history, completer=completer, complete_in_thread=True,
+                        complete_while_typing=False)
 
-    
-    completer = MemberCompleter(session, base_url)
-    app = create_prompt_application(message="> ", get_bottom_toolbar_tokens=get_bottom_toolbar_tokens,
-                                    style=STYLE, history=history, completer=completer, complete_while_typing=False)
-    cli = CommandLineInterface(application=app, eventloop=create_eventloop())
-
-    t = None
-    def keepalive():
-        resp = session.post(base_url + "/threads/reset")
-        t = Timer(15, keepalive)
-        t.daemon = True
-        t.start()
-    keepalive()
-
-    def check_for_threads():
-        global CURRENT_THREAD, THREADS, WATCH_VAR, WATCH_VAL, COMPLETE_CACHE
-        while True:
-            resp = session.get(base_url + "/threads")
-            threads = resp.json().get("script_threads")
-            if threads:
-                CURRENT_THREAD = threads[0].get("id")
-                THREADS = threads
-                if WATCH_VAR:
-                    resp = session.get(base_url + "/threads/%s/frames/0/members" % CURRENT_THREAD, params={"object_path" : WATCH_VAR})
-                    members = resp.json().get('object_members') 
-                    if members:
-                        WATCH_VAL = members[0]["value"]
+    if vim:
+        def update_vim(context):
+            global CURRENT_FRAME
+            if context.is_halted():
+                (script, line, _) = debug_context.get_current_location(CURRENT_FRAME)
+                filename = script_path_to_real(script, cartridges)
+                vim_call('Tapi_Dwre_Update_Location', filename, line)
             else:
-                COMPLETE_CACHE = {}
-                CURRENT_THREAD = None
-                WATCH_VAL = None
-                THREADS = []
-            cli.request_redraw()
-            time.sleep(1)
+                vim_call('Tapi_Dwre_Update_Location', None, None)
+        debug_context.add_state_change_listener(update_vim)
 
-    thread_check_thread = Thread(target=check_for_threads)
-    thread_check_thread.daemon = True
-    thread_check_thread.start()
+    debug_context.add_state_change_listener(lambda x: cli.app.invalidate())
 
-    print("Connected to {} [version: {}], starting interactive session...".format(env["server"], env["codeVersion"]))
-    
-    resp = session.get(base_url + "/breakpoints")
-    server_bp = resp.json().get('breakpoints')
+    CURRENT_FRAME = 0
+
+    def update_frame(num):
+        global CURRENT_FRAME
+        CURRENT_FRAME = num
+    debug_context.add_state_change_listener(lambda x: update_frame(0))
+
+    print(f'Connected to {env["server"]} [version: {env["codeVersion"]}]' +
+          'starting interactive session...')
+
+    server_bp = debug_context.breakpoints
     if server_bp:
         for bp in server_bp:
             print("BREAKPOINT %s:%s" % (bp['script_path'], bp['line_number']))
 
     while True:
         try:
-            result = cli.run()
-            if not result.text.strip():
+            result = cli.prompt()
+            if not result.strip():
                 continue
-            cmd = result.text.split(' ')[0]
-            rest = result.text.split(' ')[1:]
+            cmd = result.split(' ')[0]
+            rest = result.split(' ')[1:]
             if cmd in ['exit']:
-                resp = session.delete(base_url + "/client")
-                resp.raise_for_status()
                 return
+            elif cmd in ['variables', 'v']:
+                refine = None
+                if rest:
+                    refine = rest[0]
+                print_variables(debug_context, refine)
             elif cmd in ['print', 'p']:
                 var = None
                 refine = None
@@ -304,42 +404,35 @@ def debug_command(env, breakpoint_locations=None):
                     var = rest[0]
                 if len(rest) > 1:
                     refine = rest[1]
-                print_members(session, base_url, var, refine)
+                print_members(debug_context, var, refine)
             elif cmd in ['stack', 's']:
-                print_thread(session)
+                print_thread(debug_context)
             elif cmd in ['watch']:
-                if rest:
-                    WATCH_VAR = rest[0]
-                    WATCH_VAL = None
+                print("Command Not Available")
             elif cmd in ['continue', 'c']:
-                COMPLETE_CACHE = {}
-                if CURRENT_THREAD:
-                    resp = session.post(base_url + "/threads/%s/resume" % CURRENT_THREAD)
+                debug_context.continue_()
             elif cmd in ['into', 'i']:
-                COMPLETE_CACHE = {}
-                if CURRENT_THREAD:
-                    resp = session.post(base_url + "/threads/%s/into" % CURRENT_THREAD)
+                debug_context.into()
             elif cmd in ['out', 'o']:
-                COMPLETE_CACHE = {}
-                if CURRENT_THREAD:
-                    resp = session.post(base_url + "/threads/%s/out" % CURRENT_THREAD)
+                debug_context.out()
             elif cmd in ['next', 'n']:
-                COMPLETE_CACHE = {}
-                if CURRENT_THREAD:
-                    resp = session.post(base_url + "/threads/%s/over" % CURRENT_THREAD)
+                debug_context.next()
             elif cmd in ['list', 'l']:
-                list_current_code()
+                list_current_code(debug_context, cartridges)
+            elif cmd in ['frame', 'f']:
+                if rest:
+                    try:
+                        frame = int(rest[0])
+                    except ValueError:
+                        continue
+                    CURRENT_FRAME = frame
             elif cmd in ['eval', 'e']:
-                thread_eval(session, base_url, ' '.join(rest))
+                print(debug_context.eval(' '.join(rest), frame=CURRENT_FRAME))
             else:
-                thread_eval(session, base_url, result.text)
-                
+                print(debug_context.eval(result), frame=CURRENT_FRAME)
         except (EOFError, KeyboardInterrupt):
-            resp = session.delete(base_url + "/client")
-            resp.raise_for_status()
+            debug_context.disconnect()
             return
-        except (Exception):
-            resp = session.delete(base_url + "/client")
-            resp.raise_for_status()
+        except Exception:
+            debug_context.disconnect()
             raise
-

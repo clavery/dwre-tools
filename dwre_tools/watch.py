@@ -2,13 +2,13 @@ import os
 import time
 import io
 import zipfile
+import uuid
+from threading import Timer
 
 import requests
-from threading import Timer
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from colorama import Fore, Back
-import uuid
+from colorama import Fore
 
 from .sync import collect_cartridges
 

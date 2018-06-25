@@ -147,7 +147,7 @@ def update_cmd_handler(args):
 
 def debug_cmd_handler(args):
     env = get_env_from_args(args)
-    debug_command(env, args.breakpoints)
+    debug_command(env, args.breakpoints, args.vim, args.verbose)
 
 
 def webdav_cmd_handler(args):
@@ -274,7 +274,11 @@ sync_cmd.add_argument('location', metavar='directory or zip file with cartridges
 
 debug_cmd = cmd_parser.add_parser('debug', help="Begin an interactive debugging session")
 debug_cmd.set_defaults(func=debug_cmd_handler)
-debug_cmd.add_argument('breakpoints', metavar='breakpoint_locations', nargs='+',
+debug_cmd.add_argument('--vim', help="Enable vim integration", action="store_true")
+debug_cmd.add_argument('--verbose', help="Verbose (debugging) output", action="store_true")
+debug_cmd.set_defaults(vim=False)
+debug_cmd.set_defaults(verbose=False)
+debug_cmd.add_argument('breakpoints', metavar='breakpoint_locations', nargs='*',
                     help='path:line_num breakpoints')
 
 webdav_cmd = cmd_parser.add_parser('webdav', help="webdav operations")

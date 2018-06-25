@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.13.0
+
+- refactors and updates `debug` to use v2.0 of script debugger; performance enhancements; some initial service unit tests; etc
+- creates skeleton for external integration (i.e. direct VIM integration)
+
 ## 1.12.0
 
 - adds global `--codeversion` argument to support specification of code version on cli
