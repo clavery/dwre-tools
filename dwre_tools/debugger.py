@@ -429,7 +429,7 @@ def debug_command(env,
             elif cmd in ['eval', 'e']:
                 print(debug_context.eval(' '.join(rest), frame=CURRENT_FRAME))
             else:
-                print(debug_context.eval(result), frame=CURRENT_FRAME)
+                print(debug_context.eval(result, frame=CURRENT_FRAME))
         except (EOFError, KeyboardInterrupt):
             debug_context.disconnect()
             return

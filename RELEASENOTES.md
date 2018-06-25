@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.13.1
+
+- regression from previous release
+
 ## 1.13.0
 
 - refactors and updates `debug` to use v2.0 of script debugger; performance enhancements; some initial service unit tests; etc
