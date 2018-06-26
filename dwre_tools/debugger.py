@@ -419,6 +419,8 @@ def debug_command(env,
                 debug_context.next()
             elif cmd in ['list', 'l']:
                 list_current_code(debug_context, cartridges)
+            elif cmd in ['help']:
+                print(HELP.table)
             elif cmd in ['frame', 'f']:
                 if rest:
                     try:
@@ -436,3 +438,18 @@ def debug_command(env,
         except Exception:
             debug_context.disconnect()
             raise
+
+
+COMMANDS = [
+    ("continue,c", "Continue Execution To end or Next Breakpoint"),
+    ("next,n", "Continue to next statement (jumping over)"),
+    ("into,i", "jump into the next function"),
+    ("out,o", "jump out of the current function/frame"),
+    ("print,p [var] [filter]", "print the current frame members or var members"),
+    ("variables,v", "print all variables in scope"),
+    ("eval,e expr", "evaluate an expression"),
+    ("stack,s", "print current thread stack"),
+    ("frame,f num", "set the current stack frame to num"),
+]
+COMMANDS.insert(0, ['CMD', 'Description'])
+HELP = AsciiTable(COMMANDS)
