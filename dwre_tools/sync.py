@@ -11,6 +11,10 @@ import io
 import zipfile
 import os
 
+from prompt_toolkit.shortcuts.progress_bar.formatters import Progress, create_default_formatters
+from prompt_toolkit.formatted_text import HTML
+import math
+from prompt_toolkit.shortcuts import ProgressBar
 from colorama import Fore, Back, Style
 from .bmtools import login_business_manager, activate_code_version
 
@@ -42,6 +46,38 @@ def collect_cartridges(directory, cartridges=None):
     return cartridges
 
 
+class StreamingIO():
+    def __init__(self, file, chunk=1000):
+        self.file = file
+        self.file.seek(0)
+        self.chunk = chunk
+
+    def __iter__(self):
+        while True:
+            data = self.file.read(self.chunk)
+            if not data:
+                break
+            yield data
+
+
+class FileSizeProgress(Progress):
+    template = '{current:.2f}/{total:.2f}KB'
+
+    def __init__(self, chunk, total):
+        super()
+        self._chunk = chunk
+        self._total = total
+
+    def format(self, progress_bar, progress, width):
+        current = min(progress.current * self._chunk / 1024, self._total / 1024)
+        return self.template.format(
+            current=current,
+            total=self._total / 1024)
+
+    def get_width(self, progress_bar):
+        return 20
+
+
 def sync_command(env, delete_code_version, cartridge_location):
     if cartridge_location is None:
         cartridge_location = '.'
@@ -70,8 +106,14 @@ def sync_command(env, delete_code_version, cartridge_location):
     print("Syncing code version {0}{1}{2} on {0}{3}{2}".format(Fore.YELLOW, code_version, Fore.RESET, env["server"]))
     dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}.zip"
                 .format(env["server"], code_version))
-    response = webdavsession.put(dest_url, data=zip_file)
-    response.raise_for_status()
+    total = zip_file.getbuffer().nbytes
+    progress_format = create_default_formatters()
+    progress_format[6] = FileSizeProgress(4096, total)
+    with ProgressBar(formatters=progress_format) as pb:
+        response = webdavsession.put(dest_url,
+                                     data=pb(StreamingIO(zip_file, chunk=4096),
+                                             total=math.ceil(total/4096)))
+        response.raise_for_status()
 
     print("Extracting...")
     data = {"method": "UNZIP"}

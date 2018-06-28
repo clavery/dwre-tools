@@ -10,6 +10,7 @@ from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.formatted_text import HTML, to_formatted_text
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.shortcuts import PromptSession
+from prompt_toolkit.application import run_in_terminal
 from pygments import highlight
 from pygments.formatters import TerminalFormatter
 from pygments.lexers import JavascriptLexer
@@ -80,10 +81,10 @@ class DebugContext():
                             l(self)
                     self._threads_state = threads_json
                 else:
-                    if self._threads:
+                    self._threads = []
+                    if self._threads_state is not None:
                         for l in self.state_change_listeners:
                             l(self)
-                    self._threads = []
                     self._threads_state = None
                 time.sleep(0.250)
 
@@ -330,6 +331,8 @@ def debug_command(env,
     breakpoints = []
     if breakpoint_locations:
         for location in breakpoint_locations:
+            if not location:
+                continue
             (path, line) = location.split(":")
             abs_location = os.path.abspath(path)
             script_path = None
@@ -361,9 +364,10 @@ def debug_command(env,
             if context.is_halted():
                 (script, line, _) = debug_context.get_current_location(CURRENT_FRAME)
                 filename = script_path_to_real(script, cartridges)
-                vim_call('Tapi_Dwre_Update_Location', filename, line)
+                run_in_terminal(lambda:
+                                vim_call('Tapi_Dwre_Update_Location', filename, line))
             else:
-                vim_call('Tapi_Dwre_Update_Location', None, None)
+                run_in_terminal(lambda: vim_call('Tapi_Dwre_Update_Location', None, None))
         debug_context.add_state_change_listener(update_vim)
 
     debug_context.add_state_change_listener(lambda x: cli.app.invalidate())
@@ -375,8 +379,10 @@ def debug_command(env,
         CURRENT_FRAME = num
     debug_context.add_state_change_listener(lambda x: update_frame(0))
 
-    print(f'Connected to {env["server"]} [version: {env["codeVersion"]}]' +
-          'starting interactive session...')
+    print(f'Connected to {env["server"]} [version: {env["codeVersion"]}]')
+
+    if vim:
+        print("VIM mode enabled")
 
     server_bp = debug_context.breakpoints
     if server_bp:
