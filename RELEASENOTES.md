@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.13.2
+
+- `sync` now has a progress bar
+
 ## 1.13.1
 
 - regression from previous release
