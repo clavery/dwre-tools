@@ -267,6 +267,7 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
 
 
 def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
+    tempdir = None
     if os.path.isfile(migrations_dir):
         tempdir = tempfile.TemporaryDirectory()
         with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
@@ -548,6 +549,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
 
 
 def run_all(env, migrations_dir, test=False):
+    tempdir = None
     if os.path.isfile(migrations_dir):
         tempdir = tempfile.TemporaryDirectory()
         with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
@@ -665,6 +667,7 @@ def run_migration(env, directory, name=None):
 
 
 def reset_migrations(env, migrations_dir, test=False):
+    tempdir = None
     if os.path.isfile(migrations_dir):
         tempdir = tempfile.TemporaryDirectory()
         with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
@@ -704,6 +707,7 @@ def reset_migrations(env, migrations_dir, test=False):
 
 
 def validate_migrations(migrations_dir):
+    tempdir = None
     if os.path.isfile(migrations_dir):
         tempdir = tempfile.TemporaryDirectory()
         with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
@@ -744,6 +748,7 @@ def validate_migrations(migrations_dir):
 
 
 def set_migration(env, migrations_dir, migration_name):
+    tempdir = None
     if os.path.isfile(migrations_dir):
         tempdir = tempfile.TemporaryDirectory()
         with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
