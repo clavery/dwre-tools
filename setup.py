@@ -24,6 +24,9 @@ setup(
     tests_require=test_requires,
     setup_requires=['pytest-runner'],
     install_requires=install_requires,
+    dependency_links=[
+        'git+https://github.com/yaml/pyyaml.git@0124e4cf9fe0c5814f43592494279edeef67994e#egg=pyyaml-4.2.0'
+    ],
     python_requires='>=3.6',
     extras_require={
         'test': test_requires,
