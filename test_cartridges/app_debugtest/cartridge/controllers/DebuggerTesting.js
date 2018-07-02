@@ -35,7 +35,6 @@ function start() {
 
   var myMap = new dw.util.HashMap();
 
-
   var order = OrderMgr.getOrder(request.httpParameterMap.orderNo.value);
 
   myMap.put("yo", t);

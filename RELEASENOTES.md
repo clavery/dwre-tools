@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.13.3
+
+- bug fixes for beta vim integration
+
+
 ## 1.13.2
 
 - `sync` now has a progress bar

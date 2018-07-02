@@ -36,12 +36,18 @@ class DebugContext():
         self._current_thread = None
         self._threads_state = None
         self._threads = []
+        self.session = None
+        self._breakpoints = breakpoints
         self.state_change_listeners = []
         # future
         self._watches = []
+        self._username = username
+        self._password = password
         self.base_url = f"https://{server}/s/-/dw/debugger/v2_0"
+        self.connect_debugger()
 
-        auth = username, password
+    def connect_debugger(self):
+        auth = self._username, self._password
         headers = {
             "x-dw-client-id": CLIENT_ID
         }
@@ -55,38 +61,44 @@ class DebugContext():
         resp.raise_for_status()
 
         resp = self.session.delete(f"{self.base_url}/breakpoints")
-        if breakpoints:
+        if self._breakpoints:
             resp = self.session.post(f"{self.base_url}/breakpoints", json={
-                "breakpoints": breakpoints
+                "breakpoints": self._breakpoints
             })
             resp.raise_for_status()
 
         self.t = None
         def keepalive():
-            self.session.post(f"{self.base_url}/threads/reset")
-            self.t = Timer(15, keepalive)
-            self.t.daemon = True
-            self.t.start()
+            try:
+                self.session.post(f"{self.base_url}/threads/reset")
+                self.t = Timer(15, keepalive)
+                self.t.daemon = True
+                self.t.start()
+            except requests.RequestException:
+                pass
         keepalive()
 
         def check_for_threads():
-            while True:
-                resp = self.session.get(f"{self.base_url}/threads")
-                threads = resp.json().get("script_threads")
-                if threads and any([t.get('status') != 'running' for t in threads]):
-                    self._threads = threads
-                    threads_json = json.dumps(threads)
-                    if threads_json != self._threads_state:
-                        for l in self.state_change_listeners:
-                            l(self)
-                    self._threads_state = threads_json
-                else:
-                    self._threads = []
-                    if self._threads_state is not None:
-                        for l in self.state_change_listeners:
-                            l(self)
-                    self._threads_state = None
-                time.sleep(0.250)
+            try:
+                while True:
+                    resp = self.session.get(f"{self.base_url}/threads")
+                    threads = resp.json().get("script_threads")
+                    if threads and any([t.get('status') != 'running' for t in threads]):
+                        self._threads = threads
+                        threads_json = json.dumps(threads)
+                        if threads_json != self._threads_state:
+                            for l in self.state_change_listeners:
+                                l(self)
+                        self._threads_state = threads_json
+                    else:
+                        self._threads = []
+                        if self._threads_state is not None:
+                            for l in self.state_change_listeners:
+                                l(self)
+                        self._threads_state = None
+                    time.sleep(0.250)
+            except requests.RequestException:
+                self.connect_debugger()
 
         self.thread_check_thread = Thread(target=check_for_threads)
         self.thread_check_thread.daemon = True
@@ -397,6 +409,7 @@ def debug_command(env,
             cmd = result.split(' ')[0]
             rest = result.split(' ')[1:]
             if cmd in ['exit']:
+                debug_context.disconnect()
                 return
             elif cmd in ['variables', 'v']:
                 refine = None
@@ -434,6 +447,8 @@ def debug_command(env,
                     except ValueError:
                         continue
                     CURRENT_FRAME = frame
+                    if vim:
+                        update_vim(debug_context)
             elif cmd in ['eval', 'e']:
                 print(debug_context.eval(' '.join(rest), frame=CURRENT_FRAME))
             else:
