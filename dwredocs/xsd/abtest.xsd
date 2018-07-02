@@ -101,6 +101,7 @@
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="never" />
             <xsd:enumeration value="session" />
+            <xsd:enumeration value="browser" />
         </xsd:restriction>
     </xsd:simpleType>
 

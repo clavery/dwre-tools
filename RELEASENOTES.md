@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.13.4
+
+- update for 18.7
+- support zip files for most `migrate` subcommands
+
 ## 1.13.3
 
 - bug fixes for beta vim integration

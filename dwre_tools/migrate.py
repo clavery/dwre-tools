@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import tempfile
 import functools
 import time
 import zipfile
@@ -255,17 +256,23 @@ def add_migration(directory, migrations_dir="migrations", id=None, description=N
 
     validate_xml(migrations_context)
     # validate path
-    migrations = get_migrations(migrations_context, hotfix=hotfix)
+    get_migrations(migrations_context, hotfix=hotfix)
 
     print("Writing new migration (%s) with parent (%s)" % (id, parent))
 
-    #print ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True)
-    xml_file_output = ET.tostring(migrations_context, pretty_print=True, encoding="utf-8", xml_declaration=True)
+    xml_file_output = ET.tostring(migrations_context, pretty_print=True,
+                                  encoding="utf-8", xml_declaration=True)
     with open(migrations_file, "wb") as f:
         f.write(xml_file_output)
 
 
 def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
+    if os.path.isfile(migrations_dir):
+        tempdir = tempfile.TemporaryDirectory()
+        with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
+            stored_zip.extractall(path=tempdir.name)
+        migrations_dir = os.path.join(tempdir.name, "migrations")
+
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 
@@ -536,8 +543,17 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         except requests.exceptions.HTTPError as e:
             print(Fore.RED + "Error reindexing (try updated your bm_dwremigrate cartridge): {}".format(e.message) + Fore.RESET)
 
+    if tempdir:
+        tempdir.cleanup()
+
 
 def run_all(env, migrations_dir, test=False):
+    if os.path.isfile(migrations_dir):
+        tempdir = tempfile.TemporaryDirectory()
+        with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
+            stored_zip.extractall(path=tempdir.name)
+        migrations_dir = os.path.join(tempdir.name, "migrations")
+
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
     parser = ET.XMLParser(remove_blank_text=True)
@@ -601,10 +617,13 @@ def run_all(env, migrations_dir, test=False):
         migration_data = hotfixes[migration]
         run_migration(env, os.path.join(migrations_dir, migration_data["location"]), migration)
 
+    if tempdir:
+        tempdir.cleanup()
+
 
 def run_migration(env, directory, name=None):
     webdavsession = requests.session()
-    webdavsession.auth=(env["username"], env["password"],)
+    webdavsession.auth = (env["username"], env["password"],)
     webdavsession.verify = env["verify"]
     webdavsession.cert = env["cert"]
     bmsession = requests.session()
@@ -646,6 +665,12 @@ def run_migration(env, directory, name=None):
 
 
 def reset_migrations(env, migrations_dir, test=False):
+    if os.path.isfile(migrations_dir):
+        tempdir = tempfile.TemporaryDirectory()
+        with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
+            stored_zip.extractall(path=tempdir.name)
+        migrations_dir = os.path.join(tempdir.name, "migrations")
+
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 
@@ -679,6 +704,12 @@ def reset_migrations(env, migrations_dir, test=False):
 
 
 def validate_migrations(migrations_dir):
+    if os.path.isfile(migrations_dir):
+        tempdir = tempfile.TemporaryDirectory()
+        with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
+            stored_zip.extractall(path=tempdir.name)
+        migrations_dir = os.path.join(tempdir.name, "migrations")
+
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 
@@ -713,6 +744,12 @@ def validate_migrations(migrations_dir):
 
 
 def set_migration(env, migrations_dir, migration_name):
+    if os.path.isfile(migrations_dir):
+        tempdir = tempfile.TemporaryDirectory()
+        with zipfile.ZipFile(migrations_dir, 'r') as stored_zip:
+            stored_zip.extractall(path=tempdir.name)
+        migrations_dir = os.path.join(tempdir.name, "migrations")
+
     migrations_file = os.path.join(migrations_dir, "migrations.xml")
     assert os.path.exists(migrations_file), "Cannot find migrations.xml"
 

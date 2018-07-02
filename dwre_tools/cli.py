@@ -227,7 +227,7 @@ migrate_cmd = cmd_parser.add_parser('migrate', help="schema/data migrations")
 migrate_cmd.set_defaults(func=migrate_cmd_handler)
 migrate_cmd.add_argument('-n', dest="test", help="test run; do not execute migrations", action="store_true")
 migrate_cmd.set_defaults(test=False)
-migrate_cmd.add_argument('-d', '--dir', help="migrations directory (default: migrations)", default="migrations")
+migrate_cmd.add_argument('-d', '--dir', help="migrations directory or zip file (default: migrations/)", default="migrations")
 migrate_cmd.set_defaults(test=False)
 
 migrate_parser = migrate_cmd.add_subparsers(title="Sub Commands", dest='subcommand')

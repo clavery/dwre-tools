@@ -442,7 +442,8 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The URL safe token for this order.</div>
+							&nbsp;(Read Only)<div class="description">The URL safe token for this order. The order token is a random string (length 32 bytes) associated with
+ this one order. It should always be used in situations requiring order access to raise the level of qualification.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -1225,6 +1226,12 @@
 						: 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
 <div class="description">Ensures that the order is authorized.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_order_Order_removeRemoteHost_DetailAnchor"><span class="">removeRemoteHost</span></a></span>()
+						: 
+					void</span>
+<div class="description">Removes the IP address of the remote host if stored.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Order_setAffiliatePartnerID_String_DetailAnchor"><span class="">setAffiliatePartnerID</span></a></span>(affiliatePartnerID
@@ -2550,7 +2557,8 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the URL safe token for this order.</div>
+<div class="description">Returns the URL safe token for this order. The order token is a random string (length 32 bytes) associated with
+ this one order. It should always be used in situations requiring order access to raise the level of qualification.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -3493,6 +3501,28 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_order_Order_removeRemoteHost_DetailAnchor"></a>
+<div class="detailName 
+						">removeRemoteHost</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">removeRemoteHost</span>()
+					 : 
+					void</div>
+<div class="description">Removes the IP address of the remote host if stored.
+ <p>
+ If IP logging was enabled during order creation the IP address of the customer will be stored and can be
+ retrieved using <a href="class_dw_order_Order.html#dw_order_Order_getRemoteHost_DetailAnchor">getRemoteHost()</a>.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_order_Order.html#dw_order_Order_getRemoteHost_DetailAnchor">getRemoteHost()</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_order_Order_setAffiliatePartnerID_String_DetailAnchor"></a>
 <div class="detailName 
 						">setAffiliatePartnerID</div>
@@ -4042,13 +4072,23 @@
 					<a href="class_dw_object_Note.html"><span class="">Note</span></a>
 </div>
 <div class="description">Tracks an order change.
-
- This adds a history entry to the order. Focus of history entries are
- changes through business logic, both custom and internal logic. Tracked
- order changes are read-only and can be accessed in the Business Manager
- order history. The following attributes of the created <a href="class_dw_object_Note.html"> history entry</a> are initialized: <li>
- <a href="class_dw_object_Note.html#dw_object_Note_getCreatedBy_DetailAnchor">Note.getCreatedBy()</a> gets the current user assigned</li> <li>
- <a href="class_dw_object_Note.html#dw_object_Note_getCreationDate_DetailAnchor">Note.getCreationDate()</a> gets the current date assigned</li></div>
+ <p>
+ This adds a history entry to the order. Focus of history entries are changes through business logic, both custom
+ and internal logic. Tracked order changes are read-only and can be accessed in the Business Manager order
+ history. The following attributes of the created <a href="class_dw_object_Note.html"> history entry</a> are initialized:
+ <li><a href="class_dw_object_Note.html#dw_object_Note_getCreatedBy_DetailAnchor">Note.getCreatedBy()</a> gets the current user assigned</li>
+ <li><a href="class_dw_object_Note.html#dw_object_Note_getCreationDate_DetailAnchor">Note.getCreationDate()</a> gets the current date assigned</li>
+ </p>
+ <p>
+ This feature is intended to track important changes in custom order flow which should become visible in Business
+ Manager's history tab. It is NOT intended as auditing feature for every change to an order. A warning will be
+ produced after 600 notes are added to an order. The warning can be reviewed in Business Manager's Quota Status
+ screen. Attempting to add a note to an order which already has 1000 notes results in an exception. Please bear in
+ mind that internal changes, such as order status changes, also track changes. Avoid using this feature in
+ recurring jobs which may re-process orders multiple times as the limit needs to be considered each time a change
+ is tracked. The same limit on the number of notes added also applies when using method
+ <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_addNote_String_String_DetailAnchor">LineItemCtnr.addNote(String, String)</a> to add notes.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -4069,7 +4109,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.6<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.7<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>
