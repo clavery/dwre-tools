@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.13.5
+
+- regression fix for non-terminal use-cases
+
 ## 1.13.4
 
 - update for 18.7

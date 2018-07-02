@@ -1,5 +1,4 @@
-from __future__ import print_function
-
+import sys
 import requests
 import yaml
 import re
@@ -109,10 +108,15 @@ def sync_command(env, delete_code_version, cartridge_location):
     total = zip_file.getbuffer().nbytes
     progress_format = create_default_formatters()
     progress_format[6] = FileSizeProgress(4096, total)
-    with ProgressBar(formatters=progress_format) as pb:
+    if sys.stdout.isatty():
+        with ProgressBar(formatters=progress_format) as pb:
+            response = webdavsession.put(dest_url,
+                                         data=pb(StreamingIO(zip_file, chunk=4096),
+                                                 total=math.ceil(total/4096)))
+            response.raise_for_status()
+    else:
         response = webdavsession.put(dest_url,
-                                     data=pb(StreamingIO(zip_file, chunk=4096),
-                                             total=math.ceil(total/4096)))
+                                     data=StreamingIO(zip_file, chunk=4096))
         response.raise_for_status()
 
     print("Extracting...")
