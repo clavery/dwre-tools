@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.13.7
+
+- using latest version of requests library; will fix any windows regressions directly if applicable
+
 ## 1.13.5
 
 - regression fix for non-terminal use-cases
