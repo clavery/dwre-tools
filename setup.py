@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
+import os
 from setuptools import setup, find_packages
 
 
 def get_requirements(env):
-    with open('requirements-{}.txt'.format(env)) as fp:
+    filename = os.path.join(os.path.dirname(__file__), "requirements-%s.txt" % env)
+    with open(filename) as fp:
         return [x.strip() for x in fp.read().split('\n') if not x.startswith('#') and x.strip()]
 
 
@@ -20,7 +22,6 @@ setup(
     url='https://bitbucket.org/pixelmedia/dwre-dwre-tools',
     packages=find_packages(),
     include_package_data=True,
-    test_suite='pytest-runner',
     tests_require=test_requires,
     setup_requires=['pytest-runner'],
     install_requires=install_requires,
