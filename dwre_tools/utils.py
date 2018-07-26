@@ -15,4 +15,5 @@ def directory_to_zip(directory, filename):
         for fname in filenames:
             zip_file.write(os.path.join(dirpath, fname), os.path.join(filename, basepath, fname))
     zip_file.close()
+    zip_file_io.seek(0)
     return zip_file_io

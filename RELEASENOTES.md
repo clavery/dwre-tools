@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.13.9
+
+- regression in some scenarios with migration uploads due to recent changes
+
 ## 1.13.8
 
 - remove workaround for pyyaml python 3.7 issue; should be resolved now with 3.13
