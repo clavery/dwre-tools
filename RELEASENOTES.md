@@ -4,6 +4,7 @@
 ## 1.13.8
 
 - remove workaround for pyyaml python 3.7 issue; should be resolved now with 3.13
+- defensive coding for use as library
 
 ## 1.13.7
 

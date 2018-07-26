@@ -67,7 +67,7 @@ def get_env_from_args(args):
     else:
         env["cert"] = None
 
-    if args.codeversion:
+    if hasattr(args, 'codeversion') and args.codeversion:
         env['codeVersion'] = args.codeversion
 
     if "verify" not in env:
