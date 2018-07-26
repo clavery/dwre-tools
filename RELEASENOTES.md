@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.13.8
+
+- remove workaround for pyyaml python 3.7 issue; should be resolved now with 3.13
+
 ## 1.13.7
 
 - using latest version of requests library; will fix any windows regressions directly if applicable
