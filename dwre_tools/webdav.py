@@ -27,7 +27,7 @@ HEADERS = {
 
 def get_directories(tree, root):
     names = tree.findall(".//{DAV:}collection/../../{DAV:}displayname")
-    return sorted([n.text for n in names if root != n.text])
+    return sorted([n.text for n in names if n.text and root != n.text])
 
 
 def file_convert_date(filetup):
