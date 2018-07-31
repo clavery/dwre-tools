@@ -99,13 +99,3 @@ def test():
 
 conn.close()
 
-
-
-
-
-
-
-
-
-
-

@@ -62,6 +62,17 @@
 <div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>context
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_Map.html"><span class="">Map</span></a>
+							&nbsp;(Read Only)<div class="description">The job context which can be used to share data between steps. NOTE: Steps should be self-contained, the
+ job context should only be used when necessary and with caution. If two steps which are running in parallel in
+ the same job store data in the job context using the same key the result is undefined.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>ID
 						&nbsp;:&nbsp;
 						
@@ -93,6 +104,12 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_job_JobExecution_getContext_DetailAnchor"><span class="">getContext</span></a></span>()
+						: 
+					<a href="class_dw_util_Map.html"><span class="">Map</span></a></span>
+<div class="description">Returns the job context which can be used to share data between steps.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_job_JobExecution_getID_DetailAnchor"><span class="">getID</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
@@ -119,6 +136,27 @@
 <div class="header">
 			Method Detail
 		</div>
+<div class="detailItem">
+<a name="dw_job_JobExecution_getContext_DetailAnchor"></a>
+<div class="detailName 
+						">getContext</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getContext</span>()
+					 : 
+					<a href="class_dw_util_Map.html"><span class="">Map</span></a>
+</div>
+<div class="description">Returns the job context which can be used to share data between steps. NOTE: Steps should be self-contained, the
+ job context should only be used when necessary and with caution. If two steps which are running in parallel in
+ the same job store data in the job context using the same key the result is undefined.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the map that represents the job context.</span>
+</div>
+</div>
+<hr>
+</div>
 <div class="detailItem">
 <a name="dw_job_JobExecution_getID_DetailAnchor"></a>
 <div class="detailName 
@@ -160,7 +198,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.7<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

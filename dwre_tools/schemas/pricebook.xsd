@@ -36,6 +36,11 @@
             <xsd:element maxOccurs="1" minOccurs="0" name="online-from" type="xsd:dateTime" />
             <xsd:element maxOccurs="1" minOccurs="0" name="online-to" type="xsd:dateTime" />
             <xsd:element maxOccurs="1" minOccurs="0" name="parent" type="simpleType.Generic.NonEmptyString.256" />
+            <xsd:element maxOccurs="1" minOccurs="0" name="feed-based" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation>If this flag is set to true the pricebook is imported as feed based otherwise it is imported as web based</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="pricebook-id" type="simpleType.Generic.NonEmptyString.256" use="required" />

@@ -276,7 +276,7 @@
  <li>GET /baskets/<basketid> (OCAPI) or</li>
  <li>GetBasket (Pipelet).</li>
  </ul>
- Baskets containing an "orderNumberBeingEdited" are explicitely excluded from the list of baskets that can be
+ Baskets containing an "orderNumberBeingEdited" are explicitly excluded from the list of baskets that can be
  retrieved. Responsible for this behaviour (this kind of basket cannot be used as general purpose shopping
  baskets) - see <a href="class_dw_order_Basket.html#dw_order_Basket_getOrderNoBeingEdited_DetailAnchor">Basket.getOrderNoBeingEdited()</a> / <a href="class_dw_order_Basket.html#dw_order_Basket_getOrderBeingEdited_DetailAnchor">Basket.getOrderBeingEdited()</a>.
  <p/>
@@ -288,7 +288,7 @@
  <li>without gift certificates,</li>
  <li>status is not cancelled,</li>
  <li>was not previously replaced and</li>
- <li>was not previously exported or has passed its export-after date.</li>
+ <li>was not previously exported.</li>
  </ul>
  Failures are indicated by throwing an APIException of type CreateBasketFromOrderException which provides one of
  these errorCodes:
@@ -297,8 +297,7 @@
  cannot be replaced.</li>
  <li>Code <a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_ORDER_ALREADY_REPLACED_DetailAnchor">OrderProcessStatusCodes.ORDER_ALREADY_REPLACED</a> - the Order was already replaced.</li>
  <li>Code <a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_ORDER_ALREADY_CANCELLED_DetailAnchor">OrderProcessStatusCodes.ORDER_ALREADY_CANCELLED</a> - the Order was cancelled.</li>
- <li>Code <a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_ORDER_ALREADY_EXPORTED_DetailAnchor">OrderProcessStatusCodes.ORDER_ALREADY_EXPORTED</a> - the Order has already been exported or
- has passed its export-after date.</li>
+ <li>Code <a href="class_dw_order_OrderProcessStatusCodes.html#dw_order_OrderProcessStatusCodes_ORDER_ALREADY_EXPORTED_DetailAnchor">OrderProcessStatusCodes.ORDER_ALREADY_EXPORTED</a> - the Order has already been exported.</li>
  </ul>
  <p/>
  Usage:
@@ -561,7 +560,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.7<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

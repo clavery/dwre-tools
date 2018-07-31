@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema 
+<xsd:schema
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
     targetNamespace="http://www.demandware.com/xml/impex/sort/2009-05-15"
     xmlns="http://www.demandware.com/xml/impex/sort/2009-05-15"
-    elementFormDefault="qualified" 
+    elementFormDefault="qualified"
     attributeFormDefault="unqualified">
 
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
@@ -44,8 +44,8 @@
     <xsd:complexType name="WeightedAttribute">
         <xsd:sequence>
             <xsd:element name="attribute-path" type="AttributePath" minOccurs="1" maxOccurs="1" />
-            <xsd:element name="weight" type="WeightedAttributeWeight" minOccurs="1" maxOccurs="1" />    
-            <xsd:element name="default-value" type="WeightedAttributeDefault" minOccurs="1" maxOccurs="1" />    
+            <xsd:element name="weight" type="WeightedAttributeWeight" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="default-value" type="WeightedAttributeDefault" minOccurs="1" maxOccurs="1" />
             <xsd:element name="direction" type="SortingDirection" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
@@ -112,7 +112,7 @@
 
     <xsd:complexType name="SortByAttribute">
         <xsd:sequence>
-            <xsd:element name="attribute-path" type="AttributePath" minOccurs="1" maxOccurs="1" />    
+            <xsd:element name="attribute-path" type="AttributePath" minOccurs="1" maxOccurs="1" />
             <xsd:element name="direction" type="SortingDirection" minOccurs="1" maxOccurs="1" />
             <xsd:element name="include-text-relevance" type="xsd:boolean" default="false" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
@@ -122,9 +122,9 @@
         <xsd:sequence>
             <xsd:element name="include-text-relevance" type="xsd:boolean" default="false" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
-        <xsd:attribute name="dynamic-attribute-id" type="Generic.NonEmptyString.256" use="required" />    
+        <xsd:attribute name="dynamic-attribute-id" type="Generic.NonEmptyString.256" use="required" />
     </xsd:complexType>
-    
+
     <xsd:complexType name="SortingRuleAssignment">
         <xsd:attribute name="category-id" type="Generic.NonEmptyString.256" use="required" />
         <xsd:attribute name="rule-id" type="Generic.NonEmptyString.256" use="required" />
@@ -141,7 +141,7 @@
         <xsd:attribute name="category-id" type="Generic.NonEmptyString.256" use="required" />
         <xsd:attribute name="rule-id" type="Generic.NonEmptyString.256" use="required" />
         <xsd:attribute name="campaign-id" type="Generic.NonEmptyString.256" use="required" />
-        <xsd:attribute name="mode" type="ImportMode" />    
+        <xsd:attribute name="mode" type="ImportMode" />
     </xsd:complexType>
 
     <xsd:complexType name="KeywordSearchSortingRuleCampaignAssignment">
@@ -150,7 +150,7 @@
         <xsd:attribute name="campaign-id" type="Generic.NonEmptyString.256" use="required" />
         <xsd:attribute name="mode" type="ImportMode" />
     </xsd:complexType>
-    
+
     <xsd:complexType name="SortingOptions">
         <xsd:sequence>
             <xsd:element name="sorting-option" type="SortingOption" minOccurs="1" maxOccurs="100" />

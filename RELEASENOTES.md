@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.13.10
+
+- update docs to 18.8
+- NEW: adds OCAPI documentation to dash docset
+
 ## 1.13.9
 
 - regression in some scenarios with migration uploads due to recent changes

@@ -118,6 +118,15 @@ for link in d('.classesName a'):
 conn.commit()
 
 
+# # Pipelet API
+
+
+
+if os.path.exists("./DWREApiDoc.docset/Contents/Resources/Documents/pipelet/"):
+    shutil.rmtree("./DWREApiDoc.docset/Contents/Resources/Documents/pipelet/")
+shutil.copytree("./dwredocs/pipeletapi/html/api/", "./DWREApiDoc.docset/Contents/Resources/Documents/pipelet")
+
+
 # # Sample/Guides
 
 
@@ -193,6 +202,112 @@ for f in os.listdir('./dwredocs/xsd/'):
         output = template.render(body=doc_output, name=name)
         f.write(output)
 
+conn.commit()
+
+
+# ## OCAPI
+
+# Place the cookies from chrome (in normal cookie header format) in .cookies
+
+
+
+with open(".cookies") as f:
+    _COOKIES = f.read()
+COOKIES = {c.split('=')[0].strip() : c.split('=')[1].strip() for c in _COOKIES.split(';')}
+
+
+
+
+OCAPI_PREFIX = '/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/'
+OCAPI_INDICIES = [
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/shop/Resources/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/data/Resources/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/usage/APIUsage.html?cp=0_12_2',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/shop/Documents/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/data/Documents/index.html'
+]
+
+
+
+
+NS = "{http://www.w3.org/1999/xhtml}"
+NSMAP = {
+    "X" : "http://www.w3.org/1999/xhtml"
+}
+from urllib.parse import urlparse
+LINKS = set()
+for page in OCAPI_INDICIES:
+    r = requests.get(page, cookies=COOKIES)
+    content = r.content.decode('utf-8').replace('self == top', 'self == "blah"').encode('utf-8')
+    content = ET.fromstring(content)
+    parsed_url = urlparse(page)
+    dirname = os.path.normpath(os.path.dirname(parsed_url.path))
+    if OCAPI_PREFIX not in dirname:
+        continue
+
+    for link in content.xpath("//X:a", namespaces=NSMAP):
+        href = link.attrib['href']
+        normalized = os.path.normpath(os.path.join(dirname, href))
+        full_link = urlparse(f"{parsed_url.scheme}://{parsed_url.netloc}{normalized}")
+        full_link = f"{full_link.scheme}://{full_link.netloc}{full_link.path}"
+        if OCAPI_PREFIX not in full_link:
+            continue
+        print(full_link)
+        if full_link.endswith('.html'):
+            LINKS.add(full_link)
+            
+resp = requests.get('https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/css/commonltr.css', cookies=COOKIES)
+css = f"""<style>
+{resp.content.decode('utf-8')}
+</style>"""
+
+
+
+
+if os.path.exists("./DWREApiDoc.docset/Contents/Resources/Documents/ocapi"):
+    shutil.rmtree("./DWREApiDoc.docset/Contents/Resources/Documents/ocapi")
+    
+if not os.path.exists('./DWREApiDoc.docset/Contents/Resources/Documents/ocapi/'):
+    os.makedirs('./DWREApiDoc.docset/Contents/Resources/Documents/ocapi/shop/Documents')
+    os.makedirs('./DWREApiDoc.docset/Contents/Resources/Documents/ocapi/data/Documents')
+    os.makedirs('./DWREApiDoc.docset/Contents/Resources/Documents/ocapi/shop/Resources')
+    os.makedirs('./DWREApiDoc.docset/Contents/Resources/Documents/ocapi/data/Resources')
+
+
+
+
+for link in LINKS:
+    r = requests.get(link, cookies=COOKIES)
+    r.raise_for_status()
+    content = r.content.decode('utf-8').replace('self == top', 'self == "blah"')
+    content = content.replace("</head>", css)
+    name, ext = os.path.splitext(os.path.basename(link))
+    print(name)
+    if "shop/Resources" in link:
+        entry_type = "Resource"
+        entry_name = "SHOPAPI " + name
+        entry_folder = "shop/Resources/"
+    elif "shop/Documents" in link:
+        entry_type = "Type"
+        entry_name = "SHOPDOC "  + name
+        entry_folder = "shop/Documents/"
+    elif "data/Resources" in link:
+        entry_type = "Resource"
+        entry_name = "DATAAPI " + name
+        entry_folder = "data/Resources/"
+    elif "data/Documents" in link:
+        entry_type = "Type"
+        entry_name = "DATADOC "  + name
+        entry_folder = "data/Documents/"
+    else:
+        entry_type = "Guide"
+        entry_name = name
+        entry_folder = ""
+        
+    c.execute("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES ('%s', '%s', '%s');" % 
+              (entry_name, entry_type, "ocapi/%s%s" % (entry_folder, name+".html")))
+    with open(os.path.join('./DWREApiDoc.docset/Contents/Resources/Documents/ocapi/%s' % entry_folder, name+".html"), 'w') as f:
+        f.write(content)
 conn.commit()
 
 

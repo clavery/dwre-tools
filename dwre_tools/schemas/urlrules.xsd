@@ -101,7 +101,7 @@
 
     <xsd:complexType name="PipelineAliases">
         <xsd:sequence>
-            <xsd:element name="pipeline-alias" type="PipelineAlias" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="pipeline-alias" type="PipelineAlias" minOccurs="1" maxOccurs="500"/>
         </xsd:sequence>
         <xsd:attribute ref="xml:lang" />
     </xsd:complexType>

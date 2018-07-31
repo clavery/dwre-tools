@@ -344,22 +344,24 @@
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
-    
-    <!-- page meta tag rules -->
+        
     <xsd:complexType name="complexType.PageMetaTagRules" mixed="false">
         <xsd:sequence>
-             <xsd:element name="page-meta-tag-rule" type="complexType.PageMetaTagRule" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="page-meta-tag-rule" type="complexType.PageMetaTagRule" minOccurs="0" maxOccurs="50" />
         </xsd:sequence>
     </xsd:complexType>
-    
+  
     <xsd:complexType name="complexType.PageMetaTagRule" mixed="false">
-        <xsd:simpleContent>
-            <xsd:extension base="simpleType.Generic.NonEmptyString.4000">
-                <xsd:attribute name="meta-tag-id" type="simpleType.Generic.NonEmptyString.256" use="required" />
-                <xsd:attribute ref="xml:lang" />
-            </xsd:extension>
-        </xsd:simpleContent>
+        <xsd:attribute name="rule-id" type="simpleType.Generic.NonEmptyString.100" use="required" />
     </xsd:complexType>
+    
+    <xsd:simpleType name="simpleType.Generic.NonEmptyString.100">
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:minLength value="1" />
+            <xsd:maxLength value="100" />
+            <xsd:pattern value="\S|(\S(.*)\S)" />
+        </xsd:restriction>
+    </xsd:simpleType>
     
     <xsd:simpleType name="simpleType.Generic.NonEmptyString.4000">
         <xsd:restriction base="simpleType.Generic.String">

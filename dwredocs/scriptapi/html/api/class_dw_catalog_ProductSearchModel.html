@@ -242,9 +242,7 @@
 						
 					    
 					    <a href="class_TopLevel_Array.html"><span class="">Array</span></a>
-							&nbsp;(Read Only)<div class="description">Reserved for beta users.</p>
-
- Returns all page meta tags, defined for this instance for which content can be generated.</p>
+							&nbsp;(Read Only)<div class="description">All page meta tags, defined for this instance for which content can be generated.</p>
 
  The meta tag content is generated based on the product listing page meta tag context and rules.
  The rules are obtained from the current category context or inherited from the parent category,
@@ -563,13 +561,13 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_dw_web_PageMetaTag.html"><span class="">PageMetaTag</span></a></span>
-<div class="description">Reserved for beta users.</div>
+<div class="description">Returns the page meta tag for the specified id.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_getPageMetaTags_DetailAnchor"><span class="">getPageMetaTags</span></a></span>()
 						: 
 					<a href="class_TopLevel_Array.html"><span class="">Array</span></a></span>
-<div class="description">Reserved for beta users.</div>
+<div class="description">Returns all page meta tags, defined for this instance for which content can be generated.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_getPriceMax_DetailAnchor"><span class="">getPriceMax</span></a></span>()
@@ -837,6 +835,15 @@
 						: 
 					void</span>
 <div class="description">Sets an explicit category to be used when determining refinements.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_setSearchableImageID_String_DetailAnchor"><span class="">setSearchableImageID</span></a></span>(imageID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					void</span>
+<div class="description">This method is currently reserved for pilot customers and is controlled by a feature toggle.</div>
 </div>
 <div class="summaryItem">
 <span class="dep"><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_setSortingCondition_String_Number_DetailAnchor"><span class="">setSortingCondition</span></a></span>(attributeID
@@ -1263,9 +1270,7 @@
 					 : 
 					<a href="class_dw_web_PageMetaTag.html"><span class="">PageMetaTag</span></a>
 </div>
-<div class="description">Reserved for beta users.</p>
-
- Returns the page meta tag for the specified id.</p>
+<div class="description">Returns the page meta tag for the specified id.</p>
 
  The meta tag content is generated based on the product listing page meta tag context and rule.
  The rule is obtained from the current category context or inherited from the parent category,
@@ -1300,9 +1305,7 @@
 					 : 
 					<a href="class_TopLevel_Array.html"><span class="">Array</span></a>
 </div>
-<div class="description">Reserved for beta users.</p>
-
- Returns all page meta tags, defined for this instance for which content can be generated.</p>
+<div class="description">Returns all page meta tags, defined for this instance for which content can be generated.</p>
 
  The meta tag content is generated based on the product listing page meta tag context and rules.
  The rules are obtained from the current category context or inherited from the parent category,
@@ -2206,6 +2209,43 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_setSearchableImageID_String_DetailAnchor"></a>
+<div class="detailName 
+						">setSearchableImageID</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setSearchableImageID</span>(imageID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					void</div>
+<div class="description">This method is currently reserved for pilot customers and is controlled by a feature toggle. If the feature
+ toggle is disabled, nothing is set to the ProductSearchModel and a subsequent search will behave as if this
+ method was never called. An image ID can be retrieved by uploading an image with a multipart/form-data POST
+ request to 'https://api.cquotient.com/v3/image/search/upload/{siteID}'. This method sets product IDs retrieved
+ from the image ID to the ProductSearchModel. If using <a href="class_dw_catalog_ProductSearchModel.html#dw_catalog_ProductSearchModel_setProductIDs_List_DetailAnchor">setProductIDs(List)</a> in addition to this method,
+ the ProductSearchModel will take the intersection of these sets of product IDs. If the image ID provided is
+ invalid or expired, product IDs will not be set onto the product search model.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">imageID</span>
+						 - 
+						<span class="parameterDesc">the image ID for the visual search query.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">RuntimeException						
+						 - 
+						 <span class="parameterDesc">if product IDs for the provided image could not be set.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductSearchModel_setSortingCondition_String_Number_DetailAnchor"></a>
 <div class="detailName 
 						dep">setSortingCondition</div>
@@ -2982,7 +3022,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.7<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

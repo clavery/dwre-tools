@@ -20,6 +20,7 @@
             <xsd:element name="custom-cartridges" type="simpleType.Generic.String" minOccurs="0" maxOccurs="1" />
             <xsd:element name="storefront-status" type="simpleType.SiteStatus" minOccurs="0" maxOccurs="1" />
             <xsd:element name="storefront-password" type="simpleType.StorefrontPassword" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="home-page-meta-tag-rules" type="complexType.PageMetaTagRules" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute name="site-id" type="simpleType.Generic.NonEmptyString.32" />
     </xsd:complexType>
@@ -52,7 +53,25 @@
             <xsd:maxLength value="256" />
             <xsd:pattern value="\S|(\S(.*)\S)" />
         </xsd:restriction>
-    </xsd:simpleType>    
+    </xsd:simpleType>
+    
+    <xsd:complexType name="complexType.PageMetaTagRules" mixed="false">
+        <xsd:sequence>
+            <xsd:element name="page-meta-tag-rule" type="complexType.PageMetaTagRule" minOccurs="0" maxOccurs="50" />
+        </xsd:sequence>
+    </xsd:complexType>
+  
+    <xsd:complexType name="complexType.PageMetaTagRule" mixed="false">
+        <xsd:attribute name="rule-id" type="simpleType.Generic.NonEmptyString.100" use="required" />
+    </xsd:complexType>
+    
+    <xsd:simpleType name="simpleType.Generic.NonEmptyString.100">
+        <xsd:restriction base="simpleType.Generic.String">
+            <xsd:minLength value="1" />
+            <xsd:maxLength value="100" />
+            <xsd:pattern value="\S|(\S(.*)\S)" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="simpleType.Generic.String">
         <xsd:restriction base="xsd:string" />

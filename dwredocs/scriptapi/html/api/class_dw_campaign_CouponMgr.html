@@ -46,6 +46,18 @@
 </div>
 <!--End of class div-->
 <div class="section">
+<div class="header">
+			Constants
+		</div>
+<div class="summaryItem">
+<span><a name="dw_campaign_CouponMgr_MR_ERROR_INVALID_SITE_ID_DetailAnchor"></a>MR_ERROR_INVALID_SITE_ID
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"MASKREDEMPTIONS_SITE_NOT_FOUND"<div class="description">Indicates that an error occurred because a valid data domain cannot be found for given siteID.</div>
+</span>
+</div>
+</div>
+<div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
 <span><a name="_DetailAnchor"></a>coupons
@@ -104,6 +116,18 @@
 						: 
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a></span>
 <div class="description">Returns list of CouponRedemptions for the specified coupon and coupon code, sorted by redemption date descending (i.e.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_campaign_CouponMgr_maskRedemptions_String_String_DetailAnchor"><span class="">maskRedemptions</span></a></span>(siteID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, email
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
+<div class="description">Mask customer email address in coupon redemptions for the given siteID and email address</div>
 </div>
 </div>
 <div class="section">
@@ -245,10 +269,49 @@
 </div>
 <hr>
 </div>
+<div class="detailItem">
+<a name="dw_campaign_CouponMgr_maskRedemptions_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">maskRedemptions</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">maskRedemptions</span>(siteID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, email
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
+</div>
+<div class="description">Mask customer email address in coupon redemptions for the given siteID and email address</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">siteID</span>
+						 - 
+						<span class="parameterDesc">the site ID</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">email</span>
+						 - 
+						<span class="parameterDesc">the customer email address</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">The status of the masking result</span>
+</div>
+</div>
+<hr>
+</div>
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.7<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

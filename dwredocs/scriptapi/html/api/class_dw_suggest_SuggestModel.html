@@ -216,10 +216,22 @@
 <div class="description">Returns a <a href="class_dw_suggest_CustomSuggestions.html">CustomSuggestions</a> container for the current search phrase.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_suggest_SuggestModel_getPopularSearchPhrases_DetailAnchor"><span class="">getPopularSearchPhrases</span></a></span>()
+						: 
+					<a href="class_dw_util_Iterator.html"><span class="">Iterator</span></a></span>
+<div class="description">Use this method to obtain a list of search phrases that currently are very popular among all users across the Site.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_suggest_SuggestModel_getProductSuggestions_DetailAnchor"><span class="">getProductSuggestions</span></a></span>()
 						: 
 					<a href="class_dw_suggest_ProductSuggestions.html"><span class="">ProductSuggestions</span></a></span>
 <div class="description">Returns a <a href="class_dw_suggest_ProductSuggestions.html">ProductSuggestions</a> container for the current search phrase.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_suggest_SuggestModel_getRecentSearchPhrases_DetailAnchor"><span class="">getRecentSearchPhrases</span></a></span>()
+						: 
+					<a href="class_dw_util_Iterator.html"><span class="">Iterator</span></a></span>
+<div class="description">Use this method to obtain a list of personalized search phrases that the current user entered recently.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_suggest_SuggestModel_removeRefinementValues_String_String_DetailAnchor"><span class="">removeRefinementValues</span></a></span>(attributeID
@@ -469,6 +481,29 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_suggest_SuggestModel_getPopularSearchPhrases_DetailAnchor"></a>
+<div class="detailName 
+						">getPopularSearchPhrases</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPopularSearchPhrases</span>()
+					 : 
+					<a href="class_dw_util_Iterator.html"><span class="">Iterator</span></a>
+</div>
+<div class="description">Use this method to obtain a list of search phrases
+ that currently are very popular among all users across the Site.
+
+ The search phrases are specific to the region (based on user's IP address),
+ language (locale) and the user's browser type (agent).</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a list of personalized popular search phrases</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_suggest_SuggestModel_getProductSuggestions_DetailAnchor"></a>
 <div class="detailName 
 						">getProductSuggestions</div>
@@ -497,6 +532,28 @@
 </div>
 <div class="parameterDetail">
 <span class="parameterDesc"><a href="class_dw_suggest_SuggestModel.html#dw_suggest_SuggestModel_setSearchPhrase_String_DetailAnchor">setSearchPhrase(String)</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_suggest_SuggestModel_getRecentSearchPhrases_DetailAnchor"></a>
+<div class="detailName 
+						">getRecentSearchPhrases</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getRecentSearchPhrases</span>()
+					 : 
+					<a href="class_dw_util_Iterator.html"><span class="">Iterator</span></a>
+</div>
+<div class="description">Use this method to obtain a list of personalized search phrases
+ that the current user entered recently.
+
+ The user is being identified by the CQuotient tracking cookie.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">a list of recent search phrases of the current user</span>
 </div>
 </div>
 <hr>
@@ -668,7 +725,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.7<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>
