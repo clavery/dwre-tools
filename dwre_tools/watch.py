@@ -14,7 +14,7 @@ from .sync import collect_cartridges
 
 
 class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
-    def __init__(self, env, path, name):
+    def __init__(self, env, path, name, zip_files=True):
         webdavsession = requests.session()
         webdavsession.verify = env["verify"]
         webdavsession.auth = (env["username"], env["password"], )
@@ -23,6 +23,7 @@ class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
         self.cartridge_name = name
         self.cartridge_path = path
         self.session = webdavsession
+        self.zip_files = zip_files
         self.code_version = env["codeVersion"]
         self.server = env["server"]
         self.base_url = (f"https://{self.server}/on/demandware.servlet/webdav/Sites/" +
@@ -65,20 +66,38 @@ class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
             normpath = self.cartridge_name + suffix
             print(f"\t{Fore.GREEN}- {normpath}{Fore.RESET}")
 
+    def upload_file(self, file):
+        prefix = os.path.commonprefix([self.cartridge_path, file])
+        suffix = file[len(prefix):]
+        normpath = self.cartridge_name + suffix
+        temp_name = str(uuid.uuid4()) + ".zip"
+        dest_url = f"{self.base_url}/{temp_name}"
+        with open(file, 'r') as f:
+            response = self.session.put(dest_url, data=f)
+            response.raise_for_status()
+        print(f"{Fore.GREEN}Uploaded{Fore.RESET}")
+        print(f"\t{Fore.GREEN}- {normpath}{Fore.RESET}")
+
     def on_created(self, event):
         print(f"[CREATED] {event.src_path}")
-        self.upload_queue.add(event.src_path)
-        t = Timer(0.200, self.upload)
-        t.start()
+        if self.zip_files:
+            self.upload_queue.add(event.src_path)
+            t = Timer(0.200, self.upload)
+            t.start()
+        else:
+            self.upload_file(event.src_path)
 
     def on_modified(self, event):
         print(f"[MODIFIED] {event.src_path}")
-        self.upload_queue.add(event.src_path)
-        t = Timer(0.200, self.upload)
-        t.start()
+        if self.zip_files:
+            self.upload_queue.add(event.src_path)
+            t = Timer(0.200, self.upload)
+            t.start()
+        else:
+            self.upload_file(event.src_path)
 
 
-def watch_command(env, directory):
+def watch_command(env, directory, zip_files=True):
     if directory is None:
         directory = '.'
 
@@ -90,7 +109,7 @@ def watch_command(env, directory):
     observer = Observer()
     for cartridge_path, cartridge_name in cartridges:
         print(f"Watching {cartridge_name}")
-        webdav_event_handler = SFCCWebdavUploaderEventHandler(env, cartridge_path, cartridge_name)
+        webdav_event_handler = SFCCWebdavUploaderEventHandler(env, cartridge_path, cartridge_name, zip_files=zip_files)
         observer.schedule(webdav_event_handler, cartridge_path, recursive=True)
     observer.start()
 

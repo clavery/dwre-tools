@@ -191,7 +191,7 @@ def zip_cmd_handler(args):
 
 def watch_cmd_handler(args):
     env = get_env_from_args(args)
-    watch_command(env, args.directory)
+    watch_command(env, args.directory, not args.nozip)
 
 
 parser = ArgumentParser(description="Demandware/SFCC Tools")
@@ -328,6 +328,8 @@ zip_cmd.add_argument('directory', help="cartridges dir (default current)", nargs
 watch_cmd = cmd_parser.add_parser('watch', help="watch cartridges from directory and upload to env")
 watch_cmd.set_defaults(func=watch_cmd_handler)
 watch_cmd.add_argument('directory', help="cartridges dir (default current)", nargs='?')
+watch_cmd.add_argument('--nozip', help="disable zipping of files", action="store_true")
+watch_cmd.set_defaults(nozip=False)
 
 
 def main():

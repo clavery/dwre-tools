@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.13.12
+
+- bugfixes
+- adds `nozip` option to watch
+
 ## 1.13.10
 
 - update docs to 18.8
