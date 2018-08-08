@@ -84,7 +84,7 @@ def watch_command(env, directory):
 
     cartridges = collect_cartridges(directory)
 
-    print(f"{Fore.GREEN}Watching {directory}; Uploading to {env['server']}" +
+    print(f"{Fore.GREEN}Watching {directory}; Uploading to {env['server']} " +
           f"code version {env['codeVersion']}{Fore.RESET}")
 
     observer = Observer()

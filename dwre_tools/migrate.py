@@ -100,6 +100,7 @@ def get_install_zip(env, bmsession, webdavsession):
 ###########################################
 17.8.3""")
     install_package_zip.close()
+    install_package_file.seek(0)
     return (install_package_file, dest_file)
 
 
@@ -115,6 +116,7 @@ def get_bootstrap_zip():
     bootstrap_package_zip.writestr("{}/meta/system-objecttype-extensions.xml".format(dest_file), BOOTSTRAP_META)
     bootstrap_package_zip.close()
 
+    bootstrap_package_file.seek(0)
     return bootstrap_package_file
 
 
