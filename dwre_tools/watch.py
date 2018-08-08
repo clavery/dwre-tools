@@ -72,7 +72,7 @@ class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
         normpath = self.cartridge_name + suffix
         temp_name = str(uuid.uuid4()) + ".zip"
         dest_url = f"{self.base_url}/{temp_name}"
-        with open(file, 'r') as f:
+        with open(file, 'rb') as f:
             response = self.session.put(dest_url, data=f)
             response.raise_for_status()
         print(f"{Fore.GREEN}Uploaded{Fore.RESET}")
