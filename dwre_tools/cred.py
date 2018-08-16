@@ -101,6 +101,6 @@ def list_credentials(param_filter=None):
         elif e.response['Error']['Code'] == 'AccessDeniedException':
             err("Access denied writing parameter")
         else:
-            err("Unknown error: %s".format(e.response['Error']['Code']))
+            err("Unknown error: {}".format(e.response['Error']['Code']))
         sys.exit(1)
     [print(p.get('Name')) for p in parameters]

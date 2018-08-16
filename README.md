@@ -27,6 +27,19 @@ brew install dwre-tools
 
 Later you can `brew update` and `brew upgrade dwre-tools` to get newer versions
 
+### Windows Subsystem For Linux
+
+We want to first install python3.6 or 3.7. If you have that already you can ignore the first 3 commands below.
+
+```
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.6
+curl https://bootstrap.pypa.io/get-pip.py | sudo python3.6
+python3.6 -mpip install https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip
+```
+
+
 ### Manual Method
 
 Copy this command into your terminal (must have a suitable version of python: see [Windows Notes](#Windows_Notes) blow):
