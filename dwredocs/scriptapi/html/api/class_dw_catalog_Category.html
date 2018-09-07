@@ -52,6 +52,25 @@
 </div>
 <!--End of class div-->
 <div class="section">
+<div class="header">
+			Constants
+		</div>
+<div class="summaryItem">
+<span><a name="dw_catalog_Category_DISPLAY_MODE_INDIVIDUAL_DetailAnchor"></a>DISPLAY_MODE_INDIVIDUAL
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_Number.html"><span class="">Number</span></a>&nbsp;=&nbsp;0<div class="description">Constant representing the Variation Group Display Mode individual setting.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_catalog_Category_DISPLAY_MODE_MERGED_DetailAnchor"></a>DISPLAY_MODE_MERGED
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_Number.html"><span class="">Number</span></a>&nbsp;=&nbsp;1<div class="description">Constant representing the Variation Group Display Mode merged setting.</div>
+</span>
+</div>
+</div>
+<div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
 <span><a name="_DetailAnchor"></a>allRecommendations
@@ -96,6 +115,15 @@
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
 							&nbsp;(Read Only)<div class="description">The description of the catalog category for the current locale.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>displayMode
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_Number.html"><span class="">Number</span></a>
+<div class="description">The Variation Groups Display Mode of the category or null if no display mode is defined.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -519,6 +547,12 @@
 <div class="description">Returns the description of the catalog category for the current locale.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_Category_getDisplayMode_DetailAnchor"><span class="">getDisplayMode</span></a></span>()
+						: 
+					<a href="class_TopLevel_Number.html"><span class="">Number</span></a></span>
+<div class="description">Returns the Variation Groups Display Mode of the category or null if no display mode is defined.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_Category_getDisplayName_DetailAnchor"><span class="">getDisplayName</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
@@ -783,6 +817,15 @@
 <div class="description">Returns true if the category is a top level category, but not the root category.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_Category_setDisplayMode_Number_DetailAnchor"><span class="">setDisplayMode</span></a></span>(displayMode
+								 : 	
+								 
+								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
+						: 
+					void</span>
+<div class="description">Set the category's Variation Groups Display Mode.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_Category_setSearchPlacement_Number_DetailAnchor"><span class="">setSearchPlacement</span></a></span>(placement
 								 : 	
 								 
@@ -949,6 +992,25 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">The value of the property for the current locale, or null if it wasn't found.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_Category_getDisplayMode_DetailAnchor"></a>
+<div class="detailName 
+						">getDisplayMode</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getDisplayMode</span>()
+					 : 
+					<a href="class_TopLevel_Number.html"><span class="">Number</span></a>
+</div>
+<div class="description">Returns the Variation Groups Display Mode of the category or null if no display mode is defined.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the value of the attribute 'displayMode' which is either <a href="class_dw_catalog_Category.html#dw_catalog_Category_DISPLAY_MODE_MERGED_DetailAnchor">DISPLAY_MODE_MERGED</a> or <a href="class_dw_catalog_Category.html#dw_catalog_Category_DISPLAY_MODE_INDIVIDUAL_DetailAnchor">DISPLAY_MODE_INDIVIDUAL</a> or null if category is set to inherit the display mode.</span>
 </div>
 </div>
 <hr>
@@ -1968,6 +2030,29 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_Category_setDisplayMode_Number_DetailAnchor"></a>
+<div class="detailName 
+						">setDisplayMode</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setDisplayMode</span>(displayMode
+								 : 
+								 
+								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
+					 : 
+					void</div>
+<div class="description">Set the category's Variation Groups Display Mode.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">displayMode</span>
+						 - 
+						<span class="parameterDesc">The category's variation groups display mode which is either <a href="class_dw_catalog_Category.html#dw_catalog_Category_DISPLAY_MODE_MERGED_DetailAnchor">DISPLAY_MODE_MERGED</a> or <a href="class_dw_catalog_Category.html#dw_catalog_Category_DISPLAY_MODE_INDIVIDUAL_DetailAnchor">DISPLAY_MODE_INDIVIDUAL</a> or null if category is set to inherit the display mode.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_Category_setSearchPlacement_Number_DetailAnchor"></a>
 <div class="detailName 
 						">setSearchPlacement</div>
@@ -2016,7 +2101,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

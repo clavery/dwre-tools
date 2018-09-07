@@ -391,6 +391,15 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>refinedByPromotion
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean
+							&nbsp;(Read Only)<div class="description">Identifies if this search has been refined by promotion.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>refinedCategorySearch
 						&nbsp;:&nbsp;
 						
@@ -490,6 +499,16 @@
 					    
 					    boolean
 							&nbsp;(Read Only)<div class="description">The method indicates if no-hits search should be tracked for predictive intelligence use.</p></div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>visualSearch
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean
+							&nbsp;(Read Only)<div class="description">The method returns true, if this is a visual search. The
+ method checks that a image UUID is specified.</div>
 </span>
 </div>
 </div>
@@ -711,6 +730,21 @@
 <div class="description">Identifies if this search has been refined by the given price range.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_isRefinedByPromotion_DetailAnchor"><span class="">isRefinedByPromotion</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Identifies if this search has been refined by promotion.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_isRefinedByPromotion_String_DetailAnchor"><span class="">isRefinedByPromotion</span></a></span>(promotionID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					boolean</span>
+<div class="description">Identifies if this search has been refined by a given promotion.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_isRefinedCategorySearch_DetailAnchor"><span class="">isRefinedCategorySearch</span></a></span>()
 						: 
 					boolean</span>
@@ -721,6 +755,12 @@
 						: 
 					boolean</span>
 <div class="description">The method indicates if no-hits search should be tracked for predictive intelligence use.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_isVisualSearch_DetailAnchor"><span class="">isVisualSearch</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">The method returns true, if this is a visual search.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_search_DetailAnchor"><span class="">search</span></a></span>()
@@ -1005,6 +1045,30 @@
 <div class="description">Constructs a URL that you can use to re-execute the query with an additional price filter.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_urlRefinePromotion_URL_String_DetailAnchor"><span class="">urlRefinePromotion</span></a></span>(url
+								 : 	
+								 
+								<a href="class_dw_web_URL.html"><span class="">URL</span></a>, refinePromotionID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a></span>
+<div class="description">Constructs a URL that you can use to re-execute the query with a promotion refinement.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_urlRefinePromotion_String_String_DetailAnchor"><span class="">urlRefinePromotion</span></a></span>(action
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, refinePromotionID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a></span>
+<div class="description">Constructs a URL that you can use to re-execute the query with a promotion refinement.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_urlRelaxCategory_String_DetailAnchor"><span class="">urlRelaxCategory</span></a></span>(action
 								 : 	
 								 
@@ -1039,6 +1103,24 @@
 						: 
 					<a href="class_dw_web_URL.html"><span class="">URL</span></a></span>
 <div class="description">Constructs a URL that you can use to would re-execute the query with no price filter.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_urlRelaxPromotion_URL_DetailAnchor"><span class="">urlRelaxPromotion</span></a></span>(url
+								 : 	
+								 
+								<a href="class_dw_web_URL.html"><span class="">URL</span></a>)
+						: 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a></span>
+<div class="description">Constructs a URL that you can use to re-execute the query without any promotion refinement.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_urlRelaxPromotion_String_DetailAnchor"><span class="">urlRelaxPromotion</span></a></span>(action
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a></span>
+<div class="description">Constructs a URL that you can use to re-execute the query without any promotion refinement.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchModel_urlSortingRule_String_SortingRule_DetailAnchor"><span class="">urlSortingRule</span></a></span>(action
@@ -1843,6 +1925,54 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_isRefinedByPromotion_DetailAnchor"></a>
+<div class="detailName 
+						">isRefinedByPromotion</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isRefinedByPromotion</span>()
+					 : 
+					boolean</div>
+<div class="description">Identifies if this search has been refined by promotion.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">True if the search is refined by promotion, false otherwise.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_isRefinedByPromotion_String_DetailAnchor"></a>
+<div class="detailName 
+						">isRefinedByPromotion</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isRefinedByPromotion</span>(promotionID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					boolean</div>
+<div class="description">Identifies if this search has been refined by a given promotion.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">promotionID</span>
+						 - 
+						<span class="parameterDesc">the ID of the promotion to check</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">True if the search is refined by the given promotionID, false otherwise.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductSearchModel_isRefinedCategorySearch_DetailAnchor"></a>
 <div class="detailName 
 						">isRefinedCategorySearch</div>
@@ -1875,6 +2005,25 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">true, if no-hits search should be tracked, otherwise false.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_isVisualSearch_DetailAnchor"></a>
+<div class="detailName 
+						">isVisualSearch</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isVisualSearch</span>()
+					 : 
+					boolean</div>
+<div class="description">The method returns true, if this is a visual search. The
+ method checks that a image UUID is specified.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">True if this is a visual search</span>
 </div>
 </div>
 <hr>
@@ -2796,6 +2945,88 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_urlRefinePromotion_URL_String_DetailAnchor"></a>
+<div class="detailName 
+						">urlRefinePromotion</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">urlRefinePromotion</span>(url
+								 : 
+								 
+								<a href="class_dw_web_URL.html"><span class="">URL</span></a>, refinePromotionID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a>
+</div>
+<div class="description">Constructs a URL that you can use to re-execute the query with a promotion refinement. The search specific
+ parameters are appended to the provided URL. The URL is typically generated with one of the URLUtils methods.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">url</span>
+						 - 
+						<span class="parameterDesc">the existing URL to use to create the new URL.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">refinePromotionID</span>
+						 - 
+						<span class="parameterDesc">the ID of the promotion.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the new URL.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_urlRefinePromotion_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">urlRefinePromotion</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">urlRefinePromotion</span>(action
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, refinePromotionID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a>
+</div>
+<div class="description">Constructs a URL that you can use to re-execute the query with a promotion refinement. The generated URL will be
+ an absolute URL which uses the protocol of the current request.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">action</span>
+						 - 
+						<span class="parameterDesc">the pipeline action, e.g. 'Search-Show'</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">refinePromotionID</span>
+						 - 
+						<span class="parameterDesc">the ID of the promotion.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the new URL.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductSearchModel_urlRelaxCategory_String_DetailAnchor"></a>
 <div class="detailName 
 						">urlRelaxCategory</div>
@@ -2933,6 +3164,70 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_urlRelaxPromotion_URL_DetailAnchor"></a>
+<div class="detailName 
+						">urlRelaxPromotion</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">urlRelaxPromotion</span>(url
+								 : 
+								 
+								<a href="class_dw_web_URL.html"><span class="">URL</span></a>)
+					 : 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a>
+</div>
+<div class="description">Constructs a URL that you can use to re-execute the query without any promotion refinement. The search specific
+ parameters are appended to the provided URL. The URL is typically generated with one of the URLUtils methods.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">url</span>
+						 - 
+						<span class="parameterDesc">the existing URL to use to create the new URL.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the new URL.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchModel_urlRelaxPromotion_String_DetailAnchor"></a>
+<div class="detailName 
+						">urlRelaxPromotion</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">urlRelaxPromotion</span>(action
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_web_URL.html"><span class="">URL</span></a>
+</div>
+<div class="description">Constructs a URL that you can use to re-execute the query without any promotion refinement. The generated URL
+ will be an absolute URL which uses the protocol of the current request.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">action</span>
+						 - 
+						<span class="parameterDesc">the pipeline action, e.g. 'Search-Show'.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the new URL.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductSearchModel_urlSortingRule_String_SortingRule_DetailAnchor"></a>
 <div class="detailName 
 						">urlSortingRule</div>
@@ -3022,7 +3317,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

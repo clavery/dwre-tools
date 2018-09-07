@@ -1189,7 +1189,7 @@
  <code>queryOrders("", "custom.myAttr asc", null).first()</code>. The method <code>first()</code> returns only the
  next element and closes the iterator.
  <p/>
- If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
+ If the order search API is configured to use the new Search Service, the following differences apply:<br/>
  <ul>
  <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
  <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring
@@ -1316,15 +1316,16 @@
  resources.
  </p>
  <p/>
- If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
+ If the order search API is configured to use the new Search Service, the following differences apply:<br/>
  <ul>
- <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
+ <li>wildcards will be filtered from the query (*, %, +) and replaced by spaces</li>
  <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring
  searches</li>
  <li>LIKE queries will always be case insensitive</li>
  <li>using logical operators may change the execution of LIKE/ILIKE clauses to exact string comparison, depending
  on how they are combined</li>
  <li>using logical operators may result in degraded performance, depending on how they are combined</li>
+ <li>the result is limited to a maximum of 1000 orders</li>
  </ul></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -1434,15 +1435,16 @@
  resources.
  </p>
  <p/>
- If the order search API is configured to use the new Search Service (Beta), the following differences apply:<br/>
+ If the order search API is configured to use the new Search Service, the following differences apply:<br/>
  <ul>
- <li>wildcards will be filtered from the query (*, %, +) and replaces by spaces</li>
+ <li>wildcards will be filtered from the query (*, %, +) and replaced by spaces</li>
  <li>LIKE and ILIKE queries will be executed as fulltext queries (working on whole words), not as substring
  searches</li>
  <li>LIKE queries will always be case insensitive</li>
  <li>using logical operators may change the execution of LIKE/ILIKE clauses to exact string comparison, depending
  on how they are combined</li>
  <li>using logical operators may result in degraded performance, depending on how they are combined</li>
+ <li>the result is limited to a maximum of 1000 orders</li>
  </ul></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -1568,7 +1570,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

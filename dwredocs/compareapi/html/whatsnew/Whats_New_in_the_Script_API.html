@@ -9,7 +9,7 @@
 <span class="newTitle">
 					What's New in the Script API
 				</span>
-<p>The following classes are either new or have been changed in version 18.8.</p>
+<p>The following classes are either new or have been changed in version 18.9.</p>
 </div>
 <div class="section">
 <div class="header">
@@ -17,7 +17,36 @@
 <p>The following classes changed in the <code>dw.campaign</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">CouponMgr</span>
+<span class="className">Promotion</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_campaign_Promotion.html#class_dw_campaign_Promotion/dw_campaign_Promotion_isRefinable_DetailAnchor">isRefinable()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.catalog</div>
+<p>The following classes changed in the <code>dw.catalog</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">Category</span>
 <div class="section">
 <table>
 <thead>
@@ -28,7 +57,16 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_campaign_CouponMgr.html#class_dw_campaign_CouponMgr/dw_campaign_CouponMgr_MR_ERROR_INVALID_SITE_ID_DetailAnchor">MR_ERROR_INVALID_SITE_ID</xref>
+<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_DISPLAY_MODE_INDIVIDUAL_DetailAnchor">DISPLAY_MODE_INDIVIDUAL</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_DISPLAY_MODE_MERGED_DetailAnchor">DISPLAY_MODE_MERGED</xref>
 </code></td><td class="summary">
 <p>
 			Field is New
@@ -48,49 +86,19 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_campaign_CouponMgr.html#class_dw_campaign_CouponMgr/dw_campaign_CouponMgr_maskRedemptions_String_String_DetailAnchor">maskRedemptions(String,
-                String)</xref>
+<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_getDisplayMode_DetailAnchor">getDisplayMode()</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
 		</p>
 </td>
 </tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="section">
-<div class="header">
-							Package dw.catalog</div>
-<p>The following classes changed in the <code>dw.catalog</code> Package. </p>
-<div class="section">
-<hr>
-<span class="className">Product</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Product.html#class_dw_catalog_Product/dw_catalog_Product_getPageMetaTag_String_DetailAnchor">getPageMetaTag(String)</xref>
+<xref href="../ScriptAPI/class_dw_catalog_Category.html#class_dw_catalog_Category/dw_catalog_Category_setDisplayMode_Number_DetailAnchor">setDisplayMode(Number)</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Product.html#class_dw_catalog_Product/dw_catalog_Product_getPageMetaTags_DetailAnchor">getPageMetaTags()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
+			Method is New
 		</p>
 </td>
 </tr>
@@ -111,25 +119,116 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_getPageMetaTag_String_DetailAnchor">getPageMetaTag(String)</xref>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_isRefinedByPromotion_DetailAnchor">isRefinedByPromotion()</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
+			Method is New
 		</p>
 </td>
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_getPageMetaTags_DetailAnchor">getPageMetaTags()</xref>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_isRefinedByPromotion_String_DetailAnchor">isRefinedByPromotion(String)</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
+			Method is New
 		</p>
 </td>
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_setSearchableImageID_String_DetailAnchor">setSearchableImageID(String)</xref>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_isVisualSearch_DetailAnchor">isVisualSearch()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_urlRefinePromotion_String_String_DetailAnchor">urlRefinePromotion(String,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_urlRefinePromotion_URL_String_DetailAnchor">urlRefinePromotion(URL,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_urlRelaxPromotion_String_DetailAnchor">urlRelaxPromotion(String)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchModel.html#class_dw_catalog_ProductSearchModel/dw_catalog_ProductSearchModel_urlRelaxPromotion_URL_DetailAnchor">urlRelaxPromotion(URL)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">ProductSearchRefinementDefinition</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchRefinementDefinition.html#class_dw_catalog_ProductSearchRefinementDefinition/dw_catalog_ProductSearchRefinementDefinition_isPromotionRefinement_DetailAnchor">isPromotionRefinement()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">ProductSearchRefinements</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_catalog_ProductSearchRefinements.html#class_dw_catalog_ProductSearchRefinements/dw_catalog_ProductSearchRefinements_getPromotionRefinementDefinition_DetailAnchor">getPromotionRefinementDefinition()</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -143,11 +242,11 @@
 </div>
 <div class="section">
 <div class="header">
-							Package dw.content</div>
-<p>The following classes changed in the <code>dw.content</code> Package. </p>
+							Package dw.customer</div>
+<p>The following classes changed in the <code>dw.customer</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Content</span>
+<span class="className">CustomerMgr</span>
 <div class="section">
 <table>
 <thead>
@@ -158,7 +257,8 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_content_Content.html#class_dw_content_Content/dw_content_Content_getPageMetaTag_String_DetailAnchor">getPageMetaTag(String)</xref>
+<xref href="../ScriptAPI/class_dw_customer_CustomerMgr.html#class_dw_customer_CustomerMgr/dw_customer_CustomerMgr_searchProfile_String_Object_DetailAnchor">searchProfile(String,
+                Object...)</xref>
 </code></td><td class="summary">
 <p>
 			Documentation Changed.
@@ -167,31 +267,9 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_content_Content.html#class_dw_content_Content/dw_content_Content_getPageMetaTags_DetailAnchor">getPageMetaTags()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">ContentSearchModel</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_content_ContentSearchModel.html#class_dw_content_ContentSearchModel/dw_content_ContentSearchModel_getPageMetaTag_String_DetailAnchor">getPageMetaTag(String)</xref>
+<xref href="../ScriptAPI/class_dw_customer_CustomerMgr.html#class_dw_customer_CustomerMgr/dw_customer_CustomerMgr_searchProfiles_String_String_Object_DetailAnchor">searchProfiles(String,
+                String,
+                Object...)</xref>
 </code></td><td class="summary">
 <p>
 			Documentation Changed.
@@ -200,7 +278,8 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_content_ContentSearchModel.html#class_dw_content_ContentSearchModel/dw_content_ContentSearchModel_getPageMetaTags_DetailAnchor">getPageMetaTags()</xref>
+<xref href="../ScriptAPI/class_dw_customer_CustomerMgr.html#class_dw_customer_CustomerMgr/dw_customer_CustomerMgr_searchProfiles_Map_String_DetailAnchor">searchProfiles(Map,
+                String)</xref>
 </code></td><td class="summary">
 <p>
 			Documentation Changed.
@@ -214,25 +293,26 @@
 </div>
 <div class="section">
 <div class="header">
-							Package dw.io</div>
-<p>The following classes changed in the <code>dw.io</code> Package. </p>
+							Package dw.extensions.paymentrequest</div>
+<p>The following classes changed in the <code>dw.extensions.paymentrequest</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">File</span>
+<span class="className">PaymentRequestHooks</span>
 <div class="section">
 <table>
 <thead>
 <tr>
-<td>Field</td><td>Summary</td>
+<td>Method</td><td>Summary</td>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_io_File.html#class_dw_io_File/dw_io_File_CUSTOMERPI_DetailAnchor">CUSTOMERPI</xref>
+<xref href="../ScriptAPI/class_dw_extensions_paymentrequest_PaymentRequestHooks.html#class_dw_extensions_paymentrequest_PaymentRequestHooks/dw_extensions_paymentrequest_PaymentRequestHooks_getPaymentRequest_Basket_Object_DetailAnchor">getPaymentRequest(Basket,
+                Object)</xref>
 </code></td><td class="summary">
 <p>
-			Field is New
+			Documentation Changed.
 		</p>
 </td>
 </tr>
@@ -243,11 +323,16 @@
 </div>
 <div class="section">
 <div class="header">
-							Package dw.job</div>
-<p>The following classes changed in the <code>dw.job</code> Package. </p>
+							Package dw.net</div>
+<p>The following classes changed in the <code>dw.net</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">JobExecution</span>
+<span class="className">HTTPClient</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
 <div class="section">
 <table>
 <thead>
@@ -258,34 +343,10 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_job_JobExecution.html#class_dw_job_JobExecution/dw_job_JobExecution_getContext_DetailAnchor">getContext()</xref>
+<xref href="../ScriptAPI/class_dw_net_HTTPClient.html#class_dw_net_HTTPClient/dw_net_HTTPClient_setTimeout_Number_DetailAnchor">setTimeout(Number)</xref>
 </code></td><td class="summary">
 <p>
-			Method is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">JobStepExecution</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_job_JobStepExecution.html#class_dw_job_JobStepExecution/dw_job_JobStepExecution_getParameterValue_String_DetailAnchor">getParameterValue(String)</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
+			Documentation Changed.
 		</p>
 </td>
 </tr>
@@ -311,7 +372,53 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_BasketMgr.html#class_dw_order_BasketMgr/dw_order_BasketMgr_createBasketFromOrder_Order_DetailAnchor">createBasketFromOrder(Order)</xref>
+<xref href="../ScriptAPI/class_dw_order_BasketMgr.html#class_dw_order_BasketMgr/dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">OrderMgr</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_searchOrder_String_Object_DetailAnchor">searchOrder(String,
+                Object...)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_searchOrders_String_String_Object_DetailAnchor">searchOrders(String,
+                String,
+                Object...)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_searchOrders_Map_String_DetailAnchor">searchOrders(Map,
+                String)</xref>
 </code></td><td class="summary">
 <p>
 			Documentation Changed.
@@ -323,47 +430,9 @@
 </div>
 </div>
 </div>
-<div class="section">
-<div class="header">
-							Package dw.system</div>
-<p>The following classes changed in the <code>dw.system</code> Package. </p>
-<div class="section">
-<hr>
-<span class="className">Site</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_system_Site.html#class_dw_system_Site/dw_system_Site_getPageMetaTag_String_DetailAnchor">getPageMetaTag(String)</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_system_Site.html#class_dw_system_Site/dw_system_Site_getPageMetaTags_DetailAnchor">getPageMetaTags()</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
 </div>
 </body>
 </html>

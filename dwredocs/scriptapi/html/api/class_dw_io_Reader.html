@@ -564,7 +564,7 @@
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">true if the stream is ready to be read, false otherwise.</span>
+<span class="parameterDesc">true guarantees that the stream is ready to read without waiting for input. A false response means that the stream may or may not block to wait for input. Note that returning false does not guarantee that the next read() will block.</span>
 </div>
 </div>
 <hr>
@@ -595,7 +595,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

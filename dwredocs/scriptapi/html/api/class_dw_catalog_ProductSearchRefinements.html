@@ -48,7 +48,7 @@
  refinements along with the search results and allows customers to "refine"
  the results (i.e. limit the results that are shown) by specifying additional
  product criteria, or "relax" (i.e. broaden) the results after previously
- refining. The three types of product search refinements are:
+ refining. The four types of product search refinements are:
 
  <ul>
  <li><b>Refine By Category:</b> Limit the products to those assigned to
@@ -58,6 +58,8 @@
  given set of values are represented as a single refinement option.</li>
  <li><b>Refine By Price:</b> Limit the products to those whose prices fall in
  a specific range.</li>
+ <li><b>Refine By Promotion:</b> Limit the products to those which are related
+ to a specific promotion.</li>
  </ul>
 
  Rendering a product search refinement UI typically begins with iterating the
@@ -68,7 +70,7 @@
  definition, display the available refinement values by calling
  <a href="class_dw_catalog_ProductSearchRefinements.html#dw_catalog_ProductSearchRefinements_getAllRefinementValues_ProductSearchRefinementDefinition_DetailAnchor">getAllRefinementValues(ProductSearchRefinementDefinition)</a>. Depending
  on the type of the refinement definition, the application must use slightly
- different logic to display the refinement widgets. For all 3 types, methods
+ different logic to display the refinement widgets. For all 4 types, methods
  in <a href="class_dw_catalog_ProductSearchModel.html">ProductSearchModel</a> are used to generate URLs to render
  hyperlinks in the UI. When clicked, these links trigger a call to the Search
  pipelet which in turn applies the appropriate filters to the native search
@@ -99,6 +101,18 @@
 					    <a href="class_dw_catalog_ProductSearchRefinementDefinition.html"><span class="">ProductSearchRefinementDefinition</span></a>
 							&nbsp;(Read Only)<div class="description">The appropriate price refinement definition based on the search
  result. The price refinement definition returned will be the first that
+ can be found traversing the category tree upward starting at the deepest
+ common category of the search result.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>promotionRefinementDefinition
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_catalog_ProductSearchRefinementDefinition.html"><span class="">ProductSearchRefinementDefinition</span></a>
+							&nbsp;(Read Only)<div class="description">The appropriate promotion refinement definition based on the search
+ result. The promotion refinement definition returned will be the first that
  can be found traversing the category tree upward starting at the deepest
  common category of the search result.</div>
 </span>
@@ -145,6 +159,12 @@
 						: 
 					<a href="class_dw_catalog_ProductSearchRefinementDefinition.html"><span class="">ProductSearchRefinementDefinition</span></a></span>
 <div class="description">Returns the appropriate price refinement definition based on the search result.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchRefinements_getPromotionRefinementDefinition_DetailAnchor"><span class="">getPromotionRefinementDefinition</span></a></span>()
+						: 
+					<a href="class_dw_catalog_ProductSearchRefinementDefinition.html"><span class="">ProductSearchRefinementDefinition</span></a></span>
+<div class="description">Returns the appropriate promotion refinement definition based on the search result.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchRefinements_getRefinementValue_ProductSearchRefinementDefinition_String_DetailAnchor"><span class="">getRefinementValue</span></a></span>(definition
@@ -340,6 +360,28 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductSearchRefinements_getPromotionRefinementDefinition_DetailAnchor"></a>
+<div class="detailName 
+						">getPromotionRefinementDefinition</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPromotionRefinementDefinition</span>()
+					 : 
+					<a href="class_dw_catalog_ProductSearchRefinementDefinition.html"><span class="">ProductSearchRefinementDefinition</span></a>
+</div>
+<div class="description">Returns the appropriate promotion refinement definition based on the search
+ result. The promotion refinement definition returned will be the first that
+ can be found traversing the category tree upward starting at the deepest
+ common category of the search result.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">The promotion refinement definition or <code>null</code> if none can be found.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductSearchRefinements_getRefinementValue_ProductSearchRefinementDefinition_String_DetailAnchor"></a>
 <div class="detailName 
 						">getRefinementValue</div>
@@ -457,7 +499,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

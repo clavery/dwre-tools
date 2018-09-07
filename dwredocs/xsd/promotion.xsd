@@ -106,6 +106,7 @@
             <xsd:element name="enabled-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="archived-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="searchable-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="refinable-flag" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
             <xsd:element name="qualifiers" type="PromotionQualifiers" minOccurs="0" maxOccurs="1" >
                 <xsd:annotation>
                     <xsd:documentation>

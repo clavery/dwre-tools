@@ -1,6 +1,14 @@
 
 # Release Notes
 
+## 1.13.15
+
+- update to 18.9 schemas and docs
+
+## 1.13.14
+
+- exception output fix for windows
+
 ## 1.13.13
 
 - regression

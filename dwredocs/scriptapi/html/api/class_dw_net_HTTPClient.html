@@ -51,6 +51,7 @@
  var httpClient : HTTPClient = new HTTPClient();
  var message : String;
  httpClient.open('GET', 'http://www.myinstance.com/feed.xml');
+ httpClient.setTimeout(3000);
  httpClient.send();
  if (httpClient.statusCode == 200)
  {
@@ -1168,7 +1169,10 @@
  for a new client is the maximum timeout value.
  <p/>
  This method can be called at any time, and will affect the next connection made with this client. It is not
- possible to set the timeout for an open connection.</div>
+ possible to set the timeout for an open connection.
+ <p/>
+ You should always set a reasonable timeout (e.g., a few seconds). Allowing connections to run long can result
+ in thread exhaustion.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1182,7 +1186,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

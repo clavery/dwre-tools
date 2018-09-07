@@ -79,7 +79,13 @@
  valid for the configured basket lifetime.
  <p/>
  The current basket, if one exists, is usually updated by the method. In particular the last-modified date is
- updated.
+ updated. The lifetime of a basket can be extended in 2 ways:
+ <ul>
+ <li>The basket is modified in some way, e.g. a product is added resulting in the basket total being newly
+ calculated. This results in the basket lifetime being reset.</li>
+ <li>The basket has not been modified for 60 minutes, then using this method to access the basket will also
+ reset the basket lifetime.</li>
+ </ul>
  <p/>
  Personal data held inside the basket such as addresses, email addresses and payment settings is associated with
  the customer to whom the basket belongs. If the basket being updated belongs to a different customer this data is
@@ -467,7 +473,13 @@
  valid for the configured basket lifetime.
  <p/>
  The current basket, if one exists, is usually updated by the method. In particular the last-modified date is
- updated.
+ updated. The lifetime of a basket can be extended in 2 ways:
+ <ul>
+ <li>The basket is modified in some way, e.g. a product is added resulting in the basket total being newly
+ calculated. This results in the basket lifetime being reset.</li>
+ <li>The basket has not been modified for 60 minutes, then using this method to access the basket will also
+ reset the basket lifetime.</li>
+ </ul>
  <p/>
  Personal data held inside the basket such as addresses, email addresses and payment settings is associated with
  the customer to whom the basket belongs. If the basket being updated belongs to a different customer this data is
@@ -560,7 +572,7 @@
 </div>
 <div class="copyright">
       		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.8<div class="clear"></div>
+			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>
