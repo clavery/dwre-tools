@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.13.16
+
+- fixes initial compatibility issue with CCDX and account manager based federated logins/account merge requests and CSRF tokens
+
 ## 1.13.15
 
 - update to 18.9 schemas and docs

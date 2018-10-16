@@ -43,7 +43,7 @@ def login_business_manager(env, session):
                                 LoginForm_RegistrationDomain="Sites",
                                 login=""), timeout=10)
     response.raise_for_status()
-    csrf_match = CSRF_FINDER.search(response.text)
+
     if "Please create a new password." in response.text:
         raise RuntimeError("Password Expired; New password required")
 
@@ -53,6 +53,8 @@ def login_business_manager(env, session):
     if "This user is currently inactive.<br />Please contact the administrator." in response.text:
         raise RuntimeError("Inactive account")
 
+    csrf_match = CSRF_FINDER.search(response.text)
+
     if csrf_match:
         csrf_token = csrf_match.group(1)
         session.params['csrf_token'] = csrf_token
@@ -61,6 +63,23 @@ def login_business_manager(env, session):
         print(response.text)
         raise RuntimeError("Can't find CSRF")
 
+    # ccdx check for merge request and skip
+    if "Log In Without Linking Accounts" in response.text and "skipMerge" in response.text:
+        response = session.post("https://{}/on/demandware.store/Sites-Site/default/ViewLogin-ProcessMerge".format(env["server"]),
+                                data=dict(
+                                    source="MERGE_ON_LOGIN",
+                                    skipMerge='',), timeout=10)
+        response.raise_for_status()
+
+    csrf_match = CSRF_FINDER.search(response.text)
+
+    if csrf_match:
+        csrf_token = csrf_match.group(1)
+        session.params['csrf_token'] = csrf_token
+        session.headers['origin'] = "https://%s" % env["server"]
+    else:
+        print(response.text)
+        raise RuntimeError("Can't find CSRF")
 
 def select_site(env, session, site_uuid):
     data = {

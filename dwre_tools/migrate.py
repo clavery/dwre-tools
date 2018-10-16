@@ -27,11 +27,10 @@ from colorama import Fore, Back, Style
 
 from .validations import validate_xml, validate_file, validate_directory
 from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST, RERUN_MIGRATIONS_ON_UPGRADE, CARTRIDGE_VERSION, MIGRATION_FILE
-from .bmtools import get_current_versions, login_business_manager, wait_for_import
+from .bmtools import get_current_versions, login_business_manager, wait_for_import, get_export_zip
 from .utils import directory_to_zip
 from .index import reindex
 from .exc import NotInstalledException
-from .export import get_export_zip
 from .cartridge import update_bm_cartridge_server
 
 
