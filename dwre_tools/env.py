@@ -49,12 +49,12 @@ def save_config(config):
         except ImportError as e:
             print("You must have GNUpg installed and the following python module: pip install python-gnupg", file=sys.stderr)
             sys.exit(1)
-        with open(os.path.join(home, ".dwre.json.gpg"), 'wb') as f:
-            encrypted = gpg.encrypt(config_data, ['B050C1999B5B4181'])
-            if encrypted.ok:
+        encrypted = gpg.encrypt(config_data, ['B050C1999B5B4181'])
+        if encrypted.ok:
+            with open(os.path.join(home, ".dwre.json.gpg"), 'wb') as f:
                 f.write(encrypted.data)
-            else:
-                raise RuntimeError(encrypted.status)
+        else:
+            raise RuntimeError(encrypted.status)
     else:
         with open(os.path.join(home, ".dwre.json"), 'wb') as f:
             f.write(config_data.encode('utf-8'))

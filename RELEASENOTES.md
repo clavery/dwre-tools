@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.13.18
+
+- update to 18.10 schemas
+- bug fix gpg encryption
+
 ## 1.13.17
 
 - dependency issue
