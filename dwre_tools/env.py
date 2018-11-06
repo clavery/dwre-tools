@@ -31,7 +31,9 @@ def load_config():
         with open(os.path.join(home, ".dwre.json.gpg"), 'rb') as f:
             decrypted = gpg.decrypt_file(f)
             if decrypted.ok:
-                return json.loads(str(decrypted))
+                config = json.loads(str(decrypted))
+                config['gpg_key_id'] = decrypted.key_id
+                return config
             else:
                 raise RuntimeError(decrypted.status)
     else:
@@ -49,7 +51,7 @@ def save_config(config):
         except ImportError as e:
             print("You must have GNUpg installed and the following python module: pip install python-gnupg", file=sys.stderr)
             sys.exit(1)
-        encrypted = gpg.encrypt(config_data, ['B050C1999B5B4181'])
+        encrypted = gpg.encrypt(config_data, config.get('gpg_key_id'))
         if encrypted.ok:
             with open(os.path.join(home, ".dwre.json.gpg"), 'wb') as f:
                 f.write(encrypted.data)
