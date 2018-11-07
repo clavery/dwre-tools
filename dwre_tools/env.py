@@ -3,6 +3,7 @@ from __future__ import print_function
 import json
 import os
 import sys
+import keyring
 
 
 def get_env_from_dw_json():
@@ -81,7 +82,7 @@ def get_default_environment(project):
     if not default_env and len(list(project["environments"].keys())) == 1:
         default_env = list(project["environments"].keys())[0]
     if default_env:
-        return (default_env, project["environments"][default_env])
+        return (default_env, get_environment(default_env, project))
     return (None, None)
 
 
@@ -91,4 +92,14 @@ def get_project(name):
 
 
 def get_environment(name, project):
-    return project["environments"][name]
+    env = project["environments"][name]
+
+    if env and env.get('useAccountManager'):
+        config = load_config()
+        account_manager = config.get('accountManager')
+        if account_manager:
+            env["username"] = account_manager.get('username');
+            env["password"] = account_manager.get('password');
+            env["useAccountManager"] = True
+
+    return env

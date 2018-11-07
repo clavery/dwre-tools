@@ -80,6 +80,9 @@ The tools requires at least one environment setup in your `.dwre.json` file.
 
 ```javascript
 {
+  "accountManager": {
+    "username": "clavery@pixelmedia.com"
+  }.
   "defaultProject" : "vbi",
   "projects" : {
     "vbi" : {
@@ -87,7 +90,7 @@ The tools requires at least one environment setup in your `.dwre.json` file.
       "environments": {
         "dev02" : {
           "username" : "clavery",
-          "password" : "password",
+          "password" : "OPTIONAL",
           "codeVersion" : "clavery",
           "server" : "dev02-us-vibram.demandware.net"
         }
@@ -96,6 +99,8 @@ The tools requires at least one environment setup in your `.dwre.json` file.
   }
 }
 ```
+
+**Note: if you omit your account manager or environment password it will be prompted on the command line and the option to store it in your login keychain will be presented**
 
 ## Usage
 

@@ -6,10 +6,14 @@ import yaml
 import re
 import zipfile
 import io
+from urllib.parse import quote, urlencode, urlparse, parse_qs
 
 from .exc import NotInstalledException
 
 CSRF_FINDER = re.compile(r"'csrf_token'\s*,(?:\s|\n)*'(.*?)'", re.MULTILINE)
+OPENID_CONNECT_ENDPOINT = "/on/demandware.servlet/dw/oidc/openid_connect_login"
+ACCOUNT_MANAGER_JSON_AUTHENTICATE = "https://account.demandware.com/dwsso/json/realms/root/authenticate"
+ACCOUNT_MANAGER_COOKIE_NAME = "dwAccountManager"
 
 
 def get_current_versions(env, session):
@@ -34,7 +38,71 @@ def get_current_versions(env, session):
                 cartridge_version, hotfixes)
 
 
+
+def login_via_account_manager(env, session):
+    data = dict(
+        source='LOGIN_DEFAULT',
+        supportLogin='true',
+        amLogin='true'
+    )
+    resp = session.post(f"https://{env['server']}{OPENID_CONNECT_ENDPOINT}", data=data, allow_redirects=False)
+    resp.raise_for_status()
+    redirect_location = resp.headers.get('location')
+    assert(redirect_location)
+    query_string = parse_qs(urlparse(redirect_location).query, keep_blank_values=True)
+
+    # Do not prompt for oauth permissions; implicit allow
+    if 'prompt' in query_string:
+        del query_string['prompt']
+    query_string['decision'] = "Allow"
+    redirect = "https://account.demandware.com/dwsso/oauth2/authorize?" + urlencode(query_string, doseq=True)
+
+    # login to forgerock AM via restful interface to obtain token
+    headers = {
+        "X-OpenAM-Username": env["username"],
+        "X-OpenAM-Password": env["password"]
+    }
+    data = {
+    }
+    params = {
+        "goto": redirect # not entirely necessary but may be useful for auditing
+    }
+
+    resp = session.post(ACCOUNT_MANAGER_JSON_AUTHENTICATE, json=data, headers=headers, params=params)
+    resp.raise_for_status()
+
+    token = resp.json().get('tokenId')
+    success_url = resp.json().get('successUrl')
+
+    # obtain access token to sandbox via restfully obtained tokenid
+    headers = {
+        ACCOUNT_MANAGER_COOKIE_NAME: token,
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie" : "%s=%s" % (ACCOUNT_MANAGER_COOKIE_NAME, token)
+    }
+    resp = session.get(success_url, allow_redirects=False, headers=headers)
+    resp.raise_for_status()
+
+    redirect_url = resp.headers.get('location')
+
+    resp = session.get(redirect_url)
+    resp.raise_for_status()
+
+    csrf_match = CSRF_FINDER.search(resp.text)
+
+    if csrf_match:
+        csrf_token = csrf_match.group(1)
+        session.params['csrf_token'] = csrf_token
+        session.headers['origin'] = "https://%s" % env["server"]
+    else:
+        print(response.text)
+        raise RuntimeError("Can't find CSRF")
+
+
 def login_business_manager(env, session):
+    if env.get('useAccountManager'):
+        return login_via_account_manager(env, session)
+
     response = session.post("https://{}/on/demandware.store/Sites-Site/default/ViewApplication-ProcessLogin".format(env["server"]),
                             data=dict(
                                 LoginForm_Login=env["username"],
@@ -43,6 +111,9 @@ def login_business_manager(env, session):
                                 LoginForm_RegistrationDomain="Sites",
                                 login=""), timeout=10)
     response.raise_for_status()
+
+    if 'redirectform' in response.text:
+        return login_via_account_manager(env, session)
 
     if "Please create a new password." in response.text:
         raise RuntimeError("Password Expired; New password required")
@@ -60,7 +131,6 @@ def login_business_manager(env, session):
         session.params['csrf_token'] = csrf_token
         session.headers['origin'] = "https://%s" % env["server"]
     else:
-        print(response.text)
         raise RuntimeError("Can't find CSRF")
 
     # ccdx check for merge request and skip

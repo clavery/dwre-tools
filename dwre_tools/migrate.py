@@ -26,7 +26,9 @@ from collections import defaultdict
 from colorama import Fore, Back, Style
 
 from .validations import validate_xml, validate_file, validate_directory
-from .migratemeta import TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION, SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST, RERUN_MIGRATIONS_ON_UPGRADE, CARTRIDGE_VERSION, MIGRATION_FILE
+from .migratemeta import (TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION,
+                          SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST, RERUN_MIGRATIONS_ON_UPGRADE,
+                          CARTRIDGE_VERSION, MIGRATION_FILE)
 from .bmtools import get_current_versions, login_business_manager, wait_for_import, get_export_zip
 from .utils import directory_to_zip
 from .index import reindex
@@ -55,7 +57,7 @@ def get_install_zip(env, bmsession, webdavsession):
     bm_cartridge_path = preferences.xpath(".//P:standard-preferences/P:all-instances/P:preference[@preference-id='CustomCartridges']", namespaces=NSMAP_PREFS)
     if not bm_cartridge_path:
         raise Exception("Cannot automatically install DWRE tools; must be done manually")
-    
+
     if not bm_cartridge_path[0].text or "bm_dwremigrate" not in bm_cartridge_path[0].text:
         print("Updating BM cartridge path preferences...")
         # create preferences.xml with updated cartridge path
@@ -78,7 +80,7 @@ def get_install_zip(env, bmsession, webdavsession):
         raise Exception("Cannot find 'Administrator' access role; DWRE tools must be installed manually")
     admin_access_role = admin_access_role[0]
     migration_access = admin_access_role.xpath(".//A:access-controls/A:access-control[@resource-path='BUSINESSMGR/CustomMenu/Sites/-/dwremigrate_menu']", namespaces=NSMAP_ACCESS_ROLE)
-    
+
     if not migration_access or migration_access[0].attrib['permission'] != 'ACCESS':
         print("Adding bm_dwremigrate access role...")
         # need to add access to BM cart
@@ -111,7 +113,6 @@ def get_bootstrap_zip():
 
     bootstrap_package_zip.writestr("{}/version.txt".format(dest_file), VERSION)
     bootstrap_package_zip.writestr("{}/preferences.xml".format(dest_file), PREFERENCES)
-    #bootstrap_package_zip.writestr("{}/csrf-whitelists.xml".format(dest_file), WHITELIST)
     bootstrap_package_zip.writestr("{}/meta/system-objecttype-extensions.xml".format(dest_file), BOOTSTRAP_META)
     bootstrap_package_zip.close()
 
@@ -771,7 +772,7 @@ def set_migration(env, migrations_dir, migration_name):
     login_business_manager(env, bmsession)
 
     assert migration_name in migrations, "Cannot find migration"
-    
+
     # TODO slice path at migrations set on bm
     new_path = path[:path.index(migration_name)+1]
 

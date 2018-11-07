@@ -1,6 +1,19 @@
 
 # Release Notes
 
+## 1.14.0
+
+- provisional support for account manager logins for supporting sandboxes (i.e. CCDX/AWS)
+    - auto detects when necessary or utilizes environment configuration (`useAccountManager=true`)
+- fixes bug in password input when password is not in environment configuration
+- adds support for retrieving and storing passwords from the users login keychain
+    - should work on macos, windows and linux
+    - will ask to store passwords typed in via the password input (requires a terminal)
+    - these can be managed with the `dwre pw` set of commands (it will choose the system keychain when the password is NOT stored in `dwre.json`)
+- fixes issues with hardcoded public key in GPG support when saving GPG encrypted `dwre.json`
+- adds top level configuration key (`accountManager`) to `dwre.json` for storing account manager username and password (also supports keychain) to avoid repeating in environments;
+    - `useAccountManager` must be `true` in the environment to use this global configuration
+
 ## 1.13.18
 
 - update to 18.10 schemas

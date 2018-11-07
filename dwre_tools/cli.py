@@ -23,6 +23,7 @@ from .zip import zip_command
 from .watch import watch_command
 
 from colorama import init, deinit
+import keyring
 
 
 def version():
@@ -73,8 +74,22 @@ def get_env_from_args(args):
     if "verify" not in env:
         env["verify"] = not args.noverify
 
-    if not env["password"]:
-        get_env_password(env)
+    if not env.get('password'):
+        # attempt to retrieve from keyring
+        key = "dwre-%s" % (env["server"])
+        if env.get('useAccountManager'):
+            key = "dwre-account-manager"
+        keyring_password = keyring.get_password(key, env["username"])
+        if not keyring_password:
+            if sys.stdout.isatty():
+                password = get_env_password(env)
+                should_save = input("Save password to your login keychain [Y/n]? ")
+                if should_save.strip().lower() == 'y':
+                    keyring.set_password(key, env["username"], password)
+            else:
+                raise RuntimeError("Password not provided and cannot ask for input")
+        else:
+            env["password"] = keyring_password
 
     return env
 
@@ -132,7 +147,9 @@ def reindex_cmd_handler(args):
 
 
 def get_env_password(env):
-    env["password"] = getpass.getpass("{}@{} password: ".format(env["username"], env["server"]))
+    password = getpass.getpass("{}@{} password: ".format(env["username"], env["server"]))
+    env["password"] = password
+    return password
 
 
 def tail_cmd_handler(args):
