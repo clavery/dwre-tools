@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.14.1
+
+- decode `tail` logs as utf-8 with less strict replacement
+
 ## 1.14.0
 
 - provisional support for account manager logins for supporting sandboxes (i.e. CCDX/AWS)

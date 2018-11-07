@@ -83,7 +83,7 @@ def tail_logs(env, filters, interval):
     # get initial for last line purposes (for some reason this returns diff content lengths so we
     # can't use it for the initial length calc
     tail_requests = [requests.get(url, auth=(username, password), verify=verify, cert=cert) for url in urls]
-    [tail_log_file(log[0], r.text) for r, log in zip(tail_requests, log_files)]
+    [tail_log_file(log[0], r.content.decode('utf8', errors='replace')) for r, log in zip(tail_requests, log_files)]
 
     try:
         while True:
