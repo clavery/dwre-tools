@@ -11,6 +11,7 @@ from urllib.parse import quote, urlencode, urlparse, parse_qs
 from .exc import NotInstalledException
 
 CSRF_FINDER = re.compile(r"'csrf_token'\s*,(?:\s|\n)*'(.*?)'", re.MULTILINE)
+CSRF_FINDER2 = re.compile(r"csrf_token=(.*?)\"", re.MULTILINE)
 OPENID_CONNECT_ENDPOINT = "/on/demandware.servlet/dw/oidc/openid_connect_login"
 ACCOUNT_MANAGER_JSON_AUTHENTICATE = "https://account.demandware.com/dwsso/json/realms/root/authenticate"
 ACCOUNT_MANAGER_COOKIE_NAME = "dwAccountManager"
@@ -89,13 +90,15 @@ def login_via_account_manager(env, session):
     resp.raise_for_status()
 
     csrf_match = CSRF_FINDER.search(resp.text)
+    if not csrf_match:
+        csrf_match = CSRF_FINDER2.search(resp.text)
 
     if csrf_match:
         csrf_token = csrf_match.group(1)
         session.params['csrf_token'] = csrf_token
         session.headers['origin'] = "https://%s" % env["server"]
     else:
-        print(response.text)
+        print(resp.text)
         raise RuntimeError("Can't find CSRF")
 
 

@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.14.2
+
+- bugfix error in account manager login
+
 ## 1.14.1
 
 - decode `tail` logs as utf-8 with less strict replacement
