@@ -1,6 +1,14 @@
 
 # Release Notes
 
+## 1.14.4
+
+- support zip files with `migrate run` subcommand
+
+## 1.14.3
+
+- issue with on demand sandbox login
+
 ## 1.14.2
 
 - bugfix error in account manager login

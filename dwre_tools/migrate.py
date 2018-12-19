@@ -626,6 +626,13 @@ def run_all(env, migrations_dir, test=False):
 
 
 def run_migration(env, directory, name=None):
+    tempdir = None
+    if os.path.isfile(directory):
+        tempdir = tempfile.TemporaryDirectory()
+        with zipfile.ZipFile(directory, 'r') as stored_zip:
+            stored_zip.extractall(path=tempdir.name)
+        directory = os.path.join(tempdir.name)
+
     webdavsession = requests.session()
     webdavsession.auth = (env["username"], env["password"],)
     webdavsession.verify = env["verify"]
