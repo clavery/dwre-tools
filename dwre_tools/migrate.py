@@ -631,7 +631,9 @@ def run_migration(env, directory, name=None):
         tempdir = tempfile.TemporaryDirectory()
         with zipfile.ZipFile(directory, 'r') as stored_zip:
             stored_zip.extractall(path=tempdir.name)
-        directory = os.path.join(tempdir.name)
+        _, filename = os.path.split(directory)
+        basename, _ = os.path.splitext(filename)
+        directory = os.path.join(tempdir.name, basename)
 
     webdavsession = requests.session()
     webdavsession.auth = (env["username"], env["password"],)

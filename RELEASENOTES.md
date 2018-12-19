@@ -1,9 +1,10 @@
 
 # Release Notes
 
-## 1.14.4
+## 1.14.5
 
 - support zip files with `migrate run` subcommand
+- double time to wait for imports
 
 ## 1.14.3
 
