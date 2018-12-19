@@ -37,11 +37,11 @@ sudo apt-get update
 sudo apt-get install python3.6 python3.6-dev libssl-dev
 curl https://bootstrap.pypa.io/get-pip.py | sudo python3.6
 sudo -H python3.6 -mpip install pip==8.1.1
-python3.6 -mpip install https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip
+python3.6 -mpip install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip
 ```
 
-To upgrade, `python3.6 -mpip install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip`
-If upgrade fails, please `apt-get update` first. Use `sudo` if that was used for the original install.
+To upgrade, rerun the last line above. Use `sudo` if that was used for the original install.
+If upgrade fails, please `apt-get update` first. 
 
 
 ### Manual Method
