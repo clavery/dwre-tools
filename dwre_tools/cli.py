@@ -212,6 +212,7 @@ def watch_cmd_handler(args):
 
 
 parser = ArgumentParser(description="Demandware/SFCC Tools")
+parser.add_argument('--log', help="Log Level (default: ERROR)", default="ERROR")
 parser.add_argument('-p', '--project', help="DWRE Project Name")
 parser.add_argument('-e', '--env', help="DWRE Environment Name")
 parser.add_argument('--server', help="DWRE server name; overrides env settings")
@@ -352,6 +353,7 @@ watch_cmd.set_defaults(nozip=False)
 def main():
     import os
     import sys
+    import logging
     init()  # init colors
     if not os.isatty(sys.stdout.fileno()):
         deinit()
@@ -361,6 +363,9 @@ def main():
     requests.packages.urllib3.disable_warnings()
 
     args = parser.parse_args()
+    if hasattr(args, 'log'):
+        level = args.log
+        logging.basicConfig(stream=sys.stderr, level=getattr(logging, level))
 
     if hasattr(args, 'func'):
         args.func(args)
