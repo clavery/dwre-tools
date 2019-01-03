@@ -108,7 +108,7 @@ def sync_command(env, delete_code_version, cartridge_location):
     total = zip_file.getbuffer().nbytes
     progress_format = create_default_formatters()
     progress_format[6] = FileSizeProgress(4096, total)
-    if sys.stdout.isatty():
+    if sys.stdout.isatty() and sys.stdin.isatty():
         with ProgressBar(formatters=progress_format) as pb:
             response = webdavsession.put(dest_url,
                                          data=pb(StreamingIO(zip_file, chunk=4096),

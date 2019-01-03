@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.14.6
+
+- tty detection for sync
+
 ## 1.14.5
 
 - support zip files with `migrate run` subcommand
