@@ -29,6 +29,19 @@ Later you can `brew update` and `brew upgrade dwre-tools` to get newer versions
 
 ### Windows Subsystem For Linux
 
+The following is probably the best way to ensure installability on Linuxbrew (Homebrew > 1.9.0). Following installation instructions here: [https://github.com/Homebrew/brew/blob/master/docs/Linuxbrew.md](https://github.com/Homebrew/brew/blob/master/docs/Linuxbrew.md)
+
+```
+# install dependencies at the system level
+$ sudo apt-get install build-essential curl file git libffi-dev libxml2-dev
+$ brew tap pixelmedia/pxl-homebrew git@bitbucket.org:pixelmedia/pxl-homebrew.git
+# or for https:
+$ brew tap pixelmedia/pxl-homebrew https://bitbucket.org/pixelmedia/pxl-homebrew.git
+$ brew install dwre-tools
+```
+
+#### Manual WSL Installation (old)
+
 We want to first install python3.6 or 3.7. If you have that already you can ignore the first 3 commands below.
 
 ```
