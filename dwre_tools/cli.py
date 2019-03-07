@@ -57,6 +57,8 @@ def get_env_from_args(args):
                 "username": args.username,
                 "password": args.password
             }
+            env["useAccountManager"] = args.accountmanager
+
 
     if args.clientcert:
         assert args.clientkey, "must specify a private key with certificate"
@@ -218,6 +220,7 @@ parser.add_argument('-e', '--env', help="DWRE Environment Name")
 parser.add_argument('--server', help="DWRE server name; overrides env settings")
 parser.add_argument('--username', help="DWRE server username; overrides env settings")
 parser.add_argument('--password', help="DWRE server password; overrides env settings")
+parser.add_argument('--accountmanager', help="Use Account Manager Login Method", action="store_true")
 parser.add_argument('--clientcert', help="SSL Client certificate")
 parser.add_argument('--clientkey', help="SSL Client private key")
 parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
@@ -226,6 +229,7 @@ parser.add_argument('--codeversion', help="Code version override")
 version_str = version()
 parser.add_argument('--version', action='version', version=version_str)
 parser.set_defaults(noverify=False)
+parser.set_defaults(accountmanager=False)
 
 cmd_parser = parser.add_subparsers(title="Commands")
 

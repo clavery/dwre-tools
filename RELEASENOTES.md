@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.14.8
+
+- allow forcing of account manager login
+
 ## 1.14.6
 
 - tty detection for sync
