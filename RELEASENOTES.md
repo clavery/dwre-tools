@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.14.9
+
+- fix bug in `reindex` command; requires `upgrade-bm-cartridge` 
+
 ## 1.14.8
 
 - allow forcing of account manager login
