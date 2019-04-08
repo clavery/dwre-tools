@@ -28,7 +28,7 @@
 <div class="className 
 				">
 			Pipelet AddProductToBasket</div>
-<div class="pipeletDesc">Adds a Product to the Basket. The pipelet creates and returns a ProductLineItem, by assigning the specified Product and Quantity to the specified Basket. If this process fails, then the pipelet exits with an ERROR.  Otherwise the pipelet adds the new ProductLineItem to a Shipment that is located in the following manner: If a Shipment is provided then it is used, otherwise the standard Shipment in the Basket is used.  If none exists, then a new one is created and assigned to the Basket. Instead of providing a Product it is possible to provide a ProductListItem, and then a ProductLineItem is created with a reference to the ProductListItem. This reference is used later, during order creation to create ProductListItemPurchase object, i.e. to update the count of purchased items. 
+<div class="topLevelDescription">Adds a Product to the Basket. The pipelet creates and returns a ProductLineItem, by assigning the specified Product and Quantity to the specified Basket. If this process fails, then the pipelet exits with an ERROR.  Otherwise the pipelet adds the new ProductLineItem to a Shipment that is located in the following manner: If a Shipment is provided then it is used, otherwise the standard Shipment in the Basket is used.  If none exists, then a new one is created and assigned to the Basket. Instead of providing a Product it is possible to provide a ProductListItem, and then a ProductLineItem is created with a reference to the ProductListItem. This reference is used later, during order creation to create ProductListItemPurchase object, i.e. to update the count of purchased items. 
 
 If the product is already in the basket, the pipelet either increments the quantity of the existing product line item or creates a new product line item, based on the site preference 'Add Product Behavior'. For option products and product bundles containing variation masters, the pipelet creates a new product line item regardless of the site preference.</div>
 <div class="parameters">
@@ -142,8 +142,10 @@ The newly created product line item.
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 </body>
 </html>

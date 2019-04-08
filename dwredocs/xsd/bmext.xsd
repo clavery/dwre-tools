@@ -193,6 +193,7 @@
     
     <xsd:complexType name="complexType.Feature" mixed="false">
         <xsd:attribute name="id" type="simpleType.NonEmptyString.4000"/>
+		<xsd:attribute name="enabled" type="xsd:boolean" default="true"/>
     </xsd:complexType>
     
     <xsd:simpleType name="simpleType.ValueInputType">

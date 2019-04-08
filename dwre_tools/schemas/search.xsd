@@ -310,7 +310,13 @@
             <xsd:enumeration value="product"></xsd:enumeration>
             <xsd:enumeration value="content"></xsd:enumeration>
             <xsd:enumeration value="redirect"></xsd:enumeration>
-            <xsd:enumeration value="spelling"></xsd:enumeration>
+            <xsd:enumeration value="spelling">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        Deprecated. Spelling index is no longer supported by the platform.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
             <xsd:enumeration value="suggest"></xsd:enumeration>
             <xsd:enumeration value="synonym"></xsd:enumeration>
             <xsd:enumeration value="catalog"></xsd:enumeration>

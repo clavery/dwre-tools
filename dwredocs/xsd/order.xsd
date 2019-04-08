@@ -22,9 +22,15 @@
     <xsd:simpleType name="simpleType.Version">
         <xsd:restriction base="xsd:string">
             <xsd:annotation>
-                <xsd:documentation>The export version which was used for the export. Since 18.5 </xsd:documentation>
+                <xsd:documentation>
+                The export version which was used for the export. Since 18.5. Using version 19.2 
+                leads to a check during order import that guest element exist on customer node. 
+                Specifying the guest flag brings additional safety because it reduces the 
+                likelihood that orders are attached to another customer.
+                </xsd:documentation>
             </xsd:annotation>
             <xsd:enumeration value="18.5" />
+            <xsd:enumeration value="19.2" />
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -309,7 +315,7 @@
         <xsd:sequence>
             <xsd:element name="guest" type="xsd:boolean" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
-                    <xsd:documentation>Was the order placed by a guest.</xsd:documentation>
+                    <xsd:documentation>Was the order placed by a guest. Required with version 19.2 </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="customer-no" type="simpleType.Generic.String.100" minOccurs="0" maxOccurs="1"></xsd:element>

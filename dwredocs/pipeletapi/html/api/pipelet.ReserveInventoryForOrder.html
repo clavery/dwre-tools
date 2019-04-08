@@ -28,7 +28,7 @@
 <div class="className 
 				">
 			Pipelet ReserveInventoryForOrder</div>
-<div class="pipeletDesc"><p>This pipelet is used in the order creation pipeline to reserve inventory for all products contained in the specified Basket. The pipelet should be executed before any order creation actions - such as payment authorization - take place, and ensures that all products are still available once the order is actually being created (pipelet CreateOrder). Inventory transactions are automatically finalized by pipelet CreateOrder, i.e. reservations are converted into actual bookings. If CreateOrder is not called for a basket with reserved inventory items, reservations for this basket will automatically expire after 10 minutes. Also, if the pipelet is called for basket that already has reserved inventory items, all previous reservations are removed and new reservations are made. Inventory reservations do not count towards the current stock level. So the only use case for this pipelet should be the inventory reservation in context of an order creation.</p>
+<div class="topLevelDescription"><p>This pipelet is used in the order creation pipeline to reserve inventory for all products contained in the specified Basket. The pipelet should be executed before any order creation actions - such as payment authorization - take place, and ensures that all products are still available once the order is actually being created (pipelet CreateOrder). Inventory transactions are automatically finalized by pipelet CreateOrder, i.e. reservations are converted into actual bookings. If CreateOrder is not called for a basket with reserved inventory items, reservations for this basket will automatically expire after 10 minutes. Also, if the pipelet is called for basket that already has reserved inventory items, all previous reservations are removed and new reservations are made. Inventory reservations do not count towards the current stock level. So the only use case for this pipelet should be the inventory reservation in context of an order creation.</p>
 <p>For product bundles, inventory is reserved for all bundled products. If the bundle has its own inventory record, inventory is also reserved for the bundle itself.</p>
 <p>The following conditions must be met for the pipelet to succeed, otherwise the pipelet will return on the ERROR exit:</p><ul>
 <li>an inventory list must be assigned to the current site</li>
@@ -60,8 +60,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <span class="newTitle">API Quotas</span>
 <p>
             API quotas may define limits on number of object instances, object sizes, runtimes, number of executions per page, or
-            prevent the execution of a Demandware Script method or pipelet in the storefront.
+            prevent the execution of a B2C Commerce Script method or pipelet in the storefront.
         </p>
 <p>
             API quotas are organized into the following functional categories:
@@ -96,9 +96,7 @@
 <li>
 <b>Log file ID:</b> abtest.concurrentTestSegments</li>
 <li>
-<b>Description:</b> The maximum number of concurrent A/B test segments taking on participants for a site. When this
-            threshold is reached, other A/B tests will not take on participants.
-        </li>
+<b>Description:</b> The maximum number of concurrent A/B test segments taking on participants for a site. When this threshold is reached, other A/B tests won't take on participants.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -124,7 +122,7 @@
 <li>
 <b>Log file ID:</b> api.basket.addRemoveInSameRequest</li>
 <li>
-<b>Description:</b> Adding and removing a product to a basket in one request, to calculate promotion, shipping or other information is not allowed.</li>
+<b>Description:</b> Adding and removing a product to a basket in one request, to calculate promotion, shipping or other information isn't allowed.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -166,7 +164,7 @@
 <li>
 <b>Log file ID:</b> api.basket.productLineItemQuantity</li>
 <li>
-<b>Description:</b> The maximum quantity value for a ProductLineItem.</li>
+<b>Description:</b> The maximum quantity value for a product line item.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -276,7 +274,7 @@
 <li>
 <b>Log file ID:</b> api.dw.customer.AddressBook.createAddress()</li>
 <li>
-<b>Description:</b> Allowed number of customer addresses, which can be created in one page.</li>
+<b>Description:</b> The maximum number of customer addresses which can be created in one page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -299,7 +297,7 @@
 <li>
 <b>Log file ID:</b> api.dw.customer.AddressBook.removeAddress()</li>
 <li>
-<b>Description:</b> Allowed number of customer addresses, which can be deleted in one page.</li>
+<b>Description:</b> The maximum number of customer addresses which can be deleted in one page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -322,7 +320,7 @@
 <li>
 <b>Log file ID:</b> api.dw.customer.CustomerMgr.createCustomer()</li>
 <li>
-<b>Description:</b> Allowed number of customer records, which can be created in one page.</li>
+<b>Description:</b> The maximum number of customer records which can be created in one page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -353,7 +351,7 @@
 <li>
 <b>Log file ID:</b> api.dw.customer.CustomerMgr.removeCustomer()</li>
 <li>
-<b>Description:</b> Allowed number of customer records, which can be deleted in one page.</li>
+<b>Description:</b> The maximum number of customer records which can be deleted in one page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -382,7 +380,7 @@
 <li>
 <b>Log file ID:</b> api.pipelet.CreateCustomer</li>
 <li>
-<b>Description:</b> Allowed number of customer records, which can be created in one page.</li>
+<b>Description:</b> The number of customer records which can be created in one page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -411,7 +409,7 @@
 <li>
 <b>Log file ID:</b> api.pipelet.CreateCustomerAddress</li>
 <li>
-<b>Description:</b> Allowed number of customer addresses, which can be created in one page.</li>
+<b>Description:</b> The maximum number of customer addresses which can be created in one page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -440,7 +438,7 @@
 <li>
 <b>Log file ID:</b> api.pipelet.RemoveCustomer</li>
 <li>
-<b>Description:</b> Allowed number of customer records, which can be deleted in one page.</li>
+<b>Description:</b> The maximum number of customer records which can be deleted in one page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -469,7 +467,7 @@
 <li>
 <b>Log file ID:</b> api.pipelet.RemoveCustomerAddress</li>
 <li>
-<b>Description:</b> Allowed number of customer addresses, which can be deleted in one page.</li>
+<b>Description:</b> The maximum number of customer addresses which can be deleted in one page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -571,7 +569,7 @@
 <li>
 <b>Log file ID:</b> api.dw.object.CustomObjectMgr.create()</li>
 <li>
-<b>Description:</b> Number of custom objects that can be created in one storefront page.</li>
+<b>Description:</b> The maximum number of custom objects which can be created in one Storefront page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -602,7 +600,7 @@
 <li>
 <b>Log file ID:</b> api.dw.object.CustomObjectMgr.remove()</li>
 <li>
-<b>Description:</b> Number of custom objects that can be removed in one storefront page.</li>
+<b>Description:</b> The maximum number of custom objects which can be removed in one Storefront page.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -637,7 +635,7 @@
 <li>
 <b>Log file ID:</b> api.dw.io.CSVStreamReader.readAll().size</li>
 <li>
-<b>Description:</b> The maximum number of lines in a CSV file, which can be read with dw.io.CSVStreamReader.readAll().</li>
+<b>Description:</b> The maximum number of lines in a CSV file which can be read with dw.io.CSVStreamReader.readAll().</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1035,7 +1033,7 @@
 <li>
 <b>Log file ID:</b> api.dw.io.Reader.getLines().size</li>
 <li>
-<b>Description:</b> The maximum number of lines that can be read with dw.io.Reader.readLines() in one call.</li>
+<b>Description:</b> The maximum number of lines which can be read with dw.io.Reader.readLines() in one call.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1056,7 +1054,7 @@
 <li>
 <b>Log file ID:</b> api.dw.io.Reader.getString().length</li>
 <li>
-<b>Description:</b> The maximum number of characters, which can be read with dw.io.Reader.getString().</li>
+<b>Description:</b> The maximum number of characters which can be read with dw.io.Reader.getString().</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1077,7 +1075,7 @@
 <li>
 <b>Log file ID:</b> api.dw.io.Reader.read().length</li>
 <li>
-<b>Description:</b> The maximum number of characters, which can be read with dw.io.Reader.read(int) in one call.</li>
+<b>Description:</b> The maximum number of characters which can be read with dw.io.Reader.read(int) in one call.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1347,7 +1345,7 @@
 <li>
 <b>Log file ID:</b> api.pipelet.ImportExport</li>
 <li>
-<b>Description:</b> No import and export allowed from the storefront.</li>
+<b>Description:</b> No import and export is allowed from the Storefront.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1429,7 +1427,7 @@
 <li>
 <b>Log file ID:</b> logging.customLogFiles</li>
 <li>
-<b>Description:</b> Maximum number of custom log files per day obtained through dw.system.Logger.getLogger(String,String)</li>
+<b>Description:</b> The maximum number of custom log files per day obtained through dw.system.Logger.getLogger(String,String).</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1523,7 +1521,7 @@
 <li>
 <b>Log file ID:</b> api.object.stringAttributeLength</li>
 <li>
-<b>Description:</b> Maximum string length, which can be stored in a business object's long text or HTML field.</li>
+<b>Description:</b> The maximum string length which can be stored in a business object's long text or HTML field.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1680,7 +1678,7 @@
 <li>
 <b>Log file ID:</b> api.pipelet.InvalidateWebCache</li>
 <li>
-<b>Description:</b> The web cache can't be invalidated from the storefront.</li>
+<b>Description:</b> The web cache can't be invalidated from the Storefront.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1819,7 +1817,7 @@
 <li>
 <b>Log file ID:</b> api.dw.customer.ProductListMgr.create()</li>
 <li>
-<b>Description:</b> The maximum number of product lists, which can be created within one page from the API or Pipelet.</li>
+<b>Description:</b> The maximum number of product lists which can be created within one page from the API or Pipelet.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1849,7 +1847,7 @@
 <li>
 <b>Log file ID:</b> api.dw.customer.ProductListMgr.remove()</li>
 <li>
-<b>Description:</b> The maximum number of product lists, which can be deleted within one page from the API or Pipelet.</li>
+<b>Description:</b> The maximum number of product lists which can be deleted within one page from the API or Pipelet.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1947,7 +1945,7 @@
 <li>
 <b>Log file ID:</b> api.jsEval</li>
 <li>
-<b>Description:</b> JavaScript eval() is not supported on the Commerce Cloud server.</li>
+<b>Description:</b> JavaScript eval() isn't supported on the Commerce Cloud server.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2010,7 +2008,7 @@
 <li>
 <b>Log file ID:</b> api.jsStringLength</li>
 <li>
-<b>Description:</b> The maximum allowed length of a JavaScript string</li>
+<b>Description:</b> The maximum allowed length of a JavaScript string.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2031,7 +2029,7 @@
 <li>
 <b>Log file ID:</b> api.jsXMLSize</li>
 <li>
-<b>Description:</b> Maximum size (estimated) in characters of a JavaScript XML object.</li>
+<b>Description:</b> The maximum (estimated) size in characters of a JavaScript XML object.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2052,7 +2050,7 @@
 <li>
 <b>Log file ID:</b> api.jsXMLfromString</li>
 <li>
-<b>Description:</b> The maximum length of a string, from which a JavaScript XML object can be created.</li>
+<b>Description:</b> The maximum length of a string from which a JavaScript XML object can be created.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2262,22 +2260,6 @@
 </div>
 <div class="section">
 <hr>
-<a name="quota_object.PriceBookPO.readonly@SF"></a>
-<p class="className">Price Books</p>
-<p>
-            The Price Books API quota consists of:
-        </p>
-<ul>
-<li>
-<b>Log file ID:</b> object.PriceBookPO.readonly@SF</li>
-<li>
-<b>Description:</b> The business object is read-only from storefront requests</li>
-<li>
-<b>Access:</b> Read-only from storefront requests.</li>
-</ul>
-</div>
-<div class="section">
-<hr>
 <a name="quota_object.ProductInventoryListPO.readonly@SF"></a>
 <p class="className">Product Inventory Lists</p>
 <p>
@@ -2343,9 +2325,9 @@
 <div class="section">
 <hr>
 <a name="quota_object.StageableCustomObjectPO.readonly@SF"></a>
-<p class="className">Replicable CustomObjects</p>
+<p class="className">Replicable Custom Objects</p>
 <p>
-            The Replicable CustomObjects API quota consists of:
+            The Replicable Custom Objects API quota consists of:
         </p>
 <ul>
 <li>
@@ -2452,7 +2434,7 @@
 <li>
 <b>Log file ID:</b> api.dw.catalog.ProductMgr.queryAllProducts()</li>
 <li>
-<b>Description:</b> Access to all products in site or catalog is not allowed in the storefront.</li>
+<b>Description:</b> Access to all products in a site or catalog isn't allowed in the Storefront.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2513,7 +2495,7 @@
 <li>
 <b>Log file ID:</b> api.pipelet.UpdateSearchIndex</li>
 <li>
-<b>Description:</b> Re-indexing can not be started from storefront.</li>
+<b>Description:</b> Re-indexing can't be started from the Storefront.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2542,7 +2524,7 @@
 <li>
 <b>Log file ID:</b> api.query.attrExpr</li>
 <li>
-<b>Description:</b> The maximum number of attribute expressions allowed in a query against System objects and Custom objects.</li>
+<b>Description:</b> The maximum number of attribute expressions allowed in a query against system objects and custom objects.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2563,7 +2545,7 @@
 <li>
 <b>Log file ID:</b> api.query.attrOrder</li>
 <li>
-<b>Description:</b> The maximum number of order criteria allowed in a query against System objects and Custom objects.</li>
+<b>Description:</b> The maximum number of order criteria allowed in a query against system objects and custom objects.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2584,7 +2566,7 @@
 <li>
 <b>Log file ID:</b> api.query.customAttrExpr</li>
 <li>
-<b>Description:</b> The maximum number of custom attribute expressions allowed in a query against System objects and Custom objects.</li>
+<b>Description:</b> The maximum number of custom attribute expressions allowed in a query against system objects and custom objects.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2605,12 +2587,54 @@
 <li>
 <b>Log file ID:</b> api.query.customAttrOrder</li>
 <li>
-<b>Description:</b> The maximum number of order criteria with a custom attribute allowed in a query against System objects and Custom objects.</li>
+<b>Description:</b> The maximum number of order criteria with a custom attribute allowed in a query against system objects and custom objects.</li>
 <li>
 <b>Limit:</b> 
 <ul>
 <li>
 <b>Default Limit: </b>2</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_searchDictionary.STEMMING_EXCEPTION"></a>
+<p class="className">Defined Stemming Exceptions per Locale</p>
+<p>
+            The Defined Stemming Exceptions per Locale API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> searchDictionary.STEMMING_EXCEPTION</li>
+<li>
+<b>Description:</b> The maximum number of defined stemming exceptions per locale.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>499</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_searchDictionary.SUGGESTEXCLUDE"></a>
+<p class="className">Defined Suggestion Term Blacklists per Locale</p>
+<p>
+            The Defined Suggestion Term Blacklists per Locale API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> searchDictionary.SUGGESTEXCLUDE</li>
+<li>
+<b>Description:</b> The maximum number of defined suggestion term blacklists per locale.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>499</li>
 </ul>
 </li>
 </ul>
@@ -2626,7 +2650,7 @@
 <li>
 <b>Log file ID:</b> searchDictionary.keywordCount</li>
 <li>
-<b>Description:</b> Maximum number of terms in keyword groups</li>
+<b>Description:</b> The maximum number of terms in keyword groups.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2685,6 +2709,27 @@
 </div>
 <div class="section">
 <hr>
+<a name="quota_api.session.maxKeyLength.isset"></a>
+<p class="className">api.session.maxKeyLength.isset</p>
+<p>
+            The api.session.maxKeyLength.isset API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.session.maxKeyLength.isset</li>
+<li>
+<b>Description:</b> The maximum length for the name of a session attribute (via &lt;isset&gt;)</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>50</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
 <a name="quota_api.session.maxStringLength"></a>
 <p class="className">api.session.maxStringLength</p>
 <p>
@@ -2695,6 +2740,27 @@
 <b>Log file ID:</b> api.session.maxStringLength</li>
 <li>
 <b>Description:</b> The maximum length for a string attribute in a session.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>2,000 (warning at 1,200)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_api.session.maxStringLength.isset"></a>
+<p class="className">api.session.maxStringLength.isset</p>
+<p>
+            The api.session.maxStringLength.isset API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.session.maxStringLength.isset</li>
+<li>
+<b>Description:</b> The maximum length for a string attribute in a session (via &lt;isset&gt;)</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2720,7 +2786,7 @@
 <li>
 <b>Log file ID:</b> urlRules.refinementValues.size</li>
 <li>
-<b>Description:</b> Maximum supported refinement value count for search refinement URLs.</li>
+<b>Description:</b> The maximum supported refinement value count for search refinement URLs.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2746,7 +2812,7 @@
 <li>
 <b>Log file ID:</b> api.velocity.includedepth</li>
 <li>
-<b>Description:</b> The maximum nesting level of velocity templates.</li>
+<b>Description:</b> The maximum nesting level of Velocity templates.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2767,7 +2833,7 @@
 <li>
 <b>Log file ID:</b> api.velocity.looplimit</li>
 <li>
-<b>Description:</b> The maximum number of loop iterations within a rendered velocity template.</li>
+<b>Description:</b> The maximum number of loop iterations within a rendered Velocity template.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2788,7 +2854,7 @@
 <li>
 <b>Log file ID:</b> api.velocity.templatesize</li>
 <li>
-<b>Description:</b> The maximum size of a velocity template (in bytes).</li>
+<b>Description:</b> The maximum size of a Velocity template (in bytes).</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2809,7 +2875,7 @@
 <li>
 <b>Log file ID:</b> api.velocity.timeout</li>
 <li>
-<b>Description:</b> The maximum execution time for a velocity template in milliseconds.</li>
+<b>Description:</b> The maximum execution time for a Velocity template in milliseconds.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -2821,8 +2887,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 </body>
 </html>

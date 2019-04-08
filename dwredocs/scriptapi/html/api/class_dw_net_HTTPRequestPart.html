@@ -282,7 +282,7 @@
 								 					
 								<a href="class_dw_io_File.html"><span class="">File</span></a>)</div>
 <div class="description">Construct a part representing a name/File pair. The HTTP message will use
- "text/plain" as default content type and "US-ASCII" as default character
+ "application/octet-stream" as the content type and "ISO-8859-1" as the character
  set for the part.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -317,9 +317,14 @@
 								 : 
 								 					
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)</div>
-<div class="description">Construct a part representing a name/File pair. The HTTP message will use
- the specified content type or "text/plain" if null is passed and the
- specified encoding or "US-ASCII" if null is passed for the part.</div>
+<div class="description">Construct a part representing a name/File pair.
+ <p>
+ <ul>
+ <li>If both contentType and encoding are null, then the part will be defaulted to use "application/octet-stream"
+ as the content-type and "ISO-8859-1" as the encoding.
+ <li>If only the encoding is null, then the contentType will be used without an encoding.
+ <li>If only the contentType is null, then it will be defaulted to "text/plain".
+ </ul></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -335,12 +340,12 @@
 <div class="parameterDetail">
 <span class="parameterName">contentType</span>
 						 - 
-						<span class="parameterDesc">The content type for this part, if null the default is used.</span>
+						<span class="parameterDesc">The content type for this part, if null or blank the default is used.</span>
 </div>
 <div class="parameterDetail">
 <span class="parameterName">encoding</span>
 						 - 
-						<span class="parameterDesc">the charset encoding for this part, if null the default is used</span>
+						<span class="parameterDesc">the charset encoding for this part, if null or blank the default is used</span>
 </div>
 </div>
 <hr>
@@ -447,8 +452,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

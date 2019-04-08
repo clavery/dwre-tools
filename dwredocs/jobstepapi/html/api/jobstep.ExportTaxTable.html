@@ -1,0 +1,89 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Job Step
+                        ExportTaxTable</title>
+<link rel="stylesheet" type="text/css" href="styles/javadoc.css" title="Style">
+<script src="js/dwapi.js" type="text/javascript"></script>
+</head>
+<body onload="openFrameSet();">
+<div class="banner">
+<div class="bannerItem">
+<a href="overview.html">
+                            Overview
+                        </a>
+</div>
+<div class="clear"></div>
+</div>
+<div>
+<div class="className">
+                                    Job Step
+                                    ExportTaxTable</div>
+<div class="topLevelDescription">Exports tax data.</div>
+<div class="topLevelDescription"></div>
+<div class="parameters">
+<span class="parameterTitle">Execution Context:</span>
+<div class="parameterDetail">Sites</div>
+<span class="parameterTitle">Parallel Execution:</span>
+<div class="parameterDetail">
+                                        Not Supported
+                                    </div>
+<span class="parameterTitle">Always execute on restart:</span>
+<div class="parameterDetail">
+                                        Supported
+                                    </div>
+</div>
+<div class="section">
+<div class="header">
+                                    Input Parameters
+                                </div>
+<div class="summaryItem">
+<span><span class="parameterTitle">ExportFile</span>
+                                            &nbsp;:&nbsp;
+                                            String
+                                                    (Optional)
+                                                </span>
+<div class="description">Export file pathname relative to 'IMPEX/src' folder. Either ExportFile or FileNamePrefix must be specified.</div>
+</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">FileNamePrefix</span>
+                                            &nbsp;:&nbsp;
+                                            String
+                                                    (Optional)
+                                                </span>
+<div class="description">The file name prefix of the export file. The job step will append site information where relevant and a timestamp. Sorting the export files alphanumerically will yield the chronological order. The parameter may include a folder component. Path is relative to 'IMPEX/src' folder. Either ExportFile or FileNamePrefix must be specified.</div>
+</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">OverwriteExportFile</span>
+                                            &nbsp;:&nbsp;
+                                            Boolean
+                                                    (Optional)
+                                                </span>
+<div class="description">Overwrite existing file. If option is not selected and the file already exists, the job step will use the ERROR exit status.</div>
+<div class="description">
+                                                Default Value:
+                                                true</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+                                    Exit Status
+                                </div>
+<div class="summaryItem">
+<span><span class="parameterTitle">OK</span></span>
+<div class="description">Step exit status used when the export finished successfully.</div>
+</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">ERROR</span></span>
+<div class="description">Step exit status used when the export failed.</div>
+</div>
+</div>
+</div>
+<div class="copyright">
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
+</div>
+</body>
+</html>

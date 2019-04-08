@@ -41,20 +41,18 @@
 <div class="classSummary">
 <div class="classSummaryDetail">
 <div class="description"><pre>
- ===========================
- EXPERIENCE BUILDER BETA API
- ===========================
+ ======================
+ PAGE DESIGNER BETA API
+ ======================
  </pre>
 
- This class represents an experience builder managed page. A page comprises of
+ This class represents a page designer managed page. A page comprises of
  multiple regions that hold components, which themselves again can have
  regions holding components, i.e. spanning a hierarchical tree of components.
- Using the <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_Page_DetailAnchor">PageMgr.renderPage(Page)</a> a page can be rendered. As such page
+ Using the <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a> a page can be rendered. As such page
  implements a view function for creating render output the view function of
  the page itself will also want to access its various properties like the SEO
- title etc. Furthermore the portion of code that triggers rendering of the
- page (likely a controller like Page-Show) is also able to check the current
- visibility of the page (<a href="class_dw_experience_Page.html#dw_experience_Page_isVisible_DetailAnchor">isVisible()</a>) in order to react accordingly.</div>
+ title etc.</div>
 <div class="subclasses"></div>
 <div class="parameters">
 <span class="parameterTitle">See Also:</span>
@@ -142,12 +140,16 @@
 						
 					    
 					    boolean
-							&nbsp;(Read Only)<div class="description">Returns if the page is currently visible which means:
+							&nbsp;(Read Only)<div class="description">Returns if the page is currently visible according to its visibility rules which means:
  <ul>
   <li>online flag is set to true</li>
   <li>schedule matches</li>
   <li>customer group matches</li>
- </ul></div>
+ </ul>
+ <p style="color:red">
+ As visibility is driven by the merchant configured dynamic visibility rules, e.g. scheduling and custom segmentation, this
+ call should NOT happen in a pagecached context outside of the processing induced by <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a>.
+ </p></div>
 </span>
 </div>
 </div>
@@ -218,7 +220,7 @@
 <span><span class="emphasis"><a href="#dw_experience_Page_isVisible_DetailAnchor"><span class="">isVisible</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Returns if the page is currently visible which means: <ul> <li>online flag is set to true</li> <li>schedule matches</li> <li>customer group matches</li> </ul></div>
+<div class="description">Returns if the page is currently visible according to its visibility rules which means: <ul> <li>online flag is set to true</li> <li>schedule matches</li> <li>customer group matches</li> </ul> <p style="color:red"> As visibility is driven by the merchant configured dynamic visibility rules, e.g.</div>
 </div>
 </div>
 <div class="section">
@@ -408,12 +410,16 @@
 <span class="emphasis">isVisible</span>()
 					 : 
 					boolean</div>
-<div class="description">Returns if the page is currently visible which means:
+<div class="description">Returns if the page is currently visible according to its visibility rules which means:
  <ul>
   <li>online flag is set to true</li>
   <li>schedule matches</li>
   <li>customer group matches</li>
- </ul></div>
+ </ul>
+ <p style="color:red">
+ As visibility is driven by the merchant configured dynamic visibility rules, e.g. scheduling and custom segmentation, this
+ call should NOT happen in a pagecached context outside of the processing induced by <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a>.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -424,8 +430,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

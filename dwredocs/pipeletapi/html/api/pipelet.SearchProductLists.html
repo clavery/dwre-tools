@@ -28,7 +28,7 @@
 <div class="className 
 				">
 			Pipelet SearchProductLists</div>
-<div class="pipeletDesc">Searches for ProductLists matching the specified input parameters.  This is useful in the storefront so customers can search for a product list such as a gift registry by the registrant name. The pipelet can be configured to search for only public product lists or all product lists, though the former is the appropriate option for the storefront.
+<div class="topLevelDescription">Searches for ProductLists matching the specified input parameters.  This is useful in the storefront so customers can search for a product list such as a gift registry by the registrant name. The pipelet can be configured to search for only public product lists or all product lists, though the former is the appropriate option for the storefront.
 
 All input parameters are optional.  If no input parameters are specified, then an empty collection iterator is returned.  If a value is passed for an input parameter, the system performs a search on all product lists in the current site which the passed parameter value on that field.  For string fields EventName, RegistrantFirstName, RegistrantLastName, OwnerFirstName, OwnerLastName, and OwnerEmail, the search is implicitly a wildcard search and is case-insensitive.  Therefore, if the registrant of a product list has first name "John", this list will be matched by a search on the RegistrantFirstName field using values "John", "john", "Joh", "joh", or even "joh*".  Values "ohn" and "*ohn" will not match.  It is also possible to search by event date.  If a value is passed for the EventDate parameter, an exact date match is required.  Alternatively, it is possible to search by date range using EventMonth and EventYear.  Searches by location are possible using EventCity, EventState, and EventCountry.  These searches do not use wildcards and must match exactly.
 
@@ -226,8 +226,10 @@ The search results.
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 </body>
 </html>

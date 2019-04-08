@@ -326,7 +326,7 @@
 <div class="description">Returns a formatted number using the default number format of the current site.</div>
 </div>
 <div class="summaryItem">
-<span>static&nbsp;<span class="emphasis"><a href="#dw_util_StringUtils_formatNumber_Number_String_DetailAnchor"><span class="">formatNumber</span></a></span>(number
+<span>static&nbsp;<span class="emphasis"><a href="#dw_util_StringUtils_formatNumber_2_Number_String_DetailAnchor"><span class="">formatNumber</span></a></span>(number
 								 : 	
 								 
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>, format
@@ -338,7 +338,7 @@
 <div class="description">Returns a formatted string using the specified number and format.</div>
 </div>
 <div class="summaryItem">
-<span>static&nbsp;<span class="emphasis"><a href="#dw_util_StringUtils_formatNumber_Number_String_String_DetailAnchor"><span class="">formatNumber</span></a></span>(number
+<span>static&nbsp;<span class="emphasis"><a href="#dw_util_StringUtils_formatNumber_2_Number_String_String_DetailAnchor"><span class="">formatNumber</span></a></span>(number
 								 : 	
 								 
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>, format
@@ -1091,7 +1091,9 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns a formatted number using the default number format of the current site.</div>
+<div class="description">Returns a formatted number using the default number format of the current site.
+
+ Decimal and grouping separators are used as specified in the locales regional settings.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1110,7 +1112,7 @@
 <hr>
 </div>
 <div class="detailItem">
-<a name="dw_util_StringUtils_formatNumber_Number_String_DetailAnchor"></a>
+<a name="dw_util_StringUtils_formatNumber_2_Number_String_DetailAnchor"></a>
 <div class="detailName 
 						">formatNumber</div>
 <div class="detailSignature
@@ -1127,7 +1129,15 @@
 <div class="description">Returns a formatted string using the specified number and format. The format is
  Java number format, like "#,###.00". To format as an integer
  number provide "0" as format string. The locale of the calling context
- request is used in formatting.</div>
+ request is used in formatting.
+
+ Decimal and grouping separators are used as specified in the locales regional settings (when configured, otherwise a fallback to the internal configuration is done).</div>
+<div class="parameters">
+<span class="parameterTitle">API Versioned:</span>
+<div class="parameterDetail">
+				From version 18.10. 
+				In prior versions this method did fall back to Java formatting rules, instead of using the definitions in regional settings.</div>
+</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1152,7 +1162,7 @@
 <hr>
 </div>
 <div class="detailItem">
-<a name="dw_util_StringUtils_formatNumber_Number_String_String_DetailAnchor"></a>
+<a name="dw_util_StringUtils_formatNumber_2_Number_String_String_DetailAnchor"></a>
 <div class="detailName 
 						">formatNumber</div>
 <div class="detailSignature
@@ -1171,7 +1181,15 @@
 </div>
 <div class="description">Returns a formatted number as a string using the specified number format in specified locale. The format is
  Java number format, like "#,###.00". To format as an integer
- number provide "0" as format string.</div>
+ number provide "0" as format string.
+
+ Decimal and grouping separators are used as specified in the locales regional settings (when configured, otherwise a fallback to the internal configuration is done).</div>
+<div class="parameters">
+<span class="parameterTitle">API Versioned:</span>
+<div class="parameterDetail">
+				From version 18.10. 
+				In prior versions this method did fall back to Java formatting rules, instead of using the definitions in regional settings.</div>
+</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1545,8 +1563,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

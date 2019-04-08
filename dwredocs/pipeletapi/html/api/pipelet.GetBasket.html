@@ -28,7 +28,7 @@
 <div class="className 
 				">
 			Pipelet GetBasket</div>
-<div class="pipeletDesc">Returns the basket of the current user. Based on the selected basket persistence, the pipelet can restore the basket of a previous user session. If the current storefront user is not identical with the user associated with the restored basket, all personal data, such as addresses, payment settings or redeemed coupons, are removed from the basket.
+<div class="topLevelDescription">Returns the basket of the current user. Based on the selected basket persistence, the pipelet can restore the basket of a previous user session. If the current storefront user is not identical with the user associated with the restored basket, all personal data, such as addresses, payment settings or redeemed coupons, are removed from the basket.
 The configuration parameter 'Create' can be set to 'true' to create a new basket if no existing basket is found. If no basket is found or created, the pipelet returns on the ERROR exit.
 See detailed description of basket persistence options in the Business Manager preferences section.
 The storefront session's currency will be compared with the basket's currency. If they do not match: The basket's currency will be changed to that of the session, all payment instruments and shipping methods in the basket will be removed (since they are currency-specific). In the typical scenario, the scripts in the pipeline after the GetBasket pipelet will do all the recalculations so the prices and basket totals will be correct in the newly changed currency.</div>
@@ -85,8 +85,10 @@ Represents the basket instance that was stored for the registered user during a 
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 </body>
 </html>

@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.14.10
+
+- update docs to 19.4
+
 ## 1.14.9
 
 - fix bug in `reindex` command; requires `upgrade-bm-cartridge` 

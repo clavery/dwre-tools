@@ -73,11 +73,12 @@
 					    <a href="class_dw_order_Basket.html"><span class="">Basket</span></a>
 							&nbsp;(Read Only)<div class="description">This method returns the current valid basket of the session customer or <code>null</code> if no current valid
  basket exists.
- <p/>
+ <p>
  The methods <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a> and <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentOrNewBasket_DetailAnchor">getCurrentOrNewBasket()</a> work based on the selected basket
  persistence, which can be configured in the Business Manager site preferences / baskets section. A basket is
  valid for the configured basket lifetime.
- <p/>
+ </p>
+ <p>
  The current basket, if one exists, is usually updated by the method. In particular the last-modified date is
  updated. The lifetime of a basket can be extended in 2 ways:
  <ul>
@@ -86,16 +87,30 @@
  <li>The basket has not been modified for 60 minutes, then using this method to access the basket will also
  reset the basket lifetime.</li>
  </ul>
- <p/>
+ </p>
+ <p>
  Personal data held inside the basket such as addresses, email addresses and payment settings is associated with
  the customer to whom the basket belongs. If the basket being updated belongs to a different customer this data is
  removed. This happens when a registered customer logs in after having previously created a basket as an anonymous
  customer. After the customer logs out, the previous basket is stored (where applicable) and the method returns
- <code>null</code>.
- <p/>
+ <code>null</code>. Personal data is also cleared when the session times out for an anonymous customer.
+ </p>
+ <p>
+ The following personal data is cleared.
+ <ul>
+ <li>product line items that were added from a wish list</li>
+ <li>shipping method</li>
+ <li>coupon line items</li>
+ <li>gift certificate line items</li>
+ <li>billing and shipping addresses</li>
+ <li>payment instruments</li>
+ <li>buyer email</li>
+ </ul>
+
  If the session currency no longer matches the basket currency, the basket currency should be updated with
  <a href="class_dw_order_Basket.html#dw_order_Basket_updateCurrency_DetailAnchor">Basket.updateCurrency()</a>.
- <p/>
+ </p>
+ <p>
  Typical usage:
 
  <pre>
@@ -104,14 +119,16 @@
      // do something with basket
  }
  </pre>
- <p/>
+ </p>
+ <p>
  Constraints:
  <ul>
  <li>The method only accesses the basket for the session customer, an exception is thrown when the session
  customer is <code>null</code>.</li>
  <li>Method <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentOrNewBasket_DetailAnchor">getCurrentOrNewBasket()</a> only creates a basket when method <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a> returns
  <code>null</code>.</li>
- </ul></div>
+ </ul>
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -467,11 +484,12 @@
 </div>
 <div class="description">This method returns the current valid basket of the session customer or <code>null</code> if no current valid
  basket exists.
- <p/>
+ <p>
  The methods <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a> and <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentOrNewBasket_DetailAnchor">getCurrentOrNewBasket()</a> work based on the selected basket
  persistence, which can be configured in the Business Manager site preferences / baskets section. A basket is
  valid for the configured basket lifetime.
- <p/>
+ </p>
+ <p>
  The current basket, if one exists, is usually updated by the method. In particular the last-modified date is
  updated. The lifetime of a basket can be extended in 2 ways:
  <ul>
@@ -480,16 +498,30 @@
  <li>The basket has not been modified for 60 minutes, then using this method to access the basket will also
  reset the basket lifetime.</li>
  </ul>
- <p/>
+ </p>
+ <p>
  Personal data held inside the basket such as addresses, email addresses and payment settings is associated with
  the customer to whom the basket belongs. If the basket being updated belongs to a different customer this data is
  removed. This happens when a registered customer logs in after having previously created a basket as an anonymous
  customer. After the customer logs out, the previous basket is stored (where applicable) and the method returns
- <code>null</code>.
- <p/>
+ <code>null</code>. Personal data is also cleared when the session times out for an anonymous customer.
+ </p>
+ <p>
+ The following personal data is cleared.
+ <ul>
+ <li>product line items that were added from a wish list</li>
+ <li>shipping method</li>
+ <li>coupon line items</li>
+ <li>gift certificate line items</li>
+ <li>billing and shipping addresses</li>
+ <li>payment instruments</li>
+ <li>buyer email</li>
+ </ul>
+
  If the session currency no longer matches the basket currency, the basket currency should be updated with
  <a href="class_dw_order_Basket.html#dw_order_Basket_updateCurrency_DetailAnchor">Basket.updateCurrency()</a>.
- <p/>
+ </p>
+ <p>
  Typical usage:
 
  <pre>
@@ -498,14 +530,16 @@
      // do something with basket
  }
  </pre>
- <p/>
+ </p>
+ <p>
  Constraints:
  <ul>
  <li>The method only accesses the basket for the session customer, an exception is thrown when the session
  customer is <code>null</code>.</li>
  <li>Method <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentOrNewBasket_DetailAnchor">getCurrentOrNewBasket()</a> only creates a basket when method <a href="class_dw_order_BasketMgr.html#dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</a> returns
  <code>null</code>.</li>
- </ul></div>
+ </ul>
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -571,8 +605,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

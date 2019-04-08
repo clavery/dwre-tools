@@ -9,6 +9,10 @@
     "max_components": {
       "type": "integer",
       "minimum": 1
+    },
+    "component_type_exclusions": {
+      "type": "array",
+      "items": {"$ref": "componenttypeexclusion.json"}
     }
   },
   "required": ["id"],

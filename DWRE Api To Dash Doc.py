@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
 # # Initial Steps
@@ -18,6 +18,7 @@ from markdown.extensions.tables import TableExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
 from markdown.extensions.codehilite import CodeHiliteExtension
 from jinja2 import Template
+import requests
 
 
 
@@ -42,7 +43,8 @@ PLIST = """<?xml version="1.0" encoding="UTF-8"?>
 
 
 
-shutil.rmtree("./DWREApiDoc.docset/Contents/")
+if os.path.exists("./DWREApiDoc.docset/Contents/"):
+    shutil.rmtree("./DWREApiDoc.docset/Contents/")
 
 if not os.path.exists('./DWREApiDoc.docset/Contents/Resources/Documents/'):
     os.makedirs('./DWREApiDoc.docset/Contents/Resources/Documents/')
@@ -205,27 +207,31 @@ for f in os.listdir('./dwredocs/xsd/'):
 conn.commit()
 
 
+
+
+
+
+
 # ## OCAPI
 
 # Place the cookies from chrome (in normal cookie header format) in .cookies
 
 
 
-with open(".cookies") as f:
-    _COOKIES = f.read()
-COOKIES = {c.split('=')[0].strip() : c.split('=')[1].strip() for c in _COOKIES.split(';')}
-
-
-
-
-OCAPI_PREFIX = '/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/'
+OCAPI_PREFIX = '/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/'
 OCAPI_INDICIES = [
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/shop/Resources/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/data/Resources/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/usage/APIUsage.html?cp=0_12_2',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/shop/Documents/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/18.8/data/Documents/index.html'
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/shop/Resources/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/data/Resources/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/usage/APIUsage.html?cp=0_12_2',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/shop/Documents/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/data/Documents/index.html'
 ]
+
+
+
+
+from lxml import etree as ET
+from io import StringIO
 
 
 
@@ -237,15 +243,16 @@ NSMAP = {
 from urllib.parse import urlparse
 LINKS = set()
 for page in OCAPI_INDICIES:
-    r = requests.get(page, cookies=COOKIES)
+    r = requests.get(page)
     content = r.content.decode('utf-8').replace('self == top', 'self == "blah"').encode('utf-8')
-    content = ET.fromstring(content)
+    parser = ET.HTMLParser()
+    content = ET.fromstring(content, parser)
     parsed_url = urlparse(page)
     dirname = os.path.normpath(os.path.dirname(parsed_url.path))
     if OCAPI_PREFIX not in dirname:
         continue
 
-    for link in content.xpath("//X:a", namespaces=NSMAP):
+    for link in content.xpath("//a", namespaces=NSMAP):
         href = link.attrib['href']
         normalized = os.path.normpath(os.path.join(dirname, href))
         full_link = urlparse(f"{parsed_url.scheme}://{parsed_url.netloc}{normalized}")
@@ -256,7 +263,7 @@ for page in OCAPI_INDICIES:
         if full_link.endswith('.html'):
             LINKS.add(full_link)
             
-resp = requests.get('https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/css/commonltr.css', cookies=COOKIES)
+resp = requests.get('https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/css/commonltr.css')
 css = f"""<style>
 {resp.content.decode('utf-8')}
 </style>"""
@@ -277,7 +284,7 @@ if not os.path.exists('./DWREApiDoc.docset/Contents/Resources/Documents/ocapi/')
 
 
 for link in LINKS:
-    r = requests.get(link, cookies=COOKIES)
+    r = requests.get(link)
     r.raise_for_status()
     content = r.content.decode('utf-8').replace('self == top', 'self == "blah"')
     content = content.replace("</head>", css)
@@ -314,4 +321,9 @@ conn.commit()
 
 
 conn.close()
+
+
+
+
+
 

@@ -473,7 +473,7 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-<div class="description">The customer number of the customer associated with this container.</div>
+							&nbsp;(Read Only)<div class="description">The customer number of the customer associated with this container.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -1452,6 +1452,15 @@
 <div class="description">Removes the specified gift certificate line item from the line item container.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_order_LineItemCtnr_removeNote_Note_DetailAnchor"><span class="">removeNote</span></a></span>(note
+								 : 	
+								 
+								<a href="class_dw_object_Note.html"><span class="">Note</span></a>)
+						: 
+					void</span>
+<div class="description">Removes a note from this line item container and deletes it.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_LineItemCtnr_removePaymentInstrument_PaymentInstrument_DetailAnchor"><span class="">removePaymentInstrument</span></a></span>(pi
 								 : 	
 								 
@@ -1513,15 +1522,6 @@
 						: 
 					void</span>
 <div class="description">Sets the name of the customer associated with this container.</div>
-</div>
-<div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_order_LineItemCtnr_setCustomerNo_String_DetailAnchor"><span class="">setCustomerNo</span></a></span>(customerNo
-								 : 	
-								 
-								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
-						: 
-					void</span>
-<div class="description">Sets the customer number of the customer associated with this container.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_LineItemCtnr_updateOrderLevelPriceAdjustmentTax_DetailAnchor"><span class="">updateOrderLevelPriceAdjustmentTax</span></a></span>()
@@ -3958,6 +3958,29 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_order_LineItemCtnr_removeNote_Note_DetailAnchor"></a>
+<div class="detailName 
+						">removeNote</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">removeNote</span>(note
+								 : 
+								 
+								<a href="class_dw_object_Note.html"><span class="">Note</span></a>)
+					 : 
+					void</div>
+<div class="description">Removes a note from this line item container and deletes it.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">note</span>
+						 - 
+						<span class="parameterDesc">The note to remove. Must not be null. Must belong to this line item container.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_order_LineItemCtnr_removePaymentInstrument_PaymentInstrument_DetailAnchor"></a>
 <div class="detailName 
 						">removePaymentInstrument</div>
@@ -4124,29 +4147,6 @@
 <hr>
 </div>
 <div class="detailItem">
-<a name="dw_order_LineItemCtnr_setCustomerNo_String_DetailAnchor"></a>
-<div class="detailName 
-						">setCustomerNo</div>
-<div class="detailSignature
-	    				">
-<span class="emphasis">setCustomerNo</span>(customerNo
-								 : 
-								 
-								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
-					 : 
-					void</div>
-<div class="description">Sets the customer number of the customer associated with this container.</div>
-<div class="parameters">
-<span class="parameterTitle">Parameters:</span>
-<div class="parameterDetail">
-<span class="parameterName">customerNo</span>
-						 - 
-						<span class="parameterDesc">the customer number of the customer associated with this container.</span>
-</div>
-</div>
-<hr>
-</div>
-<div class="detailItem">
 <a name="dw_order_LineItemCtnr_updateOrderLevelPriceAdjustmentTax_DetailAnchor"></a>
 <div class="detailName 
 						">updateOrderLevelPriceAdjustmentTax</div>
@@ -4247,8 +4247,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

@@ -294,7 +294,7 @@
     <xsd:complexType name="SuggestionList">
         <xsd:sequence>
             <xsd:element name="suggestions" type="Suggestions" minOccurs="0" maxOccurs="unbounded" />
-            <xsd:element name="exclusions" type="Exclusions" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="exclusions" type="Exclusions" minOccurs="0" maxOccurs="500" />
             <xsd:element name="minimum-term-length" type="xsd:integer" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
         <xsd:attribute ref="xml:lang" use="required" />

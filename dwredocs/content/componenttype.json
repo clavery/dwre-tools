@@ -7,17 +7,16 @@
     "id": {"$ref":"common.json#/definitions/id"},
     "name": {"$ref":"common.json#/definitions/name"},
     "description": {"$ref":"common.json#/definitions/description"},
-    "remote": { "type": "boolean", "default": false},
     "group": {"$ref":"common.json#/definitions/id"},
     "region_definitions": {
       "type": "array",
       "items": {"$ref": "regiondefinition.json"}
     },
-    "attribute_definitions": {
+    "attribute_definition_groups": {
       "type": "array",
-      "items": {"$ref": "attributedefinition.json"}
+      "items": {"$ref": "attributedefinitiongroup.json"}
     }
   },
-  "required": ["id","region_definitions","attribute_definitions", "group"],
+  "required": ["id","region_definitions","attribute_definition_groups", "group"],
   "additionalProperties": false
 }

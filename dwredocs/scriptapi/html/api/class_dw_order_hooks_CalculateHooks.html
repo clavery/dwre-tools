@@ -42,20 +42,20 @@
  point. A function must be defined inside a JavaScript source and must be exported. The script with the exported hook
  function must be located inside a site cartridge. Inside the site cartridge a 'package.json' file with a 'hooks'
  entry must exist.
- 
+
  <pre>
  "hooks": "./hooks.json"
  </pre>
- 
+
  The hooks entry links to a json file, relative to the 'package.json' file. This file lists all registered hooks
  inside the hooks property:
- 
+
  <pre>
  "hooks": [
       {"name": "dw.order.calculate", "script": "./calculate.js"}
  ]
  </pre>
- 
+
  A hook entry has a 'name' and a 'script' property.
  <ul>
  <li>The 'name' contains the extension point, the hook name.</li>
@@ -148,18 +148,16 @@
 					 : 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
 </div>
-<div class="description">The function is called by extension point <a href="class_dw_order_hooks_CalculateHooks.html#dw_order_hooks_CalculateHooks_extensionPointCalculate_DetailAnchor">extensionPointCalculate</a>. It is thought as the single place of
+<div class="description">The function is called by extension point <a href="class_dw_order_hooks_CalculateHooks.html#dw_order_hooks_CalculateHooks_extensionPointCalculate_DetailAnchor">extensionPointCalculate</a>. It provides a single place for
  the line item container calculation.
  <p>
- The hook provides a default implementation, which can be overridden at any time. The default implementation calls
- the hook "dw.ocapi.shop.basket.calculate" for basket calculation to provide a fallback for existing
- implementations. Please note that "dw.ocapi.shop.basket.calculate" is a deprecated hook. When called for orders
- the internal standard calculation will be done. With this default implementation calling this hook will not
- result in an error if no hook is registered.
+ To provide a fallback for existing implementations, the default implementation calls the hook
+ dw.ocapi.shop.basket.calculate. However, this hook is deprecated, and calling it will create entries in the
+ deprecated API usage logs. You should override this function to use dw.order.calculate instead.
  </p>
  <p>
- If you provide your own implementation it is suggested to provide and use the following hooks. Best practice is
- to use the hook manager to retrieve them in the calculate hook and void calling them directly.
+ If you provide your own implementation, you should provide and use the following hooks. Best practice is
+ to use the hook manager to retrieve them in the calculate hook, and avoid calling them directly.
  </p>
  <ul>
  <li><a href="class_dw_order_hooks_CalculateHooks.html#dw_order_hooks_CalculateHooks_extensionPointCalculateTax_DetailAnchor">extensionPointCalculateTax</a> for tax calculation</li>
@@ -188,8 +186,8 @@
 					 : 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
 </div>
-<div class="description">The function is called by extension point <a href="class_dw_order_hooks_CalculateHooks.html#dw_order_hooks_CalculateHooks_extensionPointCalculateShipping_DetailAnchor">extensionPointCalculateShipping</a>. It is thought as the single
- place of shipping calculation during the line item container calculation.</div>
+<div class="description">The function is called by extension point <a href="class_dw_order_hooks_CalculateHooks.html#dw_order_hooks_CalculateHooks_extensionPointCalculateShipping_DetailAnchor">extensionPointCalculateShipping</a>. It provides a single
+ place for shipping calculation during the line item container calculation.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -213,8 +211,8 @@
 					 : 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
 </div>
-<div class="description">The function is called by extension point <a href="class_dw_order_hooks_CalculateHooks.html#dw_order_hooks_CalculateHooks_extensionPointCalculateTax_DetailAnchor">extensionPointCalculateTax</a>. It is thought as the single place
- of tax calculation during the line item container calculation.</div>
+<div class="description">The function is called by extension point <a href="class_dw_order_hooks_CalculateHooks.html#dw_order_hooks_CalculateHooks_extensionPointCalculateTax_DetailAnchor">extensionPointCalculateTax</a>. It provides a single place
+ for tax calculation during the line item container calculation.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -227,8 +225,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>

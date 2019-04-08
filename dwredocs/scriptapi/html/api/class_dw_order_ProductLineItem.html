@@ -141,7 +141,20 @@
 						
 					    
 					    boolean
-							&nbsp;(Read Only)<div class="description">Returns true if the product line items represents a catalog product.</div>
+							&nbsp;(Read Only)<div class="description">Returns true if the product line item represents a catalog product.
+ <p>
+ That flag is determined during product line item creation with
+ <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_createProductLineItem_String_Shipment_DetailAnchor">LineItemCtnr.createProductLineItem(String, Shipment)</a>, stored at the line item container and can
+ be accessed as productLineItem.catalogProduct. It represents what can be evaluated with
+
+ <pre>
+ dw.catalog.ProductMgr.getProduct( productID ) != null
+     && dw.catalog.ProductMgr.getProduct( productID ).isAssignedToSiteCatalog()
+ </pre>
+
+ If the product is not available during product line item creation it is considered a non catalog product line item without
+ connection to a product.
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -259,10 +272,11 @@
 						
 					    
 					    <a href="class_dw_catalog_ProductOptionModel.html"><span class="">ProductOptionModel</span></a>
-							&nbsp;(Read Only)<div class="description">The product option model for a product line item representing
- an option product. The returned option model has preselected values
- based on the dependent option line items of this product line item.<br/>
- Null is returned if this line item does not represent an option product.</div>
+							&nbsp;(Read Only)<div class="description">The product option model for a product line item representing an option product.
+ <p>
+ The returned option model has preselected values based on the dependent option line items of this product line
+ item. Null is returned if this line item does not represent an option product.
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -303,9 +317,8 @@
 						
 					    
 					    <a href="class_dw_order_OrderItem.html"><span class="">OrderItem</span></a>
-							&nbsp;(Read Only)<div class="description">The <a href="class_dw_order_OrderItem.html"> order-item extension</a> for this item, or <code>null</code>.
- An order-item extension will only exist for a ProductLineItem which
- belongs to an <a href="class_dw_order_Order.html">Order</a>.</div>
+							&nbsp;(Read Only)<div class="description">The <a href="class_dw_order_OrderItem.html"> order-item extension</a> for this item, or null. An order-item
+ extension will only exist for a ProductLineItem which belongs to an <a href="class_dw_order_Order.html">Order</a>.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -324,19 +337,21 @@
 						
 					    
 					    <a href="class_TopLevel_Number.html"><span class="">Number</span></a>
-<div class="description">The position within the line item container assigned to the ProductLineItem upon
- its creation, may be used as a sort-order.
- The position is updated in the following way: <br/>
- When a ProductLineItem is added to the LineItemCtnr, it is assigned the
- next available position, based on the current count <br/>
- When a ProductLineItem is removed from the LineItemCtnr then LineItemCtnr
- method reassignPositions is called, so that the 'gap' left by the removed
- line-item is refilled. This method is dependent on no 2 ProductLineItem
- having the same position.
- When a LineItemCtnr is copied (eg when a PlacedOrder is created from a
- Basket), no special position handling is necessary as the
- ProductLineItems are added according to theie current position ordering
- in the source LineItemCtnr.</div>
+<div class="description">The position within the line item container assigned to the ProductLineItem upon its creation, may be
+ used as a sort-order.
+ <p>
+ The position is updated in the following way:
+ <ul>
+ <li>When a ProductLineItem is added to the LineItemCtnr, it is assigned the next available position, based on the
+ current count</li>
+ <li>When a ProductLineItem is removed from the LineItemCtnr then LineItemCtnr method reassignPositions is called,
+ so that the 'gap' left by the removed line-item is refilled. This method is dependent on no 2 ProductLineItem
+ having the same position.</li>
+ <li>When a LineItemCtnr is copied (e.g. when a PlacedOrder is created from a Basket), no special position
+ handling is necessary as the ProductLineItems are added according to their current position ordering in the
+ source LineItemCtnr.</li>
+ </ul>
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -356,11 +371,12 @@
 						
 					    
 					    <a href="class_dw_catalog_Product.html"><span class="">Product</span></a>
-							&nbsp;(Read Only)<div class="description">The product associated with the product line item.  The product
- line item might not be related to an actual catalog product, for
- example if it represents an option, or was not created from a catalog
- product, or if the product does not exist in the catalog anymore.
- In these cases, the method returns null.</div>
+							&nbsp;(Read Only)<div class="description">The product associated with the product line item.
+ <p>
+ The product line item might not be related to an actual catalog product, for example if it represents an option,
+ or was not created from a catalog product, or if the product does not exist in the catalog anymore. In these
+ cases, the method returns null.
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -369,7 +385,10 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The ID of the related product.</div>
+							&nbsp;(Read Only)<div class="description">The ID of the related product.
+ <p>
+ Returns empty if no product is related.
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -407,7 +426,7 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-<div class="description">The name of product that was copied when
+<div class="description">The name of the product that was copied when
  product was added to line item container.</div>
 </span>
 </div>
@@ -444,15 +463,13 @@
 						
 					    
 					    <a href="class_dw_order_ProductLineItem.html"><span class="">ProductLineItem</span></a>
-							&nbsp;(Read Only)<div class="description">The ProductLineItem that qualified the basket for this bonus
- product.
- <p/>
- This method is only applicable if the product line item is a bonus
- product line item, and if the promotion is a product promotion with
- number of qualifying products granting a bonus-product discount. If these
- conditions aren't met, the method returns null. If there are multiple
- product line items that triggered this bonus product, this method returns
- the last one by position within the order.</div>
+							&nbsp;(Read Only)<div class="description">The ProductLineItem that qualified the basket for this bonus product.
+ <p>
+ This method is only applicable if the product line item is a bonus product line item, and if the promotion is a
+ product promotion with number of qualifying products granting a bonus-product discount. If these conditions
+ aren't met, the method returns null. If there are multiple product line items that triggered this bonus product,
+ this method returns the last one by position within the order.
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -709,7 +726,7 @@
 <span><span class="emphasis"><a href="#dw_order_ProductLineItem_getOrderItem_DetailAnchor"><span class="">getOrderItem</span></a></span>()
 						: 
 					<a href="class_dw_order_OrderItem.html"><span class="">OrderItem</span></a></span>
-<div class="description">Returns the <a href="class_dw_order_OrderItem.html"> order-item extension</a> for this item, or <code>null</code>.</div>
+<div class="description">Returns the <a href="class_dw_order_OrderItem.html"> order-item extension</a> for this item, or null.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_ProductLineItem_getParent_DetailAnchor"><span class="">getParent</span></a></span>()
@@ -793,7 +810,7 @@
 <span><span class="emphasis"><a href="#dw_order_ProductLineItem_getProductName_DetailAnchor"><span class="">getProductName</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the name of product that was copied when product was added to line item container.</div>
+<div class="description">Returns the name of the product that was copied when product was added to line item container.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_ProductLineItem_getProratedPrice_DetailAnchor"><span class="">getProratedPrice</span></a></span>()
@@ -871,7 +888,7 @@
 <span><span class="emphasis"><a href="#dw_order_ProductLineItem_isCatalogProduct_DetailAnchor"><span class="">isCatalogProduct</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Returns true if the product line items represents a catalog product.</div>
+<div class="description">Returns true if the product line item represents a catalog product.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_ProductLineItem_isGift_DetailAnchor"><span class="">isGift</span></a></span>()
@@ -1012,7 +1029,7 @@
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
 						: 
 					void</span>
-<div class="description">Sets price attributes of the line item based on the current purchase currency, taxation policy and line item quantity.<br/> The method sets the 'basePrice' attribute of the line item.</div>
+<div class="description">Sets price attributes of the line item based on the current purchase currency, taxation policy and line item quantity.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_ProductLineItem_setProductInventoryList_ProductInventoryList_DetailAnchor"><span class="">setProductInventoryList</span></a></span>(productInventoryList
@@ -1039,7 +1056,7 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					void</span>
-<div class="description">Sets the name of product.</div>
+<div class="description">Sets the name of the product.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_ProductLineItem_setQuantityValue_Number_DetailAnchor"><span class="">setQuantityValue</span></a></span>(quantityValue
@@ -1159,15 +1176,12 @@
 					 : 
 					<a href="class_dw_order_PriceAdjustment.html"><span class="">PriceAdjustment</span></a>
 </div>
-<div class="description">Creates a product price adjustment. The price adjustment
- line item is being initialized with the tax class code and tax rate
- of the product line item.<br/>
-
- The promotion ID is mandatory and must not be the ID of any actual
- promotion defined in Commerce Cloud Digital.<br/>
-
- If there already exists a price adjustment for the same promotionID,
- an exception is thrown.</div>
+<div class="description">Creates a product price adjustment.
+ <p>
+ The price adjustment line item is being initialized with the tax class code and tax rate of the product line
+ item. The promotion ID is mandatory and must not be the ID of any actual promotion defined in Commerce Cloud
+ Digital. If there already exists a price adjustment for the same promotionID, an exception is thrown.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1201,25 +1215,24 @@
 					 : 
 					<a href="class_dw_order_PriceAdjustment.html"><span class="">PriceAdjustment</span></a>
 </div>
-<div class="description">Creates a product price adjustment representing a specific discount. The price adjustment
- line item is initialized with the tax class code and tax rate
- of the product line item.<br/>
+<div class="description">Creates a product price adjustment representing a specific discount. The price adjustment line item is
+ initialized with the tax class code and tax rate of the product line item.
+ <p>
+ The promotion ID is mandatory and must not be the ID of any actual promotion defined in Commerce Cloud Digital.
+ If a price adjustment already exists for the same promotionID, an exception is thrown.
+ </p>
+ <p>
+ The possible discounts are <a href="class_dw_campaign_FixedPriceDiscount.html">FixedPriceDiscount</a>, <a href="class_dw_campaign_AmountDiscount.html">AmountDiscount</a>,
+ <a href="class_dw_campaign_PercentageDiscount.html">PercentageDiscount</a>. Example:
+ </p>
 
- The promotion ID is mandatory and must not be the ID of any actual
- promotion defined in Commerce Cloud Digital. If a price adjustment already exists for the same promotionID,
- an exception is thrown.
- <br/>
- The possible discounts are <a href="class_dw_campaign_FixedPriceDiscount.html">FixedPriceDiscount</a>,
- <a href="class_dw_campaign_AmountDiscount.html">AmountDiscount</a>, <a href="class_dw_campaign_PercentageDiscount.html">PercentageDiscount</a>.
- <br/>
- Example:
- <p/>
- <code>
- var myProductItem : dw.order.ProductLineItem; // assume known<br/>
- var paFixedUnitPrice100 : dw.order.PriceAdjustment = myProductItem.createPriceAdjustment("myPromotionID1", new FixedPriceDiscount(100.00));<br/>
- var paTenPercent : dw.order.PriceAdjustment = myProductItem.createPriceAdjustment("myPromotionID2", new PercentageDiscount(10));<br/>
- var paReduceBy20 : dw.order.PriceAdjustment = myProductItem.createPriceAdjustment("myPromotionID3", new AmountDiscount(20.00);<br/>
- </code></div>
+ <pre>
+ var myProductItem : dw.order.ProductLineItem; // assume known
+ var paFixedUnitPrice100 : dw.order.PriceAdjustment = myProductItem.createPriceAdjustment("myPromotionID1", new FixedPriceDiscount(100.00));
+ var paTenPercent : dw.order.PriceAdjustment = myProductItem.createPriceAdjustment("myPromotionID2", new PercentageDiscount(10));
+ var paReduceBy20 : dw.order.PriceAdjustment = myProductItem.createPriceAdjustment("myPromotionID3", new AmountDiscount(20.00);
+ </pre>
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1678,10 +1691,11 @@
 					 : 
 					<a href="class_dw_catalog_ProductOptionModel.html"><span class="">ProductOptionModel</span></a>
 </div>
-<div class="description">Returns the product option model for a product line item representing
- an option product. The returned option model has preselected values
- based on the dependent option line items of this product line item.<br/>
- Null is returned if this line item does not represent an option product.</div>
+<div class="description">Returns the product option model for a product line item representing an option product.
+ <p>
+ The returned option model has preselected values based on the dependent option line items of this product line
+ item. Null is returned if this line item does not represent an option product.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1740,9 +1754,8 @@
 					 : 
 					<a href="class_dw_order_OrderItem.html"><span class="">OrderItem</span></a>
 </div>
-<div class="description">Returns the <a href="class_dw_order_OrderItem.html"> order-item extension</a> for this item, or <code>null</code>.
- An order-item extension will only exist for a ProductLineItem which
- belongs to an <a href="class_dw_order_Order.html">Order</a>.</div>
+<div class="description">Returns the <a href="class_dw_order_OrderItem.html"> order-item extension</a> for this item, or null. An order-item
+ extension will only exist for a ProductLineItem which belongs to an <a href="class_dw_order_Order.html">Order</a>.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1781,19 +1794,21 @@
 					 : 
 					<a href="class_TopLevel_Number.html"><span class="">Number</span></a>
 </div>
-<div class="description">Returns the position within the line item container assigned to the ProductLineItem upon
- its creation, may be used as a sort-order.
- The position is updated in the following way: <br/>
- When a ProductLineItem is added to the LineItemCtnr, it is assigned the
- next available position, based on the current count <br/>
- When a ProductLineItem is removed from the LineItemCtnr then LineItemCtnr
- method reassignPositions is called, so that the 'gap' left by the removed
- line-item is refilled. This method is dependent on no 2 ProductLineItem
- having the same position.
- When a LineItemCtnr is copied (eg when a PlacedOrder is created from a
- Basket), no special position handling is necessary as the
- ProductLineItems are added according to theie current position ordering
- in the source LineItemCtnr.</div>
+<div class="description">Returns the position within the line item container assigned to the ProductLineItem upon its creation, may be
+ used as a sort-order.
+ <p>
+ The position is updated in the following way:
+ <ul>
+ <li>When a ProductLineItem is added to the LineItemCtnr, it is assigned the next available position, based on the
+ current count</li>
+ <li>When a ProductLineItem is removed from the LineItemCtnr then LineItemCtnr method reassignPositions is called,
+ so that the 'gap' left by the removed line-item is refilled. This method is dependent on no 2 ProductLineItem
+ having the same position.</li>
+ <li>When a LineItemCtnr is copied (e.g. when a PlacedOrder is created from a Basket), no special position
+ handling is necessary as the ProductLineItems are added according to their current position ordering in the
+ source LineItemCtnr.</li>
+ </ul>
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1940,15 +1955,24 @@
 					 : 
 					<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>
 </div>
-<div class="description">Returns the product associated with the product line item.  The product
- line item might not be related to an actual catalog product, for
- example if it represents an option, or was not created from a catalog
- product, or if the product does not exist in the catalog anymore.
- In these cases, the method returns null.</div>
+<div class="description">Returns the product associated with the product line item.
+ <p>
+ The product line item might not be related to an actual catalog product, for example if it represents an option,
+ or was not created from a catalog product, or if the product does not exist in the catalog anymore. In these
+ cases, the method returns null.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">the product of the line item, or null</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_order_ProductLineItem.html#dw_order_ProductLineItem_isCatalogProduct_DetailAnchor">isCatalogProduct()</a></span>
 </div>
 </div>
 <hr>
@@ -1963,11 +1987,26 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the ID of the related product.</div>
+<div class="description">Returns the ID of the related product.
+ <p>
+ Returns empty if no product is related.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">the ID of the related product.</span>
+</div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_order_ProductLineItem.html#dw_order_ProductLineItem_isCatalogProduct_DetailAnchor">isCatalogProduct()</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_order_ProductLineItem.html#dw_order_ProductLineItem_getProduct_DetailAnchor">getProduct()</a></span>
 </div>
 </div>
 <hr>
@@ -2041,12 +2080,12 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the name of product that was copied when
+<div class="description">Returns the name of the product that was copied when
  product was added to line item container.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the name of product.</span>
+<span class="parameterDesc">the name of the product.</span>
 </div>
 </div>
 <hr>
@@ -2108,15 +2147,13 @@
 					 : 
 					<a href="class_dw_order_ProductLineItem.html"><span class="">ProductLineItem</span></a>
 </div>
-<div class="description">Returns the ProductLineItem that qualified the basket for this bonus
- product.
- <p/>
- This method is only applicable if the product line item is a bonus
- product line item, and if the promotion is a product promotion with
- number of qualifying products granting a bonus-product discount. If these
- conditions aren't met, the method returns null. If there are multiple
- product line items that triggered this bonus product, this method returns
- the last one by position within the order.</div>
+<div class="description">Returns the ProductLineItem that qualified the basket for this bonus product.
+ <p>
+ This method is only applicable if the product line item is a bonus product line item, and if the promotion is a
+ product promotion with number of qualifying products granting a bonus-product discount. If these conditions
+ aren't met, the method returns null. If there are multiple product line items that triggered this bonus product,
+ this method returns the last one by position within the order.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -2313,11 +2350,32 @@
 <span class="emphasis">isCatalogProduct</span>()
 					 : 
 					boolean</div>
-<div class="description">Returns true if the product line items represents a catalog product.</div>
+<div class="description">Returns true if the product line item represents a catalog product.
+ <p>
+ That flag is determined during product line item creation with
+ <a href="class_dw_order_LineItemCtnr.html#dw_order_LineItemCtnr_createProductLineItem_String_Shipment_DetailAnchor">LineItemCtnr.createProductLineItem(String, Shipment)</a>, stored at the line item container and can
+ be accessed as productLineItem.catalogProduct. It represents what can be evaluated with
+
+ <pre>
+ dw.catalog.ProductMgr.getProduct( productID ) != null
+     && dw.catalog.ProductMgr.getProduct( productID ).isAssignedToSiteCatalog()
+ </pre>
+
+ If the product is not available during product line item creation it is considered a non catalog product line item without
+ connection to a product.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">true if product line item represents catalog product.</span>
+<span class="parameterDesc">true if product line item represents catalog product, otherwise false</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_order_ProductLineItem.html#dw_order_ProductLineItem_getProduct_DetailAnchor">getProduct()</a></span>
 </div>
 </div>
 <hr>
@@ -2431,30 +2489,28 @@
 								<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>)
 					 : 
 					void</div>
-<div class="description">Replaces the current product of the product line item with the product
- specified in parameter <i>newProduct</i>. <br/>
- The following rules apply: <br/>
+<div class="description">Replaces the current product of the product line item with the product specified in parameter <i>newProduct</i>.
+ <p>
+ The following rules apply:
  <ul>
- <li> Preserve line item attributes UUID, Quantity, CategoryID,
- ExternalLineItemStatus, ExternalLineItemText, isGift, GiftMessage,
- Position, Parent, Shipment</li>
- <li> Replace product-specific attributes ProductID, ProductName,
- MinOrderQuantity, StepQuantity, ManufacturerName, ManufacturerSKU</li>
- <li> Remove all price adjustments related to the product line item</li>
- <li> Remove the shipping line item related to the product line item</li>
- <li> Remove all bundled line items of current product, and
- add bundled line items if new product is a bundle</li>
- <li> Remove all option line items of current product, and add option
- line items if new product is an option product; use default option
- selections</li>
- <li> Set all price attributes to N/A</li>
- <li> Preserve all custom attributes of line item, but override
- order-required attributes with values from new product</li>
+ <li>Preserve line item attributes UUID, Quantity, CategoryID, ExternalLineItemStatus, ExternalLineItemText,
+ isGift, GiftMessage, Position, Parent, Shipment</li>
+ <li>Replace product-specific attributes ProductID, ProductName, MinOrderQuantity, StepQuantity, ManufacturerName,
+ ManufacturerSKU</li>
+ <li>Remove all price adjustments related to the product line item</li>
+ <li>Remove the shipping line item related to the product line item</li>
+ <li>Remove all bundled line items of current product, and add bundled line items if new product is a bundle</li>
+ <li>Remove all option line items of current product, and add option line items if new product is an option
+ product; use default option selections</li>
+ <li>Set all price attributes to N/A</li>
+ <li>Preserve all custom attributes of line item, but override order-required attributes with values from new
+ product</li>
  </ul>
-
- <p/>The primary use is to replace one variation product with another,
- without having to both create a new line item for the replacement
- and remove the line item for the replaced product.</div>
+ </p>
+ <p>
+ The primary use is to replace one variation product with another, without having to both create a new line item
+ for the replacement and remove the line item for the replaced product.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2661,15 +2717,15 @@
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
 					 : 
 					void</div>
-<div class="description">Set the minimum order quantity value for this object.  This will be used
- to validate and adjust quantities when <code>setQuantityValue()</code>
- is called.  For typical catalog product line items, it is usually
- desirable to have this value inherited from the product attributes, but
- for non-catalog products, it is sometimes desirable to set this  value
- programmatically.  <br/>
-
- Null is accepted and represents Quantity.NA.
- Otherwise, the quantity value must be > 0.</div>
+<div class="description">Set the minimum order quantity value for this object.
+ <p>
+ This will be used to validate and adjust quantities when setQuantityValue() is called. For typical catalog
+ product line items, it is usually desirable to have this value inherited from the product attributes, but for
+ non-catalog products, it is sometimes desirable to set this value programmatically.
+ </p>
+ <p>
+ Null is accepted and represents Quantity.NA. Otherwise, the quantity value must be > 0.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2693,17 +2749,18 @@
 					 : 
 					void</div>
 <div class="description">Sets the position within the line item container. This value may be used as a sort-order.
- The position is updated in the following way: <br/>
- When a ProductLineItem is added to the LineItemCtnr, it is assigned the
- next available position, based on the current count <br/>
- When a ProductLineItem is removed from the LineItemCtnr then LineItemCtnr
- method reassignPositions is called, so that the 'gap' left by the removed
- line-item is refilled. This method is dependent on no 2 ProductLineItem
- having the same position.
- When a LineItemCtnr is copied (e.g. when an Order is created from a
- Basket), no special position handling is necessary as the
- ProductLineItems are added according to their current position ordering
- in the source LineItemCtnr.</div>
+ <p>
+ The position is updated in the following way:
+ <ul>
+ <li>When a ProductLineItem is added to the LineItemCtnr, it is assigned the next available position, based on the
+ current count</li>
+ <li>When a ProductLineItem is removed from the LineItemCtnr then LineItemCtnr method reassignPositions is called,
+ so that the 'gap' left by the removed line-item is refilled. This method is dependent on no 2 ProductLineItem
+ having the same position.</li>
+ <li>When a LineItemCtnr is copied (e.g. when an Order is created from a Basket), no special position handling is
+ necessary as the ProductLineItems are added according to their current position ordering in the source
+ LineItemCtnr.</li>
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2727,17 +2784,19 @@
 					 : 
 					void</div>
 <div class="description">Sets price attributes of the line item based on the current
- purchase currency, taxation policy and line item quantity.<br/>
-
+ purchase currency, taxation policy and line item quantity.
+ <p>
  The method sets the 'basePrice' attribute of the line item.
  Additionally, it sets the 'netPrice' attribute of the line item
  if the current taxation policy is 'net', and the 'grossPrice'
  attribute, if the current taxation policy is 'gross'. The
  'netPrice'/'grossPrice' attributes are set by multiplying the
- specified price value with the line item quantity.<br/>
-
+ specified price value with the line item quantity.
+ </p>
+ <p>
  If null is specified as value, the price attributes are reset to
- Money.NA.</div>
+ Money.NA.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2806,7 +2865,7 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets the name of product.</div>
+<div class="description">Sets the name of the product.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2830,12 +2889,14 @@
 					 : 
 					void</div>
 <div class="description">Updates the quantity value of the product line item.
- Validates the specified quantity value against the line item's min order
- and step quantity and adjusts it if necessary.  In particular, if
- 0 is passed, then the value will be adjusted to the min order quantity,
- not removed from the line item container.
- <p/>
- Null values or values &lt; 0.0 are not accepted.</div>
+ <p>
+ Validates the specified quantity value against the line item's min order and step quantity and adjusts it if
+ necessary. In particular, if 0 is passed, then the value will be adjusted to the min order quantity, not removed
+ from the line item container.
+ </p>
+ <p>
+ Null values or values &lt; 0.0 are not accepted.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2859,13 +2920,11 @@
 					 : 
 					void</div>
 <div class="description">Associates the specified product line item with the specified shipment.
-  The method is only applicable for independent product line items.
-  If called for any dependent line item (option or bundled line item),
-  the method will throw an exception.<br/>
-  The shipment for all dependent line items will be updated automatically
-  by the method.<br/>
-
-  Product line item and shipment must belong to the same line item ctnr.</div>
+ <p>
+ The method is only applicable for independent product line items. If called for any dependent line item (option
+ or bundled line item), the method will throw an exception. The shipment for all dependent line items will be
+ updated automatically by the method. Product line item and shipment must belong to the same line item ctnr.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2888,15 +2947,15 @@
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
 					 : 
 					void</div>
-<div class="description">Set the step quantity value for this object.  This will be used
- to validate and adjust quantities when <code>updateQuantity()</code>
- is called.  For typical catalog product line items, it is usually
- desirable to have this value inherited from the product attributes, but
- for non-catalog products, it is sometimes desirable to set this
- value programmatically.  <br/>
-
- Null is accepted and represents Quantity.NA.
- Otherwise, the quantity value must be > 0.</div>
+<div class="description">Set the step quantity value for this object.
+ <p>
+ This will be used to validate and adjust quantities when updateQuantity() is called. For typical catalog product
+ line items, it is usually desirable to have this value inherited from the product attributes, but for non-catalog
+ products, it is sometimes desirable to set this value programmatically.
+ </p>
+ <p>
+ Null is accepted and represents Quantity.NA. Otherwise, the quantity value must be > 0.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2940,7 +2999,9 @@
 
  Note, that this method will update the attributes optionValueID,
  productID, productName and lineItemText. It will not update the price
- attributes of the line item.</div>
+ attributes of the line item. To update the price of the line item you
+ need to call <a href="class_dw_order_ProductLineItem.html#dw_order_ProductLineItem_updateOptionPrice_DetailAnchor">updateOptionPrice()</a> in addition. This is
+ usually done during calculation in the calculate hook.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -3001,12 +3062,14 @@
 					 : 
 					<a href="class_TopLevel_Number.html"><span class="">Number</span></a>
 </div>
-<div class="description">Updates the quantity value of the product line item and all its dependent
- product line items. Validates the specified quantity value against the
- line item's min order and step quantity and adjusts it if necessary.
- The adjusted quantity value is returned. <br/>
-
- In general, quantity values &lt; 0.0 are not accepted.</div>
+<div class="description">Updates the quantity value of the product line item and all its dependent product line items.
+ <p>
+ Validates the specified quantity value against the line item's min order and step quantity and adjusts it if
+ necessary. The adjusted quantity value is returned.
+ </p>
+ <p>
+ In general, quantity values &lt; 0.0 are not accepted.
+ </p></div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail"></div>
@@ -3035,8 +3098,10 @@
 </div>
 </div>
 <div class="copyright">
-      		
-			copyright &copy; 2018 salesforce.com, inc. All rights reserved. 18.9<div class="clear"></div>
+
+            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+
+			<div class="clear"></div>
 </div>
 <!--End of formatClass-->
 </div>
