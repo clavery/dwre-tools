@@ -43,7 +43,14 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description">Represents an HTTP Service.</div>
+<div class="description">Represents an HTTP Service.
+ <p>
+ The HTTP Service will use the return value of the createRequest callback as the request body (if supported by the
+ HTTP method). If this is an array of non-null <a href="class_dw_net_HTTPRequestPart.html">HTTPRequestPart</a> objects, then a multi-part request will
+ be formed. Otherwise the object is converted to a String and used.
+ <p>
+ See also <a href="class_TopLevel_XML.html#TopLevel_XML_toXMLString_DetailAnchor">XML.toXMLString()</a> and <a href="class_TopLevel_JSON.html#TopLevel_JSON_stringify_Object_DetailAnchor">JSON.stringify(Object)</a>, which must be
+ explicitly called if needed.</div>
 <div class="subclasses">
 <div class="subclass">
 	    	All Known Subclasses

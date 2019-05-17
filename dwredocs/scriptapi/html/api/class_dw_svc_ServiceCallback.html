@@ -40,10 +40,84 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description">Defines callbacks for use with the <a href="class_dw_svc_ServiceRegistry.html">ServiceRegistry</a>.
+<div class="description">Defines callbacks for use with the <a href="class_dw_svc_LocalServiceRegistry.html">LocalServiceRegistry</a>.
  <p>
- Note this class itself is not used directly, and is present only for documentation
- of the available callback methods.</div>
+ Note this class itself is not used directly, and is present only for documentation of the available callback methods.
+ <p>
+ These methods are called in sequence when a service is called:
+ <ol>
+ <li><a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_initServiceClient_Service_DetailAnchor">initServiceClient(Service)</a> -- Creates the underlying client that will be used to make the call. This is
+ intended for SOAP Services. Other client types will be created automatically.
+ <li><a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor">createRequest(Service, Object...)</a> -- Given arguments to the <a href="class_dw_svc_Service.html#dw_svc_Service_call_Object_DetailAnchor">Service.call(Object...)</a>, configure
+ the actual service request. This may include setting request headers, defining the message body, etc.
+ <li><a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_execute_Service_Object_DetailAnchor">execute(Service, Object)</a> -- Perform the actual request. At this point the client has been configured
+ with the relevant credentials, so the call should be made. This is required for SOAP services.
+ <li><a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_parseResponse_Service_Object_DetailAnchor">parseResponse(Service, Object)</a> -- Convert the result of the call into an object to be returned from the
+ <a href="class_dw_svc_Service.html#dw_svc_Service_call_Object_DetailAnchor">Service.call(Object...)</a> method.
+ </ol>
+ If the service is mocked (see <a href="class_dw_svc_Service.html#dw_svc_Service_isMock_DetailAnchor">Service.isMock()</a>), then <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_mockFull_Service_Object_DetailAnchor">mockFull(Service, Object...)</a> takes the place
+ of this entire sequence. If that is not implemented, then <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_mockCall_Service_Object_DetailAnchor">mockCall(Service, Object)</a> takes the place of just
+ the <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_execute_Service_Object_DetailAnchor">execute(Service, Object)</a> method.
+ <p>
+ The URL, request, and response objects may be logged. To avoid logging sensitive data,
+ <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_filterLogMessage_String_DetailAnchor">filterLogMessage(String)</a> and/or <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_getRequestLogMessage_Object_DetailAnchor">getRequestLogMessage(Object)</a> and
+ <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_getResponseLogMessage_Object_DetailAnchor">getResponseLogMessage(Object)</a> must be implemented. If they are not implemented then this logging will not be
+ done on Production environments.
+ <p>
+ There are some special considerations for the combination of service type and callback:
+ <table>
+ <th>
+ <tr>
+ <td>Service Type</td>
+ <td>initServiceClient</td>
+ <td>createRequest</td>
+ <td>execute</td>
+ <td>parseResponse</td>
+ </tr>
+ </th>
+ <tr>
+ <td>HTTP</td>
+ <td>Not normally implemented. Must return a <a href="class_dw_net_HTTPClient.html">HTTPClient</a></td>
+ <td>Required unless execute is provided. The return value is expected to be either a String or array of
+ <a href="class_dw_net_HTTPRequestPart.html">HTTPRequestPart</a>, which will be used as the request body</td>
+ <td>Not called unless a boolean "executeOverride:true" is set on the callback. This is a temporary limitation, a
+ future release will always call this callback if it is present</td>
+ <td>Required unless execute is provided.</td>
+ </tr>
+ <tr>
+ <td>HTTPForm</td>
+ <td>Not normally implemented. Must return a <a href="class_dw_net_HTTPClient.html">HTTPClient</a></td>
+ <td>Not normally implemented. Default behavior constructs an "application/x-www-form-urlencoded" request based on a
+ Map given as an argument.</td>
+ <td>Not normally implemented. The same limitations as HTTP regarding the "executeOverride" flag apply here.</td>
+ <td>Optional. Default behavior is to return the response body as a String.</td>
+ </tr>
+ <tr>
+ <td>SOAP</td>
+ <td>Optional. This must return the Webservice stub or port</td>
+ <td>Required. If initServiceClient was not provided, then this function must call
+ <a href="class_dw_svc_SOAPService.html#dw_svc_SOAPService_setServiceClient_Object_DetailAnchor">SOAPService.setServiceClient(Object)</a> with the stub or port</td>
+ <td>Required. A typical implementation will call the webservice via a method on the service client</td>
+ <td>Optional. Default behavior returns the output of execute</td>
+ </tr>
+ <tr>
+ <td>FTP</td>
+ <td>Not normally implemented. Must return a <a href="class_dw_net_FTPClient.html">FTPClient</a> or <a href="class_dw_net_SFTPClient.html">SFTPClient</a></td>
+ <td>Required unless execute is defined. If present, it should call
+ <a href="class_dw_svc_FTPService.html#dw_svc_FTPService_setOperation_String_Object_DetailAnchor">FTPService.setOperation(String, Object...)</a></td>
+ <td>Optional. An implementation may call any required methods on the given client. The default implementation calls
+ the Operation that was set up and returns the result.</td>
+ <td>Optional. Default behavior returns the output of execute</td>
+ </tr>
+ <tr>
+ <td>GENERIC</td>
+ <td>Optional.</td>
+ <td>Optional.</td>
+ <td>Required. The GENERIC type allows any code to be wrapped in the service framework layer, and it's up to this
+ execute method to define what that logic is.</td>
+ <td>Optional.</td>
+ </tr>
+ </table></div>
 <div class="subclasses"></div>
 </div>
 </div>
@@ -56,7 +130,10 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">Allows overriding the URL provided by the service configuration.</div>
+							&nbsp;(Read Only)<div class="description">Allows overriding the URL provided by the service configuration.
+ <p>
+ It is usually better to call <a href="class_dw_svc_Service.html#dw_svc_Service_setURL_String_DetailAnchor">Service.setURL(String)</a> within <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor">createRequest(Service, Object...)</a>
+ because that allows you to modify the existing URL based on call parameters.</div>
 </span>
 </div>
 </div>
@@ -207,7 +284,7 @@
 </div>
 <div class="description">Creates a request object to be used when calling the service.
  <p>
- The type of the object expected is dependent on the service. For example, the <a href="class_dw_svc_HTTPServiceDefinition.html">HTTPServiceDefinition</a> expects the
+ The type of the object expected is dependent on the service. For example, the <a href="class_dw_svc_HTTPService.html">HTTPService</a> expects the
  HTTP request body to be returned.
  <p>
  This is required unless the execute method is implemented.</div>
@@ -252,8 +329,8 @@
 </div>
 <div class="description">Provides service-specific execution logic.
  <p>
- This can be overridden to execute a chain of FTP commands in the <a href="class_dw_svc_FTPServiceDefinition.html">FTPServiceDefinition</a>, or perform the actual remote
- call on a webservice stub in the <a href="class_dw_svc_SOAPServiceDefinition.html">SOAPServiceDefinition</a>.</div>
+ This can be overridden to execute a chain of FTP commands in the <a href="class_dw_svc_FTPService.html">FTPService</a>, or perform the actual remote
+ call on a webservice stub in the <a href="class_dw_svc_SOAPService.html">SOAPService</a>.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -399,7 +476,10 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Allows overriding the URL provided by the service configuration.</div>
+<div class="description">Allows overriding the URL provided by the service configuration.
+ <p>
+ It is usually better to call <a href="class_dw_svc_Service.html#dw_svc_Service_setURL_String_DetailAnchor">Service.setURL(String)</a> within <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor">createRequest(Service, Object...)</a>
+ because that allows you to modify the existing URL based on call parameters.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -590,7 +670,7 @@
 <div class="parameterDetail">
 <span class="parameterName">response</span>
 						 - 
-						<span class="parameterDesc">Service-specific response object. For example, the <a href="class_dw_svc_HTTPServiceDefinition.html">HTTPServiceDefinition</a> service provides the underlying <a href="class_dw_net_HTTPClient.html">HTTPClient</a> object that made the HTTP call.</span>
+						<span class="parameterDesc">Service-specific response object. For example, the <a href="class_dw_svc_HTTPService.html">HTTPService</a> service provides the underlying <a href="class_dw_net_HTTPClient.html">HTTPClient</a> object that made the HTTP call.</span>
 </div>
 </div>
 <div class="parameters">

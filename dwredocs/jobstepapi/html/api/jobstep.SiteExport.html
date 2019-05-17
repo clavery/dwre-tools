@@ -21,12 +21,12 @@
                                     SiteExport</div>
 <div class="topLevelDescription">Exports site data.</div>
 <div class="topLevelDescription">
- <p>The DataUnits parameter defines which objects are included in the export. 
- Its function is similar to the Data Units to Export field on the Business Manager Site Import & Export page.   
- The parameter requires a string in JSON format that describes the data to be exported. 
- Units not included in the JSON are not included in the export. 
- The JSON syntax and data unit names are validated when you add the step to the job.  
- If an object name is not found, a log message is written during run time. 
+ <p>The DataUnits parameter defines which objects are included in the export.
+ Its function is similar to the Data Units to Export field on the Business Manager Site Import & Export page.
+ The parameter requires a string in JSON format that describes the data to be exported.
+ Units not included in the JSON are not included in the export.
+ The JSON syntax and data unit names are validated when you add the step to the job.
+ If an object name is not found, a log message is written during run time.
  The following is an example of JSON for DataUnits.</p>
  <pre>
  <code>
@@ -110,16 +110,16 @@
         "system_type_definitions": true,
         "custom_types": true,
         "custom_preference_groups": true
-    }    
+    }
   }
 }
  </code>
- </pre> 
+ </pre>
  <ul>
  <li>export_data_units_configuration: Highest level array of the JSON.</li>
- <li>sites: Site-specific data to export. 
- You can export individual sites by specifying their names, or all sites using the keyword all. 
- You can specify which sub-data units to include in the export, or specify all to include all sub-data units for that site. 
+ <li>sites: Site-specific data to export.
+ You can export individual sites by specifying their names, or all sites using the keyword all.
+ You can specify which sub-data units to include in the export, or specify all to include all sub-data units for that site.
  The sub-data units are:
  <ul>
  <li>ab_tests</li>
@@ -151,19 +151,19 @@
  <li>url_rules</li>
  </ul>
  </li>
- <li>libraries: Shared libraries. To export only certain libraries, specify the library names. 
+ <li>libraries: Shared libraries. To export only certain libraries, specify the library names.
  To export all shared libraries, use the keyword all.</li>
- <li>library_static_resources: Content images of private site libraries. 
- To export the content images of only certain sites, specify the site names. 
+ <li>library_static_resources: Content images of private site libraries.
+ To export the content images of only certain sites, specify the site names.
  To export the content images for all sites, use the keyword all.</li>
  <li>catalogs: Catalogs. To export only certain catalogs, specify the catalog names. To export all catalogs, use the keyword all.</li>
- <li>catalog_static_resources: Product images. To export only certain product images, specify the catalog names. 
+ <li>catalog_static_resources: Product images. To export only certain product images, specify the catalog names.
  To export product images of all catalogs, use the keyword all.</li>
- <li>price_books: Price books. To export only certain price books, specify the price book names. 
+ <li>price_books: Price books. To export only certain price books, specify the price book names.
  To export all price books, use the keyword all.</li>
- <li>inventory_lists: Inventory lists. To export only certain inventory lists, specify the inventory list names. 
+ <li>inventory_lists: Inventory lists. To export only certain inventory lists, specify the inventory list names.
  To export all inventory lists, use the keyword all.</li>
- <li>customer_lists: Customer lists. To export the customer lists of only certain sites, specify the site names. 
+ <li>customer_lists: Customer lists. To export the customer lists of only certain sites, specify the site names.
  1To export the customer lists for all sites, use the keyword all.</li>
  <li>global data: Global data to export. Use the keyword all to include all global units. The global units are:
  <ul>

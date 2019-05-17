@@ -50,7 +50,7 @@
  multiple regions that hold components, which themselves again can have
  regions holding components, i.e. spanning a hierarchical tree of components.
  Using the <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a> a page can be rendered. As such page
- implements a view function for creating render output the view function of
+ implements a render function for creating render output the render function of
  the page itself will also want to access its various properties like the SEO
  title etc.</div>
 <div class="subclasses"></div>
@@ -99,7 +99,7 @@
 </span>
 </div>
 <div class="summaryItem">
-<span><a name="_DetailAnchor"></a>SEODescription
+<span><a name="_DetailAnchor"></a>pageDescription
 						&nbsp;:&nbsp;
 						
 					    
@@ -108,7 +108,7 @@
 </span>
 </div>
 <div class="summaryItem">
-<span><a name="_DetailAnchor"></a>SEOKeywords
+<span><a name="_DetailAnchor"></a>pageKeywords
 						&nbsp;:&nbsp;
 						
 					    
@@ -117,7 +117,7 @@
 </span>
 </div>
 <div class="summaryItem">
-<span><a name="_DetailAnchor"></a>SEOTitle
+<span><a name="_DetailAnchor"></a>pageTitle
 						&nbsp;:&nbsp;
 						
 					    
@@ -140,15 +140,40 @@
 						
 					    
 					    boolean
-							&nbsp;(Read Only)<div class="description">Returns if the page is currently visible according to its visibility rules which means:
+							&nbsp;(Read Only)<div class="description">Returns <code>true</code> if the page is currently visible which is the case if:
  <ul>
-  <li>online flag is set to true</li>
-  <li>schedule matches</li>
-  <li>customer group matches</li>
+  <li>page is published</li>
+  <li>all visibility rules apply, requiring that
+   <ul>
+    <li>schedule matches</li>
+    <li>customer group matches</li>
+   </ul>
+  </li>
  </ul>
+ If any of these is not the case then <code>false</code> will be returned.
  <p style="color:red">
  As visibility is driven by the merchant configured dynamic visibility rules, e.g. scheduling and custom segmentation, this
- call should NOT happen in a pagecached context outside of the processing induced by <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a>.
+ call should NOT happen in a pagecached context outside of the processing induced by <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a>. <br/>
+ Use <a href="class_dw_experience_Page.html#dw_experience_Page_hasVisibilityRules_DetailAnchor">hasVisibilityRules()</a> prior to calling this method in order to check for the existence of visibility rules. If there are
+ visibility rules then do not apply pagecaching. Otherwise the visibility decision making would end up in the pagecache and any subsequent
+ call would just return from the pagecache instead of performing the <a href="class_dw_experience_Page.html#dw_experience_Page_isVisible_DetailAnchor">isVisible()</a> check again as desired.
+ <code><pre>
+   ...
+   var page = PageMgr.getPage(pageID);
+   if(page.hasVisibilityRules())
+   {
+      // pagecaching is NOT ok here
+      if(page.isVisible())
+      {
+         response.writer.print(PageMgr.renderPage(pageID, {});
+      }
+   }
+   else
+   {
+       // pagecaching is ok here, but requires a pagecache refresh if merchants start adding visibility rules to the page
+   }
+   ...
+ </pre></code>
  </p></div>
 </span>
 </div>
@@ -184,6 +209,24 @@
 <div class="description">Returns the name of this page.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Page_getPageDescription_DetailAnchor"><span class="">getPageDescription</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the SEO description of this page.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Page_getPageKeywords_DetailAnchor"><span class="">getPageKeywords</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the SEO keywords of this page.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Page_getPageTitle_DetailAnchor"><span class="">getPageTitle</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the SEO title of this page.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_experience_Page_getRegion_String_DetailAnchor"><span class="">getRegion</span></a></span>(id
 								 : 	
 								 
@@ -193,34 +236,22 @@
 <div class="description">Returns the page region that matches the given id.</div>
 </div>
 <div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_experience_Page_getSEODescription_DetailAnchor"><span class="">getSEODescription</span></a></span>()
-						: 
-					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the SEO description of this page.</div>
-</div>
-<div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_experience_Page_getSEOKeywords_DetailAnchor"><span class="">getSEOKeywords</span></a></span>()
-						: 
-					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the SEO keywords of this page.</div>
-</div>
-<div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_experience_Page_getSEOTitle_DetailAnchor"><span class="">getSEOTitle</span></a></span>()
-						: 
-					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the SEO title of this page.</div>
-</div>
-<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_experience_Page_getTypeID_DetailAnchor"><span class="">getTypeID</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
 <div class="description">Returns the type id of this page.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Page_hasVisibilityRules_DetailAnchor"><span class="">hasVisibilityRules</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">Returns <code>true</code> if the page has visibility rules (scheduling, customer groups) applied, otherwise <code>false</code>.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_experience_Page_isVisible_DetailAnchor"><span class="">isVisible</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Returns if the page is currently visible according to its visibility rules which means: <ul> <li>online flag is set to true</li> <li>schedule matches</li> <li>customer group matches</li> </ul> <p style="color:red"> As visibility is driven by the merchant configured dynamic visibility rules, e.g.</div>
+<div class="description">Returns <code>true</code> if the page is currently visible which is the case if: <ul> <li>page is published</li> <li>all visibility rules apply, requiring that <ul> <li>schedule matches</li> <li>customer group matches</li> </ul> </li> </ul> If any of these is not the case then <code>false</code> will be returned.</div>
 </div>
 </div>
 <div class="section">
@@ -295,6 +326,63 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_experience_Page_getPageDescription_DetailAnchor"></a>
+<div class="detailName 
+						">getPageDescription</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPageDescription</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the SEO description of this page.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the page SEO description</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_Page_getPageKeywords_DetailAnchor"></a>
+<div class="detailName 
+						">getPageKeywords</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPageKeywords</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the SEO keywords of this page.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the page SEO keywords</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_Page_getPageTitle_DetailAnchor"></a>
+<div class="detailName 
+						">getPageTitle</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPageTitle</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the SEO title of this page.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the page SEO title</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_experience_Page_getRegion_String_DetailAnchor"></a>
 <div class="detailName 
 						">getRegion</div>
@@ -326,63 +414,6 @@
 <hr>
 </div>
 <div class="detailItem">
-<a name="dw_experience_Page_getSEODescription_DetailAnchor"></a>
-<div class="detailName 
-						">getSEODescription</div>
-<div class="detailSignature
-	    				">
-<span class="emphasis">getSEODescription</span>()
-					 : 
-					<a href="class_TopLevel_String.html"><span class="">String</span></a>
-</div>
-<div class="description">Returns the SEO description of this page.</div>
-<div class="parameters">
-<span class="parameterTitle">Returns:</span>
-<div class="parameterDetail">
-<span class="parameterDesc">the page SEO description</span>
-</div>
-</div>
-<hr>
-</div>
-<div class="detailItem">
-<a name="dw_experience_Page_getSEOKeywords_DetailAnchor"></a>
-<div class="detailName 
-						">getSEOKeywords</div>
-<div class="detailSignature
-	    				">
-<span class="emphasis">getSEOKeywords</span>()
-					 : 
-					<a href="class_TopLevel_String.html"><span class="">String</span></a>
-</div>
-<div class="description">Returns the SEO keywords of this page.</div>
-<div class="parameters">
-<span class="parameterTitle">Returns:</span>
-<div class="parameterDetail">
-<span class="parameterDesc">the page SEO keywords</span>
-</div>
-</div>
-<hr>
-</div>
-<div class="detailItem">
-<a name="dw_experience_Page_getSEOTitle_DetailAnchor"></a>
-<div class="detailName 
-						">getSEOTitle</div>
-<div class="detailSignature
-	    				">
-<span class="emphasis">getSEOTitle</span>()
-					 : 
-					<a href="class_TopLevel_String.html"><span class="">String</span></a>
-</div>
-<div class="description">Returns the SEO title of this page.</div>
-<div class="parameters">
-<span class="parameterTitle">Returns:</span>
-<div class="parameterDetail">
-<span class="parameterDesc">the page SEO title</span>
-</div>
-</div>
-<hr>
-</div>
-<div class="detailItem">
 <a name="dw_experience_Page_getTypeID_DetailAnchor"></a>
 <div class="detailName 
 						">getTypeID</div>
@@ -402,6 +433,25 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_experience_Page_hasVisibilityRules_DetailAnchor"></a>
+<div class="detailName 
+						">hasVisibilityRules</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">hasVisibilityRules</span>()
+					 : 
+					boolean</div>
+<div class="description">Returns <code>true</code> if the page has visibility rules (scheduling, customer groups) applied, otherwise <code>false</code>. Use this
+ method prior to <a href="class_dw_experience_Page.html#dw_experience_Page_isVisible_DetailAnchor">isVisible()</a>, so you do not call the latter in a pagecached context.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><code>true</code> if the page has visibility rules (scheduling, customer groups) applied, otherwise <code>false</code>.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_experience_Page_isVisible_DetailAnchor"></a>
 <div class="detailName 
 						">isVisible</div>
@@ -410,21 +460,54 @@
 <span class="emphasis">isVisible</span>()
 					 : 
 					boolean</div>
-<div class="description">Returns if the page is currently visible according to its visibility rules which means:
+<div class="description">Returns <code>true</code> if the page is currently visible which is the case if:
  <ul>
-  <li>online flag is set to true</li>
-  <li>schedule matches</li>
-  <li>customer group matches</li>
+  <li>page is published</li>
+  <li>all visibility rules apply, requiring that
+   <ul>
+    <li>schedule matches</li>
+    <li>customer group matches</li>
+   </ul>
+  </li>
  </ul>
+ If any of these is not the case then <code>false</code> will be returned.
  <p style="color:red">
  As visibility is driven by the merchant configured dynamic visibility rules, e.g. scheduling and custom segmentation, this
- call should NOT happen in a pagecached context outside of the processing induced by <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a>.
+ call should NOT happen in a pagecached context outside of the processing induced by <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a>. <br/>
+ Use <a href="class_dw_experience_Page.html#dw_experience_Page_hasVisibilityRules_DetailAnchor">hasVisibilityRules()</a> prior to calling this method in order to check for the existence of visibility rules. If there are
+ visibility rules then do not apply pagecaching. Otherwise the visibility decision making would end up in the pagecache and any subsequent
+ call would just return from the pagecache instead of performing the <a href="class_dw_experience_Page.html#dw_experience_Page_isVisible_DetailAnchor">isVisible()</a> check again as desired.
+ <code><pre>
+   ...
+   var page = PageMgr.getPage(pageID);
+   if(page.hasVisibilityRules())
+   {
+      // pagecaching is NOT ok here
+      if(page.isVisible())
+      {
+         response.writer.print(PageMgr.renderPage(pageID, {});
+      }
+   }
+   else
+   {
+       // pagecaching is ok here, but requires a pagecache refresh if merchants start adding visibility rules to the page
+   }
+   ...
+ </pre></code>
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">true if the page is currently visible, otherwise false</span>
+<span class="parameterDesc"><code>true</code> if the page is currently visible (published and visibility rules apply), otherwise <code>false</code> (unpublished and/or visibility rules don't apply)</span>
 </div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_Page.html#dw_experience_Page_isVisible_DetailAnchor">isVisible()</a></span>
+</div>
+<div class="parameterDetail"></div>
 </div>
 <hr>
 </div>

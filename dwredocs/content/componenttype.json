@@ -4,7 +4,6 @@
   "type":"object",
   
   "properties": {
-    "id": {"$ref":"common.json#/definitions/id"},
     "name": {"$ref":"common.json#/definitions/name"},
     "description": {"$ref":"common.json#/definitions/description"},
     "group": {"$ref":"common.json#/definitions/id"},
@@ -17,6 +16,6 @@
       "items": {"$ref": "attributedefinitiongroup.json"}
     }
   },
-  "required": ["id","region_definitions","attribute_definition_groups", "group"],
+  "required": ["region_definitions","attribute_definition_groups", "group"],
   "additionalProperties": false
 }

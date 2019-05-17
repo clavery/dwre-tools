@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-    
+
   "type":"object",
 
   "definitions": {
     "basic_attribute_type": {
       "type": "string",
-      "enum":["string","text","markup","integer","boolean","product","category","file","page","image"]
+      "enum":["string","text","markup","integer","boolean","product","category","file","page","image", "url"]
     },
     "enumerated_attribute_type": {
       "type": "string",
@@ -14,7 +14,7 @@
     },
     "custom_attribute_type": {
       "type": "string",
-      "pattern": "^custom\\.\\w+$"
+      "enum":["custom"]
     },
    "attribute_base": {
      "properties": {
@@ -27,6 +27,7 @@
            "$ref": "#/definitions/enumerated_attribute_type"},{
            "$ref": "#/definitions/custom_attribute_type"
        }]},
+       "editor_definition":{},
        "values":{},
        "required": {"type": "boolean","default": true},
        "default_value":{
@@ -45,6 +46,7 @@
        { "$ref": "#/definitions/attribute_base" },
        { "properties": {
            "type": { "$ref": "#/definitions/basic_attribute_type" },
+           "editor_definition":{"not":{}},
            "values":{"not":{}}
          },
          "required": ["type"]
@@ -56,6 +58,7 @@
        { "$ref": "#/definitions/attribute_base" },
        { "properties": {
            "type": { "$ref": "#/definitions/enumerated_attribute_type" },
+           "editor_definition":{"not":{}},
            "values": {
              "oneOf":[{
                "type": "array", "minItems":1, "items": {"type": "string"}},{
@@ -72,6 +75,7 @@
        { "$ref": "#/definitions/attribute_base" },
        { "properties": {
            "type": { "$ref": "#/definitions/custom_attribute_type" },
+           "editor_definition": {"$ref":"editordefinition.json#/definitions/custom"},
            "values":{"not":{}}
          },
          "required": ["type"]
@@ -79,7 +83,7 @@
      ]
    }
   },
-  
+
   "oneOf": [
     { "$ref": "#/definitions/basic_attribute" },
     { "$ref": "#/definitions/enumerated_attribute" },

@@ -128,12 +128,19 @@
  <ul>
  <li>
  If the method call happens in the context of a storefront request and
- the current customer is identical to the customer related to the basket
- or order, and the current protocol is HTTPS.
+ the current authenticated customer is referenced by the basket or order, and the current protocol is HTTPS.
+ </li>
+ <li>
+ If the customer is anonymous, and the order references this customer, and the protocol is secure and
+ the order status is CREATED.
  </li>
  <li>
  If the method call happens in the context of the business manager and the
  current user has the permission to manage orders.
+ </li>
+ <li>
+ If the payment information has not been masked as a result of the data retention security policy
+ for the site.
  </li>
  </ul>
  Otherwise, the method returns the masked credit card number.</div>
@@ -194,7 +201,7 @@
 <span><span class="emphasis"><a href="#dw_order_OrderPaymentInstrument_getCreditCardNumber_DetailAnchor"><span class="">getCreditCardNumber</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the de-crypted creditcard number if the calling context meets the following criteria: <br/> <ul> <li> If the method call happens in the context of a storefront request and the current customer is identical to the customer related to the basket or order, and the current protocol is HTTPS.</div>
+<div class="description">Returns the de-crypted creditcard number if the calling context meets the following criteria: <br/> <ul> <li> If the method call happens in the context of a storefront request and the current authenticated customer is referenced by the basket or order, and the current protocol is HTTPS.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_OrderPaymentInstrument_getPaymentTransaction_DetailAnchor"><span class="">getPaymentTransaction</span></a></span>()
@@ -353,12 +360,19 @@
  <ul>
  <li>
  If the method call happens in the context of a storefront request and
- the current customer is identical to the customer related to the basket
- or order, and the current protocol is HTTPS.
+ the current authenticated customer is referenced by the basket or order, and the current protocol is HTTPS.
+ </li>
+ <li>
+ If the customer is anonymous, and the order references this customer, and the protocol is secure and
+ the order status is CREATED.
  </li>
  <li>
  If the method call happens in the context of the business manager and the
  current user has the permission to manage orders.
+ </li>
+ <li>
+ If the payment information has not been masked as a result of the data retention security policy
+ for the site.
  </li>
  </ul>
  Otherwise, the method returns the masked credit card number.</div>

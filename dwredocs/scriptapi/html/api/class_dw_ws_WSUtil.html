@@ -527,6 +527,27 @@
 <div class="description">Returns the property value using the specified key and on a port returned from one of the WebReference2 getService methods.</div>
 </div>
 <div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_ws_WSUtil_isAllowChunking_Object_DetailAnchor"><span class="">isAllowChunking</span></a></span>(port
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					boolean</span>
+<div class="description">Returns true if the HTTP request may be chunked, false otherwise</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_ws_WSUtil_setAllowChunking_Object_Boolean_DetailAnchor"><span class="">setAllowChunking</span></a></span>(port
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>, allow
+								 : 	
+								 
+								boolean)
+						: 
+					void</span>
+<div class="description">Indicate that HTTP chunked Transfer-Encoding may be used.</div>
+</div>
+<div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_ws_WSUtil_setConnectionTimeout_Number_Object_DetailAnchor"><span class="">setConnectionTimeout</span></a></span>(timeoutInMilliseconds
 								 : 	
 								 
@@ -1029,6 +1050,68 @@
 </div>
 <div class="parameterDetail">
 <span class="parameterDesc"><a href="class_dw_ws_Port.html">Port</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_ws_WSUtil_isAllowChunking_Object_DetailAnchor"></a>
+<div class="detailName 
+						">isAllowChunking</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">isAllowChunking</span>(port
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					boolean</div>
+<div class="description">Returns true if the HTTP request may be chunked, false otherwise</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">port</span>
+						 - 
+						<span class="parameterDesc">a port returned from one of the WebReference2 getService methods.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">returns true if the HTTP request may be chunked and false otherwise</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_ws_WSUtil_setAllowChunking_Object_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setAllowChunking</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">setAllowChunking</span>(port
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>, allow
+								 : 
+								 
+								boolean)
+					 : 
+					void</div>
+<div class="description">Indicate that HTTP chunked Transfer-Encoding may be used.
+ <p>
+ The default behavior is true. If false then the request will not
+ be chunked and the Content-Length will always be sent.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">port</span>
+						 - 
+						<span class="parameterDesc">a port returned from one of the WebReference2 getService methods.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">allow</span>
+						 - 
+						<span class="parameterDesc">true to enable chunking, false otherwise</span>
 </div>
 </div>
 <hr>

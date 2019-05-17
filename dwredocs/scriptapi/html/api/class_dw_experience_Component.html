@@ -180,18 +180,12 @@
  By raw attribute value we denote the value as provided by the content
  editor when setting up this component. This value might be fundamentally
  different from the value as provided through the content dictionary when
- the process or view function of the component is invoked. This is due to
+ the render function of the component is invoked. This is due to
  the fact that during rendering the raw value is processed before being
  stored in the content dictionary - for example link placeholders in
  markup text are resolved to real URLs as part of such processing.
- Accessing the raw value can be helpful if process or view logic of the
- component needs to operate on these unprocessed values. Furthermore
- especially the component process function might inject values into the
- content dictionary as part of it business logic, e.g. by implementing
- procedural fallbacks for optional attributes that have not been provided
- by the content editor directly - so in order to distinguish these
- scenarios in the subsequent handling of the component view function the
- access to the raw values again is helpful.</div>
+ Accessing the raw value can be helpful if render logic of the
+ component needs to operate on these unprocessed values.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">

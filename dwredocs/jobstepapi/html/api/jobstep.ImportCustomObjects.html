@@ -50,7 +50,7 @@
                                                 Archive, Archive Zipped, Keep, Delete</div>
 <div class="description">
                                                 Default Value:
-                                                Keep</div>
+                                                Archive</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">ArchiveFolder</span>
@@ -87,7 +87,7 @@
                                                 ERROR, WARN</div>
 <div class="description">
                                                 Default Value:
-                                                ERROR</div>
+                                                WARN</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">ImportMode</span>
@@ -114,10 +114,10 @@
 <div class="description">
                                                 Allowed Values:
 
-                                                OK, ERROR, WARN</div>
+                                                OK, ERROR, WARN, NO_FILES_FOUND</div>
 <div class="description">
                                                 Default Value:
-                                                OK</div>
+                                                NO_FILES_FOUND</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">WorkingFolder</span>
@@ -143,6 +143,10 @@
 <div class="summaryItem">
 <span><span class="parameterTitle">ERROR</span></span>
 <div class="description">Used when (1) there are no files and 'NoFilesFoundHandling' is set to 'ERROR', (2) resources could not be locked, or (3) import process failed and 'ImportFailedHandling' is set to 'ERROR'.</div>
+</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">NO_FILES_FOUND</span></span>
+<div class="description">Used when there are no files and 'NoFilesFoundHandling' is set to 'NO_FILES_FOUND'.</div>
 </div>
 </div>
 </div>

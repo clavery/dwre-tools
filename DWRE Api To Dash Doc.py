@@ -218,13 +218,13 @@ conn.commit()
 
 
 
-OCAPI_PREFIX = '/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/'
+OCAPI_PREFIX = '/DOC3/topic/com.demandware.dochelp/OCAPI/19.5/'
 OCAPI_INDICIES = [
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/shop/Resources/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/data/Resources/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/usage/APIUsage.html?cp=0_12_2',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/shop/Documents/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.3/data/Documents/index.html'
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.5/shop/Resources/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.5/data/Resources/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.5/usage/APIUsage.html?cp=0_12_2',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.5/shop/Documents/index.html',
+    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/19.5/data/Documents/index.html'
 ]
 
 

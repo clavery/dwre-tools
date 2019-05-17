@@ -50,7 +50,7 @@
                                                 Keep, Delete, Archive, Archive Zipped</div>
 <div class="description">
                                                 Default Value:
-                                                Keep</div>
+                                                Archive</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">ArchiveFolder</span>
@@ -84,7 +84,7 @@
                                                 ERROR, WARN</div>
 <div class="description">
                                                 Default Value:
-                                                ERROR</div>
+                                                WARN</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">ImportMode</span>
@@ -111,10 +111,10 @@
 <div class="description">
                                                 Allowed Values:
 
-                                                OK, ERROR, WARN</div>
+                                                OK, ERROR, WARN, NO_FILES_FOUND</div>
 <div class="description">
                                                 Default Value:
-                                                ERROR</div>
+                                                NO_FILES_FOUND</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">WorkingFolder</span>
@@ -123,23 +123,6 @@
                                                     (Optional)
                                                 </span>
 <div class="description">The folder that contains the import files, relative to the 'IMPEX/src/' folder. If not defined 'IMPEX/src/' is used as working folder.</div>
-</div>
-</div>
-<div class="section">
-<div class="header">
-                                    Exit Status
-                                </div>
-<div class="summaryItem">
-<span><span class="parameterTitle">OK</span></span>
-<div class="description">Step exit status used when the import finished successfully.</div>
-</div>
-<div class="summaryItem">
-<span><span class="parameterTitle">ERROR</span></span>
-<div class="description">Step exit status used when the import failed.</div>
-</div>
-<div class="summaryItem">
-<span><span class="parameterTitle">WARN</span></span>
-<div class="description">Step exit status used when the import was not successful and parameter 'ImportFailedHandling' or parameter 'NoFilesFoundHandling'  is 'WARN'</div>
 </div>
 </div>
 </div>

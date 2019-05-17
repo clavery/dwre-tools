@@ -16,12 +16,21 @@
         "y" : { "$ref": "#/definitions/fraction" }
       },
       "required": ["x","y"]
+    },
+    "meta_data": {
+      "type": "object",
+      "properties": {
+        "height" : { "type": "integer" },
+        "width" : { "type": "integer" }
+      },
+      "required": ["height","width"]
     }
   },
 
   "properties": {
     "path": {"type": "string"},
-    "focal_point": {"$ref":"#/definitions/focal_point"}
+    "focal_point": {"$ref":"#/definitions/focal_point"},
+    "meta_data": {"$ref":"#/definitions/meta_data"}
   },
   "required": ["path"],
   "additionalProperties": false

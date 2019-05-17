@@ -191,17 +191,18 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Render a page. All of this is going to happen in two layers of remote includes. The first one is going to be returned by this method.
+<div class="description">Render a page. All of this is going to happen in two layers of remote includes, therefore pagecaching of page rendering
+ is separated from the pagecache lifecycle of the caller. The first one is going to be returned by this method.
  <ul>
      <li>layer 1 - determines visibility fingerprint for the page and all its nested components driven by scheduling and customer segmentation. This remote include will not be pagecached. It will then delegate to layer 2.</li>
-     <li>layer 2 - does the actual rendering of the page by invoking its process function first, followed by invoking its view function. This remote include will be pagecached based on the previously determined visibility fingerprint.</li>
+     <li>layer 2 - does the actual rendering of the page by invoking its render function. This remote include will factor the previously determined visibility fingerprint in to the pagecache key, in case you decide to use pagecaching.</li>
  </ul>
  <p>
  The layer 1 remote include is what is returned when calling this method.
  </p>
  <p>
  The provided <code>parameters</code> argument is passed through till the layer 2 remote include which does the actual rendering so that it will be available
- for the <code>view</code> and <code>process</code> function of the invoked page as part of <a href="class_dw_experience_PageScriptContext.html#dw_experience_PageScriptContext_getRenderParameters_DetailAnchor">PageScriptContext.getRenderParameters()</a>. You probably want to
+ for the <code>render</code> function of the invoked page as part of <a href="class_dw_experience_PageScriptContext.html#dw_experience_PageScriptContext_getRenderParameters_DetailAnchor">PageScriptContext.getRenderParameters()</a>. You probably want to
  provide caller parameters from the outside in shape of a json String to the inside of the page rendering, e.g. to loop through query parameters.
  </p>
  <p>
@@ -209,12 +210,11 @@
  the page and its nested components can happen in scope of this request.
  </p>
  <p>
- The rendering of a page invokes the <code>view</code> and <code>process</code> function of the respective page type.
+ The rendering of a page invokes the <code>render</code> function of the respective page type.
  <pre>
-     <code>String : view( <a href="class_dw_experience_PageScriptContext.html">PageScriptContext</a> context)</code>
-     <code>void   : process( <a href="class_dw_experience_PageScriptContext.html">PageScriptContext</a> context)</code>
+     <code>String : render( <a href="class_dw_experience_PageScriptContext.html">PageScriptContext</a> context)</code>
  </pre>
- The return value of the <code>view</code> function finally represents the markup produced by this page type.<br />
+ The return value of the <code>render</code> function finally represents the markup produced by this page type.<br />
  </p>
  <p>
  Nesting of <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a>, i.e. rendering a page within a page (or respectively its components), is not a supported use case.
@@ -258,13 +258,12 @@
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
 <div class="description"><p>Renders a region by triggering rendering of all visible components within
- this region. For each of these components first the process function is
- invoked, followed by invoking the view function of the respective component type.
+ this region. For each of these components the render function of the respective component
+ type is invoked.
  <pre>
-     <code>String : view( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> context)</code>
-     <code>void   : process( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> context)</code>
+     <code>String : render( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> context)</code>
  </pre>
- The return value of the <code>view</code> function will be wrapped by an HTML element - this
+ The return value of the <code>render</code> function will be wrapped by an HTML element - this
  finally represents the markup produced by this component type. The markup of the region
  accordingly represents the concatenation of all the components markup within an
  own wrapper element.<br />
@@ -337,24 +336,23 @@
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
 <div class="description"><p>Renders a region by triggering rendering of all visible components within
- this region. For each of these components first the process function is
- invoked, followed by invoking the view function  of the respective component type.
+ this region. For each of these components the render function  of the respective component
+ type is invoked.
  <pre>
-     <code>String : view( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> params)</code>
-     <code>void   : process( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> params)</code>
+     <code>String : render( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> params)</code>
  </pre>
- The return value of the <code>view</code> function will be wrapped by an HTML element - this
+ The return value of the <code>render</code> function will be wrapped by an HTML element - this
  finally represents the markup produced by this component type. The markup of the region
  accordingly represents the concatenation of all the components markup within an
  own wrapper element.<br />
  The following sample shows how this would look like for a 'pictures' region
- that contains two components of type 'image'. </p>
+ that contains two components of type 'assets.image'. </p>
  <pre><code>
  &lt;div class="experience-region experience-pictures"&gt;
-     &lt;div class="experience-component experience-image"&gt;
+     &lt;div class="experience-component experience-assets-image"&gt;
          ...
      &lt;/div&gt;
-     &lt;div class="experience-component experience-image"&gt;
+     &lt;div class="experience-component experience-assets-image"&gt;
          ..
      &lt;/div&gt;
  &lt;/div&gt;
@@ -372,6 +370,9 @@
   <li>tag name : div</li>
   <li>attributes : {"class":"experience-component experience-[COMPONENT_TYPE_ID]"}</li>
  </ul>
+ As the [COMPONENT_TYPE_ID] can contain dots due to its package like naming scheme (e.g. assets.image)
+ any occurrences of these dots will be replaced by dashes (e.g. assets-image) so that CSS selectors
+ do not have to be escaped.
  </p>
 
  <p>In order to provide your own settings for the wrapper elements see

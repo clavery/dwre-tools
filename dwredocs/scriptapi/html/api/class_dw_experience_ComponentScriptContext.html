@@ -46,11 +46,10 @@
  ======================
  </pre>
 
- This is the context that is handed over to the <code>view</code> and <code>process</code> function of the respective component type
+ This is the context that is handed over to the <code>render</code> function of the respective component type
  script.
  <pre>
-     <code>String : view( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> context)</code>
-     <code>void   : process( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> context)</code>
+     <code>String : render( <a href="class_dw_experience_ComponentScriptContext.html">ComponentScriptContext</a> context)</code>
  </pre></div>
 <div class="subclasses"></div>
 </div>
@@ -77,7 +76,7 @@
  <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderRegion_Region_RegionRenderSettings_DetailAnchor">PageMgr.renderRegion(Region, RegionRenderSettings)</a> there is the possibility
  to define render settings for the region itself but also for its contained components.
  The latter will be provided here so you further set or refine them for your component
- as part of the <code>process</code> function, i.e. to drive the shape of the
+ as part of the <code>render</code> function, i.e. to drive the shape of the
  component wrapper element.</div>
 </span>
 </div>
@@ -88,7 +87,7 @@
 					    
 					    <a href="class_dw_util_Map.html"><span class="">Map</span></a>
 							&nbsp;(Read Only)<div class="description">The content attributes of the component. Currently those are setup by the merchant
- using page designer and can be processed in your respective component type <code>view</code> and <code>process</code> function.</div>
+ using page designer and can be processed in your respective component type <code>render</code> function.</div>
 </span>
 </div>
 </div>
@@ -170,7 +169,7 @@
  <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderRegion_Region_RegionRenderSettings_DetailAnchor">PageMgr.renderRegion(Region, RegionRenderSettings)</a> there is the possibility
  to define render settings for the region itself but also for its contained components.
  The latter will be provided here so you further set or refine them for your component
- as part of the <code>process</code> function, i.e. to drive the shape of the
+ as part of the <code>render</code> function, i.e. to drive the shape of the
  component wrapper element.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -191,7 +190,7 @@
 					<a href="class_dw_util_Map.html"><span class="">Map</span></a>
 </div>
 <div class="description">Returns the content attributes of the component. Currently those are setup by the merchant
- using page designer and can be processed in your respective component type <code>view</code> and <code>process</code> function.</div>
+ using page designer and can be processed in your respective component type <code>render</code> function.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">

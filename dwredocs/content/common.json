@@ -4,7 +4,11 @@
   "definitions": {
     "id": {
       "type": "string",
-      "pattern": "^[\\w-]+$"
+      "pattern": "^[\\w]+$"
+    },
+    "full_qualified_id": {
+      "type": "string",
+      "pattern": "^[\\w\\.]+$"
     },
     "name": {
       "type": "string"

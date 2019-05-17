@@ -132,10 +132,22 @@
 <div class="description">Returns the meta data for Orders.</div>
 </div>
 <div class="summaryItem">
-<span>static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_failOrder_Order_DetailAnchor"><span class="">failOrder</span></a></span>(order
+<span class="dep">static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_failOrder_Order_DetailAnchor"><span class="">failOrder</span></a></span>(order
 								 : 	
 								 
 								<a href="class_dw_order_Order.html"><span class="">Order</span></a>)
+						: 
+					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
+<div class="description"><p> This method fails an unplaced order and is usually called if payment could not be authorized.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_order_OrderMgr_failOrder_Order_Boolean_DetailAnchor"><span class="">failOrder</span></a></span>(order
+								 : 	
+								 
+								<a href="class_dw_order_Order.html"><span class="">Order</span></a>, reopenBasketIfPossible
+								 : 	
+								 
+								boolean)
 						: 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
 <div class="description"><p> This method fails an unplaced order and is usually called if payment could not be authorized.</div>
@@ -613,9 +625,9 @@
 <div class="detailItem">
 <a name="dw_order_OrderMgr_failOrder_Order_DetailAnchor"></a>
 <div class="detailName 
-						">failOrder</div>
+						dep">failOrder</div>
 <div class="detailSignature
-	    				">static&nbsp;<span class="emphasis">failOrder</span>(order
+	    				dep">static&nbsp;<span class="emphasis">failOrder</span>(order
 								 : 
 								 
 								<a href="class_dw_order_Order.html"><span class="">Order</span></a>)
@@ -634,6 +646,14 @@
  be used for a subsequent order.
  </p></div>
 <div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Please use <a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_failOrder_Order_Boolean_DetailAnchor">failOrder(Order, Boolean)</a> instead.</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
 <span class="parameterName">order</span>
@@ -644,8 +664,54 @@
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
 <div class="parameterDetail">
 <span class="parameterDesc">Status 'OK' or 'ERROR' with an error message</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_order_OrderMgr_failOrder_Order_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">failOrder</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">failOrder</span>(order
+								 : 
+								 
+								<a href="class_dw_order_Order.html"><span class="">Order</span></a>, reopenBasketIfPossible
+								 : 
+								 
+								boolean)
+					 : 
+					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
+</div>
+<div class="description"><p>
+ This method fails an unplaced order and is usually called if payment could not be authorized. The specified Order
+ must be in status CREATED, and will be set to status FAILED.
+ </p>
+ <p>
+ Inventory transactions and coupon redemptions associated with the Order will be rolled back.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">order</span>
+						 - 
+						<span class="parameterDesc">the order to be placed</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">reopenBasketIfPossible</span>
+						 - 
+						<span class="parameterDesc">reopen the basket if it still exists and limit for number of baskets is not reached</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Status 'OK' or 'ERROR' with an error message. Status detail basket contains the reopened basket, if it has been reopened successfully.</span>
 </div>
 </div>
 <hr>

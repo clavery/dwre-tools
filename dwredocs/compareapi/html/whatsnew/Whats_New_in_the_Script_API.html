@@ -9,12 +9,76 @@
 <span class="newTitle">
 					What's New in the Script API
 				</span>
-<p>The following classes are either new or have been changed in version 19.4.</p>
+<p>The following classes are either new or have been changed in version 19.6.</p>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.experience</div>
+<p>The following classes were added to the <code>dw.experience</code> Package.</p>
+<ul>
+<li>
+<code>CustomEditor</code>
+</li>
+<li>
+<code>CustomEditorResources</code>
+</li>
+</ul>
 </div>
 <div class="section">
 <div class="header">
 							Package dw.order</div>
+<p>The following classes were added to the <code>dw.order</code> Package.</p>
+<ul>
+<li>
+<code>CreateAgentBasketLimitExceededException</code>
+</li>
+</ul>
 <p>The following classes changed in the <code>dw.order</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">BasketMgr</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_BasketMgr.html#class_dw_order_BasketMgr/dw_order_BasketMgr_createAgentBasket_DetailAnchor">createAgentBasket()</xref>
+</code></td><td class="summary">
+<p>
+			Exceptions Changed from <code>no exceptions</code> to <code>dw.order.CreateAgentBasketLimitExceededException</code>
+</p>
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_BasketMgr.html#class_dw_order_BasketMgr/dw_order_BasketMgr_getBasket_String_DetailAnchor">getBasket(String)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_BasketMgr.html#class_dw_order_BasketMgr/dw_order_BasketMgr_getCurrentBasket_DetailAnchor">getCurrentBasket()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div class="section">
 <hr>
 <span class="className">OrderMgr</span>
@@ -28,8 +92,8 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_getOrder_String_String_DetailAnchor">getOrder(String,
-                String)</xref>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_failOrder_Order_Boolean_DetailAnchor">failOrder(Order,
+                Boolean)</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -38,11 +102,11 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_getOrder_String_DetailAnchor">getOrder(String)</xref>
+<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_failOrder_Order_DetailAnchor">failOrder(Order)</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
-		</p>
+<b>Deprecated</b>
+</p>
 </td>
 </tr>
 </tbody>
@@ -52,11 +116,88 @@
 </div>
 <div class="section">
 <div class="header">
-							Package dw.system</div>
-<p>The following classes changed in the <code>dw.system</code> Package. </p>
+							Package dw.svc</div>
+<p>The following classes changed in the <code>dw.svc</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Response</span>
+<span class="className">FTPService</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">FTPServiceDefinition</span>
+<div class="section">
+<ul>
+<li>Deprecated</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">HTTPFormServiceDefinition</span>
+<div class="section">
+<ul>
+<li>Deprecated</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">HTTPService</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">HTTPServiceDefinition</span>
+<div class="section">
+<ul>
+<li>Deprecated</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">LocalServiceRegistry</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">SOAPServiceDefinition</span>
+<div class="section">
+<ul>
+<li>Deprecated</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">Service</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">ServiceCallback</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
 <div class="section">
 <table>
 <thead>
@@ -67,8 +208,8 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_system_Response.html#class_dw_system_Response/dw_system_Response_addHttpHeader_String_String_DetailAnchor">addHttpHeader(String,
-                String)</xref>
+<xref href="../ScriptAPI/class_dw_svc_ServiceCallback.html#class_dw_svc_ServiceCallback/dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor">createRequest(Service,
+                Object...)</xref>
 </code></td><td class="summary">
 <p>
 			Documentation Changed.
@@ -77,8 +218,17 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_system_Response.html#class_dw_system_Response/dw_system_Response_setHttpHeader_String_String_DetailAnchor">setHttpHeader(String,
-                String)</xref>
+<xref href="../ScriptAPI/class_dw_svc_ServiceCallback.html#class_dw_svc_ServiceCallback/dw_svc_ServiceCallback_execute_Service_Object_DetailAnchor">execute(Service,
+                Object)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_svc_ServiceCallback.html#class_dw_svc_ServiceCallback/dw_svc_ServiceCallback_getURL_DetailAnchor">getURL()</xref>
 </code></td><td class="summary">
 <p>
 			Documentation Changed.
@@ -89,14 +239,23 @@
 </table>
 </div>
 </div>
+<div class="section">
+<hr>
+<span class="className">ServiceDefinition</span>
+<div class="section">
+<ul>
+<li>Deprecated</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="section">
 <div class="header">
-							Package dw.web</div>
-<p>The following classes changed in the <code>dw.web</code> Package. </p>
+							Package dw.ws</div>
+<p>The following classes changed in the <code>dw.ws</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Cookie</span>
+<span class="className">WSUtil</span>
 <div class="section">
 <table>
 <thead>
@@ -107,7 +266,7 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_web_Cookie.html#class_dw_web_Cookie/dw_web_Cookie_isHttpOnly_DetailAnchor">isHttpOnly()</xref>
+<xref href="../ScriptAPI/class_dw_ws_WSUtil.html#class_dw_ws_WSUtil/dw_ws_WSUtil_isAllowChunking_Object_DetailAnchor">isAllowChunking(Object)</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -116,7 +275,8 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_web_Cookie.html#class_dw_web_Cookie/dw_web_Cookie_setHttpOnly_Boolean_DetailAnchor">setHttpOnly(Boolean)</xref>
+<xref href="../ScriptAPI/class_dw_ws_WSUtil.html#class_dw_ws_WSUtil/dw_ws_WSUtil_setAllowChunking_Object_Boolean_DetailAnchor">setAllowChunking(Object,
+                Boolean)</xref>
 </code></td><td class="summary">
 <p>
 			Method is New

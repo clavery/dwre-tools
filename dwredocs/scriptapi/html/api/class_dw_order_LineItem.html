@@ -66,10 +66,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-<div class="description">The base price for the line item, which is the
- price of the unit before applying adjustments, in the purchase
- currency. The base price may be net or gross of tax depending
- on the configured taxation policy.</div>
+<div class="description">The base price for the line item, which is the price of the unit before applying adjustments, in the
+ purchase currency. The base price may be net or gross of tax depending on the configured taxation policy.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -78,9 +76,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-<div class="description">The gross price for the line item, which is the
- price of the unit before applying adjustments, in the purchase
- currency, including tax.</div>
+<div class="description">The gross price for the line item, which is the price of the unit before applying adjustments, in the
+ purchase currency, including tax.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -107,10 +104,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-<div class="description">The net price for the line item, which is the
- price of the
- unit before applying adjustments, in the purchase currency,
- excluding tax.</div>
+<div class="description">The net price for the line item, which is the price of the unit before applying adjustments, in the
+ purchase currency, excluding tax.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -119,9 +114,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">Get the price of the line item. If the line item is based on net pricing
- then the net price is returned. If the line item is based on gross pricing
- then the gross price is returned.</div>
+							&nbsp;(Read Only)<div class="description">Get the price of the line item. If the line item is based on net pricing then the net price is returned. If the
+ line item is based on gross pricing then the gross price is returned.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -139,9 +133,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-<div class="description">The tax for the line item, which is the
- tax of the unit before applying adjustments,
- in the purchase currency.</div>
+<div class="description">The tax for the line item, which is the tax of the unit before applying adjustments, in the purchase
+ currency.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -159,10 +152,8 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-<div class="description">The tax class ID for the line item or null
- if no tax class ID is associated with the line item.
- In the case where the tax class ID is null, you
- should use the default tax class ID.</div>
+<div class="description">The tax class ID for the line item or null if no tax class ID is associated with the line item. In the
+ case where the tax class ID is null, you should use the default tax class ID.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -171,9 +162,8 @@
 						
 					    
 					    <a href="class_TopLevel_Number.html"><span class="">Number</span></a>
-<div class="description">The tax rate, which is the decimal tax rate to be applied
- to the product represented by this line item. A value of 0.175
- represents a percentage of 17.5%.</div>
+<div class="description">The tax rate, which is the decimal tax rate to be applied to the product represented by this line item. A
+ value of 0.175 represents a percentage of 17.5%.</div>
 </span>
 </div>
 </div>
@@ -345,7 +335,7 @@
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
 						: 
 					void</span>
-<div class="description">Updates the tax-related attributes of the line item based on the specified tax rate and a tax basis determined by the system.</div>
+<div class="description">Updates the tax-related attributes of the line item based on the specified tax rate, a tax basis determined by the system and the "Tax Rounding Mode" order preference.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_LineItem_updateTax_Number_Money_DetailAnchor"><span class="">updateTax</span></a></span>(taxRate
@@ -357,7 +347,7 @@
 								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
 						: 
 					void</span>
-<div class="description">Updates the tax-related attributes of the line item based on the specified tax rate and the passed tax basis.</div>
+<div class="description">Updates the tax-related attributes of the line item based on the specified tax rate, the passed tax basis and the "Tax Rounding Mode" order preference.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_LineItem_updateTaxAmount_Money_DetailAnchor"><span class="">updateTaxAmount</span></a></span>(tax
@@ -413,10 +403,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the base price for the line item, which is the
- price of the unit before applying adjustments, in the purchase
- currency. The base price may be net or gross of tax depending
- on the configured taxation policy.</div>
+<div class="description">Returns the base price for the line item, which is the price of the unit before applying adjustments, in the
+ purchase currency. The base price may be net or gross of tax depending on the configured taxation policy.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -435,9 +423,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the gross price for the line item, which is the
- price of the unit before applying adjustments, in the purchase
- currency, including tax.</div>
+<div class="description">Returns the gross price for the line item, which is the price of the unit before applying adjustments, in the
+ purchase currency, including tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -494,10 +481,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the net price for the line item, which is the
- price of the
- unit before applying adjustments, in the purchase currency,
- excluding tax.</div>
+<div class="description">Returns the net price for the line item, which is the price of the unit before applying adjustments, in the
+ purchase currency, excluding tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -516,9 +501,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Get the price of the line item. If the line item is based on net pricing
- then the net price is returned. If the line item is based on gross pricing
- then the gross price is returned.</div>
+<div class="description">Get the price of the line item. If the line item is based on net pricing then the net price is returned. If the
+ line item is based on gross pricing then the gross price is returned.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -556,9 +540,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the tax for the line item, which is the
- tax of the unit before applying adjustments,
- in the purchase currency.</div>
+<div class="description">Returns the tax for the line item, which is the tax of the unit before applying adjustments, in the purchase
+ currency.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -596,10 +579,8 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the tax class ID for the line item or null
- if no tax class ID is associated with the line item.
- In the case where the tax class ID is null, you
- should use the default tax class ID.</div>
+<div class="description">Returns the tax class ID for the line item or null if no tax class ID is associated with the line item. In the
+ case where the tax class ID is null, you should use the default tax class ID.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -626,9 +607,8 @@
 					 : 
 					<a href="class_TopLevel_Number.html"><span class="">Number</span></a>
 </div>
-<div class="description">Returns the tax rate, which is the decimal tax rate to be applied
- to the product represented by this line item. A value of 0.175
- represents a percentage of 17.5%.</div>
+<div class="description">Returns the tax rate, which is the decimal tax rate to be applied to the product represented by this line item. A
+ value of 0.175 represents a percentage of 17.5%.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -649,10 +629,8 @@
 								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets the base price for the line item, which is the
- price of the unit before applying adjustments, in the purchase
- currency. The base price may be net or gross of tax depending
- on the configured taxation policy.</div>
+<div class="description">Sets the base price for the line item, which is the price of the unit before applying adjustments, in the
+ purchase currency. The base price may be net or gross of tax depending on the configured taxation policy.</div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail"></div>
@@ -682,9 +660,8 @@
 								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets the gross price for the line item, which is the
- Price of the unit before applying adjustments, in the purchase
- currency, including tax.</div>
+<div class="description">Sets the gross price for the line item, which is the Price of the unit before applying adjustments, in the
+ purchase currency, including tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail"></div>
@@ -737,8 +714,7 @@
 								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets the value for the net price, which is the
- price of the unit before applying adjustments, in the purchase
+<div class="description">Sets the value for the net price, which is the price of the unit before applying adjustments, in the purchase
  currency, excluding tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
@@ -769,16 +745,11 @@
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets price attributes of the line item based on the current
- purchase currency and taxation policy. <br/>
-
- The methods sets the 'basePrice' attribute of the line item.
- Additionally, it sets the 'netPrice' attribute of the line item
- if the current taxation policy is 'net', and the 'grossPrice'
- attribute, if the current taxation policy is 'gross'. <br/>
-
- If null is specified as value, the price attributes are reset to
- Money.NOT_AVAILABLE.</div>
+<div class="description">Sets price attributes of the line item based on the current purchase currency and taxation policy. <br/>
+ The methods sets the 'basePrice' attribute of the line item. Additionally, it sets the 'netPrice' attribute of
+ the line item if the current taxation policy is 'net', and the 'grossPrice' attribute, if the current taxation
+ policy is 'gross'. <br/>
+ If null is specified as value, the price attributes are reset to Money.NOT_AVAILABLE.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -801,8 +772,8 @@
 								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets the value for the tax of the line item, which is the
- the tax of the unit before applying adjustments, in the purchase currency.</div>
+<div class="description">Sets the value for the tax of the line item, which is the the tax of the unit before applying adjustments, in the
+ purchase currency.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -848,9 +819,8 @@
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
 					 : 
 					void</div>
-<div class="description">Sets the tax rate, which is the
- decimal tax rate to be applied to the product represented by this
- line item. A value of 0.175 represents a percentage of 17.5%.</div>
+<div class="description">Sets the tax rate, which is the decimal tax rate to be applied to the product represented by this line item. A
+ value of 0.175 represents a percentage of 17.5%.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -873,12 +843,10 @@
 								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
 					 : 
 					void</div>
-<div class="description">Updates the price attributes of the line item based
- on the specified price.  The base price is set to the specified
- value.  If the line item is based on net pricing then the net price
- attribute is set.  If the line item is based on  gross pricing then the
- gross price attribute is set.  Whether or not a line item is based
- on net or gross pricing is a site-wide configuration parameter.</div>
+<div class="description">Updates the price attributes of the line item based on the specified price. The base price is set to the
+ specified value. If the line item is based on net pricing then the net price attribute is set. If the line item
+ is based on gross pricing then the gross price attribute is set. Whether or not a line item is based on net or
+ gross pricing is a site-wide configuration parameter.</div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail">
@@ -908,30 +876,23 @@
 								<a href="class_TopLevel_Number.html"><span class="">Number</span></a>)
 					 : 
 					void</div>
-<div class="description">Updates the tax-related attributes of the line item based on the
- specified tax rate and a tax basis determined by the system.
- This method sets the tax basis as an attribute, and is not
- affected by the previous value of this attribute.
+<div class="description">Updates the tax-related attributes of the line item based on the specified tax rate, a tax basis determined by
+ the system and the "Tax Rounding Mode" order preference. This method sets the tax basis as an attribute, and is
+ not affected by the previous value of this attribute.
  <p/>
- The value used as a basis depends on the type of line item this is and on
- the promotion preferences for the current site. If the "old" tax basis
- rules are used, then the tax basis will simply be equal to
- <a href="class_dw_order_LineItem.html#dw_order_LineItem_getPrice_DetailAnchor">getPrice()</a>. If the "new" tax basis rules used, then the tax
- basis depends upon line item type as follows:
-
+ The value used as a basis depends on the type of line item this is and on the promotion preferences for the
+ current site. If the "old" tax basis rules are used, then the tax basis will simply be equal to
+ <a href="class_dw_order_LineItem.html#dw_order_LineItem_getPrice_DetailAnchor">getPrice()</a>. If the "new" tax basis rules used, then the tax basis depends upon line item type as
+ follows:
  <ul>
- <li><b>ProductLineItem:</b> basis equals
- <a href="class_dw_order_ProductLineItem.html#dw_order_ProductLineItem_getProratedPrice_DetailAnchor">ProductLineItem.getProratedPrice()</a>.</li>
- <li><b>ShippingLineItem:</b> basis equals
- <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_getAdjustedPrice_DetailAnchor">ShippingLineItem.getAdjustedPrice()</a>.</li>
+ <li><b>ProductLineItem:</b> basis equals <a href="class_dw_order_ProductLineItem.html#dw_order_ProductLineItem_getProratedPrice_DetailAnchor">ProductLineItem.getProratedPrice()</a>.</li>
+ <li><b>ShippingLineItem:</b> basis equals <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_getAdjustedPrice_DetailAnchor">ShippingLineItem.getAdjustedPrice()</a>.</li>
  <li><b>ProductShippingLineItem:</b> basis equals
  <a href="class_dw_order_ProductShippingLineItem.html#dw_order_ProductShippingLineItem_getAdjustedPrice_DetailAnchor">ProductShippingLineItem.getAdjustedPrice()</a>.</li>
  <li><b>PriceAdjustment:</b> basis equals 0.00.</li>
  <li>All other line item types: basis equals <a href="class_dw_order_LineItem.html#dw_order_LineItem_getPrice_DetailAnchor">getPrice()</a>.</li>
  </ul>
-
- If null is passed as tax rate, tax-related attribute fields are set to
- N/A.</div>
+ If null is passed as tax rate, tax-related attribute fields are set to N/A.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -957,9 +918,9 @@
 								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
 					 : 
 					void</div>
-<div class="description">Updates the tax-related attributes of the line item based on the
- specified tax rate and the passed tax basis. If null is passed as tax
- rate or tax basis, tax-related attribute fields are set to N/A.</div>
+<div class="description">Updates the tax-related attributes of the line item based on the specified tax rate, the passed tax basis and the
+ "Tax Rounding Mode" order preference. If null is passed as tax rate or tax basis, tax-related attribute fields
+ are set to N/A.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -987,15 +948,12 @@
 								<a href="class_dw_value_Money.html"><span class="">Money</span></a>)
 					 : 
 					void</div>
-<div class="description">Updates tax amount of the line item setting the provided value.
- Depending on the way how the tax is calculated (based on net or gross price),
- the corresponding gross or net price is updated accordingly. For tax calculation
- based on net price, the gross price is calculated by adding the tax to the
- net price. For tax calculation based on gross price, the net price is calculated
- by subtracting the tax from the gross price.
+<div class="description">Updates tax amount of the line item setting the provided value. Depending on the way how the tax is calculated
+ (based on net or gross price), the corresponding gross or net price is updated accordingly. For tax calculation
+ based on net price, the gross price is calculated by adding the tax to the net price. For tax calculation based
+ on gross price, the net price is calculated by subtracting the tax from the gross price.
  <p/>
- If null is passed as tax amount, the item tax and resulting net or gross
- price are set to N/A.
+ If null is passed as tax amount, the item tax and resulting net or gross price are set to N/A.
  <p/>
  Note that tax rate is not calculated and it is not updated.</div>
 <div class="parameters">

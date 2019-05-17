@@ -43,7 +43,18 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description">Represents an FTP or SFTP Service.</div>
+<div class="description">Represents an FTP or SFTP Service.
+ <p>
+ There are two basic styles of configuration for this service.
+ <p>
+ In the first style, <code>createRequest</code> is implemented to call the setOperation method on the Service. This
+ will cause the single operation to be performed and returned as the data object in the <code>parseResponse</code>
+ method. Any error status is set automatically based on the returned value of the operation.
+ <p>
+ In the second style, <code>execute</code> is implemented to perform one or more operations using the serviceClient
+ available on the Service object. This serviceClient will be either an <a href="class_dw_net_FTPClient.html">FTPClient</a> or an
+ <a href="class_dw_net_SFTPClient.html">SFTPClient</a>. The return value of execute will be passed as the data object in the
+ <code>parseResponse</code> method.</div>
 <div class="subclasses"></div>
 </div>
 </div>

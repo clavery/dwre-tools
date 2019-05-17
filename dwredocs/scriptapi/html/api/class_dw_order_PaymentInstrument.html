@@ -325,17 +325,21 @@
  to the profile of the current customer, and the current protocol is HTTPS
  </li>
  <li>
- If the instance is a OrderPaymentInstrumentInfo, and we are in
- the context of a storefront request, and the current customer is identical
- to the customer related to the basket, and the current protocol is HTTPS
+ If the instance is a OrderPaymentInstrument in the context of a storefront request, and
+ the current authenticated customer is referenced by the basket or order, and
+ the current protocol is HTTPS.
  </li>
  <li>
- If the instance is a OrderPaymentInstrumentInfo, and we are in
+ If the customer is anonymous, and the customer is referenced by the order, and the protocol is secure and
+ the order status is CREATED.
+ </li>
+ <li>
+ If the instance is a OrderPaymentInstrument, and we are in
  the context of a business manager request, and the current user has the
  permission MANAGE_ORDERS
  </li>
  <li>
- If the instance is a OrderPaymentInstrumentInfo, and the account information
+ If the instance is a OrderPaymentInstrument, and the account information
  has not been masked as a result of the data retention security policy
  for the site
  </li>
@@ -601,7 +605,7 @@
 <span><span class="emphasis"><a href="#dw_order_PaymentInstrument_getCreditCardNumber_DetailAnchor"><span class="">getCreditCardNumber</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the decrypted credit card number if the calling context meets the following criteria: <br/> <ul> <li> If the instance is a CustomerPaymentInstrument, and we are in the context of a storefront request, and the current customer is registered and authenticated, and the payment instrument is associated to the profile of the current customer, and the current protocol is HTTPS </li> <li> If the instance is a OrderPaymentInstrumentInfo, and we are in the context of a storefront request, and the current customer is identical to the customer related to the basket, and the current protocol is HTTPS </li> <li> If the instance is a OrderPaymentInstrumentInfo, and we are in the context of a business manager request, and the current user has the permission MANAGE_ORDERS </li> <li> If the instance is a OrderPaymentInstrumentInfo, and the account information has not been masked as a result of the data retention security policy for the site </li> </ul> <p/> Otherwise, the method returns the masked credit card number.</div>
+<div class="description">Returns the decrypted credit card number if the calling context meets the following criteria: <br/> <ul> <li> If the instance is a CustomerPaymentInstrument, and we are in the context of a storefront request, and the current customer is registered and authenticated, and the payment instrument is associated to the profile of the current customer, and the current protocol is HTTPS </li> <li> If the instance is a OrderPaymentInstrument in the context of a storefront request, and the current authenticated customer is referenced by the basket or order, and the current protocol is HTTPS.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_PaymentInstrument_getCreditCardNumberLastDigits_DetailAnchor"><span class="">getCreditCardNumberLastDigits</span></a></span>()
@@ -1379,17 +1383,21 @@
  to the profile of the current customer, and the current protocol is HTTPS
  </li>
  <li>
- If the instance is a OrderPaymentInstrumentInfo, and we are in
- the context of a storefront request, and the current customer is identical
- to the customer related to the basket, and the current protocol is HTTPS
+ If the instance is a OrderPaymentInstrument in the context of a storefront request, and
+ the current authenticated customer is referenced by the basket or order, and
+ the current protocol is HTTPS.
  </li>
  <li>
- If the instance is a OrderPaymentInstrumentInfo, and we are in
+ If the customer is anonymous, and the customer is referenced by the order, and the protocol is secure and
+ the order status is CREATED.
+ </li>
+ <li>
+ If the instance is a OrderPaymentInstrument, and we are in
  the context of a business manager request, and the current user has the
  permission MANAGE_ORDERS
  </li>
  <li>
- If the instance is a OrderPaymentInstrumentInfo, and the account information
+ If the instance is a OrderPaymentInstrument, and the account information
  has not been masked as a result of the data retention security policy
  for the site
  </li>

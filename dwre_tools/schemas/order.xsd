@@ -31,6 +31,7 @@
             </xsd:annotation>
             <xsd:enumeration value="18.5" />
             <xsd:enumeration value="19.2" />
+            <xsd:enumeration value="19.5" />
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -111,6 +112,14 @@
             <xsd:element name="place-date" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
                     <xsd:documentation>For internal use only. Element will not be contained in order.xml.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="global-party-id" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                    Since version 19.5.
+                    Value is ignored when imported on a production instance.
+                    </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1" />
