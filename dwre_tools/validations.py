@@ -3,8 +3,11 @@ from __future__ import print_function
 from lxml import etree as ET
 import os
 import re
+import json
 
 from colorama import Fore, Back, Style
+from jsonschema import validate as validate_jsonschema
+import jsonschema
 import dwre_tools
 
 SCHEMA_MAP = {
@@ -61,6 +64,29 @@ NSMAP = {
     "http://www.demandware.com/xml/impex/search2/2010-02-19" : "search2.xsd",
 }
 
+JSON_SCHEMAS = [
+    "attributedefinition.json",
+    "attributedefinitiongroup.json",
+    "common.json",
+    "componenttype.json",
+    "componenttypeexclusion.json",
+    "contentassetcomponentconfig.json",
+    "contentassetcomponentdata.json",
+    "contentassetpageconfig.json",
+    "customeditortype.json",
+    "editordefinition.json",
+    "image.json",
+    "pagetype.json",
+    "regiondefinition.json",
+    "visibilityrule.json",
+]
+
+def load_json_schema_ref_resolver():
+    store = {}
+    for schema in JSON_SCHEMAS:
+        store[schema] = json.load(open(os.path.join(dwre_tools.__path__[0], 'schemas/' + schema)))
+    return jsonschema.RefResolver(base_uri='', referrer='', store=store)
+
 def validate_xml(xml, throw=True):
     """Validates XML against DWRE schemas"""
 
@@ -107,6 +133,53 @@ def validate_file(full_filename):
         print(e)
         return False
 
+def validate_json_schemas(directory):
+    results = []
+    ref_resolver = load_json_schema_ref_resolver()
+    for (dirpath, dirnames, filenames) in os.walk(directory):
+        for fname in filenames:
+            (root, ext) = os.path.splitext(fname)
+
+            if ext == ".json":
+                full_filename = os.path.join(dirpath, fname)
+                result = validate_json_schema(full_filename, ref_resolver=ref_resolver)
+                results.append(result)
+
+    return all(results)
+
+def validate_json_schema(full_filename, ref_resolver=None):
+    if not ref_resolver:
+        ref_resolver = load_json_schema_ref_resolver()
+    try:
+        if os.path.normpath("experience/components") in os.path.normpath(full_filename):
+            print("%s"  % full_filename, end=' ')
+            # validate component
+            component_schema = json.load(open(os.path.join(dwre_tools.__path__[0], 'schemas/componenttype.json')))
+            with open(full_filename, "r") as f:
+                instance = json.load(f) # TODO: check json failure
+                validate_jsonschema(instance=instance, schema=component_schema,
+                                    resolver=ref_resolver)
+            print(Fore.GREEN + "[OK]" + Fore.RESET)
+            return True
+        elif os.path.normpath("experience/pages") in os.path.normpath(full_filename):
+            print("%s"  % full_filename, end=' ')
+            # validate component
+            component_schema = json.load(open(os.path.join(dwre_tools.__path__[0], 'schemas/pagetype.json')))
+            with open(full_filename, "r") as f:
+                instance = json.load(f) # TODO: check json failure
+                validate_jsonschema(instance=instance, schema=component_schema,
+                                    resolver=ref_resolver)
+            print(Fore.GREEN + "[OK]" + Fore.RESET)
+            return True
+        return True
+    except json.decoder.JSONDecodeError as e:
+        print(Fore.RED + "[ERROR] Cannot Decode JSON" + Fore.RESET)
+        print(e.msg)
+        return False
+    except jsonschema.exceptions.ValidationError as e:
+        print(Fore.RED + "[ERROR] jsonschema validation error" + Fore.RESET)
+        print(e.message)
+        return False
 
 def validate_directory(directory):
     results = []
@@ -114,21 +187,23 @@ def validate_directory(directory):
         for fname in filenames:
             (root, ext) = os.path.splitext(fname)
 
-            if ext != ".xml":
-                continue
-
-            full_filename = os.path.join(dirpath, fname)
-            result = validate_file(full_filename)
-            results.append(result)
+            if ext == ".xml":
+                full_filename = os.path.join(dirpath, fname)
+                result = validate_file(full_filename)
+                results.append(result)
 
     return all(results)
-
 
 def validate_command(target):
     if os.path.isdir(target):
         validate_directory(target)
+        validate_json_schemas(target)
     elif os.path.isfile(target):
-        validate_file(target)
+        (root, ext) = os.path.splitext(target)
+        if ext == ".json":
+            validate_json_schema(target)
+        else:
+            validate_file(target)
     else:
         raise IOError("file not found")
 

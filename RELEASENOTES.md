@@ -1,6 +1,13 @@
 
 # Release Notes
 
+## 1.15.0
+
+- adds jsonschema validation to validation related commands
+    - validates page designer json schemas; future use cases for JSON schema validations
+- update docs and schemas to 19.6
+- allows setting of the `useAccountManager` flag via `dw.json` files
+
 ## 1.14.10
 
 - update docs to 19.4

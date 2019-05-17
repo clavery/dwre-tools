@@ -25,7 +25,7 @@ from collections import defaultdict
 
 from colorama import Fore, Back, Style
 
-from .validations import validate_xml, validate_file, validate_directory
+from .validations import validate_xml, validate_file, validate_directory, validate_json_schemas
 from .migratemeta import (TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION,
                           SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST, RERUN_MIGRATIONS_ON_UPGRADE,
                           CARTRIDGE_VERSION, MIGRATION_FILE)
@@ -34,6 +34,7 @@ from .utils import directory_to_zip
 from .index import reindex
 from .exc import NotInstalledException
 from .cartridge import update_bm_cartridge_server
+from .sync import collect_cartridges
 
 
 X = "{http://www.pixelmedia.com/xml/dwremigrate}"
@@ -755,6 +756,11 @@ def validate_migrations(migrations_dir):
         data = hotfixes[m]
         result = validate_directory(os.path.join(migrations_dir, data["location"]))
         results.append(result)
+    print(Fore.MAGENTA + "Validating JSON schemas..." + Fore.RESET)
+    cartridges = collect_cartridges(".")
+    for cartridge in cartridges:
+        print(Fore.MAGENTA + "Validating " + cartridge[1] + Fore.RESET)
+        results.append(validate_json_schemas(cartridge[0]))
     return all(results)
 
 

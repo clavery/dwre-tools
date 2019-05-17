@@ -265,7 +265,7 @@ migrate_add_cmd.add_argument('--id', help="id of migration (default: generated)"
 migrate_add_cmd.add_argument('directory', help="migration directory (within migrations/)")
 migrate_apply_cmd = migrate_parser.add_parser("apply", help="apply migrations to environment")
 migrate_apply_cmd.set_defaults(subcommand="apply")
-migrate_validate_cmd = migrate_parser.add_parser("validate", help="validate migrations directory")
+migrate_validate_cmd = migrate_parser.add_parser("validate", help="validate migrations directory and all jsonschemas")
 migrate_validate_cmd.set_defaults(subcommand="validate")
 migrate_reset_cmd = migrate_parser.add_parser("reset", help="reset migration state to current code version")
 migrate_reset_cmd.set_defaults(subcommand="reset")
@@ -278,7 +278,7 @@ migrate_set_cmd.set_defaults(subcommand="set")
 migrate_runall_cmd = migrate_parser.add_parser("runall", help="run all migrations not currently applied without validating or updating/applying migrations")
 migrate_runall_cmd.set_defaults(subcommand="runall")
 
-validate_cmd = cmd_parser.add_parser('validate', help="XMLSchema validations")
+validate_cmd = cmd_parser.add_parser('validate', help="XMLSchema and jsonschema validations")
 validate_cmd.set_defaults(func=validate_cmd_handler)
 validate_cmd.add_argument('target', help="filename or directory to validate")
 

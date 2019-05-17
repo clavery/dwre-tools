@@ -14,3 +14,4 @@ boto3 >= 1.4.7
 python-gnupg
 watchdog==0.8.3
 keyring==16.0.1
+jsonschema==3.0.1

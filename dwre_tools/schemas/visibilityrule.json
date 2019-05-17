@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  
+  "type":"object",
+  
+  "definitions": {
+    "time_period": {
+      "type": "object",
+      "properties": {
+        "valid_from": {
+          "format": "date-time"
+        },
+        "valid_to": {
+          "format": "date-time"
+        }
+      }
+    },
+    "customer_group_id_listing": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  
+  "properties": {
+    "schedule": {"$ref": "#/definitions/time_period"},
+    "customer_group_ids": {"$ref": "#/definitions/customer_group_id_listing"}
+  },
+  "additionalProperties": false
+}
