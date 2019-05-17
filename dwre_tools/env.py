@@ -11,11 +11,13 @@ def get_env_from_dw_json():
     if os.path.exists(dw_json_file):
         with open(dw_json_file) as f:
             j = json.load(f)
+            use_account_manager = j.get('useAccountManager') == True
             return {
                 "server": j.get("hostname"),
                 "username": j.get("username"),
                 "password": j.get("password"),
                 "codeVersion": j.get("code-version"),
+                "useAccountManager": use_account_manager,
             }
     return None
 
