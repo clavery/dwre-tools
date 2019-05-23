@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.15.1
+
+- Fixing bug with missing json schemas
+
 ## 1.15.0
 
 - adds jsonschema validation to validation related commands
