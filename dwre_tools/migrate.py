@@ -421,7 +421,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         print(Fore.CYAN + "(hotfix", end="")
         if migration_data["reindex"]:
             reindex_requested = True
-            print(",Reindex Requested)")
+            print(",Reindex Requested)", Fore.RESET)
         else:
             print(")", Fore.RESET)
 
