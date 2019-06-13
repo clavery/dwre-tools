@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.15.2
+
+- Fixing logic bug with account manager fallback
+
 ## 1.15.1
 
 - Fixing bug with missing json schemas

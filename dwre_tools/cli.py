@@ -76,7 +76,7 @@ def get_env_from_args(args):
     if "verify" not in env:
         env["verify"] = not args.noverify
 
-    if not env.get('password'):
+    if "password" not in env or not env.get('password'):
         # attempt to retrieve from keyring
         key = "dwre-%s" % (env["server"])
         if env.get('useAccountManager'):
