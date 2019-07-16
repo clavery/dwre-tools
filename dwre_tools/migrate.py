@@ -389,7 +389,6 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             current_migration_path = path_to_check
 
         if current_hotfixes and hotfixes:
-            print(hotfixes)
             hotfix_path = [h for h in hotfixes if h not in current_hotfixes]
 
     if migration_path or hotfix_path:
