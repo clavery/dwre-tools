@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.15.3
+
+- minor changes
+
 ## 1.15.2
 
 - Fixing logic bug with account manager fallback
