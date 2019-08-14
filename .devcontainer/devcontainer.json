@@ -1,0 +1,11 @@
+{
+	"name": "DWRE Tools Python Container",
+	"dockerFile": "Dockerfile",
+	"appPort": 9000,
+	"context": "..",
+	"extensions": [
+		"ms-python.python"
+	],
+  "runArgs": ["-v", "${env:HOME}${env:USERPROFILE}/.dwre.json.gpg:/root/.dwre.json.gpg", "-v", "${env:HOME}${env:USERPROFILE}/.dwre.json:/root/.dwre.json"],
+  "postCreateCommand" : "python3 setup.py develop"
+}

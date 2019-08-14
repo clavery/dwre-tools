@@ -11,3 +11,4 @@ env/
 .cookies
 testing/
 .vscode/settings.json
+dw.json
