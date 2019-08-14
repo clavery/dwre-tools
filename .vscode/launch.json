@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // simply modify or add additional configurations with arguments for testing
+            // recommend using a python3 virtual environment and selecting "Python: Selected Interpreter" in vscode to select the local
+            // virtualenv
+            "name": "DWRE Tools Tail",
+            "type": "python",
+            "request": "launch",
+            "module": "dwre_tools.cli",
+            "args": [
+                "tail"
+            ]
+        },
+        {
+            "name": "DWRE Tools Migrate Run",
+            "type": "python",
+            "request": "launch",
+            "module": "dwre_tools.cli",
+            "cwd": "${workspaceFolder}/testdata/test1",
+            "args": [
+                "migrate",
+                "run",
+                "migrations/20171115T1210_jira_collector_meta"
+            ]
+        }
+    ]
+}

@@ -10,3 +10,4 @@ env/
 .pyre
 .cookies
 testing/
+.vscode/settings.json

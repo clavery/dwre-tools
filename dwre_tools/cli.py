@@ -376,3 +376,6 @@ def main():
     else:
         parser.print_help()
         sys.exit(2)
+
+if __name__ == "__main__":
+    main()
