@@ -55,13 +55,11 @@
  are translated into URL parameters.<p/>
 
  <table>
- <th>
  <tr>
-     <td>Type of transformation</td>
-     <td>Parameters</td>
-     <td>Description</td>
+     <th>Type of transformation</th>
+     <th>Parameters</th>
+     <th>Description</th>
  </tr>
- </th>
  <tr>
      <td>Scale an image</td>
      <td>
@@ -79,6 +77,8 @@
          the image larger, only this operation is applied, if the image
          remains in the size of 2000x2000. Valid values for these parameters
          are 10-2000.<p/>
+
+         Note: <code>scaleMode</code> can only be used in combination with <code>scaleHeight</code> and <code>scaleWidth</code>.<p/>
 
          The <code>scaleMode</code> parameter can be set to <code>cut</code>
          or <code>fit</code>. The default <code>scaleMode</code> is
@@ -99,6 +99,9 @@
      <td>
          The <code>imageX</code> and <code>imageY</code> parameters are both
          integers. Valid values for these parameters are 0 or greater.<p/>
+
+         Supported formats are <code>png</code>, <code>jpg</code>, <code>jp2</code>, and
+         <code>gif</code>.<p/>
 
          The <code>imageURI</code> parameter can be set to the absolute path
          of the overlaid image. The value of the <code>imageURI</code>
@@ -145,7 +148,7 @@
      <td><code>format</code></td>
      <td>
          The <code>format</code> parameter specifies the target format of
-         image. Supported formats are <code>png</code>, <code>jpg</code>, and
+         image. Supported formats are <code>png</code>, <code>jpg</code>, <code>jp2</code>, and
          <code>gif</code>. If no target format is specified, no format
          conversion is performed.<p/>
 
@@ -164,11 +167,18 @@
      <td>Adjust image compression quality</td>
      <td><code>quality</code></td>
      <td>
-         The <code>quality</code> parameter specifies the compression quality of
-         the image. Depending on the target image format, this might result in changes
-         to the visual quality of the image as well.
+         The <code>quality</code> parameter specifies a quality setting for <code>jpg</code> and <code>jp2</code> images,
+         and specifies the compression level for <code>png</code> images.<p/>
 
-         Valid values for the <code>quality</code> parameter are between 1 and 100. The default is 80.
+         For <code>jpg</code> and <code>jp2</code> images, you can set values from 1–100 for the highest quality.
+         The default quality is 80. If you're not changing the default quality, you don't need to pass in a value.<p/>
+
+         For <code>png</code> images, the quality setting has no effect on the appearance of the <code>png</code>, since the compression is always lossless.
+         Instead you can use the quality setting to set the zlib compression level and filter-type for PNG images.
+         The tens digit sets the zlib compression level(1-9). The ones digit sets the filter type.<p/>
+
+         If the <code>png</code> setting is not present or set to 0, it uses a default value of 75.
+         If this setting is set to 100, it actually equals the quality setting 90.
      </td>
  </tr>
  <tr>
@@ -176,10 +186,29 @@
      <td><code>strip</code></td>
      <td>
          The <code>strip</code> parameter specifies if metadata like EXIF and color profiles is
-         stripped from the image during transformation.
+         stripped from the image during transformation.<p/>
 
          Valid values for the <code>strip</code> parameter are between <code>true</code> and <code>false</code>.
          The default is <code>true</code>
+     </td>
+ </tr>
+ <tr>
+     <td>Change background color</td>
+     <td><code>bgcolor(color) or bgcolor(color+alpha)</code></td>
+     <td>
+         The <code>bgcolor</code> parameter specifies the background color for images that support transparency
+         as well as JPEG images when being converted from a format that supports transparency.
+         Optionally, alpha setting for PNG images are also supported.<p/>
+
+         <code>bgcolor</code> expects a 6 digit hexadecimal value of RGB with an optional
+         two hexadecimal characters representing alpha value that determines transparency.<p/>
+
+         FF0000 = Red<p/>
+
+         FF000077 = Red with 50% transparency<p/>
+
+         Alpha values are optional. When the alpha value is omitted, the resulting color is opaque.
+         Alpha values are only valid when the image output format is PNG.
      </td>
  </tr>
  </table>

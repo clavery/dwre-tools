@@ -40,27 +40,19 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description"><pre>
- ======================
- PAGE DESIGNER BETA API
- ======================
- </pre>
-
- <p>Provides functionality for getting and rendering page designer managed pages. The basic flow is
- to initiate page rendering by ID via <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a>. This will trigger page
+<div class="description">Provides functionality for getting and rendering page designer managed pages.
+ <p>
+ The basic flow is to initiate page rendering by ID via <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a>. This will trigger page
  rendering from a top level perspective, i.e. the page serves as entry point and root container of components.
  As a related page or component template will likely want to trigger rendering of nested components
  within its regions it can do this by first fetching the desired region by ID via
  <a href="class_dw_experience_Page.html#dw_experience_Page_getRegion_String_DetailAnchor">Page.getRegion(String)</a> or <a href="class_dw_experience_Component.html#dw_experience_Component_getRegion_String_DetailAnchor">Component.getRegion(String)</a> and then call to <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderRegion_Region_RegionRenderSettings_DetailAnchor">renderRegion(Region, RegionRenderSettings)</a>
  with the recently retrieved region (and optionally provide <a href="class_dw_experience_RegionRenderSettings.html">RegionRenderSettings</a> for customized
- rendering of region and component wrapper elements).</p>
+ rendering of region and component wrapper elements).
+ </p>
 
  <p>Various attributes required for rendering in the corresponding template can be accessed with the
- accordant methods of <a href="class_dw_experience_Page.html">Page</a> and <a href="class_dw_experience_Component.html">Component</a>.</p>
-
- <p><b>Any rendering or retrieval of pages, components and regions will return null in case the page designer feature is
- turned off. The page designer feature is a beta feature only and must not be used if not explicitly taking
- part in the corresponding beta program.</b></p></div>
+ accordant methods of <a href="class_dw_experience_Page.html">Page</a> and <a href="class_dw_experience_Component.html">Component</a>.</p></div>
 <div class="subclasses"></div>
 <div class="parameters">
 <span class="parameterTitle">See Also:</span>

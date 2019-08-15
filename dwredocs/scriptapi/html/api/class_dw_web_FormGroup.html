@@ -142,7 +142,7 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
 						: 
 					void</span>
-<div class="description">The method updates the form with the values from the given object.</div>
+<div class="description">The method updates the form with the values from the given object.<br> <br> The method call is basically equivalent to the pipelet UpdateFormWithObject.<br> <br> The method not only copies the value, it also binds the object to the form.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_web_FormGroup_copyTo_Object_DetailAnchor"><span class="">copyTo</span></a></span>(obj
@@ -151,7 +151,7 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
 						: 
 					void</span>
-<div class="description">The method updates the object with the values from the form.</div>
+<div class="description">The method updates the object with the values from the form.<br> <br> The method call is basically equivalent to the pipelet UpdateObjectWithForm.<br> <br> The method needs a submitted form.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_web_FormGroup_getChildCount_DetailAnchor"><span class="">getChildCount</span></a></span>()
@@ -235,18 +235,18 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
 					 : 
 					void</div>
-<div class="description">The method updates the form with the values from the given object. The
- method call is basically equivalent to the pipelet UpdateFormWithObject.
-
- The method not only copies the value, it also binds the object to the form.
- Binding means that the form keeps the information from which objects the
- values were taken. This can be used for two purposed, first for lists it
- makes it easier in the code to find the associated object, for example in
- case of a relate action, and it allows to copy back the values from the form
- into the object (see accept()).
-
- Because of this bind behavior, the operation is also sometimes called a
- bind-operation.</div>
+<div class="description">The method updates the form with the values from the given object.<br>
+ <br>
+ The method call is basically equivalent to the pipelet UpdateFormWithObject.<br>
+ <br>
+ The method not only copies the value, it also binds the object to the form. Binding means that the form keeps the
+ information from which objects the values were taken. This can be used for two purposes:
+ <ol>
+ <li>for lists it makes it easier in the code to find the associated object, for example in case of a related
+ action, and</li>
+ <li>it allows to copy back the values from the form into the object (see <a href="class_dw_web_FormGroup.html#dw_web_FormGroup_accept_DetailAnchor">accept()</a>).</li>
+ </ol>
+ Because of this bind behavior, the operation is also sometimes called a bind-operation.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -269,8 +269,19 @@
 								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
 					 : 
 					void</div>
-<div class="description">The method updates the object with the values from the form. The method
- call is basically equivalent to the pipelet UpdateObjectWithForm.</div>
+<div class="description">The method updates the object with the values from the form.<br>
+ <br>
+ The method call is basically equivalent to the pipelet UpdateObjectWithForm.<br>
+ <br>
+ The method needs a submitted form. The copyTo call is delegated to the form fields. Each form field than checks
+ if its value was submitted as part of the form:
+ <ul>
+ <li>If this is <i>true</i>, the object gets updated with the form field value.</li>
+ <li>If this is <i>false</i>, the object will not be updated.</li>
+ </ul>
+ This is the reason why you cannot copy values from one object into another object by using
+ <a href="class_dw_web_FormGroup.html#dw_web_FormGroup_copyFrom_Object_DetailAnchor">copyFrom(Object)</a> and <a href="class_dw_web_FormGroup.html#dw_web_FormGroup_copyTo_Object_DetailAnchor">copyTo(Object)</a> within the same request (e.g. by one call to a script or
+ controller).</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">

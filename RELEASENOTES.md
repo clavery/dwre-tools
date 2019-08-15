@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.15.4
+
+- 19.8 updates
+- adds jobstepapi types to docs and doc generation
+
 ## 1.15.3
 
 - minor changes

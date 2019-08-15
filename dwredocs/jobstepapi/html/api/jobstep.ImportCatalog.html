@@ -43,7 +43,7 @@
                                             String
                                                     (Required)
                                                 </span>
-<div class="description">What to do with the import file after successful or failed import.</div>
+<div class="description">What to do with the import file after successful or failed import. The handling is not performed if there was a locking problem, or if ImportFailedHandling is ERROR and the file failed to validate.</div>
 <div class="description">
                                                 Allowed Values:
 
@@ -123,6 +123,27 @@
                                                     (Optional)
                                                 </span>
 <div class="description">The folder that contains the import files, relative to the 'IMPEX/src/' folder. If not defined 'IMPEX/src/' is used as working folder.</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+                                    Exit Status
+                                </div>
+<div class="summaryItem">
+<span><span class="parameterTitle">OK</span></span>
+<div class="description">Step exit status used when the import finished successfully.</div>
+</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">ERROR</span></span>
+<div class="description">Step exit status used when the import failed.</div>
+</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">NO_FILES_FOUND</span></span>
+<div class="description">Step exit status used when no files were found and parameter 'NoFilesFoundHandling' is 'NO_FILES_FOUND'.</div>
+</div>
+<div class="summaryItem">
+<span><span class="parameterTitle">WARN</span></span>
+<div class="description">Step exit status used when the import was not successful and parameter 'ImportFailedHandling' or parameter 'NoFilesFoundHandling' is 'WARN'.</div>
 </div>
 </div>
 </div>

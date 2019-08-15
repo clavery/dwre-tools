@@ -134,27 +134,6 @@
 </div>
 <div class="section">
 <hr>
-<a name="quota_api.basket.agentMaxOpenCustomerBaskets"></a>
-<p class="className">api.basket.agentMaxOpenCustomerBaskets</p>
-<p>
-            The api.basket.agentMaxOpenCustomerBaskets API quota consists of:
-        </p>
-<ul>
-<li>
-<b>Log file ID:</b> api.basket.agentMaxOpenCustomerBaskets</li>
-<li>
-<b>Description:</b> DEPRECATED! Replaced by agent baskets limit feature toggle.</li>
-<li>
-<b>Limit:</b> 
-<ul>
-<li>
-<b>Default Limit: </b>4</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section">
-<hr>
 <a name="quota_api.basket.productLineItemQuantity"></a>
 <p class="className">api.basket.productLineItemQuantity</p>
 <p>
@@ -170,27 +149,6 @@
 <ul>
 <li>
 <b>Default Limit: </b>1,000</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section">
-<hr>
-<a name="quota_api.shop.basket.agentMaxOpenCustomerBaskets"></a>
-<p class="className">api.shop.basket.agentMaxOpenCustomerBaskets</p>
-<p>
-            The api.shop.basket.agentMaxOpenCustomerBaskets API quota consists of:
-        </p>
-<ul>
-<li>
-<b>Log file ID:</b> api.shop.basket.agentMaxOpenCustomerBaskets</li>
-<li>
-<b>Description:</b> DEPRECATED! In the context of the Shop API used with an agent/oauth authentication: the maximum number of open baskets assigned to one customer.</li>
-<li>
-<b>Limit:</b> 
-<ul>
-<li>
-<b>Default Limit: </b>4</li>
 </ul>
 </li>
 </ul>
@@ -1382,29 +1340,16 @@
 <li> Pipelet ExportSourceCodes</li>
 <li> Pipelet ExportStores</li>
 <li> Pipelet ExportTaxTable</li>
-<li> Pipelet ImportABTests</li>
 <li> Pipelet ImportActiveData</li>
-<li> Pipelet ImportCampaigns</li>
-<li> Pipelet ImportContent</li>
-<li> Pipelet ImportCoupons</li>
 <li> Pipelet ImportCustomObjects</li>
-<li> Pipelet ImportCustomerGroups</li>
-<li> Pipelet ImportCustomerList</li>
 <li> Pipelet ImportCustomerPI</li>
-<li> Pipelet ImportCustomers</li>
-<li> Pipelet ImportGiftCertificates</li>
 <li> Pipelet ImportInventoryLists</li>
 <li> Pipelet ImportKeyValueMapping</li>
 <li> Pipelet ImportPipelet</li>
 <li> Pipelet ImportPriceAdjustmentLimits</li>
 <li> Pipelet ImportProductLists</li>
-<li> Pipelet ImportPromotions</li>
 <li> Pipelet ImportServices</li>
-<li> Pipelet ImportShippingMethods</li>
-<li> Pipelet ImportSlots</li>
-<li> Pipelet ImportSourceCodes</li>
 <li> Pipelet ImportStores</li>
-<li> Pipelet ImportTaxTable</li>
 <li> Pipelet ValidateActiveDataFile</li>
 <li> Pipelet ValidateXMLFile</li>
 </ul>
@@ -2412,6 +2357,22 @@
 <ul>
 <li>
 <b>Log file ID:</b> object.StorePO.readonly@SF</li>
+<li>
+<b>Description:</b> The business object is read-only from storefront requests</li>
+<li>
+<b>Access:</b> Read-only from storefront requests.</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_object.SystemNotificationPO.readonly@SF"></a>
+<p class="className">System Notification Messages</p>
+<p>
+            The System Notification Messages API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.SystemNotificationPO.readonly@SF</li>
 <li>
 <b>Description:</b> The business object is read-only from storefront requests</li>
 <li>

@@ -40,13 +40,7 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description"><pre>
- ======================
- PAGE DESIGNER BETA API
- ======================
- </pre>
-
- This class represents a page designer managed page. A page comprises of
+<div class="description">This class represents a page designer managed page. A page comprises of
  multiple regions that hold components, which themselves again can have
  regions holding components, i.e. spanning a hierarchical tree of components.
  Using the <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">PageMgr.renderPage(String, String)</a> a page can be rendered. As such page
@@ -143,6 +137,7 @@
 							&nbsp;(Read Only)<div class="description">Returns <code>true</code> if the page is currently visible which is the case if:
  <ul>
   <li>page is published</li>
+  <li>the page is set to visible in the current locale</li>
   <li>all visibility rules apply, requiring that
    <ul>
     <li>schedule matches</li>
@@ -251,7 +246,7 @@
 <span><span class="emphasis"><a href="#dw_experience_Page_isVisible_DetailAnchor"><span class="">isVisible</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Returns <code>true</code> if the page is currently visible which is the case if: <ul> <li>page is published</li> <li>all visibility rules apply, requiring that <ul> <li>schedule matches</li> <li>customer group matches</li> </ul> </li> </ul> If any of these is not the case then <code>false</code> will be returned.</div>
+<div class="description">Returns <code>true</code> if the page is currently visible which is the case if: <ul> <li>page is published</li> <li>the page is set to visible in the current locale</li> <li>all visibility rules apply, requiring that <ul> <li>schedule matches</li> <li>customer group matches</li> </ul> </li> </ul> If any of these is not the case then <code>false</code> will be returned.</div>
 </div>
 </div>
 <div class="section">
@@ -463,6 +458,7 @@
 <div class="description">Returns <code>true</code> if the page is currently visible which is the case if:
  <ul>
   <li>page is published</li>
+  <li>the page is set to visible in the current locale</li>
   <li>all visibility rules apply, requiring that
    <ul>
     <li>schedule matches</li>
@@ -499,7 +495,7 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc"><code>true</code> if the page is currently visible (published and visibility rules apply), otherwise <code>false</code> (unpublished and/or visibility rules don't apply)</span>
+<span class="parameterDesc"><code>true</code> if the page is currently visible (published, visible in the current locale, and visibility rules apply), otherwise <code>false</code> (unpublished and/or visibility rules don't apply)</span>
 </div>
 </div>
 <div class="parameters">

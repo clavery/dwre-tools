@@ -106,7 +106,7 @@
                                             String
                                                     (Optional)
                                                 </span>
-<div class="description">Export file pathname relative to 'IMPEX/src' folder. Either ExportFile or FileNamePrefix must be specified.</div>
+<div class="description">Export file name and path relative to 'IMPEX/src'. Required if not using FileNamePrefix.</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">Failed</span>
@@ -125,7 +125,7 @@
                                             String
                                                     (Optional)
                                                 </span>
-<div class="description">The file name prefix of the export file. The job step will append site information where relevant and a timestamp. Sorting the export files alphanumerically will yield the chronological order. The parameter may include a folder component. Path is relative to 'IMPEX/src' folder. Either ExportFile or FileNamePrefix must be specified.</div>
+<div class="description">Prefix for the export file. A timestamp is appended and site information as applicable. To order the files chronologically, sort alphanumerically. Path is relative to 'IMPEX/src' and can include a subdirectory. Required if not using ExportFile.</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">New</span>
@@ -155,7 +155,7 @@
                                             Boolean
                                                     (Optional)
                                                 </span>
-<div class="description">Overwrite existing file. If option is not selected and the file already exists, the job step will use the ERROR exit status.</div>
+<div class="description">If selected, the option overwrites an existing file. If not selected and a file exists, the job step exits and reports an error.</div>
 <div class="description">
                                                 Default Value:
                                                 true</div>

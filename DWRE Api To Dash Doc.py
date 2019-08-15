@@ -92,6 +92,34 @@ def test():
     pass
 
 
+# ## Job Step API
+
+
+
+if os.path.exists("./DWREApiDoc.docset/Contents/Resources/Documents/jobstepapi/"):
+    shutil.rmtree("./DWREApiDoc.docset/Contents/Resources/Documents/jobstepapi/")
+shutil.copytree("./dwredocs/jobstepapi/html/api/", "./DWREApiDoc.docset/Contents/Resources/Documents/jobstepapi")
+
+
+
+
+with open("./DWREApiDoc.docset/Contents/Resources/Documents/jobstepapi/jobStepList.html", "r") as f:
+    d = pq(f.read())
+
+c = conn.cursor()
+
+for link in d('.classesName a'):
+    name = link.find("span").text
+    path = link.attrib["href"]
+    
+    print(name, path)
+    
+    c.execute("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES ('%s', 'Builtin', '%s');" % 
+              (name, "jobstepapi/%s" % path))
+    
+conn.commit()
+
+
 # # Pipelet API
 
 
@@ -321,6 +349,11 @@ conn.commit()
 
 
 conn.close()
+
+
+
+
+
 
 
 
