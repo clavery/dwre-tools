@@ -392,6 +392,6 @@ migrate -n apply
 
 # License
 
-This software is Copyright 2015-2017 PixelMEDIA, Inc. All Rights Reserved.
+This software is Copyright 2015-2019 PixelMEDIA, Inc and Charles Lavery (charles.lavery@gmail.com). All Rights Reserved.
 
-Use of this software is only allowed under the expressed written permission of PixelMEDIA, Inc. Any other use is strictly prohibited.
+Use of this software is only allowed under the express written permission of the copyright holders. Any other use, sale, distribution or duplication is strictly prohibited.
