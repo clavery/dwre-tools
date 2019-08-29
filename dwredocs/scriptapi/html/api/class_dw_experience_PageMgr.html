@@ -82,6 +82,18 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_getCustomEditor_String_Map_DetailAnchor"><span class="">getCustomEditor</span></a></span>(customEditorTypeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, configuration
+								 : 	
+								 
+								<a href="class_dw_util_Map.html"><span class="">Map</span></a>)
+						: 
+					<a href="class_dw_experience_CustomEditor.html"><span class="">CustomEditor</span></a></span>
+<div class="description"><p> Initialize the custom editor of given type id using the passed configuration.</div>
+</div>
+<div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_getPage_String_DetailAnchor"><span class="">getPage</span></a></span>(pageID
 								 : 	
 								 
@@ -138,6 +150,54 @@
 <div class="header">
 			Method Detail
 		</div>
+<div class="detailItem">
+<a name="dw_experience_PageMgr_getCustomEditor_String_Map_DetailAnchor"></a>
+<div class="detailName 
+						">getCustomEditor</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getCustomEditor</span>(customEditorTypeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, configuration
+								 : 
+								 
+								<a href="class_dw_util_Map.html"><span class="">Map</span></a>)
+					 : 
+					<a href="class_dw_experience_CustomEditor.html"><span class="">CustomEditor</span></a>
+</div>
+<div class="description"><p>
+ Initialize the custom editor of given type id using the passed configuration. The initialization
+ will trigger the <code>init</code> function of the respective custom editor type for which the passed
+ custom editor object is being preinitialized with the given configuration (similar to what would
+ happen through the <code>editor_definition</code> reference by any component type attribute definition).
+ </p>
+ <p>
+ This method is useful to obtain any custom editor instance you want to reuse within the <code>init</code>
+ method of another custom editor, e.g. as dependent breakout element.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">customEditorTypeID</span>
+						 - 
+						<span class="parameterDesc">the reference to a custom editor type, e.g. 'com.foo.bar'</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">configuration</span>
+						 - 
+						<span class="parameterDesc">the data structure used for preinitialization of the custom editor (also see <a href="class_dw_experience_CustomEditor.html#dw_experience_CustomEditor_getConfiguration_DetailAnchor">CustomEditor.getConfiguration()</a>). Be aware that this configuration will have to be serializable to JSON itself as it will be passed to Page Designer for processing in the UI. So you must not add any values in this map that are not properly serializable. Do not use complex DWScript classes that do not support JSON serialization like for instance <a href="class_dw_catalog_Product.html">Product</a>.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the initialized custom editor instance</span>
+</div>
+</div>
+<hr>
+</div>
 <div class="detailItem">
 <a name="dw_experience_PageMgr_getPage_String_DetailAnchor"></a>
 <div class="detailName 

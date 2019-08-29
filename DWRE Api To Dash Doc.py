@@ -246,13 +246,14 @@ conn.commit()
 
 
 
-OCAPI_PREFIX = '/DOC3/topic/com.demandware.dochelp/OCAPI/current/'
+V = "19.8"
+OCAPI_PREFIX = '/DOC3/topic/com.demandware.dochelp/OCAPI/%s/' % V
 OCAPI_INDICIES = [
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/current/shop/Resources/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/current/data/Resources/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/current/usage/APIUsage.html?cp=0_12_2',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/current/shop/Documents/index.html',
-    'https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/OCAPI/current/data/Documents/index.html'
+    'https://documentation.b2c.commercecloud.salesforce.com/DOC3/topic/com.demandware.dochelp/OCAPI/%s/shop/Resources/index.html' % V,
+    'https://documentation.b2c.commercecloud.salesforce.com/DOC3/topic/com.demandware.dochelp/OCAPI/%s/data/Resources/index.html' % V,
+    'https://documentation.b2c.commercecloud.salesforce.com/DOC3/topic/com.demandware.dochelp/OCAPI/%s/usage/APIUsage.html?cp=0_12_2' % V,
+    'https://documentation.b2c.commercecloud.salesforce.com/DOC3/topic/com.demandware.dochelp/OCAPI/%s/shop/Documents/index.html' % V,
+    'https://documentation.b2c.commercecloud.salesforce.com/DOC3/topic/com.demandware.dochelp/OCAPI/%s/data/Documents/index.html' % V
 ]
 
 
@@ -295,6 +296,11 @@ resp = requests.get('https://documentation.demandware.com/DOC3/topic/com.demandw
 css = f"""<style>
 {resp.content.decode('utf-8')}
 </style>"""
+
+
+
+
+page
 
 
 

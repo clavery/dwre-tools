@@ -71,10 +71,28 @@
  through the editor definition of the respective attribute definition of type <code>custom</code>.
  Be aware that this configuration will have to be serializable to JSON itself as it will be passed
  to Page Designer for processing in the UI. So you must not add any values in this map that are not
- properly serializable. In order to add structured information refrain from using curly braces JS
- object notation but use <a href="class_dw_util_HashMap.html">HashMap</a> for key value pairs. Using arrays for lists
- is also perfectly fine. The same applies for simple values like strings and numbers. Do not use complex
- DWScript classes that do not support JSON serialization like for instance <a href="class_dw_catalog_Product.html">Product</a>.</div>
+ properly serializable. Do not use complex DWScript classes that do not support JSON serialization
+ like for instance <a href="class_dw_catalog_Product.html">Product</a>.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>dependencies
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_Map.html"><span class="">Map</span></a>
+							&nbsp;(Read Only)<div class="description"><p>
+ Returns the dependencies to other custom editors, e.g. used as breakout elements. You can use
+ this mapping to add more custom editor dependencies as needed. For this purpose you want to create
+ a <a href="class_dw_experience_CustomEditor.html">CustomEditor</a> instance via <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getCustomEditor_String_Map_DetailAnchor">PageMgr.getCustomEditor(String, Map)</a>) and then add it
+ to the dependencies mapping with an ID of your choice. In the client side logic of Page Designer
+ you will then be able to access these dependencies again by using the corresponding ID.
+ </p>
+ <p>
+ This is especially helpful if your custom editor for an attribute requires to open a breakout panel,
+ e.g. for a separate picker required by your custom editor. This picker could be another custom editor,
+ i.e. the one you declare as dependency here.
+ </p></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -105,6 +123,12 @@
 						: 
 					<a href="class_dw_util_Map.html"><span class="">Map</span></a></span>
 <div class="description">Returns the configuration of the custom editor.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_CustomEditor_getDependencies_DetailAnchor"><span class="">getDependencies</span></a></span>()
+						: 
+					<a href="class_dw_util_Map.html"><span class="">Map</span></a></span>
+<div class="description"><p> Returns the dependencies to other custom editors, e.g.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_experience_CustomEditor_getResources_DetailAnchor"><span class="">getResources</span></a></span>()
@@ -141,14 +165,42 @@
  through the editor definition of the respective attribute definition of type <code>custom</code>.
  Be aware that this configuration will have to be serializable to JSON itself as it will be passed
  to Page Designer for processing in the UI. So you must not add any values in this map that are not
- properly serializable. In order to add structured information refrain from using curly braces JS
- object notation but use <a href="class_dw_util_HashMap.html">HashMap</a> for key value pairs. Using arrays for lists
- is also perfectly fine. The same applies for simple values like strings and numbers. Do not use complex
- DWScript classes that do not support JSON serialization like for instance <a href="class_dw_catalog_Product.html">Product</a>.</div>
+ properly serializable. Do not use complex DWScript classes that do not support JSON serialization
+ like for instance <a href="class_dw_catalog_Product.html">Product</a>.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">the configuration of the custom editor</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_CustomEditor_getDependencies_DetailAnchor"></a>
+<div class="detailName 
+						">getDependencies</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getDependencies</span>()
+					 : 
+					<a href="class_dw_util_Map.html"><span class="">Map</span></a>
+</div>
+<div class="description"><p>
+ Returns the dependencies to other custom editors, e.g. used as breakout elements. You can use
+ this mapping to add more custom editor dependencies as needed. For this purpose you want to create
+ a <a href="class_dw_experience_CustomEditor.html">CustomEditor</a> instance via <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getCustomEditor_String_Map_DetailAnchor">PageMgr.getCustomEditor(String, Map)</a>) and then add it
+ to the dependencies mapping with an ID of your choice. In the client side logic of Page Designer
+ you will then be able to access these dependencies again by using the corresponding ID.
+ </p>
+ <p>
+ This is especially helpful if your custom editor for an attribute requires to open a breakout panel,
+ e.g. for a separate picker required by your custom editor. This picker could be another custom editor,
+ i.e. the one you declare as dependency here.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">an ID to <a href="class_dw_experience_CustomEditor.html">CustomEditor</a> mapping</span>
 </div>
 </div>
 <hr>

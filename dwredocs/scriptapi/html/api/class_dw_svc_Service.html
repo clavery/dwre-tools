@@ -261,7 +261,7 @@
 <div class="parameterDetail">
 <span class="parameterName">args</span>
 						 - 
-						<span class="parameterDesc">Arguments to pass.</span>
+						<span class="parameterDesc">Arguments to pass. If there is a single argument and that argument is an array, then each item in the array will become a separate argument. For example, the following results in three separate arguments to the service: <pre> svc.call( [1,2,3] ) </pre> and is functionally equivalent to <pre> svc.call( 1, 2, 3 ) </pre> This can be avoided by explicitly forming a <a href="class_dw_util_List.html">List</a>, enclosing the array in another array, or by sending a second argument. The following will all send the array as a List in the first argument. <pre> svc.call( ArrayList([1,2,3]) ) </pre> <pre> svc.call( [[1,2,3]] ) </pre> <pre> svc.call( [1,2,3], "" ) </pre> Another option is to change the definition of the associated <a href="class_dw_svc_ServiceCallback.html#dw_svc_ServiceCallback_createRequest_Service_Object_DetailAnchor">ServiceCallback.createRequest(Service, Object...)</a> to accept an object instead, and pass the array as a field of that object: <pre> svc.call( { 'data': [1,2,3] } ) </pre></span>
 </div>
 </div>
 <div class="parameters">

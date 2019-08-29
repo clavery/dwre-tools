@@ -287,7 +287,10 @@
  The type of the object expected is dependent on the service. For example, the <a href="class_dw_svc_HTTPService.html">HTTPService</a> expects the
  HTTP request body to be returned.
  <p>
- This is required unless the execute method is implemented.</div>
+ This is required unless the execute method is implemented.
+ <p>
+ It is not recommended to have a service accept a single array or list as a parameter, since doing so requires
+ some extra work when actually calling the service. See <a href="class_dw_svc_Service.html#dw_svc_Service_call_Object_DetailAnchor">Service.call(Object...)</a> for more details.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
