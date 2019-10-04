@@ -21,6 +21,7 @@ def cartridges_to_zip(cartridges, filename):
     zip_file_io = io.BytesIO()
     zip_file = zipfile.ZipFile(zip_file_io, "w", zipfile.ZIP_DEFLATED)
 
+    _, real_filename = os.path.split(filename)
     for (cart_location, cart_name) in cartridges:
         fcount = 0
         print("Collecting {0}{1}{2}".format(Fore.CYAN, cart_name, Fore.RESET), end='')
@@ -28,7 +29,7 @@ def cartridges_to_zip(cartridges, filename):
             basepath = dirpath[len(cart_location)+1:]
             for fname in filenames:
                 fcount = fcount + 1
-                zip_file.write(os.path.join(dirpath, fname), os.path.join(filename, cart_name, basepath, fname))
+                zip_file.write(os.path.join(dirpath, fname), os.path.join(real_filename, cart_name, basepath, fname))
         print("...{0} files".format(fcount))
     zip_file.close()
     return zip_file_io
@@ -101,6 +102,7 @@ def sync_command(env, delete_code_version, cartridge_location):
     if delete_code_version:
         print("Deleting code version...")
         response = webdavsession.delete("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}".format(env["server"], code_version))
+        response.raise_for_status()
 
     print("Syncing code version {0}{1}{2} on {0}{3}{2}".format(Fore.YELLOW, code_version, Fore.RESET, env["server"]))
     dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}.zip"

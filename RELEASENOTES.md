@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.15.6
+
+- zip fix
+- raise error on delete in sync fix
+
 ## 1.15.5
 
 - 19.9 updates
