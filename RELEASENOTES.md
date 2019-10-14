@@ -1,6 +1,27 @@
 
 # Release Notes
 
+## 1.16.0
+
+- updates schema and docs to 19.10
+- adds `exclude-hosts` option to migrations and hotfix XML context allowing a migration to be excluded from hosts using 1 or more patterns
+    - Each `host-pattern` is a regular expression that will search the entire host string (i.e. a simple string such as `staging` is sufficient to exclude any host with that in the hostname; it doesn't need to match the whole string)
+    - Note migrations.xml using this element is not backwards compatible with tool version < 1.16
+
+### Example
+
+```
+<migration id="test">
+    <description>test migration</description>
+    <location>test</location>
+    <parent>test_parent</parent>
+    <exclude-hosts>
+      <host-pattern>staging</host-pattern>
+      <host-pattern>develop.*</host-pattern>
+    </exclude-hosts>
+</migration>
+```
+
 ## 1.15.6
 
 - zip fix

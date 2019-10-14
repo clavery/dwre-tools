@@ -3,6 +3,7 @@
 
 # # Initial Steps
 
+# - get api from https://dev04-na01-XXX.demandware.net:443/on/demandware.servlet/WFS/Studio/Sites/mock/demandware-mock.zip
 # - `mkdir -p ./DWREApiDoc.docset/Contents/Resources/Documents`
 # - copy scriptapi/api to Documents/api and pipeletapi/api to Documents/pipelet (i.e. rename folder to pipelet)
 # - Run this script
@@ -246,7 +247,7 @@ conn.commit()
 
 
 
-V = "19.8"
+V = "current"
 OCAPI_PREFIX = '/DOC3/topic/com.demandware.dochelp/OCAPI/%s/' % V
 OCAPI_INDICIES = [
     'https://documentation.b2c.commercecloud.salesforce.com/DOC3/topic/com.demandware.dochelp/OCAPI/%s/shop/Resources/index.html' % V,

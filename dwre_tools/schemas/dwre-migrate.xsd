@@ -7,52 +7,49 @@
   targetNamespace = "http://www.pixelmedia.com/xml/dwremigrate"
   elementFormDefault   = "qualified"
   attributeFormDefault = "unqualified">
-  <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
+<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
 
-  <xsd:element name="migrations">
-    <xsd:complexType mixed="false">
-      <xsd:sequence>
-        <xsd:element name="migration" type="complexType.Migration" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-    </xsd:complexType>
-  </xsd:element>
-
-  <xsd:complexType name="complexType.Migration" mixed="false">
+<xsd:element name="migrations">
+  <xsd:complexType mixed="false">
     <xsd:sequence>
-      <xsd:element name="description" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
-      <xsd:element name="location" type="simpleType.Generic.String.256" minOccurs="1" maxOccurs="1" />
-      <xsd:element name="parent" type="simpleType.Generic.NonEmptyString.100" minOccurs="0" maxOccurs="1" nillable="true" />
-      <xsd:element name="reindex" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
-      <xsd:element name="env" type="simpleType.Env" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="migration" type="complexType.Migration" minOccurs="0" maxOccurs="unbounded" />
     </xsd:sequence>
-    <xsd:attribute name="id" type="simpleType.Generic.NonEmptyString.100" use="required" />
   </xsd:complexType>
+</xsd:element>
 
-  <xsd:simpleType name="simpleType.Generic.String">
-    <xsd:restriction base="xsd:string" />
-  </xsd:simpleType>
+<xsd:complexType name="complexType.Migration" mixed="false">
+  <xsd:sequence>
+    <xsd:element name="description" type="simpleType.Generic.String.256" minOccurs="0" maxOccurs="1" />
+    <xsd:element name="location" type="simpleType.Generic.String.256" minOccurs="1" maxOccurs="1" />
+    <xsd:element name="parent" type="simpleType.Generic.NonEmptyString.100" minOccurs="0" maxOccurs="1" nillable="true" />
+    <xsd:element name="reindex" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+    <xsd:element name="exclude-hosts" type="complexType.ExcludeHosts" minOccurs="0" maxOccurs="1" />
+  </xsd:sequence>
+  <xsd:attribute name="id" type="simpleType.Generic.NonEmptyString.100" use="required" />
+</xsd:complexType>
 
-  <xsd:simpleType name="simpleType.Generic.String.256">
-    <xsd:restriction base="simpleType.Generic.String">
-      <xsd:minLength value="0" />
-      <xsd:maxLength value="256" />
-    </xsd:restriction>
-  </xsd:simpleType>
+<xsd:simpleType name="simpleType.Generic.String">
+  <xsd:restriction base="xsd:string" />
+</xsd:simpleType>
 
-  <xsd:simpleType name="simpleType.Generic.NonEmptyString.100">
-    <xsd:restriction base="simpleType.Generic.String">
-      <xsd:minLength value="1" />
-      <xsd:maxLength value="100" />
-      <xsd:pattern value="\S|(\S(.*)\S)" />
-    </xsd:restriction>
-  </xsd:simpleType>
+<xsd:simpleType name="simpleType.Generic.String.256">
+  <xsd:restriction base="simpleType.Generic.String">
+    <xsd:minLength value="1" />
+    <xsd:maxLength value="256" />
+  </xsd:restriction>
+</xsd:simpleType>
 
-  <xsd:simpleType name="simpleType.Env">
-    <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="all" />
-      <xsd:enumeration value="production" />
-      <xsd:enumeration value="staging" />
-      <xsd:enumeration value="development" />
-    </xsd:restriction>
-  </xsd:simpleType>
+<xsd:simpleType name="simpleType.Generic.NonEmptyString.100">
+  <xsd:restriction base="simpleType.Generic.String">
+    <xsd:minLength value="1" />
+    <xsd:maxLength value="100" />
+    <xsd:pattern value="\S|(\S(.*)\S)" />
+  </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="complexType.ExcludeHosts">
+  <xsd:sequence>
+    <xsd:element name="host-pattern" type="simpleType.Generic.String.256" minOccurs="1" maxOccurs="unbounded" />
+  </xsd:sequence>
+</xsd:complexType>
 </xsd:schema>

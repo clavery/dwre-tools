@@ -40,17 +40,61 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description">Represents a product search result item returned by the Search pipelet. <br/>
- An instance of ProductSearchHit is a wrapper around the actual product returned by the search. The wrapped product
- can be accessed by method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>. An instance of ProductSearchHit contains a hit type that can be
- accessed by method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getHitType_DetailAnchor">getHitType()</a>. A hit type can be refined against and encapsulates the wrapped product type
- of the hit.
- <p/>
- For special product types, the wrapped product can be the representative of other related products actually hit by
- the search. A variation master or variation group returned by the search represents a collection of hit variants. A
- product set returned by the search represents a collection of hit set-products. A bundle returned by the search
- represents a collection of hit bundled-products. If the product wrapped by this ProductSearchHit is the
- representative of other products, method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> can be used to access all these products.</div>
+<div class="description">ProductSearchHit is the result of a executed search query and wraps the actual product found by the search.
+
+ The method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> returns the actual products that is conforming the query and is represented by the search hit.
+ Depending on the hit typ, <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> returns:
+  <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product part of set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product part of a bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> -> a variation product</li>
+ </ul>
+
+ The ProductSearchHit type can be retrieved by method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getHitType_DetailAnchor">getHitType()</a> and contains the following types:
+ <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a></li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a></li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a></li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a></li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a></li>
+ </ul>
+
+ The method <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a> returns the presentation product corresponding to the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> type.
+ <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation master product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation group</li>
+ </ul>
+
+ Example:
+
+ Given a product master P1 called "Sweater" with attributes color and size that has the following variants:
+ <ul>
+     <li>V1 - color: red, size: small</li>
+     <li>V2 - color: red, size: large</li>
+     <li>V3 - color: blue, size: small</li>
+     <li>V4 - color: blue, size: large</li>
+     <li>V5 - color: yellow, size: small</li>
+     <li>V6 - color: yellow, size: large</li>
+ </ul>
+
+ A search for "red sweater" should hit the first two variants, V1 and V2
+ that are both red. The ProductSearchHit for this result encompass the master and the red variants but not the other
+ non-relevant variants.
+
+ The variants hit by the query can be retrieved by <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a>, returning a list that contains the two red sweater variants.
+
+ The master product "Sweater" is returned by <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>.
+
+ Furthermore, to get the first or last of that list of variants hit by the query we can call
+ <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getFirstRepresentedProduct_DetailAnchor">getFirstRepresentedProduct()</a> or <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProduct_DetailAnchor">getLastRepresentedProduct()</a>. The product with the highest
+ sort rank is returned first, and the product with the lowest sort rank is
+ returned last. The product sort rank depends on the sorting conditions
+ used for the search query.</div>
 <div class="subclasses"></div>
 </div>
 </div>
@@ -120,7 +164,7 @@
 							&nbsp;(Read Only)<div class="description">Return the IDs of all searchable promotions for which at least one of the represented products of this search hit
  relates to the promotion, either as qualifying, discount, or bonus product. This may be used as a better
  performing alternative to <a href="class_dw_campaign_PromotionPlan.html#dw_campaign_PromotionPlan_getProductPromotions_Product_DetailAnchor">PromotionPlan.getProductPromotions(Product)</a> in some special cases.
- However be warned: this method has no additional checks and returns currently all id's which are known at
+ However be warned: this method has no additional checks and currently returns all id's which are known at
  indexing time. Custom code should generally filter and sort the promotions returned by this method according to
  <a href="class_dw_campaign_PromotionMgr.html#dw_campaign_PromotionMgr_getActiveCustomerPromotions_DetailAnchor">PromotionMgr.getActiveCustomerPromotions()</a> before messaging the promotions on a product tile.</div>
 </span>
@@ -134,7 +178,7 @@
 							&nbsp;(Read Only)<div class="description">Return the IDs of all searchable promotions for which at least one of the represented products of this search hit
  is a bonus product. This may be used as a better performing alternative to
  <a href="class_dw_campaign_PromotionPlan.html#dw_campaign_PromotionPlan_getProductPromotions_Product_DetailAnchor">PromotionPlan.getProductPromotions(Product)</a> in some special cases. However be warned: this
- method has no additional checks and returns currently all id's which are known at indexing time. Custom code
+ method has no additional checks and currently returns all id's which are known at indexing time. Custom code
  should generally filter and sort the promotions returned by this method according to
  <a href="class_dw_campaign_PromotionMgr.html#dw_campaign_PromotionMgr_getActiveCustomerPromotions_DetailAnchor">PromotionMgr.getActiveCustomerPromotions()</a> before messaging the promotions on a product tile.</div>
 </span>
@@ -148,7 +192,7 @@
 							&nbsp;(Read Only)<div class="description">Return the IDs of all searchable promotions for which at least one of the represented products of this search hit
  satisfy the discounted product rule. This may be used as a better performing alternative to
  <a href="class_dw_campaign_PromotionPlan.html#dw_campaign_PromotionPlan_getProductPromotionsForDiscountedProduct_Product_DetailAnchor">PromotionPlan.getProductPromotionsForDiscountedProduct(Product)</a> in some special cases.
- However be warned: this method has no additional checks and returns currently all id's which are known at
+ However be warned: this method has no additional checks and currently returns all id's which are known at
  indexing time. Custom code should generally filter and sort the promotions returned by this method according to
  <a href="class_dw_campaign_PromotionMgr.html#dw_campaign_PromotionMgr_getActiveCustomerPromotions_DetailAnchor">PromotionMgr.getActiveCustomerPromotions()</a> before messaging the promotions on a product tile.</div>
 </span>
@@ -159,8 +203,8 @@
 						
 					    
 					    <a href="class_dw_catalog_Product.html"><span class="">Product</span></a>
-							&nbsp;(Read Only)<div class="description">The first product represented by the product wrapped by the search
- hit.</div>
+							&nbsp;(Read Only)<div class="description">The product that is actually hit by the search and has the highest
+ sort rank according to the sorting conditions used for the search query.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -169,8 +213,8 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The first product ID represented by the product wrapped by the search
- hit.</div>
+							&nbsp;(Read Only)<div class="description">The ID of the product that is actually hit by the search and has the highest
+ sort rank according to the sorting conditions used for the search query.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -196,8 +240,8 @@
 						
 					    
 					    <a href="class_dw_catalog_Product.html"><span class="">Product</span></a>
-							&nbsp;(Read Only)<div class="description">The last product represented by the product wrapped by the search
- hit.</div>
+							&nbsp;(Read Only)<div class="description">The product that is actually hit by the search and has the lowest
+ sort rank according to the sorting conditions used for the search query.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -206,8 +250,8 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The last product ID represented by the product wrapped by the search
- hit.</div>
+							&nbsp;(Read Only)<div class="description">The ID of the product that is actually hit by the search and has the lowest
+ sort rank according to the sorting conditions used for the search query.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -236,7 +280,7 @@
  the set of products used for finding the minimum. The method returns
  <code>N/A</code> in case no price information can be found.
  <p/>
- Note: The method uses price information of the search index and therefore
+ Note: the method uses price information of the search index and therefore
  might return different prices than the ProductPriceModel.</div>
 </span>
 </div>
@@ -257,14 +301,16 @@
 						
 					    
 					    <a href="class_dw_catalog_Product.html"><span class="">Product</span></a>
-							&nbsp;(Read Only)<div class="description">The product wrapped by this ProductSearchHit. For special product
- types, the wrapped product can be the representative of other related
- products actually hit by the search. A variation master returned by the
- search represents a collection of hit variants. A product set returned by
- the search represents a collection of hit set-products. A bundle returned
- by the search represents a collection of hit bundled-products. In this
- case call <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> to get a list of the
- represented products.</div>
+							&nbsp;(Read Only)<div class="description">The presentation product of this ProductSearchHit corresponding to the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> type.
+ <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation master product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation group</li>
+ </ul>
+
+ To retrieve the product(s) actually hit by the search use <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a>.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -273,14 +319,16 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The product ID of this ProductSearchHit. For special product
- types, the ID can be the representative of other related products
- actually hit by the search. A variation master ID returned by the search
- represents a collection of hit variants. A product set ID returned by the
- search represents a collection of hit set-products. A bundle ID returned
- by the search represents a collection of hit bundled-products. In this
- case call <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProductIDs_DetailAnchor">getRepresentedProductIDs()</a> to get a list of the
- represented product IDs.</div>
+							&nbsp;(Read Only)<div class="description">The ID of the presentation product of this ProductSearchHit corresponding to the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> type.
+ <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation master product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation group</li>
+ </ul>
+
+ To retrieve the ID of the product actually hit by the search use <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getFirstRepresentedProductID_DetailAnchor">getFirstRepresentedProductID()</a> or <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProductID_DetailAnchor">getLastRepresentedProductID()</a>.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -292,7 +340,7 @@
 							&nbsp;(Read Only)<div class="description">Return the IDs of all searchable promotions for which at least one of the represented products of this search hit
  satisfies the qualifying product rule. This may be used as a better performing alternative to
  <a href="class_dw_campaign_PromotionPlan.html#dw_campaign_PromotionPlan_getProductPromotionsForQualifyingProduct_Product_DetailAnchor">PromotionPlan.getProductPromotionsForQualifyingProduct(Product)</a> in some special cases.
- However be warned: this method has no additional checks and returns currently all id's which are known at
+ However be warned: this method has no additional checks and currently returns all id's which are known at
  indexing time. Custom code should generally filter and sort the promotions returned by this method according to
  <a href="class_dw_campaign_PromotionMgr.html#dw_campaign_PromotionMgr_getActiveCustomerPromotions_DetailAnchor">PromotionMgr.getActiveCustomerPromotions()</a> before messaging the promotions on a product tile.</div>
 </span>
@@ -303,31 +351,20 @@
 						
 					    
 					    <a href="class_dw_util_List.html"><span class="">List</span></a>
-							&nbsp;(Read Only)<div class="description">In case the product that is wrapped by this ProductSearchHit (see
- <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>) is a variation or a variation master or a product
- set, this ProductSearchHit can represent multiple products.
- <p/>
- * The following specific rules apply: <br/>
- <ul>
- <li>If the wrapped product is a variation master, the method returns all
- variant IDs of this master that satisfy the search query.</li>
- <li>If the wrapped product is a variation group, the method returns all
- variant IDs of this variation group that satisfy the search query.</li>
- <li>If the wrapped product is a variant representing other variants (due
- to variation slicing), the method returns this variant ID and all
- represented variant IDs that satisfy the search query.</li>
- <li>If the wrapped product is a product set, the method returns all set
- products IDs that satisfy the search query.</li>
- <li>If the wrapped product is a product bundle, the method returns all
- bundled product IDs that satisfy the search query.</li>
- <li>If the wrapped product is a <i>simple</i> product, the method returns
- this product ID</li>
+							&nbsp;(Read Only)<div class="description">The method returns the actual ID of the product that is conforming the query and is represented by the search hit.
+ Depending on the hit typ, it returns the ID of:
+  <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product part of set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product part of a bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation product</li>
  </ul>
- <p/>
- If the method returns multiple product IDs, the ID of the product with
- the highest sort rank is returned first, and the ID of the product with
- the lowest sort rank is returned last. The product sort rank depends in
- the sorting conditions used for the search query.</div>
+
+ If the method returns multiple products, the product with the highest
+ sort rank is returned first, and the product with the lowest sort rank is
+ returned last. The product sort rank depends on the sorting conditions
+ used for the search query.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -336,30 +373,19 @@
 						
 					    
 					    <a href="class_dw_util_List.html"><span class="">List</span></a>
-							&nbsp;(Read Only)<div class="description">In case the product that is wrapped by this ProductSearchHit (see
- <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>) is a variation or a variation master or a product
- set, this ProductSearchHit can represent multiple products.
- <p/>
- * The following specific rules apply: <br/>
- <ul>
- <li>If the wrapped product is a variation master, the method returns all
- variants of this master that satisfy the search query.</li>
- <li>If the wrapped product is a variation group, the method returns all
- variants of this variation group that satisfy the search query.</li>
- <li>If the wrapped product is a variant representing other variants (due
- to variation slicing), the method returns this variant and all
- represented variants that satisfy the search query.</li>
- <li>If the wrapped product is a product set, the method returns all set
- products that satisfy the search query.</li>
- <li>If the wrapped product is a product bundle, the method returns all
- bundled products that satisfy the search query.</li>
- <li>If the wrapped product is a <i>simple</i> product, the method returns
- this product</li>
+							&nbsp;(Read Only)<div class="description">The method returns the actual product that is conforming the query and is represented by the search hit.
+ Depending on the hit typ, <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> returns:
+  <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product part of set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product part of a bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation product</li>
  </ul>
- <p/>
+
  If the method returns multiple products, the product with the highest
  sort rank is returned first, and the product with the lowest sort rank is
- returned last. The product sort rank depends in the sorting conditions
+ returned last. The product sort rank depends on the sorting conditions
  used for the search query.</div>
 </span>
 </div>
@@ -380,13 +406,13 @@
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getFirstRepresentedProduct_DetailAnchor"><span class="">getFirstRepresentedProduct</span></a></span>()
 						: 
 					<a href="class_dw_catalog_Product.html"><span class="">Product</span></a></span>
-<div class="description">Returns the first product represented by the product wrapped by the search hit.</div>
+<div class="description">Returns the product that is actually hit by the search and has the highest sort rank according to the sorting conditions used for the search query.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getFirstRepresentedProductID_DetailAnchor"><span class="">getFirstRepresentedProductID</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the first product ID represented by the product wrapped by the search hit.</div>
+<div class="description">Returns the ID of the product that is actually hit by the search and has the highest sort rank according to the sorting conditions used for the search query.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getHitType_DetailAnchor"><span class="">getHitType</span></a></span>()
@@ -398,13 +424,13 @@
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getLastRepresentedProduct_DetailAnchor"><span class="">getLastRepresentedProduct</span></a></span>()
 						: 
 					<a href="class_dw_catalog_Product.html"><span class="">Product</span></a></span>
-<div class="description">Returns the last product represented by the product wrapped by the search hit.</div>
+<div class="description">Returns the product that is actually hit by the search and has the lowest sort rank according to the sorting conditions used for the search query.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getLastRepresentedProductID_DetailAnchor"><span class="">getLastRepresentedProductID</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the last product ID represented by the product wrapped by the search hit.</div>
+<div class="description">Returns the ID of the product that is actually hit by the search and has the lowest sort rank according to the sorting conditions used for the search query.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getMaxPrice_DetailAnchor"><span class="">getMaxPrice</span></a></span>()
@@ -422,25 +448,25 @@
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getProduct_DetailAnchor"><span class="">getProduct</span></a></span>()
 						: 
 					<a href="class_dw_catalog_Product.html"><span class="">Product</span></a></span>
-<div class="description">Returns the product wrapped by this ProductSearchHit.</div>
+<div class="description">Returns the presentation product of this ProductSearchHit corresponding to the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> type.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getProductID_DetailAnchor"><span class="">getProductID</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the product ID of this ProductSearchHit.</div>
+<div class="description">Returns the ID of the presentation product of this ProductSearchHit corresponding to the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> type.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getRepresentedProductIDs_DetailAnchor"><span class="">getRepresentedProductIDs</span></a></span>()
 						: 
 					<a href="class_dw_util_List.html"><span class="">List</span></a></span>
-<div class="description">In case the product that is wrapped by this ProductSearchHit (see <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>) is a variation or a variation master or a product set, this ProductSearchHit can represent multiple products.</div>
+<div class="description">The method returns the actual ID of the product that is conforming the query and is represented by the search hit.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor"><span class="">getRepresentedProducts</span></a></span>()
 						: 
 					<a href="class_dw_util_List.html"><span class="">List</span></a></span>
-<div class="description">In case the product that is wrapped by this ProductSearchHit (see <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>) is a variation or a variation master or a product set, this ProductSearchHit can represent multiple products.</div>
+<div class="description">The method returns the actual product that is conforming the query and is represented by the search hit.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getRepresentedVariationValues_Object_DetailAnchor"><span class="">getRepresentedVariationValues</span></a></span>(va
@@ -482,12 +508,12 @@
 					 : 
 					<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>
 </div>
-<div class="description">Returns the first product represented by the product wrapped by the search
- hit.</div>
+<div class="description">Returns the product that is actually hit by the search and has the highest
+ sort rank according to the sorting conditions used for the search query.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">The first product represented by the wrapped product.</span>
+<span class="parameterDesc">the first product that is actually hit by the search</span>
 </div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
@@ -514,12 +540,12 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the first product ID represented by the product wrapped by the search
- hit.</div>
+<div class="description">Returns the ID of the product that is actually hit by the search and has the highest
+ sort rank according to the sorting conditions used for the search query.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">The first product ID represented by the wrapped product.</span>
+<span class="parameterDesc">the ID of the first product that is actually hit by the search</span>
 </div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
@@ -528,10 +554,10 @@
 <span class="parameterTitle">See Also:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProductIDs_DetailAnchor">getRepresentedProductIDs()</a></span>
+<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a></span>
 </div>
 <div class="parameterDetail">
-<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProductID_DetailAnchor">getLastRepresentedProductID()</a></span>
+<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProduct_DetailAnchor">getLastRepresentedProduct()</a></span>
 </div>
 </div>
 <hr>
@@ -573,12 +599,12 @@
 					 : 
 					<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>
 </div>
-<div class="description">Returns the last product represented by the product wrapped by the search
- hit.</div>
+<div class="description">Returns the product that is actually hit by the search and has the lowest
+ sort rank according to the sorting conditions used for the search query.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">The last product represented by the wrapped product.</span>
+<span class="parameterDesc">the last product that is actually hit by the search</span>
 </div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
@@ -590,7 +616,7 @@
 <span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a></span>
 </div>
 <div class="parameterDetail">
-<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getFirstRepresentedProduct_DetailAnchor">getFirstRepresentedProduct()</a></span>
+<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProduct_DetailAnchor">getLastRepresentedProduct()</a></span>
 </div>
 </div>
 <hr>
@@ -605,12 +631,12 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the last product ID represented by the product wrapped by the search
- hit.</div>
+<div class="description">Returns the ID of the product that is actually hit by the search and has the lowest
+ sort rank according to the sorting conditions used for the search query.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">The last product ID represented by the wrapped product.</span>
+<span class="parameterDesc">the ID of the last product that is actually hit by the search</span>
 </div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
@@ -619,10 +645,10 @@
 <span class="parameterTitle">See Also:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProductIDs_DetailAnchor">getRepresentedProductIDs()</a></span>
+<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a></span>
 </div>
 <div class="parameterDetail">
-<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getFirstRepresentedProductID_DetailAnchor">getFirstRepresentedProductID()</a></span>
+<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProduct_DetailAnchor">getLastRepresentedProduct()</a></span>
 </div>
 </div>
 <hr>
@@ -647,7 +673,7 @@
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">The maximum price of all products represented by the product hit.</span>
+<span class="parameterDesc">the maximum price of all products represented by the product hit.</span>
 </div>
 </div>
 <hr>
@@ -667,12 +693,12 @@
  the set of products used for finding the minimum. The method returns
  <code>N/A</code> in case no price information can be found.
  <p/>
- Note: The method uses price information of the search index and therefore
+ Note: the method uses price information of the search index and therefore
  might return different prices than the ProductPriceModel.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">The minimum price of all products represented by the product hit.</span>
+<span class="parameterDesc">the minimum price of all products represented by the product hit.</span>
 </div>
 </div>
 <hr>
@@ -687,18 +713,20 @@
 					 : 
 					<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>
 </div>
-<div class="description">Returns the product wrapped by this ProductSearchHit. For special product
- types, the wrapped product can be the representative of other related
- products actually hit by the search. A variation master returned by the
- search represents a collection of hit variants. A product set returned by
- the search represents a collection of hit set-products. A bundle returned
- by the search represents a collection of hit bundled-products. In this
- case call <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> to get a list of the
- represented products.</div>
+<div class="description">Returns the presentation product of this ProductSearchHit corresponding to the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> type.
+ <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation master product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation group</li>
+ </ul>
+
+ To retrieve the product(s) actually hit by the search use <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a>.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the Product wrapped by this ProductSearchHit, which is possible a representative of other related products actually hit by the search.</span>
+<span class="parameterDesc">the presentation product of this ProductSearchHit, which is possibly a representative of other related products actually hit by the search.</span>
 </div>
 <div class="parameterDetail"></div>
 </div>
@@ -721,28 +749,26 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the product ID of this ProductSearchHit. For special product
- types, the ID can be the representative of other related products
- actually hit by the search. A variation master ID returned by the search
- represents a collection of hit variants. A product set ID returned by the
- search represents a collection of hit set-products. A bundle ID returned
- by the search represents a collection of hit bundled-products. In this
- case call <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProductIDs_DetailAnchor">getRepresentedProductIDs()</a> to get a list of the
- represented product IDs.</div>
+<div class="description">Returns the ID of the presentation product of this ProductSearchHit corresponding to the <a href="class_dw_catalog_ProductSearchHit.html">ProductSearchHit</a> type.
+ <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation master product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation group</li>
+ </ul>
+
+ To retrieve the ID of the product actually hit by the search use <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getFirstRepresentedProductID_DetailAnchor">getFirstRepresentedProductID()</a> or <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProductID_DetailAnchor">getLastRepresentedProductID()</a>.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the Product ID of this ProductSearchHit, that possibly represents a set of related products actually hit by the search.</span>
+<span class="parameterDesc">the ID of the presentation product of this ProductSearchHit, that possibly represents a set of related products actually hit by the search.</span>
 </div>
-<div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 </div>
 <div class="parameters">
 <span class="parameterTitle">See Also:</span>
 <div class="parameterDetail"></div>
-<div class="parameterDetail">
-<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProductIDs_DetailAnchor">getRepresentedProductIDs()</a></span>
-</div>
 <div class="parameterDetail">
 <span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a></span>
 </div>
@@ -759,35 +785,24 @@
 					 : 
 					<a href="class_dw_util_List.html"><span class="">List</span></a>
 </div>
-<div class="description">In case the product that is wrapped by this ProductSearchHit (see
- <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>) is a variation or a variation master or a product
- set, this ProductSearchHit can represent multiple products.
- <p/>
- * The following specific rules apply: <br/>
- <ul>
- <li>If the wrapped product is a variation master, the method returns all
- variant IDs of this master that satisfy the search query.</li>
- <li>If the wrapped product is a variation group, the method returns all
- variant IDs of this variation group that satisfy the search query.</li>
- <li>If the wrapped product is a variant representing other variants (due
- to variation slicing), the method returns this variant ID and all
- represented variant IDs that satisfy the search query.</li>
- <li>If the wrapped product is a product set, the method returns all set
- products IDs that satisfy the search query.</li>
- <li>If the wrapped product is a product bundle, the method returns all
- bundled product IDs that satisfy the search query.</li>
- <li>If the wrapped product is a <i>simple</i> product, the method returns
- this product ID</li>
+<div class="description">The method returns the actual ID of the product that is conforming the query and is represented by the search hit.
+ Depending on the hit typ, it returns the ID of:
+  <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product part of set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product part of a bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation product</li>
  </ul>
- <p/>
- If the method returns multiple product IDs, the ID of the product with
- the highest sort rank is returned first, and the ID of the product with
- the lowest sort rank is returned last. The product sort rank depends in
- the sorting conditions used for the search query.</div>
+
+ If the method returns multiple products, the product with the highest
+ sort rank is returned first, and the product with the lowest sort rank is
+ returned last. The product sort rank depends on the sorting conditions
+ used for the search query.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">a sorted list of product IDs represented by the wrapped product.</span>
+<span class="parameterDesc">a sorted list of products represented by the wrapped product.</span>
 </div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
@@ -796,10 +811,10 @@
 <span class="parameterTitle">See Also:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getFirstRepresentedProductID_DetailAnchor">getFirstRepresentedProductID()</a></span>
+<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getFirstRepresentedProduct_DetailAnchor">getFirstRepresentedProduct()</a></span>
 </div>
 <div class="parameterDetail">
-<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProductID_DetailAnchor">getLastRepresentedProductID()</a></span>
+<span class="parameterDesc"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getLastRepresentedProduct_DetailAnchor">getLastRepresentedProduct()</a></span>
 </div>
 </div>
 <hr>
@@ -814,30 +829,19 @@
 					 : 
 					<a href="class_dw_util_List.html"><span class="">List</span></a>
 </div>
-<div class="description">In case the product that is wrapped by this ProductSearchHit (see
- <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getProduct_DetailAnchor">getProduct()</a>) is a variation or a variation master or a product
- set, this ProductSearchHit can represent multiple products.
- <p/>
- * The following specific rules apply: <br/>
- <ul>
- <li>If the wrapped product is a variation master, the method returns all
- variants of this master that satisfy the search query.</li>
- <li>If the wrapped product is a variation group, the method returns all
- variants of this variation group that satisfy the search query.</li>
- <li>If the wrapped product is a variant representing other variants (due
- to variation slicing), the method returns this variant and all
- represented variants that satisfy the search query.</li>
- <li>If the wrapped product is a product set, the method returns all set
- products that satisfy the search query.</li>
- <li>If the wrapped product is a product bundle, the method returns all
- bundled products that satisfy the search query.</li>
- <li>If the wrapped product is a <i>simple</i> product, the method returns
- this product</li>
+<div class="description">The method returns the actual product that is conforming the query and is represented by the search hit.
+ Depending on the hit typ, <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> returns:
+  <ul>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SIMPLE_DetailAnchor">HIT_TYPE_SIMPLE</a> -> a simple product </li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_MASTER_DetailAnchor">HIT_TYPE_PRODUCT_MASTER</a> -> a variation product</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_SET_DetailAnchor">HIT_TYPE_PRODUCT_SET</a> -> a product part of set</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_PRODUCT_BUNDLE_DetailAnchor">HIT_TYPE_PRODUCT_BUNDLE</a> -> a product part of a bundle</li>
+      <li><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> ->a variation product</li>
  </ul>
- <p/>
+
  If the method returns multiple products, the product with the highest
  sort rank is returned first, and the product with the lowest sort rank is
- returned last. The product sort rank depends in the sorting conditions
+ returned last. The product sort rank depends on the sorting conditions
  used for the search query.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -896,7 +900,7 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">A list containing all distinct ProductVariationAttributeValues.</span>
+<span class="parameterDesc">a list containing all distinct ProductVariationAttributeValues.</span>
 </div>
 </div>
 <hr>
@@ -916,7 +920,7 @@
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc"><code>True</code> if the represented products form a price range <code>False</code> otherwise.</span>
+<span class="parameterDesc"><code>true</code> if the represented products form a price range <code>false</code> otherwise.</span>
 </div>
 </div>
 <hr>

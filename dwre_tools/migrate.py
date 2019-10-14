@@ -154,18 +154,29 @@ def get_migrations(migrations_context, hotfix=False):
         description_el = migration.find(X + "description")
         parent_el = migration.find(X + "parent")
         reindex = migration.find(X + "reindex")
+        exclude_hosts = migration.find(X + "exclude-hosts")
 
         description = ""
         if description_el is not None:
             description = description_el.text
 
         assert id not in migration_data, "Migration %s already exists" % id
-        migration_data[id] = {"id": id, "location" : location, "description": description}
+        migration_data[id] = {
+            "id": id,
+            "location" : location,
+            "description": description
+        }
 
         if reindex is not None and reindex.text.lower() == "true":
             migration_data[id]["reindex"] = True
         else:
             migration_data[id]["reindex"] = False
+
+        if exclude_hosts is not None:
+            _hosts = exclude_hosts.findall(X + "host-pattern")
+            _hosts = map(lambda h: h.text.lower(), _hosts)
+            hosts = map(lambda h: re.compile(h), _hosts)
+            migration_data[id]["exclude-hosts"] = list(hosts)
 
         if parent_el is not None:
             migration_nodes[parent_el.text].append(id)
@@ -405,7 +416,13 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
     for migration in migration_path:
         migration_data = migrations[migration]
 
-        print("[%s] %s" % (migration_data["id"], migration_data["description"]), end="")
+        excluded_hosts = migration_data.get('exclude-hosts')
+        if excluded_hosts and any(map(lambda h: h.search(env["server"]) is not None, excluded_hosts)):
+            print(Fore.YELLOW + "[%s] %s (host exclusion)" % (migration_data["id"], migration_data["description"]) + Fore.RESET, end="")
+            migration_data["exclude"] = True
+        else:
+            migration_data["exclude"] = False
+            print("[%s] %s" % (migration_data["id"], migration_data["description"]), end="")
 
         if migration_data["reindex"]:
             reindex_requested = True
@@ -416,8 +433,15 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
     for migration in hotfix_path:
         migration_data = hotfixes[migration]
 
-        print("[%s] %s " % (migration_data["id"], migration_data["description"]), end="")
-        print(Fore.CYAN + "(hotfix", end="")
+        excluded_hosts = migration_data.get('exclude-hosts')
+        if excluded_hosts and any(map(lambda h: h.search(env["server"]) is not None, excluded_hosts)):
+            print(Fore.YELLOW + "[%s] %s (hotfix,host exclusion" % (migration_data["id"], migration_data["description"]) + Fore.RESET, end="")
+            migration_data["exclude"] = True
+        else:
+            migration_data["exclude"] = False
+            print("[%s] %s " % (migration_data["id"], migration_data["description"]), end="")
+            print(Fore.CYAN + "(hotfix", end="")
+
         if migration_data["reindex"]:
             reindex_requested = True
             print(",Reindex Requested)", Fore.RESET)
@@ -456,18 +480,25 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         else:
             zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
 
-        # upload
-        dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
-            env["server"], zip_filename)
-        response = webdavsession.put(dest_url, data=zip_file)
-        response.raise_for_status()
+        if not migration.get("exclude"):
+            # upload
+            dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
+                env["server"], zip_filename)
+            response = webdavsession.put(dest_url, data=zip_file)
+            response.raise_for_status()
 
-        # activate
-        response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
-                                  data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
-        response.raise_for_status()
+            # activate
+            response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
+                                      data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
+            response.raise_for_status()
 
-        wait_for_import(env, bmsession, zip_filename)
+            wait_for_import(env, bmsession, zip_filename)
+
+            # delete file
+            dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
+                        env["server"], zip_filename)
+            response = webdavsession.delete(dest_url)
+            response.raise_for_status()
 
         # update migration version
         current_migration_path.append(migration["id"])
@@ -476,14 +507,12 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
                                       data={"NewVersion" : migration["id"], "NewVersionPath" : new_version_path})
 
-        # delete file
-        dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
-                    env["server"], zip_filename)
-        response = webdavsession.delete(dest_url)
-        response.raise_for_status()
 
         end_time = time.time()
-        print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time), end="")
+        if migration.get("exclude"):
+            print(Fore.YELLOW + "Skipped migration %s (host exclusion)" % migration["id"] + Fore.RESET)
+        else:
+            print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time), end="")
         if migration["reindex"]:
             print(Fore.CYAN + " (Reindex Requested)" + Fore.RESET)
         else:
@@ -497,18 +526,25 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         zip_filename = "dwremigrate_%s" % migration["id"]
         zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
 
-        # upload
-        dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
-            env["server"], zip_filename)
-        response = webdavsession.put(dest_url, data=zip_file)
-        response.raise_for_status()
+        if not migration.get("exclude"):
+            # upload
+            dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
+                env["server"], zip_filename)
+            response = webdavsession.put(dest_url, data=zip_file)
+            response.raise_for_status()
 
-        # activate
-        response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
-                                  data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
-        response.raise_for_status()
+            # activate
+            response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
+                                      data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
+            response.raise_for_status()
 
-        wait_for_import(env, bmsession, zip_filename)
+            wait_for_import(env, bmsession, zip_filename)
+
+            # delete file
+            dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
+                        env["server"], zip_filename)
+            response = webdavsession.delete(dest_url)
+            response.raise_for_status()
 
         # update migration version
         current_hotfixes.append(migration["id"])
@@ -516,14 +552,12 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
                                   data={"dwreMigrateHotfixes" : new_version_path})
 
-        # delete file
-        dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
-                    env["server"], zip_filename)
-        response = webdavsession.delete(dest_url)
-        response.raise_for_status()
-
         end_time = time.time()
-        print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time), end="")
+        if migration.get("exclude"):
+            print(Fore.YELLOW + "Skipped hotfix %s (host exclusion)" % migration["id"] + Fore.RESET)
+        else:
+            print("Migrated %s in %.3f seconds" % (migration["id"], end_time - start_time), end="")
+
         if migration["reindex"]:
             print(Fore.CYAN + " (Reindex Requested)" + Fore.RESET)
         else:
@@ -603,12 +637,24 @@ def run_all(env, migrations_dir, test=False):
     for migration in required_migrations:
         migration_data = migrations[migration]
 
-        print("[%s] %s" % (migration_data["id"], migration_data["description"]))
+        excluded_hosts = migration_data.get('exclude-hosts')
+        if excluded_hosts and any(map(lambda h: h.search(env["server"]) is not None, excluded_hosts)):
+            print(Fore.YELLOW + "[%s] %s (host exclusion)" % (migration_data["id"], migration_data["description"]) + Fore.RESET)
+            migration_data["exclude"] = True
+        else:
+            migration_data["exclude"] = False
+            print("[%s] %s" % (migration_data["id"], migration_data["description"]))
 
     for migration in required_hotfixes:
         migration_data = hotfixes[migration]
 
-        print("[%s] %s" % (migration_data["id"], migration_data["description"]))
+        excluded_hosts = migration_data.get('exclude-hosts')
+        if excluded_hosts and any(map(lambda h: h.search(env["server"]) is not None, excluded_hosts)):
+            print(Fore.YELLOW + "[%s] %s (host exclusion)" % (migration_data["id"], migration_data["description"]) + Fore.RESET)
+            migration_data["exclude"] = True
+        else:
+            migration_data["exclude"] = False
+            print("[%s] %s" % (migration_data["id"], migration_data["description"]))
 
     if test:
         print("Will not perform migrations, exiting...")
@@ -616,10 +662,16 @@ def run_all(env, migrations_dir, test=False):
 
     for migration in required_migrations:
         migration_data = migrations[migration]
-        run_migration(env, os.path.join(migrations_dir, migration_data["location"]), migration)
+        if migration_data.get("exclude"):
+            print("Skipping migration %s (host exclusion)..." % migration)
+        else:
+            run_migration(env, os.path.join(migrations_dir, migration_data["location"]), migration)
     for migration in required_hotfixes:
         migration_data = hotfixes[migration]
-        run_migration(env, os.path.join(migrations_dir, migration_data["location"]), migration)
+        if migration_data.get("exclude"):
+            print("Skipping migration %s (host exclusion)..." % migration)
+        else:
+            run_migration(env, os.path.join(migrations_dir, migration_data["location"]), migration)
 
     if tempdir:
         tempdir.cleanup()
