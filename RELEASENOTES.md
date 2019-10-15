@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.16.1
+
+- reverts raise error on delete in sync from 1.15.6 (can't do this cause it might be 404)
+
 ## 1.16.0
 
 - updates schema and docs to 19.10
@@ -23,6 +27,8 @@
 ```
 
 ## 1.15.6
+
+**NOTE: broken version due to bug in delete fix below**
 
 - zip fix
 - raise error on delete in sync fix

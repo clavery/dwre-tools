@@ -102,7 +102,6 @@ def sync_command(env, delete_code_version, cartridge_location):
     if delete_code_version:
         print("Deleting code version...")
         response = webdavsession.delete("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}".format(env["server"], code_version))
-        response.raise_for_status()
 
     print("Syncing code version {0}{1}{2} on {0}{3}{2}".format(Fore.YELLOW, code_version, Fore.RESET, env["server"]))
     dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}.zip"
