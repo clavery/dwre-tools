@@ -16,8 +16,8 @@ import os
 
 SERVER = "demo-na01-redwing.demandware.net"
 HOST = "demo-na01-redwing.demandware.net"
-CLIENT_ID = "760ef340-9ed1-42a8-bd28-35bbf33be266"
-API_CLIENT_PASSWORD = "15nGiwXer9C3cbvDBVzGA6YX"
+CLIENT_ID = "..."
+API_CLIENT_PASSWORD = "..."
 
 
 # ## Client Credentials Grant
