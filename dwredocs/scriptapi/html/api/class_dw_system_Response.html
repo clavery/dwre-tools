@@ -444,7 +444,13 @@
  var cookie : Cookie = new Cookie("SomeName", "Simple Value");<br/>
  cookie.setMaxAge(0);<br/>
  response.addHttpCookie(cookie);<br/>
- </pre></div>
+ </pre>
+
+ You can't set a cookie's SameSite attribute using the API. The server sets SameSite to None if either the
+ developer sets the cookie's Secure flag or the global security preference Enforce HTTPS is enabled, in which case
+ the Secure flag is also set. Otherwise, the server doesn't set the SameSite attribute and the browser uses its
+ own default SameSite setting. The SameSite attribute is not sent with a cookie if the server detects that the
+ client doesn't correctly interpret the attribute.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">

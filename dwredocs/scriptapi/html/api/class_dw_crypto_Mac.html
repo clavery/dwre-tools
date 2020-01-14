@@ -46,7 +46,7 @@
  Typically, message authentication codes are used between two parties
  that share a secret key in order to validate information transmitted between these parties.
  A MAC mechanism that is based on cryptographic hash functions is referred to as HMAC.
- HMAC can be used with any cryptographic hash function, e.g., MD5 or SHA-1,
+ HMAC can be used with any cryptographic hash function, e.g., SHA256,
  in combination with a secret shared key. HMAC is specified in RFC 2104.
  <p/>
  <b>Note:</b> this class handles sensitive security-related data. 
@@ -60,20 +60,32 @@
 			Constants
 		</div>
 <div class="summaryItem">
-<span><a name="dw_crypto_Mac_HMAC_MD5_DetailAnchor"></a>HMAC_MD5
+<span class="dep"><a name="dw_crypto_Mac_HMAC_MD5_DetailAnchor"></a>HMAC_MD5
 						&nbsp;:&nbsp;
 						
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"HmacMD5"<div class="description">Constant representing the HMAC-MD5 keyed-hashing algorithm as defined in RFC 2104 "HMAC: Keyed-Hashing for Message Authentication" (February 1997).
- This algorithm uses as MD5 cryptographic hash function</div>
+ This algorithm uses as MD5 cryptographic hash function.</div>
 </span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">This algorithm is obsolete and and has been deprecated. Please use HmacSHA256, HmacSHA384 or HmacSHA512.</span>
+</div>
+</div>
 </div>
 <div class="summaryItem">
-<span><a name="dw_crypto_Mac_HMAC_SHA_1_DetailAnchor"></a>HMAC_SHA_1
+<span class="dep"><a name="dw_crypto_Mac_HMAC_SHA_1_DetailAnchor"></a>HMAC_SHA_1
 						&nbsp;:&nbsp;
 						
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"HmacSHA1"<div class="description">Constant representing the HmacSHA1 algorithms as defined in RFC 2104 "HMAC: Keyed-Hashing for Message Authentication" (February 1997)
  with SHA-1 as the message digest algorithm.</div>
 </span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">This algorithm is obsolete and and has been deprecated. Please use HmacSHA256, HmacSHA384 or HmacSHA512.</span>
+</div>
+</div>
 </div>
 <div class="summaryItem">
 <span><a name="dw_crypto_Mac_HMAC_SHA_256_DetailAnchor"></a>HMAC_SHA_256
@@ -180,8 +192,6 @@
  supported algorithms are:
 
  <ul>
- <li>MD5</li>
- <li>SHA 1</li>
  <li>SHA 256</li>
  <li>SHA 384</li>
  <li>SHA 512</li>

@@ -449,6 +449,15 @@
  </p>
  <p>
  Behaves same as <code>reserveInventory( null, false );</code>.
+ </p>
+ <p>
+ This method must not be used with
+ <ul>
+ <li>the <b>CreateOrder2</b> pipelet, or</li>
+ <li><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a>, or</li>
+ <li><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_String_DetailAnchor">OrderMgr.createOrder(Basket, String)</a></li>
+ </ul>
+ in the same request.
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -521,6 +530,15 @@
  </p>
  <p>
  Behaves same as <code>reserveInventory( reservationDurationInMinutes, false );</code>.
+ </p>
+ <p>
+ This method must not be used with
+ <ul>
+ <li>the <b>CreateOrder2</b> pipelet, or</li>
+ <li><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a>, or</li>
+ <li><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_String_DetailAnchor">OrderMgr.createOrder(Basket, String)</a></li>
+ </ul>
+ in the same request.
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -616,6 +634,15 @@
  </ul>
  <a href="class_dw_system_StatusItem.html#dw_system_StatusItem_getDetails_DetailAnchor">StatusItem.getDetails()</a> will contain for each item the <b>sku</b> and <b>uuid</b> of the item
  which was changed/removed.
+ </p>
+ <p>
+ This method must not be used with
+ <ul>
+ <li>the <b>CreateOrder2</b> pipelet, or</li>
+ <li><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_DetailAnchor">OrderMgr.createOrder(Basket)</a>, or</li>
+ <li><a href="class_dw_order_OrderMgr.html#dw_order_OrderMgr_createOrder_Basket_String_DetailAnchor">OrderMgr.createOrder(Basket, String)</a></li>
+ </ul>
+ in the same request.
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>

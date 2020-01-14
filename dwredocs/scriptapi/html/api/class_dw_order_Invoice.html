@@ -51,7 +51,14 @@
  <a href="class_dw_order_ShippingOrder.html#dw_order_ShippingOrder_createInvoice_String_DetailAnchor">ShippingOrder.createInvoice(String)</a>,
  <a href="class_dw_order_Appeasement.html#dw_order_Appeasement_createInvoice_String_DetailAnchor">Appeasement.createInvoice(String)</a>,
  <a href="class_dw_order_ReturnCase.html#dw_order_ReturnCase_createInvoice_String_DetailAnchor">ReturnCase.createInvoice(String)</a> or
- <a href="class_dw_order_Return.html#dw_order_Return_createInvoice_String_DetailAnchor">Return.createInvoice(String)</a>.</div>
+ <a href="class_dw_order_Return.html#dw_order_Return_createInvoice_String_DetailAnchor">Return.createInvoice(String)</a>.
+ <p/>
+ Order post-processing APIs (gillian) are now inactive by default and will throw
+ an exception if accessed. On sandboxes the APIs can be activated with a feature
+ switch "Order Post Processing APIs on Sandboxes". On PIGs an activation needs
+ preliminary approval by Product Management. Please contact support in this case.
+ Existing customers using these APIs are not affected by this change and can use the
+ APIs until further notice.</div>
 <div class="subclasses"></div>
 </div>
 </div>

@@ -204,7 +204,14 @@
  necessary, including the possibility of creating a credit invoice: <br/>
  <code>changeStatus = function (retrn:Return, status) {
    <br/> retrn.status=status;
-   <br/></code></div>
+   <br/></code>
+ <p/>
+ Order post-processing APIs (gillian) are now inactive by default and will throw
+ an exception if accessed. On sandboxes the APIs can be activated with a feature
+ switch "Order Post Processing APIs on Sandboxes". On PIGs an activation needs
+ preliminary approval by Product Management. Please contact support in this case.
+ Existing customers using these APIs are not affected by this change and can use the
+ APIs until further notice.</div>
 <div class="subclasses"></div>
 </div>
 </div>
@@ -268,7 +275,7 @@
 								<a href="class_dw_order_Return.html"><span class="">Return</span></a>, inputData
 								 : 	
 								 
-								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F19.10%2Fdata%2FDocuments%2FReturnItem.html" target="_blank"><span class="">ReturnItem</span></a>)
+								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F20.1%2Fdata%2FDocuments%2FReturnItem.html" target="_blank"><span class="">ReturnItem</span></a>)
 						: 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
 <div class="description">The hook provides customization in the process of assigning the returned amount, quantity etc.</div>
@@ -289,7 +296,7 @@
 								<a href="class_dw_order_Return.html"><span class="">Return</span></a>, inputData
 								 : 	
 								 
-								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F19.10%2Fdata%2FDocuments%2FReturn.html" target="_blank"><span class="">Return</span></a>)
+								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F20.1%2Fdata%2FDocuments%2FReturn.html" target="_blank"><span class="">Return</span></a>)
 						: 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a></span>
 <div class="description">Responsible to change the status of a <a href="class_dw_order_Return.html">Return</a>: the custom script is responsible for setting the new status using <a href="class_dw_order_Return.html#dw_order_Return_setStatus_String_DetailAnchor">Return.setStatus(String)</a>.</div>
@@ -298,7 +305,7 @@
 <span><span class="emphasis"><a href="#dw_order_hooks_ReturnHooks_createReturn_ReturnWO_DetailAnchor"><span class="">createReturn</span></a></span>(inputData
 								 : 	
 								 
-								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F19.10%2Fdata%2FDocuments%2FReturn.html" target="_blank"><span class="">Return</span></a>)
+								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F20.1%2Fdata%2FDocuments%2FReturn.html" target="_blank"><span class="">Return</span></a>)
 						: 
 					<a href="class_dw_order_Return.html"><span class="">Return</span></a></span>
 <div class="description">This hook is responsible for creating a new <a href="class_dw_order_Return.html">Return</a>, based on a <a href="class_dw_order_ReturnCase.html">ReturnCase</a>.</div>
@@ -329,7 +336,7 @@
 								<a href="class_dw_order_Return.html"><span class="">Return</span></a>, inputData
 								 : 
 								 
-								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F19.10%2Fdata%2FDocuments%2FReturnItem.html" target="_blank"><span class="">ReturnItem</span></a>)
+								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F20.1%2Fdata%2FDocuments%2FReturnItem.html" target="_blank"><span class="">ReturnItem</span></a>)
 					 : 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
 </div>
@@ -409,7 +416,7 @@
 								<a href="class_dw_order_Return.html"><span class="">Return</span></a>, inputData
 								 : 
 								 
-								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F19.10%2Fdata%2FDocuments%2FReturn.html" target="_blank"><span class="">Return</span></a>)
+								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F20.1%2Fdata%2FDocuments%2FReturn.html" target="_blank"><span class="">Return</span></a>)
 					 : 
 					<a href="class_dw_system_Status.html"><span class="">Status</span></a>
 </div>
@@ -455,7 +462,7 @@
 <span class="emphasis">createReturn</span>(inputData
 								 : 
 								 
-								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F19.10%2Fdata%2FDocuments%2FReturn.html" target="_blank"><span class="">Return</span></a>)
+								<a href="https://info.demandware.com/DOC2/index.jsp?topic=%2Fhelp%2FOCAPI%2F20.1%2Fdata%2FDocuments%2FReturn.html" target="_blank"><span class="">Return</span></a>)
 					 : 
 					<a href="class_dw_order_Return.html"><span class="">Return</span></a>
 </div>

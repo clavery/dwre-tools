@@ -41,7 +41,8 @@ The Basket will be removed from the session and marked for removal.</p>
 <p>The pipelet removes all empty shipments of the basket before creating the order. A shipment is empty if
 <ul><li>it contains no product or gift certificate line items</li>
 <li>all total prices (net, gross, tax) are 0.0</li></ul></p>
-<p>The pipelet decrements inventory for all products contained in the order. (Means the pipelet <i>ReserveInventoryForOrder</i> must not be sub-sequently called.) The pipelet redeems all coupons contained in the order.</p>
+<p>The pipelet decrements inventory for all products contained in the order. It redeems all coupons contained in the order.</p>
+<p>This pipelet must not be used with ReserveInventoryForOrder pipelet or dw.order.Basket#reserveInventory() in the same request.</p>
 <p>If the basket contains product or gift certificate line items associated with product list items, the pipelet updates the purchase the product list items.
 For example, if the basket contains an item added from a gift registry, the purchase history of the respective gift registry item is updated.</p></div>
 <div class="parameters">

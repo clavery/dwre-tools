@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.16.2
+
+- update docs and schemas to 20.1
+
 ## 1.16.1
 
 - reverts raise error on delete in sync from 1.15.6 (can't do this cause it might be 404)

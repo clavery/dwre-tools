@@ -283,20 +283,29 @@ for page in OCAPI_INDICIES:
         continue
 
     for link in content.xpath("//a", namespaces=NSMAP):
+        if 'href' not in link.attrib:
+            continue
         href = link.attrib['href']
         normalized = os.path.normpath(os.path.join(dirname, href))
         full_link = urlparse(f"{parsed_url.scheme}://{parsed_url.netloc}{normalized}")
         full_link = f"{full_link.scheme}://{full_link.netloc}{full_link.path}"
         if OCAPI_PREFIX not in full_link:
             continue
-        print(full_link)
-        if full_link.endswith('.html'):
+       
+        if full_link.endswith('.html') and "DOC3" in full_link:
+            print(full_link)
             LINKS.add(full_link)
             
 resp = requests.get('https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/css/commonltr.css')
 css = f"""<style>
 {resp.content.decode('utf-8')}
 </style>"""
+
+
+
+
+print(link.attrib
+     )
 
 
 

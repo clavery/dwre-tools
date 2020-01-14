@@ -50,7 +50,14 @@
  Represents a physically returned order line item. Please refer to the documentation of <a href="class_dw_order_hooks_ReturnHooks.html">ReturnHooks</a>
  for further information.
  <br>
- When the related Return were set to status COMPLETED, only the the custom attributes of the return item can be changed.</div>
+ When the related Return were set to status COMPLETED, only the the custom attributes of the return item can be changed.
+ <p/>
+ Order post-processing APIs (gillian) are now inactive by default and will throw
+ an exception if accessed. On sandboxes the APIs can be activated with a feature
+ switch "Order Post Processing APIs on Sandboxes". On PIGs an activation needs
+ preliminary approval by Product Management. Please contact support in this case.
+ Existing customers using these APIs are not affected by this change and can use the
+ APIs until further notice.</div>
 <div class="subclasses"></div>
 </div>
 </div>

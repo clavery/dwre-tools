@@ -73,7 +73,7 @@
  The to-be-transformed image needs to be hosted on Digital.<p/>
 
  Image transformation parameters are specified as JavaScript object literal. They
- are translated into URL parameters.<p/>
+ are translated into URL parameters. See <a href="https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/ImageManagement/CreatingImageTransformationURLs.html?cp=0_3_0_5_6_1">Create Image Transformation URLs.</a><p/>
 
  <table>
  <tr>
@@ -96,8 +96,7 @@
          automatically cropped accord to the second dimension, with a
          centered position of the cropped area. If the parameter would scale
          the image larger, only this operation is applied, if the image
-         remains in the size of 2000x2000. Valid values for these parameters
-         are 10-2000.<p/>
+         remains within acceptable pixel dimensions.<p/>
 
          Note: <code>scaleMode</code> can only be used in combination with <code>scaleHeight</code> and <code>scaleWidth</code>.<p/>
 

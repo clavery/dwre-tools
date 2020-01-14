@@ -49,7 +49,14 @@
 <div class="description">Represents an item of an <a href="class_dw_order_Appeasement.html">Appeasement</a> which is associated with one <a href="class_dw_order_OrderItem.html">OrderItem</a> usually representing an <a href="class_dw_order_Order.html">Order</a>
  <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a>. Items are created using method <a href="class_dw_order_Appeasement.html#dw_order_Appeasement_addItems_Money_List_DetailAnchor">Appeasement.addItems(Money, List)</a>
  <br>
- When the related Appeasement were set to status COMPLETED, only the the custom attributes of the appeasement item can be changed.</div>
+ When the related Appeasement were set to status COMPLETED, only the the custom attributes of the appeasement item can be changed.
+ <p/>
+ Order post-processing APIs (gillian) are now inactive by default and will throw
+ an exception if accessed. On sandboxes the APIs can be activated with a feature
+ switch "Order Post Processing APIs on Sandboxes". On PIGs an activation needs
+ preliminary approval by Product Management. Please contact support in this case.
+ Existing customers using these APIs are not affected by this change and can use the
+ APIs until further notice.</div>
 <div class="subclasses"></div>
 </div>
 </div>
