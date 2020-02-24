@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import pyquery
 import time
+import json
 import yaml
 import re
 import zipfile
@@ -61,17 +62,110 @@ def login_via_account_manager(env, session):
     # login to forgerock AM via restful interface to obtain token
     headers = {
         "X-OpenAM-Username": env["username"],
-        "X-OpenAM-Password": env["password"]
+        "X-OpenAM-Password": env["password"],
+        "Accept-API-Version" : "protocol=1.0,resource=2.1",
+        "Content-Type": "application/json"
     }
-    data = {
-    }
+
+    """
+    New series of "callback" based assertions: https://backstage.forgerock.com/docs/am/6.5/AM-6.5-Dev-Guide.pdf
+    """
     params = {
-        "goto": redirect # not entirely necessary but may be useful for auditing
+        "ForceAuth": "true",
+        "goto" : redirect
+    }
+    resp = session.post(ACCOUNT_MANAGER_JSON_AUTHENTICATE, json=data, headers=headers, params=params)
+    resp.raise_for_status()
+    authid = resp.json().get('authId')
+
+    data = {
+        "authId": authid,
+        "callbacks": [
+            {
+                "type": "NameCallback",
+                "output": [
+                    {
+                        "name": "prompt",
+                        "value": "User Name"
+                    }
+                ],
+                "input": [
+                    {
+                        "name": "IDToken1",
+                        "value": env["username"]
+                    }
+                ]
+            },
+            {
+                "type": "TextOutputCallback",
+                "output": [
+                    {
+                        "name": "message",
+                        "value": "var pwdinp = document.createElement('input');\npwdinp.id='shadowPassword';\npwdinp.name='shadowPassword';\npwdinp.type='password';\npwdinp.tabindex='-1';\npwdinp.style='visibility:hidden';\ndocument.querySelector('form').appendChild(pwdinp);\n"
+                    },
+                    {
+                        "name": "messageType",
+                        "value": "4"
+                    }
+                ]
+            }
+        ]
+    }
+    resp = session.post(ACCOUNT_MANAGER_JSON_AUTHENTICATE, json=data, headers=headers, params=params)
+    authid = resp.json().get('authId')
+    resp.raise_for_status()
+
+    data = {
+        "authId": authid,
+        "callbacks": [
+            {
+                "type": "NameCallback",
+                "output": [
+                    {
+                        "name": "prompt",
+                        "value": "User Name"
+                    }
+                ],
+                "input": [
+                    {
+                        "name": "IDToken1",
+                        "value": env['username']
+                    }
+                ]
+            },
+            {
+                "type": "PasswordCallback",
+                "output": [
+                    {
+                        "name": "prompt",
+                        "value": "Password"
+                    }
+                ],
+                "input": [
+                    {
+                        "name": "IDToken2",
+                        "value": env['password']
+                    }
+                ]
+            },
+            {
+                "type": "TextOutputCallback",
+                "output": [
+                    {
+                        "name": "message",
+                        "value": "var pwdinp = document.createElement('input');\npwdinp.id='shadowPassword';\npwdinp.name='shadowPassword';\npwdinp.type='password';\npwdinp.tabindex='-1';\npwdinp.style='visibility:hidden';\ndocument.querySelector('form').appendChild(pwdinp);\n\ndocument.querySelector('div.form-group').style.visibility='hidden'; // hide username and first pwd field\ndocument.querySelector('form').appendChild(document.querySelector('div.form-group')); // move to end so there is no gap before password field\ndocument.querySelector('#idToken2').addEventListener('input',function() {\n    document.querySelector('#shadowPassword').value=this.value;\n    return true;\n}); // copy value to shadow pwd field\ndocument.querySelector('#idToken2').focus();\n"
+                    },
+                        {
+                            "name": "messageType",
+                            "value": "4"
+                        }
+                ]
+            }
+        ]
     }
 
     resp = session.post(ACCOUNT_MANAGER_JSON_AUTHENTICATE, json=data, headers=headers, params=params)
     resp.raise_for_status()
-
     token = resp.json().get('tokenId')
     success_url = resp.json().get('successUrl')
 
@@ -81,7 +175,7 @@ def login_via_account_manager(env, session):
         "Content-Type": "application/x-www-form-urlencoded",
         "Cookie" : "%s=%s" % (ACCOUNT_MANAGER_COOKIE_NAME, token)
     }
-    resp = session.get(success_url, allow_redirects=False, headers=headers)
+    resp = session.get(success_url, allow_redirects=False, headers=headers, params=params)
     resp.raise_for_status()
 
     redirect_url = resp.headers.get('location')
