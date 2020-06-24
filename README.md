@@ -59,7 +59,7 @@ If upgrade fails, please `apt-get update` first.
 
 ### Manual Method
 
-Copy this command into your terminal (must have a suitable version of python: see [Windows Notes](#Windows_Notes) blow):
+Copy this command into your terminal (must have a suitable version of python: see [Windows Notes](#Windows_Notes) below):
 
 ```sh
 pip3 install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com/packages-374e8dc7/dwre-tools-latest.zip
