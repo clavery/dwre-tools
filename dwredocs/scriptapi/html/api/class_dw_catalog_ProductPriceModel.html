@@ -156,6 +156,28 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>maxPricePerUnit
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
+							&nbsp;(Read Only)<div class="description">Calculates and returns the maximum price-book price per unit of all variants (for
+ master products) or set-products (for product sets) for base quantity
+ 1.00. This value can be used to display a range of prices in storefront.
+ If the product represented by this model is not a master product or
+ product set, then this method behaves the same as <a href="class_dw_catalog_ProductPriceModel.html#dw_catalog_ProductPriceModel_getPricePerUnit_DetailAnchor">getPricePerUnit()</a>.
+ Only online products are considered. If the "orderable products only"
+ search preference is enabled for the current site, then only orderable
+ products are considered. For master products, only variants with all
+ variation attributes configured are considered.
+
+ e.g.
+ suppose one master product mp (price = $6, unitQuantity = 2), it has 2 variants:
+ v1(price = $5, unitQuantity = 5), v2(price = $10, unitQuantity = 20).
+ The max price per unit of mp will be max($6/2, $5/5, $10/20) = $3</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>minPrice
 						&nbsp;:&nbsp;
 						
@@ -174,6 +196,28 @@
  <b>Warning:</b>  If the product represented by this model is a master
  product with numerous variants, this method can be very expensive and
  should be avoided.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>minPricePerUnit
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
+							&nbsp;(Read Only)<div class="description">Calculates and returns the minimum price-book price per unit of all variants (for
+ master products) or set-products (for product sets) for base quantity
+ 1.00. This value can be used to display a range of prices in storefront.
+ If the product represented by this model is not a master product or
+ product set, then this method behaves the same as <a href="class_dw_catalog_ProductPriceModel.html#dw_catalog_ProductPriceModel_getPricePerUnit_DetailAnchor">getPricePerUnit()</a>.
+ Only online products are considered. If the "orderable products only"
+ search preference is enabled for the current site, then only orderable
+ products are considered. For master products, only variants with all
+ variation attributes configured are considered.
+
+ e.g.
+ suppose one master product mp (price = $6, unitQuantity = 2), it has 2 variants:
+ v1(price = $5, unitQuantity = 5), v2(price = $10, unitQuantity = 20).
+ The min price per unit of mp will be min($6/2, $5/5, $10/20) = $0.5</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -229,6 +273,25 @@
  only one price info in the collection it will be the same price info as getPriceInfo(). Two or more price infos
  indicate that there are that many price books that meet the criteria for returning the price shown in the
  storefront.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>pricePerUnit
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
+							&nbsp;(Read Only)<div class="description">The sales price per unit of a product, calculated based on base price
+ quantity 1.00.
+ <p>
+ The product sales price per unit is returned for the current session currency.
+ Hence, the using this method is only useful in storefront processes.
+ <p>
+ The price lookup is based on the configuration of price books. It depends
+ on various settings, such as which price books are active, or explicitly
+ set as applicable in the current session.
+ <p>
+ If no price could be found, MONEY.N_A is returned.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -303,6 +366,12 @@
 <div class="description">Calculates and returns the maximum price in a given price book of all variants (for master products) or set-products (for product sets) for base quantity 1.00.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductPriceModel_getMaxPricePerUnit_DetailAnchor"><span class="">getMaxPricePerUnit</span></a></span>()
+						: 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
+<div class="description">Calculates and returns the maximum price-book price per unit of all variants (for master products) or set-products (for product sets) for base quantity 1.00.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductPriceModel_getMinPrice_DetailAnchor"><span class="">getMinPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
@@ -316,6 +385,12 @@
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
 <div class="description">Calculates and returns the minimum price in a given price book of all variants (for master products) or set-products (for product sets) for base quantity 1.00.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductPriceModel_getMinPricePerUnit_DetailAnchor"><span class="">getMinPricePerUnit</span></a></span>()
+						: 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
+<div class="description">Calculates and returns the minimum price-book price per unit of all variants (for master products) or set-products (for product sets) for base quantity 1.00.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductPriceModel_getPrice_DetailAnchor"><span class="">getPrice</span></a></span>()
@@ -406,6 +481,21 @@
 						: 
 					<a href="class_TopLevel_Number.html"><span class="">Number</span></a></span>
 <div class="description">Calculates and returns the percentage off amount of the passed comparePrice to the passed basePrice.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductPriceModel_getPricePerUnit_DetailAnchor"><span class="">getPricePerUnit</span></a></span>()
+						: 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
+<div class="description">Returns the sales price per unit of a product, calculated based on base price quantity 1.00.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductPriceModel_getPricePerUnit_Quantity_DetailAnchor"><span class="">getPricePerUnit</span></a></span>(quantity
+								 : 	
+								 
+								<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>)
+						: 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
+<div class="description">Returns the sales price per unit of a product, calculated based on the passed order quantity.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductPriceModel_getPriceTable_DetailAnchor"><span class="">getPriceTable</span></a></span>()
@@ -535,6 +625,38 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductPriceModel_getMaxPricePerUnit_DetailAnchor"></a>
+<div class="detailName 
+						">getMaxPricePerUnit</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getMaxPricePerUnit</span>()
+					 : 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
+</div>
+<div class="description">Calculates and returns the maximum price-book price per unit of all variants (for
+ master products) or set-products (for product sets) for base quantity
+ 1.00. This value can be used to display a range of prices in storefront.
+ If the product represented by this model is not a master product or
+ product set, then this method behaves the same as <a href="class_dw_catalog_ProductPriceModel.html#dw_catalog_ProductPriceModel_getPricePerUnit_DetailAnchor">getPricePerUnit()</a>.
+ Only online products are considered. If the "orderable products only"
+ search preference is enabled for the current site, then only orderable
+ products are considered. For master products, only variants with all
+ variation attributes configured are considered.
+
+ e.g.
+ suppose one master product mp (price = $6, unitQuantity = 2), it has 2 variants:
+ v1(price = $5, unitQuantity = 5), v2(price = $10, unitQuantity = 20).
+ The max price per unit of mp will be max($6/2, $5/5, $10/20) = $3</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Maximum price per unit of all online variants or set-products.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductPriceModel_getMinPrice_DetailAnchor"></a>
 <div class="detailName 
 						">getMinPrice</div>
@@ -601,6 +723,38 @@
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
 <span class="parameterDesc">The minimum price across all subproducts in the specified price book.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductPriceModel_getMinPricePerUnit_DetailAnchor"></a>
+<div class="detailName 
+						">getMinPricePerUnit</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getMinPricePerUnit</span>()
+					 : 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
+</div>
+<div class="description">Calculates and returns the minimum price-book price per unit of all variants (for
+ master products) or set-products (for product sets) for base quantity
+ 1.00. This value can be used to display a range of prices in storefront.
+ If the product represented by this model is not a master product or
+ product set, then this method behaves the same as <a href="class_dw_catalog_ProductPriceModel.html#dw_catalog_ProductPriceModel_getPricePerUnit_DetailAnchor">getPricePerUnit()</a>.
+ Only online products are considered. If the "orderable products only"
+ search preference is enabled for the current site, then only orderable
+ products are considered. For master products, only variants with all
+ variation attributes configured are considered.
+
+ e.g.
+ suppose one master product mp (price = $6, unitQuantity = 2), it has 2 variants:
+ v1(price = $5, unitQuantity = 5), v2(price = $10, unitQuantity = 20).
+ The min price per unit of mp will be min($6/2, $5/5, $10/20) = $0.5</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Minimum price of all online variants or set-products.</span>
 </div>
 </div>
 <hr>
@@ -1035,6 +1189,76 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductPriceModel_getPricePerUnit_DetailAnchor"></a>
+<div class="detailName 
+						">getPricePerUnit</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPricePerUnit</span>()
+					 : 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
+</div>
+<div class="description">Returns the sales price per unit of a product, calculated based on base price
+ quantity 1.00.
+ <p>
+ The product sales price per unit is returned for the current session currency.
+ Hence, the using this method is only useful in storefront processes.
+ <p>
+ The price lookup is based on the configuration of price books. It depends
+ on various settings, such as which price books are active, or explicitly
+ set as applicable in the current session.
+ <p>
+ If no price could be found, MONEY.N_A is returned.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">product sales price per unit</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductPriceModel_getPricePerUnit_Quantity_DetailAnchor"></a>
+<div class="detailName 
+						">getPricePerUnit</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPricePerUnit</span>(quantity
+								 : 
+								 
+								<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a>)
+					 : 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
+</div>
+<div class="description">Returns the sales price per unit of a product, calculated based on the passed
+ order quantity.
+ <p>
+ The product sales price per unit is returned for the current session currency.
+ Hence, the using this method is only useful in storefront processes.
+ <p>
+ The price lookup is based on the configuration of price books. It depends
+ on various settings, such as which price books are active, or explicitely
+ set as applicable in the current session.
+ <p>
+ If no price could be found, MONEY.N_A is returned.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">quantity</span>
+						 - 
+						<span class="parameterDesc">Quantity price is requested for</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">product sales price per unit</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductPriceModel_getPriceTable_DetailAnchor"></a>
 <div class="detailName 
 						">getPriceTable</div>
@@ -1125,7 +1349,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

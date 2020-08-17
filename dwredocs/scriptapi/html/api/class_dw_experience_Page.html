@@ -66,6 +66,17 @@
 <div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>aspectTypeID
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">Get the aspect type of the page.
+ If an aspect type is set for this page (and is found in the deployed code version), then the page is treated as dynamic page during rendering,
+ also see <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_Map_String_DetailAnchor">PageMgr.renderPage(String, Map, String)</a>.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>description
 						&nbsp;:&nbsp;
 						
@@ -117,6 +128,15 @@
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
 							&nbsp;(Read Only)<div class="description">The SEO title of this page.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>searchWords
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The search words of the page used for the search index.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -186,6 +206,21 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Page_getAspectTypeID_DetailAnchor"><span class="">getAspectTypeID</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Get the aspect type of the page.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Page_getAttribute_String_DetailAnchor"><span class="">getAttribute</span></a></span>(attributeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Returns the raw attribute value identified by the specified attribute id.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_experience_Page_getDescription_DetailAnchor"><span class="">getDescription</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
@@ -231,6 +266,12 @@
 <div class="description">Returns the page region that matches the given id.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_experience_Page_getSearchWords_DetailAnchor"><span class="">getSearchWords</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the search words of the page used for the search index.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_experience_Page_getTypeID_DetailAnchor"><span class="">getTypeID</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
@@ -263,6 +304,67 @@
 <div class="header">
 			Method Detail
 		</div>
+<div class="detailItem">
+<a name="dw_experience_Page_getAspectTypeID_DetailAnchor"></a>
+<div class="detailName 
+						">getAspectTypeID</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getAspectTypeID</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Get the aspect type of the page.
+ If an aspect type is set for this page (and is found in the deployed code version), then the page is treated as dynamic page during rendering,
+ also see <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_Map_String_DetailAnchor">PageMgr.renderPage(String, Map, String)</a>.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the ID of the page's aspect type</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_Page_getAttribute_String_DetailAnchor"></a>
+<div class="detailName 
+						">getAttribute</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getAttribute</span>(attributeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Returns the raw attribute value identified by the specified attribute id.
+ By raw attribute value we denote the value as provided by the content
+ editor when setting up this page. This value might be fundamentally
+ different from the value as provided through the content dictionary when
+ the render function of the page is invoked. This is due to
+ the fact that during rendering the raw value is processed before being
+ stored in the content dictionary - for example link placeholders in
+ markup text are resolved to real URLs as part of such processing.
+ Accessing the raw value can be helpful if render logic of the
+ page needs to operate on these unprocessed values.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">attributeID</span>
+						 - 
+						<span class="parameterDesc">the id of the desired attribute</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the value of the desired attribute, or null if not found</span>
+</div>
+</div>
+<hr>
+</div>
 <div class="detailItem">
 <a name="dw_experience_Page_getDescription_DetailAnchor"></a>
 <div class="detailName 
@@ -409,6 +511,25 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_experience_Page_getSearchWords_DetailAnchor"></a>
+<div class="detailName 
+						">getSearchWords</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getSearchWords</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the search words of the page used for the search index.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the page search words</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_experience_Page_getTypeID_DetailAnchor"></a>
 <div class="detailName 
 						">getTypeID</div>
@@ -510,7 +631,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

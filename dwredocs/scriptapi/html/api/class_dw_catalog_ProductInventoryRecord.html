@@ -91,6 +91,18 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>custom
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
+							&nbsp;(Read Only)<div class="description">The custom attributes for this object. The returned object is
+ used for retrieving and storing attribute values. See
+ <a href="class_dw_object_CustomAttributes.html">CustomAttributes</a> for a detailed example of the syntax for
+ working with custom attributes.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>inStockDate
 						&nbsp;:&nbsp;
 						
@@ -203,6 +215,12 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_describe_DetailAnchor"><span class="">describe</span></a></span>()
+						: 
+					<a href="class_dw_object_ObjectTypeDefinition.html"><span class="">ObjectTypeDefinition</span></a></span>
+<div class="description">Returns the meta data of this object.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getAllocation_DetailAnchor"><span class="">getAllocation</span></a></span>()
 						: 
 					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
@@ -219,6 +237,12 @@
 						: 
 					<a href="class_dw_value_Quantity.html"><span class="">Quantity</span></a></span>
 <div class="description">Returns the quantity of items available to sell (ATS).</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getCustom_DetailAnchor"><span class="">getCustom</span></a></span>()
+						: 
+					<a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a></span>
+<div class="description">Returns the custom attributes for this object.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductInventoryRecord_getInStockDate_DetailAnchor"><span class="">getInStockDate</span></a></span>()
@@ -370,6 +394,26 @@
 			Method Detail
 		</div>
 <div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_describe_DetailAnchor"></a>
+<div class="detailName 
+						">describe</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">describe</span>()
+					 : 
+					<a href="class_dw_object_ObjectTypeDefinition.html"><span class="">ObjectTypeDefinition</span></a>
+</div>
+<div class="description">Returns the meta data of this object. If no meta data is available the method returns null. The returned
+ ObjectTypeDefinition can be used to retrieve the metadata for any of the custom attributes.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the meta data of this object. If no meta data is available the method returns null.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductInventoryRecord_getAllocation_DetailAnchor"></a>
 <div class="detailName 
 						">getAllocation</div>
@@ -424,6 +468,28 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">the quantity or quantity N/A if not available.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductInventoryRecord_getCustom_DetailAnchor"></a>
+<div class="detailName 
+						">getCustom</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getCustom</span>()
+					 : 
+					<a href="class_dw_object_CustomAttributes.html"><span class="">CustomAttributes</span></a>
+</div>
+<div class="description">Returns the custom attributes for this object. The returned object is
+ used for retrieving and storing attribute values. See
+ <a href="class_dw_object_CustomAttributes.html">CustomAttributes</a> for a detailed example of the syntax for
+ working with custom attributes.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the custom attributes for this object.</span>
 </div>
 </div>
 <hr>
@@ -781,7 +847,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

@@ -505,7 +505,9 @@
 					<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a>
 </div>
 <div class="description">Creates a new Customer using the supplied login, password. The system automatically assigns a customer number based on
- the customer sequence numbers configured for the site and/or organization.
+ the customer sequence numbers configured for the site or organization. The number is guaranteed to be unique, but is not guaranteed to be sequential.
+ It can be higher or lower than a previously created number. As a result, sorting customers by customer number is not guaranteed to sort them in their 
+ order of creation.
 
  <p/>The method throws an exception if any of the following conditions are encountered:
  <ul>
@@ -569,7 +571,9 @@
 					<a href="class_dw_customer_Customer.html"><span class="">Customer</span></a>
 </div>
 <div class="description">Creates a new Customer using the supplied login, password, and a customerNo. If the customerNo is not specified,
- the system automatically assigns a customer number based on the customer sequence numbers configured for the site and/or organization.
+ the system automatically assigns a customer number based on the customer sequence numbers configured for the site or organization. An automatically assigned
+ number is guaranteed to be unique, but is not guaranteed to be sequential. It can be higher or lower than a previously created number. As a result, sorting
+ customers by customer number is not guaranteed to sort them in their order of creation.
 
  <p/>The method throws an exception if any of the following conditions are encountered:
  <ul>
@@ -1885,7 +1889,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

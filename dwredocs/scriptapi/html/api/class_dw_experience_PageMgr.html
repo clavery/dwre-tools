@@ -42,7 +42,7 @@
 <div class="classSummaryDetail">
 <div class="description">Provides functionality for getting and rendering page designer managed pages.
  <p>
- The basic flow is to initiate page rendering by ID via <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a>. This will trigger page
+ The basic flow is to initiate page rendering by ID via <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a> or <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_Map_String_DetailAnchor">renderPage(String, Map, String)</a>. This will trigger page
  rendering from a top level perspective, i.e. the page serves as entry point and root container of components.
  As a related page or component template will likely want to trigger rendering of nested components
  within its regions it can do this by first fetching the desired region by ID via
@@ -103,10 +103,40 @@
 <div class="description">Returns the page identified by the specified id.</div>
 </div>
 <div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_getPage_Category_Boolean_String_DetailAnchor"><span class="">getPage</span></a></span>(category
+								 : 	
+								 
+								<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>, pageMustBeVisible
+								 : 	
+								 
+								boolean, aspectTypeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_experience_Page.html"><span class="">Page</span></a></span>
+<div class="description">Get the dynamic page for given category (including bottom up traversal of the category tree) and aspect type.</div>
+</div>
+<div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_renderPage_String_String_DetailAnchor"><span class="">renderPage</span></a></span>(pageID
 								 : 	
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>, parameters
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Render a page.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_renderPage_String_Map_String_DetailAnchor"><span class="">renderPage</span></a></span>(pageID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, aspectAttributes
+								 : 	
+								 
+								<a href="class_dw_util_Map.html"><span class="">Map</span></a>, parameters
 								 : 	
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
@@ -229,6 +259,54 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_experience_PageMgr_getPage_Category_Boolean_String_DetailAnchor"></a>
+<div class="detailName 
+						">getPage</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getPage</span>(category
+								 : 
+								 
+								<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>, pageMustBeVisible
+								 : 
+								 
+								boolean, aspectTypeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_experience_Page.html"><span class="">Page</span></a>
+</div>
+<div class="description">Get the dynamic page for given category (including bottom up traversal of the category tree) and aspect type.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">category</span>
+						 - 
+						<span class="parameterDesc">category to find the page for, i.e. starting point (inclusive) for the bottom up traversal</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">pageMustBeVisible</span>
+						 - 
+						<span class="parameterDesc">while doing the bottom up traversal any attached page whose <a href="class_dw_experience_Page.html#dw_experience_Page_isVisible_DetailAnchor">Page.isVisible()</a> does not yield true will be bypassed in the search</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">aspectTypeID</span>
+						 - 
+						<span class="parameterDesc">id of the page-category-assignment aspect type</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the page assigned to the given category. If this none is found there then the path upwards in the category tree is traversed until a category is found that has a page assigned. If category assignments are not supported by the given aspect type or none is found within the aforementioned path of categories then <code>null</code> is returned.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_experience_PageMgr_renderPage_String_String_DetailAnchor"></a>
 <div class="detailName 
 						">renderPage</div>
@@ -270,6 +348,12 @@
  </p>
  <p>
  Nesting of <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a>, i.e. rendering a page within a page (or respectively its components), is not a supported use case.
+ </p>
+ <p>
+ Due to the nature of the remote includes mentioned above this comes with the url length restriction as you already know it from
+ remote includes you implement by hand within your templates. Thus the size of the <code>parameters</code> parameter of this
+ method has a length limitation accordingly because it just translates into a url parameter of the aforementioned remote includes.
+ As a best practice refrain from passing complex objects (e.g. full blown product models) but keep it rather slim (e.g. only product IDs).
  </p></div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
@@ -291,6 +375,111 @@
 <div class="parameterDetail">
 <span class="parameterDesc">the remote include that will yield the markup as produced by page rendering</span>
 </div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_Map_String_DetailAnchor">renderPage(String, Map, String)</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_PageMgr_renderPage_String_Map_String_DetailAnchor"></a>
+<div class="detailName 
+						">renderPage</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">renderPage</span>(pageID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, aspectAttributes
+								 : 
+								 
+								<a href="class_dw_util_Map.html"><span class="">Map</span></a>, parameters
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Render a page. This is an extension of <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a> for the purpose of rendering a
+ page that needs to determine pieces of its content at rendering time instead of design time only. Therefore it
+ is possible to pass aspect attributes in case the given page is subject to an aspect type. The latter specifies the
+ eligible aspect attribute definitions which the passed in aspect attributes will be validated against.
+ If the validation fails for any of the following reasons an <a href="class_dw_experience_AspectAttributeValidationException.html">AspectAttributeValidationException</a>
+ will be thrown:
+ <ul>
+     <li>any aspect attribute value violates the value domain of the corresponding attribute definition</li>
+     <li>any required aspect attribute value is <code>null</code></li>
+ </ul>
+ Aspect attributes without corresponding attribute definition will be omitted. Once they made it into the rendering
+ they will apply if no persistent component attribute value exists (taking precedence over default attribute values
+ as coming from the attribute definition json) and the component attribute has the <code>dynamic_lookup</code>
+ property defined which contains the aspect attribute alias. The aspect attribute value lookup then happens by taking
+ this aspect attribute alias and using it as attribute identifier within the given map of aspect attributes.
+ <p>
+ Due to the nature of using remote includes, also see <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a>, this comes with the url length
+ restriction as you already know it from remote includes you implement by hand within your templates. Thus the size of both the
+ <code>aspectAttributes</code> (keys and values) as well as the <code>parameters</code> parameter of this method
+ are subject to a length limitation accordingly because they just translate into url parameters of the aforementioned remote includes.
+ As a best practice refrain from passing complex objects (e.g. full blown product models) but keep it rather slim (e.g. only product IDs).
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">pageID</span>
+						 - 
+						<span class="parameterDesc">the aspect driven page that will be rendered</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">aspectAttributes</span>
+						 - 
+						<span class="parameterDesc">the values for the aspect attributes, with the key being the id of the respective attribute definition and the value adhering to the type of this attribute definition</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">parameters</span>
+						 - 
+						<span class="parameterDesc">the optional parameters passed to page rendering</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the remote include that will yield the markup as produced by page rendering</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a></span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<a href="class_dw_experience_AspectAttributeValidationException.html"><span class="parameterName">AspectAttributeValidationException</span></a>						
+						 - 
+						 <span class="parameterDesc">if any given aspect attribute value does fulfill its respective attribute definition</span>
+</div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
 </div>
 <hr>
 </div>
@@ -452,7 +641,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

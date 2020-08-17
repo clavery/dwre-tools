@@ -19,7 +19,7 @@
 <div class="className">
                                     Job Step
                                     ExportOrders</div>
-<div class="topLevelDescription">Exports order data. The Search Service is used to find the orders.</div>
+<div class="topLevelDescription">Exports all orders matching the selected criteria using Search Service, with a maximum of 1000 orders per run. After an order has been exported successfully, its export status is EXPORTED. If an order did not export successfully, its order export status is FAILED. This job step is intended to export orders at recurring intervals. To include all orders that are ready to be exported (up to 1000), set the filter criteria to Export Status = READY FOR EXPORT.</div>
 <div class="topLevelDescription"></div>
 <div class="parameters">
 <span class="parameterTitle">Execution Context:</span>
@@ -43,7 +43,7 @@
                                             Boolean
                                                     (Optional)
                                                 </span>
-<div class="description">The 'canceled' order status.</div>
+<div class="description">Include orders in order status CANCELED.</div>
 <div class="description">
                                                 Default Value:
                                                 true</div>
@@ -54,7 +54,7 @@
                                             Boolean
                                                     (Optional)
                                                 </span>
-<div class="description">The 'completed' order status.</div>
+<div class="description">Include orders in order status COMPLETED.</div>
 <div class="description">
                                                 Default Value:
                                                 true</div>
@@ -65,7 +65,7 @@
                                             String
                                                     (Required)
                                                 </span>
-<div class="description">The 'confirmation' status.</div>
+<div class="description">The confirmation status.</div>
 <div class="description">
                                                 Allowed Values:
 
@@ -80,7 +80,7 @@
                                             Boolean
                                                     (Optional)
                                                 </span>
-<div class="description">The 'created' order status.</div>
+<div class="description">Deprecated. Created orders cannot be exported.</div>
 <div class="description">
                                                 Default Value:
                                                 true</div>
@@ -91,14 +91,14 @@
                                             String
                                                     (Required)
                                                 </span>
-<div class="description">The 'export' status.</div>
+<div class="description">The export status. Recommendation is to use READY FOR EXPORT to signal the export is needed.</div>
 <div class="description">
                                                 Allowed Values:
 
                                                 All, Not Exported, Exported, Ready for Export, Export Failed</div>
 <div class="description">
                                                 Default Value:
-                                                All</div>
+                                                Ready for Export</div>
 </div>
 <div class="summaryItem">
 <span><span class="parameterTitle">ExportFile</span>
@@ -114,7 +114,7 @@
                                             Boolean
                                                     (Optional)
                                                 </span>
-<div class="description">The 'failed' order status.</div>
+<div class="description">Deprecated. Failed orders cannot be exported.</div>
 <div class="description">
                                                 Default Value:
                                                 true</div>
@@ -133,7 +133,7 @@
                                             Boolean
                                                     (Optional)
                                                 </span>
-<div class="description">The 'new' order status.</div>
+<div class="description">Include orders in order status NEW.</div>
 <div class="description">
                                                 Default Value:
                                                 true</div>
@@ -144,7 +144,7 @@
                                             Boolean
                                                     (Optional)
                                                 </span>
-<div class="description">The 'open' order status.</div>
+<div class="description">Include orders in order status OPEN.</div>
 <div class="description">
                                                 Default Value:
                                                 true</div>
@@ -166,7 +166,7 @@
                                             String
                                                     (Required)
                                                 </span>
-<div class="description">The 'payment' status.</div>
+<div class="description">The payment status.</div>
 <div class="description">
                                                 Allowed Values:
 
@@ -181,7 +181,7 @@
                                             Boolean
                                                     (Optional)
                                                 </span>
-<div class="description">The 'replaced' order status.</div>
+<div class="description">Include orders in order status REPLACED.</div>
 <div class="description">
                                                 Default Value:
                                                 true</div>
@@ -192,7 +192,7 @@
                                             String
                                                     (Required)
                                                 </span>
-<div class="description">The 'shipment' status.</div>
+<div class="description">The shipment status.</div>
 <div class="description">
                                                 Allowed Values:
 
@@ -229,7 +229,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.16.4
+
+- update docs and schemas to 20.8
+
 ## 1.16.3
 
 - fix AM login after forgerock upgrade

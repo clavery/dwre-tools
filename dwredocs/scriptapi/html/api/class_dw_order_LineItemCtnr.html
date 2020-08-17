@@ -2231,6 +2231,10 @@
  <p/>
  If the product list item references an option product, the option values are copied from the product list item.
  <p/>
+ If the product list item is associated with an existing product line item, and the BasketAddProductBehaviour
+ setting is MergeQuantities, then the product line item quantity is increased by 1.0 or, if defined, the minimum
+ order quantity of the product.
+ <p/>
  An exception is thrown if
  <ul>
  <li>the line item container is no basket.</li>
@@ -4248,7 +4252,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

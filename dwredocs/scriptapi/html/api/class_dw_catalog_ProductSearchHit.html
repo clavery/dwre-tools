@@ -270,12 +270,42 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>maxPricePerUnit
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
+							&nbsp;(Read Only)<div class="description">The maximum price per unit of all products represented by the
+ product hit. See <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> for details on
+ the set of products used for finding the maximum. The method returns
+ <code>N/A</code> in case no price information can be found.
+ <p/>
+ Note: The method uses price information of the search index and therefore
+ might return different prices than the ProductPriceModel.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>minPrice
 						&nbsp;:&nbsp;
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
 							&nbsp;(Read Only)<div class="description">The minimum price of all products represented by the
+ product hit. See <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> for details on
+ the set of products used for finding the minimum. The method returns
+ <code>N/A</code> in case no price information can be found.
+ <p/>
+ Note: the method uses price information of the search index and therefore
+ might return different prices than the ProductPriceModel.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>minPricePerUnit
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
+							&nbsp;(Read Only)<div class="description">The minimum price per unit of all products represented by the
  product hit. See <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> for details on
  the set of products used for finding the minimum. The method returns
  <code>N/A</code> in case no price information can be found.
@@ -439,10 +469,22 @@
 <div class="description">Returns the maximum price of all products represented by the product hit.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getMaxPricePerUnit_DetailAnchor"><span class="">getMaxPricePerUnit</span></a></span>()
+						: 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
+<div class="description">Returns the maximum price per unit of all products represented by the product hit.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getMinPrice_DetailAnchor"><span class="">getMinPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
 <div class="description">Returns the minimum price of all products represented by the product hit.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getMinPricePerUnit_DetailAnchor"><span class="">getMinPricePerUnit</span></a></span>()
+						: 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
+<div class="description">Returns the minimum price per unit of all products represented by the product hit.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_catalog_ProductSearchHit_getProduct_DetailAnchor"><span class="">getProduct</span></a></span>()
@@ -679,6 +721,31 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_catalog_ProductSearchHit_getMaxPricePerUnit_DetailAnchor"></a>
+<div class="detailName 
+						">getMaxPricePerUnit</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getMaxPricePerUnit</span>()
+					 : 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
+</div>
+<div class="description">Returns the maximum price per unit of all products represented by the
+ product hit. See <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> for details on
+ the set of products used for finding the maximum. The method returns
+ <code>N/A</code> in case no price information can be found.
+ <p/>
+ Note: The method uses price information of the search index and therefore
+ might return different prices than the ProductPriceModel.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the maximum price per unit of all products represented by the product hit.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_catalog_ProductSearchHit_getMinPrice_DetailAnchor"></a>
 <div class="detailName 
 						">getMinPrice</div>
@@ -699,6 +766,31 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">the minimum price of all products represented by the product hit.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_catalog_ProductSearchHit_getMinPricePerUnit_DetailAnchor"></a>
+<div class="detailName 
+						">getMinPricePerUnit</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getMinPricePerUnit</span>()
+					 : 
+					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
+</div>
+<div class="description">Returns the minimum price per unit of all products represented by the
+ product hit. See <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_getRepresentedProducts_DetailAnchor">getRepresentedProducts()</a> for details on
+ the set of products used for finding the minimum. The method returns
+ <code>N/A</code> in case no price information can be found.
+ <p/>
+ Note: the method uses price information of the search index and therefore
+ might return different prices than the ProductPriceModel.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the minimum price per unit of all products represented by the product hit.</span>
 </div>
 </div>
 <hr>
@@ -928,7 +1020,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

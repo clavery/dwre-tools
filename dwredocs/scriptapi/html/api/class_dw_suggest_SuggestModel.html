@@ -65,7 +65,9 @@
  products) can by obtained, and, on the other hand, a list of terms
  is provided which were used to lookup the found items.
  The terms can be used to present a advanced user experience in the
- storefront, e.g. show auto completed words, spell corrections and so on.</div>
+ storefront, e.g. show auto completed words, spell corrections and so on.
+ The SuggestModel script API will always create suggestions with Autocorrections
+ regardless of the value of "Search Autocorrections" search preference.</div>
 <div class="subclasses"></div>
 </div>
 </div>
@@ -127,6 +129,15 @@
  The <a href="class_dw_suggest_CustomSuggestions.html">CustomSuggestions</a> container provides access to matching
  custom phrases (if any) and the terms suggested
  by the system with respect to the merchant provided custom phrases.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>filteredByFolder
+						&nbsp;:&nbsp;
+						
+					    
+					    boolean<div class="description">The method returns true, if the search suggestions are filtered by the folder. If this returns true it is not
+ possible for search suggestions to contain Page Designer content as it belongs to no folder.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -234,6 +245,12 @@
 <div class="description">Use this method to obtain a list of personalized search phrases that the current user entered recently.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_suggest_SuggestModel_isFilteredByFolder_DetailAnchor"><span class="">isFilteredByFolder</span></a></span>()
+						: 
+					boolean</span>
+<div class="description">The method returns true, if the search suggestions are filtered by the folder.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_suggest_SuggestModel_removeRefinementValues_String_String_DetailAnchor"><span class="">removeRefinementValues</span></a></span>(attributeID
 								 : 	
 								 
@@ -253,6 +270,15 @@
 						: 
 					void</span>
 <div class="description">Apply a category ID to filter product, brand and category suggestions.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_suggest_SuggestModel_setFilteredByFolder_Boolean_DetailAnchor"><span class="">setFilteredByFolder</span></a></span>(filteredByFolder
+								 : 	
+								 
+								boolean)
+						: 
+					void</span>
+<div class="description">Set a flag to indicate if the search suggestions filter for elements that do not belong to a folder.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_suggest_SuggestModel_setMaxSuggestions_Number_DetailAnchor"><span class="">setMaxSuggestions</span></a></span>(maxSuggestions
@@ -559,6 +585,25 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_suggest_SuggestModel_isFilteredByFolder_DetailAnchor"></a>
+<div class="detailName 
+						">isFilteredByFolder</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">isFilteredByFolder</span>()
+					 : 
+					boolean</div>
+<div class="description">The method returns true, if the search suggestions are filtered by the folder. If this returns true it is not
+ possible for search suggestions to contain Page Designer content as it belongs to no folder.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">True if search suggestions are filtered by the folder of the content asset.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_suggest_SuggestModel_removeRefinementValues_String_String_DetailAnchor"></a>
 <div class="detailName 
 						">removeRefinementValues</div>
@@ -617,6 +662,30 @@
 <span class="parameterName">categoryID</span>
 						 - 
 						<span class="parameterDesc">the category to filter suggestions for</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_suggest_SuggestModel_setFilteredByFolder_Boolean_DetailAnchor"></a>
+<div class="detailName 
+						">setFilteredByFolder</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setFilteredByFolder</span>(filteredByFolder
+								 : 
+								 
+								boolean)
+					 : 
+					void</div>
+<div class="description">Set a flag to indicate if the search suggestions filter for elements that do not belong to a folder.
+ Must be set to false to return content assets that do not belong to any folder.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">filteredByFolder</span>
+						 - 
+						<span class="parameterDesc">filter the search suggestions by folder</span>
 </div>
 </div>
 <hr>
@@ -725,7 +794,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

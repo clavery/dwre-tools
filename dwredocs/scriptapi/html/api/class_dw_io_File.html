@@ -66,10 +66,13 @@
  access the same file. The programmer has to make sure no more than one process
  writes to a file at a given time.</p>
 
- <p/>This class provides other useful methods for listing the
+ <p>This class provides other useful methods for listing the
  children of a directory and for working with zip files.
  <p/>
- <b>Note:</b> when this class is used with sensitive data, be careful in persisting sensitive information.</div>
+ <b>Note:</b> when this class is used with sensitive data, be careful in persisting sensitive information.
+
+ <p>For performance reasons no more than 100,000 files (regular files and directories) should be stored in a
+ directory.</p></div>
 <div class="subclasses"></div>
 </div>
 </div>
@@ -1191,7 +1194,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

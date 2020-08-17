@@ -137,12 +137,37 @@
 <div class="section">
 <div class="header">Properties</div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>itemPromotionTiers
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_dw_util_Map.html"><span class="">Map</span></a>
+							&nbsp;(Read Only)<div class="description">The tier index by quantity Id of Product promotion. ProductLineItems may have more than one quantity, but
+ not all items of that SKU may have received the same tier of promotion. Each quantity of the ProductLineItem is
+ indexed from 1 to n, where n is the quantity of the ProductLineItem, and this method returns a mapping from that
+ quantity index to the index of tier of the promotion that item received. For more information about tier indexes,
+ see <a href="class_dw_campaign_Discount.html#dw_campaign_Discount_getPromotionTier_DetailAnchor">getPromotionTier()</a>  method.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>promotion
 						&nbsp;:&nbsp;
 						
 					    
 					    <a href="class_dw_campaign_Promotion.html"><span class="">Promotion</span></a>
 							&nbsp;(Read Only)<div class="description">The promotion this discount is based on.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>promotionTier
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_Number.html"><span class="">Number</span></a>
+							&nbsp;(Read Only)<div class="description">The tier index for promotion at order level or bonus product.
+ Promotion tiers are always evaluated in the order of the highest threshold (e.g. quantity, or amount)
+ to the lowest threshold. The tier that is evaluated first (i.e. the highest quantity or amount) is indexed as 0,
+ the next tier 1, etc. The lowest tier will have index n - 1, where n is the total number of tiers.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -184,10 +209,22 @@
 			Method Summary
 		</div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_campaign_Discount_getItemPromotionTiers_DetailAnchor"><span class="">getItemPromotionTiers</span></a></span>()
+						: 
+					<a href="class_dw_util_Map.html"><span class="">Map</span></a></span>
+<div class="description">Returns the tier index by quantity Id of Product promotion.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_campaign_Discount_getPromotion_DetailAnchor"><span class="">getPromotion</span></a></span>()
 						: 
 					<a href="class_dw_campaign_Promotion.html"><span class="">Promotion</span></a></span>
 <div class="description">Returns the promotion this discount is based on.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_campaign_Discount_getPromotionTier_DetailAnchor"><span class="">getPromotionTier</span></a></span>()
+						: 
+					<a href="class_TopLevel_Number.html"><span class="">Number</span></a></span>
+<div class="description">Returns the tier index for promotion at order level or bonus product.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_campaign_Discount_getQuantity_DetailAnchor"><span class="">getQuantity</span></a></span>()
@@ -217,6 +254,37 @@
 			Method Detail
 		</div>
 <div class="detailItem">
+<a name="dw_campaign_Discount_getItemPromotionTiers_DetailAnchor"></a>
+<div class="detailName 
+						">getItemPromotionTiers</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getItemPromotionTiers</span>()
+					 : 
+					<a href="class_dw_util_Map.html"><span class="">Map</span></a>
+</div>
+<div class="description">Returns the tier index by quantity Id of Product promotion. ProductLineItems may have more than one quantity, but
+ not all items of that SKU may have received the same tier of promotion. Each quantity of the ProductLineItem is
+ indexed from 1 to n, where n is the quantity of the ProductLineItem, and this method returns a mapping from that
+ quantity index to the index of tier of the promotion that item received. For more information about tier indexes,
+ see <a href="class_dw_campaign_Discount.html#dw_campaign_Discount_getPromotionTier_DetailAnchor">getPromotionTier()</a>  method.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Map of Tier index by quantity Id or <code>empty map</code></span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_campaign_Discount.html#dw_campaign_Discount_getPromotionTier_DetailAnchor">getPromotionTier()</a></span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_campaign_Discount_getPromotion_DetailAnchor"></a>
 <div class="detailName 
 						">getPromotion</div>
@@ -231,6 +299,28 @@
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
 <span class="parameterDesc">Promotion related to this discount</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_campaign_Discount_getPromotionTier_DetailAnchor"></a>
+<div class="detailName 
+						">getPromotionTier</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getPromotionTier</span>()
+					 : 
+					<a href="class_TopLevel_Number.html"><span class="">Number</span></a>
+</div>
+<div class="description">Returns the tier index for promotion at order level or bonus product.
+ Promotion tiers are always evaluated in the order of the highest threshold (e.g. quantity, or amount)
+ to the lowest threshold. The tier that is evaluated first (i.e. the highest quantity or amount) is indexed as 0,
+ the next tier 1, etc. The lowest tier will have index n - 1, where n is the total number of tiers.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Tier index or <code>null</code></span>
 </div>
 </div>
 <hr>
@@ -281,7 +371,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2019, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

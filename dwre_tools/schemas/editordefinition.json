@@ -12,6 +12,16 @@
       },
       "required": ["type"],
       "additionalProperties": false
+    },
+    "cms_record": {
+      "type": "object",
+      "properties": {
+        "content_type": {
+          "type": "string"
+        }
+      },
+      "required": ["content_type"],
+      "additionalProperties": false
     }
   }
 }
