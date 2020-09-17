@@ -70,6 +70,14 @@ def get_env_from_args(args):
     else:
         env["cert"] = None
 
+    if args.clientid:
+        assert args.clientpassword, "must specify a client password"
+        env["clientID"] = args.clientid
+        env["clientPassword"] = args.clientpassword
+
+    if args.instancetype:
+        env["instanceType"] = args.instancetype
+
     if hasattr(args, 'codeversion') and args.codeversion:
         env['codeVersion'] = args.codeversion
 
@@ -82,7 +90,7 @@ def get_env_from_args(args):
         if env.get('useAccountManager'):
             key = "dwre-account-manager"
         keyring_password = keyring.get_password(key, env["username"])
-        if not keyring_password:
+        if not keyring_password and 'clientID' not in env:
             if sys.stdout.isatty():
                 password = get_env_password(env)
                 should_save = input("Save password to your login keychain [Y/n]? ")
@@ -90,8 +98,27 @@ def get_env_from_args(args):
                     keyring.set_password(key, env["username"], password)
             else:
                 raise RuntimeError("Password not provided and cannot ask for input")
-        else:
+        elif keyring_password:
             env["password"] = keyring_password
+
+    if "clientID" in env and ("clientPassword" not in env or not  env.get('clientPassword')):
+        # attempt to retrieve from keyring
+        key = "ocapi-%s" % (env["server"])
+        keyring_password = keyring.get_password(key, env["clientID"])
+        if not keyring_password:
+            key = "OCAPIClientCredentials"
+            keyring_password = keyring.get_password(key, env["clientID"])
+
+        if not keyring_password:
+            if sys.stdout.isatty():
+                client_password = get_env_client_password(env)
+                should_save = input("Save client password to your login keychain [Y/n]? ")
+                if should_save.strip().lower() == 'y':
+                    keyring.set_password(key, env["clientID"], client_password)
+            else:
+                raise RuntimeError("Client Password not provided and cannot ask for input")
+        else:
+            env["clientPassword"] = keyring_password
 
     return env
 
@@ -149,8 +176,13 @@ def reindex_cmd_handler(args):
 
 
 def get_env_password(env):
-    password = getpass.getpass("{}@{} password: ".format(env["username"], env["server"]))
+    password = getpass.getpass("{} {} password: ".format(env["username"], env["server"]))
     env["password"] = password
+    return password
+
+def get_env_client_password(env):
+    password = getpass.getpass("OCAPI {} password: ".format(env["clientID"]))
+    env["clientPassword"] = password
     return password
 
 
@@ -223,6 +255,9 @@ parser.add_argument('--password', help="DWRE server password; overrides env sett
 parser.add_argument('--accountmanager', help="Use Account Manager Login Method", action="store_true")
 parser.add_argument('--clientcert', help="SSL Client certificate")
 parser.add_argument('--clientkey', help="SSL Client private key")
+parser.add_argument('--clientid', help="OCAPI Client ID")
+parser.add_argument('--clientpassword', help="OCAPI Client password")
+parser.add_argument('--instancetype', help="Instance Type (development, staging, sandbox, production)")
 parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
 parser.add_argument('--codeversion', help="Code version override")
 

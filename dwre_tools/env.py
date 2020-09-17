@@ -3,8 +3,6 @@ from __future__ import print_function
 import json
 import os
 import sys
-import keyring
-
 
 def get_env_from_dw_json():
     dw_json_file = os.path.join(os.curdir, 'dw.json')
@@ -16,8 +14,10 @@ def get_env_from_dw_json():
                 "server": j.get("hostname"),
                 "username": j.get("username"),
                 "password": j.get("password"),
+                "clientID": j.get("clientID"),
+                "clientPassword": j.get("clientPassword"),
                 "codeVersion": j.get("code-version"),
-                "useAccountManager": use_account_manager,
+                "useAccountManager": use_account_manager
             }
     return None
 

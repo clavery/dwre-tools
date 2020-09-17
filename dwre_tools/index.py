@@ -12,11 +12,7 @@ from .bmtools import login_business_manager
 
 
 def reindex(env):
-    bmsession = requests.session()
-    bmsession.verify = env["verify"]
-    bmsession.cert = env["cert"]
-
-    login_business_manager(env, bmsession)
+    bmsession = login_business_manager(env)
 
     response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateIndexes".format(env["server"]))
     response.raise_for_status()

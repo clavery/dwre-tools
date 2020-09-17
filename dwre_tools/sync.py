@@ -15,7 +15,7 @@ from prompt_toolkit.formatted_text import HTML
 import math
 from prompt_toolkit.shortcuts import ProgressBar
 from colorama import Fore, Back, Style
-from .bmtools import login_business_manager, activate_code_version
+from .bmtools import login_business_manager, activate_code_version, authenticate_webdav_session
 
 def cartridges_to_zip(cartridges, filename):
     zip_file_io = io.BytesIO()
@@ -82,10 +82,7 @@ def sync_command(env, delete_code_version, cartridge_location):
     if cartridge_location is None:
         cartridge_location = '.'
 
-    webdavsession = requests.session()
-    webdavsession.verify = env["verify"]
-    webdavsession.auth=(env["username"], env["password"],)
-    webdavsession.cert = env["cert"]
+    webdavsession = authenticate_webdav_session(env)
     code_version = env["codeVersion"]
 
     if os.path.isfile(cartridge_location):
@@ -132,10 +129,5 @@ def sync_command(env, delete_code_version, cartridge_location):
 
     if delete_code_version:
         print("Reactivating code version...")
-        bmsession = requests.session()
-        bmsession.verify = env["verify"]
-        bmsession.cert = env["cert"]
-
-        login_business_manager(env, bmsession)
-        activate_code_version(env, bmsession, code_version)
+        activate_code_version(env, code_version)
         print("Done")

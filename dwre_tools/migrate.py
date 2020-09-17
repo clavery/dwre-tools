@@ -29,7 +29,8 @@ from .validations import validate_xml, validate_file, validate_directory, valida
 from .migratemeta import (TOOL_VERSION, BOOTSTRAP_META, PREFERENCES, VERSION,
                           SKIP_METADATA_CHECK_ON_UPGRADE, WHITELIST, RERUN_MIGRATIONS_ON_UPGRADE,
                           CARTRIDGE_VERSION, MIGRATION_FILE)
-from .bmtools import get_current_versions, login_business_manager, wait_for_import, get_export_zip
+from .bmtools import get_current_versions, wait_for_import, get_export_zip, \
+    authenticate_webdav_session, import_site_package, update_current_version, update_hotfix_path, get_install_export_zip
 from .utils import directory_to_zip
 from .index import reindex
 from .exc import NotInstalledException
@@ -42,12 +43,11 @@ X = "{http://www.pixelmedia.com/xml/dwremigrate}"
 NSMAP_PREFS = {"P" : 'http://www.demandware.com/xml/impex/preferences/2007-03-31'}
 NSMAP_ACCESS_ROLE = {"A" : 'http://www.demandware.com/xml/impex/accessrole/2007-09-05'}
 
-def get_install_zip(env, bmsession, webdavsession):
+def get_install_zip(env, webdavsession):
     """Attempts to add the BM extension and access roles to prep for boostrap"""
     filename = "ToolsExport_" + str(uuid.uuid4()).replace("-", "")[:10]
-    zip_file = get_export_zip(env, bmsession, webdavsession, 
-                              export_units=["AccessRoleExport", "GlobalPreferencesExport"],
-                              filename=filename)
+
+    zip_file = get_install_export_zip(env, webdavsession, filename)
 
     dest_file = "DWREMigrateInstall_" + str(uuid.uuid4()).replace("-", "")[:10]
 
@@ -302,21 +302,13 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
     migrations_context = ET.parse(migrations_file)
     validate_xml(migrations_context)
 
-    webdavsession = requests.session()
-    webdavsession.verify = env["verify"]
-    webdavsession.auth=(env["username"], env["password"],)
-    webdavsession.cert = env["cert"]
-    bmsession = requests.session()
-    bmsession.verify = env["verify"]
-    bmsession.cert = env["cert"]
-
-    login_business_manager(env, bmsession)
+    webdavsession = authenticate_webdav_session(env)
 
     not_installed = False
     try:
         (current_tool_version, current_migration, current_migration_path,
          current_cartridge_version, current_hotfixes) = (
-            get_current_versions(env, bmsession))
+            get_current_versions(env))
     except NotInstalledException as e:
         current_cartridge_version = None
         current_tool_version = None
@@ -476,7 +468,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             zip_file = get_bootstrap_zip()
             zip_filename = "DWREMigrateBootstrap_v{}".format(TOOL_VERSION)
         elif m is "INSTALL":
-            (zip_file, zip_filename) = get_install_zip(env, bmsession, webdavsession)
+            (zip_file, zip_filename) = get_install_zip(env, webdavsession)
         else:
             zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
 
@@ -488,11 +480,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             response.raise_for_status()
 
             # activate
-            response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
-                                      data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
-            response.raise_for_status()
-
-            wait_for_import(env, bmsession, zip_filename)
+            import_site_package(env, zip_filename)
 
             # delete file
             dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
@@ -504,9 +492,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         current_migration_path.append(migration["id"])
         new_version_path = ",".join(current_migration_path)
         if m not in ['CARTRIDGE', 'INSTALL', 'BOOTSTRAP']:
-            response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
-                                      data={"NewVersion" : migration["id"], "NewVersionPath" : new_version_path})
-
+            update_current_version(env, migration["id"], new_version_path)
 
         end_time = time.time()
         if migration.get("exclude"):
@@ -534,11 +520,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             response.raise_for_status()
 
             # activate
-            response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
-                                      data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
-            response.raise_for_status()
-
-            wait_for_import(env, bmsession, zip_filename)
+            import_site_package(env, zip_filename)
 
             # delete file
             dest_url = "https://{0}/on/demandware.servlet/webdav/Sites/Impex/src/instance/{1}.zip".format(
@@ -549,8 +531,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         # update migration version
         current_hotfixes.append(migration["id"])
         new_version_path = ",".join(current_hotfixes)
-        response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
-                                  data={"dwreMigrateHotfixes" : new_version_path})
+        update_hotfix_path(env, new_version_path)
 
         end_time = time.time()
         if migration.get("exclude"):
@@ -606,21 +587,13 @@ def run_all(env, migrations_dir, test=False):
         validate_xml(hotfixes_context)
         (hotfix_path, hotfixes) = get_migrations(hotfixes_context, hotfix=True)
 
-    webdavsession = requests.session()
-    webdavsession.auth=(env["username"], env["password"],)
-    webdavsession.verify = env["verify"]
-    webdavsession.cert = env["cert"]
-    bmsession = requests.session()
-    bmsession.verify = env["verify"]
-    bmsession.cert = env["cert"]
-
-    login_business_manager(env, bmsession)
+    webdavsession = authenticate_webdav_session(env)
 
     not_installed = False
     try:
         (current_tool_version, current_migration, current_migration_path,
          current_cartridge_version, current_hotfixes) = (
-            get_current_versions(env, bmsession))
+            get_current_versions(env))
     except NotInstalledException as e:
         raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
 
@@ -687,15 +660,7 @@ def run_migration(env, directory, name=None):
         basename, _ = os.path.splitext(filename)
         directory = os.path.join(tempdir.name, basename)
 
-    webdavsession = requests.session()
-    webdavsession.auth = (env["username"], env["password"],)
-    webdavsession.verify = env["verify"]
-    webdavsession.cert = env["cert"]
-    bmsession = requests.session()
-    bmsession.verify = env["verify"]
-    bmsession.cert = env["cert"]
-
-    login_business_manager(env, bmsession)
+    webdavsession = authenticate_webdav_session(env)
 
     start_time = time.time()
 
@@ -716,11 +681,7 @@ def run_migration(env, directory, name=None):
     response.raise_for_status()
 
     # activate
-    response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewSiteImpex-Dispatch".format(env["server"]),
-                                data={"import" :"", "ImportFileName" : zip_filename + ".zip", "realmUse": "False"})
-    response.raise_for_status()
-
-    wait_for_import(env, bmsession, zip_filename)
+    import_site_package(env, zip_filename)
 
     response = webdavsession.delete(dest_url)
     response.raise_for_status()
@@ -743,19 +704,11 @@ def reset_migrations(env, migrations_dir, test=False):
     migrations_context = ET.parse(migrations_file)
     validate_xml(migrations_context)
 
-    webdavsession = requests.session()
-    webdavsession.verify = env["verify"]
-    webdavsession.cert = env["cert"]
-    webdavsession.auth=(env["username"], env["password"],)
-    bmsession = requests.session()
-    bmsession.verify = env["verify"]
-    bmsession.cert = env["cert"]
-
-    login_business_manager(env, bmsession)
+    webdavsession = authenticate_webdav_session(env)
 
     (current_tool_version, current_migration, current_migration_path,
      current_cartridge_version, hotfixes) = (
-        get_current_versions(env, bmsession))
+        get_current_versions(env))
 
     (path, migrations) = get_migrations(migrations_context)
 
@@ -764,8 +717,7 @@ def reset_migrations(env, migrations_dir, test=False):
         print("\t" + "%s:" % i, p)
 
     if not test:
-        response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
-                                  data={"NewVersion" : migrations[path[-1]]["id"], "NewVersionPath" : ",".join(path)})
+        update_current_version(env, migrations[path[-1]]["id"], ",".join(path))
         print("Updated migrations to code version")
 
 
@@ -829,20 +781,12 @@ def set_migration(env, migrations_dir, migration_name):
     migrations_context = ET.parse(migrations_file)
     validate_xml(migrations_context)
 
-    bmsession = requests.session()
-    bmsession.verify = env["verify"]
-    bmsession.cert = env["cert"]
-
     (path, migrations) = get_migrations(migrations_context)
-
-    login_business_manager(env, bmsession)
 
     assert migration_name in migrations, "Cannot find migration"
 
     # TODO slice path at migrations set on bm
     new_path = path[:path.index(migration_name)+1]
 
-    response = bmsession.post("https://{}/on/demandware.store/Sites-Site/default/DWREMigrate-UpdateVersion".format(env["server"]),
-            data={"NewVersion" : migration_name, "NewVersionPath" : ",".join(new_path)})
-    response.raise_for_status()
+    update_current_version(env, migration_name, ",".join(new_path))
     print("Updated migrations to %s" % migration_name)

@@ -390,6 +390,120 @@ dwre --server cert.staging.web.stonewall.demandware.net \
 migrate -n apply
 ```
 
+### Client Credentials (OCAPI/Account Manager) Only Usage
+
+As of 1.17.0 the tool supports OCAPI only usage for a subset of commands
+(`tail`, `watch`, `sync`, and `migrate`). This can be used for MFA required
+accounts.
+
+Update your config with a clientID and clientPassword key, removing
+username/password and providng **at least** a `clientID` property:
+
+```json
+{
+...
+    "dev04": {
+      "codeVersion": "foo",
+      "server": "dev04-na01-test.demandware.net",
+      "clientID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "clientPassword": "daskjlkjasdlkj",
+      "instanceType": "development"
+    },
+...
+}
+```
+
+**Note: `clientPassword` can be omitted from the configuration file and stored in the systems
+keychain/keystore under the server-specific key `ocapi-[SERVER]` or global `OCAPIClientCredentials` with clientID as the username.**
+
+Username, password, useAccountManager can also be provided but client credentials will be preferred when a `clientID` exists and the subcommand supports it.
+
+![Keystore](ocapi.png)
+
+If `clientPassword` isn't provided or cannot be found in the keystore the tool
+will prompt for it on the CLI.
+
+**If `instanceType` isn't provided "development" will be assumed. i.e. This is only necessary for staging environments.**
+
+The CLI arguments `--clientid`, `--clientpassword`, and `--instancetype` are the equivalent to
+these configuration attributes.
+
+#### Business Manager Setup
+
+Setup the following in OCAPI Client and WebDav Client permissions (in addition to any other permissions already configured)
+
+WebDAV Client Permissions
+
+```json
+{  
+   "clients":[  
+      {  
+         "client_id":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+         "permissions":[  
+            {  
+               "path":"/impex/",
+               "operations":[  
+                  "read_write"
+               ]
+            },
+            {  
+               "path":"/cartridges/",
+               "operations":[  
+                  "read_write"
+               ]
+            },
+            {  
+               "path":"/logs/",
+               "operations":[  
+                  "read_write"
+               ]
+            }
+         ]
+      }
+   ]
+}
+```
+
+DATA API Permissions
+
+```json
+{
+  "_v":"20.8",
+  "clients":
+  [
+    {
+      "client_id":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "resources":
+      [
+        {
+          "resource_id":"/sites",
+          "methods":["get"],
+          "read_attributes":"(**)"
+        },
+        {
+          "resource_id":"/code_versions/**",
+          "methods":["get", "patch", "delete"],
+          "read_attributes":"(**)",
+"write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/global_preferences/**",
+          "methods":["get", "patch"],
+          "read_attributes":"(**)",
+"write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/jobs/**",
+          "methods":["get", "post"],
+          "read_attributes":"(**)",
+"write_attributes":"(**)"
+        }
+      ]
+    }
+  ]
+}
+```
+
 # License
 
 This software is Copyright 2015-2019 PixelMEDIA, Inc and Charles Lavery (charles.lavery@gmail.com). All Rights Reserved.

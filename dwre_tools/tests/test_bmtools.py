@@ -30,8 +30,7 @@ class TestBMTools(TestCase):
         responses.add(responses.POST, re.compile('.*ViewApplication-ProcessLogin.*'),
                       body="'csrf_token','abc'", status=200)
 
-        session = requests.session()
-        login_business_manager(self.env, session)
+        session = login_business_manager(self.env)
 
         assert len(responses.calls) == 1
         assert 'csrf_token' in session.params and session.params['csrf_token'] == 'abc'
@@ -41,10 +40,8 @@ class TestBMTools(TestCase):
         responses.add(responses.POST, re.compile('.*ViewApplication-ProcessLogin.*'),
                       body="Invalid login or password", status=200)
 
-        session = requests.session()
-
         with self.assertRaises(RuntimeError):
-            login_business_manager(self.env, session)
+            login_business_manager(self.env)
 
         assert len(responses.calls) == 1
 

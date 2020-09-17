@@ -32,12 +32,7 @@ def pw_refresh():
                 print(Fore.GREEN + "[ACCOUNT MANAGER SSO]" + Fore.RESET)
                 continue
             try:
-                session = requests.session()
-                session.verify = e.get("verify", True)
-                if 'clientcert' in e:
-                    session.cert = (e["clientcert"], e["clientkey"])
-
-                login_business_manager(e, session)
+                session = login_business_manager(e)
                 print(Fore.GREEN + "[SUCCESS]" + Fore.RESET)
             except requests.exceptions.ReadTimeout as e:
                 print(Fore.RED + "[FAILED: Timeout. Dead instance?]".format(e) + Fore.RESET)

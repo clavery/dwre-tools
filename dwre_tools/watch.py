@@ -11,14 +11,12 @@ from watchdog.events import FileSystemEventHandler
 from colorama import Fore
 
 from .sync import collect_cartridges
+from .bmtools import authenticate_webdav_session
 
 
 class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
     def __init__(self, env, path, name, zip_files=True):
-        webdavsession = requests.session()
-        webdavsession.verify = env["verify"]
-        webdavsession.auth = (env["username"], env["password"], )
-        webdavsession.cert = env["cert"]
+        webdavsession = authenticate_webdav_session(env)
 
         self.cartridge_name = name
         self.cartridge_path = path

@@ -1,6 +1,15 @@
 
 # Release Notes
 
+## 1.17.0
+
+- `tail`, `watch`, `sync`, and `migrate` subcommands can now be used with
+OCAPI/Account manager client credentials only when the environment contains a
+clientID
+    - Limitations: Note that the `tail` command does not refresh the access
+    token and will fail after 30 minutes of activity
+- other commands do not support this
+
 ## 1.16.4
 
 - update docs and schemas to 20.8

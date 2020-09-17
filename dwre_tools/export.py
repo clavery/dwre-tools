@@ -11,19 +11,15 @@ import zipfile, io
 import os
 import shutil
 
-from .bmtools import login_business_manager, get_list_data_units, get_export_zip
+from .bmtools import login_business_manager, get_list_data_units, get_export_zip, authenticate_webdav_session
 
 
 def export_units(env):
     pass
 
 def export_command(env, directory):
-    bmsession = requests.session()
-    bmsession.verify = env["verify"]
-    bmsession.cert = env["cert"]
-
     print("Getting data units from business manager...")
-    login_business_manager(env, bmsession)
+    bmsession = login_business_manager(env)
     data_units = get_list_data_units(env, bmsession)
 
     import logging
@@ -67,12 +63,9 @@ def export_command(env, directory):
 
         filename = "ToolsExport_" + str(uuid.uuid4()).replace("-", "")[:10]
 
-        webdavsession = requests.session()
-        webdavsession.verify = env["verify"]
-        webdavsession.auth=(env["username"], env["password"],)
-        webdavsession.cert = env["cert"]
+        webdavsession = authenticate_webdav_session(env)
 
-        export_zip = get_export_zip(env, bmsession, webdavsession, export_units, filename)
+        export_zip = get_export_zip(env, webdavsession, export_units, filename)
 
         tempdir = tempfile.mkdtemp()
         export_zip.extractall(tempdir)
