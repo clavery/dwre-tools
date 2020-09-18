@@ -50,6 +50,10 @@ def get_env_from_args(args):
                 args.env = env_name
             else:
                 env = get_environment(args.env, project)
+        elif args.clientid:
+            env = {
+                "server": args.server,
+            }
         else:
             assert args.username, "Must specify a username"
             env = {
@@ -84,7 +88,7 @@ def get_env_from_args(args):
     if "verify" not in env:
         env["verify"] = not args.noverify
 
-    if "password" not in env or not env.get('password'):
+    if ("password" not in env or not env.get('password')) and not env.get('clientID'):
         # attempt to retrieve from keyring
         key = "dwre-%s" % (env["server"])
         if env.get('useAccountManager'):

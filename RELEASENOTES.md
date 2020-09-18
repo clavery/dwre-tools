@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.1
+
+- fixes bug with cli usage and clientID
+
 ## 1.17.0
 
 - `tail`, `watch`, `sync`, and `migrate` subcommands can now be used with
