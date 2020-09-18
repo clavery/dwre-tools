@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.2
+
+- more bugs thanks to ralph
+
 ## 1.17.1
 
 - fixes bug with cli usage and clientID

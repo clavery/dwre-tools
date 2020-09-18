@@ -78,12 +78,14 @@ def get_current_versions(env):
         resp = session.get("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type))
         resp.raise_for_status()
         j = resp.json()
+        if j.get("c_dwreMigrateToolVersion") is None:
+            raise NotInstalledException("DWRE Tools Metadata is likely not installed")
         return (
             j.get("c_dwreMigrateToolVersion"),
             j.get("c_dwreMigrateCurrentVersion"),
-            j.get("c_dwreMigrateVersionPath").split(","),
+            j.get("c_dwreMigrateVersionPath").split(",") if j.get("c_dwreMigrateVersionPath") else [],
             "2",
-            j.get("c_dwreMigrateHotfixes").split(',')
+            j.get("c_dwreMigrateHotfixes").split(',') if j.get('c_dwreMigrateHotfixes') else []
         )
     else:
         bmsession = login_business_manager(env)
