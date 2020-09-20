@@ -25,9 +25,7 @@ def update_hotfix_path(env, path):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "development"
-        if "instanceType" in env:
-            instance_type = env["instanceType"]
+        instance_type = "current"
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.patch("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type), json={
@@ -47,9 +45,7 @@ def update_current_version(env, id, path):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "development"
-        if "instanceType" in env:
-            instance_type = env["instanceType"]
+        instance_type = "current"
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.patch("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type), json={
@@ -70,9 +66,7 @@ def get_current_versions(env):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "development"
-        if "instanceType" in env:
-            instance_type = env["instanceType"]
+        instance_type = "current"
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.get("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type))
@@ -395,7 +389,6 @@ def activate_code_version(env, code_version):
         bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewCodeDeployment-Activate"
                        .format(env["server"]), data=dict(
                            CodeVersionID=code_version))
-
 
 def import_site_package(env, filename):
     use_ocapi = False

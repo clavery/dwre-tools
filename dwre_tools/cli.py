@@ -79,9 +79,6 @@ def get_env_from_args(args):
         env["clientID"] = args.clientid
         env["clientPassword"] = args.clientpassword
 
-    if args.instancetype:
-        env["instanceType"] = args.instancetype
-
     if hasattr(args, 'codeversion') and args.codeversion:
         env['codeVersion'] = args.codeversion
 
@@ -261,7 +258,6 @@ parser.add_argument('--clientcert', help="SSL Client certificate")
 parser.add_argument('--clientkey', help="SSL Client private key")
 parser.add_argument('--clientid', help="OCAPI Client ID")
 parser.add_argument('--clientpassword', help="OCAPI Client password")
-parser.add_argument('--instancetype', help="Instance Type (development, staging, sandbox, production)")
 parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
 parser.add_argument('--codeversion', help="Code version override")
 
