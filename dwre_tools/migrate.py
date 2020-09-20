@@ -320,7 +320,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
     skip_migrations = False
     upgrade_required = False
     if (not_installed or current_cartridge_version is None 
-            or int(current_cartridge_version) < int(CARTRIDGE_VERSION)):
+            or int(current_cartridge_version) < int(CARTRIDGE_VERSION)) and "clientID" not in env:
         migration_path.append("CARTRIDGE")
         migrations["CARTRIDGE"] = {"id" : "DWRE_MIGRATE_CARTRIDGE", "description" : "Install/upgrade cartridge bm_dwremigrate", "reindex" : False}
         skip_migrations = True
@@ -330,7 +330,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
 
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
         upgrade_required = True
-        if not_installed:
+        if not_installed and "clientID" not in env:
             migration_path.append("INSTALL")
             migrations["INSTALL"] = {"id" : "DWRE_MIGRATE_INSTALL", "description" : "Install DWRE Migrate BM Extension", "reindex" : False}
             skip_migrations = True

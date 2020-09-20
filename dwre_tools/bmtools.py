@@ -76,6 +76,9 @@ def get_current_versions(env):
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.get("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type))
+        if resp.status_code == 404:
+            raise NotInstalledException("DWRE Tools Metadata is likely not installed")
+
         resp.raise_for_status()
         j = resp.json()
         if j.get("c_dwreMigrateToolVersion") is None:
