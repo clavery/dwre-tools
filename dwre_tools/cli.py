@@ -85,7 +85,7 @@ def get_env_from_args(args):
     if "verify" not in env:
         env["verify"] = not args.noverify
 
-    if ("password" not in env or not env.get('password')) and not env.get('clientID'):
+    if ("password" not in env or not env.get('password')) and "username" in env:
         # attempt to retrieve from keyring
         key = "dwre-%s" % (env["server"])
         if env.get('useAccountManager'):
@@ -102,7 +102,7 @@ def get_env_from_args(args):
         elif keyring_password:
             env["password"] = keyring_password
 
-    if "clientID" in env and ("clientPassword" not in env or not  env.get('clientPassword')):
+    if "clientID" in env and ("clientPassword" not in env or not env.get('clientPassword')):
         # attempt to retrieve from keyring
         key = "ocapi-%s" % (env["server"])
         keyring_password = keyring.get_password(key, env["clientID"])

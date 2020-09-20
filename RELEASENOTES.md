@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.4
+
+- updates logic to look for password in keychain if username exists but not prompt if client credentials exist
+
 ## 1.17.3
 
 - bootstrap now works with client credentials
