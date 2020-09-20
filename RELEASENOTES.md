@@ -1,6 +1,13 @@
 
 # Release Notes
 
+## 1.17.3
+
+- bootstrap now works with client credentials
+- **removed** instanceType option as it's not needed
+- `export` subcommand now works with client credentials with some caveats
+- updated readme with some additional details on ocapi config
+
 ## 1.17.2
 
 - more bugs thanks to ralph
