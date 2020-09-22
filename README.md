@@ -406,7 +406,8 @@ username/password and providng **at least** a `clientID` property:
       "codeVersion": "foo",
       "server": "dev04-na01-test.demandware.net",
       "clientID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "clientPassword": "daskjlkjasdlkj"
+      "clientPassword": "daskjlkjasdlkj",
+      "instanceType": "staging"
     },
 ...
 }
@@ -422,7 +423,9 @@ Username, password, useAccountManager can also be provided but client credential
 If `clientPassword` isn't provided or cannot be found in the keystore the tool
 will prompt for it on the CLI.
 
-The CLI arguments `--clientid`, `--clientpassword` are the equivalent to
+`instanceType` defaults to "development" and is usually fine for everything unless a staging environment is used. For that specify "staging" or use the `--instancetype staging` cli option.
+
+The CLI arguments `--clientid`, `--clientpassword`, `--instancetype` are the equivalent to
 these configuration attributes.
 
 #### Business Manager Setup

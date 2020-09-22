@@ -25,7 +25,7 @@ def update_hotfix_path(env, path):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "current"
+        instance_type = env.get("instanceType", "development")
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.patch("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type), json={
@@ -45,7 +45,7 @@ def update_current_version(env, id, path):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "current"
+        instance_type = env.get("instanceType", "development")
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.patch("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type), json={

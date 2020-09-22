@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.6
+
+- bringing back `instanceType`, `--instancetype`; defaults to "development"
+
 ## 1.17.5
 
 - fix bug in loading from dw.json

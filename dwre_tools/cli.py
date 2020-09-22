@@ -82,6 +82,9 @@ def get_env_from_args(args):
     if hasattr(args, 'codeversion') and args.codeversion:
         env['codeVersion'] = args.codeversion
 
+    if "instanceType" not in env:
+        env["instanceType"] = args.instancetype
+
     if "verify" not in env:
         env["verify"] = not args.noverify
 
@@ -257,6 +260,7 @@ parser.add_argument('--accountmanager', help="Use Account Manager Login Method",
 parser.add_argument('--clientcert', help="SSL Client certificate")
 parser.add_argument('--clientkey', help="SSL Client private key")
 parser.add_argument('--clientid', help="OCAPI Client ID")
+parser.add_argument('--instancetype', help="Instance Type (development, sandbox, staging, production)", default="development")
 parser.add_argument('--clientpassword', help="OCAPI Client password")
 parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
 parser.add_argument('--codeversion', help="Code version override")

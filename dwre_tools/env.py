@@ -20,6 +20,8 @@ def get_env_from_dw_json():
             if "client-id" in j:
                 config["clientID"] = j.get("client-id")
                 config["clientPassword"] = j.get("client-secret")
+            if "instanceType" in j:
+                config["instanceType"] = j.get("instanceType")
             return config
     return None
 
