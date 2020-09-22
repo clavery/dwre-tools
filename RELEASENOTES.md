@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.8
+
+- more logging
+
 ## 1.17.7
 
 - verbose logging with `--log DEBUG`

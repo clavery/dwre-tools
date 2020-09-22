@@ -1,5 +1,7 @@
 from __future__ import print_function
 
+import logging
+
 import pyquery
 import time
 import json
@@ -31,6 +33,9 @@ def update_hotfix_path(env, path):
         resp = session.patch("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type), json={
             "c_dwreMigrateHotfixes": path
         })
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        if requests_log.getEffectiveLevel() == logging.DEBUG:
+            print(resp.content)
         resp.raise_for_status()
     else:
         bmsession = login_business_manager(env)
@@ -52,6 +57,9 @@ def update_current_version(env, id, path):
             "c_dwreMigrateCurrentVersion": id,
             "c_dwreMigrateVersionPath": path
         })
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        if requests_log.getEffectiveLevel() == logging.DEBUG:
+            print(resp.content)
         resp.raise_for_status()
     else:
         bmsession = login_business_manager(env)
@@ -70,6 +78,9 @@ def get_current_versions(env):
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.get("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type))
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        if requests_log.getEffectiveLevel() == logging.DEBUG:
+            print(resp.content)
         if resp.status_code == 404:
             raise NotInstalledException("DWRE Tools Metadata is likely not installed")
 
@@ -112,6 +123,9 @@ def get_current_versions(env):
 def authenticate_session_from_env(env, session):
     auth = (env["clientID"], env["clientPassword"])
     resp = requests.post("https://account.demandware.com/dwsso/oauth2/access_token", data={"grant_type":"client_credentials"}, auth=auth)
+    requests_log = logging.getLogger("requests.packages.urllib3")
+    if requests_log.getEffectiveLevel() == logging.DEBUG:
+        print(resp.content)
     resp.raise_for_status()
     j = resp.json()
     access_token = j.get("access_token")
