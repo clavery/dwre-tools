@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.5
+
+- fix bug in loading from dw.json
+
 ## 1.17.4
 
 - updates logic to look for password in keychain if username exists but not prompt if client credentials exist

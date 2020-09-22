@@ -10,15 +10,17 @@ def get_env_from_dw_json():
         with open(dw_json_file) as f:
             j = json.load(f)
             use_account_manager = j.get('useAccountManager') == True
-            return {
+            config = {
                 "server": j.get("hostname"),
                 "username": j.get("username"),
                 "password": j.get("password"),
-                "clientID": j.get("clientID"),
-                "clientPassword": j.get("clientPassword"),
                 "codeVersion": j.get("code-version"),
                 "useAccountManager": use_account_manager
             }
+            if "client-id" in j:
+                config["clientID"] = j.get("client-id")
+                config["clientPassword"] = j.get("client-secret")
+            return config
     return None
 
 

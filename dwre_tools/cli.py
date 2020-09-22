@@ -381,7 +381,6 @@ zip_cmd.set_defaults(func=zip_cmd_handler)
 zip_cmd.add_argument('filename', help="destination filename")
 zip_cmd.add_argument('directory', help="cartridges dir (default current)", nargs='?')
 
-
 watch_cmd = cmd_parser.add_parser('watch', help="watch cartridges from directory and upload to env")
 watch_cmd.set_defaults(func=watch_cmd_handler)
 watch_cmd.add_argument('directory', help="cartridges dir (default current)", nargs='?')
