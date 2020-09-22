@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.7
+
+- verbose logging with `--log DEBUG`
+
 ## 1.17.6
 
 - bringing back `instanceType`, `--instancetype`; defaults to "development"
