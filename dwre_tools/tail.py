@@ -3,9 +3,12 @@ from __future__ import print_function
 import requests
 import time
 import re
+import logging
 import sys
 from xml.etree import ElementTree as ET
 import functools
+import urllib3
+import http
 
 from colorama import Fore, Back, Style
 
@@ -88,14 +91,30 @@ def tail_logs(env, filters, interval):
 
             for i, log in enumerate(log_files):
                 url = 'https://' + server + '/on/demandware.servlet/webdav/Sites/Logs/' + log[0]
-                response = session.get(url, headers={
-                    "range": "bytes=%s-" % (lengths[i])
-                })
-                if response.status_code == 416:
+
+                try:
+                    response = session.get(url, headers={
+                        "range": "bytes=%s-" % (lengths[i])
+                    })
+                    if response.status_code == 416:
+                        continue
+                    elif response.status_code == 403:
+                        print("Re-Authenticating")
+                        session = authenticate_webdav_session()
+                        continue
+                    response.raise_for_status()
+                    output_log_file(log[0], response.text)
+                    lengths[i] = lengths[i] + len(response.text)
+                except requests.exceptions.ConnectionError as e:
+                    logging.debug(str(e))
                     continue
-                response.raise_for_status()
-                output_log_file(log[0], response.text)
-                lengths[i] = lengths[i] + len(response.text)
+                except urllib3.exceptions.ProtocolError:
+                    print("Host dropped connection")
+                    continue
+                except http.client.RemoteDisconnected:
+                    print("Host dropped connection")
+                    continue
+
     except KeyboardInterrupt as e:
         sys.exit(0)
 

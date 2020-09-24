@@ -408,10 +408,10 @@ def main():
     if hasattr(args, 'log'):
         level = args.log
         logging.basicConfig(stream=sys.stderr, level=getattr(logging, level))
-        requests_log = logging.getLogger("requests.packages.urllib3")
-        requests_log.setLevel(logging.DEBUG)
-        requests_log.propagate = True
         if level == "DEBUG":
+            requests_log = logging.getLogger("requests.packages.urllib3")
+            requests_log.setLevel(logging.DEBUG)
+            requests_log.propagate = True
             try:
                 import http.client as http_client
             except ImportError:

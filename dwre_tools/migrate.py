@@ -587,8 +587,6 @@ def run_all(env, migrations_dir, test=False):
         validate_xml(hotfixes_context)
         (hotfix_path, hotfixes) = get_migrations(hotfixes_context, hotfix=True)
 
-    webdavsession = authenticate_webdav_session(env)
-
     not_installed = False
     try:
         (current_tool_version, current_migration, current_migration_path,
@@ -596,6 +594,8 @@ def run_all(env, migrations_dir, test=False):
             get_current_versions(env))
     except NotInstalledException as e:
         raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
+
+    webdavsession = authenticate_webdav_session(env)
 
     required_migrations = list(set(path).difference(set(current_migration_path)))
     required_migrations = sorted(required_migrations, key=functools.cmp_to_key(lambda x, y: path.index(x) - path.index(y)))
