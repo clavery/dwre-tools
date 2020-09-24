@@ -100,11 +100,11 @@ def tail_logs(env, filters, interval):
                         continue
                     elif response.status_code == 401:
                         print("Re-Authenticating")
-                        session = authenticate_webdav_session()
+                        session = authenticate_webdav_session(env)
                         continue
                     elif response.status_code == 403:
                         print("Re-Authenticating")
-                        session = authenticate_webdav_session()
+                        session = authenticate_webdav_session(env)
                         continue
                     response.raise_for_status()
                     output_log_file(log[0], response.text)
