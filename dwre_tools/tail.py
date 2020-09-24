@@ -98,6 +98,10 @@ def tail_logs(env, filters, interval):
                     })
                     if response.status_code == 416:
                         continue
+                    elif response.status_code == 401:
+                        print("Re-Authenticating")
+                        session = authenticate_webdav_session()
+                        continue
                     elif response.status_code == 403:
                         print("Re-Authenticating")
                         session = authenticate_webdav_session()

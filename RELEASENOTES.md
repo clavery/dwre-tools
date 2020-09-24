@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.10
+
+- reauth after failure
+
 ## 1.17.9
 
 - fixing the logging to only dump on debug
