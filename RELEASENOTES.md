@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.12
+
+- fix auth for noverify
+
 ## 1.17.11
 
 - fixes

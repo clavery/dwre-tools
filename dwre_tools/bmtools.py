@@ -132,7 +132,8 @@ def authenticate_session_from_env(env, session):
     expiration_seconds = j.get("expires_in");
     session.headers.update({"Authorization": "Bearer " + access_token})
     session.headers.update({"x-dw-client-id": env["clientID"]})
-
+    session.verify = env["verify"]
+    session.cert = env["cert"]
 
 def authenticate_webdav_session(env):
     session = requests.session()
