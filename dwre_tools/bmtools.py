@@ -547,13 +547,7 @@ def get_export_zip(env, webdavsession, export_units, filename):
 
 
 def get_install_export_zip(env, webdavsession, filename):
-    if "clientID" in env:
-        use_ocapi = True
-    if use_ocapi:
-        # TODO
-        pass
-    else:
-        zip_file = get_export_zip(env, webdavsession,
-                                  export_units=["AccessRoleExport", "GlobalPreferencesExport"],
-                                  filename=filename)
-        return zip_file
+    zip_file = get_export_zip(env, webdavsession,
+                              export_units=["AccessRoleExport", "GlobalPreferencesExport"],
+                              filename=filename)
+    return zip_file
