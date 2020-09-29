@@ -165,6 +165,7 @@ def get_export_data_units(env):
 
 def export_command(env, directory):
     print("Getting data units...")
+    use_ocapi = False
     if "clientID" in env:
         use_ocapi = True
     if use_ocapi:

@@ -202,6 +202,7 @@ def update_cmd_handler(args):
 
 def debug_cmd_handler(args):
     env = get_env_from_args(args)
+    print(env["password"])
     debug_command(env, args.breakpoints, args.vim, args.verbose)
 
 

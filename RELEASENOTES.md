@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.15
+
+- bug fix export when using u/p
+
 ## 1.17.14
 
 - bug fix bootstrapping when using u/p
