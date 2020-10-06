@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.17
+
+- sleep before activating code version to avoid occasionally deployment issues of new code versions
+
 ## 1.17.16
 
 - don't use `current` in global prefs

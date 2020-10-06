@@ -1,4 +1,6 @@
 import sys
+import time
+
 import requests
 import yaml
 import re
@@ -129,5 +131,6 @@ def sync_command(env, delete_code_version, cartridge_location):
 
     if delete_code_version:
         print("Reactivating code version...")
+        time.sleep(2)
         activate_code_version(env, code_version)
         print("Done")
