@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.16
+
+- don't use `current` in global prefs
+
 ## 1.17.15
 
 - bug fix export when using u/p

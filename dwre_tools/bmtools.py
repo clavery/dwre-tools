@@ -74,7 +74,7 @@ def get_current_versions(env):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "current"
+        instance_type = env.get("instanceType", "development")
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.get("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type))
