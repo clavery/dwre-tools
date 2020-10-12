@@ -453,7 +453,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         start_time = time.time()
 
         zip_filename = "dwremigrate_%s" % migration["id"]
-        if m is "CARTRIDGE":
+        if m == "CARTRIDGE":
             if code_deployed:
                 print(Fore.RED + "Error: cartridge does not appear to have upgraded; check code version", Fore.RESET)
                 sys.exit(2)
@@ -464,10 +464,10 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             time.sleep(10)
             code_deployed = True
             continue
-        elif m is "BOOTSTRAP":
+        elif m == "BOOTSTRAP":
             zip_file = get_bootstrap_zip()
             zip_filename = "DWREMigrateBootstrap_v{}".format(TOOL_VERSION)
-        elif m is "INSTALL":
+        elif m == "INSTALL":
             (zip_file, zip_filename) = get_install_zip(env, webdavsession)
         else:
             zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
