@@ -131,6 +131,6 @@ def sync_command(env, delete_code_version, cartridge_location):
 
     if delete_code_version:
         print("Reactivating code version (waiting 10 seconds)...")
-        time.sleep(10)
+        time.sleep(20)
         activate_code_version(env, code_version)
         print("Done")
