@@ -22,7 +22,9 @@ class TestBMTools(TestCase):
         self.env = {
             "server": "www.example.com",
             "username": "test",
-            "password": "user"
+            "password": "user",
+            "verify": "",
+            "cert": 0
         }
 
     @responses.activate
@@ -70,12 +72,13 @@ class TestBMTools(TestCase):
             migrationPath='foobar,abc123',
             dwreMigrateHotfixes='hotfix1,hotfix1'
         )
+
         responses.add(responses.GET, re.compile('.*DWREMigrate-Versions.*'),
                       json=r, status=200)
 
         session = requests.session()
         (tool_version, migration_version, current_migration_path,
-                cartridge_version, hotfixes) = get_current_versions(self.env, session)
+                cartridge_version, hotfixes) = get_current_versions(self.env)
 
         assert len(responses.calls) == 1
         assert tool_version == '1'
@@ -94,7 +97,7 @@ class TestBMTools(TestCase):
 
         request_callback.num_requests = 0
         responses.add_callback(responses.GET, re.compile('.*ViewSiteImpex-Status.*'),
-                               callback=request_callback) 
+                               callback=request_callback)
         responses.add(responses.GET, re.compile('.*ViewSiteImpex-Monitor.*'),
                       body="finished successfully", status=200)
 
