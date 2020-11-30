@@ -1,5 +1,7 @@
 from __future__ import print_function
 
+import logging
+
 import pyquery
 import time
 import json
@@ -25,14 +27,15 @@ def update_hotfix_path(env, path):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "development"
-        if "instanceType" in env:
-            instance_type = env["instanceType"]
+        instance_type = env.get("instanceType", "development")
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.patch("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type), json={
             "c_dwreMigrateHotfixes": path
         })
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        if requests_log.getEffectiveLevel() == logging.DEBUG:
+            print(resp.content)
         resp.raise_for_status()
     else:
         bmsession = login_business_manager(env)
@@ -47,15 +50,16 @@ def update_current_version(env, id, path):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "development"
-        if "instanceType" in env:
-            instance_type = env["instanceType"]
+        instance_type = env.get("instanceType", "development")
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.patch("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type), json={
             "c_dwreMigrateCurrentVersion": id,
             "c_dwreMigrateVersionPath": path
         })
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        if requests_log.getEffectiveLevel() == logging.DEBUG:
+            print(resp.content)
         resp.raise_for_status()
     else:
         bmsession = login_business_manager(env)
@@ -70,20 +74,26 @@ def get_current_versions(env):
         use_ocapi = True
 
     if use_ocapi:
-        instance_type = "development"
-        if "instanceType" in env:
-            instance_type = env["instanceType"]
+        instance_type = env.get("instanceType", "development")
         session = requests.session()
         authenticate_session_from_env(env, session)
         resp = session.get("https://{}/s/-/dw/data/v20_8/global_preferences/preference_groups/dwreMigrate/{}".format(env["server"], instance_type))
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        if requests_log.getEffectiveLevel() == logging.DEBUG:
+            print(resp.content)
+        if resp.status_code == 404:
+            raise NotInstalledException("DWRE Tools Metadata is likely not installed")
+
         resp.raise_for_status()
         j = resp.json()
+        if j.get("c_dwreMigrateToolVersion") is None:
+            raise NotInstalledException("DWRE Tools Metadata is likely not installed")
         return (
             j.get("c_dwreMigrateToolVersion"),
             j.get("c_dwreMigrateCurrentVersion"),
-            j.get("c_dwreMigrateVersionPath").split(","),
+            j.get("c_dwreMigrateVersionPath").split(",") if j.get("c_dwreMigrateVersionPath") else [],
             "2",
-            j.get("c_dwreMigrateHotfixes").split(',')
+            j.get("c_dwreMigrateHotfixes").split(',') if j.get('c_dwreMigrateHotfixes') else []
         )
     else:
         bmsession = login_business_manager(env)
@@ -113,13 +123,18 @@ def get_current_versions(env):
 def authenticate_session_from_env(env, session):
     auth = (env["clientID"], env["clientPassword"])
     resp = requests.post("https://account.demandware.com/dwsso/oauth2/access_token", data={"grant_type":"client_credentials"}, auth=auth)
+    requests_log = logging.getLogger("requests.packages.urllib3")
+    if requests_log.getEffectiveLevel() == logging.DEBUG:
+        print(resp.content)
     resp.raise_for_status()
     j = resp.json()
     access_token = j.get("access_token")
     expiration_seconds = j.get("expires_in");
     session.headers.update({"Authorization": "Bearer " + access_token})
     session.headers.update({"x-dw-client-id": env["clientID"]})
-
+    session.verify = env["verify"] == True
+    if "cert" in env:
+        session.cert = env["cert"]
 
 def authenticate_webdav_session(env):
     session = requests.session()
@@ -391,7 +406,6 @@ def activate_code_version(env, code_version):
                        .format(env["server"]), data=dict(
                            CodeVersionID=code_version))
 
-
 def import_site_package(env, filename):
     use_ocapi = False
     if "clientID" in env:
@@ -533,13 +547,7 @@ def get_export_zip(env, webdavsession, export_units, filename):
 
 
 def get_install_export_zip(env, webdavsession, filename):
-    if "clientID" in env:
-        use_ocapi = True
-    if use_ocapi:
-        # TODO
-        pass
-    else:
-        zip_file = get_export_zip(env, webdavsession,
-                                  export_units=["AccessRoleExport", "GlobalPreferencesExport"],
-                                  filename=filename)
-        return zip_file
+    zip_file = get_export_zip(env, webdavsession,
+                              export_units=["AccessRoleExport", "GlobalPreferencesExport"],
+                              filename=filename)
+    return zip_file

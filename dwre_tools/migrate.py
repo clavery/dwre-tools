@@ -320,7 +320,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
     skip_migrations = False
     upgrade_required = False
     if (not_installed or current_cartridge_version is None 
-            or int(current_cartridge_version) < int(CARTRIDGE_VERSION)):
+            or int(current_cartridge_version) < int(CARTRIDGE_VERSION)) and "clientID" not in env:
         migration_path.append("CARTRIDGE")
         migrations["CARTRIDGE"] = {"id" : "DWRE_MIGRATE_CARTRIDGE", "description" : "Install/upgrade cartridge bm_dwremigrate", "reindex" : False}
         skip_migrations = True
@@ -330,7 +330,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
 
     if current_tool_version is None or int(TOOL_VERSION) > int(current_tool_version):
         upgrade_required = True
-        if not_installed:
+        if not_installed and "clientID" not in env:
             migration_path.append("INSTALL")
             migrations["INSTALL"] = {"id" : "DWRE_MIGRATE_INSTALL", "description" : "Install DWRE Migrate BM Extension", "reindex" : False}
             skip_migrations = True
@@ -453,7 +453,7 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
         start_time = time.time()
 
         zip_filename = "dwremigrate_%s" % migration["id"]
-        if m is "CARTRIDGE":
+        if m == "CARTRIDGE":
             if code_deployed:
                 print(Fore.RED + "Error: cartridge does not appear to have upgraded; check code version", Fore.RESET)
                 sys.exit(2)
@@ -464,10 +464,10 @@ def apply_migrations(env, migrations_dir, test=False, code_deployed=False):
             time.sleep(10)
             code_deployed = True
             continue
-        elif m is "BOOTSTRAP":
+        elif m == "BOOTSTRAP":
             zip_file = get_bootstrap_zip()
             zip_filename = "DWREMigrateBootstrap_v{}".format(TOOL_VERSION)
-        elif m is "INSTALL":
+        elif m == "INSTALL":
             (zip_file, zip_filename) = get_install_zip(env, webdavsession)
         else:
             zip_file = directory_to_zip(os.path.join(migrations_dir, migration["location"]), zip_filename)
@@ -587,8 +587,6 @@ def run_all(env, migrations_dir, test=False):
         validate_xml(hotfixes_context)
         (hotfix_path, hotfixes) = get_migrations(hotfixes_context, hotfix=True)
 
-    webdavsession = authenticate_webdav_session(env)
-
     not_installed = False
     try:
         (current_tool_version, current_migration, current_migration_path,
@@ -596,6 +594,8 @@ def run_all(env, migrations_dir, test=False):
             get_current_versions(env))
     except NotInstalledException as e:
         raise RuntimeError("migrations not installed; use apply subcommand to bootstrap")
+
+    webdavsession = authenticate_webdav_session(env)
 
     required_migrations = list(set(path).difference(set(current_migration_path)))
     required_migrations = sorted(required_migrations, key=functools.cmp_to_key(lambda x, y: path.index(x) - path.index(y)))

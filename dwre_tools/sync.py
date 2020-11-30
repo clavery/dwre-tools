@@ -1,4 +1,6 @@
 import sys
+import time
+
 import requests
 import yaml
 import re
@@ -128,6 +130,7 @@ def sync_command(env, delete_code_version, cartridge_location):
     print(f"{Fore.GREEN}Successfully synced cartridges with {env['server']}{Fore.RESET}")
 
     if delete_code_version:
-        print("Reactivating code version...")
+        print("Reactivating code version (waiting 10 seconds)...")
+        time.sleep(20)
         activate_code_version(env, code_version)
         print("Done")

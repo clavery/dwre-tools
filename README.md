@@ -407,7 +407,7 @@ username/password and providng **at least** a `clientID` property:
       "server": "dev04-na01-test.demandware.net",
       "clientID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "clientPassword": "daskjlkjasdlkj",
-      "instanceType": "development"
+      "instanceType": "staging"
     },
 ...
 }
@@ -423,9 +423,9 @@ Username, password, useAccountManager can also be provided but client credential
 If `clientPassword` isn't provided or cannot be found in the keystore the tool
 will prompt for it on the CLI.
 
-**If `instanceType` isn't provided "development" will be assumed. i.e. This is only necessary for staging environments.**
+`instanceType` defaults to "development" and is usually fine for everything unless a staging environment is used. For that specify "staging" or use the `--instancetype staging` cli option.
 
-The CLI arguments `--clientid`, `--clientpassword`, and `--instancetype` are the equivalent to
+The CLI arguments `--clientid`, `--clientpassword`, `--instancetype` are the equivalent to
 these configuration attributes.
 
 #### Business Manager Setup
@@ -466,6 +466,10 @@ WebDAV Client Permissions
 
 DATA API Permissions
 
+**NOTE: Only the `code_versions`, `global_preferences`, and `jobs` resources below are necessary for primary functions.** 
+The additional resources below them are for the `export` subcommand. If the client ID has no use
+for the `export` command these can and should be omitted.
+
 ```json
 {
   "_v":"20.8",
@@ -475,11 +479,6 @@ DATA API Permissions
       "client_id":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "resources":
       [
-        {
-          "resource_id":"/sites",
-          "methods":["get"],
-          "read_attributes":"(**)"
-        },
         {
           "resource_id":"/code_versions/**",
           "methods":["get", "patch", "delete"],
@@ -497,6 +496,16 @@ DATA API Permissions
           "methods":["get", "post"],
           "read_attributes":"(**)",
 "write_attributes":"(**)"
+        },
+        {
+          "resource_id":"/sites",
+          "methods":["get"],
+          "read_attributes":"(**)"
+        },
+        {
+          "resource_id":"/catalogs",
+          "methods":["get"],
+          "read_attributes":"(**)"
         }
       ]
     }

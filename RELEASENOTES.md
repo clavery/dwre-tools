@@ -1,6 +1,77 @@
 
 # Release Notes
 
+## 1.17.18
+
+- sleep longer
+-
+## 1.17.17
+
+- sleep before activating code version to avoid occasionally deployment issues of new code versions
+
+## 1.17.16
+
+- don't use `current` in global prefs
+
+## 1.17.15
+
+- bug fix export when using u/p
+
+## 1.17.14
+
+- bug fix bootstrapping when using u/p
+
+## 1.17.12
+
+- fix auth for noverify
+
+## 1.17.11
+
+- fixes
+
+## 1.17.10
+
+- reauth after failure
+
+## 1.17.9
+
+- fixing the logging to only dump on debug
+
+## 1.17.8
+
+- more logging
+
+## 1.17.7
+
+- verbose logging with `--log DEBUG`
+
+## 1.17.6
+
+- bringing back `instanceType`, `--instancetype`; defaults to "development"
+
+## 1.17.5
+
+- fix bug in loading from dw.json
+
+## 1.17.4
+
+- updates logic to look for password in keychain if username exists but not prompt if client credentials exist
+
+## 1.17.3
+
+- bootstrap now works with client credentials
+- **removed** instanceType option as it's not needed
+- `export` subcommand now works with client credentials with some caveats
+- updated readme with some additional details on ocapi config
+
+## 1.17.2
+
+- more bugs thanks to ralph
+
+## 1.17.1
+
+- fixes bug with cli usage and clientID
+
 ## 1.17.0
 
 - `tail`, `watch`, `sync`, and `migrate` subcommands can now be used with

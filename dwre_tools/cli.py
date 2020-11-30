@@ -50,6 +50,10 @@ def get_env_from_args(args):
                 args.env = env_name
             else:
                 env = get_environment(args.env, project)
+        elif args.clientid:
+            env = {
+                "server": args.server,
+            }
         else:
             assert args.username, "Must specify a username"
             env = {
@@ -75,16 +79,16 @@ def get_env_from_args(args):
         env["clientID"] = args.clientid
         env["clientPassword"] = args.clientpassword
 
-    if args.instancetype:
-        env["instanceType"] = args.instancetype
-
     if hasattr(args, 'codeversion') and args.codeversion:
         env['codeVersion'] = args.codeversion
+
+    if "instanceType" not in env:
+        env["instanceType"] = args.instancetype
 
     if "verify" not in env:
         env["verify"] = not args.noverify
 
-    if "password" not in env or not env.get('password'):
+    if ("password" not in env or not env.get('password')) and "username" in env:
         # attempt to retrieve from keyring
         key = "dwre-%s" % (env["server"])
         if env.get('useAccountManager'):
@@ -101,7 +105,7 @@ def get_env_from_args(args):
         elif keyring_password:
             env["password"] = keyring_password
 
-    if "clientID" in env and ("clientPassword" not in env or not  env.get('clientPassword')):
+    if "clientID" in env and ("clientPassword" not in env or not env.get('clientPassword')):
         # attempt to retrieve from keyring
         key = "ocapi-%s" % (env["server"])
         keyring_password = keyring.get_password(key, env["clientID"])
@@ -198,6 +202,7 @@ def update_cmd_handler(args):
 
 def debug_cmd_handler(args):
     env = get_env_from_args(args)
+    print(env["password"])
     debug_command(env, args.breakpoints, args.vim, args.verbose)
 
 
@@ -256,8 +261,8 @@ parser.add_argument('--accountmanager', help="Use Account Manager Login Method",
 parser.add_argument('--clientcert', help="SSL Client certificate")
 parser.add_argument('--clientkey', help="SSL Client private key")
 parser.add_argument('--clientid', help="OCAPI Client ID")
+parser.add_argument('--instancetype', help="Instance Type (development, sandbox, staging, production)", default="development")
 parser.add_argument('--clientpassword', help="OCAPI Client password")
-parser.add_argument('--instancetype', help="Instance Type (development, staging, sandbox, production)")
 parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
 parser.add_argument('--codeversion', help="Code version override")
 
@@ -381,7 +386,6 @@ zip_cmd.set_defaults(func=zip_cmd_handler)
 zip_cmd.add_argument('filename', help="destination filename")
 zip_cmd.add_argument('directory', help="cartridges dir (default current)", nargs='?')
 
-
 watch_cmd = cmd_parser.add_parser('watch', help="watch cartridges from directory and upload to env")
 watch_cmd.set_defaults(func=watch_cmd_handler)
 watch_cmd.add_argument('directory', help="cartridges dir (default current)", nargs='?')
@@ -405,6 +409,16 @@ def main():
     if hasattr(args, 'log'):
         level = args.log
         logging.basicConfig(stream=sys.stderr, level=getattr(logging, level))
+        if level == "DEBUG":
+            requests_log = logging.getLogger("requests.packages.urllib3")
+            requests_log.setLevel(logging.DEBUG)
+            requests_log.propagate = True
+            try:
+                import http.client as http_client
+            except ImportError:
+                # Python 2
+                import httplib as http_client
+            http_client.HTTPConnection.debuglevel = 1
 
     if hasattr(args, 'func'):
         args.func(args)
