@@ -11,7 +11,7 @@ import requests
 import responses
 
 import dwre_tools
-from dwre_tools.bmtools import login_business_manager, get_list_data_units, get_current_versions
+import dwre_tools.bmtools as bmtools
 from dwre_tools.bmtools import wait_for_import
 
 TEST_DATA = os.path.join(dwre_tools.__path__[0], '..', 'testdata')
@@ -22,26 +22,30 @@ class TestBMTools(TestCase):
         self.env = {
             "server": "www.example.com",
             "username": "test",
-            "password": "user"
+            "password": "user",
+            "verify": "",
+            "cert": 0
         }
 
     @responses.activate
     def test_login_business_manager(self):
+        bmtools.BM_SESSION_CACHE = {}
         responses.add(responses.POST, re.compile('.*ViewApplication-ProcessLogin.*'),
                       body="'csrf_token','abc'", status=200)
 
-        session = login_business_manager(self.env)
+        session = bmtools.login_business_manager(self.env)
 
         assert len(responses.calls) == 1
         assert 'csrf_token' in session.params and session.params['csrf_token'] == 'abc'
 
     @responses.activate
     def test_login_business_manager_bad_password(self):
+        bmtools.BM_SESSION_CACHE = {}
         responses.add(responses.POST, re.compile('.*ViewApplication-ProcessLogin.*'),
                       body="Invalid login or password", status=200)
 
         with self.assertRaises(RuntimeError):
-            login_business_manager(self.env)
+            bmtools.login_business_manager(self.env)
 
         assert len(responses.calls) == 1
 
@@ -53,7 +57,7 @@ class TestBMTools(TestCase):
                       body=DATA_UNITS_BODY, status=200)
 
         session = requests.session()
-        data_units = get_list_data_units(self.env, session)
+        data_units = bmtools.get_list_data_units(self.env, session)
 
         assert len(responses.calls) == 1
         assert data_units
@@ -70,14 +74,18 @@ class TestBMTools(TestCase):
             migrationPath='foobar,abc123',
             dwreMigrateHotfixes='hotfix1,hotfix1'
         )
+
+        responses.add(responses.POST, re.compile('.*ViewApplication-ProcessLogin.*'),
+                      body="'csrf_token','abc'", status=200)
+
         responses.add(responses.GET, re.compile('.*DWREMigrate-Versions.*'),
                       json=r, status=200)
 
         session = requests.session()
         (tool_version, migration_version, current_migration_path,
-                cartridge_version, hotfixes) = get_current_versions(self.env, session)
+                cartridge_version, hotfixes) = bmtools.get_current_versions(self.env)
 
-        assert len(responses.calls) == 1
+        assert len(responses.calls) == 2
         assert tool_version == '1'
         assert len(current_migration_path) == 2
         assert 'hotfix1' in hotfixes
@@ -94,7 +102,7 @@ class TestBMTools(TestCase):
 
         request_callback.num_requests = 0
         responses.add_callback(responses.GET, re.compile('.*ViewSiteImpex-Status.*'),
-                               callback=request_callback) 
+                               callback=request_callback)
         responses.add(responses.GET, re.compile('.*ViewSiteImpex-Monitor.*'),
                       body="finished successfully", status=200)
 
