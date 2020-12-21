@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.17.20
+
+- (bdion) json validations fix
+
 ## 1.17.18
 
 - sleep longer
