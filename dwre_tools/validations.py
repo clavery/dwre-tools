@@ -68,6 +68,7 @@ JSON_SCHEMAS = [
     "attributedefinition.json",
     "attributedefinitiongroup.json",
     "common.json",
+    "componentconstructor.json",
     "componenttype.json",
     "componenttypeexclusion.json",
     "contentassetcomponentconfig.json",
