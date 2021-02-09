@@ -96,7 +96,7 @@ The tools requires at least one environment setup in your `.dwre.json` file.
 {
   "accountManager": {
     "username": "clavery@pixelmedia.com"
-  }.
+  },
   "defaultProject" : "vbi",
   "projects" : {
     "vbi" : {
