@@ -54,7 +54,7 @@ python3.6 -mpip install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com
 ```
 
 To upgrade, rerun the last line above. Use `sudo` if that was used for the original install.
-If upgrade fails, please `apt-get update` first. 
+If upgrade fails, please `apt-get update` first.
 
 
 ### Manual Method
@@ -313,7 +313,7 @@ Sub Commands:
 
 ### `pw`
 
-The `pw` command interfaces with the users `.dwre.json` file. 
+The `pw` command interfaces with the users `.dwre.json` file.
 
 ```
 usage: dwre pw [-h] {list,get} ...
@@ -447,26 +447,26 @@ Setup the following in OCAPI Client and WebDav Client permissions (in addition t
 WebDAV Client Permissions
 
 ```json
-{  
-   "clients":[  
-      {  
+{
+   "clients":[
+      {
          "client_id":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-         "permissions":[  
-            {  
+         "permissions":[
+            {
                "path":"/impex/",
-               "operations":[  
+               "operations":[
                   "read_write"
                ]
             },
-            {  
+            {
                "path":"/cartridges/",
-               "operations":[  
+               "operations":[
                   "read_write"
                ]
             },
-            {  
+            {
                "path":"/logs/",
-               "operations":[  
+               "operations":[
                   "read_write"
                ]
             }
@@ -478,7 +478,7 @@ WebDAV Client Permissions
 
 DATA API Permissions
 
-**NOTE: Only the `code_versions`, `global_preferences`, and `jobs` resources below are necessary for primary functions.** 
+**NOTE: Only the `code_versions`, `global_preferences`, and `jobs` resources below are necessary for primary functions.**
 The additional resources below them are for the `export` subcommand. If the client ID has no use
 for the `export` command these can and should be omitted.
 
