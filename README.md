@@ -54,7 +54,7 @@ python3.6 -mpip install --upgrade https://devops-pixelmedia-com.s3.amazonaws.com
 ```
 
 To upgrade, rerun the last line above. Use `sudo` if that was used for the original install.
-If upgrade fails, please `apt-get update` first. 
+If upgrade fails, please `apt-get update` first.
 
 
 ### Manual Method
@@ -313,7 +313,7 @@ Sub Commands:
 
 ### `pw`
 
-The `pw` command interfaces with the users `.dwre.json` file. 
+The `pw` command interfaces with the users `.dwre.json` file.
 
 ```
 usage: dwre pw [-h] {list,get} ...
@@ -418,6 +418,18 @@ keychain/keystore under the server-specific key `ocapi-[SERVER]` or global `OCAP
 
 Username, password, useAccountManager can also be provided but client credentials will be preferred when a `clientID` exists and the subcommand supports it.
 
+For projects using the `dw.json` file, those variables should be `client-id` and `client-secret` to match the convention expected by sfcc-ci.
+
+```json
+{
+    "hostname": "dev04-na01-test.demandware.net",
+    "code-version": "foo",
+    "client-id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "client-secret": "daskjlkjasdlkj"
+}
+
+```
+
 ![Keystore](ocapi.png)
 
 If `clientPassword` isn't provided or cannot be found in the keystore the tool
@@ -435,26 +447,26 @@ Setup the following in OCAPI Client and WebDav Client permissions (in addition t
 WebDAV Client Permissions
 
 ```json
-{  
-   "clients":[  
-      {  
+{
+   "clients":[
+      {
          "client_id":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-         "permissions":[  
-            {  
+         "permissions":[
+            {
                "path":"/impex/",
-               "operations":[  
+               "operations":[
                   "read_write"
                ]
             },
-            {  
+            {
                "path":"/cartridges/",
-               "operations":[  
+               "operations":[
                   "read_write"
                ]
             },
-            {  
+            {
                "path":"/logs/",
-               "operations":[  
+               "operations":[
                   "read_write"
                ]
             }
@@ -466,7 +478,7 @@ WebDAV Client Permissions
 
 DATA API Permissions
 
-**NOTE: Only the `code_versions`, `global_preferences`, and `jobs` resources below are necessary for primary functions.** 
+**NOTE: Only the `code_versions`, `global_preferences`, and `jobs` resources below are necessary for primary functions.**
 The additional resources below them are for the `export` subcommand. If the client ID has no use
 for the `export` command these can and should be omitted.
 
@@ -483,19 +495,19 @@ for the `export` command these can and should be omitted.
           "resource_id":"/code_versions/**",
           "methods":["get", "patch", "delete"],
           "read_attributes":"(**)",
-"write_attributes":"(**)"
+          "write_attributes":"(**)"
         },
         {
           "resource_id":"/global_preferences/**",
           "methods":["get", "patch"],
           "read_attributes":"(**)",
-"write_attributes":"(**)"
+          "write_attributes":"(**)"
         },
         {
           "resource_id":"/jobs/**",
           "methods":["get", "post"],
           "read_attributes":"(**)",
-"write_attributes":"(**)"
+          "write_attributes":"(**)"
         },
         {
           "resource_id":"/sites",
