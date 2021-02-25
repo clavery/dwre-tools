@@ -418,6 +418,18 @@ keychain/keystore under the server-specific key `ocapi-[SERVER]` or global `OCAP
 
 Username, password, useAccountManager can also be provided but client credentials will be preferred when a `clientID` exists and the subcommand supports it.
 
+For projects using the `dw.json` file, those variables should be `client-id` and `client-secret` to match the convention expected by sfcc-ci.
+
+```json
+{
+    "hostname": "dev04-na01-test.demandware.net",
+    "code-version": "foo",
+    "client-id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "client-secret": "daskjlkjasdlkj"
+}
+
+```
+
 ![Keystore](ocapi.png)
 
 If `clientPassword` isn't provided or cannot be found in the keystore the tool
