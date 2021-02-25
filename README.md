@@ -495,19 +495,19 @@ for the `export` command these can and should be omitted.
           "resource_id":"/code_versions/**",
           "methods":["get", "patch", "delete"],
           "read_attributes":"(**)",
-"write_attributes":"(**)"
+          "write_attributes":"(**)"
         },
         {
           "resource_id":"/global_preferences/**",
           "methods":["get", "patch"],
           "read_attributes":"(**)",
-"write_attributes":"(**)"
+          "write_attributes":"(**)"
         },
         {
           "resource_id":"/jobs/**",
           "methods":["get", "post"],
           "read_attributes":"(**)",
-"write_attributes":"(**)"
+          "write_attributes":"(**)"
         },
         {
           "resource_id":"/sites",
