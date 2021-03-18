@@ -395,25 +395,30 @@ def delete_code_version(env, code_version):
     if use_ocapi:
         session = requests.session()
         authenticate_session_from_env(env, session)
-        resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
-        resp.raise_for_status()
-        j = resp.json()
-        if j.get('active') == True:
-            # activate another version to delete this one
-            resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions".format(env["server"]))
+        try:
+            resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
             resp.raise_for_status()
-            # get all other code_versions
-            code_versions = [cv.get('id') for cv in resp.json().get('data') if cv.get('id') != code_version]
-            if len(code_versions) == 0:
-                raise RuntimeError("Cannot delete code version as there are no other code versions to temporarily activate; a code version must always be active")
-            temp_code_version = code_versions.pop()
-            print("Temporarily activating %s code_version" % temp_code_version)
-            resp = session.patch("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], temp_code_version), json={
-                "active": True
-            })
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code != 404:
+                raise
+        else:
+            j = resp.json()
+            if j.get('active') == True:
+                # activate another version to delete this one
+                resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions".format(env["server"]))
+                resp.raise_for_status()
+                # get all other code_versions
+                code_versions = [cv.get('id') for cv in resp.json().get('data') if cv.get('id') != code_version]
+                if len(code_versions) == 0:
+                    raise RuntimeError("Cannot delete code version as there are no other code versions to temporarily activate; a code version must always be active")
+                temp_code_version = code_versions.pop()
+                print("Temporarily activating %s code_version" % temp_code_version)
+                resp = session.patch("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], temp_code_version), json={
+                    "active": True
+                })
+                resp.raise_for_status()
+            resp = session.delete("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
             resp.raise_for_status()
-        resp = session.delete("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
-        resp.raise_for_status()
     else:
         webdavsession = authenticate_webdav_session(env)
         response = webdavsession.delete("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}".format(env["server"], code_version))

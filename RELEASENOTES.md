@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.18.1
+
+- Fixed a bug in the previous release for when a code version does not exist
+
 ## 1.18.0
 
 - `sync` now uses OCAPI to delete due to webdav changes in 21.4
