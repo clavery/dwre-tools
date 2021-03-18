@@ -17,7 +17,8 @@ from prompt_toolkit.formatted_text import HTML
 import math
 from prompt_toolkit.shortcuts import ProgressBar
 from colorama import Fore, Back, Style
-from .bmtools import login_business_manager, activate_code_version, authenticate_webdav_session
+from .bmtools import login_business_manager, activate_code_version, authenticate_webdav_session, delete_code_version
+
 
 def cartridges_to_zip(cartridges, filename):
     zip_file_io = io.BytesIO()
@@ -80,7 +81,7 @@ class FileSizeProgress(Progress):
         return 20
 
 
-def sync_command(env, delete_code_version, cartridge_location):
+def sync_command(env, should_delete_code_version, cartridge_location):
     if cartridge_location is None:
         cartridge_location = '.'
 
@@ -98,9 +99,9 @@ def sync_command(env, delete_code_version, cartridge_location):
         cartridges = collect_cartridges(cartridge_location)
         zip_file = cartridges_to_zip(cartridges, code_version)
 
-    if delete_code_version:
+    if should_delete_code_version:
         print("Deleting code version...")
-        response = webdavsession.delete("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}".format(env["server"], code_version))
+        delete_code_version(env, code_version)
 
     print("Syncing code version {0}{1}{2} on {0}{3}{2}".format(Fore.YELLOW, code_version, Fore.RESET, env["server"]))
     dest_url = ("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}.zip"
@@ -129,8 +130,6 @@ def sync_command(env, delete_code_version, cartridge_location):
 
     print(f"{Fore.GREEN}Successfully synced cartridges with {env['server']}{Fore.RESET}")
 
-    if delete_code_version:
-        print("Reactivating code version (waiting 10 seconds)...")
-        time.sleep(20)
+    if should_delete_code_version:
         activate_code_version(env, code_version)
         print("Done")

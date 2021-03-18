@@ -1,6 +1,11 @@
 
 # Release Notes
 
+## 1.18.0
+
+- `sync` now uses OCAPI to delete due to webdav changes in 21.4
+  - `sync -d` likely no longer works without OCAPI
+  
 ## 1.17.20
 
 - (bdion) json validations fix

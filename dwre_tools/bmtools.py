@@ -387,6 +387,38 @@ def select_site(env, session, site_uuid):
     resp.raise_for_status()
 
 
+def delete_code_version(env, code_version):
+    use_ocapi = False
+    if "clientID" in env:
+        use_ocapi = True
+
+    if use_ocapi:
+        session = requests.session()
+        authenticate_session_from_env(env, session)
+        resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
+        resp.raise_for_status()
+        j = resp.json()
+        if j.get('active') == True:
+            # activate another version to delete this one
+            resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions".format(env["server"]))
+            resp.raise_for_status()
+            # get all other code_versions
+            code_versions = [cv.get('id') for cv in resp.json().get('data') if cv.get('id') != code_version]
+            if len(code_versions) == 0:
+                raise RuntimeError("Cannot delete code version as there are no other code versions to temporarily activate; a code version must always be active")
+            temp_code_version = code_versions.pop()
+            print("Temporarily activating %s code_version" % temp_code_version)
+            resp = session.patch("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], temp_code_version), json={
+                "active": True
+            })
+            resp.raise_for_status()
+        resp = session.delete("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
+        resp.raise_for_status()
+    else:
+        webdavsession = authenticate_webdav_session(env)
+        response = webdavsession.delete("https://{0}/on/demandware.servlet/webdav/Sites/Cartridges/{1}".format(env["server"], code_version))
+        response.raise_for_status()
+
 def activate_code_version(env, code_version):
     use_ocapi = False
     if "clientID" in env:
@@ -395,11 +427,23 @@ def activate_code_version(env, code_version):
     if use_ocapi:
         session = requests.session()
         authenticate_session_from_env(env, session)
-        resp = session.patch("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version), json={
-            "active": True
-        })
+        retries = 0
+        retry = True
+        while retry and retries < 6:
+            try:
+                resp = session.patch("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version), json={
+                    "active": True
+                })
+                resp.raise_for_status()
+                retry = False
+            except requests.exceptions.HTTPError as e:
+                retries = retries + 1
+                print("%s error while activating code version: %s; retry %s" % (e.response.status_code, e.response.reason, retries))
+                requests_log = logging.getLogger("requests.packages.urllib3")
+                if requests_log.getEffectiveLevel() == logging.DEBUG:
+                    print(resp.content)
+                time.sleep(5)
         resp.raise_for_status()
-        print(resp.json())
     else:
         bmsession = login_business_manager(env)
         bmsession.post("https://{}/on/demandware.store/Sites-Site/default/ViewCodeDeployment-Activate"
