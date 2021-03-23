@@ -396,7 +396,10 @@ def delete_code_version(env, code_version):
         session = requests.session()
         authenticate_session_from_env(env, session)
         try:
-            resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
+            resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], "v200.70.0-93101667-680693419"))
+            requests_log = logging.getLogger("requests.packages.urllib3")
+            if requests_log.getEffectiveLevel() == logging.DEBUG:
+                print(resp.content)
             resp.raise_for_status()
         except requests.exceptions.HTTPError as e:
             if e.response.status_code != 404:
@@ -406,6 +409,9 @@ def delete_code_version(env, code_version):
             if j.get('active') == True:
                 # activate another version to delete this one
                 resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions".format(env["server"]))
+                requests_log = logging.getLogger("requests.packages.urllib3")
+                if requests_log.getEffectiveLevel() == logging.DEBUG:
+                    print(resp.content)
                 resp.raise_for_status()
                 # get all other code_versions
                 code_versions = [cv.get('id') for cv in resp.json().get('data') if cv.get('id') != code_version]
@@ -416,8 +422,14 @@ def delete_code_version(env, code_version):
                 resp = session.patch("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], temp_code_version), json={
                     "active": True
                 })
+                requests_log = logging.getLogger("requests.packages.urllib3")
+                if requests_log.getEffectiveLevel() == logging.DEBUG:
+                    print(resp.content)
                 resp.raise_for_status()
             resp = session.delete("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
+            requests_log = logging.getLogger("requests.packages.urllib3")
+            if requests_log.getEffectiveLevel() == logging.DEBUG:
+                print(resp.content)
             resp.raise_for_status()
     else:
         webdavsession = authenticate_webdav_session(env)
