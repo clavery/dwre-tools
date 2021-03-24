@@ -396,7 +396,7 @@ def delete_code_version(env, code_version):
         session = requests.session()
         authenticate_session_from_env(env, session)
         try:
-            resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], "v200.70.0-93101667-680693419"))
+            resp = session.get("https://{}/s/-/dw/data/v20_8/code_versions/{}".format(env["server"], code_version))
             requests_log = logging.getLogger("requests.packages.urllib3")
             if requests_log.getEffectiveLevel() == logging.DEBUG:
                 print(resp.content)

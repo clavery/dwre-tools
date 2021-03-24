@@ -21,7 +21,7 @@ if platform.startswith("linux"):
 
 setup(
     name='dwre-tools',
-    version='1.18.5',
+    version='1.18.6',
     description='SFCC (Demandware) tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',
