@@ -24,8 +24,6 @@ from .watch import watch_command
 
 from colorama import init, deinit
 
-def get_from_keyring()
-
 def version():
     import pkg_resources
     return pkg_resources.require("dwre-tools")[0].version

@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.18.5
+
+- typo
+
 ## 1.18.4 
 
 - some linux dependency changes; 'keyring' is skipped and must be installed manually if you want to use it on linux
