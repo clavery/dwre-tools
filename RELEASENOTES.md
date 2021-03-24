@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.18.7
+
+- more fixes
+
 ## 1.18.6
 
 - typo

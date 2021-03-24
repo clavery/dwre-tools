@@ -3,7 +3,6 @@ import sys
 
 import requests
 from colorama import Fore, Back, Style
-import keyring
 
 from .env import load_config, save_config, get_environment
 from .bmtools import login_business_manager
@@ -58,11 +57,15 @@ def pw_put(account_name, password):
 
     if env:
         if not env.get('password'):
-            key = "dwre-%s" % (env["server"])
-            if env.get('useAccountManager'):
-                key = "dwre-account-manager"
-            keyring.set_password(key, env["username"], password)
-            print("Updated %s [KEYCHAIN]" % account_name)
+            try:
+                import keyring
+                key = "dwre-%s" % (env["server"])
+                if env.get('useAccountManager'):
+                    key = "dwre-account-manager"
+                keyring.set_password(key, env["username"], password)
+                print("Updated %s [KEYCHAIN]" % account_name)
+            except ImportError:
+                pass
         else:
             env['password'] = password
             save_config(j)
@@ -82,11 +85,15 @@ def get_dwre_hosts():
                 env.get("username"), env.get("server"))
 
             if not env.get('password'):
-                key = "dwre-%s" % (env["server"])
-                if env.get('useAccountManager'):
-                    key = "dwre-account-manager"
-                keyring_password = keyring.get_password(key, env["username"])
-                env["password"] = keyring_password
+                try:
+                    import keyring
+                    key = "dwre-%s" % (env["server"])
+                    if env.get('useAccountManager'):
+                        key = "dwre-account-manager"
+                    keyring_password = keyring.get_password(key, env["username"])
+                    env["password"] = keyring_password
+                except ImportError:
+                    pass
 
             account = {"account_name": name,
                        "extra": extra,
