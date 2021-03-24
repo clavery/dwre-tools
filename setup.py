@@ -13,9 +13,15 @@ def get_requirements(env):
 install_requires = get_requirements('base')
 test_requires = get_requirements('test')
 dev_requires = get_requirements('dev')
+
+# remove requirement for keyring on linux due to build requirements (rust, etc)
+from sys import platform
+if platform.startswith("linux"):
+    install_requires = [r for r in install_requires if "keyring" not in r]
+
 setup(
     name='dwre-tools',
-    version='1.18.2',
+    version='1.18.4',
     description='SFCC (Demandware) tools',
     author='Charles Lavery',
     author_email='clavery@pixelmedia.com',

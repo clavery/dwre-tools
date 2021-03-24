@@ -23,8 +23,8 @@ from .zip import zip_command
 from .watch import watch_command
 
 from colorama import init, deinit
-import keyring
 
+def get_from_keyring()
 
 def version():
     import pkg_resources
@@ -90,39 +90,47 @@ def get_env_from_args(args):
 
     if ("password" not in env or not env.get('password')) and "username" in env:
         # attempt to retrieve from keyring
-        key = "dwre-%s" % (env["server"])
-        if env.get('useAccountManager'):
-            key = "dwre-account-manager"
-        keyring_password = keyring.get_password(key, env["username"])
-        if not keyring_password and 'clientID' not in env:
-            if sys.stdout.isatty():
-                password = get_env_password(env)
-                should_save = input("Save password to your login keychain [Y/n]? ")
-                if should_save.strip().lower() == 'y':
-                    keyring.set_password(key, env["username"], password)
-            else:
-                raise RuntimeError("Password not provided and cannot ask for input")
-        elif keyring_password:
-            env["password"] = keyring_password
+        try:
+            import keyring
+            key = "dwre-%s" % (env["server"])
+            if env.get('useAccountManager'):
+                key = "dwre-account-manager"
+            keyring_password = keyring.get_password(key, env["username"])
+            if not keyring_password and 'clientID' not in env:
+                if sys.stdout.isatty():
+                    password = get_env_password(env)
+                    should_save = input("Save password to your login keychain [Y/n]? ")
+                    if should_save.strip().lower() == 'y':
+                        keyring.set_password(key, env["username"], password)
+                else:
+                    raise RuntimeError("Password not provided and cannot ask for input")
+            elif keyring_password:
+                env["password"] = keyring_password
+        except ImportError:
+            raise RuntimeError("Password not provided and 'keyring' dependency is not installed; install manually or provide password on cli")
 
     if "clientID" in env and ("clientPassword" not in env or not env.get('clientPassword')):
         # attempt to retrieve from keyring
-        key = "ocapi-%s" % (env["server"])
-        keyring_password = keyring.get_password(key, env["clientID"])
-        if not keyring_password:
-            key = "OCAPIClientCredentials"
+        try:
+            import keyring
+            key = "ocapi-%s" % (env["server"])
             keyring_password = keyring.get_password(key, env["clientID"])
+            if not keyring_password:
+                key = "OCAPIClientCredentials"
+                keyring_password = keyring.get_password(key, env["clientID"])
 
-        if not keyring_password:
-            if sys.stdout.isatty():
-                client_password = get_env_client_password(env)
-                should_save = input("Save client password to your login keychain [Y/n]? ")
-                if should_save.strip().lower() == 'y':
-                    keyring.set_password(key, env["clientID"], client_password)
+            if not keyring_password:
+                if sys.stdout.isatty():
+                    client_password = get_env_client_password(env)
+                    should_save = input("Save client password to your login keychain [Y/n]? ")
+                    if should_save.strip().lower() == 'y':
+                        keyring.set_password(key, env["clientID"], client_password)
+                else:
+                    raise RuntimeError("Client Password not provided and cannot ask for input")
             else:
-                raise RuntimeError("Client Password not provided and cannot ask for input")
-        else:
-            env["clientPassword"] = keyring_password
+                env["clientPassword"] = keyring_password
+        except ImportError:
+            raise RuntimeError("clientPassword not provided and 'keyring' dependency is not installed; install manually or provide secret on cli")
 
     return env
 

@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.18.4 
+
+- some linux dependency changes; 'keyring' is skipped and must be installed manually if you want to use it on linux
+
 ## 1.18.1
 
 - Fixed a bug in the previous release for when a code version does not exist
