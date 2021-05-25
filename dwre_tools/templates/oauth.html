@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Flow</title>
+</head>
+<body onload="doReturnFlow()">
+<script>
+    function doReturnFlow() {
+        document.location = "http://localhost:8080/?" + window.location.hash.substring(1);
+    }
+</script>
+
+</body>
+</html>

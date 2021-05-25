@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import logging
+import webbrowser
 
 import pyquery
 import time
@@ -12,6 +13,7 @@ import requests
 import io
 from urllib.parse import quote, urlencode, urlparse, parse_qs
 
+from flask import Flask, request, render_template
 from .exc import NotInstalledException
 
 CSRF_FINDER = re.compile(r"'csrf_token'\s*,(?:\s|\n)*'(.*?)'", re.MULTILINE)
@@ -118,18 +120,55 @@ def get_current_versions(env):
             return (tool_version, migration_version, current_migration_path,
                     cartridge_version, hotfixes)
 
+def access_token_from_interactive(client_id):
+    import logging
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
+
+    app = Flask(__name__)
+
+    def shutdown_server():
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            raise RuntimeError('Not running with the Werkzeug Server')
+        func()
+
+    access_token = None
+    @app.route("/")
+    def index():
+        nonlocal access_token
+        print("Got access token response")
+        access_token = request.args.get("access_token")
+        if access_token:
+            shutdown_server()
+            return 'DONE %s' % access_token
+        else:
+            return render_template('oauth.html')
+
+    # localhost:8080 is what sfcc-ci documents to configure for client ids
+    url = "https://account.demandware.com/dwsso/oauth2/authorize?client_id=%s&redirect_uri=http://localhost:8080&response_type=token" % client_id
+    webbrowser.open(url)
+    print("Launching web browser to %s" % url)
+    app.run(port=8080)
+
+    assert access_token, "Access token not received; user cancelled request or invalid redirect"
+    return access_token
 
 # Authenticate a session using account manager client credentials
 def authenticate_session_from_env(env, session):
-    auth = (env["clientID"], env["clientPassword"])
-    resp = requests.post("https://account.demandware.com/dwsso/oauth2/access_token", data={"grant_type":"client_credentials"}, auth=auth)
-    requests_log = logging.getLogger("requests.packages.urllib3")
-    if requests_log.getEffectiveLevel() == logging.DEBUG:
-        print(resp.content)
-    resp.raise_for_status()
-    j = resp.json()
-    access_token = j.get("access_token")
-    expiration_seconds = j.get("expires_in");
+    if "implicitAuthFlow" in env and env["implicitAuthFlow"]:
+        # use interactive login
+        access_token = access_token_from_interactive(env["clientID"])
+    else:
+        auth = (env["clientID"], env["clientPassword"])
+        resp = requests.post("https://account.demandware.com/dwsso/oauth2/access_token", data={"grant_type":"client_credentials"}, auth=auth)
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        if requests_log.getEffectiveLevel() == logging.DEBUG:
+            print(resp.content)
+        resp.raise_for_status()
+        j = resp.json()
+        access_token = j.get("access_token")
+        expiration_seconds = j.get("expires_in");
     session.headers.update({"Authorization": "Bearer " + access_token})
     session.headers.update({"x-dw-client-id": env["clientID"]})
     session.verify = env["verify"] == True
