@@ -73,9 +73,9 @@ def get_env_from_args(args):
         env["cert"] = None
 
     if args.clientid:
-        assert args.clientpassword, "must specify a client password"
         env["clientID"] = args.clientid
-        env["clientPassword"] = args.clientpassword
+        if args.clientpassword:
+            env["clientPassword"] = args.clientpassword
 
     if hasattr(args, 'codeversion') and args.codeversion:
         env['codeVersion'] = args.codeversion
@@ -107,8 +107,9 @@ def get_env_from_args(args):
         except ImportError:
             raise RuntimeError("Password not provided and 'keyring' dependency is not installed; install manually or provide password on cli")
 
-    if "clientID" in env and ("clientPassword" not in env or not env.get('clientPassword')):
-        # attempt to retrieve from keyring
+    if "clientID" in env and ("clientPassword" not in env or not env.get('clientPassword'))\
+            and not args.implicit:
+        # attempt to retrieve client password from keyring
         try:
             import keyring
             key = "ocapi-%s" % (env["server"])
@@ -130,6 +131,7 @@ def get_env_from_args(args):
         except ImportError:
             raise RuntimeError("clientPassword not provided and 'keyring' dependency is not installed; install manually or provide secret on cli")
 
+    env["implicitAuthFlow"] = args.implicit
     return env
 
 
@@ -271,11 +273,13 @@ parser.add_argument('--instancetype', help="Instance Type (development, sandbox,
 parser.add_argument('--clientpassword', help="OCAPI Client password")
 parser.add_argument('--noverify', help="Don't verify server cert", action="store_true")
 parser.add_argument('--codeversion', help="Code version override")
+parser.add_argument('-i', '--implicit', help="Use interactive/implicit auth grant", action="store_true")
 
 version_str = version()
 parser.add_argument('--version', action='version', version=version_str)
 parser.set_defaults(noverify=False)
 parser.set_defaults(accountmanager=False)
+parser.set_defaults(implicit=False)
 
 cmd_parser = parser.add_subparsers(title="Commands")
 
