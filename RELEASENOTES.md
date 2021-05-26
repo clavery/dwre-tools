@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.18.8
+
+- support for implicit/interactive auth grant flow with the `-i`, `--implicit` switch
+
 ## 1.18.7
 
 - more fixes
