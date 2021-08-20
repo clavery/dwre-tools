@@ -36,6 +36,9 @@
 <a href="#category_Import/Export">Import/Export</a>
 </li>
 <li>
+<a href="#category_Inventory">Inventory</a>
+</li>
+<li>
 <a href="#category_Logging">Logging</a>
 </li>
 <li>
@@ -52,6 +55,12 @@
 </li>
 <li>
 <a href="#category_Pipeline">Pipeline</a>
+</li>
+<li>
+<a href="#category_Price">Price</a>
+</li>
+<li>
+<a href="#category_PriceBook">PriceBook</a>
 </li>
 <li>
 <a href="#category_Product Inventory">Product Inventory</a>
@@ -71,6 +80,9 @@
 </li>
 <li>
 <a href="#category_Session">Session</a>
+</li>
+<li>
+<a href="#category_System Notification">System Notification</a>
 </li>
 <li>
 <a href="#category_URL Rules">URL Rules</a>
@@ -1143,6 +1155,7 @@
 <li> dw.net.HTTPClient.send(File)</li>
 <li> dw.net.HTTPClient.send(String)</li>
 <li> dw.net.HTTPClient.send(String,String)</li>
+<li> dw.net.HTTPClient.sendBytes(Bytes)</li>
 <li> dw.net.HTTPClient.sendMultiPart(HTTPRequestPart[])</li>
 </ul>
 </li>
@@ -1175,6 +1188,7 @@
 <li>dw.net.HTTPClient.sendAndReceiveToFile(File)</li>
 <li> dw.net.HTTPClient.sendAndReceiveToFile(String,File)</li>
 <li> dw.net.HTTPClient.sendAndReceiveToFile(String,String,File)</li>
+<li> dw.net.HTTPClient.sendBytesAndReceiveToFile(Bytes,File)</li>
 </ul>
 </li>
 </ul>
@@ -1317,6 +1331,7 @@
 <b>Usage Context:</b> 
 <ul>
 <li>Pipelet ExportABTests</li>
+<li> Pipelet ExportAssignments</li>
 <li> Pipelet ExportCatalog</li>
 <li> Pipelet ExportContent</li>
 <li> Pipelet ExportCouponCodes</li>
@@ -1350,6 +1365,34 @@
 <li> Pipelet ImportStores</li>
 <li> Pipelet ValidateActiveDataFile</li>
 <li> Pipelet ValidateXMLFile</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<a name="category_Inventory"></a>
+<div class="header">Inventory Category
+                                </div>
+<div class="section">
+<hr>
+<a name="quota_api.dw.catalog.ProductInventoryRecord.update()"></a>
+<p class="className">api.dw.catalog.ProductInventoryRecord.update()</p>
+<p>
+            The api.dw.catalog.ProductInventoryRecord.update() API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.dw.catalog.ProductInventoryRecord.update()</li>
+<li>
+<b>Description:</b> Updating a product inventory record in a Storefront request isn't allowed.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Storefront Limit: </b>0</li>
+<li>
+<b>Default Limit: </b>No limit</li>
 </ul>
 </li>
 </ul>
@@ -1432,6 +1475,48 @@
 <a name="category_Object Attributes"></a>
 <div class="header">Object Attributes Category
                                 </div>
+<div class="section">
+<hr>
+<a name="quota_api.object.EmbeddedObjectInHTMLAttributeUserWithoutStrongAuth"></a>
+<p class="className">Embedded Object in HTML Attribute (User Not Strongly Authenticated)</p>
+<p>
+            The Embedded Object in HTML Attribute (User Not Strongly Authenticated) API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.object.EmbeddedObjectInHTMLAttributeUserWithoutStrongAuth</li>
+<li>
+<b>Description:</b> Only users with strong authentication, such as through MFA with Account Manager, can include objects embedded with iframe, object, applet, or embed tags in an HTML attribute.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>0</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_api.object.JSInHTMLAttributeUserWithoutStrongAuth"></a>
+<p class="className">JavaScript in HTML Attribute (User Not Strongly Authenticated)</p>
+<p>
+            The JavaScript in HTML Attribute (User Not Strongly Authenticated) API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.object.JSInHTMLAttributeUserWithoutStrongAuth</li>
+<li>
+<b>Description:</b> Only users with strong authentication, such as through MFA with Account Manager, can include JavaScript in an HTML attribute.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>0</li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section">
 <hr>
 <a name="quota_api.object.maxMultiValueAttribute"></a>
@@ -1720,6 +1805,124 @@
 </div>
 </div>
 <div class="section">
+<a name="category_Price"></a>
+<div class="header">Price Category
+                                </div>
+<div class="section">
+<hr>
+<a name="quota_price.priceEntries"></a>
+<p class="className">Price Entries</p>
+<p>
+            The Price Entries API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> price.priceEntries</li>
+<li>
+<b>Description:</b> The maximum number of price entries in read-only price books.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>300,000,000 (warning at 290,000,000)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<a name="category_PriceBook"></a>
+<div class="header">PriceBook Category
+                                </div>
+<div class="section">
+<hr>
+<a name="quota_api.dw.catalog.PriceBookMgr.assignPriceBookToSite(PriceBook,String)"></a>
+<p class="className">api.dw.catalog.PriceBookMgr.assignPriceBookToSite(PriceBook,String)</p>
+<p>
+            The api.dw.catalog.PriceBookMgr.assignPriceBookToSite(PriceBook,String) API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.dw.catalog.PriceBookMgr.assignPriceBookToSite(PriceBook,String)</li>
+<li>
+<b>Description:</b> Allowed number of calls to method dw.catalog.PriceBookMgr.assignPriceBookToSite(PriceBook,String).</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Storefront Limit: </b>0</li>
+<li>
+<b>Default Limit: </b>No limit</li>
+</ul>
+</li>
+<li>
+<b>Usage Context:</b> 
+<ul>
+<li>dw.catalog.PriceBookMgr.assignPriceBookToSite(PriceBook,String)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_api.dw.catalog.PriceBookMgr.unassignPriceBookFromAllSites(PriceBook)"></a>
+<p class="className">api.dw.catalog.PriceBookMgr.unassignPriceBookFromAllSites(PriceBook)</p>
+<p>
+            The api.dw.catalog.PriceBookMgr.unassignPriceBookFromAllSites(PriceBook) API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.dw.catalog.PriceBookMgr.unassignPriceBookFromAllSites(PriceBook)</li>
+<li>
+<b>Description:</b> Allowed number of calls to method dw.catalog.PriceBookMgr.unassignPriceBookFromAllSites(PriceBook).</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Storefront Limit: </b>0</li>
+<li>
+<b>Default Limit: </b>No limit</li>
+</ul>
+</li>
+<li>
+<b>Usage Context:</b> 
+<ul>
+<li>dw.catalog.PriceBookMgr.unassignPriceBookFromAllSites(PriceBook)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_api.dw.catalog.PriceBookMgr.unassignPriceBookFromSite(PriceBook,String)"></a>
+<p class="className">api.dw.catalog.PriceBookMgr.unassignPriceBookFromSite(PriceBook,String)</p>
+<p>
+            The api.dw.catalog.PriceBookMgr.unassignPriceBookFromSite(PriceBook,String) API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.dw.catalog.PriceBookMgr.unassignPriceBookFromSite(PriceBook,String)</li>
+<li>
+<b>Description:</b> Allowed number of calls to method dw.catalog.PriceBookMgr.unassignPriceBookFromSite(PriceBook,String).</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Storefront Limit: </b>0</li>
+<li>
+<b>Default Limit: </b>No limit</li>
+</ul>
+</li>
+<li>
+<b>Usage Context:</b> 
+<ul>
+<li>dw.catalog.PriceBookMgr.unassignPriceBookFromSite(PriceBook,String)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section">
 <a name="category_Product Inventory"></a>
 <div class="header">Product Inventory Category
                                 </div>
@@ -1837,6 +2040,27 @@
 </div>
 <div class="section">
 <hr>
+<a name="quota_api.jsArrayBufferSize"></a>
+<p class="className">api.jsArrayBufferSize</p>
+<p>
+            The api.jsArrayBufferSize API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.jsArrayBufferSize</li>
+<li>
+<b>Description:</b> The maximum allowed size in bytes for any ArrayBuffer or typed array.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>2,000,000 (warning at 1,200,000)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
 <a name="quota_api.jsArraySize"></a>
 <p class="className">api.jsArraySize</p>
 <p>
@@ -1868,6 +2092,27 @@
 <b>Log file ID:</b> api.jsArraySize2</li>
 <li>
 <b>Description:</b> The maximum allowed number of elements in a dense JavaScript array when extended using the [] operator.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>20,000 (warning at 12,000)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_api.jsCollectionSize"></a>
+<p class="className">api.jsCollectionSize</p>
+<p>
+            The api.jsCollectionSize API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.jsCollectionSize</li>
+<li>
+<b>Description:</b> The maximum allowed number of elements in a JavaScript built-in map/set type.</li>
 <li>
 <b>Limit:</b> 
 <ul>
@@ -1963,6 +2208,27 @@
 </div>
 <div class="section">
 <hr>
+<a name="quota_api.jsSymbolRegistrySize"></a>
+<p class="className">api.jsSymbolRegistrySize</p>
+<p>
+            The api.jsSymbolRegistrySize API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> api.jsSymbolRegistrySize</li>
+<li>
+<b>Description:</b> The maximum allowed number of symbols in the global symbol registry.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>1,000 (warning at 600)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<hr>
 <a name="quota_api.jsXMLSize"></a>
 <p class="className">api.jsXMLSize</p>
 <p>
@@ -2009,6 +2275,22 @@
 <div class="header">
                                     Read-only Objects Category
                                 </div>
+<div class="section">
+<hr>
+<a name="quota_object.ExperiencePO.readonly@SF"></a>
+<p class="className">Assignments</p>
+<p>
+            The Assignments API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.ExperiencePO.readonly@SF</li>
+<li>
+<b>Description:</b> The business object is read-only from storefront requests</li>
+<li>
+<b>Access:</b> Read-only from storefront requests.</li>
+</ul>
+</div>
 <div class="section">
 <hr>
 <a name="quota_object.CampaignPO.readonly@SF"></a>
@@ -2075,6 +2357,22 @@
 </div>
 <div class="section">
 <hr>
+<a name="quota_object.SlackWorkspace.readonly@SF"></a>
+<p class="className">Connected Slack Workspaces</p>
+<p>
+            The Connected Slack Workspaces API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.SlackWorkspace.readonly@SF</li>
+<li>
+<b>Description:</b> The business object is read-only from storefront requests</li>
+<li>
+<b>Access:</b> Read-only from storefront requests.</li>
+</ul>
+</div>
+<div class="section">
+<hr>
 <a name="quota_object.ContentPO.readonly@SF"></a>
 <p class="className">Content Objects</p>
 <p>
@@ -2123,22 +2421,6 @@
 </div>
 <div class="section">
 <hr>
-<a name="quota_object.InventoryDataPO.readonly@SF"></a>
-<p class="className">IAS Inventory Cache</p>
-<p>
-            The IAS Inventory Cache API quota consists of:
-        </p>
-<ul>
-<li>
-<b>Log file ID:</b> object.InventoryDataPO.readonly@SF</li>
-<li>
-<b>Description:</b> The business object is read-only from storefront requests</li>
-<li>
-<b>Access:</b> Read-only from storefront requests.</li>
-</ul>
-</div>
-<div class="section">
-<hr>
 <a name="quota_object.LibraryPO.readonly@SF"></a>
 <p class="className">Libraries</p>
 <p>
@@ -2147,6 +2429,38 @@
 <ul>
 <li>
 <b>Log file ID:</b> object.LibraryPO.readonly@SF</li>
+<li>
+<b>Description:</b> The business object is read-only from storefront requests</li>
+<li>
+<b>Access:</b> Read-only from storefront requests.</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_object.SystemNotificationChannelPO.readonly@SF"></a>
+<p class="className">Notification Target Channels</p>
+<p>
+            The Notification Target Channels API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.SystemNotificationChannelPO.readonly@SF</li>
+<li>
+<b>Description:</b> The business object is read-only from storefront requests</li>
+<li>
+<b>Access:</b> Read-only from storefront requests.</li>
+</ul>
+</div>
+<div class="section">
+<hr>
+<a name="quota_object.InventoryDataPO.readonly@SF"></a>
+<p class="className">OCI Inventory Cache</p>
+<p>
+            The OCI Inventory Cache API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.InventoryDataPO.readonly@SF</li>
 <li>
 <b>Description:</b> The business object is read-only from storefront requests</li>
 <li>
@@ -2763,6 +3077,32 @@
 </div>
 </div>
 <div class="section">
+<a name="category_System Notification"></a>
+<div class="header">System Notification Category
+                                </div>
+<div class="section">
+<hr>
+<a name="quota_object.SystemNotificationChannelPO.relation.topics"></a>
+<p class="className">Maximum Notification Channels for Notification Topic</p>
+<p>
+            The Maximum Notification Channels for Notification Topic API quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.SystemNotificationChannelPO.relation.topics</li>
+<li>
+<b>Description:</b> The maximum number of notification channels assigned to a notification topic.</li>
+<li>
+<b>Limit:</b> 
+<ul>
+<li>
+<b>Default Limit: </b>10 (warning at 5)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section">
 <a name="category_URL Rules"></a>
 <div class="header">URL Rules Category
                                 </div>
@@ -2879,7 +3219,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

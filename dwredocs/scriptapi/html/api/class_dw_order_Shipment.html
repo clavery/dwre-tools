@@ -104,11 +104,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The adjusted total gross price, including tax, in the purchase currency.
-
- Adjusted merchandize prices represent the sum of product prices before
- services such as shipping have been added, but after adjustments from i.e.
- promotions have been added.</div>
+							&nbsp;(Read Only)<div class="description">The adjusted total gross price, including tax, in the purchase currency. The adjusted total gross price
+ represents the sum of product prices and adjustments including tax, excluding services.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -117,11 +114,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The adjusted net price, excluding tax, in the purchase currency.
-
- Adjusted merchandize prices represent the sum of product prices before
- services such as shipping have been added, but after adjustments from i.e.
- promotions have been added.</div>
+							&nbsp;(Read Only)<div class="description">The adjusted net price, excluding tax, in the purchase currency. The adjusted net price represents the
+ the sum of product prices and adjustments, excluding services and tax.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -130,11 +124,9 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The merchandize total price after all product discounts.
- If the line item container is based on net pricing the adjusted
- merchandize total net price is returned.
- If the line item container is based on gross pricing the adjusted
- merchandize total gross price is returned.</div>
+							&nbsp;(Read Only)<div class="description">The product total price after all product discounts. If the line item container is based on net pricing
+ the adjusted product total net price is returned. If the line item container is based on gross pricing the
+ adjusted product total gross price is returned.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -143,11 +135,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The total tax in purchase currency.
-
- Adjusted merchandize prices represent the sum of product prices before
- services such as shipping have been added, but after adjustments from i.e.
- promotions have been added.</div>
+							&nbsp;(Read Only)<div class="description">The total adjusted product tax in the purchase currency. The total adjusted product tax represents the
+ tax on products and adjustments, excluding services.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -156,8 +145,7 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The adjusted sum of all shipping line items of the shipment,
- including tax after shipping adjustments have been applied.</div>
+							&nbsp;(Read Only)<div class="description">The adjusted sum of all shipping line items of the shipment, including shipping adjustuments and tax</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -166,8 +154,7 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The sum of all shipping line items of the shipment, excluding tax
- after shipping adjustments have been applied.</div>
+							&nbsp;(Read Only)<div class="description">The sum of all shipping line items of the shipment, including shipping adjustments, excluding tax.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -176,10 +163,9 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The adjusted shipping total price. If the line item container
- is based on net pricing the adjusted shipping total net price is
- returned. If the line item container is based on gross pricing the adjusted
- shipping total gross price is returned.</div>
+							&nbsp;(Read Only)<div class="description">The adjusted shipping total price. If the line item container is based on net pricing the adjusted
+ shipping total net price is returned. If the line item container is based on gross pricing the adjusted shipping
+ total gross price is returned.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -188,8 +174,7 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The tax of all shipping line items of the shipment after shipping
- adjustments have been applied.</div>
+							&nbsp;(Read Only)<div class="description">The tax of all shipping line items of the shipment , including shipping adjustments.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -199,8 +184,8 @@
 					    
 					    <a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
 							&nbsp;(Read Only)<div class="description">All line items related to the shipment.
-
- <p/>The returned collection may include line items of the following types:
+ <p/>
+ The returned collection may include line items of the following types:
  <ul>
  <li><a href="class_dw_order_ProductLineItem.html">ProductLineItem</a></li>
  <li><a href="class_dw_order_ShippingLineItem.html">ShippingLineItem</a></li>
@@ -208,9 +193,8 @@
  <li><a href="class_dw_order_PriceAdjustment.html">PriceAdjustment</a></li>
  </ul>
  Their common type is <a href="class_dw_order_LineItem.html">LineItem</a>.
-
- <p/>Each <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a> in the collection
- may itself contain bundled or option product line items,
+ <p/>
+ Each <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a> in the collection may itself contain bundled or option product line items,
  as well as a product-level shipping line item.</div>
 </span>
 </div>
@@ -220,7 +204,7 @@
 						
 					    
 					    boolean
-							&nbsp;(Read Only)<div class="description">Return true if this shipment is the default shipment.</div>
+							&nbsp;(Read Only)<div class="description">Return <code>true</code> if this shipment is the default shipment (shipment ID "me").</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -255,7 +239,7 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The ID of this shipment.</div>
+							&nbsp;(Read Only)<div class="description">The ID of this shipment ("me" for the default shipment).</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -264,11 +248,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The total gross price, including tax, in the purchase currency.
-
- Merchandize total prices represent the sum of product prices before
- services such as shipping or adjustments from i.e. promotions have
- been added.</div>
+							&nbsp;(Read Only)<div class="description">The gross product subtotal in the purchase currency. The gross product subtotal represents the sum of
+ product prices including tax, excluding services and adjustments.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -277,11 +258,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The net price, excluding tax, in the purchase currency.
-
- Merchandize total prices represent the sum of product prices before
- services such as shipping or adjustments from i.e. promotions have
- been added.</div>
+							&nbsp;(Read Only)<div class="description">The net product subtotal, excluding tax, in the purchase currency. The net product subtotal represents
+ the sum of product prices, excluding services, adjustments, and tax.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -290,10 +268,9 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The merchandize total price. If the line item container is based
- on net pricing the merchandize total net price is returned. If the line
- item container is based on gross pricing the merchandize total gross price
- is returned.</div>
+							&nbsp;(Read Only)<div class="description">The product total price. If the line item container is based on net pricing the product total net
+ price is returned. If the line item container is based on gross pricing the product total gross price is
+ returned.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -302,14 +279,14 @@
 						
 					    
 					    <a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
-							&nbsp;(Read Only)<div class="description">A collection of price adjustments that have been applied to the
- totals such as promotion on the purchase value (i.e. $10 Off or 10% Off).</div>
+							&nbsp;(Read Only)<div class="description">A collection of price adjustments that have been applied to the totals, such as a promotion on the
+ purchase value (i.e. $10 Off or 10% Off).</div>
 </span>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">Shipments cannot have merchandize price adjustments, therefore this method will always return an empty collection</span>
+<span class="parameterDesc">Shipments cannot have product price adjustments, therefore this method will always return an empty collection</span>
 </div>
 </div>
 </div>
@@ -319,11 +296,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The total tax in purchase currency.
-
- Merchandize total prices represent the sum of product prices before
- services such as shipping or adjustments from i.e. promotions have
- been added.</div>
+							&nbsp;(Read Only)<div class="description">The total product tax in the purchase currency. The total product tax represents the tax on products,
+ excluding services and adjustments.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -332,8 +306,7 @@
 						
 					    
 					    <a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
-							&nbsp;(Read Only)<div class="description">A collection of all product line items related
- to this shipment.</div>
+							&nbsp;(Read Only)<div class="description">A collection of all product line items related to this shipment.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -342,11 +315,10 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The merchandise total price of the shipment after considering all
- product price adjustments and prorating all Buy-X-Get-Y and order-level
- discounts, according to the scheme described in
- <a href="class_dw_order_PriceAdjustment.html#dw_order_PriceAdjustment_getProratedPrices_DetailAnchor">PriceAdjustment.getProratedPrices()</a>. For net pricing the
- net price is returned. For gross pricing, the gross price is returned.</div>
+							&nbsp;(Read Only)<div class="description">The total product price of the shipment, including product-level adjustments and prorating all
+ Buy-X-Get-Y and order-level adjustments, according to the scheme described in
+ <a href="class_dw_order_PriceAdjustment.html#dw_order_PriceAdjustment_getProratedPrices_DetailAnchor">PriceAdjustment.getProratedPrices()</a>. For net pricing the net price is returned. For gross
+ pricing, the gross price is returned.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -377,9 +349,8 @@
 						
 					    
 					    <a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
-							&nbsp;(Read Only)<div class="description">A collection of all shipping line items of the shipment,
- excluding any product-level shipping costs that are
- associated with <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a>s of the shipment.</div>
+							&nbsp;(Read Only)<div class="description">A collection of all shipping line items of the shipment, excluding any product-level shipping costs that
+ are associated with <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a>s of the shipment.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -406,14 +377,11 @@
 						
 					    
 					    <a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
-							&nbsp;(Read Only)<div class="description">A collection of price adjustments that have been applied to the
- shipping costs of the shipment, for example by the promotions engine.<br/>
-
- Note that this method returns all shipping price adjustments in this
- shipment regardless of which shipping line item they belong to. Use
- <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_getShippingPriceAdjustments_DetailAnchor">ShippingLineItem.getShippingPriceAdjustments()</a> to
- retrieve the shipping price adjustments associated with a specific
- shipping line item.</div>
+							&nbsp;(Read Only)<div class="description">A collection of price adjustments that have been applied to the shipping costs of the shipment, for
+ example by the promotions engine.<br/>
+ Note that this method returns all shipping price adjustments in this shipment, regardless of which shipping line
+ item they belong to. Use <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_getShippingPriceAdjustments_DetailAnchor">ShippingLineItem.getShippingPriceAdjustments()</a> to retrieve the shipping
+ price adjustments associated with a specific shipping line item.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -422,8 +390,7 @@
 						
 					    
 					    <a href="class_dw_value_EnumValue.html"><span class="">EnumValue</span></a>
-<div class="description">The shipping status. Possible values are
- SHIPMENT_NOTSHIPPED or SHIPMENT_SHIPPED.</div>
+<div class="description">The shipping status. Possible values are SHIPMENT_NOTSHIPPED or SHIPMENT_SHIPPED.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -432,8 +399,7 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The sum of all shipping line items of the shipment,
- including tax before shipping adjustments have been applied.</div>
+							&nbsp;(Read Only)<div class="description">The sum of all shipping line items of the shipment, including tax, excluding shipping adjustments.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -442,8 +408,7 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The sum of all shipping line items of the shipment, excluding tax
- before shipping adjustments have been applied.</div>
+							&nbsp;(Read Only)<div class="description">The sum of all shipping line items of the shipment, excluding tax and adjustments.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -452,10 +417,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The shipping total price. If the line item container is based on
- net pricing the shipping total net price is returned. If the line item
- container is based on gross pricing the shipping total gross price is
- returned.</div>
+							&nbsp;(Read Only)<div class="description">The shipping total price. If the line item container is based on net pricing the shipping total net price
+ is returned. If the line item container is based on gross pricing the shipping total gross price is returned.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -464,8 +427,7 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The tax of all shipping line items of the shipment before
- shipping adjustments have been applied.</div>
+							&nbsp;(Read Only)<div class="description">The tax of all shipping line items of the shipment before shipping adjustments have been applied.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -474,8 +436,7 @@
 						
 					    
 					    <a href="class_dw_order_ShippingLineItem.html"><span class="">ShippingLineItem</span></a>
-							&nbsp;(Read Only)<div class="description">Convenenience method. Same as
- <code>getShippingLineItem(ShippingLineItem.STANDARD_SHIPPING_ID)</code></div>
+							&nbsp;(Read Only)<div class="description">Convenience method. Same as <code>getShippingLineItem(ShippingLineItem.STANDARD_SHIPPING_ID)</code></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -484,9 +445,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The grand total price gross of tax for the shipment, in purchase currency.
-
- Total prices represent the sum of product prices, services prices and adjustments.</div>
+							&nbsp;(Read Only)<div class="description">The total gross price of the shipment in the purchase currency. The total gross price is the sum of
+ product prices, service prices, adjustments, and tax.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -495,9 +455,8 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The grand total price for the shipment net of tax, in purchase currency.
-
- Total prices represent the sum of product prices, services prices and adjustments.</div>
+							&nbsp;(Read Only)<div class="description">The total net price of the shipment in the purchase currency. The total net price is the sum of product
+ prices, service prices, and adjustments, excluding tax.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -506,9 +465,7 @@
 						
 					    
 					    <a href="class_dw_value_Money.html"><span class="">Money</span></a>
-							&nbsp;(Read Only)<div class="description">The total tax for the shipment, in purchase currency.
-
- Total prices represent the sum of product prices, services prices and adjustments.</div>
+							&nbsp;(Read Only)<div class="description">The total tax for the shipment in the purchase currency.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -573,7 +530,7 @@
 <span><span class="emphasis"><a href="#dw_order_Shipment_getAdjustedMerchandizeTotalPrice_DetailAnchor"><span class="">getAdjustedMerchandizeTotalPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the merchandize total price after all product discounts.</div>
+<div class="description">Returns the product total price after all product discounts.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getAdjustedMerchandizeTotalPrice_Boolean_DetailAnchor"><span class="">getAdjustedMerchandizeTotalPrice</span></a></span>(applyOrderLevelAdjustments
@@ -582,25 +539,25 @@
 								boolean)
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the merchandise total price of the shipment after considering all product price adjustments and, optionally, prorating all order-level discounts.</div>
+<div class="description">Returns the total product price including product-level adjustments and, optionally, prorated order-level adjustments.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getAdjustedMerchandizeTotalTax_DetailAnchor"><span class="">getAdjustedMerchandizeTotalTax</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the total tax in purchase currency.</div>
+<div class="description">Returns the total adjusted product tax in the purchase currency.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getAdjustedShippingTotalGrossPrice_DetailAnchor"><span class="">getAdjustedShippingTotalGrossPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the adjusted sum of all shipping line items of the shipment, including tax after shipping adjustments have been applied.</div>
+<div class="description">Returns the adjusted sum of all shipping line items of the shipment, including shipping adjustuments and tax</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getAdjustedShippingTotalNetPrice_DetailAnchor"><span class="">getAdjustedShippingTotalNetPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the sum of all shipping line items of the shipment, excluding tax after shipping adjustments have been applied.</div>
+<div class="description">Returns the sum of all shipping line items of the shipment, including shipping adjustments, excluding tax.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getAdjustedShippingTotalPrice_DetailAnchor"><span class="">getAdjustedShippingTotalPrice</span></a></span>()
@@ -612,7 +569,7 @@
 <span><span class="emphasis"><a href="#dw_order_Shipment_getAdjustedShippingTotalTax_DetailAnchor"><span class="">getAdjustedShippingTotalTax</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the tax of all shipping line items of the shipment after shipping adjustments have been applied.</div>
+<div class="description">Returns the tax of all shipping line items of the shipment , including shipping adjustments.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getAllLineItems_DetailAnchor"><span class="">getAllLineItems</span></a></span>()
@@ -636,37 +593,37 @@
 <span><span class="emphasis"><a href="#dw_order_Shipment_getID_DetailAnchor"><span class="">getID</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the ID of this shipment.</div>
+<div class="description">Returns the ID of this shipment ("me" for the default shipment).</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getMerchandizeTotalGrossPrice_DetailAnchor"><span class="">getMerchandizeTotalGrossPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the total gross price, including tax, in the purchase currency.</div>
+<div class="description">Returns the gross product subtotal in the purchase currency.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getMerchandizeTotalNetPrice_DetailAnchor"><span class="">getMerchandizeTotalNetPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the net price, excluding tax, in the purchase currency.</div>
+<div class="description">Returns the net product subtotal, excluding tax, in the purchase currency.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getMerchandizeTotalPrice_DetailAnchor"><span class="">getMerchandizeTotalPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the merchandize total price.</div>
+<div class="description">Returns the product total price.</div>
 </div>
 <div class="summaryItem">
 <span class="dep"><span class="emphasis"><a href="#dw_order_Shipment_getMerchandizeTotalPriceAdjustments_DetailAnchor"><span class="">getMerchandizeTotalPriceAdjustments</span></a></span>()
 						: 
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a></span>
-<div class="description">Returns a collection of price adjustments that have been applied to the totals such as promotion on the purchase value (i.e.</div>
+<div class="description">Returns a collection of price adjustments that have been applied to the totals, such as a promotion on the purchase value (i.e.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getMerchandizeTotalTax_DetailAnchor"><span class="">getMerchandizeTotalTax</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the total tax in purchase currency.</div>
+<div class="description">Returns the total product tax in the purchase currency.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getProductLineItems_DetailAnchor"><span class="">getProductLineItems</span></a></span>()
@@ -678,7 +635,7 @@
 <span><span class="emphasis"><a href="#dw_order_Shipment_getProratedMerchandizeTotalPrice_DetailAnchor"><span class="">getProratedMerchandizeTotalPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the merchandise total price of the shipment after considering all product price adjustments and prorating all Buy-X-Get-Y and order-level discounts, according to the scheme described in <a href="class_dw_order_PriceAdjustment.html#dw_order_PriceAdjustment_getProratedPrices_DetailAnchor">PriceAdjustment.getProratedPrices()</a>.</div>
+<div class="description">Returns the total product price of the shipment, including product-level adjustments and prorating all Buy-X-Get-Y and order-level adjustments, according to the scheme described in <a href="class_dw_order_PriceAdjustment.html#dw_order_PriceAdjustment_getProratedPrices_DetailAnchor">PriceAdjustment.getProratedPrices()</a>.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getShipmentNo_DetailAnchor"><span class="">getShipmentNo</span></a></span>()
@@ -732,7 +689,7 @@
 <span><span class="emphasis"><a href="#dw_order_Shipment_getShippingPriceAdjustments_DetailAnchor"><span class="">getShippingPriceAdjustments</span></a></span>()
 						: 
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a></span>
-<div class="description">Returns a collection of price adjustments that have been applied to the shipping costs of the shipment, for example by the promotions engine.<br/> Note that this method returns all shipping price adjustments in this shipment regardless of which shipping line item they belong to.</div>
+<div class="description">Returns a collection of price adjustments that have been applied to the shipping costs of the shipment, for example by the promotions engine.<br/> Note that this method returns all shipping price adjustments in this shipment, regardless of which shipping line item they belong to.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getShippingStatus_DetailAnchor"><span class="">getShippingStatus</span></a></span>()
@@ -744,13 +701,13 @@
 <span><span class="emphasis"><a href="#dw_order_Shipment_getShippingTotalGrossPrice_DetailAnchor"><span class="">getShippingTotalGrossPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the sum of all shipping line items of the shipment, including tax before shipping adjustments have been applied.</div>
+<div class="description">Returns the sum of all shipping line items of the shipment, including tax, excluding shipping adjustments.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getShippingTotalNetPrice_DetailAnchor"><span class="">getShippingTotalNetPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the sum of all shipping line items of the shipment, excluding tax before shipping adjustments have been applied.</div>
+<div class="description">Returns the sum of all shipping line items of the shipment, excluding tax and adjustments.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getShippingTotalPrice_DetailAnchor"><span class="">getShippingTotalPrice</span></a></span>()
@@ -768,25 +725,25 @@
 <span><span class="emphasis"><a href="#dw_order_Shipment_getStandardShippingLineItem_DetailAnchor"><span class="">getStandardShippingLineItem</span></a></span>()
 						: 
 					<a href="class_dw_order_ShippingLineItem.html"><span class="">ShippingLineItem</span></a></span>
-<div class="description">Convenenience method.</div>
+<div class="description">Convenience method.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getTotalGrossPrice_DetailAnchor"><span class="">getTotalGrossPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the grand total price gross of tax for the shipment, in purchase currency.</div>
+<div class="description">Returns the total gross price of the shipment in the purchase currency.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getTotalNetPrice_DetailAnchor"><span class="">getTotalNetPrice</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the grand total price for the shipment net of tax, in purchase currency.</div>
+<div class="description">Returns the total net price of the shipment in the purchase currency.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getTotalTax_DetailAnchor"><span class="">getTotalTax</span></a></span>()
 						: 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a></span>
-<div class="description">Returns the total tax for the shipment, in purchase currency.</div>
+<div class="description">Returns the total tax for the shipment in the purchase currency.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_getTrackingNumber_DetailAnchor"><span class="">getTrackingNumber</span></a></span>()
@@ -798,7 +755,7 @@
 <span><span class="emphasis"><a href="#dw_order_Shipment_isDefault_DetailAnchor"><span class="">isDefault</span></a></span>()
 						: 
 					boolean</span>
-<div class="description">Return true if this shipment is the default shipment.</div>
+<div class="description">Return <code>true</code> if this shipment is the default shipment (shipment ID "me").</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Shipment_isGift_DetailAnchor"><span class="">isGift</span></a></span>()
@@ -897,7 +854,7 @@
 					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
 </div>
 <div class="summaryItem">
-<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+<a href="class_TopLevel_Object.html#TopLevel_Object_assign_Object_Object_DetailAnchor"><span class="">assign</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_create_Object_DetailAnchor"><span class="">create</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_create_Object_Object_DetailAnchor"><span class="">create</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_defineProperties_Object_Object_DetailAnchor"><span class="">defineProperties</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_defineProperty_Object_Object_Object_DetailAnchor"><span class="">defineProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_freeze_Object_DetailAnchor"><span class="">freeze</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_getOwnPropertyDescriptor_Object_Object_DetailAnchor"><span class="">getOwnPropertyDescriptor</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_getOwnPropertyNames_Object_DetailAnchor"><span class="">getOwnPropertyNames</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_getOwnPropertySymbols_Object_DetailAnchor"><span class="">getOwnPropertySymbols</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_getPrototypeOf_Object_DetailAnchor"><span class="">getPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_is_Object_Object_DetailAnchor"><span class="">is</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isExtensible_Object_DetailAnchor"><span class="">isExtensible</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isFrozen_Object_DetailAnchor"><span class="">isFrozen</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isSealed_Object_DetailAnchor"><span class="">isSealed</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_keys_Object_DetailAnchor"><span class="">keys</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_preventExtensions_Object_DetailAnchor"><span class="">preventExtensions</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_seal_Object_DetailAnchor"><span class="">seal</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_setPrototypeOf_Object_Object_DetailAnchor"><span class="">setPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
 </div>
 </div>
 <div class="section">
@@ -914,9 +871,8 @@
 					 : 
 					<a href="class_dw_order_OrderAddress.html"><span class="">OrderAddress</span></a>
 </div>
-<div class="description">A shipment has initially no shipping address. This method creates a
- shipping address for the shipment and replaces an existing shipping
- address.</div>
+<div class="description">A shipment has initially no shipping address. This method creates a shipping address for the shipment and
+ replaces an existing shipping address.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -938,9 +894,8 @@
 					 : 
 					<a href="class_dw_order_ShippingLineItem.html"><span class="">ShippingLineItem</span></a>
 </div>
-<div class="description">Creates a new shipping line item for this shipment.
- If the specified ID is already assigned to any of the existing
- shipping line items of the shipment, the method throws an exception.</div>
+<div class="description">Creates a new shipping line item for this shipment. If the specified ID is already assigned to any of the
+ existing shipping line items of the shipment, the method throws an exception.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -971,21 +926,18 @@
 					 : 
 					<a href="class_dw_order_PriceAdjustment.html"><span class="">PriceAdjustment</span></a>
 </div>
-<div class="description">Creates a shipping price adjustment to be applied to the shipment. The
- price adjustment implicitly belongs to the standard shipping line item
- if this line item exists, otherwise it belongs to the shipment itself.<br/>
-
- The promotion ID is mandatory and must not be the ID of any actual
- promotion defined in Commerce Cloud Digital.<br/>
-
- If there already exists a shipping price adjustment line item referring
- to the specified promotion ID, an exception is thrown.</div>
+<div class="description">Creates a shipping price adjustment to be applied to the shipment. The price adjustment implicitly belongs to the
+ standard shipping line item if this line item exists, otherwise it belongs to the shipment itself.<br/>
+ The promotion ID is mandatory and must not be the ID of any actual promotion defined in Salesforce B2C
+ Commerce.<br/>
+ If there already exists a shipping price adjustment line item referring to the specified promotion ID, an
+ exception is thrown.</div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">Deprecated in favor of <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_createShippingPriceAdjustment_String_DetailAnchor">ShippingLineItem.createShippingPriceAdjustment(String)</a> which explicitly relates the price adjustment to a shipping line item.</span>
+<span class="parameterDesc">Deprecated in favor of <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_createShippingPriceAdjustment_String_DetailAnchor">ShippingLineItem.createShippingPriceAdjustment(String)</a>, which explicitly relates the price adjustment to a shipping line item.</span>
 </div>
 </div>
 <div class="parameters">
@@ -1016,11 +968,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the adjusted total gross price, including tax, in the purchase currency.
-
- Adjusted merchandize prices represent the sum of product prices before
- services such as shipping have been added, but after adjustments from i.e.
- promotions have been added.</div>
+<div class="description">Returns the adjusted total gross price, including tax, in the purchase currency. The adjusted total gross price
+ represents the sum of product prices and adjustments including tax, excluding services.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1039,11 +988,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the adjusted net price, excluding tax, in the purchase currency.
-
- Adjusted merchandize prices represent the sum of product prices before
- services such as shipping have been added, but after adjustments from i.e.
- promotions have been added.</div>
+<div class="description">Returns the adjusted net price, excluding tax, in the purchase currency. The adjusted net price represents the
+ the sum of product prices and adjustments, excluding services and tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1062,15 +1008,13 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the merchandize total price after all product discounts.
- If the line item container is based on net pricing the adjusted
- merchandize total net price is returned.
- If the line item container is based on gross pricing the adjusted
- merchandize total gross price is returned.</div>
+<div class="description">Returns the product total price after all product discounts. If the line item container is based on net pricing
+ the adjusted product total net price is returned. If the line item container is based on gross pricing the
+ adjusted product total gross price is returned.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">either the adjusted merchandize total net or gross price.</span>
+<span class="parameterDesc">either the adjusted product total net or gross price.</span>
 </div>
 </div>
 <hr>
@@ -1088,23 +1032,21 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the merchandise total price of the shipment after considering all
- product price adjustments and, optionally, prorating all order-level
- discounts. For net pricing the net price is returned. For gross pricing,
- the gross price is returned.</div>
+<div class="description">Returns the total product price including product-level adjustments and, optionally, prorated order-level
+ adjustments. For net pricing the net price is returned. For gross pricing, the gross price is returned.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
 <span class="parameterName">applyOrderLevelAdjustments</span>
 						 - 
-						<span class="parameterDesc">If true, order-level adjustments will be applied to total price</span>
+						<span class="parameterDesc">If true, prorated order-level adjustments will be applied to total price</span>
 </div>
 </div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">Adjusted net or gross merchandise total price</span>
+<span class="parameterDesc">Adjusted net or gross product total price</span>
 </div>
 <div class="parameterDetail"></div>
 </div>
@@ -1128,11 +1070,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the total tax in purchase currency.
-
- Adjusted merchandize prices represent the sum of product prices before
- services such as shipping have been added, but after adjustments from i.e.
- promotions have been added.</div>
+<div class="description">Returns the total adjusted product tax in the purchase currency. The total adjusted product tax represents the
+ tax on products and adjustments, excluding services.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1151,12 +1090,11 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the adjusted sum of all shipping line items of the shipment,
- including tax after shipping adjustments have been applied.</div>
+<div class="description">Returns the adjusted sum of all shipping line items of the shipment, including shipping adjustuments and tax</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the adjusted sum of all shipping line items of the shipment, including tax after shipping adjustments have been applied.</span>
+<span class="parameterDesc">the adjusted sum of all shipping line items of the shipment, including shipping adjustuments and tax</span>
 </div>
 </div>
 <hr>
@@ -1171,12 +1109,11 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the sum of all shipping line items of the shipment, excluding tax
- after shipping adjustments have been applied.</div>
+<div class="description">Returns the sum of all shipping line items of the shipment, including shipping adjustments, excluding tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the sum of all shipping line items of the shipment, excluding tax after shipping adjustments have been applied.</span>
+<span class="parameterDesc">the sum of all shipping line items of the shipment, including shipping adjustments, excluding tax.</span>
 </div>
 </div>
 <hr>
@@ -1191,10 +1128,9 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the adjusted shipping total price. If the line item container
- is based on net pricing the adjusted shipping total net price is
- returned. If the line item container is based on gross pricing the adjusted
- shipping total gross price is returned.</div>
+<div class="description">Returns the adjusted shipping total price. If the line item container is based on net pricing the adjusted
+ shipping total net price is returned. If the line item container is based on gross pricing the adjusted shipping
+ total gross price is returned.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1213,12 +1149,11 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the tax of all shipping line items of the shipment after shipping
- adjustments have been applied.</div>
+<div class="description">Returns the tax of all shipping line items of the shipment , including shipping adjustments.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the tax of all shipping line items of the shipment after shipping adjustments have been applied.</span>
+<span class="parameterDesc">the tax of all shipping line items of the shipment , including shipping adjustments.</span>
 </div>
 </div>
 <hr>
@@ -1234,8 +1169,8 @@
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
 </div>
 <div class="description">Returns all line items related to the shipment.
-
- <p/>The returned collection may include line items of the following types:
+ <p/>
+ The returned collection may include line items of the following types:
  <ul>
  <li><a href="class_dw_order_ProductLineItem.html">ProductLineItem</a></li>
  <li><a href="class_dw_order_ShippingLineItem.html">ShippingLineItem</a></li>
@@ -1243,9 +1178,8 @@
  <li><a href="class_dw_order_PriceAdjustment.html">PriceAdjustment</a></li>
  </ul>
  Their common type is <a href="class_dw_order_LineItem.html">LineItem</a>.
-
- <p/>Each <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a> in the collection
- may itself contain bundled or option product line items,
+ <p/>
+ Each <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a> in the collection may itself contain bundled or option product line items,
  as well as a product-level shipping line item.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
@@ -1303,7 +1237,7 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the ID of this shipment.</div>
+<div class="description">Returns the ID of this shipment ("me" for the default shipment).</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1322,11 +1256,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the total gross price, including tax, in the purchase currency.
-
- Merchandize total prices represent the sum of product prices before
- services such as shipping or adjustments from i.e. promotions have
- been added.</div>
+<div class="description">Returns the gross product subtotal in the purchase currency. The gross product subtotal represents the sum of
+ product prices including tax, excluding services and adjustments.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1345,11 +1276,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the net price, excluding tax, in the purchase currency.
-
- Merchandize total prices represent the sum of product prices before
- services such as shipping or adjustments from i.e. promotions have
- been added.</div>
+<div class="description">Returns the net product subtotal, excluding tax, in the purchase currency. The net product subtotal represents
+ the sum of product prices, excluding services, adjustments, and tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1368,14 +1296,13 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the merchandize total price. If the line item container is based
- on net pricing the merchandize total net price is returned. If the line
- item container is based on gross pricing the merchandize total gross price
- is returned.</div>
+<div class="description">Returns the product total price. If the line item container is based on net pricing the product total net
+ price is returned. If the line item container is based on gross pricing the product total gross price is
+ returned.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">either the merchandize total net or gross price</span>
+<span class="parameterDesc">either the product total net or gross price</span>
 </div>
 </div>
 <hr>
@@ -1390,19 +1317,19 @@
 					 : 
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
 </div>
-<div class="description">Returns a collection of price adjustments that have been applied to the
- totals such as promotion on the purchase value (i.e. $10 Off or 10% Off).</div>
+<div class="description">Returns a collection of price adjustments that have been applied to the totals, such as a promotion on the
+ purchase value (i.e. $10 Off or 10% Off).</div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">Shipments cannot have merchandize price adjustments, therefore this method will always return an empty collection</span>
+<span class="parameterDesc">Shipments cannot have product price adjustments, therefore this method will always return an empty collection</span>
 </div>
 </div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">a collection of price adjustments that have been applied to the totals such as promotion on the purchase value (i.e. $10 Off or 10% Off).</span>
+<span class="parameterDesc">a collection of price adjustments that have been applied to the totals, such as a promotion on the purchase value (i.e. $10 Off or 10% Off).</span>
 </div>
 <div class="parameterDetail"></div>
 </div>
@@ -1418,11 +1345,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the total tax in purchase currency.
-
- Merchandize total prices represent the sum of product prices before
- services such as shipping or adjustments from i.e. promotions have
- been added.</div>
+<div class="description">Returns the total product tax in the purchase currency. The total product tax represents the tax on products,
+ excluding services and adjustments.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1441,8 +1365,7 @@
 					 : 
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
 </div>
-<div class="description">Returns a collection of all product line items related
- to this shipment.</div>
+<div class="description">Returns a collection of all product line items related to this shipment.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1461,15 +1384,14 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the merchandise total price of the shipment after considering all
- product price adjustments and prorating all Buy-X-Get-Y and order-level
- discounts, according to the scheme described in
- <a href="class_dw_order_PriceAdjustment.html#dw_order_PriceAdjustment_getProratedPrices_DetailAnchor">PriceAdjustment.getProratedPrices()</a>. For net pricing the
- net price is returned. For gross pricing, the gross price is returned.</div>
+<div class="description">Returns the total product price of the shipment, including product-level adjustments and prorating all
+ Buy-X-Get-Y and order-level adjustments, according to the scheme described in
+ <a href="class_dw_order_PriceAdjustment.html#dw_order_PriceAdjustment_getProratedPrices_DetailAnchor">PriceAdjustment.getProratedPrices()</a>. For net pricing the net price is returned. For gross
+ pricing, the gross price is returned.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">Adjusted and prorated net or gross merchandise total price</span>
+<span class="parameterDesc">Adjusted and prorated net or gross product total price</span>
 </div>
 </div>
 <hr>
@@ -1529,11 +1451,10 @@
 					 : 
 					<a href="class_dw_order_ShippingLineItem.html"><span class="">ShippingLineItem</span></a>
 </div>
-<div class="description">Returns the shipping line item identified by the specified ID, or
- null if not found.
-
- <p/>To get the standard shipping line item for this shipment,
- use the identifier <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_STANDARD_SHIPPING_ID_DetailAnchor">ShippingLineItem.STANDARD_SHIPPING_ID</a>.</div>
+<div class="description">Returns the shipping line item identified by the specified ID, or null if not found.
+ <p/>
+ To get the standard shipping line item for this shipment, use the identifier
+ <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_STANDARD_SHIPPING_ID_DetailAnchor">ShippingLineItem.STANDARD_SHIPPING_ID</a>.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -1561,9 +1482,8 @@
 					 : 
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
 </div>
-<div class="description">Returns a collection of all shipping line items of the shipment,
- excluding any product-level shipping costs that are
- associated with <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a>s of the shipment.</div>
+<div class="description">Returns a collection of all shipping line items of the shipment, excluding any product-level shipping costs that
+ are associated with <a href="class_dw_order_ProductLineItem.html">ProductLineItem</a>s of the shipment.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1623,8 +1543,7 @@
 					 : 
 					<a href="class_dw_order_PriceAdjustment.html"><span class="">PriceAdjustment</span></a>
 </div>
-<div class="description">Returns the shipping price adjustment associated with the
- specified promotion ID.</div>
+<div class="description">Returns the shipping price adjustment associated with the specified promotion ID.</div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail">
@@ -1658,14 +1577,11 @@
 					 : 
 					<a href="class_dw_util_Collection.html"><span class="">Collection</span></a>
 </div>
-<div class="description">Returns a collection of price adjustments that have been applied to the
- shipping costs of the shipment, for example by the promotions engine.<br/>
-
- Note that this method returns all shipping price adjustments in this
- shipment regardless of which shipping line item they belong to. Use
- <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_getShippingPriceAdjustments_DetailAnchor">ShippingLineItem.getShippingPriceAdjustments()</a> to
- retrieve the shipping price adjustments associated with a specific
- shipping line item.</div>
+<div class="description">Returns a collection of price adjustments that have been applied to the shipping costs of the shipment, for
+ example by the promotions engine.<br/>
+ Note that this method returns all shipping price adjustments in this shipment, regardless of which shipping line
+ item they belong to. Use <a href="class_dw_order_ShippingLineItem.html#dw_order_ShippingLineItem_getShippingPriceAdjustments_DetailAnchor">ShippingLineItem.getShippingPriceAdjustments()</a> to retrieve the shipping
+ price adjustments associated with a specific shipping line item.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1684,8 +1600,7 @@
 					 : 
 					<a href="class_dw_value_EnumValue.html"><span class="">EnumValue</span></a>
 </div>
-<div class="description">Returns the shipping status. Possible values are
- SHIPMENT_NOTSHIPPED or SHIPMENT_SHIPPED.</div>
+<div class="description">Returns the shipping status. Possible values are SHIPMENT_NOTSHIPPED or SHIPMENT_SHIPPED.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1704,12 +1619,11 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the sum of all shipping line items of the shipment,
- including tax before shipping adjustments have been applied.</div>
+<div class="description">Returns the sum of all shipping line items of the shipment, including tax, excluding shipping adjustments.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the sum of all shipping line items of the shipment, including tax before shipping adjustments have been applied.</span>
+<span class="parameterDesc">the sum of all shipping line items of the shipment, including tax, excluding shipping adjustments.</span>
 </div>
 </div>
 <hr>
@@ -1724,12 +1638,11 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the sum of all shipping line items of the shipment, excluding tax
- before shipping adjustments have been applied.</div>
+<div class="description">Returns the sum of all shipping line items of the shipment, excluding tax and adjustments.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the sum of all shipping line items of the shipment, excluding tax before shipping adjustments have been applied.</span>
+<span class="parameterDesc">the sum of all shipping line items of the shipment, excluding tax and adjustments.</span>
 </div>
 </div>
 <hr>
@@ -1744,10 +1657,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the shipping total price. If the line item container is based on
- net pricing the shipping total net price is returned. If the line item
- container is based on gross pricing the shipping total gross price is
- returned.</div>
+<div class="description">Returns the shipping total price. If the line item container is based on net pricing the shipping total net price
+ is returned. If the line item container is based on gross pricing the shipping total gross price is returned.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1766,8 +1677,7 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the tax of all shipping line items of the shipment before
- shipping adjustments have been applied.</div>
+<div class="description">Returns the tax of all shipping line items of the shipment before shipping adjustments have been applied.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1786,8 +1696,7 @@
 					 : 
 					<a href="class_dw_order_ShippingLineItem.html"><span class="">ShippingLineItem</span></a>
 </div>
-<div class="description">Convenenience method. Same as
- <code>getShippingLineItem(ShippingLineItem.STANDARD_SHIPPING_ID)</code></div>
+<div class="description">Convenience method. Same as <code>getShippingLineItem(ShippingLineItem.STANDARD_SHIPPING_ID)</code></div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1806,9 +1715,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the grand total price gross of tax for the shipment, in purchase currency.
-
- Total prices represent the sum of product prices, services prices and adjustments.</div>
+<div class="description">Returns the total gross price of the shipment in the purchase currency. The total gross price is the sum of
+ product prices, service prices, adjustments, and tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1827,9 +1735,8 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the grand total price for the shipment net of tax, in purchase currency.
-
- Total prices represent the sum of product prices, services prices and adjustments.</div>
+<div class="description">Returns the total net price of the shipment in the purchase currency. The total net price is the sum of product
+ prices, service prices, and adjustments, excluding tax.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1848,9 +1755,7 @@
 					 : 
 					<a href="class_dw_value_Money.html"><span class="">Money</span></a>
 </div>
-<div class="description">Returns the total tax for the shipment, in purchase currency.
-
- Total prices represent the sum of product prices, services prices and adjustments.</div>
+<div class="description">Returns the total tax for the shipment in the purchase currency.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -1887,11 +1792,11 @@
 <span class="emphasis">isDefault</span>()
 					 : 
 					boolean</div>
-<div class="description">Return true if this shipment is the default shipment.</div>
+<div class="description">Return <code>true</code> if this shipment is the default shipment (shipment ID "me").</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">true if this shipment is the default shipment.</span>
+<span class="parameterDesc"><code>true</code> if this shipment is the default shipment</span>
 </div>
 </div>
 <hr>
@@ -1926,8 +1831,7 @@
 								<a href="class_dw_order_ShippingLineItem.html"><span class="">ShippingLineItem</span></a>)
 					 : 
 					void</div>
-<div class="description">Removes the specified shipping line item and any of its dependent
- shipping price adjustments.</div>
+<div class="description">Removes the specified shipping line item and any of its dependent shipping price adjustments.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2050,8 +1954,7 @@
 					 : 
 					void</div>
 <div class="description">Sets the shipping status of the shipment. <br/>
- Possible values are <a href="class_dw_order_Shipment.html#dw_order_Shipment_SHIPPING_STATUS_NOTSHIPPED_DetailAnchor">SHIPPING_STATUS_NOTSHIPPED</a> or
- <a href="class_dw_order_Shipment.html#dw_order_Shipment_SHIPPING_STATUS_SHIPPED_DetailAnchor">SHIPPING_STATUS_SHIPPED</a>.</div>
+ Possible values are <a href="class_dw_order_Shipment.html#dw_order_Shipment_SHIPPING_STATUS_NOTSHIPPED_DetailAnchor">SHIPPING_STATUS_NOTSHIPPED</a> or <a href="class_dw_order_Shipment.html#dw_order_Shipment_SHIPPING_STATUS_SHIPPED_DetailAnchor">SHIPPING_STATUS_SHIPPED</a>.</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -2088,7 +1991,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

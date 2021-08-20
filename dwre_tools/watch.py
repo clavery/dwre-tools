@@ -18,6 +18,7 @@ class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
     def __init__(self, env, path, name, zip_files=True):
         webdavsession = authenticate_webdav_session(env)
 
+        self.env = env
         self.cartridge_name = name
         self.cartridge_path = path
         self.session = webdavsession
@@ -29,7 +30,7 @@ class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
 
         self.upload_queue = set()
 
-    def upload(self):
+    def upload(self, retry=False):
         # TODO: check for thread safety here
         queue = self.upload_queue.copy()
         self.upload_queue = set()
@@ -51,7 +52,18 @@ class SFCCWebdavUploaderEventHandler(FileSystemEventHandler):
         temp_name = str(uuid.uuid4()) + ".zip"
         dest_url = f"{self.base_url}/{temp_name}"
         response = self.session.put(dest_url, data=zip_file_io)
-        response.raise_for_status()
+        if response.status_code == 401 and not retry:
+            print("Re-Authenticating")
+            self.session = authenticate_webdav_session(self.env)
+            self.upload_queue = queue
+            self.upload(retry=True)
+        elif response.status_code == 403 and not retry:
+            print("Re-Authenticating")
+            self.session = authenticate_webdav_session(self.env)
+            self.upload_queue = queue
+            self.upload(retry=True)
+        else:
+            response.raise_for_status()
         data = {"method": "UNZIP"}
         response = self.session.post(dest_url, data=data)
         response.raise_for_status()

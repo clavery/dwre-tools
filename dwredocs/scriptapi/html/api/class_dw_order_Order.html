@@ -49,7 +49,7 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description">The Order class represents an order.</div>
+<div class="description">The Order class represents an order. The correct way to retrieve an order is described in <a href="class_dw_order_OrderMgr.html">OrderMgr</a>.</div>
 <div class="subclasses"></div>
 </div>
 </div>
@@ -393,9 +393,9 @@
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
 							&nbsp;(Read Only)<div class="description">The Global Party ID reconciles customer identity across multiple systems. For example, as part of the Service for
  Commerce experience, service agents can find information for customers who have never called into the call
- center, but have created a profile on the website. Service agents can find guest order data from Commerce Cloud
- and easily create accounts for customers. Customer 360 Data Manager matches records from multiple data sources
- to determine all the records associated with a specific customer.</div>
+ center, but have created a profile on the website. Service agents can find guest order data from B2C Commerce and
+ easily create accounts for customers. Customer 360 Data Manager matches records from multiple data sources to
+ determine all the records associated with a specific customer.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -465,8 +465,11 @@
 						
 					    
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
-							&nbsp;(Read Only)<div class="description">The URL safe token for this order. The order token is a random string (length 32 bytes) associated with
- this one order. It should always be used in situations requiring order access to raise the level of qualification.</div>
+							&nbsp;(Read Only)<div class="description">The token for this order. The order token is a string (length 32 bytes) associated
+ with this one order. The order token is random. It reduces the capability of malicious
+ users to access an order through guessing. Order token can be used to <b>further</b> validate order
+ ownership, but should never be used to solely validate ownership. In addition, the storefront
+ should ensure authentication and authorization. See the <a href="https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/b2c_security_best_practices/b2c_developer_authentication_and_authorization.html">Security Best Practices for Developers</a> for details.</div>
 </span>
 </div>
 <div class="summaryItem">
@@ -1080,7 +1083,7 @@
 <span><span class="emphasis"><a href="#dw_order_Order_getOrderToken_DetailAnchor"><span class="">getOrderToken</span></a></span>()
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the URL safe token for this order.</div>
+<div class="description">Returns the token for this order.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Order_getOriginalOrder_DetailAnchor"><span class="">getOriginalOrder</span></a></span>()
@@ -1519,7 +1522,7 @@
 					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
 </div>
 <div class="summaryItem">
-<a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
+<a href="class_TopLevel_Object.html#TopLevel_Object_assign_Object_Object_DetailAnchor"><span class="">assign</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_create_Object_DetailAnchor"><span class="">create</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_create_Object_Object_DetailAnchor"><span class="">create</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_defineProperties_Object_Object_DetailAnchor"><span class="">defineProperties</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_defineProperty_Object_Object_Object_DetailAnchor"><span class="">defineProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_freeze_Object_DetailAnchor"><span class="">freeze</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_getOwnPropertyDescriptor_Object_Object_DetailAnchor"><span class="">getOwnPropertyDescriptor</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_getOwnPropertyNames_Object_DetailAnchor"><span class="">getOwnPropertyNames</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_getOwnPropertySymbols_Object_DetailAnchor"><span class="">getOwnPropertySymbols</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_getPrototypeOf_Object_DetailAnchor"><span class="">getPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_hasOwnProperty_String_DetailAnchor"><span class="">hasOwnProperty</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_is_Object_Object_DetailAnchor"><span class="">is</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isExtensible_Object_DetailAnchor"><span class="">isExtensible</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isFrozen_Object_DetailAnchor"><span class="">isFrozen</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isPrototypeOf_Object_DetailAnchor"><span class="">isPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_isSealed_Object_DetailAnchor"><span class="">isSealed</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_keys_Object_DetailAnchor"><span class="">keys</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_preventExtensions_Object_DetailAnchor"><span class="">preventExtensions</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_propertyIsEnumerable_String_DetailAnchor"><span class="">propertyIsEnumerable</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_seal_Object_DetailAnchor"><span class="">seal</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_setPrototypeOf_Object_Object_DetailAnchor"><span class="">setPrototypeOf</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toLocaleString_DetailAnchor"><span class="">toLocaleString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_toString_DetailAnchor"><span class="">toString</span></a>, <a href="class_TopLevel_Object.html#TopLevel_Object_valueOf_DetailAnchor"><span class="">valueOf</span></a>
 </div>
 </div>
 <div class="section">
@@ -2331,9 +2334,9 @@
 </div>
 <div class="description">The Global Party ID reconciles customer identity across multiple systems. For example, as part of the Service for
  Commerce experience, service agents can find information for customers who have never called into the call
- center, but have created a profile on the website. Service agents can find guest order data from Commerce Cloud
- and easily create accounts for customers. Customer 360 Data Manager matches records from multiple data sources
- to determine all the records associated with a specific customer.</div>
+ center, but have created a profile on the website. Service agents can find guest order data from B2C Commerce and
+ easily create accounts for customers. Customer 360 Data Manager matches records from multiple data sources to
+ determine all the records associated with a specific customer.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
@@ -2697,12 +2700,15 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the URL safe token for this order. The order token is a random string (length 32 bytes) associated with
- this one order. It should always be used in situations requiring order access to raise the level of qualification.</div>
+<div class="description">Returns the token for this order. The order token is a string (length 32 bytes) associated
+ with this one order. The order token is random. It reduces the capability of malicious
+ users to access an order through guessing. Order token can be used to <b>further</b> validate order
+ ownership, but should never be used to solely validate ownership. In addition, the storefront
+ should ensure authentication and authorization. See the <a href="https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/b2c_security_best_practices/b2c_developer_authentication_and_authorization.html">Security Best Practices for Developers</a> for details.</div>
 <div class="parameters">
 <span class="parameterTitle">Returns:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">the URL safe token for this order.</span>
+<span class="parameterDesc">the token for this order.</span>
 </div>
 </div>
 <hr>
@@ -4337,7 +4343,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

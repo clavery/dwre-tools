@@ -33,7 +33,8 @@
               "type": "number",
               "minimum": 0.01,
               "maximum": 100
-            }
+            },
+            "sortable": {"type": "boolean","default": false}
           },
           "required": ["searchable", "refinable"],
           "additionalProperties":false
@@ -76,7 +77,14 @@
             "type": { "enum":["markup"] },
             "editor_definition":{"not":{}},
             "values":{"not":{}},
-            "default_value":{"type":"string"}
+            "default_value":{"type":"string"},
+            "searching": {
+              "properties": {
+                "searchable": {"type": "boolean"},
+                "refinable": {"type": "boolean"},
+                "sortable": {"enum": [false]}
+              }
+            }
           },
           "required": ["type"]
         }
@@ -238,7 +246,8 @@
            "searching": {
              "properties": {
                "searchable": {"type": "boolean"},
-               "refinable": { "enum": [ false ] }
+               "refinable": { "enum": [ false ] },
+               "sortable": { "enum": [ false ] }
              },
              "required": ["searchable", "refinable"],
              "additionalProperties":false
@@ -259,7 +268,8 @@
             "searching": {
               "properties": {
                 "searchable": {"type": "boolean"},
-                "refinable": { "enum": [ false ] }
+                "refinable": { "enum": [ false ] },
+                "sortable": { "enum": [ false ] }
               },
               "required": ["searchable", "refinable"],
               "additionalProperties":false

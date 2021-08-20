@@ -53,7 +53,13 @@ If the basket represents an order that is being edited, this pipelet:
 <ul><li>1. Creates a new Order from the basket.</li>
 <li>2. Updates the original Order with the Order that replaced it.</li>
 <li>3. Sets the status of the original order to 'replaced'.</li></ul>
-
+<p>
+Please note that this pipelet might result in an order with a different customer ID than the originating registered
+customer attached to the session. This happens if a registered customer logs in with the "RememberMe" flag set to true,
+but is later logged out (either explicitly, or automatically via session expiration) before calling this pipelet. This is
+due to the internal order creation logic, which creates a new guest customer and attaches it to the order in such cases.
+To avoid this situation, have your custom code verify that the customer is authenticated before it calls this pipelet.
+</p>
 <p>The inventory items reserved previously for the order are finalized when the transaction is committed.
 Since api version 2.10.6 this is only the delta changes compared with an order being replaced.</p>
 </div>
@@ -125,7 +131,7 @@ Optional order no. If not specified, the pipelet creates an order no.
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

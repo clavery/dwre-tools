@@ -96,6 +96,24 @@
 <hr>
 <div class="section">
 <p class="className">
+<a name="object_Categorization Rules per Category"></a>Categorization Rules per Category</p>
+<p>
+            The Categorization Rules per Category object relation quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.CatalogCategoryPO.relation.categorizationRulePOs</li>
+<li>
+<b>Description:</b> The maximum number of categorization rules for a category.</li>
+<li>
+<b>Limit:</b> 5</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<div class="section">
+<p class="className">
 <a name="object_Incoming Category Links per Category"></a>Incoming Category Links per Category</p>
 <p>
             The Incoming Category Links per Category object relation quota consists of:
@@ -161,6 +179,24 @@
 <b>Description:</b> The maximum number of catalogs in an instance.</li>
 <li>
 <b>Limit:</b> 200 (warning at 120)</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<div class="section">
+<p class="className">
+<a name="object_Categorization Conditions per Categorization Rule"></a>Categorization Conditions per Categorization Rule</p>
+<p>
+            The Categorization Conditions per Categorization Rule object relation quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.CategorizationRulePO.relation.categorizationConditionPOs</li>
+<li>
+<b>Description:</b> The maximum number of categorization conditions for a categorization rule.</li>
+<li>
+<b>Limit:</b> 10</li>
 </ul>
 </div>
 </div>
@@ -585,9 +621,9 @@
 <hr>
 <div class="section">
 <p class="className">
-<a name="object_IAS Inventory Cache"></a>IAS Inventory Cache</p>
+<a name="object_OCI Inventory Cache"></a>OCI Inventory Cache</p>
 <p>
-            The IAS Inventory Cache object quota consists of:
+            The OCI Inventory Cache object quota consists of:
         </p>
 <ul>
 <li>
@@ -613,7 +649,7 @@
 <li>
 <b>Description:</b> The maximum number of inventory lists in an instance.</li>
 <li>
-<b>Limit:</b> 3,000 (warning at 1,800)</li>
+<b>Limit:</b> 10,000 (warning at 8,000)</li>
 </ul>
 </div>
 </div>
@@ -631,7 +667,7 @@
 <li>
 <b>Description:</b> Quota limits for a product inventory record.</li>
 <li>
-<b>Limit:</b> 30,000,000 (warning at 18,000,000)</li>
+<b>Limit:</b> 50,000,000 (warning at 40,000,000)</li>
 </ul>
 </div>
 </div>
@@ -663,6 +699,24 @@
 <a name="category_Marketing"></a>
 <div class="header">Marketing Category
                                     </div>
+<div class="section">
+<hr>
+<div class="section">
+<p class="className">
+<a name="object_Assignments"></a>Assignments</p>
+<p>
+            The Assignments object quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.ExperiencePO</li>
+<li>
+<b>Description:</b> The maximum number of assignments in an instance.</li>
+<li>
+<b>Limit:</b> 2,000 (warning at 1,200)</li>
+</ul>
+</div>
+</div>
 <div class="section">
 <hr>
 <div class="section">
@@ -708,7 +762,7 @@
 <li>
 <b>Description:</b> The maximum number of active promotions (enabled, assigned to campaign or A/B Test, and currently running) in an instance.</li>
 <li>
-<b>Limit:</b> 250</li>
+<b>Limit:</b> 1,000</li>
 </ul>
 </li>
 </ul>
@@ -913,6 +967,42 @@
 <hr>
 <div class="section">
 <p class="className">
+<a name="object_Connected Slack Workspaces"></a>Connected Slack Workspaces</p>
+<p>
+            The Connected Slack Workspaces object quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.SlackWorkspace</li>
+<li>
+<b>Description:</b> The maximum number of connected Slack workspaces in an instance.</li>
+<li>
+<b>Limit:</b> 10 (warning at 7)</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<div class="section">
+<p class="className">
+<a name="object_Notification Target Channels"></a>Notification Target Channels</p>
+<p>
+            The Notification Target Channels object quota consists of:
+        </p>
+<ul>
+<li>
+<b>Log file ID:</b> object.SystemNotificationChannelPO</li>
+<li>
+<b>Description:</b> The maximum number of notification target channels in an instance.</li>
+<li>
+<b>Limit:</b> 100 (warning at 80)</li>
+</ul>
+</div>
+</div>
+<div class="section">
+<hr>
+<div class="section">
+<p class="className">
 <a name="object_System Notification Messages"></a>System Notification Messages</p>
 <p>
             The System Notification Messages object quota consists of:
@@ -931,7 +1021,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

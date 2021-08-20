@@ -82,7 +82,9 @@
                                                     (Optional)
                                                 </span>
 <div class="description">Indicates if the script module's function requires transaction handling. The default
-                value is 'false'.
+                value is 'false'. To avoid a negative impact on system performance and allow more granular 
+                transaction control, keep the default setting of 'false'. Implement transaction handling within the 
+                job step using the dw.system.Transaction API.
             </div>
 <div class="description">
                                                 Default Value:
@@ -105,7 +107,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

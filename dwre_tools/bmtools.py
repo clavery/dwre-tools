@@ -156,7 +156,9 @@ def access_token_from_interactive(client_id):
 
 # Authenticate a session using account manager client credentials
 def authenticate_session_from_env(env, session):
-    if "implicitAuthFlow" in env and env["implicitAuthFlow"]:
+    if "accessToken" in env and env["accessToken"]:
+        access_token = env["accessToken"]
+    elif "implicitAuthFlow" in env and env["implicitAuthFlow"]:
         # use interactive login
         access_token = access_token_from_interactive(env["clientID"])
     else:
@@ -171,6 +173,8 @@ def authenticate_session_from_env(env, session):
         expiration_seconds = j.get("expires_in");
     session.headers.update({"Authorization": "Bearer " + access_token})
     session.headers.update({"x-dw-client-id": env["clientID"]})
+    ## TODO expires
+    env["accessToken"] = access_token
     session.verify = env["verify"] == True
     if "cert" in env:
         session.cert = env["cert"]
@@ -517,6 +521,9 @@ def import_site_package(env, filename):
         resp = session.post("https://{}/s/-/dw/data/v20_8/jobs/sfcc-site-archive-import/executions".format(env["server"]), json={
             "file_name": filename + ".zip"
         })
+        requests_log = logging.getLogger("requests.packages.urllib3")
+        if requests_log.getEffectiveLevel() == logging.DEBUG:
+            print(resp.content)
         resp.raise_for_status()
         j = resp.json()
         job_id = j.get("id")

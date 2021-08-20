@@ -29,7 +29,8 @@
                     likelihood that orders are attached to another customer. Since version 20.6 the fields
                     product-name (4000), suite (256) and price-book-id (256) support longer string values
                     due to their implementation. Since version 20.8 the fields inventory-list-id and 
-                    custom-attributes of ProductShippingLineItem are exported.
+                    custom-attributes of ProductShippingLineItem are exported. Since version 21.9 the
+                    fields account-id and account-type are exported.
                 </xsd:documentation>
             </xsd:annotation>
             <xsd:enumeration value="18.5" />
@@ -37,6 +38,7 @@
             <xsd:enumeration value="19.5" />
             <xsd:enumeration value="20.6" />
             <xsd:enumeration value="20.8" />
+            <xsd:enumeration value="21.9" />
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -567,6 +569,22 @@
             <xsd:element name="processor-id" type="simpleType.Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="transaction-id" type="simpleType.Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1" />
             <xsd:element name="transaction-type" type="simpleType.Payment.TransactionType" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="account-id" type="simpleType.Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                    Since version 21.9.
+                    The ID of the payment account used to create the payment transaction.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="account-type" type="simpleType.Generic.NonEmptyString.256" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation>
+                    Since version 21.9.
+                    The type of the payment account used to create the payment transaction.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="custom-attributes" type="sharedType.CustomAttributes" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
                     <xsd:documentation>These are the custom attributes of the PaymentTransaction system object.</xsd:documentation>

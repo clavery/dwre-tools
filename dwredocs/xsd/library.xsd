@@ -143,7 +143,7 @@
             <xsd:element name="folder-links" type="complexType.Content.FolderLinks" minOccurs="0" maxOccurs="1">
                 <xsd:annotation>
                     <xsd:documentation>
-                        Pages and components cannot be assigned to folders.
+                        Components cannot be assigned to folders.
                     </xsd:documentation>
                 </xsd:annotation>
             </xsd:element>

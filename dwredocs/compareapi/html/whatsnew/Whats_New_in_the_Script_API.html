@@ -9,7 +9,7 @@
 <span class="newTitle">
 					What's New in the Script API
 				</span>
-<p>The following classes are either new or have been changed in version 20.8.</p>
+<p>The following classes are either new or have been changed in version 21.9.</p>
 </div>
 <div class="section">
 <div class="header">
@@ -17,7 +17,7 @@
 <p>The following classes changed in the <code>dw.catalog</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Product</span>
+<span class="className">PriceBookMgr</span>
 <div class="section">
 <table>
 <thead>
@@ -28,31 +28,8 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Product.html#class_dw_catalog_Product/dw_catalog_Product_getUnitQuantity_DetailAnchor">getUnitQuantity()</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">ProductPriceModel</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductPriceModel.html#class_dw_catalog_ProductPriceModel/dw_catalog_ProductPriceModel_getMaxPricePerUnit_DetailAnchor">getMaxPricePerUnit()</xref>
+<xref href="../ScriptAPI/class_dw_catalog_PriceBookMgr.html#class_dw_catalog_PriceBookMgr/dw_catalog_PriceBookMgr_assignPriceBookToSite_PriceBook_String_DetailAnchor">assignPriceBookToSite(PriceBook,
+                String)</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -61,7 +38,7 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductPriceModel.html#class_dw_catalog_ProductPriceModel/dw_catalog_ProductPriceModel_getMinPricePerUnit_DetailAnchor">getMinPricePerUnit()</xref>
+<xref href="../ScriptAPI/class_dw_catalog_PriceBookMgr.html#class_dw_catalog_PriceBookMgr/dw_catalog_PriceBookMgr_unassignPriceBookFromAllSites_PriceBook_DetailAnchor">unassignPriceBookFromAllSites(PriceBook)</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -70,97 +47,8 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductPriceModel.html#class_dw_catalog_ProductPriceModel/dw_catalog_ProductPriceModel_getPricePerUnit_DetailAnchor">getPricePerUnit()</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductPriceModel.html#class_dw_catalog_ProductPriceModel/dw_catalog_ProductPriceModel_getPricePerUnit_Quantity_DetailAnchor">getPricePerUnit(Quantity)</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">ProductSearchHit</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductSearchHit.html#class_dw_catalog_ProductSearchHit/dw_catalog_ProductSearchHit_getMaxPricePerUnit_DetailAnchor">getMaxPricePerUnit()</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_ProductSearchHit.html#class_dw_catalog_ProductSearchHit/dw_catalog_ProductSearchHit_getMinPricePerUnit_DetailAnchor">getMinPricePerUnit()</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">Variant</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_Variant.html#class_dw_catalog_Variant/dw_catalog_Variant_getUnitQuantity_DetailAnchor">getUnitQuantity()</xref>
-</code></td><td class="summary">
-<p>
-			Method is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">VariationGroup</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_catalog_VariationGroup.html#class_dw_catalog_VariationGroup/dw_catalog_VariationGroup_getUnitQuantity_DetailAnchor">getUnitQuantity()</xref>
+<xref href="../ScriptAPI/class_dw_catalog_PriceBookMgr.html#class_dw_catalog_PriceBookMgr/dw_catalog_PriceBookMgr_unassignPriceBookFromSite_PriceBook_String_DetailAnchor">unassignPriceBookFromSite(PriceBook,
+                String)</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -174,15 +62,36 @@
 </div>
 <div class="section">
 <div class="header">
-							Package dw.content</div>
-<p>The following classes changed in the <code>dw.content</code> Package. </p>
+							Package dw.customer</div>
+<p>The following classes were added to the <code>dw.customer</code> Package.</p>
+<ul>
+<li>
+<code>CustomerCDPData</code>
+</li>
+</ul>
+<p>The following classes changed in the <code>dw.customer</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">MediaFile</span>
+<span class="className">Customer</span>
 <div class="section">
-<ul>
-<li>Class Documentation Changed</li>
-</ul>
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_customer_Customer.html#class_dw_customer_Customer/dw_customer_Customer_getCDPData_DetailAnchor">getCDPData()</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -192,7 +101,7 @@
 <p>The following classes changed in the <code>dw.order</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">LineItemCtnr</span>
+<span class="className">PaymentTransaction</span>
 <div class="section">
 <table>
 <thead>
@@ -203,78 +112,37 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_LineItemCtnr.html#class_dw_order_LineItemCtnr/dw_order_LineItemCtnr_createProductLineItem_ProductListItem_Shipment_DetailAnchor">createProductLineItem(ProductListItem,
-                Shipment)</xref>
+<xref href="../ScriptAPI/class_dw_order_PaymentTransaction.html#class_dw_order_PaymentTransaction/dw_order_PaymentTransaction_getAccountID_DetailAnchor">getAccountID()</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">OrderMgr</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_OrderMgr.html#class_dw_order_OrderMgr/dw_order_OrderMgr_failOrder_Order_Boolean_DetailAnchor">failOrder(Order,
-                Boolean)</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section">
-<hr>
-<span class="className">PaymentInstrument</span>
-<div class="section">
-<table>
-<thead>
-<tr>
-<td>Method</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_getBankAccountDriversLicense_DetailAnchor">getBankAccountDriversLicense()</xref>
-</code></td><td class="summary">
-<p>
-			Documentation Changed.
+			Method is New
 		</p>
 </td>
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_getBankAccountNumber_DetailAnchor">getBankAccountNumber()</xref>
+<xref href="../ScriptAPI/class_dw_order_PaymentTransaction.html#class_dw_order_PaymentTransaction/dw_order_PaymentTransaction_getAccountType_DetailAnchor">getAccountType()</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
+			Method is New
 		</p>
 </td>
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_getCreditCardNumber_DetailAnchor">getCreditCardNumber()</xref>
+<xref href="../ScriptAPI/class_dw_order_PaymentTransaction.html#class_dw_order_PaymentTransaction/dw_order_PaymentTransaction_setAccountID_String_DetailAnchor">setAccountID(String)</xref>
 </code></td><td class="summary">
 <p>
-			Documentation Changed.
+			Method is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_PaymentTransaction.html#class_dw_order_PaymentTransaction/dw_order_PaymentTransaction_setAccountType_String_DetailAnchor">setAccountType(String)</xref>
+</code></td><td class="summary">
+<p>
+			Method is New
 		</p>
 </td>
 </tr>
@@ -285,21 +153,122 @@
 </div>
 <div class="section">
 <div class="header">
-							Package dw.web</div>
-<p>The following classes changed in the <code>dw.web</code> Package. </p>
+							Package dw.util</div>
+<p>The following classes changed in the <code>dw.util</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">URLUtils</span>
+<span class="className">Locale</span>
 <div class="section">
 <ul>
 <li>Class Documentation Changed</li>
 </ul>
 </div>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getCountry_DetailAnchor">getCountry()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getDisplayCountry_DetailAnchor">getDisplayCountry()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getDisplayLanguage_DetailAnchor">getDisplayLanguage()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getDisplayName_DetailAnchor">getDisplayName()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getID_DetailAnchor">getID()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getISO3Country_DetailAnchor">getISO3Country()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getISO3Language_DetailAnchor">getISO3Language()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getLanguage_DetailAnchor">getLanguage()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_getLocale_String_DetailAnchor">getLocale(String)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_util_Locale.html#class_dw_util_Locale/dw_util_Locale_toString_DetailAnchor">toString()</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2020, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>
