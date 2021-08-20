@@ -289,39 +289,11 @@ The `debug` command is used for the dwre vim plugin [https://github.com/clavery/
 
 ### `cred`
 
-Get stored credentials from AWS (required IAM access)
-
-Use `--help` on an individual command
-
-```
-usage: dwre cred [-h] {get,list,info,put} ...
-
-optional arguments:
-  -h, --help           show this help message and exit
-
-Sub Commands:
-  {get,list,info,put}
-    get                get a credential
-    list               list available keys
-    info               credential information
-    put                create or update credential
-```
+legacy command
 
 ### `pw`
 
-The `pw` command interfaces with the users `.dwre.json` file.
-
-```
-usage: dwre pw [-h] {list,get} ...
-
-optional arguments:
-  -h, --help  show this help message and exit
-
-Sub Commands:
-  {list,get}
-    list      list available accounts
-    get       get account (project-env)
-```
+legacy command
 
 ## Development / Contributing
 
