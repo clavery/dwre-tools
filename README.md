@@ -94,9 +94,6 @@ The tools requires at least one environment setup in your `.dwre.json` file.
 
 ```javascript
 {
-  "accountManager": {
-    "username": "clavery@pixelmedia.com"
-  },
   "defaultProject" : "vbi",
   "projects" : {
     "vbi" : {
@@ -106,7 +103,9 @@ The tools requires at least one environment setup in your `.dwre.json` file.
           "username" : "clavery",
           "password" : "OPTIONAL",
           "codeVersion" : "clavery",
-          "server" : "dev02-us-vibram.demandware.net"
+          "server" : "dev02-us-vibram.demandware.net",
+          "clientID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "clientPassword": "daskjlkjasdlkj"
         }
       }
     }
@@ -114,14 +113,13 @@ The tools requires at least one environment setup in your `.dwre.json` file.
 }
 ```
 
-**Note: if you omit your account manager or environment password it will be prompted on the command line and the option to store it in your login keychain will be presented**
+**Note: if you omit an environment password or secret it will be prompted on the command line and the option to store it in your login keychain will be presented**
 
 ## Usage
 
 Use the command line help to get updated commands/syntax:
 
 All subcommands also have a help with `-h` or `--help`
-
 
 ```sh
 $ dwre --help
@@ -176,13 +174,7 @@ The migrate command will perform "site imports" against the specified instance i
 
 #### Installation
 
-This command requires that the cartridge `bm_dwremigrate` be installed and activated into the business manager site and that the BM user to be used is given the appropriate BM module permissions ("DWREMigrate"). **NOTE: As of version 1.5.0 the DWRE tools can perform this activation and access role step for you. The cartridge must simply be uploaded to the current code version (i.e. through eclipse or `dwre sync`**
-
-- Copy the `bm_dwremigrate` directory into your project's cartridges directory. In Eclipse, import the cartridge into your project and link it to the Demandware server. Perform a full upload.
-- In the Business Manager, go to *Administration -> Manage Sites*. Under the *Business Manager Site* section, click on the *Manage the Business Manager site* link. Add `bm_dwremigrate` to the end of the cartidge path.
-- Go to *Administration -> Roles &amp; Permissions*. Select the user used to manage the site. Select the Business Manager Modules tab. Check the entry for `DWREMigrate` and click *Update*.
-
-This command also requires that metadata be added to the instance however this will be done automatically, if required, at first run time. Metadata will also be automatically added as a migration in future versions.
+This command requires that metadata be added to the instance however this will be done automatically, if required, at first run time. Metadata will also be automatically added as a migration in future versions.
 
 An example `migrations.xml` follows (the XML will be validated against a schema in the module at run time):
 
@@ -291,6 +283,10 @@ Some commands once launched (most are only relevant on a HALTED thread; i.e. a b
 
 Additionally any commands not defined will instead be "evaled" as if they were passed to the `eval` command (i.e. "1+2" will echo 3)
 
+#### Vim Plugin
+
+The `debug` command is used for the dwre vim plugin [https://github.com/clavery/vim-dwre](https://github.com/clavery/vim-dwre)
+
 ### `cred`
 
 Get stored credentials from AWS (required IAM access)
@@ -327,19 +323,6 @@ Sub Commands:
     get       get account (project-env)
 ```
 
-#### Shell Function
-
-The following shell function requires OSX and the program `fzf` (`brew install fzf`). It uses the `dwre pw` commands to quickly list and find passwords, and copies the selected credential to the clipboard.
-
-```
-function dpw {
-  dwre pw list |
-    fzf |
-    xargs dwre pw get |
-    pbcopy
-}
-```
-
 ## Development / Contributing
 
 To install in development mode first ensure the package is uninstalled
@@ -369,11 +352,6 @@ The simplest way to run the tests is to run `python setup.py test` which will en
 - Use the data in the `testdata` directory to simulate existing projects (i.e. migration directories and XML files). Use the `setUp` and `tearDown` methods to copy to a temporary directory for testing live filesystem affecting code.
 - The quickest and most informative way to run tests is to use `pytest` directly and use verbose mode: `pytest --pyargs dwre_tools -v`.
 
-## Todo
-
-- Abstract sessions for all commands to better support session management (SSL, etc)
-- Proper logging instead of print statements w/ "disable color if not a TTY"
-
 ## Notes
 
 ### Running Against Staging Server (Two Factor Auth)
@@ -395,6 +373,8 @@ migrate -n apply
 As of 1.17.0 the tool supports OCAPI only usage for a subset of commands
 (`tail`, `watch`, `sync`, and `migrate`). This can be used for MFA required
 accounts.
+
+**NOTE: As of 1.18.0 this is the ONLY supported communication method for migrations, etc**
 
 Update your config with a clientID and clientPassword key, removing
 username/password and providng **at least** a `clientID` property:
@@ -433,7 +413,7 @@ For projects using the `dw.json` file, those variables should be `client-id` and
 ![Keystore](ocapi.png)
 
 If `clientPassword` isn't provided or cannot be found in the keystore the tool
-will prompt for it on the CLI.
+will prompt for it on the CLI. In non-terminal environments an exception will be raised.
 
 `instanceType` defaults to "development" and is usually fine for everything unless a staging environment is used. For that specify "staging" or use the `--instancetype staging` cli option.
 
