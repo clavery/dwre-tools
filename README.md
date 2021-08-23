@@ -295,6 +295,23 @@ legacy command
 
 legacy command
 
+### `asset`
+
+Allows for syncing content assets (`body` custom attribute) to/from a shared library via html files in a given folder.
+Watching the html files will update the library on the fly.
+
+Defaults to watching files in the `./assets` folder (use the `--dir` switch to change). Defaults to the `default` locale
+(use the `--locale` switch to sync alternate locales).
+
+```shell
+dwre asset --help
+dwre asset sync --help
+dwre asset watch --help
+dwre asset sync MySharedLibrary
+# Will update any files with matching asset IDs on the instance
+dwre asset watch MySharedLibrary
+```
+
 ## Development / Contributing
 
 To install in development mode first ensure the package is uninstalled

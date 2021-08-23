@@ -20,7 +20,7 @@ from .cartridge import upgrade_bm_cartridge
 from .cred import get_credential, get_credential_info, put_credential, list_credentials
 from .pw import pw_list, pw_get, pw_put, pw_refresh
 from .zip import zip_command
-from .watch import watch_command
+from .watch import watch_command, asset_sync_command, asset_watch_command
 
 from colorama import init, deinit
 
@@ -258,6 +258,14 @@ def watch_cmd_handler(args):
     watch_command(env, args.directory, not args.nozip)
 
 
+def asset_cmd_handler(args):
+    env = get_env_from_args(args)
+    if args.subcommand == "sync":
+        asset_sync_command(env, args.dir, args.library, args.locale)
+    elif args.subcommand == "watch":
+        asset_watch_command(env, args.dir, args.library, args.locale)
+
+
 parser = ArgumentParser(description="Demandware/SFCC Tools")
 parser.add_argument('--log', help="Log Level (default: ERROR)", default="ERROR")
 parser.add_argument('-p', '--project', help="DWRE Project Name")
@@ -402,6 +410,18 @@ watch_cmd.add_argument('directory', help="cartridges dir (default current)", nar
 watch_cmd.add_argument('--nozip', help="disable zipping of files", action="store_true")
 watch_cmd.set_defaults(nozip=False)
 
+asset_cmd = cmd_parser.add_parser('asset', help="sync assets with a library")
+asset_cmd.set_defaults(func=asset_cmd_handler)
+asset_cmd.add_argument('-d', '--dir', help="assets directory (default: ./assets)", default="assets")
+asset_cmd.add_argument('-l', '--locale', help="locale to sync (default: default)", default="default")
+asset_parser = asset_cmd.add_subparsers(title="Sub Commands", dest='subcommand')
+asset_parser.required = True
+asset_sync_cmd = asset_parser.add_parser("sync", help="sync assets from library")
+asset_sync_cmd.set_defaults(subcommand="sync")
+asset_sync_cmd.add_argument('library', help="library ID")
+asset_watch_cmd = asset_parser.add_parser("watch", help="watch assets")
+asset_watch_cmd.set_defaults(subcommand="watch")
+asset_watch_cmd.add_argument('library', help="library ID")
 
 def main():
     import os

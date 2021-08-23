@@ -1,6 +1,10 @@
 
 # Release Notes
 
+## 1.19.0
+
+- adds the `asset` command and it's subcommands for watching and syncing content asset html bodies
+
 ## 1.18.9
 
 - support for implicit/interactive auth grant flow with the `-i`, `--implicit` switch
