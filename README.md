@@ -283,7 +283,7 @@ Some commands once launched (most are only relevant on a HALTED thread; i.e. a b
 
 Additionally any commands not defined will instead be "evaled" as if they were passed to the `eval` command (i.e. "1+2" will echo 3)
 
-#### Vim Plugin
+**Vim Plugin**
 
 The `debug` command is used for the dwre vim plugin [https://github.com/clavery/vim-dwre](https://github.com/clavery/vim-dwre)
 
@@ -310,6 +310,17 @@ dwre asset watch --help
 dwre asset sync MySharedLibrary
 # Will update any files with matching asset IDs on the instance
 dwre asset watch MySharedLibrary
+```
+
+Access to the shared library (get, patch and put) is required for your client ID via the data API:
+
+```json
+{
+    "resource_id":"/libraries/**",
+    "methods":["get", "patch", "put"],
+    "read_attributes":"(**)",
+    "write_attributes":"(**)"
+}
 ```
 
 ## Development / Contributing
