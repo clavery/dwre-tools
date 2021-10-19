@@ -158,6 +158,15 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="_DetailAnchor"></a>billingDetails
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+<div class="description">A JS object containing the billing details to use when a Stripe PaymentMethod is created.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="_DetailAnchor"></a>exclude
 						&nbsp;:&nbsp;
 						
@@ -272,6 +281,12 @@
 <div class="description">Returns a JS object containing the data used to prepare the shopper basket when a Buy Now button is tapped.</div>
 </div>
 <div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_extensions_payments_SalesforcePaymentRequest_getBillingDetails_DetailAnchor"><span class="">getBillingDetails</span></a></span>()
+						: 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a></span>
+<div class="description">Returns a JS object containing the billing details to use when a Stripe PaymentMethod is created.</div>
+</div>
+<div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_extensions_payments_SalesforcePaymentRequest_getExclude_DetailAnchor"><span class="">getExclude</span></a></span>()
 						: 
 					<a href="class_dw_util_Set.html"><span class="">Set</span></a></span>
@@ -303,6 +318,15 @@
 						: 
 					void</span>
 <div class="description"><p> Sets the data used to prepare the shopper basket when a Buy Now button is tapped.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_extensions_payments_SalesforcePaymentRequest_setBillingDetails_Object_DetailAnchor"><span class="">setBillingDetails</span></a></span>(billingDetails
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the billing details to use when a Stripe PaymentMethod is created.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_extensions_payments_SalesforcePaymentRequest_setOptions_Object_DetailAnchor"><span class="">setOptions</span></a></span>(options
@@ -694,6 +718,33 @@ SalesforcePaymentRequest.format({
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_extensions_payments_SalesforcePaymentRequest_getBillingDetails_DetailAnchor"></a>
+<div class="detailName 
+						">getBillingDetails</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getBillingDetails</span>()
+					 : 
+					<a href="class_TopLevel_Object.html"><span class="">Object</span></a>
+</div>
+<div class="description">Returns a JS object containing the billing details to use when a Stripe PaymentMethod is created.</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">JS object containing the billing details</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_extensions_payments_SalesforcePaymentRequest.html#dw_extensions_payments_SalesforcePaymentRequest_setBillingDetails_Object_DetailAnchor">setBillingDetails(Object)</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_extensions_payments_SalesforcePaymentRequest_getExclude_DetailAnchor"></a>
 <div class="detailName 
 						">getExclude</div>
@@ -852,6 +903,47 @@ request.setBasketData({
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
 <span class="parameterDesc"><a href="class_dw_extensions_payments_SalesforcePaymentRequest.html#dw_extensions_payments_SalesforcePaymentRequest_getBasketData_DetailAnchor">getBasketData()</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_extensions_payments_SalesforcePaymentRequest_setBillingDetails_Object_DetailAnchor"></a>
+<div class="detailName 
+						">setBillingDetails</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setBillingDetails</span>(billingDetails
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the billing details to use when a Stripe PaymentMethod is created. For convenience this method accepts a
+ JS object to set all details at once. The following example shows how to set details including address.
+ </p>
+ <pre><code>
+request.setBillingDetails({
+    address: {
+        city: 'Wien',
+        country: 'AT',
+        line1: 'Opernring 2',
+        postal_code: '1010'
+    },
+    email: 'jhummel@salesforce.com',
+    name: 'Johann Hummel'
+});
+ </code></pre>
+ <p>
+ For more information on the available billing details see the Stripe create PaymentMethod API
+ documentation.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">billingDetails</span>
+						 - 
+						<span class="parameterDesc">JS object containing the billing details</span>
 </div>
 </div>
 <hr>

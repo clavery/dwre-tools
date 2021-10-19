@@ -29,89 +29,90 @@
  If something is wrong, a log message is written during runtime. The following is an example JSON-snippet for the
  ReplicationConfiguration parameter.
  </p>
-
  <pre>
-<code>
-{
-  "data_replication_configuration" : {
-    "target" : "production",
-    "type" : "transfer_and_publish",
-    "description" : "Any data replication process description",
-    "keep_caches" : false,
-    "notification" : {
-      "type": "process_end",
-      "to": [
-        "john@example.com",
-        "jane@example.com"
-      ]
-    },
-    "tasks" : {
-      "global" : {
-        "csc_settings" : true,
-        "csrf_whitelists" : true,
-        "catalogs" : {
-          "catalogDEMO" : true
-        },
-        "custom_object_types" : true,
-        "custom_objects" : true,
-        "customer_lists" : true,
-        "geolocations" : true,
-        "global_sorting" : true,
-        "libraries" : {
-          "libDEMO" : true
-        },
-        "oauth_providers" : true,
-        "ocapi_settings" : true,
-        "page_meta_tags" : true,
-        "payments_config" : true,
-        "preferences" : {
-          "system_preferences" : true,
-          "custom_preferences" : true
-        },
-        "price_books": true,
-        "sites" : {
-          "siteDEMO" : true
-        },
-        "static_content" : true,
-        "webdav_client_permissions" : true
-      },
-      "sites" : {
-        "siteDEMO" : {
-          "ab_tests" : true,
-          "ab_tests_and_experiences" : true,
-          "active_data_feeds" : true,
-          "cache_settings" : true,
-          "campaigns_and_promotions" : true,
-          "content_library" : true,
-          "content_slots" : true,
-          "coupons" : true,
-          "custom_objects" : true,
-          "customer_groups" : true,
-          "dynamic_content" : true,
-          "ocapi_settings" : true,
-          "payment" : true,
-          "preferences" : {
-            "system_preferences" : true,
-            "custom_preferences" : true
-          },
-          "search_indexes" : true,
-          "shipping_methods" : true,
-          "sorting" : true,
-          "source_codes" : true,
-          "storefront_urls" : {
-            "catalog_urls" : true,
-            "content_urls" : true,
-            "pipeline_urls" : true,
-            "redirects" : true
-          },
-          "stores" : true,
-          "taxation" : true
-        }
-      }
-    }
-  }
-}
-</code>
+ <code>
+
+ {
+   "data_replication_configuration" : {
+     "target" : "production",
+     "type" : "transfer_and_publish",
+     "description" : "Any data replication process description",
+     "cache_invalidation" : "clear_all",
+     "notification" : {
+       "type": "process_end",
+       "to": [
+         "john@example.com",
+         "jane@example.com"
+       ]
+     },
+     "tasks" : {
+       "global" : {
+         "csc_settings" : true,
+         "csrf_whitelists" : true,
+         "catalogs" : {
+           "catalogDEMO" : true
+         },
+         "custom_object_types" : true,
+         "custom_objects" : true,
+         "customer_lists" : true,
+         "geolocations" : true,
+         "global_sorting" : true,
+         "libraries" : {
+           "libDEMO" : true
+         },
+         "oauth_providers" : true,
+         "ocapi_settings" : true,
+         "page_meta_tags" : true,
+         "payments_config" : true,
+         "preferences" : {
+           "system_preferences" : true,
+           "custom_preferences" : true
+         },
+         "price_books": true,
+         "sites" : {
+           "siteDEMO" : true
+         },
+         "static_content" : true,
+         "webdav_client_permissions" : true
+       },
+       "sites" : {
+         "siteDEMO" : {
+           "ab_tests" : true,
+           "ab_tests_and_experiences" : true,
+           "active_data_feeds" : true,
+           "cache_settings" : true,
+           "campaigns_and_promotions" : true,
+           "content_library" : true,
+           "content_slots" : true,
+           "coupons" : true,
+           "custom_objects" : true,
+           "customer_groups" : true,
+           "dynamic_content" : true,
+           "ocapi_settings" : true,
+           "payment" : true,
+           "preferences" : {
+             "system_preferences" : true,
+             "custom_preferences" : true
+           },
+           "search_indexes" : true,
+           "shipping_methods" : true,
+           "sorting" : true,
+           "source_codes" : true,
+           "storefront_urls" : {
+             "catalog_urls" : true,
+             "content_urls" : true,
+             "pipeline_urls" : true,
+             "redirects" : true
+           },
+           "stores" : true,
+           "taxation" : true
+         }
+       }
+     }
+   }
+ }
+
+ </code>
  </pre>
  <ul>
  <li>data_replication_configuration: Highest level array.
@@ -119,7 +120,13 @@
  <li>target: Target system, either 'production' or 'development'.</li>
  <li>type: Data replication type, either 'transfer_and_publish', 'transfer', 'publish' or 'undo'.</li>
  <li>description: Optional description of the data replication process.</li>
- <li>keep_caches: 'true' or 'false', to keep caches or not.</li>
+ <li>cache_invalidation:
+ <ul>
+ <li>'clear_impacted_partitions' - Clear caches based on impacted cache partitions.</li>
+ <li>'clear_all' - Clear caches.</li>
+ <li>'keep_all' - Keep caches.</li>
+ </ul>
+ <li>keep_caches: 'true' or 'false', to keep caches or not. <b><i>Deprecated: Use 'cache_invalidation' property instead which has precedence.</i></b> If neither 'cache_invalidation' nor 'keep_caches' is configured, caches will be cleared.</li>
  <li>notification:
  <ul>
  <li>type: Notification type:
@@ -138,7 +145,7 @@
  <li>global: Global data replication tasks. To process all tasks, use the keyword 'all', otherwise use these:
  <ul>
  <li>csc_settings</li>
- <li>csrf_whitelists</li>
+ <li>csrf_whitelists: Where possible, we changed noninclusive terms to align with our company value of Equality. Because changing terms in our code can break current implementations, we maintained this object name.</li>
  <li>catalogs: Catalogs. To process only certain catalogs, specify the catalog names. To process all catalogs, use the
  keyword 'all'.</li>
  <li>custom_object_types</li>
@@ -210,7 +217,7 @@
  <ul>
  <p>
  Where possible, we changed noninclusive terms to align with our company value of Equality. Because changing terms in
- our code can break current implementations, we maintained this object\u2019s name.
+ our code can break current implementations, we maintained this object's name.
  </p>
  </div>
 <div class="parameters">
