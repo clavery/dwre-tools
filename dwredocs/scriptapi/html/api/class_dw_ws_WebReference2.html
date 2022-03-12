@@ -66,19 +66,84 @@
  For example, if your WSDL file is <code>MyWSDL.wsdl</code>, the property file name is <code>MyWSDL.wsdl.properties</code>.
  Supported properties include:
 
- <ul>
- <li><code>namespace=true</code>: If the WSDL contains different types with the same name a compilation error may occur. Set this
- flag to generate a namespace-aware <a href="class_dw_ws_Port.html">Port</a>, which will have classes separated into packages based on their associated
- namespace. The default value is <code>false</code>.
- <li><code>underscoreBinding=asCharInWord</code>: If you have elements in a WSDL schema that contain the underscore character,
- code generation may fail. This property will resolve the problem. The default value is <code>asWordSeparator</code>.
- <li><code>collectionType=indexed</code>: The generated API will use array types instead of List types for collections. This
- results in code that is more compatible with older <code>webreferences</code>-based implementations. The default behavior is
- to generate Lists.
- <li><code>enableWrapperStyle=false</code>: The generated API will use "bare" methods when this is false. When this is true,
- "wrapped" methods may be generated instead. The default value is true, but a false value is more compatible with older
- <code>webreferences</code>-based implementations.
- </ul></div>
+ <table>
+   <tr>
+     <th>Name</th>
+     <th>Type</th>
+     <th>Description</th>
+   </tr>
+   <tr>
+     <td><code>namespace</code></td>
+     <td><code>boolean</code></td>
+     <td>If the WSDL contains different types with the same name a compilation error may occur. Set this to <code>true</code> to
+     generate a namespace-aware <a href="class_dw_ws_Port.html">Port</a>, which will have classes separated into packages based on their associated namespace.
+     The default value is <code>false</code></td>
+   </tr>
+   <tr>
+     <td><code>underscoreBinding</code></td>
+     <td><code>string</code></td>
+     <td>If you have elements in a WSDL schema that contain the underscore character, code generation may fail. Set this property
+     to <code>asCharInWord</code> to resolve the problem. The default value is <code>asWordSeparator</code>.</td>
+   </tr>
+   <tr>
+     <td><code>collectionType</code></td>
+     <td><code>string</code></td>
+     <td>The generated API will use array types instead of List types for collections when this value is set to
+     <code>indexed</code>. This results in code that is more compatible with older <code>webreferences</code>-based
+     implementations. The default behavior is to generate Lists.</td>
+   </tr>
+   <tr>
+     <td><code>enableWrapperStyle</code></td>
+     <td><code>boolean</code></td>
+     <td>The generated API will use "bare" methods when this is <code>false</code>. When this is <code>true</code>,
+     "wrapped" methods may be generated instead. The default value is <code>true</code>, but a <code>false</code>
+     value is more  compatible with older <code>webreferences</code>-based implementations.</td>
+   </tr>
+ </table>
+
+ The messages sent to and from the remote server are logged at DEBUG level on sandboxes, and not logged at all on production.
+ The custom log category used is derived from the WSDL name and message type. For example, the custom log categories for the file
+ <code>MyWSDL.wsdl</code> are <code>webreferences2.MyWSDL.request</code> and <code>webreferences2.MyWSDL.response</code>. This
+ logging is controlled by the following in the WSDL properties:
+
+ <table>
+   <tr>
+     <th>Name</th>
+     <th>Type</th>
+     <th>Description</th>
+   </tr>
+   <tr>
+     <td><code>logging.enabled</code></td>
+     <td><code>boolean</code></td>
+     <td><code>true</code> to explicitly allow logging, <code>false</code> to disallow. Default is <code>true</code> on Sandboxes
+     and <code>false</code> on all other instance types</td>
+   </tr>
+   <tr>
+     <td><code>logging.pretty</code></td>
+     <td><code>boolean</code></td>
+     <td><code>true</code> to pretty-print the SOAP XML. Default is <code>false</code> to log the actual message body.</td>
+   </tr>
+   <tr>
+     <td><code>logging.verbose</code></td>
+     <td><code>boolean</code></td>
+     <td><code>true</code> to log HTTP headers and other message information. Default is <code>false</code> to only log the
+     message body</td>
+   </tr>
+   <tr>
+     <td><code>logging.filter.elements</code></td>
+     <td>comma-separated <code>string</code></td>
+     <td>List of element tag names containing sensitive information. These will be filtered out of the message. All properties with
+     this prefix will be used. For example <code>logging.filter.elements=Password,Token</code> is equivalent to two different properties
+     <code>logging.filter.elements.01=Token</code> and <code>logging.filter.elements.02=Token</code></td>
+   </tr>
+   <tr>
+     <td><code>logging.filter.headers</code></td>
+     <td>comma-separated <code>string</code></td>
+     <td>List of message header names containing sensitive information. These will be filtered out of the message. All properties with
+     this prefix will be used. For example <code>logging.filter.headers=Authorization,Token</code> is equivalent to two different properties
+     <code>logging.filter.headers.01=Authorization</code> and <code>logging.filter.headers.02=Token</code></td>
+   </tr>
+ </table></div>
 <div class="subclasses"></div>
 <div class="parameters">
 <span class="parameterTitle">See Also:</span>
@@ -230,7 +295,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2022, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

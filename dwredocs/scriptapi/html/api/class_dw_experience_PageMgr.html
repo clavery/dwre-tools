@@ -42,23 +42,33 @@
 <div class="classSummaryDetail">
 <div class="description">Provides functionality for getting, rendering and serializing page designer managed pages.
  <p>
- The basic flow is to initiate page rendering by ID via
+ The basic flow is to determine a page by either id, category or product
+ <ul>
+  <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getPage_String_DetailAnchor">getPage(String)</a></li>
+  <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getPageByCategory_Category_Boolean_String_DetailAnchor">getPageByCategory(Category, Boolean, String)</a></li>
+  <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getPageByProduct_Product_Boolean_String_DetailAnchor">getPageByProduct(Product, Boolean, String)</a></li>
+ </ul>
+ and then to initiate rendering of this page via
  <ul>
   <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_String_DetailAnchor">renderPage(String, String)</a></li>
   <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderPage_String_Map_String_DetailAnchor">renderPage(String, Map, String)</a></li>
  </ul>
- and accordingly page serialization by ID via
- <ul>
-  <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_serializePage_String_String_DetailAnchor">serializePage(String, String)</a></li>
-  <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_serializePage_String_Map_String_DetailAnchor">serializePage(String, Map, String)</a></li>
- </ul>
- This will trigger page rendering/serialization from a top level perspective, i.e. the page serves as entry point and root container of components.
+ This will trigger page rendering from a top level perspective, i.e. the page serves as entry point and root container of components.
  </p>
  <p>As a related page or component template will likely want to trigger rendering of nested components
  within its regions it can do this by first fetching the desired region by ID via
  <a href="class_dw_experience_Page.html#dw_experience_Page_getRegion_String_DetailAnchor">Page.getRegion(String)</a> or <a href="class_dw_experience_Component.html#dw_experience_Component_getRegion_String_DetailAnchor">Component.getRegion(String)</a> and then call to <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_renderRegion_Region_RegionRenderSettings_DetailAnchor">renderRegion(Region, RegionRenderSettings)</a>
  with the recently retrieved region (and optionally provide <a href="class_dw_experience_RegionRenderSettings.html">RegionRenderSettings</a> for customized
  rendering of region and component wrapper elements).
+ </p>
+ <p>
+ Similar to the rendering you can also serialize such page to json via
+ <ul>
+  <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_serializePage_String_String_DetailAnchor">serializePage(String, String)</a></li>
+  <li><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_serializePage_String_Map_String_DetailAnchor">serializePage(String, Map, String)</a></li>
+ </ul>
+ This will trigger page serialization from a top level perspective, i.e. the page serves as entry point and root container of components,
+ which will automatically traverse all visible components and attach their serialization result to the emitted json.
  </p>
 
  <p>Various attributes required for rendering and serialization in the corresponding template can be accessed with the
@@ -113,7 +123,7 @@
 <div class="description">Returns the page identified by the specified id.</div>
 </div>
 <div class="summaryItem">
-<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_getPage_Category_Boolean_String_DetailAnchor"><span class="">getPage</span></a></span>(category
+<span class="dep">static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_getPage_Category_Boolean_String_DetailAnchor"><span class="">getPage</span></a></span>(category
 								 : 	
 								 
 								<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>, pageMustBeVisible
@@ -125,7 +135,37 @@
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 						: 
 					<a href="class_dw_experience_Page.html"><span class="">Page</span></a></span>
-<div class="description">Get the dynamic page for given category (including bottom up traversal of the category tree) and aspect type.</div>
+<div class="description">Get the dynamic page for the given category (including bottom up traversal of the category tree) and aspect type.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_getPageByCategory_Category_Boolean_String_DetailAnchor"><span class="">getPageByCategory</span></a></span>(category
+								 : 	
+								 
+								<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>, pageMustBeVisible
+								 : 	
+								 
+								boolean, aspectTypeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_experience_Page.html"><span class="">Page</span></a></span>
+<div class="description">Get the dynamic page for the given category (including bottom up traversal of the category tree) and aspect type.</div>
+</div>
+<div class="summaryItem">
+<span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_getPageByProduct_Product_Boolean_String_DetailAnchor"><span class="">getPageByProduct</span></a></span>(product
+								 : 	
+								 
+								<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>, pageMustBeVisible
+								 : 	
+								 
+								boolean, aspectTypeID
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_dw_experience_Page.html"><span class="">Page</span></a></span>
+<div class="description">Get the dynamic page for the given product and aspect type.</div>
 </div>
 <div class="summaryItem">
 <span>static&nbsp;<span class="emphasis"><a href="#dw_experience_PageMgr_renderPage_String_String_DetailAnchor"><span class="">renderPage</span></a></span>(pageID
@@ -298,9 +338,9 @@
 <div class="detailItem">
 <a name="dw_experience_PageMgr_getPage_Category_Boolean_String_DetailAnchor"></a>
 <div class="detailName 
-						">getPage</div>
+						dep">getPage</div>
 <div class="detailSignature
-	    				">static&nbsp;<span class="emphasis">getPage</span>(category
+	    				dep">static&nbsp;<span class="emphasis">getPage</span>(category
 								 : 
 								 
 								<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>, pageMustBeVisible
@@ -313,7 +353,17 @@
 					 : 
 					<a href="class_dw_experience_Page.html"><span class="">Page</span></a>
 </div>
-<div class="description">Get the dynamic page for given category (including bottom up traversal of the category tree) and aspect type.</div>
+<div class="description">Get the dynamic page for the given category (including bottom up traversal of the category tree) and aspect type.</div>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Please use <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getPageByCategory_Category_Boolean_String_DetailAnchor">getPageByCategory(Category, Boolean, String)</a> instead.</span>
+</div>
+</div>
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
@@ -338,7 +388,109 @@
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">the page assigned to the given category. If this none is found there then the path upwards in the category tree is traversed until a category is found that has a page assigned. If category assignments are not supported by the given aspect type or none is found within the aforementioned path of categories then <code>null</code> is returned.</span>
+<span class="parameterDesc">the page assigned to the given category. If none is found then the path upwards in the category tree is traversed until a category is found that has an implicit (but not explicit) page assignment. If category assignments are not supported by the given aspect type or none is found within the aforementioned path of categories then <code>null</code> is returned.</span>
+</div>
+<div class="parameterDetail"></div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_PageMgr_getPageByCategory_Category_Boolean_String_DetailAnchor"></a>
+<div class="detailName 
+						">getPageByCategory</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getPageByCategory</span>(category
+								 : 
+								 
+								<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>, pageMustBeVisible
+								 : 
+								 
+								boolean, aspectTypeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_experience_Page.html"><span class="">Page</span></a>
+</div>
+<div class="description">Get the dynamic page for the given category (including bottom up traversal of the category tree) and aspect type.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">category</span>
+						 - 
+						<span class="parameterDesc">category to find the page for, i.e. starting point (inclusive) for the bottom up traversal</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">pageMustBeVisible</span>
+						 - 
+						<span class="parameterDesc">while doing the bottom up traversal any attached page whose <a href="class_dw_experience_Page.html#dw_experience_Page_isVisible_DetailAnchor">Page.isVisible()</a> does not yield true will be bypassed in the search</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">aspectTypeID</span>
+						 - 
+						<span class="parameterDesc">id of the page-category-assignment aspect type</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the page assigned to the given category. If none is found then the path upwards in the category tree is traversed until a category is found that has an implicit (but not explicit) page assignment. If category assignments are not supported by the given aspect type or none is found within the aforementioned path of categories then <code>null</code> is returned.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_experience_PageMgr_getPageByProduct_Product_Boolean_String_DetailAnchor"></a>
+<div class="detailName 
+						">getPageByProduct</div>
+<div class="detailSignature
+	    				">static&nbsp;<span class="emphasis">getPageByProduct</span>(product
+								 : 
+								 
+								<a href="class_dw_catalog_Product.html"><span class="">Product</span></a>, pageMustBeVisible
+								 : 
+								 
+								boolean, aspectTypeID
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_dw_experience_Page.html"><span class="">Page</span></a>
+</div>
+<div class="description">Get the dynamic page for the given product and aspect type.
+ <p>
+ No bottom up traversal of the product's category tree is performed. If you require this then  a
+ separate call to <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getPageByCategory_Category_Boolean_String_DetailAnchor">getPageByCategory(Category, Boolean, String)</a> (with the category of your choice, e.g. the default
+ category of the product) needs to be made.
+ </p></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">product</span>
+						 - 
+						<span class="parameterDesc">product to find the page for</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">pageMustBeVisible</span>
+						 - 
+						<span class="parameterDesc">an attached page whose <a href="class_dw_experience_Page.html#dw_experience_Page_isVisible_DetailAnchor">Page.isVisible()</a> does not yield true will be bypassed in the search</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">aspectTypeID</span>
+						 - 
+						<span class="parameterDesc">id of the page-product-assignment aspect type</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the page assigned to the given product. If product assignments are not supported by the given aspect type then <code>null</code> is returned.</span>
 </div>
 </div>
 <hr>
@@ -879,7 +1031,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2022, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

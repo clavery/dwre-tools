@@ -896,7 +896,10 @@
 
     <xsd:simpleType name="CategoryIDComparator">
         <xsd:restriction base="xsd:string">
+            <!-- 'is equal' means matching category or any of its child categories -->
             <xsd:enumeration value="is equal" />
+            <!-- 'is exactly' means matching category only -->
+            <xsd:enumeration value="is exactly" />
             <xsd:enumeration value="is direct child of"/>
             <xsd:enumeration value="is child of"/>
             <xsd:enumeration value="is direct parent of"/>

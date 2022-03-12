@@ -17,7 +17,7 @@ def get_env_from_dw_json():
                 "codeVersion": j.get("code-version"),
                 "useAccountManager": use_account_manager
             }
-            if "client-id" in j:
+            if "client-id" in j and j.get("client-id") != "":
                 config["clientID"] = j.get("client-id")
                 config["clientPassword"] = j.get("client-secret")
             if "instanceType" in j:

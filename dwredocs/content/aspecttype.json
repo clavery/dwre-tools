@@ -22,7 +22,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["category"]
+        "enum": ["category", "product"]
       },
       "uniqueItems": true
     }

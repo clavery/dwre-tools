@@ -34,10 +34,8 @@ def get_catalogs(env, session):
 
 
 def get_site_specific_units(site):
-    return [{
-        "id": "sites|" + site + "|ab_tests",
-        "text": "A/B Tests",
-    },
+    return [
+        { "id": "sites|" + site + "|ab_tests", "text": "A/B Tests", },
         {"id": "sites|" + site + "|active_data_feeds", "text": "Active Data Feeds.", },
         {"id": "sites|" + site + "|cache_settings", "text": "Cache Settings.", },
         {"id": "sites|" + site + "|campaigns_and_promotions", "text": "Campaigns and Promotions.", },
@@ -69,10 +67,8 @@ def get_site_specific_units(site):
 
 
 def get_global_units():
-    return [{
-        "id": "global_data|access_roles",
-        "text": "Access Roles",
-    },
+    return [
+    { "id": "global_data|access_roles", "text": "Access Roles", },
     {"id": "global_data|csc_settings", "text": "Settings for Customer Service Center customization.", },
     {"id": "global_data|csrf_whitelists", "text": "CSRF Allowlists.", },
     {"id": "global_data|custom_preference_groups", "text": "Global Preferences", },
@@ -94,7 +90,8 @@ def get_global_units():
     {"id": "global_data|static_resources", "text": "Global static resources.", },
     {"id": "global_data|system_type_definitions", "text": "System Type Definitions (Meta Data).", },
     {"id": "global_data|users", "text": "Users of the organization.", },
-    {"id": "global_data|webdav_client_permissions", "text": "Global WebDAV Client Permissions.", },]
+    {"id": "global_data|webdav_client_permissions", "text": "Global WebDAV Client Permissions.", },
+    ]
 
 
 def get_export_data_units(env):

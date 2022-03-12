@@ -275,6 +275,18 @@
 </div>
 </div>
 <div class="summaryItem">
+<span class="emphasis"><a href="class_dw_order_Order.html#dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING_DetailAnchor"><span class="">dw.order.Order.ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING</span></a></span>
+<div class="parameterDetail">
+<span class="parameterDesc">Support for this algorithm will be removed in a future release. Please use <a href="class_dw_order_Order.html#dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA56ANDMGF1PADDING</a> instead.</span>
+</div>
+</div>
+<div class="summaryItem">
+<span class="emphasis"><a href="class_dw_order_PaymentInstrument.html#dw_order_PaymentInstrument_ENCRYPTION_ALGORITHM_RSA_DetailAnchor"><span class="">dw.order.PaymentInstrument.ENCRYPTION_ALGORITHM_RSA</span></a></span>
+<div class="parameterDetail">
+<span class="parameterDesc">Support for this algorithm will be removed in a future release. Please use <a href="class_dw_order_PaymentInstrument.html#dw_order_PaymentInstrument_ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA56ANDMGF1PADDING</a> instead.</span>
+</div>
+</div>
+<div class="summaryItem">
 <span class="emphasis"><a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_SLICING_GROUP_DetailAnchor"><span class="">dw.catalog.ProductSearchHit.HIT_TYPE_SLICING_GROUP</span></a></span>
 <div class="parameterDetail">
 <span class="parameterDesc">Please use <a href="class_dw_catalog_ProductSearchHit.html#dw_catalog_ProductSearchHit_HIT_TYPE_VARIATION_GROUP_DetailAnchor">HIT_TYPE_VARIATION_GROUP</a> instead.</span>
@@ -1253,6 +1265,26 @@
 <span class="parameterDesc">Use <a href="class_dw_customer_Profile.html#dw_customer_Profile_setSalutation_String_DetailAnchor">setSalutation(String)</a></span>
 </div>
 </div>
+<div class="summaryItem">static&nbsp;<span class="emphasis"><a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getPage_Category_Boolean_String_DetailAnchor"><span class="">dw.experience.PageMgr.getPage</span></a></span>(category
+							 : 	
+							 
+							<a href="class_dw_catalog_Category.html"><span class="">Category</span></a>, pageMustBeVisible
+							 : 	
+							 
+							boolean, aspectTypeID
+							 : 	
+							 
+							<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					: 
+				<a href="class_dw_experience_Page.html"><span class="">Page</span></a>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">Please use <a href="class_dw_experience_PageMgr.html#dw_experience_PageMgr_getPageByCategory_Category_Boolean_String_DetailAnchor">getPageByCategory(Category, Boolean, String)</a> instead.</span>
+</div>
+</div>
 <div class="summaryItem">
 <span class="emphasis"><a href="class_dw_experience_PageScriptContext.html#dw_experience_PageScriptContext_getRenderParameters_DetailAnchor"><span class="">dw.experience.PageScriptContext.getRenderParameters</span></a></span>()
 					: 
@@ -1588,7 +1620,7 @@
 <div class="parameterDetail"></div>
 </div>
 <div class="summaryItem">
-<span class="emphasis"><a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor"><span class="">dw.order.Order.getOrderExportXML</span></a></span>(encryptionMethod
+<span class="emphasis"><a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor"><span class="">dw.order.Order.getOrderExportXML</span></a></span>(encryptionAlgorithm
 							 : 	
 							 
 							<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
@@ -1601,8 +1633,11 @@
 					: 
 				<a href="class_TopLevel_String.html"><span class="">String</span></a>
 <div class="parameterDetail">
-<span class="parameterDesc">use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a></span>
+<span class="parameterDesc">This method will be removed soon. Please use the following methods instead: <ul> <li><a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_DetailAnchor">getOrderExportXML()</a> – if payment instrument data should be masked <li> <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a> – if payment instrument data should be re-encrypted </ul></span>
 </div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
@@ -1661,13 +1696,13 @@
 							<a href="class_TopLevel_String.html"><span class="">String</span></a>)
 					: 
 				<a href="class_TopLevel_String.html"><span class="">String</span></a>
-<div class="parameterDetail"></div>
-<div class="parameterDetail"></div>
-<div class="parameterDetail"></div>
-<div class="parameterDetail"></div>
 <div class="parameterDetail">
-<span class="parameterDesc">The method has been deprecated. Please use <a href="class_dw_order_PaymentInstrument.html#dw_order_PaymentInstrument_getEncryptedCreditCardNumber_String_CertificateRef_DetailAnchor">getEncryptedCreditCardNumber(String, CertificateRef)</a> instead.</span>
+<span class="parameterDesc">Please use <a href="class_dw_order_PaymentInstrument.html#dw_order_PaymentInstrument_getEncryptedCreditCardNumber_String_CertificateRef_DetailAnchor">getEncryptedCreditCardNumber(String, CertificateRef)</a> instead.</span>
 </div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
 </div>
 <div class="summaryItem">
 <span class="emphasis"><a href="class_dw_order_PaymentInstrument.html#dw_order_PaymentInstrument_getGiftCertificateID_DetailAnchor"><span class="">dw.order.PaymentInstrument.getGiftCertificateID</span></a></span>()
@@ -2569,7 +2604,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2022, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

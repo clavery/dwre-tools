@@ -5,8 +5,6 @@
 
 # - get api from https://dev04-na01-XXX.demandware.net:443/on/demandware.servlet/WFS/Studio/Sites/mock/demandware-mock.zip
 # - `mkdir -p ./DWREApiDoc.docset/Contents/Resources/Documents`
-# - copy scriptapi/api to Documents/api and pipeletapi/api to Documents/pipelet (i.e. rename folder to pipelet)
-# - Run this script
 
 
 
@@ -243,8 +241,6 @@ conn.commit()
 
 # ## OCAPI
 
-# Place the cookies from chrome (in normal cookie header format) in .cookies
-
 
 
 V = "current"
@@ -286,6 +282,8 @@ for page in OCAPI_INDICIES:
         if 'href' not in link.attrib:
             continue
         href = link.attrib['href']
+        if href.startswith("https://www"):
+            continue
         normalized = os.path.normpath(os.path.join(dirname, href))
         full_link = urlparse(f"{parsed_url.scheme}://{parsed_url.netloc}{normalized}")
         full_link = f"{full_link.scheme}://{full_link.netloc}{full_link.path}"
@@ -296,7 +294,7 @@ for page in OCAPI_INDICIES:
             print(full_link)
             LINKS.add(full_link)
             
-resp = requests.get('https://documentation.demandware.com/DOC3/topic/com.demandware.dochelp/css/commonltr.css')
+resp = requests.get('https://documentation.b2c.commercecloud.salesforce.com/DOC3/topic/com.demandware.dochelp/css/commonltr.css')
 css = f"""<style>
 {resp.content.decode('utf-8')}
 </style>"""
@@ -304,8 +302,7 @@ css = f"""<style>
 
 
 
-print(link.attrib
-     )
+print(link.attrib)
 
 
 

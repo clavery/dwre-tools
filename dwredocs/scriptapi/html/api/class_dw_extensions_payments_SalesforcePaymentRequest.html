@@ -139,10 +139,66 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="dw_extensions_payments_SalesforcePaymentRequest_ELEMENT_TYPE_PAYPAL_DetailAnchor"></a>ELEMENT_TYPE_PAYPAL
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"paypal"<div class="description">Element type name for PayPal in multi-step checkout.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_extensions_payments_SalesforcePaymentRequest_ELEMENT_TYPE_PAYPAL_EXPRESS_DetailAnchor"></a>ELEMENT_TYPE_PAYPAL_EXPRESS
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"paypalexpress"<div class="description">Element type name for PayPal in express checkout.</div>
+</span>
+</div>
+<div class="summaryItem">
 <span><a name="dw_extensions_payments_SalesforcePaymentRequest_ELEMENT_TYPE_SEPA_DEBIT_DetailAnchor"></a>ELEMENT_TYPE_SEPA_DEBIT
 						&nbsp;:&nbsp;
 						
 					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"sepa_debit"<div class="description">Element type name for SEPA debit.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_SHIPPING_PREFERENCE_GET_FROM_FILE_DetailAnchor"></a>PAYPAL_SHIPPING_PREFERENCE_GET_FROM_FILE
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"GET_FROM_FILE"<div class="description">PayPal application context <code>shipping_preference</code> value <code>"GET_FROM_FILE"</code>, to use the
+ customer-provided shipping address on the PayPal site.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_SHIPPING_PREFERENCE_NO_SHIPPING_DetailAnchor"></a>PAYPAL_SHIPPING_PREFERENCE_NO_SHIPPING
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"NO_SHIPPING"<div class="description">PayPal application context <code>shipping_preference</code> value <code>"NO_SHIPPING"</code>, to redact the
+ shipping address from the PayPal site. Recommended for digital goods.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_SHIPPING_PREFERENCE_SET_PROVIDED_ADDRESS_DetailAnchor"></a>PAYPAL_SHIPPING_PREFERENCE_SET_PROVIDED_ADDRESS
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"SET_PROVIDED_ADDRESS"<div class="description">PayPal application context <code>shipping_preference</code> value <code>"SET_PROVIDED_ADDRESS"</code>, to use the
+ merchant-provided address. The customer cannot change this address on the PayPal site.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_USER_ACTION_CONTINUE_DetailAnchor"></a>PAYPAL_USER_ACTION_CONTINUE
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"CONTINUE"<div class="description">PayPal application context <code>user_action</code> value <code>"CONTINUE"</code>. Use this option when the final
+ amount is not known when the checkout flow is initiated and you want to redirect the customer to the merchant
+ page without processing the payment.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_USER_ACTION_PAY_NOW_DetailAnchor"></a>PAYPAL_USER_ACTION_PAY_NOW
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"PAY_NOW"<div class="description">PayPal application context <code>user_action</code> value <code>"PAY_NOW"</code>. Use this option when the final
+ amount is known when the checkout is initiated and you want to process the payment immediately when the customer
+ clicks Pay Now.</div>
 </span>
 </div>
 </div>
@@ -336,6 +392,33 @@
 						: 
 					void</span>
 <div class="description"><p> Sets the payment request options to use when a Buy Now button is tapped.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_extensions_payments_SalesforcePaymentRequest_setPayPalButtonsOptions_Object_DetailAnchor"><span class="">setPayPalButtonsOptions</span></a></span>(options
+								 : 	
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the the options to pass into the <code>paypal.Buttons</code> call.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_extensions_payments_SalesforcePaymentRequest_setPayPalShippingPreference_String_DetailAnchor"><span class="">setPayPalShippingPreference</span></a></span>(shippingPreference
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the PayPal order application context <code>shipping_preference</code> value.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_extensions_payments_SalesforcePaymentRequest_setPayPalUserAction_String_DetailAnchor"><span class="">setPayPalUserAction</span></a></span>(userAction
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					void</span>
+<div class="description">Sets the PayPal order application context <code>user_action</code> value.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_extensions_payments_SalesforcePaymentRequest_setReturnController_String_DetailAnchor"><span class="">setReturnController</span></a></span>(returnController
@@ -1016,6 +1099,101 @@ request.setOptions({
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_extensions_payments_SalesforcePaymentRequest_setPayPalButtonsOptions_Object_DetailAnchor"></a>
+<div class="detailName 
+						">setPayPalButtonsOptions</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setPayPalButtonsOptions</span>(options
+								 : 
+								 
+								<a href="class_TopLevel_Object.html"><span class="">Object</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the the options to pass into the <code>paypal.Buttons</code> call. For more information see the PayPal
+ Buttons API documentation.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">options</span>
+						 - 
+						<span class="parameterDesc">JS object containing the options</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_extensions_payments_SalesforcePaymentRequest_setPayPalShippingPreference_String_DetailAnchor"></a>
+<div class="detailName 
+						">setPayPalShippingPreference</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setPayPalShippingPreference</span>(shippingPreference
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the PayPal order application context <code>shipping_preference</code> value. For more information see the
+ PayPal Orders API documentation.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">shippingPreference</span>
+						 - 
+						<span class="parameterDesc">constant indicating the shipping preference</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_extensions_payments_SalesforcePaymentRequest.html#dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_SHIPPING_PREFERENCE_GET_FROM_FILE_DetailAnchor">PAYPAL_SHIPPING_PREFERENCE_GET_FROM_FILE</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_extensions_payments_SalesforcePaymentRequest.html#dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_SHIPPING_PREFERENCE_NO_SHIPPING_DetailAnchor">PAYPAL_SHIPPING_PREFERENCE_NO_SHIPPING</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_extensions_payments_SalesforcePaymentRequest.html#dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_SHIPPING_PREFERENCE_SET_PROVIDED_ADDRESS_DetailAnchor">PAYPAL_SHIPPING_PREFERENCE_SET_PROVIDED_ADDRESS</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_extensions_payments_SalesforcePaymentRequest_setPayPalUserAction_String_DetailAnchor"></a>
+<div class="detailName 
+						">setPayPalUserAction</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">setPayPalUserAction</span>(userAction
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					void</div>
+<div class="description">Sets the PayPal order application context <code>user_action</code> value. For more information see the PayPal
+ Orders API documentation.</div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">userAction</span>
+						 - 
+						<span class="parameterDesc">constant indicating the user action</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">See Also:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_extensions_payments_SalesforcePaymentRequest.html#dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_USER_ACTION_CONTINUE_DetailAnchor">PAYPAL_USER_ACTION_CONTINUE</a></span>
+</div>
+<div class="parameterDetail">
+<span class="parameterDesc"><a href="class_dw_extensions_payments_SalesforcePaymentRequest.html#dw_extensions_payments_SalesforcePaymentRequest_PAYPAL_USER_ACTION_PAY_NOW_DetailAnchor">PAYPAL_USER_ACTION_PAY_NOW</a></span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_extensions_payments_SalesforcePaymentRequest_setReturnController_String_DetailAnchor"></a>
 <div class="detailName 
 						">setReturnController</div>
@@ -1146,7 +1324,7 @@ request.setOptions({
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2022, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

@@ -9,15 +9,15 @@
 <span class="newTitle">
 					What's New in the Script API
 				</span>
-<p>The following classes are either new or have been changed in version 21.10.</p>
+<p>The following classes are either new or have been changed in version 22.3.</p>
 </div>
 <div class="section">
 <div class="header">
-							Package dw.extensions.payments</div>
-<p>The following classes changed in the <code>dw.extensions.payments</code> Package. </p>
+							Package dw.order</div>
+<p>The following classes changed in the <code>dw.order</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">SalesforcePaymentRequest</span>
+<span class="className">LineItemCtnr</span>
 <div class="section">
 <table>
 <thead>
@@ -28,7 +28,61 @@
 <tbody>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_extensions_payments_SalesforcePaymentRequest.html#class_dw_extensions_payments_SalesforcePaymentRequest/dw_extensions_payments_SalesforcePaymentRequest_getBillingDetails_DetailAnchor">getBillingDetails()</xref>
+<xref href="../ScriptAPI/class_dw_order_LineItemCtnr.html#class_dw_order_LineItemCtnr/dw_order_LineItemCtnr_createProductLineItem_String_Shipment_DetailAnchor">createProductLineItem(String,
+                Shipment)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">Order</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Field</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_getOrderExportXML_DetailAnchor">getOrderExportXML()</xref>
 </code></td><td class="summary">
 <p>
 			Method is New
@@ -37,10 +91,109 @@
 </tr>
 <tr>
 <td><code>
-<xref href="../ScriptAPI/class_dw_extensions_payments_SalesforcePaymentRequest.html#class_dw_extensions_payments_SalesforcePaymentRequest/dw_extensions_payments_SalesforcePaymentRequest_setBillingDetails_Object_DetailAnchor">setBillingDetails(Object)</xref>
+<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String,
+                String)</xref>
 </code></td><td class="summary">
 <p>
-			Method is New
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_Order.html#class_dw_order_Order/dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor">getOrderExportXML(String,
+                String,
+                Boolean)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<hr>
+<span class="className">PaymentInstrument</span>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Field</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_ENCRYPTION_ALGORITHM_RSA_DetailAnchor">ENCRYPTION_ALGORITHM_RSA</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+<p>
+<b>Deprecated</b>
+</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING</xref>
+</code></td><td class="summary">
+<p>
+			Field is New
+		</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<table>
+<thead>
+<tr>
+<td>Method</td><td>Summary</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_getEncryptedBankAccountDriversLicense_String_String_DetailAnchor">getEncryptedBankAccountDriversLicense(String,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_getEncryptedBankAccountNumber_String_String_DetailAnchor">getEncryptedBankAccountNumber(String,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_getEncryptedCreditCardNumber_String_CertificateRef_DetailAnchor">getEncryptedCreditCardNumber(String,
+                CertificateRef)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
+		</p>
+</td>
+</tr>
+<tr>
+<td><code>
+<xref href="../ScriptAPI/class_dw_order_PaymentInstrument.html#class_dw_order_PaymentInstrument/dw_order_PaymentInstrument_getEncryptedCreditCardNumber_String_String_DetailAnchor">getEncryptedCreditCardNumber(String,
+                String)</xref>
+</code></td><td class="summary">
+<p>
+			Documentation Changed.
 		</p>
 </td>
 </tr>
@@ -55,32 +208,31 @@
 <p>The following classes changed in the <code>dw.system</code> Package. </p>
 <div class="section">
 <hr>
-<span class="className">Response</span>
+<span class="className">Transaction</span>
 <div class="section">
-<table>
-<thead>
-<tr>
-<td>Field</td><td>Summary</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>
-<xref href="../ScriptAPI/class_dw_system_Response.html#class_dw_system_Response/dw_system_Response_PERMISSIONS_POLICY_DetailAnchor">PERMISSIONS_POLICY</xref>
-</code></td><td class="summary">
-<p>
-			Field is New
-		</p>
-</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="header">
+							Package dw.web</div>
+<p>The following classes changed in the <code>dw.web</code> Package. </p>
+<div class="section">
+<hr>
+<span class="className">Cookie</span>
+<div class="section">
+<ul>
+<li>Class Documentation Changed</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2022, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

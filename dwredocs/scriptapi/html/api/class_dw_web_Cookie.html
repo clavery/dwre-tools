@@ -40,12 +40,14 @@
 </div>
 <div class="classSummary">
 <div class="classSummaryDetail">
-<div class="description">Represents an HTTP cookie used for storing information on a client browser.
- Cookies are passed along in the HTTP request and can be retrieved by
- calling dw.system.Request.getHttpCookies().
+<div class="description">Represents an HTTP cookie used for storing information on a client browser. Cookies are passed along in the HTTP
+ request and can be retrieved by calling dw.system.Request.getHttpCookies().
  <p/>
- <b>Note:</b> this class allows access to sensitive security-related data.
- Pay special attention to PCI DSS v3. requirements 2, 4, and 12.
+ Cookies must comply with RFC6265. We recommend you use only printable ASCII characters without separators, such as a
+ comma or equal sign. If JSON is used as a cookie value, it must be encoded.
+ <p/>
+ <b>Note:</b> this class allows access to sensitive security-related data. Pay special attention to PCI DSS v3.
+ requirements 2, 4, and 12.
  <p/>
  See <a href="class_dw_system_Request.html#dw_system_Request_getHttpCookies_DetailAnchor">Request.getHttpCookies()</a>.</div>
 <div class="subclasses"></div>
@@ -712,7 +714,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2022, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>

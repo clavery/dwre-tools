@@ -73,6 +73,26 @@
 </span>
 </div>
 <div class="summaryItem">
+<span><a name="dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING_DetailAnchor"></a>ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"RSA/ECB/OAEPWithSHA-256AndMGF1Padding"<div class="description">The encryption algorithm "RSA/ECB/OAEPWithSHA-256AndMGF1Padding".</div>
+</span>
+</div>
+<div class="summaryItem">
+<span class="dep"><a name="dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING_DetailAnchor"></a>ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING
+						&nbsp;:&nbsp;
+						
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>&nbsp;=&nbsp;"RSA/ECB/PKCS1Padding"<div class="description">The outdated encryption algorithm "RSA/ECB/PKCS1Padding". Please do not use anymore!</div>
+</span>
+<div class="parameters">
+<span class="parameterTitle">Deprecated:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">Support for this algorithm will be removed in a future release. Please use <a href="class_dw_order_Order.html#dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA56ANDMGF1PADDING</a> instead.</span>
+</div>
+</div>
+</div>
+<div class="summaryItem">
 <span><a name="dw_order_Order_EXPORT_STATUS_EXPORTED_DetailAnchor"></a>EXPORT_STATUS_EXPORTED
 						&nbsp;:&nbsp;
 						
@@ -448,6 +468,25 @@
  an exception if accessed. Activation needs preliminary approval by Product Management.
  Please contact support in this case. Existing customers using these APIs are not
  affected by this change and can use the APIs until further notice.</div>
+</span>
+</div>
+<div class="summaryItem">
+<span><a name="_DetailAnchor"></a>orderExportXML
+						&nbsp;:&nbsp;
+						
+					    
+					    <a href="class_TopLevel_String.html"><span class="">String</span></a>
+							&nbsp;(Read Only)<div class="description">The order export XML as String object.
+ <p>
+ NOTE: This method will return payment instrument data masked. If payment instrument re-encryption is needed
+ please use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a> instead.
+ <p>
+ Example:
+
+ <pre>
+ var orderXMLAsString : String = order.getOrderExportXML();
+ var orderXML : XML = new XML(orderXMLAsString);
+ </pre></div>
 </span>
 </div>
 <div class="summaryItem">
@@ -1038,7 +1077,25 @@
 <div class="description">Returns the collection of <a href="class_dw_order_Invoice.html">Invoice</a>s associated with this order.</div>
 </div>
 <div class="summaryItem">
-<span class="dep"><span class="emphasis"><a href="#dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor"><span class="">getOrderExportXML</span></a></span>(encryptionMethod
+<span><span class="emphasis"><a href="#dw_order_Order_getOrderExportXML_DetailAnchor"><span class="">getOrderExportXML</span></a></span>()
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the order export XML as String object.</div>
+</div>
+<div class="summaryItem">
+<span><span class="emphasis"><a href="#dw_order_Order_getOrderExportXML_String_String_DetailAnchor"><span class="">getOrderExportXML</span></a></span>(encryptionAlgorithm
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
+								 : 	
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+						: 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
+<div class="description">Returns the order export XML as String object, with payment instrument data re-encrypted using the given encryption algorithm and key.</div>
+</div>
+<div class="summaryItem">
+<span class="dep"><span class="emphasis"><a href="#dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor"><span class="">getOrderExportXML</span></a></span>(encryptionAlgorithm
 								 : 	
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
@@ -1050,19 +1107,7 @@
 								boolean)
 						: 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the order export XML as String object.</div>
-</div>
-<div class="summaryItem">
-<span><span class="emphasis"><a href="#dw_order_Order_getOrderExportXML_String_String_DetailAnchor"><span class="">getOrderExportXML</span></a></span>(encryptionMethod
-								 : 	
-								 
-								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
-								 : 	
-								 
-								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
-						: 
-					<a href="class_TopLevel_String.html"><span class="">String</span></a></span>
-<div class="description">Returns the order export XML as String object.</div>
+<div class="description">Returns the order export XML as String object, with payment instrument data re-encrypted using the given encryption algorithm and key.</div>
 </div>
 <div class="summaryItem">
 <span><span class="emphasis"><a href="#dw_order_Order_getOrderItem_String_DetailAnchor"><span class="">getOrderItem</span></a></span>(itemID
@@ -2492,12 +2537,132 @@
 <hr>
 </div>
 <div class="detailItem">
+<a name="dw_order_Order_getOrderExportXML_DetailAnchor"></a>
+<div class="detailName 
+						">getOrderExportXML</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getOrderExportXML</span>()
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the order export XML as String object.
+ <p>
+ NOTE: This method will return payment instrument data masked. If payment instrument re-encryption is needed
+ please use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a> instead.
+ <p>
+ Example:
+
+ <pre>
+ var orderXMLAsString : String = order.getOrderExportXML();
+ var orderXML : XML = new XML(orderXMLAsString);
+ </pre></div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail">
+<span class="parameterDesc">the order export XML</span>
+</div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the method is called in a transaction with changes.</span>
+</div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the order is not placed. This method can be called for placed orders only.</span>
+</div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the order export XML could not be generated.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
+<a name="dw_order_Order_getOrderExportXML_String_String_DetailAnchor"></a>
+<div class="detailName 
+						">getOrderExportXML</div>
+<div class="detailSignature
+	    				">
+<span class="emphasis">getOrderExportXML</span>(encryptionAlgorithm
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
+								 : 
+								 
+								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
+					 : 
+					<a href="class_TopLevel_String.html"><span class="">String</span></a>
+</div>
+<div class="description">Returns the order export XML as String object, with payment instrument data re-encrypted using the given
+ encryption algorithm and key.
+ <p>
+ NOTE: If no encryption is needed or desired please always use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_DetailAnchor">getOrderExportXML()</a> instead, which returns
+ the payment instrument data masked. Do <b>not</b> pass in any null arguments!
+ <p>
+ Example:
+
+ <pre>
+ var orderXMLAsString : String = order.getOrderExportXML( "RSA/ECB/PKCS1Padding", "[key]" );
+ var orderXML : XML = new XML( orderXMLAsString );
+ </pre></div>
+<div class="parameters">
+<span class="parameterTitle">Parameters:</span>
+<div class="parameterDetail">
+<span class="parameterName">encryptionAlgorithm</span>
+						 - 
+						<span class="parameterDesc">The encryption algorithm to be used for the re-encryption of the payment instrument data (credit card number, bank account number, bank account driver's license number). Must be a valid, non-null algorithm. Currently, only <a href="class_dw_order_Order.html#dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING</a> is supported, but this will be fixed and support for <a href="class_dw_order_Order.html#dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA56ANDMGF1PADDING</a> will be added soon.</span>
+</div>
+<div class="parameterDetail">
+<span class="parameterName">encryptionKey</span>
+						 - 
+						<span class="parameterDesc">The Base64 encoded form of the public key to be used for the re-encryption of the payment instrument data. Must be a valid, non-blank key.</span>
+</div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Returns:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">
+<span class="parameterDesc">the order export XML</span>
+</div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the method is called in a transaction with changes.</span>
+</div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the order is not placed. This method can be called for placed orders only.</span>
+</div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the order export XML could not be generated.</span>
+</div>
+</div>
+<hr>
+</div>
+<div class="detailItem">
 <a name="dw_order_Order_getOrderExportXML_String_String_Boolean_DetailAnchor"></a>
 <div class="detailName 
 						dep">getOrderExportXML</div>
 <div class="detailSignature
 	    				dep">
-<span class="emphasis">getOrderExportXML</span>(encryptionMethod
+<span class="emphasis">getOrderExportXML</span>(encryptionAlgorithm
 								 : 
 								 
 								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
@@ -2510,23 +2675,26 @@
 					 : 
 					<a href="class_TopLevel_String.html"><span class="">String</span></a>
 </div>
-<div class="description">Returns the order export XML as String object.
- <p/>
- NOTE: This method is deprecated and will be removed soon. Use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a> instead.
- <p/>
+<div class="description">Returns the order export XML as String object, with payment instrument data re-encrypted using the given
+ encryption algorithm and key.
+ <p>
+ NOTE: If no encryption is needed or desired please always use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_DetailAnchor">getOrderExportXML()</a> instead, which returns
+ the payment instrument data masked. Do <b>not</b> pass in any null arguments!
+ <p>
  Example:
+
  <pre>
-     var orderXmlAsString : String = order.getOrderExportXML(null, null, false);
-     var orderXml : XML = new XML(orderXmlAsString);
- </pre>
- This method can be called for placed orders only, otherwise an exception will be thrown.
- <br/>
- Also, an exception will be thrown if the method is called in a transaction with changes.</div>
+ var orderXMLAsString : String = order.getOrderExportXML( "RSA/ECB/PKCS1Padding", "[key]", false );
+ var orderXML : XML = new XML( orderXMLAsString );
+ </pre></div>
 <div class="parameters">
 <span class="parameterTitle">Deprecated:</span>
 <div class="parameterDetail">
-<span class="parameterDesc">use <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a></span>
+<span class="parameterDesc">This method will be removed soon. Please use the following methods instead: <ul> <li><a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_DetailAnchor">getOrderExportXML()</a> – if payment instrument data should be masked <li> <a href="class_dw_order_Order.html#dw_order_Order_getOrderExportXML_String_String_DetailAnchor">getOrderExportXML(String, String)</a> – if payment instrument data should be re-encrypted </ul></span>
 </div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
@@ -2535,14 +2703,14 @@
 <div class="parameters">
 <span class="parameterTitle">Parameters:</span>
 <div class="parameterDetail">
-<span class="parameterName">encryptionMethod</span>
+<span class="parameterName">encryptionAlgorithm</span>
 						 - 
-						<span class="parameterDesc">the algorithm to be used for the encryption of the payment instruments if order payments re-encryption is needed</span>
+						<span class="parameterDesc">The encryption algorithm to be used for the re-encryption of the payment instrument data (credit card number, bank account number, bank account driver's license number). Must be a valid, non-null algorithm. Currently, only <a href="class_dw_order_Order.html#dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_PKCS1PADDING</a> is supported, but this will be fixed and support for <a href="class_dw_order_Order.html#dw_order_Order_ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA_256ANDMGF1PADDING_DetailAnchor">ENCRYPTION_ALGORITHM_RSA_ECB_OAEPWITHSHA56ANDMGF1PADDING</a> will be added soon.</span>
 </div>
 <div class="parameterDetail">
 <span class="parameterName">encryptionKey</span>
 						 - 
-						<span class="parameterDesc">the base64 encoded form of the public key to be used to encrypt the payment instruments if order payments re-encryption is needed</span>
+						<span class="parameterDesc">The Base64 encoded form of the public key to be used for the re-encryption of the payment instrument data. Must be a valid, non-blank key.</span>
 </div>
 <div class="parameterDetail">
 <span class="parameterName">encryptUsingEKID</span>
@@ -2559,54 +2727,28 @@
 <div class="parameterDetail">
 <span class="parameterDesc">the order export XML</span>
 </div>
-</div>
-<hr>
-</div>
-<div class="detailItem">
-<a name="dw_order_Order_getOrderExportXML_String_String_DetailAnchor"></a>
-<div class="detailName 
-						">getOrderExportXML</div>
-<div class="detailSignature
-	    				">
-<span class="emphasis">getOrderExportXML</span>(encryptionMethod
-								 : 
-								 
-								<a href="class_TopLevel_String.html"><span class="">String</span></a>, encryptionKey
-								 : 
-								 
-								<a href="class_TopLevel_String.html"><span class="">String</span></a>)
-					 : 
-					<a href="class_TopLevel_String.html"><span class="">String</span></a>
-</div>
-<div class="description">Returns the order export XML as String object.
- <p/>
- Example:
- <pre>
-     var orderXmlAsString : String = order.getOrderExportXML(null, null);
-     var orderXml : XML = new XML(orderXmlAsString);
- </pre>
- This method can be called for placed orders only, otherwise an exception will be thrown.
- <br/>
- Also, an exception will be thrown if the method is called in a transaction with changes.</div>
-<div class="parameters">
-<span class="parameterTitle">Parameters:</span>
-<div class="parameterDetail">
-<span class="parameterName">encryptionMethod</span>
-						 - 
-						<span class="parameterDesc">the algorithm to be used for the encryption of the payment instruments if order payments re-encryption is needed</span>
-</div>
-<div class="parameterDetail">
-<span class="parameterName">encryptionKey</span>
-						 - 
-						<span class="parameterDesc">the base64 encoded form of the public key to be used to encrypt the payment instruments if order payments re-encryption is needed</span>
-</div>
-</div>
-<div class="parameters">
-<span class="parameterTitle">Returns:</span>
 <div class="parameterDetail"></div>
 <div class="parameterDetail"></div>
-<div class="parameterDetail">
-<span class="parameterDesc">the order export XML</span>
+<div class="parameterDetail"></div>
+</div>
+<div class="parameters">
+<span class="parameterTitle">Throws:</span>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail"></div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the method is called in a transaction with changes.</span>
+</div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the order is not placed. This method can be called for placed orders only.</span>
+</div>
+<div class="parameterDetail">IllegalStateException						
+						 - 
+						 <span class="parameterDesc">If the order export XML could not be generated.</span>
 </div>
 </div>
 <hr>
@@ -4343,7 +4485,7 @@
 </div>
 <div class="copyright">
 
-            &copy; Copyright 2000-2021, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
+            &copy; Copyright 2000-2022, salesforce.com inc. All rights reserved. Various trademarks held by their respective owners.
 
 			<div class="clear"></div>
 </div>
