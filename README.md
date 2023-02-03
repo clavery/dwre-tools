@@ -1,3 +1,6 @@
+**NOTE: These tools are deprecated and here only as a reference; For similar see
+https://github.com/SalesforceCommerceCloud/b2c-tools**
+
 # dwre-tools
 
 Various tools for use with Demandware instances. Written in python
