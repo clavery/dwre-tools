@@ -106,7 +106,7 @@ The tools requires at least one environment setup in your `.dwre.json` file.
           "username" : "clavery",
           "password" : "OPTIONAL",
           "codeVersion" : "clavery",
-          "server" : "dev02-us-vibram.demandware.net",
+          "server" : "dev02-us-acme.demandware.net",
           "clientID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
           "clientPassword": "daskjlkjasdlkj"
         }
